@@ -67,6 +67,10 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
 
+------------------------------------- Not auto generated below -------------------------------------
+
+Added some example files to make the proposed file structure visible.
+
 ### Code structure
 
 index.js access "root" and loads our app.js into the root.
@@ -80,11 +84,9 @@ The pages has components, located under /components/<>.js
 
 To authenticate api calls we have a fetchContext which uses the authContext (this uses localstorage and controls authentication on the client side)
 
-Do we want client side limitations, or simply that API calls wont be successful if not logged in?
+Do we want client side authentication, or simply that API calls wont be successful if not authenticated?
 
 ### Packages
-
-Added some example files to make the proposed file structure visible.
 
 - Added axios for http promises,
 - Formik (forms)
@@ -96,4 +98,4 @@ Added some example files to make the proposed file structure visible.
 
 Had some problem deciding wheter to go down the typescript track (seemed like there were no real proponents for this) so here is a Javascript boilerplate (depending on our needs the package structure might change). Will wait on further instructions from the analyst team to see if this is a deemeed a priority or not.
 
-Basic first commit, will go over a couple of wierd quirks later on.
+2020-10-08: Authentication on the client side will be handled by a third party service (OAuth) so no need to worry about that.
