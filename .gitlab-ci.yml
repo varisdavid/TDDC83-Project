@@ -30,8 +30,6 @@ stages:
 
 Build:
   stage: build
-  tags:
-    - node
   before_script:
     - yarn config set cache-folder .yarn
     - yarn install
@@ -40,8 +38,6 @@ Build:
 
 Test:
   stage: test
-  tags:
-    - node
   before_script:
     - yarn config set cache-folder .yarn
     - yarn install --frozen-lockfile
