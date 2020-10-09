@@ -1,3 +1,5 @@
+Living documents, e.g "education plan" and "project plan" are now found under "docs".
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
