@@ -41,7 +41,6 @@ Test:
     - yarn config set cache-folder .yarn
     - yarn install --frozen-lockfile
   script:
-    # Installs Chrome
     - yarn test
 # Deploy to Staging:
 #   stage: staging
