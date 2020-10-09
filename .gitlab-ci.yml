@@ -6,7 +6,7 @@ stages:
 
 build:
   stage: build
-  script: yarn build 
+  script: yarn build
 
 test:
   stage: test
