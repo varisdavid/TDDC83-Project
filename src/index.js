@@ -1,25 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './tailwind.css';
-import './styles.css';
-import App from './App';
+
 import * as serviceWorker from './serviceWorker';
 
-import { Auth0Provider } from "@auth0/auth0-react";
+import { BrowserRouter as Router } from "react-router-dom";
+import Auth0ProvierWithHistory from "./auth/Auth0ProviderWithHistory" // Auth0s own context with our info added
+
+import App from './App';
+
+// import './tailwind.css';
+import './index.css';
 
 
 ReactDOM.render(
 
-  <Auth0Provider
-    domain="dev-mlj1m1lm.eu.auth0.com"
-    clientId="hTDLbigJVn6L1UJ2dwcKodjrU3l79dQx"
-    redirectUri={window.location.origin}
-  >
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-    
-  </Auth0Provider>,
+  <React.StrictMode>
+    <Router>
+      <Auth0ProvierWithHistory>
+        <App />
+      </Auth0ProvierWithHistory>
+    </Router>
+  </React.StrictMode>,
   document.getElementById('root')
 );
 

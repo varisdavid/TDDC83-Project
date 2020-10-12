@@ -1,81 +1,33 @@
-import React, { lazy, Suspense, useContext } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect,
-} from "react-router-dom";
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
-import { AuthProvider, AuthContext } from "./context/AuthContext";
-import { FetchProvider } from "./context/FetchContext";
+import { NavBar, Footer, Loading } from "./components";
+import { Home, Profile, ExternalApi } from "./views";
+import ProtectedRoute from "./auth/ProtectedRoute";
 
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
-import FourOFour from "./pages/FourOFour";
+import "./app.css";
 
-// Using lazy for pages needing to be authenticated first
-const Account = lazy(() => import("./pages/Account"));
+const App = () => {
+  const { isLoading } = useAuth0();
 
-const UnauthenticatedRoutes = () => (
-  <Switch>
-    <Route exact path="/">
-      <Home />
-    </Route>
+  if (isLoading) {
+    return <Loading />;
+  }
 
-    <Route path="/login">
-      <Login />
-    </Route>
-
-    <Route path="/signup">
-      <Signup />
-    </Route>
-
-    <Route path="*">
-      <FourOFour />
-    </Route>
-  </Switch>
-);
-
-const AuthenticatedRoute = ({ children, ...rest }) => {
-  const auth = useContext(AuthContext);
   return (
-    <Route
-      {...rest}
-      render={() =>
-        auth.isAuthenticated() ? <App>{children}</App> : <Redirect to="/" />
-      }
-    ></Route>
-  );
-};
-
-const AppRoutes = () => {
-  return (
-    <>
-      <Suspense>
+    <div id="app" className="d-flex flex-column h-100">
+      <NavBar />
+      <div className="container flex-grow-1">
         <Switch>
-          <AuthenticatedRoute path="/account">
-            <Account />
-          </AuthenticatedRoute>
-          <UnauthenticatedRoutes />
+          <Route path="/" exact component={Home} />
+          <ProtectedRoute path="/profile" component={Profile} />
+          <ProtectedRoute path="/external-api" component={ExternalApi} />
         </Switch>
-      </Suspense>
-    </>
+      </div>
+      <Footer />
+    </div>
   );
 };
-
-function App() {
-  return (
-    <Router>
-      <AuthProvider>
-        <FetchProvider>
-          <div className="bg-gray-100">
-            <AppRoutes />
-          </div>
-        </FetchProvider>
-      </AuthProvider>
-    </Router>
-  );
-}
 
 export default App;

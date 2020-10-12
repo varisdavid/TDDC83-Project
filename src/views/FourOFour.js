@@ -1,6 +1,6 @@
 import React from "react";
 
-import GradientLink from "./../components/common/GradientLink";
+import GradientLink from "../components/common/GradientLink";
 
 const FourOFour = () => {
   return (
