@@ -1,13 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './tailwind.css';
-import './styles.css';
-import App from './App';
+
 import * as serviceWorker from './serviceWorker';
 
+import { BrowserRouter as Router } from "react-router-dom";
+import Auth0ProvierWithHistory from "./auth/Auth0ProviderWithHistory" // Auth0s own context with our info added
+
+import App from './App';
+
+// import './tailwind.css';
+import './index.css';
+
+
 ReactDOM.render(
+
   <React.StrictMode>
-    <App />
+    <Router>
+      <Auth0ProvierWithHistory>
+        <App />
+      </Auth0ProvierWithHistory>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
