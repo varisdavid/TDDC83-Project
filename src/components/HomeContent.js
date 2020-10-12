@@ -3,7 +3,7 @@ import { Link } from '@material-ui/icons';
 
 const HomeContent = () => (
   <div className="next-steps">
-    <h2 className="my-5 text-center">Patient Management</h2>
+    <h2 className="my-5 text-center">Patient management</h2>
 
     <div className="row">
       <div className="col-md-5 mb-4">
@@ -18,9 +18,7 @@ const HomeContent = () => (
           </a>
         </h6>
         <p>
-          Auth0 supports social providers as Facebook, Twitter, Instagram and
-          100+, Enterprise providers as Microsoft Office 365, Google Apps,
-          Azure, and more. You can also use any OAuth2 Authorization Server.
+            Patient management, handling many.
         </p>
       </div>
 
