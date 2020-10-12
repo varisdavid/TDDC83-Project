@@ -3,7 +3,7 @@ import { Link } from '@material-ui/icons';
 
 const HomeContent = () => (
   <div className="next-steps">
-    <h2 className="my-5 text-center">What can I do next?</h2>
+    <h2 className="my-5 text-center">Patient Management</h2>
 
     <div className="row">
       <div className="col-md-5 mb-4">
