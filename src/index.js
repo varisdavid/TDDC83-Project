@@ -8,7 +8,7 @@ import Auth0ProvierWithHistory from "./auth/Auth0ProviderWithHistory" // Auth0s 
 
 import App from './App';
 
-// import './tailwind.css';
+import './tailwind.css';
 import './index.css';
 
 

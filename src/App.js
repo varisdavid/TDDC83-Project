@@ -21,7 +21,19 @@ const App = () => {
         <Route path="/" exact component={Home} />
         <ProtectedRoute path="/profile" component={Profile} />
         <ProtectedRoute path="/external-api" component={ExternalApi} />
-        <ProtectedRoute path="/overview" component={PatientOverview} /> {/* Just a starting point, could be dashboard, patients etc .. */}
+
+        <ProtectedRoute exact path={["/overview", "/overview/home"]}>
+          <PatientOverview>
+           {/* Load patient home in this case */}
+          </PatientOverview>
+        </ProtectedRoute>
+
+        <ProtectedRoute exact path="/overview/patients">
+          <PatientOverview>
+           {/* Load patients components in this case */}
+          </PatientOverview>
+        </ProtectedRoute>
+
       </Switch>
     </div>
   );
