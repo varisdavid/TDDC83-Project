@@ -26,7 +26,7 @@ const App = () => {
           <ProtectedRoute path="/overview" component={PatientOverview} /> {/* Just a starting point, could be dashboard, patients etc .. */}
         </Switch>
       </div>
-      <Footer />
+      <Footer />  
     </div>
   );
 };
