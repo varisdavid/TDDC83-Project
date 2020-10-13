@@ -88,7 +88,7 @@ Do we want client side authentication, or simply that API calls wont be successf
 
 ### Styling
 
-The proposed styling is, inside a html element, e.g <div classname="<>">, populate this with a suitable classname you find in tailwind, if you want padding 0, write "p-0", if you want multiple values, simply space separate the different classnames. "p-0 p-2".
+The proposed styling is, inside a html element, e.g div, "<"div classname="proposed styling class here">", populate this with a suitable classname you find in tailwind, if you want padding 0, write "p-0", if you want multiple values, simply space separate the different classnames. "p-0 justify-center" etc.
 Read more at: https://tailwindcss.com/ 
 
 ### Packages
