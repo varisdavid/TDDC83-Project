@@ -84,9 +84,12 @@ The pages has components, located under /components/<>.js
 
 (Some components should and could be considered more "common" and instead located under /components/common/<>.js, e.g form field, buttons etc etc.. )
 
-To authenticate api calls we have a fetchContext which uses the authContext (this uses localstorage and controls authentication on the client side)
-
 Do we want client side authentication, or simply that API calls wont be successful if not authenticated?
+
+### Styling
+
+The proposed styling is, inside a html element, e.g <div classname="<>">, populate this with a suitable classname you find in tailwind, if you want padding 0, write "p-0", if you want multiple values, simply space separate the different classnames. "p-0 p-2".
+Read more at: https://tailwindcss.com/ 
 
 ### Packages
 
@@ -100,4 +103,5 @@ Do we want client side authentication, or simply that API calls wont be successf
 
 Had some problem deciding wheter to go down the typescript track (seemed like there were no real proponents for this) so here is a Javascript boilerplate (depending on our needs the package structure might change). Will wait on further instructions from the analyst team to see if this is a deemeed a priority or not.
 
-2020-10-08: Authentication on the client side will be handled by a third party service (OAuth) so no need to worry about that.
+
+2020-10-13: Basic auth boilerplate up.
