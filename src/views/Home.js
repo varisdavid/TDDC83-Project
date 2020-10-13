@@ -1,12 +1,16 @@
 import React, { Fragment } from "react";
 
-import { Hero, HomeContent } from "../components";
+import { NavBar, Hero, HomeContent, Footer } from "../components";
 
 const Home = () => (
   <Fragment>
-    <Hero />
-    <hr />
-    <HomeContent />
+    <NavBar />
+      <div className="container flex-grow-1">
+        <Hero />
+        <hr />
+        <HomeContent />
+      </div>
+    <Footer />
   </Fragment>
 );
 
