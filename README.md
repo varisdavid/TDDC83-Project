@@ -77,19 +77,21 @@ Added some example files to make the proposed file structure visible.
 
 index.js access "root" and loads our app.js into the root.
 
-app.js contains routing information, allowing for authenticated routes and unauthenticated ones.
-These routes in turn render pages, which are located under /pages/<>.js
+app.js contains routing information, allowing for authenticated routes ("ProtectedRoutes") and unauthenticated ones.
+These routes in turn render views, which are located under src/views/<>.js
 
-The pages has components, located under /components/<>.js
+The views have components, located under /components/<>.js
 
 (Some components should and could be considered more "common" and instead located under /components/common/<>.js, e.g form field, buttons etc etc.. )
 
-Do we want client side authentication, or simply that API calls wont be successful if not authenticated?
+Make sure to get comfortable with https://material-ui.com/ and their component library to avoid unnecessary work. (Bootstrapy)
 
 ### Styling
 
 The proposed styling is, inside a html element, e.g div, "<"div classname="proposed styling class here">", populate this with a suitable classname you find in tailwind, if you want padding 0, write "p-0", if you want multiple values, simply space separate the different classnames. "p-0 justify-center" etc.
 Read more at: https://tailwindcss.com/ 
+
+If you need to add specific styling, you could make a specific css file for that component, and load it inside that component, see how src/index.js uses src/index.css or src/app.js uses src/app.css. 
 
 ### Packages
 
