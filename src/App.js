@@ -17,16 +17,12 @@ const App = () => {
 
   return (
     <div id="app" className="d-flex flex-column h-100">
-      <NavBar />
-      <div className="container flex-grow-1">
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <ProtectedRoute path="/profile" component={Profile} />
-          <ProtectedRoute path="/external-api" component={ExternalApi} />
-          <ProtectedRoute path="/overview" component={PatientOverview} /> {/* Just a starting point, could be dashboard, patients etc .. */}
-        </Switch>
-      </div>
-      <Footer />  
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <ProtectedRoute path="/profile" component={Profile} />
+        <ProtectedRoute path="/external-api" component={ExternalApi} />
+        <ProtectedRoute path="/overview" component={PatientOverview} /> {/* Just a starting point, could be dashboard, patients etc .. */}
+      </Switch>
     </div>
   );
 };
