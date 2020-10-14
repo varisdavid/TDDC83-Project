@@ -17,7 +17,7 @@ const Hero = () => (
         rel="noopener noreferrer"
         href="https://tddc88-company-website.herokuapp.com/"
       >
-        Om oss
+        About us
       </a>
     </p>
   </div>
