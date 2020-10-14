@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Calendar from 'react-calendar';
+import ReactDOM from 'react-dom';
 
 //install by exicuting: yarn add react-calendar
 
@@ -22,3 +23,4 @@ class patient_calender extends Component {
     );
     }
 }
+ ReactDOM.render(patient_calender, document.getElementById('patient_calendar'));
