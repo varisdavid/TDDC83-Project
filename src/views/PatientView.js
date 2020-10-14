@@ -1,10 +1,17 @@
-import React from "react";
+import React, { Fragment } from "react";
 
-import { PatientCalendar } from "../components";
+import { NavBarPatient, Footer, PatientCalendar, PatientHeader } from "../components";
 
 
 const PatientView = () => (
-  <PatientCalendar/>
+  <Fragment>
+  <PatientHeader />
+  <NavBarPatient />
+    <div className="container flex-grow-1">
+      <PatientCalendar/>
+    </div>
+  <Footer />
+</Fragment>
 );
 
 export default PatientView;
