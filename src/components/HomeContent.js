@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from '@material-ui/icons';
 
 const HomeContent = () => (
-  <div className="next-steps">
+  <div className="next-steps mb-2">
     <h2 className="my-5 text-center">Patient management</h2>
 
     <div className="row">
