@@ -23,4 +23,4 @@ class patient_calender extends Component {
     );
     }
 }
- ReactDOM.render(patient_calender, document.getElementById('patient_calendar'));
+ ReactDOM.render(patient_calender, document.getElementById('root'));
