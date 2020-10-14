@@ -3,6 +3,7 @@ import Calendar from 'react-calendar';
 
 //install by exicuting: yarn add react-calendar
 
+
 class patient_calender extends Component {
     state = {
         date: new Date(),
