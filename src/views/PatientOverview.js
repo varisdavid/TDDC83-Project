@@ -10,30 +10,19 @@ import { Breadcrumbs, Link, AppBar, Typography } from "@material-ui/core"
 const PatientOverview = () => {
   return (
   <Fragment>
-    <Breadcrumbs separator=">" aria-label="breadcrumb">
-      <Link color="inherit" href="/overview">
-        X_Vårdcentral
-      </Link>
-      <Link color="inherit" href="/overview/home">
-        Hem
-      </Link>
-    </Breadcrumbs>
+    <div className="mt-2 ml-1 h-4">
+      <Breadcrumbs eparator=">" aria-label="breadcrumb">
+        <Link color="inherit" href="/overview">
+          X_Vårdcentral
+        </Link>
+        <Link color="inherit" href="/overview/home">
+          Hem
+        </Link>
+      </Breadcrumbs>
+    </div>
 
 
-    <AppBar className="mt-10 h-20">
-      <Typography variant="h6" color="grey">
-        X_Vårdcentral
-      </Typography>
-      <Typography variant="h6" color="grey">
-        Help Icon
-      </Typography>
-      <Typography variant="h6" color="grey">
-        Settings Icon
-      </Typography>
-      <Typography variant="h6" color="grey">
-        Logout Icon
-      </Typography>
-    </AppBar>
+    <div></div>
 
     {/* This should be followed by another "navbar which contains the different areas, "home", "patients", "calendar" etc ..*/}
 
