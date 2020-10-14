@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
 import { Loading } from "./components";
-import { Home, Profile, ExternalApi, PatientOverview } from "./views";
+import { Home, Profile, ExternalApi, Overview } from "./views";
 import ProtectedRoute from "./auth/ProtectedRoute";
 
 import "./app.css";
@@ -22,16 +22,10 @@ const App = () => {
         <ProtectedRoute path="/profile" component={Profile} />
         <ProtectedRoute path="/external-api" component={ExternalApi} />
 
-        <ProtectedRoute exact path={["/overview", "/overview/home"]}>
-          <PatientOverview>
+        <ProtectedRoute path="/overview">
+          <Overview>
            {/* Load patient home in this case */}
-          </PatientOverview>
-        </ProtectedRoute>
-
-        <ProtectedRoute exact path="/overview/patients">
-          <PatientOverview>
-           {/* Load patients components in this case */}
-          </PatientOverview>
+          </Overview>
         </ProtectedRoute>
 
       </Switch>

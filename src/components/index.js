@@ -4,4 +4,6 @@ import Hero from "./Hero";
 import Loading from "./Loading";
 import NavBar from "./NavBar";
 
-export { HomeContent, Footer, Hero, Loading, NavBar };
+import OverviewHeader from "./OverviewHeader"
+
+export { HomeContent, Footer, Hero, Loading, NavBar, OverviewHeader };

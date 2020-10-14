@@ -1,6 +1,6 @@
 import ExternalApi from "./ExternalApi";
 import Home from "./Home";
 import Profile from "./Profile";
-import PatientOverview from "./PatientOverview"
+import Overview from "./Overview"
 
-export { ExternalApi, Home, Profile, PatientOverview };
+export { ExternalApi, Home, Profile, Overview };
