@@ -11,6 +11,7 @@ const PatientCalendar = () => {
             <Calendar
                onChange={onChange}
                value={value}
+               onClickDay = {onChange}
             />
         </div>
     );
