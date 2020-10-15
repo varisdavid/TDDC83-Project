@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 import PropTypes from 'prop-types';
 import { Typography, Box } from '@material-ui/core';
@@ -37,9 +38,33 @@ TabPanel.propTypes = {
 
 const Overview = () => {
 
+  const location = useLocation();
+  
   // will change later on
   const healthCenter = useState("X_Vårdcentral");
-  const [activeTabValue, setActiveTabValue] = useState(0);
+  const [activeTabValue, setActiveTabValue] = useState();
+
+  useEffect(() => {
+    console.log("hi");
+    console.log(location.pathname);
+
+
+    if (location.pathname === "/overview/home") {
+      setActiveTabValue(0);
+    } else if (location.pathname === "/overview/patients") {
+      setActiveTabValue(1);
+    } else if (location.pathname === "/overview/calendar") {
+      setActiveTabValue(2);
+    } else if (location.pathname === "/overview/notices") {
+      setActiveTabValue(3);
+    } else if (location.pathname === "/overview/search") {
+      setActiveTabValue(4);
+    } else {
+      console.log("d?")
+    }
+
+  }, [location] );
+
 
   return (
   <>

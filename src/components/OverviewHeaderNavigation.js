@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Tabs, Tab, InputBase } from '@material-ui/core';
 import { Search } from '@material-ui/icons';
@@ -37,12 +37,10 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const OverviewHeaderNavigation = ({setActiveTabValue}) => {
+const OverviewHeaderNavigation = ({activeTabValue, setActiveTabValue}) => {
   const classes = useStyles();
-  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
     setActiveTabValue(newValue)
   };
 
@@ -52,7 +50,7 @@ const OverviewHeaderNavigation = ({setActiveTabValue}) => {
         <Tabs
           className="bg-white text-gray-800"
           variant="fullWidth"
-          value={value}
+          value={activeTabValue}
           onChange={handleChange}
           aria-label="overview-navtab"
         >
@@ -60,7 +58,7 @@ const OverviewHeaderNavigation = ({setActiveTabValue}) => {
           <LinkTab label="Patienter" href="/overview/patients" {...a11yProps(1)} />
           <LinkTab label="Kalender" href="/overview/calendar" {...a11yProps(2)} />
           <LinkTab label="Notiser" href="/overview/notices" {...a11yProps(3)} />
-          <div className="w-1/5 text-center self-center">
+          <div className="text-center self-center">
               <Search className="mr-2 text-gray-800"/>
               <InputBase
               className="text-gray-800"
