@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from '@material-ui/icons';
 
 const HomeContent = () => (
-  <div className="next-steps">
+  <div className="next-steps mb-2">
     <h2 className="my-5 text-center">Patient management</h2>
 
     <div className="row">
@@ -11,14 +11,14 @@ const HomeContent = () => (
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://auth0.com/docs/connections"
+            href="https://tddc88-company-website.herokuapp.com/"
           >
             <Link className="mr-2" />
-            Configure other identity providers
+            Lorem Ipsum
           </a>
         </h6>
         <p>
-            Patient management, handling many.
+        Aliquam id sem in sem suscipit suscipit. Sed ut ornare mauris. Etiam nisl elit, lobortis imperdiet aliquet et, molestie eget lectus. Proin a augue rutrum, blandit ante et, volutpat tellus.
         </p>
       </div>
 
@@ -29,17 +29,14 @@ const HomeContent = () => (
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://auth0.com/docs/multifactor-authentication"
+            href="https://tddc88-company-website.herokuapp.com/"
           >
             <Link className="mr-2" />
-            Enable Multi-Factor Authentication
+            Lorem Ipsum
           </a>
         </h6>
         <p>
-          Add an extra layer of security by enabling Multi-factor
-          Authentication, requiring your users to provide more than one piece of
-          identifying information. Push notifications, authenticator apps, SMS,
-          and DUO Security are supported.
+        Aliquam id sem in sem suscipit suscipit. Sed ut ornare mauris. Etiam nisl elit, lobortis imperdiet aliquet et, molestie eget lectus. Proin a augue rutrum, blandit ante et, volutpat tellus.
         </p>
       </div>
     </div>
@@ -50,16 +47,14 @@ const HomeContent = () => (
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://auth0.com/docs/anomaly-detection"
+            href="https://tddc88-company-website.herokuapp.com/"
           >
             <Link className="mr-2" />
-            Anomaly Detection
+            Lorem Ipsum
           </a>
         </h6>
         <p>
-          Auth0 can detect anomalies and stop malicious attempts to access your
-          application. Anomaly detection can alert you and your users of
-          suspicious activity, as well as block further login attempts.
+        Aliquam id sem in sem suscipit suscipit. Sed ut ornare mauris. Etiam nisl elit, lobortis imperdiet aliquet et, molestie eget lectus. Proin a augue rutrum, blandit ante et, volutpat tellus.
         </p>
       </div>
 
@@ -70,17 +65,14 @@ const HomeContent = () => (
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://auth0.com/docs/rules"
+            href="https://tddc88-company-website.herokuapp.com/"
           >
             <Link className="mr-2" />
-            Learn About Rules
+            Lorem Ipsum
           </a>
         </h6>
         <p>
-          Rules are JavaScript functions that execute when a user authenticates
-          to your application. They run once the authentication process is
-          complete, and you can use them to customize and extend Auth0's
-          capabilities.
+        Aliquam id sem in sem suscipit suscipit. Sed ut ornare mauris. Etiam nisl elit, lobortis imperdiet aliquet et, molestie eget lectus. Proin a augue rutrum, blandit ante et, volutpat tellus.
         </p>
       </div>
     </div>

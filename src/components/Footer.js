@@ -1,12 +1,16 @@
 import React from "react";
 
+import logo from "../assets/logo.svg"
+
 const Footer = () => (
-  <footer className="bg-light p-3 text-center">
-    <div className="logo" />
+  <footer className="p-5 align-middle text-center h-40 bg-gray-300">
+    <div className="mt-2">
+      <img className="m-auto" height="25" width="25" src={logo} alt="Logo" />
+    </div>
     <p>
-      Sample project provided by{" "}
-      <a target="_blank" rel="noopener noreferrer" href="https://auth0.com">
-        Auth0
+      {" "}
+      <a target="_blank" rel="noopener noreferrer" href="https://tddc88-company-website.herokuapp.com/">
+        About Us
       </a>
     </p>
   </footer>

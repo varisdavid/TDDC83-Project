@@ -1,10 +1,15 @@
+### Documentation
+
 Living documents, e.g "education plan" and "project plan" are now found under "docs".
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Get started with the project
 
-## Available Scripts
+Install yarn: https://classic.yarnpkg.com/en/docs/getting-started
+Navigate to a desirable folder -> do "git clone -b "pure-react" https://gitlab.liu.se/tddc88-company-3-2020/deploy.git" (either use the branch pure-react or a feature branch)
+"cd deploy"
+"yarn install"
+"yarn start"
 
-In the project directory, you can run:
 
 ### `yarn start`
 
@@ -77,19 +82,21 @@ Added some example files to make the proposed file structure visible.
 
 index.js access "root" and loads our app.js into the root.
 
-app.js contains routing information, allowing for authenticated routes and unauthenticated ones.
-These routes in turn render pages, which are located under /pages/<>.js
+app.js contains routing information, allowing for authenticated routes ("ProtectedRoutes") and unauthenticated ones.
+These routes in turn render views, which are located under src/views/<>.js
 
-The pages has components, located under /components/<>.js
+The views have components, located under /components/<>.js
 
 (Some components should and could be considered more "common" and instead located under /components/common/<>.js, e.g form field, buttons etc etc.. )
 
-Do we want client side authentication, or simply that API calls wont be successful if not authenticated?
+Make sure to get comfortable with https://material-ui.com/ and their component library to avoid unnecessary work. (Bootstrapy)
 
 ### Styling
 
 The proposed styling is, inside a html element, e.g div, "<"div classname="proposed styling class here">", populate this with a suitable classname you find in tailwind, if you want padding 0, write "p-0", if you want multiple values, simply space separate the different classnames. "p-0 justify-center" etc.
-Read more at: https://tailwindcss.com/ 
+Read more at: https://tailwindcss.com/
+
+If you need to add specific styling, you could make a specific css file for that component, and load it inside that component, see how src/index.js uses src/index.css or src/app.js uses src/app.css.
 
 ### Packages
 
@@ -101,7 +108,6 @@ Read more at: https://tailwindcss.com/
 
 ### Status
 
-Had some problem deciding wheter to go down the typescript track (seemed like there were no real proponents for this) so here is a Javascript boilerplate (depending on our needs the package structure might change). Will wait on further instructions from the analyst team to see if this is a deemeed a priority or not.
-
+Had some problem deciding wheter to go down the typescript track (seemed like there were no real proponents for this) so here is a Javascript boilerplate (depending on our needs the package structure might change). Will wait on further instructions from the analyst team to see if this is deemeed a priority or not.
 
 2020-10-13: Basic auth boilerplate up.
