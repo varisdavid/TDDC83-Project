@@ -22,9 +22,7 @@ const App = () => {
         <ProtectedRoute path="/profile" component={Profile} />
         <ProtectedRoute path="/external-api" component={ExternalApi} />
         <ProtectedRoute path="/overview">
-          <Overview>
-           {/* Load patient home in this case */}
-          </Overview>
+          <Overview />
         </ProtectedRoute>
 
       </Switch>

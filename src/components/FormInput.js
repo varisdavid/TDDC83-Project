@@ -5,7 +5,9 @@ import FormError from './../components/common/FormError';
 import Input from './../components/common/Input';
 
 const FormInput = ({ ariaLabel, name, type, placeholder }) => {
+
   const [field, meta] = useField(name);
+  
   return (
     <>
       <Input

@@ -5,6 +5,8 @@ import Loading from "./Loading";
 import NavBar from "./NavBar";
 
 import OverviewHeader from "./OverviewHeader";
-import NavTabs from "./OverviewHeaderNavigation";
+import OverviewHeaderBanner from "./OverviewHeaderBanner"
+import OverviewHeaderBreadcrumbs from "./OverviewHeaderBreadcrumbs"
+import OverviewHeaderNavigation from "./OverviewHeaderNavigation";
 
-export { HomeContent, Footer, Hero, Loading, NavBar, OverviewHeader, NavTabs };
+export { HomeContent, Footer, Hero, Loading, NavBar, OverviewHeader, OverviewHeaderBanner, OverviewHeaderNavigation, OverviewHeaderBreadcrumbs };

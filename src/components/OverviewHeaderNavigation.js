@@ -1,34 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Tabs, Tab, Typography, Box, InputBase } from '@material-ui/core';
+import { AppBar, Tabs, Tab, InputBase } from '@material-ui/core';
 import { Search } from '@material-ui/icons';
 
-const TabPanel = (props) => {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`nav-tabpanel-${index}`}
-      aria-labelledby={`nav-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
-};
+import { useHistory } from "react-router-dom";
 
 const a11yProps = (index) => {
   return {
@@ -38,36 +13,44 @@ const a11yProps = (index) => {
 }
 
 const LinkTab = (props) => {
+
+  const history = useHistory();
+
   return (
     <Tab
       component="a"
       onClick={(event) => {
         event.preventDefault();
+        history.push(props.href);
       }}
       {...props}
     />
   );
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: "#fff",
+    color: "#2d3748",
+    marginTop: "4px",
   },
 }));
 
-const NavTabs = () => {
+const OverviewHeaderNavigation = ({setActiveTabValue}) => {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    setActiveTabValue(newValue)
   };
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar className="bg-white shadow-none" position="relative">
         <Tabs
+          className="bg-white text-gray-800"
           variant="fullWidth"
           value={value}
           onChange={handleChange}
@@ -83,27 +66,12 @@ const NavTabs = () => {
               className="text-gray-800"
               placeholder="Sök..."
               inputProps={{ 'aria-label': 'search' }}
-              />
+            />
           </div>
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0}>
-        Page One
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Page Two
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Page Three
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        Page Four
-      </TabPanel>
-      <TabPanel value={value} index={4}>
-        Page Five
-      </TabPanel>
     </div>
   );
 };
 
-export default NavTabs;
+export default OverviewHeaderNavigation;
