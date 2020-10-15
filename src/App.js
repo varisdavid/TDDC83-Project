@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
 import { Loading } from "./components";
-import { Home, Profile, ExternalApi, Overview } from "./views";
+import { Home, Profile, ExternalApi, Overview, PatientView } from "./views";
 import ProtectedRoute from "./auth/ProtectedRoute";
 
 import "./app.css";
@@ -24,6 +24,7 @@ const App = () => {
         <ProtectedRoute path="/overview">
           <Overview />
         </ProtectedRoute>
+        <ProtectedRoute path="/patient" component={PatientView} />
 
       </Switch>
     </div>

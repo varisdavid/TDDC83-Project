@@ -30,5 +30,8 @@ export {
     Patients,
     PatientsSearch,
     PatientsTable,
-    PatientGroups
+    PatientGroups,
+    PatientCalendar,
+    PatientHeader,
+    NavBarPatient
 };
