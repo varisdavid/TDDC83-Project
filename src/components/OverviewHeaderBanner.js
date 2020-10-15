@@ -1,10 +1,14 @@
 import React from "react";
 
+import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "@material-ui/core"
 import { Help, Settings, ExitToAppRounded } from '@material-ui/icons';
 
 const OverviewHeaderBanner = ({healthCenter}) => {
    
+    const { logout } = useAuth0();
+
+
     return (
         <>
             <div className="p-2 h-32 flex">
@@ -20,7 +24,13 @@ const OverviewHeaderBanner = ({healthCenter}) => {
                     <Link className="w-1/3 text-gray-800 text-center" href="/overview/settings">
                         <Settings style={{ fontSize: 40 }} />
                     </Link>
-                    <Link className="w-1/3 text-gray-800 text-center" href="/logout">
+                    <Link 
+                        className="w-1/3 text-gray-800 text-center" 
+                        onClick={() =>
+                            logout({
+                            returnTo: "http://localhost:3000",
+                            })
+                        }>
                         <ExitToAppRounded style={{ fontSize: 40 }} />
                     </Link>
                 </div>  

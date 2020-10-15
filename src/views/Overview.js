@@ -42,12 +42,9 @@ const Overview = () => {
   
   // will change later on
   const healthCenter = useState("X_Vårdcentral");
-  const [activeTabValue, setActiveTabValue] = useState();
+  const [activeTabValue, setActiveTabValue] = useState(0);
 
   useEffect(() => {
-    console.log("hi");
-    console.log(location.pathname);
-
 
     if (location.pathname === "/overview/home") {
       setActiveTabValue(0);
@@ -60,7 +57,7 @@ const Overview = () => {
     } else if (location.pathname === "/overview/search") {
       setActiveTabValue(4);
     } else {
-      console.log("d?")
+      setActiveTabValue(0);
     }
 
   }, [location] );
