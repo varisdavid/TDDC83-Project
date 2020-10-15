@@ -7,4 +7,28 @@ import PatientCalendar from "./PatientCalendar";
 import PatientHeader from "./PatientHeader";
 import NavBarPatient from "./NavBarPatient";
 
-export { HomeContent, Footer, Hero, Loading, NavBar, PatientCalendar, PatientHeader, NavBarPatient };
+import OverviewHeader from "./OverviewHeader";
+import OverviewHeaderBanner from "./OverviewHeaderBanner"
+import OverviewHeaderBreadcrumbs from "./OverviewHeaderBreadcrumbs"
+import OverviewHeaderNavigation from "./OverviewHeaderNavigation";
+
+import Patients from "./Patients";
+import PatientsSearch from "./PatientsSearch"
+import PatientsTable from "./PatientsTable"
+import PatientGroups from "./PatientGroups";
+
+export { 
+    HomeContent, 
+    Footer, 
+    Hero, 
+    Loading, 
+    NavBar, 
+    OverviewHeader, 
+    OverviewHeaderBanner, 
+    OverviewHeaderNavigation, 
+    OverviewHeaderBreadcrumbs, 
+    Patients,
+    PatientsSearch,
+    PatientsTable,
+    PatientGroups
+};

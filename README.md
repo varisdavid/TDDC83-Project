@@ -1,10 +1,15 @@
+### Documentation
+
 Living documents, e.g "education plan" and "project plan" are now found under "docs".
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Get started with the project
 
-## Available Scripts
+Install yarn: https://classic.yarnpkg.com/en/docs/getting-started
+Navigate to a desirable folder -> do "git clone -b "pure-react" https://gitlab.liu.se/tddc88-company-3-2020/deploy.git" (either use the branch pure-react or a feature branch)
+"cd deploy"
+"yarn install"
+"yarn start"
 
-In the project directory, you can run:
 
 ### `yarn start`
 
