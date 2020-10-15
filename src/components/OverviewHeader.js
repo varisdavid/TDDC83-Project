@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
 import { Breadcrumbs, Link, Divider, AppBar, Toolbar, InputBase } from "@material-ui/core"
-
-
 import { Help, Settings, ExitToAppRounded, Search } from '@material-ui/icons';
+
+import { NavTabs } from "../components";
 
 // TODO:
 // Routing is incomplete, styling is whatever
@@ -16,9 +16,9 @@ const OverviewHeader = () => {
 
     return (
     <>
-        <div className="w-100 h-auto">
+        <div className="w-full h-auto">
             <div className="p-2 h-auto">
-                <Breadcrumbs className="self-center" separator="›" aria-label="breadcrumb">
+                <Breadcrumbs className="self-center" separator=">" aria-label="breadcrumb">
                     <Link className="text-gray-800" href="/overview">
                         { healthCenter }
                     </Link>
@@ -69,9 +69,9 @@ const OverviewHeader = () => {
                         <div className="w-1/5 text-center">
                             <Search className="mr-2 text-gray-800"/>
                             <InputBase
-                            className="text-gray-800"
-                            placeholder="Sök..."
-                            inputProps={{ 'aria-label': 'search' }}
+                                className="text-gray-800"
+                                placeholder="Sök..."
+                                inputProps={{ 'aria-label': 'search' }}
                             />
                         </div>
                     </Toolbar>
@@ -80,6 +80,8 @@ const OverviewHeader = () => {
         </div>
         
         <Divider variant="middle"/>
+
+        <NavTabs />
 
 
     </>

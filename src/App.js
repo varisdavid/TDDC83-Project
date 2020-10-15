@@ -21,7 +21,6 @@ const App = () => {
         <Route path="/" exact component={Home} />
         <ProtectedRoute path="/profile" component={Profile} />
         <ProtectedRoute path="/external-api" component={ExternalApi} />
-
         <ProtectedRoute path="/overview">
           <Overview>
            {/* Load patient home in this case */}
