@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Tabs, Tab, InputBase } from '@material-ui/core';
-import { Search } from '@material-ui/icons';
+import React from 'react';
+import { AppBar, Tabs, Tab } from '@material-ui/core';
 
 import { useHistory } from "react-router-dom";
 
@@ -28,56 +26,60 @@ const LinkTab = (props) => {
   );
 }
 
-const useStyles = makeStyles(() => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: "#fff",
-    color: "#2d3748",
-    marginTop: "4px",
-  },
-}));
-
 const OverviewHeaderNavigation = ({activeTabValue, setActiveTabValue}) => {
-  const classes = useStyles();
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (newValue) => {
     setActiveTabValue(newValue)
   };
 
-  const [searchTerm, setSearchTerm] = useState('');
-
-  const handleSearchChange = (event) => {
-      setSearchTerm(event.target.value);
-    };
-
 
   return (
-    <div className={classes.root}>
-      <AppBar className="bg-white shadow-none" position="relative">
+    <>
+      <AppBar 
+        position="relative"
+      >
         <Tabs
-          className="bg-white text-gray-800"
+          TabIndicatorProps={{
+            style: {
+              height:"0px",
+            }
+          }}
+          style={{ backgroundColor: "#A9D7FF", color: "#000" }} 
+          className="text-gray-800"
           variant="fullWidth"
           value={activeTabValue}
           onChange={handleChange}
           aria-label="overview-navtab"
         >
-          <LinkTab label="Hem" href="/overview/home" {...a11yProps(0)} />
-          <LinkTab label="Patienter" href="/overview/patients" {...a11yProps(1)} />
-          <LinkTab label="Kalender" href="/overview/calendar" {...a11yProps(2)} />
-          <LinkTab label="Notiser" href="/overview/notices" {...a11yProps(3)} />
-          <div className="text-center self-center">
-              <Search className="mr-2 text-gray-800"/>
-              <InputBase
-                className="text-gray-800"
-                placeholder="Sök..."
-                inputProps={{ 'aria-label': 'search' }}
-                onChange={handleSearchChange}
-                value={searchTerm}
-              />
-          </div>
+          <LinkTab 
+            style={{ textDecoration: "none", backgroundColor: activeTabValue === 0 ? "#0066B3" : "inherit", color: activeTabValue === 0 ? "#FFF" : "inherit" }} 
+            label="Hem" 
+            href="/overview/home" 
+            {...a11yProps(0)} 
+          />
+          <LinkTab 
+            style={{ textDecoration: "none", backgroundColor: activeTabValue === 1 ? "#0066B3" : "inherit", color: activeTabValue === 1 ? "#FFF" : "inherit"}} 
+            label="Patienter" 
+            href="/overview/patients" 
+            {...a11yProps(1)} 
+          />
+          <LinkTab 
+            style={{ textDecoration: "none", backgroundColor: activeTabValue === 2 ? "#0066B3" : "inherit", color: activeTabValue === 2 ? "#FFF" : "inherit"}} 
+            label="Notislogg" 
+            href="/overview/notices" 
+            {...a11yProps(2)} 
+          />
+          
+          <LinkTab 
+            style={{ textDecoration: "none", backgroundColor: activeTabValue === 3 ? "#0066B3" : "inherit", color: activeTabValue === 3 ? "#FFF" : "inherit"}} 
+            label="Kalender" 
+            href="/overview/calendar" 
+            {...a11yProps(3)} 
+          />
+
         </Tabs>
       </AppBar>
-    </div>
+    </>
   );
 };
 

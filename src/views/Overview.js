@@ -52,12 +52,10 @@ const Overview = () => {
       setActiveTabValue(0);
     } else if (location.pathname === "/overview/patients") {
       setActiveTabValue(1);
-    } else if (location.pathname === "/overview/calendar") {
-      setActiveTabValue(2);
     } else if (location.pathname === "/overview/notices") {
+      setActiveTabValue(2);
+    } else if (location.pathname === "/overview/calendar") {
       setActiveTabValue(3);
-    } else if (location.pathname === "/overview/search") {
-      setActiveTabValue(4);
     } else {
       setActiveTabValue(0);
     }
@@ -68,21 +66,23 @@ const Overview = () => {
   return (
   <>
     <OverviewHeader healthCenter={healthCenter} activeTabValue={activeTabValue} setActiveTabValue={setActiveTabValue}/>
+
     <TabPanel value={activeTabValue} index={0}>
       
     </TabPanel>
+
     <TabPanel value={activeTabValue} index={1}>
       <Patients />
     </TabPanel>
+
     <TabPanel value={activeTabValue} index={2}>
       Page Three
     </TabPanel>
+
     <TabPanel value={activeTabValue} index={3}>
       Page Four
     </TabPanel>
-    <TabPanel value={activeTabValue} index={4}>
-      Page Five
-    </TabPanel>
+
   </>
 
   );
