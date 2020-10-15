@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Tabs, Tab, InputBase } from '@material-ui/core';
 import { Search } from '@material-ui/icons';
@@ -44,6 +44,13 @@ const OverviewHeaderNavigation = ({activeTabValue, setActiveTabValue}) => {
     setActiveTabValue(newValue)
   };
 
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearchChange = (event) => {
+      setSearchTerm(event.target.value);
+    };
+
+
   return (
     <div className={classes.root}>
       <AppBar className="bg-white shadow-none" position="relative">
@@ -61,10 +68,12 @@ const OverviewHeaderNavigation = ({activeTabValue, setActiveTabValue}) => {
           <div className="text-center self-center">
               <Search className="mr-2 text-gray-800"/>
               <InputBase
-              className="text-gray-800"
-              placeholder="Sök..."
-              inputProps={{ 'aria-label': 'search' }}
-            />
+                className="text-gray-800"
+                placeholder="Sök..."
+                inputProps={{ 'aria-label': 'search' }}
+                onChange={handleSearchChange}
+                value={searchTerm}
+              />
           </div>
         </Tabs>
       </AppBar>

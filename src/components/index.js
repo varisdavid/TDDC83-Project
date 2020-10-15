@@ -9,4 +9,23 @@ import OverviewHeaderBanner from "./OverviewHeaderBanner"
 import OverviewHeaderBreadcrumbs from "./OverviewHeaderBreadcrumbs"
 import OverviewHeaderNavigation from "./OverviewHeaderNavigation";
 
-export { HomeContent, Footer, Hero, Loading, NavBar, OverviewHeader, OverviewHeaderBanner, OverviewHeaderNavigation, OverviewHeaderBreadcrumbs };
+import Patients from "./Patients";
+import PatientsSearch from "./PatientsSearch"
+import PatientsTable from "./PatientsTable"
+import PatientGroups from "./PatientGroups";
+
+export { 
+    HomeContent, 
+    Footer, 
+    Hero, 
+    Loading, 
+    NavBar, 
+    OverviewHeader, 
+    OverviewHeaderBanner, 
+    OverviewHeaderNavigation, 
+    OverviewHeaderBreadcrumbs, 
+    Patients,
+    PatientsSearch,
+    PatientsTable,
+    PatientGroups
+};

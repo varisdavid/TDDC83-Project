@@ -8,7 +8,7 @@ const OverviewHeader = ({healthCenter, activeTabValue, setActiveTabValue}) => {
 
     return (
     <>
-        <div className="w-full h-auto MuiPaper-elevation4">
+        <div className="w-full h-auto shadow">
             <OverviewHeaderBreadcrumbs activeTabValue={activeTabValue} />
             <Divider orientation="middle" />
             <OverviewHeaderBanner healthCenter={healthCenter} />  
