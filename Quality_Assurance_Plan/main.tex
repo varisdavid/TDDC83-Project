@@ -2,11 +2,17 @@
 \documentclass{article}
 
 \usepackage{graphicx}
+\usepackage{comment}
+\usepackage{hyperref}
 \graphicspath{./Pictures/}
 
 \begin{document}
 	% Title Page
 	\input{titlepage}
+	\clearpage
+	
+	% Change Log
+	\input{Sections/ChangeLog}
 	\clearpage
 	
 	% Table of Contents
@@ -15,14 +21,117 @@
 	
 	% Introduction: Why is this an important document?
 	\section{Introduction}
+	This Software Quality Assurance Plan (SQAP) describes the process, methods, standards and procedures that will be used to ensure the desired quality level of the HeartByte [project name].
 	
-	\section{Generall Principles}
+	\subsection{Scope}
+	This plan establishes the SQA activities performed throughout the life cycle of [Project name]. The goal of the SQA process is to verify that all software and documentation to be delivered meet all technical requirements and the expectations of both the customer Region Östergötland (RÖ) and CEO Daniel Ståhl. The SQA procedures defined herein shall be used to examine all deliverable software and documentation to determine compliance with tehcnical and performance requirements. 
 	
-	\section{Requirements}
+	%Possibly course management as well.
+	% Possibly add table with al software lifecycle activities
 	
-	\section{Testing}
+	\subsection{Relationship to Other Plans}
+	TBD.
 	
-	\section{Continious Integration}
+	\subsection{SQA Roles and Responsibilities}
+	The following chart defines the SQA roles and responsibilities of the members of the project team regarding SQA activities.
+	
+	\begin{tabular}{|l|l|l|l|}
+		\hline
+		Role & Name & Liu-id & Responsibility \\
+		\hline
+		Quality Coordinator & Emma Johansson & emmjo662 & Manages the Quality Assurance function. This include to develop and document quality standard and process for all management process, as well as perform SQA tasks. \\
+		
+		Test Leader & Gustav Karlsson & guska006 & Manages the testing function.
+		content...
+	\end{tabular}
+	
+	To be further specified after discussion with concerned members.
+	
+	%Remove?
+	\section{Software Configuration Management}
+	The purpose of Software Configuration Management (SCM) is to implement a controlled change process and define build and process management. The project uses GitLab as version control tool. The framework on how Git is used within the project is found in \textit{Framework for programming TDDC88}. The main principles specified to assure high quality code is that each function are to be developed on a separate branch and requested to merge to the master development branch when finished. The merge request is then to be audited by [responsible for merge requests] before being accepted and merged to the master. This process work to avoid defects being imported into the running code.
+	
+	[How is the code commented and readme files created?]
+
+	\section{SQA Tasks}
+	The following section describes tasks that lies within the responsibility of SQA. The tasks are dynamic and not occurring only once.  
+	
+	\subsection{Task: Conduct Appraisal processes}
+	The project will throughout its life cycle produce a number of deliverables and work products. The appraisal process of these are to be specified and overseen by SQA in collaboration with responsible team leader. These processes are defined in section~\ref{doc} \nameref{doc}
+	
+	List of work products that SQA will review and audit:
+	
+	\begin{tabular}{|l|l|l|l|}
+		\hline	
+		No & Work Product & Permission & Grant to Person \\
+		\hline	
+		\hline
+		1   & Architecture Notebook	& Read	& Emma \\
+		2	& Software Requirements Specification	& Read & Gustav \\
+		3	& Education Plan		& Read	& Emma \\
+		4	& Project Plan			& Read	& Emma \\
+		5	& Software Quality Assurance Plan		& Read	& Axel \\
+	
+		
+		\hline
+	\end{tabular}
+	
+	
+	\subsection{Task: Evaluate Software Tools}
+	SQA shall evaluate software tools, both existing and planned, used for software development and support. This is due to ensure that existing tools are adequate for the purpose they are intended and whether the capabilities of the tools are needed. Planned tools are assessed in the same way, but also by determining feasibility in adopting the tool with regard to available knowledge and resources for education within HeartByte. This evaluation is done in consultation with representatives from the management team as well as the team proposing the tool.
+	
+	\subsection{Task:Evaluate Project Planning and Compliance}
+	The Project Plan is a work product under supervision of SQA. The Plan is assessed by ensuring that relevant activities are specified and planned, as well as management processes. SQA shall also evaluate that the project conducts the activities stated in the Project Plan. Each version of the Project Plan shall be reviewed prior to its release. Evaluation of conducted activities are to be done continuously and in detail at the end of each iteration of the project. 
+	
+	\subsection{Task: Evaluate System Requirements Analysis Process}
+	%Requirements analysis establishes a common understanding of the customer’s requirements between that customer and the software project team.  An agreement with the customer on the requirements for the software project is established and maintained.  This agreement is known as allocating system requirements to software and hardware.  Section 4 lists the system requirements documents.
+	%SQA activities are listed below:
+	\begin{comment}
+		
+	
+	a.	Verify that the correct participants are involved in the system requirements analysis process to identify all user needs.
+	b.	Verify that requirements are reviewed to determine if they are feasible to implement, clearly stated, and consistent.
+	c.	Verify that changes to allocated requirements, work products and activities are identified, reviewed, and tracked to closure.
+	d.	Verify that project personnel involved in the system requirements analysis process are trained in the necessary procedures and standards applicable to their area of responsibility to do the job correctly.
+	e.	Verify that the commitments resulting from allocated requirements are negotiated and agreed upon by the affected groups.
+	f.	Verify that commitments are documented, communicated, reviewed, and accepted.
+	g.	Verify that allocated requirements identified as having potential problems are reviewed with the group responsible for analyzing system requirements and documents, and that necessary changes are made.
+	h.	Verify that the prescribed processes for defining, documenting, and allocating requirements are followed and documented.
+	i.	Confirm that a configuration management process is in place to control and manage the baseline.
+	j.	Verify that requirements are documented, managed, controlled, and traced (preferably via a matrix).
+	k.	Verify that the agreed upon requirements are addressed in the SDP.
+	SQA may use the audit checklist in Figure B-3 as a guide for conducting the evaluation.
+	The results of this task shall be documented using the Process Audit Form described in Section 7 and provided to project management.  SQA recommendation for corrective action requires project management’s disposition and will be processed in accordance with the guidance in Section 7
+	\end{comment}
+	
+	\subsection{Task: Evaluate Coverage Rate of Tests}
+	
+	\section{Documentation} \label{doc}
+	%Which documentation there shall be, who is reviewing it, where is it supposed to be 
+	
+	\section{Tools, Technologies and Methodologies} %?
+	CodeMR is used to assess metrics to evaluate chosen quality factors. These are understandability, reliability and ...
+	
+	TBD.
+	
+	
+	\section{Test}
+	%Which testing activities we are to have
+	Reference to Test Plan. Unit testing, function testing, system testing and user testing. 
+	
+	\subsection{Methodology}
+	TBD on discussion with Gustav, Filip and Axel.
+	
+	\subsubsection{User Test}
+	User shall be summarised using the predetermined template which follows here *Make list of content*
+		
+	\subsection{Continuous Integration}
+	Continuous integration refers to the practice where developers integrate their work continuously. This methodology is used in HeartByte's project in order to improve predictability and easier troubleshooting. By continuously integrating changes there will be no unexpected grand errors. 
+	
+
+	
+	\section{Problem Reporting and Corrective Action}
+	TBD.
 	
 	
 \end{document}
