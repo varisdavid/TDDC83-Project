@@ -6,7 +6,7 @@ const OverviewHeader = ({healthCenter, activeTabValue, setActiveTabValue}) => {
 
     return (
     <>
-        <div className="w-full h-auto shadow">
+        <div className="w-full h-auto">
             <OverviewHeaderBanner healthCenter={healthCenter} />  
             <OverviewHeaderNavigation activeTabValue={activeTabValue} setActiveTabValue={setActiveTabValue} />
         </div>

@@ -37,6 +37,7 @@ const OverviewHeaderNavigation = ({activeTabValue, setActiveTabValue}) => {
     <>
       <AppBar 
         position="relative"
+        style={{ boxShadow: "none" }}
       >
         <Tabs
           TabIndicatorProps={{
