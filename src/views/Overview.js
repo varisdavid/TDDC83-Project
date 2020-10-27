@@ -6,6 +6,8 @@ import { Typography, Box } from '@material-ui/core';
 
 import { OverviewHeader } from "../components"
 
+import UserCalendar from "./UserCalendar"
+
 // Current thinking is that all views described in the 
 // prototype should have this as a baseplate, were either the children 
 // of "home" or "patients" etc is rendered within
@@ -73,7 +75,7 @@ const Overview = () => {
       
     </TabPanel>
     <TabPanel value={activeTabValue} index={2}>
-      Page Three
+      <UserCalendar/>
     </TabPanel>
     <TabPanel value={activeTabValue} index={3}>
       Page Four
