@@ -54,7 +54,7 @@ const Context = React.createContext({ value: null, setValue: () => {} });
 
 const BasicTable = (props) => {
   const classes = useStyles();
-  const [rows, setRow] = useState(props.props);
+  const [rows] = useState(props.props);
 
   return (
     <TableContainer component={Paper}>
