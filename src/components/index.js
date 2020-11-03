@@ -3,10 +3,35 @@ import Footer from "./Footer";
 import Hero from "./Hero";
 import Loading from "./Loading";
 import NavBar from "./NavBar";
+// import PatientCalendar from "./PatientCalendar";
+// import PatientHeader from "./PatientHeader";
+// import NavBarPatient from "./NavBarPatient";
 
 import OverviewHeader from "./OverviewHeader";
-import OverviewHeaderBanner from "./OverviewHeaderBanner"
-import OverviewHeaderBreadcrumbs from "./OverviewHeaderBreadcrumbs"
+import OverviewHeaderBanner from "./OverviewHeaderBanner";
+import OverviewHeaderBreadcrumbs from "./OverviewHeaderBreadcrumbs";
 import OverviewHeaderNavigation from "./OverviewHeaderNavigation";
 
-export { HomeContent, Footer, Hero, Loading, NavBar, OverviewHeader, OverviewHeaderBanner, OverviewHeaderNavigation, OverviewHeaderBreadcrumbs };
+import OverviewCalendar from "./OverviewCalendar";
+
+import Patients from "./Patients";
+import PatientsSearch from "./PatientsSearch"
+import PatientsTable from "./PatientsTable"
+import PatientGroups from "./PatientGroups";
+
+export { 
+    HomeContent, 
+    Footer, 
+    Hero, 
+    Loading, 
+    NavBar, 
+    OverviewHeader, 
+    OverviewHeaderBanner, 
+    OverviewHeaderNavigation, 
+    OverviewHeaderBreadcrumbs, 
+    OverviewCalendar,
+    Patients,
+    PatientsSearch,
+    PatientsTable,
+    PatientGroups,
+};
