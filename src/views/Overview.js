@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 import PropTypes from 'prop-types';
-import { Typography, Box } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 
 import { OverviewHeader } from "../components"
 
@@ -24,7 +24,7 @@ const TabPanel = (props) => {
     >
       {value === index && (
         <Box p={3}>
-          <Typography>{children}</Typography>
+          <div>{children}</div>
         </Box>
       )}
     </div>
@@ -34,7 +34,6 @@ const TabPanel = (props) => {
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
 };
 
 
@@ -43,8 +42,9 @@ const Overview = () => {
   const location = useLocation();
   
   // will change later on
-  const healthCenter = useState("X_Vårdcentral");
-  const [activeTabValue, setActiveTabValue] = useState(0);
+  const healthCenter = "X_Vårdcentral";
+
+  const [activeTabValue, setActiveTabValue] = useState();
 
   useEffect(() => {
 
@@ -56,9 +56,7 @@ const Overview = () => {
       setActiveTabValue(2);
     } else if (location.pathname === "/overview/calendar") {
       setActiveTabValue(3);
-    } else {
-      setActiveTabValue(0);
-    }
+    } 
 
   }, [location] );
 
@@ -66,6 +64,7 @@ const Overview = () => {
   return (
   <>
     <OverviewHeader healthCenter={healthCenter} activeTabValue={activeTabValue} setActiveTabValue={setActiveTabValue}/>
+
 
     <TabPanel value={activeTabValue} index={0}>
       

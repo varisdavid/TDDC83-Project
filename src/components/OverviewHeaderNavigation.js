@@ -26,10 +26,10 @@ const LinkTab = (props) => {
   );
 }
 
-const OverviewHeaderNavigation = ({activeTabValue, setActiveTabValue}) => {
+const OverviewHeaderNavigation = ({ activeTabValue, setActiveTabValue }) => {
 
-  const handleChange = (newValue) => {
-    setActiveTabValue(newValue)
+  const handleChange = (event, newValue) => {
+    setActiveTabValue(newValue);
   };
 
 
@@ -45,37 +45,37 @@ const OverviewHeaderNavigation = ({activeTabValue, setActiveTabValue}) => {
               height:"0px",
             }
           }}
+          onChange={handleChange}
           style={{ backgroundColor: "#A9D7FF", color: "#000" }} 
           className="text-gray-800"
           variant="fullWidth"
           value={activeTabValue}
-          onChange={handleChange}
           aria-label="overview-navtab"
         >
           <LinkTab 
             style={{ textDecoration: "none", backgroundColor: activeTabValue === 0 ? "#0066B3" : "inherit", color: activeTabValue === 0 ? "#FFF" : "inherit" }} 
             label="Hem" 
             href="/overview/home" 
-            {...a11yProps(0)} 
+            {...a11yProps(0)}
           />
           <LinkTab 
             style={{ textDecoration: "none", backgroundColor: activeTabValue === 1 ? "#0066B3" : "inherit", color: activeTabValue === 1 ? "#FFF" : "inherit"}} 
             label="Patienter" 
-            href="/overview/patients" 
-            {...a11yProps(1)} 
+            href="/overview/patients"
+            {...a11yProps(1)}
           />
           <LinkTab 
             style={{ textDecoration: "none", backgroundColor: activeTabValue === 2 ? "#0066B3" : "inherit", color: activeTabValue === 2 ? "#FFF" : "inherit"}} 
             label="Notislogg" 
-            href="/overview/notices" 
-            {...a11yProps(2)} 
+            href="/overview/notices"
+            {...a11yProps(2)}
           />
           
           <LinkTab 
             style={{ textDecoration: "none", backgroundColor: activeTabValue === 3 ? "#0066B3" : "inherit", color: activeTabValue === 3 ? "#FFF" : "inherit"}} 
             label="Kalender" 
-            href="/overview/calendar" 
-            {...a11yProps(3)} 
+            href="/overview/calendar"
+            {...a11yProps(3)}
           />
 
         </Tabs>

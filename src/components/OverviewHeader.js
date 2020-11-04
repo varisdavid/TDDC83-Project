@@ -2,7 +2,7 @@ import React from "react";
 
 import { OverviewHeaderBanner, OverviewHeaderNavigation } from "../components";
 
-const OverviewHeader = ({healthCenter, activeTabValue, setActiveTabValue}) => {
+const OverviewHeader = ({healthCenter, activeTabValue, setActiveTabValue }) => {
 
     return (
     <>

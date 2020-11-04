@@ -19,6 +19,8 @@ import PatientsSearch from "./PatientsSearch"
 import PatientsTable from "./PatientsTable"
 import PatientGroups from "./PatientGroups";
 
+import FilterModal from "./FilterModal"
+
 export { 
     HomeContent, 
     Footer, 
@@ -34,4 +36,5 @@ export {
     PatientsSearch,
     PatientsTable,
     PatientGroups,
+    FilterModal,
 };

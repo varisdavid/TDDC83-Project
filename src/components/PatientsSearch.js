@@ -1,9 +1,19 @@
 import React, { useState } from "react";
 
 import { InputBase, Button } from '@material-ui/core';
-import { FilterList, ArrowDropDown } from '@material-ui/icons';
+import { ArrowDropDown } from '@material-ui/icons';
 
-const PatientsSearch = () => {
+import { FilterModal } from "../components"
+
+const PatientsSearch = ({columns, 
+                        NumberRangeColumnFilter, 
+                        SelectColumnFilter, 
+                        GlobalFilter, 
+                        state, 
+                        preGlobalFilteredRows, 
+                        setGlobalFilter, 
+                        headerGroups,
+                        visibleColumns}) => {
 
     // Work in progress, need to add hooks for react-table for the filtering and sorting buttons.
     // Need to understand how filtrera shall work and make sortera efter into a proper dropdown menu.
@@ -19,6 +29,7 @@ const PatientsSearch = () => {
         <div style={{ height: "auto", marginLeft: "auto", marginRight: "auto", width: "95%" }}>
             <div style={{ height: "45px", width: "inherit", marginLeft: "auto", marginRight: "auto", backgroundColor: "#FFF", borderRadius: "25px 25px" }}>
                 <InputBase
+                    inputComponent='input'               
                     className="text-gray-800"
                     style={{ 
                         marginLeft: "10px",
@@ -33,10 +44,17 @@ const PatientsSearch = () => {
             </div>
 
             <div style={{ height: "auto", paddingTop: "12px", paddingBottom: "2px", width: "40%", marginLeft: "auto", textAlign: "end" }}>
-                <Button className="shadow" style={{ borderRadius: "0", backgroundColor: "#FFF", marginRight: "1.5rem" }}>
-                    Filtrera
-                    <FilterList style={{ marginLeft: "8px", fontSize: "16px" }} />
-                </Button>
+                <FilterModal
+                    columns={columns}
+                    NumberRangeColumnFilter={NumberRangeColumnFilter} 
+                    SelectColumnFilter={SelectColumnFilter}
+                    GlobalFilter={GlobalFilter}
+                    state={state}
+                    preGlobalFilteredRows={preGlobalFilteredRows}
+                    setGlobalFilter={setGlobalFilter}
+                    headerGroups={headerGroups}
+                    visibleColumns={visibleColumns}
+                />
                 <Button className="shadow" style={{ borderRadius: "0", backgroundColor: "#FFF" }}>
                     Sortera efter
                     <ArrowDropDown style={{ marginLeft: "20px", fontSize: "16px" }} />

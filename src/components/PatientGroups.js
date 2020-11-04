@@ -31,13 +31,21 @@ const PatientsGroup = () => {
 
             {patientGroups.map(group => {
                 return (
-                    <Button className="shadow mr-2" style={{ paddingTop: "2px", paddingBottom: "2px", paddingLeft: "15px", paddingRight: "15px", borderRadius: "0" }}>
+                    <Button 
+                      className="shadow mr-2"
+                      key={group.accessor} 
+                      style={{ paddingTop: "2px", 
+                        paddingBottom: "2px", 
+                        paddingLeft: "15px", 
+                        paddingRight: "15px", 
+                        borderRadius: "0" }}
+                      >
                         { group.Name }
                     </Button>
                 )
             })}
 
-            <Button>
+            <Button component={'span'}>
                 <AddToPhotos style={{ fontSize: "40px", color: "#0066B3" }} />
             </Button>
 
