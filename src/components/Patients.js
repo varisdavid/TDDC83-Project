@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 
 import { PatientsSearch, PatientsTable, PatientGroups } from "../components"
-import { useTable, useFilters, useGlobalFilter, useSortBy } from 'react-table'
+import { useTable, useFlexLayout, useFilters, useGlobalFilter, useSortBy } from 'react-table'
 
   // Filter for between number x and y
   function NumberRangeColumnFilter({
@@ -89,6 +89,16 @@ import { useTable, useFilters, useGlobalFilter, useSortBy } from 'react-table'
 }
 
 const Patients = () => {
+
+  const defaultColumn = React.useMemo(
+    () => ({
+      // When using the useFlexLayout:
+      minWidth: 40, // minWidth is only used as a limit for resizing
+      width: `20%`, // width is used for both the flex-basis and flex-grow
+      maxWidth: 250, // maxWidth is only used as a limit for resizing
+    }),
+    []
+  )
 
   const data = useMemo(
     // To get them in the proper order, using numbers to represent priority, 1 = high, 2 = medium, 3 = low
@@ -260,11 +270,13 @@ const Patients = () => {
     // filters: [{ id: 'col1', value: "Green"}]
   };
 
+
   const {
       getTableProps,
       getTableBodyProps,
       headerGroups,
       rows,
+      totalColumnsWidth,
       prepareRow,
       toggleSortBy,
       setGlobalFilter,
@@ -273,10 +285,12 @@ const Patients = () => {
       columns,
       data,
       initialState,
+      defaultColumn
     },
     useFilters, // useFilters!
     useGlobalFilter,
     useSortBy,
+    useFlexLayout,
   );
 
   useEffect(() => {
@@ -298,19 +312,22 @@ const Patients = () => {
                   setSortState={setSortState}
                   searchValue={searchValue}
                   setSearchValue={setSearchValue}
+                  
               /> 
           </div>
       </div>
 
       <div className="flex justify-center">
           <div className="w-10/12 mt-3 p-2">
-              <div style={{ minHeight: 480, width: '100%' }}>
+              <div style={{ width: '100%' }}>
                   <PatientsTable 
+                    data={data}
                     getTableProps={getTableProps}
                     getTableBodyProps={getTableBodyProps}
                     headerGroups={headerGroups}
                     rows={rows}
                     prepareRow={prepareRow}
+                    totalColumnsWidth={totalColumnsWidth}
                   />
               </div>
           </div>

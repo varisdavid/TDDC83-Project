@@ -15,7 +15,7 @@ const DropdownContent = ({ dropdownItems, setSortState, setDropdownOpen, dropdow
     return (
         <div 
             style={{width: "175px"}} 
-            className="bg-white text-center grey-400 w-inherit absolute right-0 p-2 shadow-lg rounded-lg mt-2"
+            className="bg-white z-10 text-center grey-400 w-inherit absolute right-0 p-2 shadow-lg rounded-lg mt-2"
         >
         
         {dropdownItems.map((item, i) => {
