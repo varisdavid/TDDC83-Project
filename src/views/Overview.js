@@ -40,11 +40,26 @@ TabPanel.propTypes = {
 const Overview = () => {
 
   const location = useLocation();
+
+  var activeValue;
   
+  if (location.pathname === "/overview/home") {
+    activeValue = 0;
+  } else if (location.pathname === "/overview/patients") {
+    activeValue = 1;
+  } else if (location.pathname === "/overview/notices") {
+    activeValue = 2;
+  } else if (location.pathname === "/overview/calendar") {
+    activeValue = 3;
+  } else {
+    activeValue = 0;
+  }
+
+  const [activeTabValue, setActiveTabValue] = useState(activeValue);
+
   // will change later on
   const healthCenter = "X_Vårdcentral";
 
-  const [activeTabValue, setActiveTabValue] = useState(0);
 
   useEffect(() => {
 

@@ -28,9 +28,9 @@ const LinkTab = (props) => {
 
 const OverviewHeaderNavigation = ({ activeTabValue, setActiveTabValue }) => {
 
-  const handleChange = (event, newValue) => {
-    setActiveTabValue(newValue);
-  };
+  // const handleChange = (event, newValue) => {
+  //   setActiveTabValue(newValue);
+  // };
 
 
   return (
@@ -45,7 +45,7 @@ const OverviewHeaderNavigation = ({ activeTabValue, setActiveTabValue }) => {
               height:"0px",
             }
           }}
-          onChange={handleChange}
+          // onChange={handleChange}
           style={{ backgroundColor: "#A9D7FF", color: "#000" }} 
           className="text-gray-800"
           variant="fullWidth"
