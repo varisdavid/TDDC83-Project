@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 
 import { PatientsSearch, PatientsTable, PatientGroups } from "../components"
-import { useTable, useFilters, useSortBy } from 'react-table'
+import { useTable, useFilters, useGlobalFilter, useSortBy } from 'react-table'
 
   // Filter for between number x and y
   function NumberRangeColumnFilter({
@@ -244,6 +244,8 @@ const Patients = () => {
       []
     )
   
+  const [searchValue, setSearchValue] = useState("")
+  
   // Keeps track of sorting options
   const [sortState, setSortState] = useState({columnId: "col1"});
   
@@ -264,6 +266,7 @@ const Patients = () => {
       rows,
       prepareRow,
       toggleSortBy,
+      setGlobalFilter,
   } = useTable(
     {
       columns,
@@ -271,12 +274,14 @@ const Patients = () => {
       initialState,
     },
     useFilters, // useFilters!
+    useGlobalFilter,
     useSortBy,
   );
 
   useEffect(() => {
     toggleSortBy(sortState.columnId);
-  }, [sortState, toggleSortBy]);
+    setGlobalFilter(searchValue);
+  }, [sortState, toggleSortBy, searchValue, setGlobalFilter]);
 
   return (
   <>
@@ -290,6 +295,8 @@ const Patients = () => {
                   NumberRangeColumnFilter={NumberRangeColumnFilter} 
                   SelectColumnFilter={SelectColumnFilter}
                   setSortState={setSortState}
+                  searchValue={searchValue}
+                  setSearchValue={setSearchValue}
               /> 
           </div>
       </div>

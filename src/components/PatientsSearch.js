@@ -34,7 +34,9 @@ const DropdownContent = ({ dropdownItems, setSortState, setDropdownOpen, dropdow
 const PatientsSearch = ({columns, 
                         NumberRangeColumnFilter, 
                         SelectColumnFilter,
-                        setSortState
+                        setSortState,
+                        searchValue,
+                        setSearchValue
                         }) => {
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -66,10 +68,8 @@ const PatientsSearch = ({columns,
         },
     ];
 
-    const [searchTerm, setSearchTerm] = useState('');
-
     const handleSearchChange = (event) => {
-        setSearchTerm(event.target.value);
+        setSearchValue(event.target.value);
     };
 
     return (
@@ -87,7 +87,7 @@ const PatientsSearch = ({columns,
                     placeholder="Sök:"
                     inputProps={{ 'aria-label': 'search' }}
                     onChange={handleSearchChange}
-                    value={searchTerm} 
+                    value={searchValue} 
                 />
             </div>
 
