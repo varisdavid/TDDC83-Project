@@ -41,11 +41,11 @@ const PatientsTable = ({getTableProps, getTableBodyProps, headerGroups, rows, pr
         ))}
         </TableHead>
         <TableBody {...getTableBodyProps()}>
-            {rows.map((row, i) => {
+            {rows.map((row, rowIndex) => {
                 prepareRow(row)
                 return (
-                <TableRow {...row.getRowProps()} style={ i % 2 ? { background: '#E5E5E5' } : { background: '#FFF' }}>
-                    {row.cells.map(cell => {
+                <TableRow {...row.getRowProps()} style={ rowIndex % 2 ? { background: '#E5E5E5' } : { background: '#FFF' }}>
+                    {row.cells.map((cell, cellIndex) => {
                     
                     return (
                       <TableCell
@@ -55,7 +55,40 @@ const PatientsTable = ({getTableProps, getTableBodyProps, headerGroups, rows, pr
                             textAlign: "center",
                         }}
                        >
-                        { cell.render('Cell') }
+                        {((cellIndex === 0) && (cell.value === "1")) &&
+                        <div style={{
+                          backgroundColor: "#FF6464",
+                          marginRight: "auto",
+                          marginLeft: "auto",
+                          borderRadius: "15px",
+                          width: "90px", 
+                          height: "27px"}}>
+                        </div>
+                        }
+
+                        {((cellIndex === 0) && (cell.value === "2")) &&
+                        <div style={{
+                          backgroundColor: "#FED765",
+                          marginRight: "auto",
+                          marginLeft: "auto",
+                          borderRadius: "15px", 
+                          width: "90px", 
+                          height: "27px"}}>
+                        </div>
+                        }
+
+                        {((cellIndex === 0) && (cell.value === "3")) &&
+                        <div style={{
+                          backgroundColor: "#27AE60",
+                          marginRight: "auto",
+                          marginLeft: "auto",
+                          borderRadius: "15px", 
+                          width: "90px", 
+                          height: "27px"}}>
+                        </div>
+                        }
+
+                        {(cellIndex !== 0) && cell.render('Cell')}
                       </TableCell>
                     )
                     

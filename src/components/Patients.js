@@ -91,9 +91,10 @@ import { useTable, useFilters, useGlobalFilter, useSortBy } from 'react-table'
 const Patients = () => {
 
   const data = useMemo(
+    // To get them in the proper order, using numbers to represent priority, 1 = high, 2 = medium, 3 = low
       () => [
         {
-          col1: 'High',
+          col1: '1',
           col2: 'Gunnilla Andersson',
           col3: '470203-1324',
           col4: 'Diabetes, Hypertoni',
@@ -101,7 +102,7 @@ const Patients = () => {
           col6: 'Patienten',
         },
         {
-          col1: 'High',
+          col1: '1',
           col2: 'Gunnilla Andersson',
           col3: '470203-1324',
           col4: 'Diabetes, Hypertoni',
@@ -109,7 +110,7 @@ const Patients = () => {
           col6: 'Patienten',
         },
         {
-          col1: 'High',
+          col1: '1',
           col2: 'Gunnilla Andersson',
           col3: '470203-1324',
           col4: 'Diabetes, Hypertoni',
@@ -117,7 +118,7 @@ const Patients = () => {
           col6: 'Patienten',
         },
         {
-          col1: 'High',
+          col1: '1',
           col2: 'Gunnilla Andersson',
           col3: '470203-1324',
           col4: 'Diabetes, Hypertoni',
@@ -125,7 +126,7 @@ const Patients = () => {
           col6: 'Patienten',
         },
         {
-          col1: 'High',
+          col1: '1',
           col2: 'Gunnilla Andersson',
           col3: '470203-1324',
           col4: 'Diabetes, Hypertoni',
@@ -133,7 +134,7 @@ const Patients = () => {
           col6: 'Patienten',
         },
         {
-          col1: 'Medium',
+          col1: '2',
           col2: 'Gunnilla Andersson',
           col3: '470203-1324',
           col4: 'Diabetes, Hypertoni',
@@ -141,7 +142,7 @@ const Patients = () => {
           col6: 'Patienten',
         },
         {
-          col1: 'Medium',
+          col1: '2',
           col2: 'Gunnilla Andersson',
           col3: '470203-1324',
           col4: 'Diabetes, Hypertoni',
@@ -149,7 +150,7 @@ const Patients = () => {
           col6: 'Patienten',
         },
         {
-          col1: 'Medium',
+          col1: '2',
           col2: 'Gunnilla Andersson',
           col3: '470203-1324',
           col4: 'Diabetes, Hypertoni',
@@ -157,7 +158,7 @@ const Patients = () => {
           col6: 'Patienten',
         },
         {
-          col1: 'Medium',
+          col1: '2',
           col2: 'Gunnilla Andersson',
           col3: '470203-1324',
           col4: 'Diabetes, Hypertoni',
@@ -165,7 +166,7 @@ const Patients = () => {
           col6: 'Patienten',
         },
         {
-          col1: 'Low',
+          col1: '3',
           col2: 'Gunnilla Andersson',
           col3: '470203-1324',
           col4: 'Diabetes, Hypertoni',
@@ -173,7 +174,7 @@ const Patients = () => {
           col6: 'Patienten',
         },
         {
-          col1: 'Low',
+          col1: '3',
           col2: 'Gunnilla Andersson',
           col3: '470203-1324',
           col4: 'Diabetes, Hypertoni',
@@ -181,7 +182,7 @@ const Patients = () => {
           col6: 'Patienten',
         },
         {
-          col1: 'Low',
+          col1: '3',
           col2: 'Gunnilla Andersson',
           col3: '470203-1324',
           col4: 'Diabetes, Hypertoni',
@@ -189,7 +190,7 @@ const Patients = () => {
           col6: 'Patienten',
         },
         {
-          col1: 'Cool',
+          col1: '1',
           col2: 'Gilla Andersson',
           col3: '410203-1324',
           col4: 'Diabetes',
@@ -197,7 +198,7 @@ const Patients = () => {
           col6: 'Patienten',
         },
         {
-          col1: 'Cool',
+          col1: '1',
           col2: 'Andersson',
           col3: '350203-1324',
           col4: 'Diabetes',
