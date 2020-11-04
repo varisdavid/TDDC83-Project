@@ -1,5 +1,6 @@
 import React from "react";
 
+import { Table as MaUTable, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core'
 import { ArrowDropUp, ArrowDropDown } from "@material-ui/icons";
 
 // A couple of things, cell 0s should turn into blobs instead of writing their value out,
@@ -11,12 +12,12 @@ const PatientsTable = ({getTableProps, getTableBodyProps, headerGroups, rows, pr
   
   return (
   <>   
-      <table {...getTableProps()} style={{ width: "100%", overflowY: "scroll" }}>
-        <thead>
+      <MaUTable {...getTableProps()} style={{ width: "100%", overflowY: "scroll" }}>
+        <TableHead>
         {headerGroups.map(headerGroup => (
-            <tr style={{ height: "60px" }} {...headerGroup.getHeaderGroupProps()}>
+            <TableRow style={{ height: "60px" }} {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map(column => (
-                <th
+                <TableCell
                   {...column.getHeaderProps()}
                   style={{
                   background: '#275E8E',
@@ -34,33 +35,38 @@ const PatientsTable = ({getTableProps, getTableBodyProps, headerGroups, rows, pr
                       : <ArrowDropDown style={{fontSize: "15px" }} />
                     : ''}
                 </span>
-                </th>
+                </TableCell>
             ))}
-            </tr>
+            </TableRow>
         ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
+        </TableHead>
+        <TableBody {...getTableBodyProps()}>
             {rows.map((row, i) => {
                 prepareRow(row)
                 return (
-                <tr {...row.getRowProps()}>
+                <TableRow {...row.getRowProps()}>
                     {row.cells.map(cell => {
-                    return <td
-                    {...cell.getCellProps()}
-                    style={{
-                        padding: '10px',
-                        background: row.index % 2 === 1 ? '#E5E5E5' : '#FFF',
-                        textAlign: "center",
-                    }}
-                >
-                    { cell.render('Cell') }
-                </td>
+                    
+                    return (
+                      <TableCell
+                        {...cell.getCellProps()}
+                        style={{
+                            padding: '10px',
+                            background: row.index % 2 === 1 ? '#E5E5E5' : '#FFF',
+                            textAlign: "center",
+                        }}
+                       >
+                        { cell.render('Cell') }
+                      </TableCell>
+                    )
+                    
                     })}
-                </tr>
+
+                </TableRow>
                 )
             })}
-        </tbody>
-    </table>
+        </TableBody>
+    </MaUTable>
   </>
   );
 };
