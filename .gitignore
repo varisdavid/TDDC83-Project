@@ -22,3 +22,9 @@
 *.out
 *.synctex.gz
 *.pdf
+
+#Python Cache
+__pychache__
+
+#Environment
+venv/
