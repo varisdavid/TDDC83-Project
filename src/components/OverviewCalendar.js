@@ -29,7 +29,7 @@ const useStyles = makeStyles({
   },
 });
 
-const rows = [
+const Data = [
   {
     time: "8:00",
     activity: "Rond",
@@ -54,7 +54,7 @@ const Context = React.createContext({ value: null, setValue: () => {} });
 
 const BasicTable = (props) => {
   const classes = useStyles();
-  // const [row, setRow] = useState(props);
+  const [rows] = useState(props.props);
 
   return (
     <TableContainer component={Paper}>
@@ -110,7 +110,7 @@ const UserCalendar = () => {
           </Grid>
           <Grid item xs={5} className={classes.layout}>
             <p>{value.toUTCString().slice(0, 16)}</p>
-            <BasicTable props={rows} />
+            <BasicTable props={Data} />
           </Grid>
         </Grid>
       </Context.Provider>
