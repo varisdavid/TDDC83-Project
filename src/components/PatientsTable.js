@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Table as MaUTable, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core'
+import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core'
 import { ArrowDropUp, ArrowDropDown } from "@material-ui/icons";
 
 // A couple of things, cell 0s should turn into blobs instead of writing their value out,
@@ -12,7 +12,7 @@ const PatientsTable = ({getTableProps, getTableBodyProps, headerGroups, rows, pr
   
   return (
   <>   
-      <MaUTable {...getTableProps()} style={{ width: "100%", overflowY: "scroll" }}>
+      <Table {...getTableProps()} style={{ width: "100%", overflowY: "scroll" }}>
         <TableHead>
         {headerGroups.map(headerGroup => (
             <TableRow style={{ height: "60px" }} {...headerGroup.getHeaderGroupProps()}>
@@ -44,7 +44,7 @@ const PatientsTable = ({getTableProps, getTableBodyProps, headerGroups, rows, pr
             {rows.map((row, i) => {
                 prepareRow(row)
                 return (
-                <TableRow {...row.getRowProps()}>
+                <TableRow {...row.getRowProps()} style={ i % 2 ? { background: '#E5E5E5' } : { background: '#FFF' }}>
                     {row.cells.map(cell => {
                     
                     return (
@@ -52,7 +52,6 @@ const PatientsTable = ({getTableProps, getTableBodyProps, headerGroups, rows, pr
                         {...cell.getCellProps()}
                         style={{
                             padding: '10px',
-                            background: row.index % 2 === 1 ? '#E5E5E5' : '#FFF',
                             textAlign: "center",
                         }}
                        >
@@ -66,7 +65,7 @@ const PatientsTable = ({getTableProps, getTableBodyProps, headerGroups, rows, pr
                 )
             })}
         </TableBody>
-    </MaUTable>
+    </Table>
   </>
   );
 };
