@@ -44,7 +44,7 @@ const Overview = () => {
   // will change later on
   const healthCenter = "X_Vårdcentral";
 
-  const [activeTabValue, setActiveTabValue] = useState();
+  const [activeTabValue, setActiveTabValue] = useState(0);
 
   useEffect(() => {
 
@@ -56,7 +56,9 @@ const Overview = () => {
       setActiveTabValue(2);
     } else if (location.pathname === "/overview/calendar") {
       setActiveTabValue(3);
-    } 
+    } else {
+      setActiveTabValue(0);
+    }
 
   }, [location] );
 
