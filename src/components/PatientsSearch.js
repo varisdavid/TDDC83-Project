@@ -5,24 +5,72 @@ import { ArrowDropDown } from '@material-ui/icons';
 
 import { FilterModal } from "../components"
 
+const DropdownContent = ({ dropdownItems, setSortState, setDropdownOpen, dropdownOpen }) => {
+
+    const handleClick = (id) => {
+        setSortState({columnId: id});
+        setDropdownOpen(!dropdownOpen);
+    }
+
+    return (
+        <div 
+            style={{width: "175px"}} 
+            className="bg-white text-center grey-400 w-inherit absolute right-0 p-2 shadow-lg rounded-lg mt-2"
+        >
+        
+        {dropdownItems.map((item, i) => {
+            return (
+            <div className="mt-1" key={i}>
+               <Button onClick={() => handleClick(item.id)}>
+                   {item.sortBy}
+               </Button>
+            </div>
+            );
+        })}
+        </div>
+    );
+};
+
 const PatientsSearch = ({columns, 
                         NumberRangeColumnFilter, 
-                        SelectColumnFilter, 
-                        GlobalFilter, 
-                        state, 
-                        preGlobalFilteredRows, 
-                        setGlobalFilter, 
-                        headerGroups,
-                        visibleColumns}) => {
+                        SelectColumnFilter,
+                        setSortState
+                        }) => {
 
-    // Work in progress, need to add hooks for react-table for the filtering and sorting buttons.
-    // Need to understand how filtrera shall work and make sortera efter into a proper dropdown menu.
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+
+    const dropdownItems = [
+        {
+        sortBy: 'Prioritering',
+        id: 'col1',
+        },
+        {
+        sortBy: 'Namn',
+        id: 'col2',
+        },
+        {
+        sortBy: 'Personnummer',
+        id: 'col3',
+        },
+        {
+        sortBy: 'Diagnos',
+        id: 'col4',
+        },
+        {
+        sortBy: 'Senast uppdaterad',
+        id: 'col5',
+        },
+        {
+        sortBy: 'Uppdaterad av',
+        id: 'col6',
+        },
+    ];
 
     const [searchTerm, setSearchTerm] = useState('');
 
     const handleSearchChange = (event) => {
         setSearchTerm(event.target.value);
-      };
+    };
 
     return (
     <>
@@ -43,22 +91,25 @@ const PatientsSearch = ({columns,
                 />
             </div>
 
-            <div style={{ height: "auto", paddingTop: "12px", paddingBottom: "2px", width: "40%", marginLeft: "auto", textAlign: "end" }}>
+            <div style={{ height: "auto", paddingTop: "12px", paddingBottom: "2px", marginLeft: "auto", textAlign: "end" }}>
                 <FilterModal
                     columns={columns}
                     NumberRangeColumnFilter={NumberRangeColumnFilter} 
                     SelectColumnFilter={SelectColumnFilter}
-                    GlobalFilter={GlobalFilter}
-                    state={state}
-                    preGlobalFilteredRows={preGlobalFilteredRows}
-                    setGlobalFilter={setGlobalFilter}
-                    headerGroups={headerGroups}
-                    visibleColumns={visibleColumns}
                 />
-                <Button className="shadow" style={{ borderRadius: "0", backgroundColor: "#FFF" }}>
+                <Button 
+                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                    className="shadow" 
+                    style={{ borderRadius: "0", backgroundColor: "#FFF" }}
+                >
                     Sortera efter
                     <ArrowDropDown style={{ marginLeft: "20px", fontSize: "16px" }} />
                 </Button>
+                {dropdownOpen && (
+                    <div className="relative">
+                        <DropdownContent dropdownItems={dropdownItems} setSortState={setSortState} setDropdownOpen={setDropdownOpen} dropdownOpen={dropdownOpen} />
+                    </div>
+                )}
             </div>
         </div>
         

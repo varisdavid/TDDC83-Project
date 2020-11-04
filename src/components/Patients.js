@@ -1,55 +1,7 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 
-import { PatientsSearch, PatientGroups } from "../components"
-import { useTable, useFilters, useGlobalFilter, useAsyncDebounce } from 'react-table'
-
-  // Define a default UI for filtering
-  function GlobalFilter({
-    preGlobalFilteredRows,
-    globalFilter,
-    setGlobalFilter,
-  }) {
-    const count = preGlobalFilteredRows.length
-    const [value, setValue] = useState(globalFilter)
-    const onChange = useAsyncDebounce(value => {
-      setGlobalFilter(value || undefined)
-    }, 200)
-  
-    return (
-      <span>
-        Search:{' '}
-        <input
-          value={value || ""}
-          onChange={e => {
-            setValue(e.target.value);
-            onChange(e.target.value);
-          }}
-          placeholder={`${count} records...`}
-          style={{
-            fontSize: '1.1rem',
-            border: '0',
-          }}
-        />
-      </span>
-    )
-  }
-  
-  // Define a default UI for filtering
-  function DefaultColumnFilter({
-    column: { filterValue, preFilteredRows, setFilter },
-  }) {
-    const count = preFilteredRows.length
-  
-    return (
-      <input
-        value={filterValue || ''}
-        onChange={e => {
-          setFilter(e.target.value || undefined) // Set undefined to remove the filter entirely
-        }}
-        placeholder={`Search ${count} records...`}
-      />
-    )
-  }
+import { PatientsSearch, PatientsTable, PatientGroups } from "../components"
+import { useTable, useFilters, useSortBy } from 'react-table'
 
   // Filter for between number x and y
   function NumberRangeColumnFilter({
@@ -138,292 +90,234 @@ import { useTable, useFilters, useGlobalFilter, useAsyncDebounce } from 'react-t
 
 const Patients = () => {
 
-    const data = useMemo(
-        () => [
-          {
-            col1: 'Red',
-            col2: 'Gunnilla Andersson',
-            col3: '470203-1324',
-            col4: 'Diabetes, Hypertoni',
-            col5: '2020-10-08',
-            col6: 'Patienten',
-          },
-          {
-            col1: 'Red',
-            col2: 'Gunnilla Andersson',
-            col3: '470203-1324',
-            col4: 'Diabetes, Hypertoni',
-            col5: '2020-10-08',
-            col6: 'Patienten',
-          },
-          {
-            col1: 'Red',
-            col2: 'Gunnilla Andersson',
-            col3: '470203-1324',
-            col4: 'Diabetes, Hypertoni',
-            col5: '2020-10-08',
-            col6: 'Patienten',
-          },
-          {
-            col1: 'Red',
-            col2: 'Gunnilla Andersson',
-            col3: '470203-1324',
-            col4: 'Diabetes, Hypertoni',
-            col5: '2020-10-08',
-            col6: 'Patienten',
-          },
-          {
-            col1: 'Red',
-            col2: 'Gunnilla Andersson',
-            col3: '470203-1324',
-            col4: 'Diabetes, Hypertoni',
-            col5: '2020-10-08',
-            col6: 'Patienten',
-          },
-          {
-            col1: 'Yellow',
-            col2: 'Gunnilla Andersson',
-            col3: '470203-1324',
-            col4: 'Diabetes, Hypertoni',
-            col5: '2020-10-08',
-            col6: 'Patienten',
-          },
-          {
-            col1: 'Yellow',
-            col2: 'Gunnilla Andersson',
-            col3: '470203-1324',
-            col4: 'Diabetes, Hypertoni',
-            col5: '2020-10-08',
-            col6: 'Patienten',
-          },
-          {
-            col1: 'Yellow',
-            col2: 'Gunnilla Andersson',
-            col3: '470203-1324',
-            col4: 'Diabetes, Hypertoni',
-            col5: '2020-10-08',
-            col6: 'Patienten',
-          },
-          {
-            col1: 'Yellow',
-            col2: 'Gunnilla Andersson',
-            col3: '470203-1324',
-            col4: 'Diabetes, Hypertoni',
-            col5: '2020-10-08',
-            col6: 'Patienten',
-          },
-          {
-            col1: 'Green',
-            col2: 'Gunnilla Andersson',
-            col3: '470203-1324',
-            col4: 'Diabetes, Hypertoni',
-            col5: '2020-10-08',
-            col6: 'Patienten',
-          },
-          {
-            col1: 'Green',
-            col2: 'Gunnilla Andersson',
-            col3: '470203-1324',
-            col4: 'Diabetes, Hypertoni',
-            col5: '2020-10-08',
-            col6: 'Patienten',
-          },
-          {
-            col1: 'Green',
-            col2: 'Gunnilla Andersson',
-            col3: '470203-1324',
-            col4: 'Diabetes, Hypertoni',
-            col5: '2020-10-08',
-            col6: 'Patienten',
-          },
-          
-        ],
-        []
-      )
-     
-    const columns = useMemo(
+  const data = useMemo(
+      () => [
+        {
+          col1: 'High',
+          col2: 'Gunnilla Andersson',
+          col3: '470203-1324',
+          col4: 'Diabetes, Hypertoni',
+          col5: '2020-10-08',
+          col6: 'Patienten',
+        },
+        {
+          col1: 'High',
+          col2: 'Gunnilla Andersson',
+          col3: '470203-1324',
+          col4: 'Diabetes, Hypertoni',
+          col5: '2020-10-08',
+          col6: 'Patienten',
+        },
+        {
+          col1: 'High',
+          col2: 'Gunnilla Andersson',
+          col3: '470203-1324',
+          col4: 'Diabetes, Hypertoni',
+          col5: '2020-10-08',
+          col6: 'Patienten',
+        },
+        {
+          col1: 'High',
+          col2: 'Gunnilla Andersson',
+          col3: '470203-1324',
+          col4: 'Diabetes, Hypertoni',
+          col5: '2020-10-08',
+          col6: 'Patienten',
+        },
+        {
+          col1: 'High',
+          col2: 'Gunnilla Andersson',
+          col3: '470203-1324',
+          col4: 'Diabetes, Hypertoni',
+          col5: '2020-10-08',
+          col6: 'Patienten',
+        },
+        {
+          col1: 'Medium',
+          col2: 'Gunnilla Andersson',
+          col3: '470203-1324',
+          col4: 'Diabetes, Hypertoni',
+          col5: '2020-10-08',
+          col6: 'Patienten',
+        },
+        {
+          col1: 'Medium',
+          col2: 'Gunnilla Andersson',
+          col3: '470203-1324',
+          col4: 'Diabetes, Hypertoni',
+          col5: '2020-10-08',
+          col6: 'Patienten',
+        },
+        {
+          col1: 'Medium',
+          col2: 'Gunnilla Andersson',
+          col3: '470203-1324',
+          col4: 'Diabetes, Hypertoni',
+          col5: '2020-10-08',
+          col6: 'Patienten',
+        },
+        {
+          col1: 'Medium',
+          col2: 'Gunnilla Andersson',
+          col3: '470203-1324',
+          col4: 'Diabetes, Hypertoni',
+          col5: '2020-10-08',
+          col6: 'Patienten',
+        },
+        {
+          col1: 'Low',
+          col2: 'Gunnilla Andersson',
+          col3: '470203-1324',
+          col4: 'Diabetes, Hypertoni',
+          col5: '2020-10-08',
+          col6: 'Patienten',
+        },
+        {
+          col1: 'Low',
+          col2: 'Gunnilla Andersson',
+          col3: '470203-1324',
+          col4: 'Diabetes, Hypertoni',
+          col5: '2020-10-08',
+          col6: 'Patienten',
+        },
+        {
+          col1: 'Low',
+          col2: 'Gunnilla Andersson',
+          col3: '470203-1324',
+          col4: 'Diabetes, Hypertoni',
+          col5: '2020-10-08',
+          col6: 'Patienten',
+        },
+        {
+          col1: 'Cool',
+          col2: 'Gilla Andersson',
+          col3: '410203-1324',
+          col4: 'Diabetes',
+          col5: '2020-10-08',
+          col6: 'Patienten',
+        },
+        {
+          col1: 'Cool',
+          col2: 'Andersson',
+          col3: '350203-1324',
+          col4: 'Diabetes',
+          col5: '2020-10-08',
+          col6: 'Patienten',
+        },
+      ],
+      []
+    )
+    
+  const columns = useMemo(
       () => [
         {
           Header: 'Prioritering',
           accessor: 'col1', // accessor is the "key" in the data
           Filter: SelectColumnFilter,
           filter: "includes",
-          filterable: true,
         },
         {
           Header: 'Namn',
           accessor: 'col2',
-          filterable: false,
-
         },
         {
           Header: 'Personnummer',
           accessor: 'col3',
           Filter: NumberRangeColumnFilter,
           filter: "between",
-          filterable: true,
-
         },
         {
           Header: 'Diagnos',
           accessor: 'col4',
           Filter: SelectColumnFilter,
           filter: "includes",
-          filterable: true,
         },
         {
           Header: 'Senast uppdaterad',
           accessor: 'col5',
-          filterable: false,
         },
         {
           Header: 'Uppdaterad av',
           accessor: 'col6',
-          filterable: false,
         },
       ],
       []
     )
   
-    const filterTypes = useMemo(
-      () => ({
-        // Add a new fuzzyTextFilterFn filter type.
-        // Or, override the default text filter to use
-        // "startWith"
-        text: (rows, id, filterValue) => {
-          return rows.filter(row => {
-            const rowValue = row.values[id]
-            return rowValue !== undefined
-              ? String(rowValue)
-                  .toLowerCase()
-                  .startsWith(String(filterValue).toLowerCase())
-              : true
-          })
-        },
-      }),
-      []
-    )
+  // Keeps track of sorting options
+  const [sortState, setSortState] = useState({columnId: "col1"});
   
-    const defaultColumn = useMemo(
-      () => ({
-        // Let's set up our default Filter UI
-        Filter: DefaultColumnFilter,
-      }),
-      []
-    )
-  
-    const {
-        getTableProps,
-        getTableBodyProps,
-        headerGroups,
-        rows,
-        prepareRow,
-        state,
-        visibleColumns,
-        preGlobalFilteredRows,
-        setGlobalFilter,
-    } = useTable(
-      {
-        columns,
-        data,
-        defaultColumn, // Be sure to pass the defaultColumn option
-        filterTypes,
-      },
-      useFilters, // useFilters!
-      useGlobalFilter // useGlobalFilter!
-    )
+  // Basic structure [{ id: 'name', value: 'Jane'}, { id: 'age', value: 21 }]
+  //const [filterState, setFilterState] = useState({});
 
-    return (
-    <>
-        <div className="flex justify-center">
-            <div
-                style={{ backgroundColor: "#A9D7FF", borderRadius: "15px 15px" }} 
-                className="flex w-10/12 mt-2 p-2"
-            >
-                <PatientsSearch 
-                    columns={columns}
-                    NumberRangeColumnFilter={NumberRangeColumnFilter} 
-                    SelectColumnFilter={SelectColumnFilter}
-                    GlobalFilter={GlobalFilter}
-                    state={state}
-                    preGlobalFilteredRows={preGlobalFilteredRows}
-                    setGlobalFilter={setGlobalFilter}
+  // Used for beginning values
+  const initialState = {
+    sortBy: [sortState],
+    filters: [],
+    // filters: [{ id: 'col1', value: "Green"}]
+  };
+
+  const {
+      getTableProps,
+      getTableBodyProps,
+      headerGroups,
+      rows,
+      prepareRow,
+      toggleSortBy,
+  } = useTable(
+    {
+      columns,
+      data,
+      initialState,
+    },
+    useFilters, // useFilters!
+    useSortBy,
+  );
+
+  useEffect(() => {
+    toggleSortBy(sortState.columnId);
+  }, [sortState, toggleSortBy]);
+
+  return (
+  <>
+      <div className="flex justify-center">
+          <div
+              style={{ backgroundColor: "#A9D7FF", borderRadius: "15px 15px" }} 
+              className="flex w-10/12 mt-2 p-2"
+          >
+              <PatientsSearch 
+                  columns={columns}
+                  NumberRangeColumnFilter={NumberRangeColumnFilter} 
+                  SelectColumnFilter={SelectColumnFilter}
+                  setSortState={setSortState}
+              /> 
+          </div>
+      </div>
+
+      <div className="flex justify-center">
+          <div className="w-10/12 mt-3 p-2">
+              <div style={{ minHeight: 480, width: '100%' }}>
+                  <PatientsTable 
+                    getTableProps={getTableProps}
+                    getTableBodyProps={getTableBodyProps}
                     headerGroups={headerGroups}
-                    visibleColumns={visibleColumns}
-                /> 
-            </div>
-        </div>
+                    rows={rows}
+                    prepareRow={prepareRow}
+                  />
+              </div>
+          </div>
+      </div>
 
-        <div className="flex justify-center">
-            <div className="w-10/12 mt-3 p-2">
-                <div style={{ minHeight: 480, width: '100%' }}>
-                    <table {...getTableProps()} style={{ width: "100%", overflowY: "scroll" }}>
-                        <thead>
-                        {headerGroups.map(headerGroup => (
-                            <tr style={{ height: "60px" }} {...headerGroup.getHeaderGroupProps()}>
-                            {headerGroup.headers.map(column => (
-                                <th
-                                {...column.getHeaderProps()}
-                                style={{
-                                background: '#275E8E',
-                                color: '#FFF',
-                                fontWeight: '700',
-                                fontSize: "15px",
-                                textAlign: "center",
-                                }}
-                            >
-                                {column.render('Header')}
-                                </th>
-                            ))}
-                            </tr>
-                        ))}
-                        <tr>
-                            <th
-                            colSpan={visibleColumns.length}
-                            style={{
-                                textAlign: 'left',
-                            }}
-                            >
-                            
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody {...getTableBodyProps()}>
-                            {rows.map((row, i) => {
-                                prepareRow(row)
-                                return (
-                                <tr {...row.getRowProps()}>
-                                    {row.cells.map(cell => {
-                                    return <td
-                                    {...cell.getCellProps()}
-                                    style={{
-                                        padding: '10px',
-                                        background: row.index % 2 === 1 ? '#E5E5E5' : '#FFF',
-                                        textAlign: "center",
-                                    }}
-                                >
-                                    { cell.render('Cell') }
-                                </td>
-                                    })}
-                                </tr>
-                                )
-                            })}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+      <div className="flex justify-center">
+          <div className="w-10/12 mt-3 p-2">
+              <div style={{ width: '100%' }}>
+                  <PatientGroups />
+              </div>
+          </div>
+      </div>
 
-        <div className="flex justify-center">
-            <div className="w-10/12 mt-3 p-2">
-                <div style={{ width: '100%' }}>
-                    <PatientGroups />
-                </div>
-            </div>
-        </div>
-
-    </>
-    );
+  </>
+  );
 };
 
 export default Patients;

@@ -33,12 +33,7 @@ import { FilterList } from '@material-ui/icons';
 
   const FilterModal = ({NumberRangeColumnFilter, 
                         SelectColumnFilter, 
-                        GlobalFilter,
-                        state,
-                        preGlobalFilteredRows, 
-                        setGlobalFilter,
-                        headerGroups,
-                        visibleColumns}) => {
+                        }) => {
 
     const classes = useStyles();
     // getModalStyle is not a pure function, we roll the style only on the first render
@@ -58,31 +53,7 @@ import { FilterList } from '@material-ui/icons';
             <h2 className="font-bold" id="simple-modal-title">Filtrera</h2>
           
             <div>
-                {headerGroups.map(headerGroup => (
-                    <div {...headerGroup.getHeaderGroupProps()}>
-                    {headerGroup.headers.map(column => (
-                        <div {...column.getHeaderProps()}>
-                        {column.filterable ? column.render('Header') : null}
-                        {/* Render the columns filter UI */}
-                        <div>{column.filterable ? column.render('Filter') : null}</div>
-                        </div>
-                    ))}
-                    </div>
-                ))}
-                <tr>
-                    <th
-                    colSpan={visibleColumns.length}
-                    style={{
-                        textAlign: 'left',
-                    }}
-                    >
-                    <GlobalFilter
-                        preGlobalFilteredRows={preGlobalFilteredRows}
-                        globalFilter={state.globalFilter}
-                        setGlobalFilter={setGlobalFilter}
-                    />
-                    </th>
-                </tr>
+                
             </div>
 
 
