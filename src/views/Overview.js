@@ -1,14 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-
-import PropTypes from 'prop-types';
 import { Box } from '@material-ui/core';
 
-import { OverviewHeader, Patients, Notices, OverviewCalendar } from "../components"
+import { OverviewHeaderBanner, OverviewHeaderNavigation, Patients, OverviewCalendar } from "../components"
 
-// Current thinking is that all views described in the 
-// prototype should have this as a baseplate, were either the children 
-// of "home" or "patients" etc is rendered within
+// Function for retrieving current active tab
+const getActiveTab = (location) => {
+  
+  if (location.pathname === "/overview/home") {
+    return 0;
+  } else if (location.pathname === "/overview/patients") {
+    return 1;  
+  } else if (location.pathname === "/overview/notices") {
+    return 2;  
+  } else if (location.pathname === "/overview/calendar") {
+    return 3;  
+  } else {
+    return 0;  
+  }
+
+}
+
+// Simple tab component, describing styling for each tab.
 const TabPanel = (props) => {
   const { children, value, index, ...other } = props;
 
@@ -29,71 +42,47 @@ const TabPanel = (props) => {
   );
 }
 
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-};
-
-
 const Overview = () => {
 
+  // Hook to retrieve the currently used url path
   const location = useLocation();
 
-  var activeValue;
-  
-  if (location.pathname === "/overview/home") {
-    activeValue = 0;
-  } else if (location.pathname === "/overview/patients") {
-    activeValue = 1;
-  } else if (location.pathname === "/overview/notices") {
-    activeValue = 2;
-  } else if (location.pathname === "/overview/calendar") {
-    activeValue = 3;
-  } else {
-    activeValue = 0;
-  }
+  // Function call to get dynamic starting tab
+  getActiveTab(location)
 
-  const [activeTabValue, setActiveTabValue] = useState(activeValue);
+  // This keeps track of which the currently active tab is.
+  const [activeTabValue, setActiveTabValue] = useState(getActiveTab(location));
 
-  // will change later on
-  const healthCenter = "X_Vårdcentral";
+  // Will be fetched by user information later on. 
+  const healthCenter = "Ryds vårdcentral";
 
-
+  // Upon rendering the component, this hook calls a function which 
+  // determines which tab is active, depending on this we load a different tab.
   useEffect(() => {
-
-    if (location.pathname === "/overview/home") {
-      setActiveTabValue(0);
-    } else if (location.pathname === "/overview/patients") {
-      setActiveTabValue(1);
-    } else if (location.pathname === "/overview/notices") {
-      setActiveTabValue(2);
-    } else if (location.pathname === "/overview/calendar") {
-      setActiveTabValue(3);
-    } else {
-      setActiveTabValue(0);
-    }
-
+    setActiveTabValue(getActiveTab(location));
   }, [location] );
 
 
   return (
   <>
-    <OverviewHeader healthCenter={healthCenter} activeTabValue={activeTabValue} setActiveTabValue={setActiveTabValue}/>
+    <div className="w-full h-auto">
+      <OverviewHeaderBanner healthCenter={healthCenter} />  
+      <OverviewHeaderNavigation activeTabValue={activeTabValue} setActiveTabValue={setActiveTabValue} />
+    </div>
 
+    <TabPanel className="Home" value={activeTabValue} index={0}>
 
-    <TabPanel value={activeTabValue} index={0}>
-      
     </TabPanel>
 
-    <TabPanel value={activeTabValue} index={1}>
+    <TabPanel className="Patients" value={activeTabValue} index={1}>
       <Patients />
     </TabPanel>
 
-    <TabPanel value={activeTabValue} index={2}>
+    <TabPanel className="Notices" value={activeTabValue} index={2}>
       {/* <Notices /> */}
     </TabPanel>
 
-    <TabPanel value={activeTabValue} index={3}>
+    <TabPanel className="Calendar" value={activeTabValue} index={3}>
       <OverviewCalendar/>
     </TabPanel>
 

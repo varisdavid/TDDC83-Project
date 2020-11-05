@@ -4,6 +4,7 @@ import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/c
 import { ArrowDropUp, ArrowDropDown } from "@material-ui/icons";
 import { useVirtual } from "react-virtual";
 
+// Takes a priority (value: integer) and renders a visual blob 
 const Blob = ({value}) => {
 
   var color;
@@ -29,8 +30,8 @@ const Blob = ({value}) => {
   )
 }
 
+// Renders a table based on props passed down from useTable
 const PatientsTable = ({
-  data,
   getTableProps, 
   getTableBodyProps, 
   headerGroups, 
@@ -38,7 +39,12 @@ const PatientsTable = ({
   prepareRow, 
   }) => {
   
+  // Used for keeping track on the wrapper div (needed for virtualization)
   const parentRef = React.useRef();
+
+  // Using package "react-virtual" for virtualization of 
+  // the table, give it rows.length for how many rows there should be
+  // its ref to outer div and the estimated size. 
   const rowVirtualizer = useVirtual({
     size: rows.length,
     parentRef,
@@ -87,6 +93,7 @@ const PatientsTable = ({
             }}
           >
           <TableBody
+            {...getTableBodyProps}
             className="ListInner"
             style={{
               display: "block",
@@ -96,7 +103,6 @@ const PatientsTable = ({
           >
             {rowVirtualizer.virtualItems.map(virtualRow => {
               const row = rows[virtualRow.index];
-              // eslint-disable-next-line no-lone-blocks
               prepareRow(row);
               return (
                 <TableRow 

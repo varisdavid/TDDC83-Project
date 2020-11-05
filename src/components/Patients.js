@@ -6,6 +6,7 @@ import { useTable, useFlexLayout, useFilters, useGlobalFilter, useSortBy } from 
 import { Tooltip } from "@material-ui/core";
 import { NotificationImportant } from "@material-ui/icons";
 
+// Component rendering bell icon (color based on value: integer) and hover information based on (text: string) 
 const Notification = ({value, text}) => {
 
   var color;
@@ -32,7 +33,7 @@ const Notification = ({value, text}) => {
   )
 }
 
-  // Filter for between number x and y
+  // Table filter for values between number x and y
   function NumberRangeColumnFilter({
     column: { filterValue = [], preFilteredRows, setFilter, id },
     }) {
@@ -85,7 +86,7 @@ const Notification = ({value, text}) => {
     )
     }
 
-  // Filter for selected value
+  // Table filter for selected value
   function SelectColumnFilter({
     column: { filterValue, setFilter, preFilteredRows, id },
     }) {
@@ -118,6 +119,7 @@ const Notification = ({value, text}) => {
 }
 
 const Patients = () => {
+
 
   const data = useMemo(
     // To get them in the proper order, using numbers to represent priority, 1 = high, 2 = medium, 3 = low

@@ -7,9 +7,7 @@ import NavBar from "./NavBar";
 // import PatientHeader from "./PatientHeader";
 // import NavBarPatient from "./NavBarPatient";
 
-import OverviewHeader from "./OverviewHeader";
 import OverviewHeaderBanner from "./OverviewHeaderBanner";
-import OverviewHeaderBreadcrumbs from "./OverviewHeaderBreadcrumbs";
 import OverviewHeaderNavigation from "./OverviewHeaderNavigation";
 
 import OverviewCalendar from "./OverviewCalendar";
@@ -30,10 +28,8 @@ export {
     Hero, 
     Loading, 
     NavBar, 
-    OverviewHeader, 
     OverviewHeaderBanner, 
     OverviewHeaderNavigation, 
-    OverviewHeaderBreadcrumbs, 
     OverviewCalendar,
     Patients,
     PatientsSearch,
