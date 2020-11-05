@@ -6,31 +6,6 @@ import { useTable, useFlexLayout, useFilters, useGlobalFilter, useSortBy } from 
 import { Tooltip } from "@material-ui/core";
 import { NotificationImportant } from "@material-ui/icons";
 
-const Blob = ({value}) => {
-
-  var color;
-  if (value === 1) {
-    color = "#FF6464";
-  } else if (value === 2) {
-    color = "#FED765";
-  } else if (value === 3) {
-    color = "#27AE60";
-  } else {
-    return;
-  }
-
-  return (
-    <div style={{
-      backgroundColor: color,
-      marginRight: "auto",
-      marginLeft: "auto",
-      borderRadius: "15px",
-      width: "90px", 
-      height: "27px"}}>
-    </div>
-  )
-}
-
 const Notification = ({value, text}) => {
 
   var color;
@@ -148,7 +123,7 @@ const Patients = () => {
     // To get them in the proper order, using numbers to represent priority, 1 = high, 2 = medium, 3 = low
       () => [
         {
-          col1: <Blob value={1}/>,
+          col1: 1,
           col2: 'Gunnilla Andersson',
           col3: '470203-1324',
           col4: 'Diabetes, Hypertoni',
@@ -157,7 +132,7 @@ const Patients = () => {
           col7: <Notification value={1} text={"Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"} />
         },
         {
-          col1: <Blob value={1}/>,
+          col1: 1,
           col2: 'Gunnilla Andersson',
           col3: '470203-1324',
           col4: 'Diabetes, Hypertoni',
@@ -166,7 +141,7 @@ const Patients = () => {
           col7: <Notification value={1} text={"Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"} />
         },
         {
-          col1: <Blob value={1}/>,
+          col1: 1,
           col2: 'Gunnilla Andersson',
           col3: '470203-1324',
           col4: 'Diabetes, Hypertoni',
@@ -176,7 +151,27 @@ const Patients = () => {
 
         },
         {
-          col1: <Blob value={1}/>,
+          col1: 1,
+          col2: 'Gunnilla Andersson',
+          col3: '470203-1324',
+          col4: 'Diabetes, Hypertoni',
+          col5: '2020-10-08',
+          col6: 'Patienten',
+          col7: <Notification value={1} text={"Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"} />
+
+        },
+        {
+          col1: 1,
+          col2: 'Gunnilla Andersson',
+          col3: '470203-1324',
+          col4: 'Diabetes, Hypertoni',
+          col5: '2020-10-08',
+          col6: 'Patienten',
+          col7: <Notification value={1} text={"Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"} />
+
+        },
+        {
+          col1: 2,
           col2: 'Gunnilla Andersson',
           col3: '470203-1324',
           col4: 'Diabetes, Hypertoni',
@@ -186,7 +181,7 @@ const Patients = () => {
 
         },
         {
-          col1: <Blob value={1}/>,
+          col1: 2,
           col2: 'Gunnilla Andersson',
           col3: '470203-1324',
           col4: 'Diabetes, Hypertoni',
@@ -196,17 +191,7 @@ const Patients = () => {
 
         },
         {
-          col1: <Blob value={2}/>,
-          col2: 'Gunnilla Andersson',
-          col3: '470203-1324',
-          col4: 'Diabetes, Hypertoni',
-          col5: '2020-10-08',
-          col6: 'Patienten',
-          col7: <Notification value={2} text={"Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"} />
-
-        },
-        {
-          col1: <Blob value={2}/>,
+          col1: 2,
           col2: 'Gunnilla Andersson',
           col3: '470203-1324',
           col4: 'Diabetes, Hypertoni',
@@ -214,7 +199,7 @@ const Patients = () => {
           col6: 'Patienten',
         },
         {
-          col1: <Blob value={2}/>,
+          col1: 2,
           col2: 'Gunnilla Andersson',
           col3: '470203-1324',
           col4: 'Diabetes, Hypertoni',
@@ -222,15 +207,7 @@ const Patients = () => {
           col6: 'Patienten',
         },
         {
-          col1: <Blob value={2}/>,
-          col2: 'Gunnilla Andersson',
-          col3: '470203-1324',
-          col4: 'Diabetes, Hypertoni',
-          col5: '2020-10-08',
-          col6: 'Patienten',
-        },
-        {
-          col1: <Blob value={3}/>,
+          col1: 3,
           col2: 'Gunnilla Andersson',
           col3: '470203-1324',
           col4: 'Diabetes, Hypertoni',
@@ -240,7 +217,7 @@ const Patients = () => {
 
         },
         {
-          col1: <Blob value={3}/>,
+          col1: 3,
           col2: 'Gunnilla Andersson',
           col3: '470203-1324',
           col4: 'Diabetes, Hypertoni',
@@ -250,7 +227,7 @@ const Patients = () => {
 
         },
         {
-          col1: <Blob value={3}/>,
+          col1: 3,
           col2: 'Gunnilla Andersson',
           col3: '470203-1324',
           col4: 'Diabetes, Hypertoni',
@@ -258,16 +235,49 @@ const Patients = () => {
           col6: 'Patienten',
         },
         {
-          col1: <Blob value={1}/>,
-          col2: 'Gilla Andersson',
+          col1: 1,
+          col2: 'Patrik Andersson',
           col3: '410203-1324',
           col4: 'Diabetes',
           col5: '2020-10-08',
           col6: 'Patienten',
         },
         {
-          col1: <Blob value={1}/>,
-          col2: 'Andersson',
+          col1: 1,
+          col2: 'Göran Andersson',
+          col3: '350203-1324',
+          col4: 'Diabetes',
+          col5: '2020-10-08',
+          col6: 'Patienten',
+        },
+        {
+          col1: 1,
+          col2: 'Casper Andersson',
+          col3: '998877-6655',
+          col4: 'Blo, Hypertoni',
+          col5: '2020-01-08',
+          col6: 'Mig',
+          col7: <Notification value={1} text={"Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"} />
+        },
+        {
+          col1: 1,
+          col2: 'Xander Andersson',
+          col3: '350203-1324',
+          col4: 'Diabetes',
+          col5: '2020-10-08',
+          col6: 'Patienten',
+        },
+        {
+          col1: 1,
+          col2: 'Viktor Andersson',
+          col3: '350203-1324',
+          col4: 'Diabetes',
+          col5: '2020-10-08',
+          col6: 'Patienten',
+        },
+        {
+          col1: 2,
+          col2: 'Zebra Andersson',
           col3: '350203-1324',
           col4: 'Diabetes',
           col5: '2020-10-08',
@@ -282,7 +292,6 @@ const Patients = () => {
         {
           Header: '',
           accessor: 'col7',
-          width: 5,
         },
         {
           Header: 'Prioritering',

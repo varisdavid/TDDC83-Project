@@ -19,7 +19,10 @@ import PatientsSearch from "./PatientsSearch"
 import PatientsTable from "./PatientsTable"
 import PatientGroups from "./PatientGroups";
 
-import FilterModal from "./FilterModal"
+import FilterModal from "./FilterModal";
+
+import Notices from "./Notices";
+import NoticesTable from "./NoticesTable";
 
 export { 
     HomeContent, 
@@ -37,4 +40,6 @@ export {
     PatientsTable,
     PatientGroups,
     FilterModal,
+    Notices,
+    NoticesTable,
 };
