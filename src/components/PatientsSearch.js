@@ -5,8 +5,10 @@ import { ArrowDropDown } from '@material-ui/icons';
 
 import { FilterModal } from "../components"
 
+// Component rendering a dropdown menu
 const DropdownContent = ({ dropdownItems, setSortState, setDropdownOpen, dropdownOpen }) => {
 
+    // If any of the alternatives are pressed, we keep track of this and close the dropdown menu.
     const handleClick = (id) => {
         setSortState({columnId: id});
         setDropdownOpen(!dropdownOpen);
@@ -31,6 +33,7 @@ const DropdownContent = ({ dropdownItems, setSortState, setDropdownOpen, dropdow
     );
 };
 
+// Component rendering blue div, with a searchfield and filtering + sorting buttons.
 const PatientsSearch = ({columns, 
                         NumberRangeColumnFilter, 
                         SelectColumnFilter,
@@ -39,8 +42,10 @@ const PatientsSearch = ({columns,
                         setSearchValue
                         }) => {
 
+    // State keeping track of wheter the sort menu has been toggled or not
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
+    // Specifying what we can sort by
     const dropdownItems = [
         {
         sortBy: 'Prioritering',
@@ -68,6 +73,7 @@ const PatientsSearch = ({columns,
         },
     ];
 
+    // Handling dynamic search based on what is entered into the search field 
     const handleSearchChange = (event) => {
         setSearchValue(event.target.value);
     };
