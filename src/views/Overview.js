@@ -5,8 +5,7 @@ import PropTypes from 'prop-types';
 import { Typography, Box } from '@material-ui/core';
 
 import { OverviewHeader } from "../components"
-
-import { Patients } from "../components"
+import { Patients, PatientCalendar} from "../components"
 
 // Current thinking is that all views described in the 
 // prototype should have this as a baseplate, were either the children 
@@ -75,7 +74,8 @@ const Overview = () => {
       <Patients />
     </TabPanel>
     <TabPanel value={activeTabValue} index={2}>
-      Page Three
+      <PatientCalendar></PatientCalendar>
+
     </TabPanel>
     <TabPanel value={activeTabValue} index={3}>
       Page Four
