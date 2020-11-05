@@ -19,10 +19,10 @@ const App = () => {
     <div id="app" className="d-flex flex-column h-100">
       <Switch>
         <Route path="/" exact component={Home} />
-        <ProtectedRoute path="/profile" component={Profile} />
-        <ProtectedRoute path="/external-api" component={ExternalApi} />
-        <ProtectedRoute exact path="/overview/settings" component={OverviewSettings} />
-        <ProtectedRoute path="/overview" component={Overview}/>
+        <Route path="/profile" component={Profile} />
+        <Route path="/external-api" component={ExternalApi} />
+        <Route exact path="/overview/settings" component={OverviewSettings} />
+        <Route path="/overview" component={Overview}/>
       </Switch>
     </div>
   );
