@@ -1,9 +1,21 @@
 import React from "react";
 
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core'
-import { ArrowDropUp, ArrowDropDown } from "@material-ui/icons";
-
+import { ArrowDropUp, ArrowDropDown, NotificationImportant } from "@material-ui/icons";
 import { useVirtual } from "react-virtual";
+
+const Blob = ({color}) => {
+  return (
+    <div style={{
+      backgroundColor: color,
+      marginRight: "auto",
+      marginLeft: "auto",
+      borderRadius: "15px",
+      width: "90px", 
+      height: "27px"}}>
+    </div>
+  )
+}
 
 
 const PatientsTable = ({
@@ -28,12 +40,13 @@ const PatientsTable = ({
         <TableHead>
         {headerGroups.map(headerGroup => (
             <TableRow {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map(column => (
+            {headerGroup.headers.map((column, columnIndex) => (
                 <TableCell
                   {...column.getHeaderProps()}
                   style={{
-                    width: "16.66667%",
-                    background: '#275E8E',
+                    width: (columnIndex === 0) ? "45px" : "16.66667%",
+                    background: (columnIndex === 0) ? "#FFF" : '#275E8E',
+                    borderColor: (columnIndex === 0) && "#FFF",
                     color: '#FFF',
                     fontWeight: '700',
                     fontSize: "15px",
@@ -91,48 +104,13 @@ const PatientsTable = ({
                 
                   {row.cells.map((cell, cellIndex) => {
                   return (
-                    <TableCell
-                      {...cell.getCellProps()}
-                      style={{
-                          padding: '10px',
-                          textAlign: "center",
-                          width: "18%",
-                      }}
-                      >
-                      {((cellIndex === 0) && (cell.value === "1")) &&
-                      <div style={{
-                        backgroundColor: "#FF6464",
-                        marginRight: "auto",
-                        marginLeft: "auto",
-                        borderRadius: "15px",
-                        width: "90px", 
-                        height: "27px"}}>
-                      </div>
-                      }
-      
-                      {((cellIndex === 0) && (cell.value === "2")) &&
-                      <div style={{
-                        backgroundColor: "#FED765",
-                        marginRight: "auto",
-                        marginLeft: "auto",
-                        borderRadius: "15px", 
-                        width: "90px", 
-                        height: "27px"}}>
-                      </div>
-                      }
-      
-                      {((cellIndex === 0) && (cell.value === "3")) &&
-                      <div style={{
-                        backgroundColor: "#27AE60",
-                        marginRight: "auto",
-                        marginLeft: "auto",
-                        borderRadius: "15px", 
-                        width: "90px", 
-                        height: "27px"}}>
-                      </div>
-                      }
-      
-                      {(cellIndex !== 0) && cell.render('Cell')}
+                    <TableCell {...cell.getCellProps()} style={{padding: '10px', 
+                                                                textAlign: "center", 
+                                                                width: (cellIndex === 0) ? '45px' : "18%", 
+                                                                background: (cellIndex === 0) && '#FFF',
+                                                                borderColor: (cellIndex === 0) && '#FFF',
+                                                              }}>
+                      {cell.render('Cell')}
                     </TableCell>
                   )
                   
