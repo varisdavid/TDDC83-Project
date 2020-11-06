@@ -48,14 +48,14 @@ paper: {
 }));
 
 
-const FilterModal = ({setDropdownOpen, setAllFilters}) => {
+const FilterModal = ({setDropdownOpen, setOwnFilters}) => {
 
     const classes = useStyles();
     // getModalStyle is not a pure function, we roll the style only on the first render
     const [modalStyle] = useState(getModalStyle);
     const [open, setOpen] = useState(false);
 
-    const [customFilter, setCustomFilter] = useState({
+    const [customFilterData, setCustomFilterData] = useState({
         minAge: 0,
         maxAge: 100,
         gender: '',
@@ -81,23 +81,23 @@ const FilterModal = ({setDropdownOpen, setAllFilters}) => {
         const name = event.target.name;
         
         if (name === "low") {
-            setCustomFilter({
-                ...customFilter,
-                priority: {low: !customFilter.priority.low, average: customFilter.priority.average, high: customFilter.priority.high}
+            setCustomFilterData({
+                ...customFilterData,
+                priority: {low: !customFilterData.priority.low, average: customFilterData.priority.average, high: customFilterData.priority.high}
             })
         } else if (name === "average") {
-            setCustomFilter({
-                ...customFilter,
-                priority: {low: customFilter.priority.low, average: !customFilter.priority.average, high: customFilter.priority.high}
+            setCustomFilterData({
+                ...customFilterData,
+                priority: {low: customFilterData.priority.low, average: !customFilterData.priority.average, high: customFilterData.priority.high}
             })
         } else if (name === "high") {
-            setCustomFilter({
-                ...customFilter,
-                priority: {low: customFilter.priority.low, average: customFilter.priority.average, high: !customFilter.priority.high}
+            setCustomFilterData({
+                ...customFilterData,
+                priority: {low: customFilterData.priority.low, average: customFilterData.priority.average, high: !customFilterData.priority.high}
             })
         } else {
-            setCustomFilter({
-                ...customFilter,
+            setCustomFilterData({
+                ...customFilterData,
                 [name]: event.target.value,
             })
         }
@@ -141,8 +141,8 @@ const FilterModal = ({setDropdownOpen, setAllFilters}) => {
 
 
     const handleFinished = () => {
-        setCustomFilter({...customFilter, diagnoses: diagnoses})
-        setAllFilters([{ id: 'priority', value: 1 }, {id: 'name', value: "Gunnilla"}])
+        setCustomFilterData({...customFilterData, diagnoses: diagnoses})
+        setOwnFilters(customFilterData);
         handleClose()
     }
 
@@ -181,7 +181,7 @@ const FilterModal = ({setDropdownOpen, setAllFilters}) => {
                                 shrink: true,
                             }}
                             inputProps={{name: 'minAge'}}
-                            value={customFilter.minAge}
+                            value={customFilterData.minAge}
                             onChange={handleChange}
                         />
                         <TextField
@@ -193,7 +193,7 @@ const FilterModal = ({setDropdownOpen, setAllFilters}) => {
                                 shrink: true,
                             }}
                             inputProps={{name: 'maxAge'}}
-                            value={customFilter.maxAge}
+                            value={customFilterData.maxAge}
                             onChange={handleChange}
                         />
                     </div>
@@ -207,7 +207,7 @@ const FilterModal = ({setDropdownOpen, setAllFilters}) => {
                                 <Select
                                     labelId='demo-simple-select-outlined-label'
                                     id='demo-simple-select-outlined'
-                                    value={customFilter.gender}
+                                    value={customFilterData.gender}
                                     onChange={handleChange}
                                     label='Gender'
                                     inputProps={{name: 'gender'}}
@@ -217,8 +217,8 @@ const FilterModal = ({setDropdownOpen, setAllFilters}) => {
                                     <MenuItem value=''>
                                         <em>All</em>
                                     </MenuItem>
-                                    <MenuItem value={'Male'}>Man</MenuItem>
-                                    <MenuItem value={'Female'}>Kvinna</MenuItem>
+                                    <MenuItem value={'male'}>Man</MenuItem>
+                                    <MenuItem value={'female'}>Kvinna</MenuItem>
                                 </Select>
                             </FormControl>
                             
@@ -227,7 +227,7 @@ const FilterModal = ({setDropdownOpen, setAllFilters}) => {
                                 <Select
                                     labelId='demo-simple-select-outlined-label'
                                     id='demo-simple-select-outlined'
-                                    value={customFilter.team}
+                                    value={customFilterData.team}
                                     onChange={handleChange}
                                     label='Team'
                                     inputProps={{name: 'team'}}
@@ -237,8 +237,8 @@ const FilterModal = ({setDropdownOpen, setAllFilters}) => {
                                     <MenuItem value=''>
                                         <em>All</em>
                                     </MenuItem>
-                                    <MenuItem value={'Team 1'}>Team 1</MenuItem>
-                                    <MenuItem value={'Team 2'}>Team 2</MenuItem>
+                                    <MenuItem value={'team 1'}>Team 1</MenuItem>
+                                    <MenuItem value={'team 2'}>Team 2</MenuItem>
                                 </Select>
                             </FormControl>
 
@@ -247,7 +247,7 @@ const FilterModal = ({setDropdownOpen, setAllFilters}) => {
                                 <Select
                                     labelId='demo-simple-select-outlined-label'
                                     id='demo-simple-select-outlined'
-                                    value={customFilter.department}
+                                    value={customFilterData.department}
                                     onChange={handleChange}
                                     label='Department'
                                     inputProps={{name: 'department'}}
@@ -257,8 +257,8 @@ const FilterModal = ({setDropdownOpen, setAllFilters}) => {
                                     <MenuItem value=''>
                                         <em>All</em>
                                     </MenuItem>
-                                    <MenuItem value={'Department 1'}>Department 1</MenuItem>
-                                    <MenuItem value={'Department 2'}>Department 2</MenuItem>
+                                    <MenuItem value={'department 1'}>Department 1</MenuItem>
+                                    <MenuItem value={'department 2'}>Department 2</MenuItem>
                                 </Select>
                             </FormControl>
 
@@ -266,17 +266,17 @@ const FilterModal = ({setDropdownOpen, setAllFilters}) => {
                                 <FormLabel component="legend" style={{color: '#000'}}>Prioritet</FormLabel>
                                 <FormGroup className='ml-3'>
                                 <FormControlLabel
-                                    control={<Checkbox style={{color: "#0066B3",}} checked={customFilter.priority.low} onChange={handleChange} name="low" />}
+                                    control={<Checkbox style={{color: "#0066B3",}} checked={customFilterData.priority.low} onChange={handleChange} name="low" />}
                                     label="Låg"
                                     style={{marginBottom: "0px"}}
                                     />
                                 <FormControlLabel
-                                    control={<Checkbox style={{color: "#0066B3",}} checked={customFilter.priority.average} onChange={handleChange} name="average"/>}
+                                    control={<Checkbox style={{color: "#0066B3",}} checked={customFilterData.priority.average} onChange={handleChange} name="average"/>}
                                     label="Medel"
                                     style={{marginBottom: "0px"}}
                                     />
                                 <FormControlLabel
-                                    control={<Checkbox style={{color: "#0066B3",}} checked={customFilter.priority.high} onChange={handleChange} name="high" />}
+                                    control={<Checkbox style={{color: "#0066B3",}} checked={customFilterData.priority.high} onChange={handleChange} name="high" />}
                                     label="Hög"
                                     style={{marginBottom: "0px"}}
                                     />

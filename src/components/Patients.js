@@ -33,93 +33,124 @@ const Notification = ({value, text}) => {
   )
 }
 
-  // Table filter for values between number x and y
-  function NumberRangeColumnFilter({
-    column: { filterValue = [], preFilteredRows, setFilter, id },
-    }) {
-    const [min, max] = useMemo(() => {
-        let min = preFilteredRows.length ? preFilteredRows[0].values[id] : 0
-        let max = preFilteredRows.length ? preFilteredRows[0].values[id] : 0
-        preFilteredRows.forEach(row => {
-        min = Math.min(row.values[id], min)
-        max = Math.max(row.values[id], max)
-        console.log(min);
-        console.log(max);
-        })
-        return [min, max]
-    }, [id, preFilteredRows])
-    
-    return (
-        <div
-        style={{
-            display: 'flex',
-        }}
-        >
-        <input
-            value={filterValue[0] || ''}
-            type='number'
-            onChange={e => {
-            const val = e.target.value
-            setFilter((old = []) => [val ? parseInt(val, 10) : undefined, old[1]])
-            }}
-            placeholder={`Min (${min})`}
-            style={{
-            width: '70px',
-            marginRight: '0.5rem',
-            }}
-        />
-        to
-        <input
-            value={filterValue[1] || ''}
-            type='number'
-            onChange={e => {
-            const val = e.target.value
-            setFilter((old = []) => [old[0], val ? parseInt(val, 10) : undefined])
-            }}
-            placeholder={`Max (${max})`}
-            style={{
-            width: '70px',
-            marginLeft: '0.5rem',
-            }}
-        />
-        </div>
-    )
-    }
+// Table filter for values between number x and y
+function NumberRangeColumnFilter({
+  column: { filterValue = [], preFilteredRows, setFilter, id },
+  }) {
+  const [min, max] = useMemo(() => {
+      let min = preFilteredRows.length ? preFilteredRows[0].values[id] : 0
+      let max = preFilteredRows.length ? preFilteredRows[0].values[id] : 0
+      preFilteredRows.forEach(row => {
+      min = Math.min(row.values[id], min)
+      max = Math.max(row.values[id], max)
+      console.log(min);
+      console.log(max);
+      })
+      return [min, max]
+  }, [id, preFilteredRows])
+  
+  return (
+      <div
+      style={{
+          display: 'flex',
+      }}
+      >
+      <input
+          value={filterValue[0] || ''}
+          type='number'
+          onChange={e => {
+          const val = e.target.value
+          setFilter((old = []) => [val ? parseInt(val, 10) : undefined, old[1]])
+          }}
+          placeholder={`Min (${min})`}
+          style={{
+          width: '70px',
+          marginRight: '0.5rem',
+          }}
+      />
+      to
+      <input
+          value={filterValue[1] || ''}
+          type='number'
+          onChange={e => {
+          const val = e.target.value
+          setFilter((old = []) => [old[0], val ? parseInt(val, 10) : undefined])
+          }}
+          placeholder={`Max (${max})`}
+          style={{
+          width: '70px',
+          marginLeft: '0.5rem',
+          }}
+      />
+      </div>
+  )
+  }
 
-  // Table filter for selected value
-  function SelectColumnFilter({
-    column: { filterValue, setFilter, preFilteredRows, id },
-    }) {
-    // Calculate the options for filtering
-    // using the preFilteredRows
-    const options = useMemo(() => {
-        const options = new Set()
-        preFilteredRows.forEach(row => {
-        options.add(row.values[id])
-        })
-        return [...options.values()]
-    }, [id, preFilteredRows])
-    
-    // Render a multi-select box
-    return (
-        <select
-        value={filterValue}
-        onChange={e => {
-            setFilter(e.target.value || undefined)
-        }}
-        >
-        <option value=''>All</option>
-        {options.map((option, i) => (
-            <option key={i} value={option}>
-            {option}
-            </option>
-        ))}
-        </select>
-    )
+// Table filter for selected value
+function SelectColumnFilter({
+  column: { filterValue, setFilter, preFilteredRows, id },
+  }) {
+  // Calculate the options for filtering
+  // using the preFilteredRows
+  const options = useMemo(() => {
+      const options = new Set()
+      preFilteredRows.forEach(row => {
+      options.add(row.values[id])
+      })
+      return [...options.values()]
+  }, [id, preFilteredRows])
+  
+  // Render a multi-select box
+  return (
+      <select
+      value={filterValue}
+      onChange={e => {
+          setFilter(e.target.value || undefined)
+      }}
+      >
+      <option value=''>All</option>
+      {options.map((option, i) => (
+          <option key={i} value={option}>
+          {option}
+          </option>
+      ))}
+      </select>
+  )
 }
 
 const Patients = () => {
 
+  const setOwnFilters = (customFilterData) => {
+
+    var priority = [3];
+    if (customFilterData.priority.low) {
+      priority[1] = 1
+    }
+    if (customFilterData.priority.average) {
+      priority[2] = 2
+    }
+    if (customFilterData.priority.high) {
+      priority[3] = 3
+    }
+
+    // setAllFilters({
+    //   priority: priority,
+    //   diagnoses: customFilterData.diagnoses,
+    //   age: [customFilterData.minAge, customFilterData.maxAge],
+    //   gender: customFilterData.gender, 
+    //   department: customFilterData.department,
+    //   team: customFilterData.team,
+    // })
+  
+    console.log(customFilterData);
+    console.log(customFilterData.gender);
+
+    setAllFilters(
+      [{ id: 'gender', value: "male" }, { id: 'priority', value: 1 }]
+    )
+
+
+  }
 
   const data = useMemo(
     // To get them in the proper order, using numbers to represent priority, 1 = high, 2 = medium, 3 = low
@@ -134,6 +165,8 @@ const Patients = () => {
           updatedBy: 'Patienten',
           age: 73,
           gender: "female",
+          team: "Team 1",
+          department: "Department 1"
         },
         {
           notices: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
@@ -145,6 +178,8 @@ const Patients = () => {
           updatedBy: 'Patienten',
           age: 73,
           gender: "female",
+          team: "Team 1",
+          department: "Department 1"
         },
         {
           notices: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
@@ -156,6 +191,8 @@ const Patients = () => {
           updatedBy: 'Patienten',
           age: 73,
           gender: "female",
+          team: "Team 1",
+          department: "Department 1"
         },
         {
           notices: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
@@ -167,6 +204,8 @@ const Patients = () => {
           updatedBy: 'Patienten',
           age: 73,
           gender: "female",
+          team: "Team 1",
+          department: "Department 1"
         },
         {
           notices: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
@@ -178,6 +217,8 @@ const Patients = () => {
           updatedBy: 'Patienten',
           age: 73,
           gender: "female",
+          team: "Team 1",
+          department: "Department 1"
         },
         {
           notices: <Notification value={2} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
@@ -189,6 +230,8 @@ const Patients = () => {
           updatedBy: 'Patienten',
           age: 73,
           gender: "female",
+          team: "Team 1",
+          department: "Department 1"
         },
         {
           notices: <Notification value={2} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
@@ -200,6 +243,8 @@ const Patients = () => {
           updatedBy: 'Patienten',
           age: 73,
           gender: "female",
+          team: "Team 1",
+          department: "Department 1"
         },
         {
           notices: <Notification value={2} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
@@ -211,6 +256,8 @@ const Patients = () => {
           updatedBy: 'Patienten',
           age: 73,
           gender: "female",
+          team: "Team 1",
+          department: "Department 2"
         },
         {
           notices: <Notification value={2} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
@@ -233,6 +280,8 @@ const Patients = () => {
           updatedBy: 'Patienten',
           age: 73,
           gender: "female",
+          team: "Team 1",
+          department: "Department 2"
         },
         {
           notices: <Notification value={3} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
@@ -244,6 +293,8 @@ const Patients = () => {
           updatedBy: 'Patienten',
           age: 73,
           gender: "female",
+          team: "Team 1",
+          department: "Department 2"
         },
         {
           notices: <Notification value={3} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
@@ -255,9 +306,11 @@ const Patients = () => {
           updatedBy: 'Patienten',
           age: 73,
           gender: "female",
+          team: "Team 2",
+          department: "Department 2"
         },
         {
-          notices: <Notification value={0} />,
+          notices: <Notification value={0} text={""}/>,
           priority: 3,
           name: 'Patrik Andersson',
           sweID: '410203-1324',
@@ -266,6 +319,8 @@ const Patients = () => {
           updatedBy: 'Patienten',
           age: 79,
           gender: "male",
+          team: "Team 2",
+          department: "Department 2"
         },
         {
           notices: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
@@ -277,6 +332,8 @@ const Patients = () => {
           updatedBy: 'Patienten',
           age: 85,
           gender: "male",
+          team: "Team 2",
+          department: "Department 2"
         },
         {
           notices: <Notification value={3} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
@@ -288,6 +345,8 @@ const Patients = () => {
           updatedBy: 'Patienten',
           age: 21,
           gender: "male",
+          team: "Team 2",
+          department: "Department 2"
         },
         {
           notices: <Notification value={3} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
@@ -299,6 +358,8 @@ const Patients = () => {
           updatedBy: 'Patienten',
           age: 85,
           gender: "male",
+          team: "Team 2",
+          department: "Department 1"
         },
         {
           notices: <Notification value={3} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
@@ -310,6 +371,8 @@ const Patients = () => {
           updatedBy: 'Patienten',
           age: 85,
           gender: "male",
+          team: "Team 2",
+          department: "Department 1"
         },
       ],
       []
@@ -354,23 +417,31 @@ const Patients = () => {
           Header: 'Kön',
           accessor: 'gender',
         },
+        {
+          Header: 'Team',
+          accessor: 'team',
+        },
+        {
+          Header: 'Department',
+          accessor: 'department',
+        },
       ],
       []
     )
   
   const [searchValue, setSearchValue] = useState('')
   
-  // Keeps track of sorting options
+  // Keeps track of sorting options, starting column sorting : "priority"
   const [sortState, setSortState] = useState({columnId: 'priority'});
   
   // Basic structure [{ id: 'name', value: 'Jane'}, { id: 'age', value: 21 }]
   //const [filterState, setFilterState] = useState({});
 
-  // Used for beginning values
+  // Used for beginning values passed to the PatientTable
   const initialState = {
     sortBy: [sortState],
     filters: [],
-    hiddenColumns: ["age", "gender"]
+    hiddenColumns: ["age", "gender", "team", "department"]
     // filters: [{ id: 'col1', value: 'Green'}]
   };
 
@@ -384,12 +455,7 @@ const Patients = () => {
       toggleSortBy,
       setGlobalFilter,
       setAllFilters,
-  } = useTable(
-    {
-      columns,
-      data,
-      initialState,
-    },
+  } = useTable({ columns, data, initialState, },
     useFilters, // useFilters!
     useGlobalFilter,
     useSortBy,
@@ -416,7 +482,7 @@ const Patients = () => {
                   setSortState={setSortState}
                   searchValue={searchValue}
                   setSearchValue={setSearchValue}
-                  setAllFilters={setAllFilters}
+                  setOwnFilters={setOwnFilters}
               /> 
           </div>
       </div>

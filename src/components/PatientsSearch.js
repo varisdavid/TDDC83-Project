@@ -37,7 +37,7 @@ const DropdownContent = ({ sortByList, setSortState, setDropdownOpen, dropdownOp
 const PatientsSearch = ({setSortState,
                         searchValue,
                         setSearchValue,
-                        setAllFilters,
+                        setOwnFilters,
                         }) => {
 
     // State keeping track of wheter the sort menu has been toggled or not
@@ -96,7 +96,7 @@ const PatientsSearch = ({setSortState,
             </div>
 
             <div style={{ height: 'auto', paddingTop: '12px', paddingBottom: '2px', marginLeft: 'auto', textAlign: 'end' }}>
-                <FilterModal setDropdownOpen={setDropdownOpen} setAllFilters={setAllFilters}/> 
+                <FilterModal setDropdownOpen={setDropdownOpen} setOwnFilters={setOwnFilters}/> 
                 <Button 
                     onClick={() => setDropdownOpen(!dropdownOpen)}
                     className='shadow' 
