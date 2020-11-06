@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Modal, Button, FormControl, InputLabel, Input, InputAdornment, Select, TextField, MenuItem, FormControlLabel, FormGroup, FormLabel, Checkbox  } from '@material-ui/core';
+import { Modal, Button, FormControl, InputLabel, InputAdornment, Input, Select, TextField, MenuItem, FormControlLabel, FormGroup, FormLabel, Checkbox  } from '@material-ui/core';
 import { FilterList, Search } from '@material-ui/icons';
 
     // Placement of the triggered modal
@@ -20,6 +20,7 @@ import { FilterList, Search } from '@material-ui/icons';
     // Styling of the triggered modal
     const useStyles = makeStyles((theme) => ({
         paper: {
+            maxWidth: "600px",
             position: 'absolute',
             backgroundColor: theme.palette.background.paper,
             border: '3px solid #0066B3',
@@ -109,9 +110,11 @@ import { FilterList, Search } from '@material-ui/icons';
                     <h2 className='font-bold p-2 mt-2' id='modal-title'>Filtrera</h2>
                 
                     <div className='flex-col items-start'>
+                        
+                        {/* De två första textfälten */}
                         <div className='flex mt-4 p-2'>
                             <TextField
-                                className='mr-4'
+                                className='mr-5'
                                 id='min-age'
                                 label='Min ålder'
                                 type='number'
@@ -136,118 +139,126 @@ import { FilterList, Search } from '@material-ui/icons';
                                 onChange={handleChange}
                             />
                         </div>
-                        
-                        <div className='flex-col p-2'>
-                            <FormControl className='mt-2' style={{width: '100%'}} variant='outlined'>
-                                <InputLabel>Kön</InputLabel>
-                                <Select
-                                    labelId='demo-simple-select-outlined-label'
-                                    id='demo-simple-select-outlined'
-                                    value={customFilter.gender}
-                                    onChange={handleChange}
-                                    label='Gender'
-                                    inputProps={{name: 'gender'}}
-                                    style={{ width: selectWidth }}
 
-                                >
-                                    <MenuItem value=''>
-                                        <em>All</em>
-                                    </MenuItem>
-                                    <MenuItem value={'Male'}>Male</MenuItem>
-                                    <MenuItem value={'Female'}>Female</MenuItem>
-                                </Select>
-                            </FormControl>
+                        {/* Wrappa våra två kolumner */}
+                        <div className='flex'>
+                            {/* De kommande 3 select fälten + checkboxar */}
+                            <div className='flex-col w-2/5 p-2 mr-2'>
+                                <FormControl className='mt-2' variant='outlined'>
+                                    <InputLabel>Kön</InputLabel>
+                                    <Select
+                                        labelId='demo-simple-select-outlined-label'
+                                        id='demo-simple-select-outlined'
+                                        value={customFilter.gender}
+                                        onChange={handleChange}
+                                        label='Gender'
+                                        inputProps={{name: 'gender'}}
+                                        style={{ width: selectWidth }}
+
+                                    >
+                                        <MenuItem value=''>
+                                            <em>All</em>
+                                        </MenuItem>
+                                        <MenuItem value={'Male'}>Male</MenuItem>
+                                        <MenuItem value={'Female'}>Female</MenuItem>
+                                    </Select>
+                                </FormControl>
+                                
+                                <FormControl className='mt-2' variant='outlined'>
+                                    <InputLabel>Team</InputLabel>
+                                    <Select
+                                        labelId='demo-simple-select-outlined-label'
+                                        id='demo-simple-select-outlined'
+                                        value={customFilter.team}
+                                        onChange={handleChange}
+                                        label='Team'
+                                        inputProps={{name: 'team'}}
+                                        style={{ width: selectWidth }}
+
+                                    >
+                                        <MenuItem value=''>
+                                            <em>All</em>
+                                        </MenuItem>
+                                        <MenuItem value={'Team 1'}>Team 1</MenuItem>
+                                        <MenuItem value={'Team 2'}>Team 2</MenuItem>
+                                    </Select>
+                                </FormControl>
+
+                                <FormControl className='mt-2' variant='outlined'>
+                                    <InputLabel>Department</InputLabel>
+                                    <Select
+                                        labelId='demo-simple-select-outlined-label'
+                                        id='demo-simple-select-outlined'
+                                        value={customFilter.department}
+                                        onChange={handleChange}
+                                        label='Department'
+                                        inputProps={{name: 'department'}}
+                                        style={{ width: selectWidth }}
+
+                                    >
+                                        <MenuItem value=''>
+                                            <em>All</em>
+                                        </MenuItem>
+                                        <MenuItem value={'Department 1'}>Department 1</MenuItem>
+                                        <MenuItem value={'Department 2'}>Department 2</MenuItem>
+                                    </Select>
+                                </FormControl>
+
+                                <FormControl className='mt-4 ml-3' component="fieldset">
+                                    <FormLabel component="legend" style={{color: '#000'}}>Prioritet</FormLabel>
+                                    <FormGroup className='ml-3'>
+                                    <FormControlLabel
+                                        control={<Checkbox checked={customFilter.priority.low} onChange={handleChange} name="low" />}
+                                        label="Låg"
+                                        style={{marginBottom: "0px"}}
+                                        />
+                                    <FormControlLabel
+                                        control={<Checkbox checked={customFilter.priority.average} onChange={handleChange} name="average"/>}
+                                        label="Medel"
+                                        style={{marginBottom: "0px"}}
+                                        />
+                                    <FormControlLabel
+                                        control={<Checkbox checked={customFilter.priority.high} onChange={handleChange} name="high" />}
+                                        label="Hög"
+                                        style={{marginBottom: "0px"}}
+                                        />
+                                    </FormGroup>
+                                </FormControl>
+                            </div>
                             
-                            <FormControl className='mt-2' style={{width: '100%'}} variant='outlined'>
-                                <InputLabel>Team</InputLabel>
-                                <Select
-                                    labelId='demo-simple-select-outlined-label'
-                                    id='demo-simple-select-outlined'
-                                    value={customFilter.team}
-                                    onChange={handleChange}
-                                    label='Team'
-                                    inputProps={{name: 'team'}}
-                                    style={{ width: selectWidth }}
-
-                                >
-                                    <MenuItem value=''>
-                                        <em>All</em>
-                                    </MenuItem>
-                                    <MenuItem value={'Team 1'}>Team 1</MenuItem>
-                                    <MenuItem value={'Team 2'}>Team 2</MenuItem>
-                                </Select>
-                            </FormControl>
-
-                            <FormControl className='mt-2' style={{width: '100%'}} variant='outlined'>
-                                <InputLabel>Department</InputLabel>
-                                <Select
-                                    labelId='demo-simple-select-outlined-label'
-                                    id='demo-simple-select-outlined'
-                                    value={customFilter.department}
-                                    onChange={handleChange}
-                                    label='Department'
-                                    inputProps={{name: 'department'}}
-                                    style={{ width: selectWidth }}
-
-                                >
-                                    <MenuItem value=''>
-                                        <em>All</em>
-                                    </MenuItem>
-                                    <MenuItem value={'Department 1'}>Department 1</MenuItem>
-                                    <MenuItem value={'Department 2'}>Department 2</MenuItem>
-                                </Select>
-                            </FormControl>
-
-                            <FormControl className='mt-4 ml-3' component="fieldset">
-                                <FormLabel component="legend" style={{color: '#000'}}>Prioritet</FormLabel>
-                                <FormGroup className='ml-3'>
-                                <FormControlLabel
-                                    control={<Checkbox checked={customFilter.priority.low} onChange={handleChange} name="low" />}
-                                    label="Låg"
-                                    style={{marginBottom: "0px"}}
-                                    />
-                                <FormControlLabel
-                                    control={<Checkbox checked={customFilter.priority.average} onChange={handleChange} name="average"/>}
-                                    label="Medel"
-                                    style={{marginBottom: "0px"}}
-                                    />
-                                <FormControlLabel
-                                    control={<Checkbox checked={customFilter.priority.high} onChange={handleChange} name="high" />}
-                                    label="Hög"
-                                    style={{marginBottom: "0px"}}
-                                    />
-                                </FormGroup>
-                            </FormControl>
-                        
-                            <div className="p-2" style={{width: "300px", height: "150px", backgroundColor: "rgba(169, 215, 255, 0.3)", borderRadius: "15px"}}>
-                                <FormControl className="flex w-full">
-                                    <InputLabel className="flex ml-2 mt-2 mr-2" htmlFor="input-with-icon-adornment">Diagnos</InputLabel>
+                            {/* Sökfält + resultatruta */}
+                            <div className="flex-col w-1/2 p-2 ml-4 mt-5 mb-5" style={{backgroundColor: "rgba(169, 215, 255, 0.3)", borderRadius: "15px"}}>
+                                <FormControl className="flex w-full mt-2" style={{height: "auto"}}>
+                                    <InputLabel disabled className="flex m-2" style={{fontWeight: "400", color: "#000"}}>Diagnos:</InputLabel>
                                     <Input
-                                        id="input-with-icon-adornment"
+                                        disableUnderline
                                         className='flex text-gray-800'
                                         style={{ 
-                                            marginLeft: '10px',
-                                            height: '30px',
+                                            fontSize: "12px",
                                             backgroundColor: '#FFF', 
                                             borderRadius: '25px 25px',
                                             borderHeight: '0',
+                                            width: "70%",
+                                            marginLeft: "auto",
+                                            marginRight: "5px",
+                                            marginTop: "0px",
                                         }}
                                         onChange={handleSearchChange}
                                         value={searchValue}
-                                        InputProps={{ disableUnderline: true }}
                                         startAdornment={
                                         <InputAdornment position="start">
-                                            <Search style={{color: "#E0E0E0"}}/>
+                                            <Search style={{marginLeft: "5px", color: "#E0E0E0"}}/>
                                         </InputAdornment>
                                         }
                                     />
                                 </FormControl>
-                            </div>
-                            <div style={{marginTop: "10px", width: "80%", marginLeft: "auto", marginRight: "auto", height: "60%", backgroundColor: "#FFFFFF"}}>
-                            </div>
+                                <div style={{marginTop: "10px", width: "80%", marginLeft: "auto", marginRight: "auto", height: "70%", backgroundColor: "#FFFFFF"}}>
+                                {/* Will be a list of results here later */}
+                                </div>
+                            </div>                                           
                         </div>
+                        <Button className='flex shadow float-right mr-4' style={{width: '120px'}} onClick={handleClose}>Ok</Button>
                     </div>
-                    <Button className='shadow' style={{float: 'right', width: '120px'}} onClick={handleClose}>Ok</Button>
                 </div>
             </Modal>
           </>
