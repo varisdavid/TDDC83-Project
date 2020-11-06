@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Modal, Button, FormControl, InputLabel, Select, TextField, MenuItem, FormControlLabel, FormGroup, FormLabel, Checkbox  } from '@material-ui/core';
-import { FilterList } from '@material-ui/icons';
+import { Modal, Button, FormControl, InputLabel, Input, InputAdornment, Select, TextField, MenuItem, FormControlLabel, FormGroup, FormLabel, Checkbox  } from '@material-ui/core';
+import { FilterList, Search } from '@material-ui/icons';
 
     // Placement of the triggered modal
     const getModalStyle = () => {
@@ -84,6 +84,13 @@ import { FilterList } from '@material-ui/icons';
         }
       };
     
+    // Keeps track of our search value
+    const [searchValue, setSearchValue] = useState('')
+
+    // Handling dynamic search based on what is entered into the search field 
+    const handleSearchChange = (event) => {
+        setSearchValue(event.target.value);
+    };
 
     const selectWidth = '200px';
 
@@ -212,9 +219,33 @@ import { FilterList } from '@material-ui/icons';
                                 </FormGroup>
                             </FormControl>
                         
+                            <div className="p-2" style={{width: "300px", height: "150px", backgroundColor: "rgba(169, 215, 255, 0.3)", borderRadius: "15px"}}>
+                                <FormControl className="flex w-full">
+                                    <InputLabel className="flex ml-2 mt-2 mr-2" htmlFor="input-with-icon-adornment">Diagnos</InputLabel>
+                                    <Input
+                                        id="input-with-icon-adornment"
+                                        className='flex text-gray-800'
+                                        style={{ 
+                                            marginLeft: '10px',
+                                            height: '30px',
+                                            backgroundColor: '#FFF', 
+                                            borderRadius: '25px 25px',
+                                            borderHeight: '0',
+                                        }}
+                                        onChange={handleSearchChange}
+                                        value={searchValue}
+                                        InputProps={{ disableUnderline: true }}
+                                        startAdornment={
+                                        <InputAdornment position="start">
+                                            <Search style={{color: "#E0E0E0"}}/>
+                                        </InputAdornment>
+                                        }
+                                    />
+                                </FormControl>
+                            </div>
+                            <div style={{marginTop: "10px", width: "80%", marginLeft: "auto", marginRight: "auto", height: "60%", backgroundColor: "#FFFFFF"}}>
+                            </div>
                         </div>
-
-
                     </div>
                     <Button className='shadow' style={{float: 'right', width: '120px'}} onClick={handleClose}>Ok</Button>
                 </div>
