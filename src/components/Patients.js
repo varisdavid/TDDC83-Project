@@ -1,30 +1,30 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect } from 'react';
 
-import { PatientsSearch, PatientsTable, PatientGroups } from "../components"
+import { PatientsSearch, PatientsTable, PatientGroups } from '../components'
 import { useTable, useFlexLayout, useFilters, useGlobalFilter, useSortBy } from 'react-table'
 
-import { Tooltip } from "@material-ui/core";
-import { NotificationImportant } from "@material-ui/icons";
+import { Tooltip } from '@material-ui/core';
+import { NotificationImportant } from '@material-ui/icons';
 
 // Component rendering bell icon (color based on value: integer) and hover information based on (text: string) 
 const Notification = ({value, text}) => {
 
   var color;
   if (value === 1) {
-    color = "#FF6464";
+    color = '#FF6464';
   } else if (value === 2) {
-    color = "#FED765";
+    color = '#FED765';
   } else if (value === 3) {
-    color = "#27AE60";
+    color = '#27AE60';
   } else {
     return;
   }
 
   return (
-    <Tooltip title={text} placement="left-start">
+    <Tooltip title={text} placement='left-start'>
       <NotificationImportant style={{
         color: color,
-        fontSize: "30px",
+        fontSize: '30px',
       }}
       />
     </Tooltip>
@@ -57,7 +57,7 @@ const Notification = ({value, text}) => {
         >
         <input
             value={filterValue[0] || ''}
-            type="number"
+            type='number'
             onChange={e => {
             const val = e.target.value
             setFilter((old = []) => [val ? parseInt(val, 10) : undefined, old[1]])
@@ -71,7 +71,7 @@ const Notification = ({value, text}) => {
         to
         <input
             value={filterValue[1] || ''}
-            type="number"
+            type='number'
             onChange={e => {
             const val = e.target.value
             setFilter((old = []) => [old[0], val ? parseInt(val, 10) : undefined])
@@ -108,7 +108,7 @@ const Notification = ({value, text}) => {
             setFilter(e.target.value || undefined)
         }}
         >
-        <option value="">All</option>
+        <option value=''>All</option>
         {options.map((option, i) => (
             <option key={i} value={option}>
             {option}
@@ -131,7 +131,7 @@ const Patients = () => {
           col4: 'Diabetes, Hypertoni',
           col5: '2020-10-08',
           col6: 'Patienten',
-          col7: <Notification value={1} text={"Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"} />
+          col7: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'} />
         },
         {
           col1: 1,
@@ -140,7 +140,7 @@ const Patients = () => {
           col4: 'Diabetes, Hypertoni',
           col5: '2020-10-08',
           col6: 'Patienten',
-          col7: <Notification value={1} text={"Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"} />
+          col7: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'} />
         },
         {
           col1: 1,
@@ -149,7 +149,7 @@ const Patients = () => {
           col4: 'Diabetes, Hypertoni',
           col5: '2020-10-08',
           col6: 'Patienten',
-          col7: <Notification value={1} text={"Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"} />
+          col7: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'} />
 
         },
         {
@@ -159,7 +159,7 @@ const Patients = () => {
           col4: 'Diabetes, Hypertoni',
           col5: '2020-10-08',
           col6: 'Patienten',
-          col7: <Notification value={1} text={"Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"} />
+          col7: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'} />
 
         },
         {
@@ -169,17 +169,7 @@ const Patients = () => {
           col4: 'Diabetes, Hypertoni',
           col5: '2020-10-08',
           col6: 'Patienten',
-          col7: <Notification value={1} text={"Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"} />
-
-        },
-        {
-          col1: 2,
-          col2: 'Gunnilla Andersson',
-          col3: '470203-1324',
-          col4: 'Diabetes, Hypertoni',
-          col5: '2020-10-08',
-          col6: 'Patienten',
-          col7: <Notification value={2} text={"Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"} />
+          col7: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'} />
 
         },
         {
@@ -189,7 +179,17 @@ const Patients = () => {
           col4: 'Diabetes, Hypertoni',
           col5: '2020-10-08',
           col6: 'Patienten',
-          col7: <Notification value={2} text={"Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"} />
+          col7: <Notification value={2} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'} />
+
+        },
+        {
+          col1: 2,
+          col2: 'Gunnilla Andersson',
+          col3: '470203-1324',
+          col4: 'Diabetes, Hypertoni',
+          col5: '2020-10-08',
+          col6: 'Patienten',
+          col7: <Notification value={2} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'} />
 
         },
         {
@@ -215,7 +215,7 @@ const Patients = () => {
           col4: 'Diabetes, Hypertoni',
           col5: '2020-10-08',
           col6: 'Patienten',
-          col7: <Notification value={3} text={"Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"} />
+          col7: <Notification value={3} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'} />
 
         },
         {
@@ -225,7 +225,7 @@ const Patients = () => {
           col4: 'Diabetes, Hypertoni',
           col5: '2020-10-08',
           col6: 'Patienten',
-          col7: <Notification value={3} text={"Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"} />
+          col7: <Notification value={3} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'} />
 
         },
         {
@@ -259,7 +259,7 @@ const Patients = () => {
           col4: 'Blo, Hypertoni',
           col5: '2020-01-08',
           col6: 'Mig',
-          col7: <Notification value={1} text={"Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"} />
+          col7: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'} />
         },
         {
           col1: 1,
@@ -297,9 +297,9 @@ const Patients = () => {
         },
         {
           Header: 'Prioritering',
-          accessor: 'col1', // accessor is the "key" in the data
+          accessor: 'col1', // accessor is the 'key' in the data
           Filter: SelectColumnFilter,
-          filter: "includes",
+          filter: 'includes',
         },
         {
           Header: 'Namn',
@@ -309,13 +309,13 @@ const Patients = () => {
           Header: 'Personnummer',
           accessor: 'col3',
           Filter: NumberRangeColumnFilter,
-          filter: "between",
+          filter: 'between',
         },
         {
           Header: 'Diagnos',
           accessor: 'col4',
           Filter: SelectColumnFilter,
-          filter: "includes",
+          filter: 'includes',
         },
         {
           Header: 'Senast uppdaterad',
@@ -329,10 +329,10 @@ const Patients = () => {
       []
     )
   
-  const [searchValue, setSearchValue] = useState("")
+  const [searchValue, setSearchValue] = useState('')
   
   // Keeps track of sorting options
-  const [sortState, setSortState] = useState({columnId: "col1"});
+  const [sortState, setSortState] = useState({columnId: 'col1'});
   
   // Basic structure [{ id: 'name', value: 'Jane'}, { id: 'age', value: 21 }]
   //const [filterState, setFilterState] = useState({});
@@ -341,10 +341,10 @@ const Patients = () => {
   const initialState = {
     sortBy: [sortState],
     filters: [],
-    // filters: [{ id: 'col1', value: "Green"}]
+    // filters: [{ id: 'col1', value: 'Green'}]
   };
 
-
+  // Creates an instance of table, given columns, data and an initial state.
   const {
       getTableProps,
       getTableBodyProps,
@@ -365,17 +365,18 @@ const Patients = () => {
     useFlexLayout,
   );
 
+  // When something happens, we check to see if we change the sorting option, and we check if the search has been triggered
   useEffect(() => {
-    toggleSortBy(sortState.columnId);
-    setGlobalFilter(searchValue);
+    toggleSortBy(sortState.columnId); // We use the value of the sortState to change sorting of the table
+    setGlobalFilter(searchValue); // We use the stored searchValue to globally filter our table by. 
   }, [sortState, toggleSortBy, searchValue, setGlobalFilter]);
 
   return (
   <>
-      <div className="flex justify-center">
+      <div className='flex justify-center'>
           <div
-              style={{ backgroundColor: "#A9D7FF", borderRadius: "15px 15px" }} 
-              className="flex w-10/12 mt-2 p-2"
+              style={{ backgroundColor: '#A9D7FF', borderRadius: '15px 15px' }} 
+              className='flex w-10/12 mt-2 p-2'
           >
               <PatientsSearch 
                   columns={columns}
@@ -389,8 +390,8 @@ const Patients = () => {
           </div>
       </div>
 
-      <div className="flex justify-center">
-          <div style={{ width: 'calc(85%)', marginRight: "22.5px" }} className="mt-3 p-2">
+      <div className='flex justify-center'>
+          <div style={{ width: 'calc(85%)', marginRight: '22.5px' }} className='mt-3 p-2'>
               <div style={{ width: 'calc(100%)' }}>
                   <PatientsTable 
                     data={data}
@@ -404,8 +405,8 @@ const Patients = () => {
           </div>
       </div>
 
-      <div className="flex justify-center">
-          <div className="w-10/12 mt-3 p-2">
+      <div className='flex justify-center'>
+          <div className='w-10/12 mt-3 p-2'>
               <div style={{ width: '100%' }}>
                   <PatientGroups />
               </div>
