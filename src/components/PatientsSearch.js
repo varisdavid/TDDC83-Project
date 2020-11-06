@@ -95,7 +95,7 @@ const PatientsSearch = ({setSortState,
             </div>
 
             <div style={{ height: 'auto', paddingTop: '12px', paddingBottom: '2px', marginLeft: 'auto', textAlign: 'end' }}>
-                <FilterModal/>
+                <FilterModal setDropdownOpen={setDropdownOpen}/> 
                 <Button 
                     onClick={() => setDropdownOpen(!dropdownOpen)}
                     className='shadow' 
