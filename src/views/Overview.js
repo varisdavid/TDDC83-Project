@@ -91,7 +91,7 @@ const Overview = () => {
     </TabPanel>
 
     <TabPanel value={activeTabValue} index={2}>
-      <PatientCalendar></PatientCalendar>
+      {/* <Notices /> */}
 
     </TabPanel>
 
