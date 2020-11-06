@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 import PropTypes from 'prop-types';
-import { Typography, Box } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 
-import { OverviewHeader } from "../components"
-import { Patients, PatientCalendar} from "../components"
+
+import { OverviewHeader, Patients, Notices, OverviewCalendar, PatientCalendar } from "../components"
 
 // Current thinking is that all views described in the 
 // prototype should have this as a baseplate, were either the children 
@@ -23,7 +23,7 @@ const TabPanel = (props) => {
     >
       {value === index && (
         <Box p={3}>
-          <Typography>{children}</Typography>
+          <div>{children}</div>
         </Box>
       )}
     </div>
@@ -33,17 +33,32 @@ const TabPanel = (props) => {
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
 };
 
 
 const Overview = () => {
 
   const location = useLocation();
+
+  var activeValue;
   
+  if (location.pathname === "/overview/home") {
+    activeValue = 0;
+  } else if (location.pathname === "/overview/patients") {
+    activeValue = 1;
+  } else if (location.pathname === "/overview/notices") {
+    activeValue = 2;
+  } else if (location.pathname === "/overview/calendar") {
+    activeValue = 3;
+  } else {
+    activeValue = 0;
+  }
+
+  const [activeTabValue, setActiveTabValue] = useState(activeValue);
+
   // will change later on
-  const healthCenter = useState("X_Vårdcentral");
-  const [activeTabValue, setActiveTabValue] = useState(0);
+  const healthCenter = "X_Vårdcentral";
+
 
   useEffect(() => {
 
@@ -51,12 +66,10 @@ const Overview = () => {
       setActiveTabValue(0);
     } else if (location.pathname === "/overview/patients") {
       setActiveTabValue(1);
-    } else if (location.pathname === "/overview/calendar") {
-      setActiveTabValue(2);
     } else if (location.pathname === "/overview/notices") {
+      setActiveTabValue(2);
+    } else if (location.pathname === "/overview/calendar") {
       setActiveTabValue(3);
-    } else if (location.pathname === "/overview/search") {
-      setActiveTabValue(4);
     } else {
       setActiveTabValue(0);
     }
@@ -67,22 +80,29 @@ const Overview = () => {
   return (
   <>
     <OverviewHeader healthCenter={healthCenter} activeTabValue={activeTabValue} setActiveTabValue={setActiveTabValue}/>
+
+
     <TabPanel value={activeTabValue} index={0}>
       
     </TabPanel>
+
     <TabPanel value={activeTabValue} index={1}>
       <Patients />
     </TabPanel>
+
     <TabPanel value={activeTabValue} index={2}>
+<<<<<<< src/views/Overview.js
       <PatientCalendar></PatientCalendar>
 
+=======
+      {/* <Notices /> */}
+>>>>>>> src/views/Overview.js
     </TabPanel>
+
     <TabPanel value={activeTabValue} index={3}>
-      Page Four
+      <OverviewCalendar/>
     </TabPanel>
-    <TabPanel value={activeTabValue} index={4}>
-      Page Five
-    </TabPanel>
+
   </>
 
   );

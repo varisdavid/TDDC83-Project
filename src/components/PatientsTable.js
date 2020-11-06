@@ -1,56 +1,143 @@
 import React from "react";
 
-import { DataGrid } from '@material-ui/data-grid';
+import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core'
+import { ArrowDropUp, ArrowDropDown } from "@material-ui/icons";
+import { useVirtual } from "react-virtual";
 
+const Blob = ({value}) => {
 
-const PatientsTable = () => {
+  var color;
+  if (value === 1) {
+    color = "#FF6464";
+  } else if (value === 2) {
+    color = "#FED765";
+  } else if (value === 3) {
+    color = "#27AE60";
+  } else {
+    return;
+  }
 
-    const columns = [
-        { field: 'id', headerName: 'ID', width: 70 },
-        { field: 'firstName', headerName: 'First name', width: 130 },
-        { field: 'lastName', headerName: 'Last name', width: 130 },
-        {
-        field: 'age',
-        headerName: 'Age',
-        type: 'number',
-        width: 90,
-        },
-        {
-        field: 'fullName',
-        headerName: 'Full name',
-        description: 'This column has a value getter and is not sortable.',
-        sortable: false,
-        width: 160,
-        valueGetter: (params) =>
-            `${params.getValue('firstName') || ''} ${
-            params.getValue('lastName') || ''
-            }`,
-        },
-    ];
-    
-    const rows = [
-        { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-        { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-        { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-        { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-        { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-        { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-        { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-        { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-        { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-    ];
+  return (
+    <div style={{
+      backgroundColor: color,
+      marginRight: "auto",
+      marginLeft: "auto",
+      borderRadius: "15px",
+      width: "90px", 
+      height: "27px"}}>
+    </div>
+  )
+}
 
-    return (
-    <>
-        <div className="flex justify-center">
-            <div className="w-10/12 mt-3 p-2 shadow">
-                <div style={{ height: 400, width: '100%' }}>
-                    <DataGrid rows={rows} columns={columns} pageSize={5} checkboxSelection />
-                </div>
-            </div>
+const PatientsTable = ({
+  data,
+  getTableProps, 
+  getTableBodyProps, 
+  headerGroups, 
+  rows, 
+  prepareRow, 
+  }) => {
+  
+  const parentRef = React.useRef();
+  const rowVirtualizer = useVirtual({
+    size: rows.length,
+    parentRef,
+    estimateSize: React.useCallback(() => 15, [])
+  });
+
+  return (
+  <>   
+      <Table {...getTableProps()} >
+        <TableHead>
+        {headerGroups.map(headerGroup => (
+            <TableRow {...headerGroup.getHeaderGroupProps()}>
+            {headerGroup.headers.map((column, columnIndex) => (
+                <TableCell
+                  {...column.getHeaderProps()}
+                  style={{
+                    width: (columnIndex === 0) ? "45px" : "16.66667%", //Make first column fixed size
+                    background: (columnIndex === 0) ? "#FFF" : '#275E8E', //Make first column invisible
+                    borderColor: (columnIndex === 0) && "#FFF", //Make first column invisible
+                    color: '#FFF',
+                    fontWeight: '700',
+                    fontSize: "15px",
+                    textAlign: "center",
+                  }}   
+                >
+                {column.render('Header')}
+                <span>
+                  {column.isSorted
+                    ? column.isSortedDesc
+                      ? <ArrowDropUp style={{fontSize: "15px" }} />
+                      : <ArrowDropDown style={{fontSize: "15px" }} />
+                    : ''}
+                </span>
+                </TableCell>
+            ))}
+            </TableRow>
+        ))}
+        </TableHead>
+          <div
+            ref={parentRef}
+            style={{
+              display: "block",
+              height: `calc(100vh - 520px)`, //calculated other parts to height of 520 + spacing, so table gets whats left
+              overflow: "auto",
+              width: `100%`
+            }}
+          >
+          <TableBody
+            className="ListInner"
+            style={{
+              display: "block",
+              height: `${rowVirtualizer.totalSize}px`,
+              position: "relative"
+            }}
+          >
+            {rowVirtualizer.virtualItems.map(virtualRow => {
+              const row = rows[virtualRow.index];
+              // eslint-disable-next-line no-lone-blocks
+              prepareRow(row);
+              return (
+                <TableRow 
+                key={virtualRow.index}
+                ref={virtualRow.measureRef}
+                {...row.getRowProps({
+                  style: {
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    transform: `translateY(${virtualRow.start}px)`,
+                    background: (virtualRow.index % 2) ? '#E5E5E5' : '#FFF',
+                  }
+                })}
+              >
+                  
+                    {row.cells.map((cell, cellIndex) => {
+                    return (
+                      <TableCell {...cell.getCellProps()} style={{padding: '10px', 
+                                                                  textAlign: "center", 
+                                                                  width: (cellIndex === 0) ? '45px' : "18%", //To make first column fixed size
+                                                                  background: (cellIndex === 0) && '#FFF', //To make first column invisible
+                                                                  borderColor: (cellIndex === 0) && '#FFF', //To make first column invisible
+                                                                }}>
+                        { (cellIndex === 1 && cell.value === 1) && <Blob value={1}/> }
+                        { (cellIndex === 1 && cell.value === 2) && <Blob value={2}/> }
+                        { (cellIndex === 1 && cell.value === 3) && <Blob value={3}/> }
+                        { cellIndex !== 1 && cell.render('Cell')}
+                      </TableCell>
+                    )
+                    
+                    })}
+                </TableRow>
+              )}
+            )}
+          </TableBody>
         </div>
-    </>
-    );
+    </Table>
+  </>
+  );
 };
 
 export default PatientsTable;

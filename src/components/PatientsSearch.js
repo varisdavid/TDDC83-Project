@@ -1,35 +1,118 @@
 import React, { useState } from "react";
 
 import { InputBase, Button } from '@material-ui/core';
-import { Search } from '@material-ui/icons';
+import { ArrowDropDown } from '@material-ui/icons';
 
-const PatientsSearch = () => {
+import { FilterModal } from "../components"
 
-    const [searchTerm, setSearchTerm] = useState('');
+const DropdownContent = ({ dropdownItems, setSortState, setDropdownOpen, dropdownOpen }) => {
+
+    const handleClick = (id) => {
+        setSortState({columnId: id});
+        setDropdownOpen(!dropdownOpen);
+    }
+
+    return (
+        <div 
+            style={{width: "175px"}} 
+            className="bg-white z-10 text-center grey-400 w-inherit absolute right-0 p-2 shadow-lg rounded-lg mt-2"
+        >
+        
+        {dropdownItems.map((item, i) => {
+            return (
+            <div className="mt-1" key={i}>
+               <Button onClick={() => handleClick(item.id)}>
+                   {item.sortBy}
+               </Button>
+            </div>
+            );
+        })}
+        </div>
+    );
+};
+
+const PatientsSearch = ({columns, 
+                        NumberRangeColumnFilter, 
+                        SelectColumnFilter,
+                        setSortState,
+                        searchValue,
+                        setSearchValue
+                        }) => {
+
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+
+    const dropdownItems = [
+        {
+        sortBy: 'Prioritering',
+        id: 'col1',
+        },
+        {
+        sortBy: 'Namn',
+        id: 'col2',
+        },
+        {
+        sortBy: 'Personnummer',
+        id: 'col3',
+        },
+        {
+        sortBy: 'Diagnos',
+        id: 'col4',
+        },
+        {
+        sortBy: 'Senast uppdaterad',
+        id: 'col5',
+        },
+        {
+        sortBy: 'Uppdaterad av',
+        id: 'col6',
+        },
+    ];
 
     const handleSearchChange = (event) => {
-        setSearchTerm(event.target.value);
-      };
+        setSearchValue(event.target.value);
+    };
 
     return (
     <>
-        <div className="flex justify-center">
-            <div className="flex-row w-10/12 mt-2 p-2 shadow">
-                <Search className="ml-4 mr-3 text-gray-800"/>
+        <div style={{ height: "auto", marginLeft: "auto", marginRight: "auto", width: "95%" }}>
+            <div style={{ height: "45px", width: "inherit", marginLeft: "auto", marginRight: "auto", backgroundColor: "#FFF", borderRadius: "25px 25px" }}>
                 <InputBase
-                    className="text-gray-800 w-4/5"
-                    placeholder="Sök patient"
+                    inputComponent='input'               
+                    className="text-gray-800"
+                    style={{ 
+                        marginLeft: "10px",
+                        height: "45px",
+                        width: "100%"
+                    }}
+                    placeholder="Sök:"
                     inputProps={{ 'aria-label': 'search' }}
                     onChange={handleSearchChange}
-                    value={searchTerm}
+                    value={searchValue} 
                 />
-                <Button className="ml-4" variant="contained" color="white" href="#contained-buttons">
-                    Sök
-                </Button>
             </div>
-                  
-        </div>
 
+            <div style={{ height: "auto", paddingTop: "12px", paddingBottom: "2px", marginLeft: "auto", textAlign: "end" }}>
+                <FilterModal
+                    columns={columns}
+                    NumberRangeColumnFilter={NumberRangeColumnFilter} 
+                    SelectColumnFilter={SelectColumnFilter}
+                />
+                <Button 
+                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                    className="shadow" 
+                    style={{ borderRadius: "0", backgroundColor: "#FFF" }}
+                >
+                    Sortera efter
+                    <ArrowDropDown style={{ marginLeft: "20px", fontSize: "16px" }} />
+                </Button>
+                {dropdownOpen && (
+                    <div className="relative">
+                        <DropdownContent dropdownItems={dropdownItems} setSortState={setSortState} setDropdownOpen={setDropdownOpen} dropdownOpen={dropdownOpen} />
+                    </div>
+                )}
+            </div>
+        </div>
+        
     </>
     );
 };
