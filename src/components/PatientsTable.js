@@ -138,6 +138,7 @@ const PatientsTable = ({
                         { (cellIndex === 1 && cell.value === 1) && <Blob value={1}/> }
                         { (cellIndex === 1 && cell.value === 2) && <Blob value={2}/> }
                         { (cellIndex === 1 && cell.value === 3) && <Blob value={3}/> }
+                        {/* { (cell.value.length > 1) && cell.value.join() } */}
                         { cellIndex !== 1 && cell.render('Cell')}
                       </TableCell>
                     )

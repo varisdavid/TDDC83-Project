@@ -336,6 +336,7 @@ const Patients = () => {
         {
           Header: 'Diagnos',
           accessor: 'diagnoses',
+          Cell: ({ value }) => String(value.join(", "))
         },
         {
           Header: 'Senast uppdaterad',
