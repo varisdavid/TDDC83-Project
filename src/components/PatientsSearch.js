@@ -47,27 +47,27 @@ const PatientsSearch = ({setSortState,
     const dropdownItems = [
         {
         sortBy: 'Prioritering',
-        id: 'col1',
+        id: 'priority',
         },
         {
         sortBy: 'Namn',
-        id: 'col2',
+        id: 'name',
         },
         {
         sortBy: 'Personnummer',
-        id: 'col3',
+        id: 'sweID',
         },
         {
         sortBy: 'Diagnos',
-        id: 'col4',
+        id: 'diagnoses',
         },
         {
         sortBy: 'Senast uppdaterad',
-        id: 'col5',
+        id: 'updatedAt',
         },
         {
         sortBy: 'Uppdaterad av',
-        id: 'col6',
+        id: 'updatedBy',
         },
     ];
 
