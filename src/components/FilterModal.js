@@ -48,7 +48,7 @@ paper: {
 }));
 
 
-const FilterModal = ({setDropdownOpen}) => {
+const FilterModal = ({setDropdownOpen, setAllFilters}) => {
 
     const classes = useStyles();
     // getModalStyle is not a pure function, we roll the style only on the first render
@@ -130,8 +130,19 @@ const FilterModal = ({setDropdownOpen}) => {
       setChecked(newChecked);
     };
 
+    // col1: 1,
+    // col2: 'Gunnilla Andersson',
+    // col3: '470203-1324',
+    // col4: 'Diabetes, Hypertoni',
+    // col5: '2020-10-08',
+    // col6: 'Patienten',
+    // col7: <Notification va
+
+
+
     const handleFinished = () => {
         setCustomFilter({...customFilter, diagnoses: diagnoses})
+        setAllFilters([{ id: 'priority', value: 1 }, {id: 'name', value: "Gunnilla"}])
         handleClose()
     }
 

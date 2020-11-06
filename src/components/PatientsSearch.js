@@ -36,7 +36,8 @@ const DropdownContent = ({ dropdownItems, setSortState, setDropdownOpen, dropdow
 // Component rendering blue div, with a searchfield and filtering + sorting buttons.
 const PatientsSearch = ({setSortState,
                         searchValue,
-                        setSearchValue
+                        setSearchValue,
+                        setAllFilters,
                         }) => {
 
     // State keeping track of wheter the sort menu has been toggled or not
@@ -95,7 +96,7 @@ const PatientsSearch = ({setSortState,
             </div>
 
             <div style={{ height: 'auto', paddingTop: '12px', paddingBottom: '2px', marginLeft: 'auto', textAlign: 'end' }}>
-                <FilterModal setDropdownOpen={setDropdownOpen}/> 
+                <FilterModal setDropdownOpen={setDropdownOpen} setAllFilters={setAllFilters}/> 
                 <Button 
                     onClick={() => setDropdownOpen(!dropdownOpen)}
                     className='shadow' 
