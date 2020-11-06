@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo } from 'react';
 
 import { Button } from '@material-ui/core';
 import { AddToPhotos } from '@material-ui/icons';
@@ -13,7 +13,7 @@ const PatientsGroup = () => {
           {
             // connect to data/how to tell table
             Name: 'Mina Patienter',
-            accessor: 'group1', // accessor is the "key" in the data
+            accessor: 'group1', // accessor is the 'key' in the data
           },
           {
             Name: 'Diabetespatienter',
@@ -27,18 +27,18 @@ const PatientsGroup = () => {
 
     return (
     <>
-        <div style={{ width: "auto", textAlign: "end" }}>
+        <div style={{ width: 'auto', textAlign: 'end' }}>
 
             {patientGroups.map(group => {
                 return (
                     <Button 
-                      className="shadow mr-2"
+                      className='shadow mr-2'
                       key={group.accessor} 
-                      style={{ paddingTop: "2px", 
-                        paddingBottom: "2px", 
-                        paddingLeft: "15px", 
-                        paddingRight: "15px", 
-                        borderRadius: "0" }}
+                      style={{ paddingTop: '2px', 
+                        paddingBottom: '2px', 
+                        paddingLeft: '15px', 
+                        paddingRight: '15px', 
+                        borderRadius: '0' }}
                       >
                         { group.Name }
                     </Button>
@@ -46,7 +46,7 @@ const PatientsGroup = () => {
             })}
 
             <Button component={'span'}>
-                <AddToPhotos style={{ fontSize: "40px", color: "#0066B3" }} />
+                <AddToPhotos style={{ fontSize: '40px', color: '#0066B3' }} />
             </Button>
 
         </div>
