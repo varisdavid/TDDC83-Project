@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 import PropTypes from 'prop-types';
-import { Box } from '@material-ui/core';
+import { Typography, Box } from '@material-ui/core';
 
 
 import { OverviewHeader, Patients, Notices, OverviewCalendar, PatientCalendar } from "../components"
@@ -91,12 +91,8 @@ const Overview = () => {
     </TabPanel>
 
     <TabPanel value={activeTabValue} index={2}>
-<<<<<<< src/views/Overview.js
       <PatientCalendar></PatientCalendar>
 
-=======
-      {/* <Notices /> */}
->>>>>>> src/views/Overview.js
     </TabPanel>
 
     <TabPanel value={activeTabValue} index={3}>

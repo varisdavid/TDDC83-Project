@@ -4,7 +4,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 import { Loading } from "./components";
 import { Home, Profile, ExternalApi, Overview, OverviewSettings, PatientView } from "./views";
-// import ProtectedRoute from "./auth/ProtectedRoute";
+import ProtectedRoute from "./auth/ProtectedRoute";
 
 import "./app.css";
 
