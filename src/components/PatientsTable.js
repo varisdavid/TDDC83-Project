@@ -8,12 +8,17 @@ import { useVirtual } from "react-virtual";
 const Blob = ({value}) => {
 
   var color;
+  var text;
+
   if (value === 1) {
     color = "#FF6464";
+    text = "Röd"
   } else if (value === 2) {
     color = "#FED765";
+    text = "Gul"
   } else if (value === 3) {
     color = "#27AE60";
+    text = "Grön"
   } else {
     return;
   }
@@ -26,6 +31,7 @@ const Blob = ({value}) => {
       borderRadius: "15px",
       width: "90px", 
       height: "27px"}}>
+        <span style={{lineHeight: "27px", color: "rgba(0, 0, 0, 0.87)", }}>{text}</span>
     </div>
   )
 }
