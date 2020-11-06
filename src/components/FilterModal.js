@@ -64,17 +64,17 @@ import { FilterList, Search } from '@material-ui/icons';
         
         if (name === "low") {
             setCustomFilter({
-                ...setCustomFilter,
+                ...customFilter,
                 priority: {low: !customFilter.priority.low, average: customFilter.priority.average, high: customFilter.priority.high}
             })
         } else if (name === "average") {
             setCustomFilter({
-                ...setCustomFilter,
+                ...customFilter,
                 priority: {low: customFilter.priority.low, average: !customFilter.priority.average, high: customFilter.priority.high}
             })
         } else if (name === "high") {
             setCustomFilter({
-                ...setCustomFilter,
+                ...customFilter,
                 priority: {low: customFilter.priority.low, average: customFilter.priority.average, high: !customFilter.priority.high}
             })
         } else {
@@ -159,8 +159,8 @@ import { FilterList, Search } from '@material-ui/icons';
                                         <MenuItem value=''>
                                             <em>All</em>
                                         </MenuItem>
-                                        <MenuItem value={'Male'}>Male</MenuItem>
-                                        <MenuItem value={'Female'}>Female</MenuItem>
+                                        <MenuItem value={'Male'}>Man</MenuItem>
+                                        <MenuItem value={'Female'}>Kvinna</MenuItem>
                                     </Select>
                                 </FormControl>
                                 
@@ -208,17 +208,17 @@ import { FilterList, Search } from '@material-ui/icons';
                                     <FormLabel component="legend" style={{color: '#000'}}>Prioritet</FormLabel>
                                     <FormGroup className='ml-3'>
                                     <FormControlLabel
-                                        control={<Checkbox checked={customFilter.priority.low} onChange={handleChange} name="low" />}
+                                        control={<Checkbox style={{color: "#0066B3",}} checked={customFilter.priority.low} onChange={handleChange} name="low" />}
                                         label="Låg"
                                         style={{marginBottom: "0px"}}
                                         />
                                     <FormControlLabel
-                                        control={<Checkbox checked={customFilter.priority.average} onChange={handleChange} name="average"/>}
+                                        control={<Checkbox style={{color: "#0066B3",}} checked={customFilter.priority.average} onChange={handleChange} name="average"/>}
                                         label="Medel"
                                         style={{marginBottom: "0px"}}
                                         />
                                     <FormControlLabel
-                                        control={<Checkbox checked={customFilter.priority.high} onChange={handleChange} name="high" />}
+                                        control={<Checkbox style={{color: "#0066B3",}} checked={customFilter.priority.high} onChange={handleChange} name="high" />}
                                         label="Hög"
                                         style={{marginBottom: "0px"}}
                                         />
