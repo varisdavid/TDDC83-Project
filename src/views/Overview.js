@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Box } from '@material-ui/core';
 
-import { OverviewHeaderBanner, OverviewHeaderNavigation, Patients, OverviewCalendar } from "../components"
+import { OverviewHeaderBanner, OverviewHeaderNavigation, Patients, OverviewCalendar } from '../components'
 
 // Function for retrieving current active tab
 const getActiveTab = (location) => {
   
-  if (location.pathname === "/overview/home") {
+  if (location.pathname === '/overview/home') {
     return 0;
-  } else if (location.pathname === "/overview/patients") {
+  } else if (location.pathname === '/overview/patients') {
     return 1;  
-  } else if (location.pathname === "/overview/notices") {
+  } else if (location.pathname === '/overview/notices') {
     return 2;  
-  } else if (location.pathname === "/overview/calendar") {
+  } else if (location.pathname === '/overview/calendar') {
     return 3;  
   } else {
     return 0;  
@@ -27,7 +27,7 @@ const TabPanel = (props) => {
 
   return (
     <div
-      role="tabpanel"
+      role='tabpanel'
       hidden={value !== index}
       id={`nav-tabpanel-${index}`}
       aria-labelledby={`nav-tab-${index}`}
@@ -54,7 +54,7 @@ const Overview = () => {
   const [activeTabValue, setActiveTabValue] = useState(getActiveTab(location));
 
   // Will be fetched by user information later on. 
-  const healthCenter = "Ryds vårdcentral";
+  const healthCenter = 'Ryds vårdcentral';
 
   // Upon rendering the component, this hook calls a function which 
   // determines which tab is active, depending on this we load a different tab.
@@ -65,24 +65,24 @@ const Overview = () => {
 
   return (
   <>
-    <div className="w-full h-auto">
+    <div className='w-full h-auto'>
       <OverviewHeaderBanner healthCenter={healthCenter} />  
       <OverviewHeaderNavigation activeTabValue={activeTabValue} setActiveTabValue={setActiveTabValue} />
     </div>
 
-    <TabPanel className="Home" value={activeTabValue} index={0}>
+    <TabPanel className='Home' value={activeTabValue} index={0}>
 
     </TabPanel>
 
-    <TabPanel className="Patients" value={activeTabValue} index={1}>
+    <TabPanel className='Patients' value={activeTabValue} index={1}>
       <Patients />
     </TabPanel>
 
-    <TabPanel className="Notices" value={activeTabValue} index={2}>
+    <TabPanel className='Notices' value={activeTabValue} index={2}>
       {/* <Notices /> */}
     </TabPanel>
 
-    <TabPanel className="Calendar" value={activeTabValue} index={3}>
+    <TabPanel className='Calendar' value={activeTabValue} index={3}>
       <OverviewCalendar/>
     </TabPanel>
 
