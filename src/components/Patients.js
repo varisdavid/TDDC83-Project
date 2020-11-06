@@ -16,8 +16,8 @@ const Notification = ({value, text}) => {
     color = '#FED765';
   } else if (value === 3) {
     color = '#27AE60';
-  } else {
-    return;
+  } else if (value === 0) {
+    color = '#FFF'; // This is for rendering bug, empty cell not taking same space.
   }
 
   return (
@@ -257,6 +257,7 @@ const Patients = () => {
           gender: "female",
         },
         {
+          notices: <Notification value={0} />,
           priority: 3,
           name: 'Patrik Andersson',
           sweID: '410203-1324',

@@ -6,7 +6,7 @@ import { ArrowDropDown } from '@material-ui/icons';
 import { FilterModal } from '../components'
 
 // Component rendering a dropdown menu
-const DropdownContent = ({ dropdownItems, setSortState, setDropdownOpen, dropdownOpen }) => {
+const DropdownContent = ({ sortByList, setSortState, setDropdownOpen, dropdownOpen }) => {
 
     // If any of the alternatives are pressed, we keep track of this and close the dropdown menu.
     const handleClick = (id) => {
@@ -20,7 +20,7 @@ const DropdownContent = ({ dropdownItems, setSortState, setDropdownOpen, dropdow
             className='bg-white z-10 text-center grey-400 w-inherit absolute right-0 p-2 shadow-lg rounded-lg mt-2'
         >
         
-        {dropdownItems.map((item, i) => {
+        {sortByList.map((item, i) => {
             return (
             <div className='mt-1' key={i}>
                <Button onClick={() => handleClick(item.id)}>
@@ -44,7 +44,7 @@ const PatientsSearch = ({setSortState,
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
     // Specifying what we can sort by
-    const dropdownItems = [
+    const sortByList = [
         {
         sortBy: 'Prioritering',
         id: 'priority',
@@ -107,7 +107,7 @@ const PatientsSearch = ({setSortState,
                 </Button>
                 {dropdownOpen && (
                     <div className='relative'>
-                        <DropdownContent dropdownItems={dropdownItems} setSortState={setSortState} setDropdownOpen={setDropdownOpen} dropdownOpen={dropdownOpen} />
+                        <DropdownContent sortByList={sortByList} setSortState={setSortState} setDropdownOpen={setDropdownOpen} dropdownOpen={dropdownOpen} />
                     </div>
                 )}
             </div>

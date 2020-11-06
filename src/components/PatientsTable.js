@@ -128,6 +128,7 @@ const PatientsTable = ({
                                                                   background: (cellIndex === 0) && '#FFF', //To make first column invisible
                                                                   borderColor: (cellIndex === 0) && '#FFF', //To make first column invisible
                                                                 }}>
+
                         { (cellIndex === 1 && cell.value === 1) && <Blob value={1}/> }
                         { (cellIndex === 1 && cell.value === 2) && <Blob value={2}/> }
                         { (cellIndex === 1 && cell.value === 3) && <Blob value={3}/> }
