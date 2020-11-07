@@ -19,7 +19,7 @@ import { Modal,
 import { FilterList, Search } from '@material-ui/icons';
 
 // Temporary search data
-const data = ["Diabetes", "Hypotermia"]
+const data = ['Diabetes', 'Hypertoni']
 
 // Used to fix the placement of the triggered modal
 const getModalStyle = () => {
@@ -37,7 +37,7 @@ return {
 // Styling of the triggered modal
 const useStyles = makeStyles((theme) => ({
 paper: {
-    maxWidth: "600px",
+    maxWidth: '600px',
     position: 'absolute',
     backgroundColor: theme.palette.background.paper,
     border: '3px solid #0066B3',
@@ -58,9 +58,9 @@ const FilterModal = ({setDropdownOpen, setOwnFilters}) => {
     const [customFilterData, setCustomFilterData] = useState({
         minAge: 0,
         maxAge: 100,
-        gender: '',
-        team: '',
-        department: '',
+        gender: 'all',
+        team: 'all',
+        department: 'all',
         priority: {low: false, average: false, high: false}, // Either low, medium, high, undefined (translated to 3, 2, 1, 0)
         diagnoses: [],
     })
@@ -80,20 +80,25 @@ const FilterModal = ({setDropdownOpen, setOwnFilters}) => {
     const handleChange = (event) => {
         const name = event.target.name;
         
-        if (name === "low") {
+        if (name === 'low') {
             setCustomFilterData({
                 ...customFilterData,
                 priority: {low: !customFilterData.priority.low, average: customFilterData.priority.average, high: customFilterData.priority.high}
             })
-        } else if (name === "average") {
+        } else if (name === 'average') {
             setCustomFilterData({
                 ...customFilterData,
                 priority: {low: customFilterData.priority.low, average: !customFilterData.priority.average, high: customFilterData.priority.high}
             })
-        } else if (name === "high") {
+        } else if (name === 'high') {
             setCustomFilterData({
                 ...customFilterData,
                 priority: {low: customFilterData.priority.low, average: customFilterData.priority.average, high: !customFilterData.priority.high}
+            })
+        } else if (name.includes("Age")) {
+            setCustomFilterData({
+                ...customFilterData,
+                [name]: parseInt(event.target.value, 10),
             })
         } else {
             setCustomFilterData({
@@ -115,19 +120,19 @@ const FilterModal = ({setDropdownOpen, setOwnFilters}) => {
     const [diagnoses, setDiagnoses] = useState(data)
 
     // Keeps track of which diagnosis are chosen
-    const [checked, setChecked] = useState([0]);
+    const [toggledDiagnoses, setToggledDiagnoses] = useState(customFilterData.diagnoses);
 
     // Handles the toggled checkboxes in the resulting diagnosis list.
-    const handleToggle = (value) => () => {
-      const currentIndex = checked.indexOf(value);
-      const newChecked = [...checked];
+    const handleDiagnoseToggle = (value) => () => {
+      const currentIndex = toggledDiagnoses.indexOf(value);
+      const newChecked = [...toggledDiagnoses];
   
       if (currentIndex === -1) {
         newChecked.push(value);
       } else {
         newChecked.splice(currentIndex, 1);
       }
-      setChecked(newChecked);
+      setToggledDiagnoses(newChecked);
     };
 
     // col1: 1,
@@ -138,11 +143,9 @@ const FilterModal = ({setDropdownOpen, setOwnFilters}) => {
     // col6: 'Patienten',
     // col7: <Notification va
 
-
-
     const handleFinished = () => {
-        setCustomFilterData({...customFilterData, diagnoses: diagnoses})
-        setOwnFilters(customFilterData);
+        setCustomFilterData({...customFilterData, diagnoses: toggledDiagnoses})
+        setOwnFilters({...customFilterData, diagnoses: toggledDiagnoses});
         handleClose()
     }
 
@@ -214,9 +217,7 @@ const FilterModal = ({setDropdownOpen, setOwnFilters}) => {
                                     style={{ width: selectWidth }}
 
                                 >
-                                    <MenuItem value=''>
-                                        <em>All</em>
-                                    </MenuItem>
+                                    <MenuItem value={'all'}><em>Alla</em></MenuItem>
                                     <MenuItem value={'male'}>Man</MenuItem>
                                     <MenuItem value={'female'}>Kvinna</MenuItem>
                                 </Select>
@@ -234,11 +235,9 @@ const FilterModal = ({setDropdownOpen, setOwnFilters}) => {
                                     style={{ width: selectWidth }}
 
                                 >
-                                    <MenuItem value=''>
-                                        <em>All</em>
-                                    </MenuItem>
-                                    <MenuItem value={'team 1'}>Team 1</MenuItem>
-                                    <MenuItem value={'team 2'}>Team 2</MenuItem>
+                                    <MenuItem value={'all'}><em>Alla</em></MenuItem>
+                                    <MenuItem value={'Team 1'}>Team 1</MenuItem>
+                                    <MenuItem value={'Team 2'}>Team 2</MenuItem>
                                 </Select>
                             </FormControl>
 
@@ -251,75 +250,73 @@ const FilterModal = ({setDropdownOpen, setOwnFilters}) => {
                                     onChange={handleChange}
                                     label='Department'
                                     inputProps={{name: 'department'}}
-                                    style={{ width: selectWidth, color: "#0066B3"}}
+                                    style={{ width: selectWidth, color: '#0066B3'}}
 
                                 >
-                                    <MenuItem value=''>
-                                        <em>All</em>
-                                    </MenuItem>
-                                    <MenuItem value={'department 1'}>Department 1</MenuItem>
-                                    <MenuItem value={'department 2'}>Department 2</MenuItem>
+                                    <MenuItem value={'all'}><em>Alla</em></MenuItem>
+                                    <MenuItem value={'Department 1'}>Department 1</MenuItem>
+                                    <MenuItem value={'Department 2'}>Department 2</MenuItem>
                                 </Select>
                             </FormControl>
 
-                            <FormControl className='mt-4 ml-3' component="fieldset">
-                                <FormLabel component="legend" style={{color: '#000'}}>Prioritet</FormLabel>
+                            <FormControl className='mt-4 ml-3' component='fieldset'>
+                                <FormLabel component='legend' style={{color: '#000'}}>Prioritet</FormLabel>
                                 <FormGroup className='ml-3'>
                                 <FormControlLabel
-                                    control={<Checkbox style={{color: "#0066B3",}} checked={customFilterData.priority.low} onChange={handleChange} name="low" />}
-                                    label="Låg"
-                                    style={{marginBottom: "0px"}}
+                                    control={<Checkbox style={{color: '#0066B3',}} checked={customFilterData.priority.low} onChange={handleChange} name='low' />}
+                                    label='Låg'
+                                    style={{marginBottom: '0px'}}
                                     />
                                 <FormControlLabel
-                                    control={<Checkbox style={{color: "#0066B3",}} checked={customFilterData.priority.average} onChange={handleChange} name="average"/>}
-                                    label="Medel"
-                                    style={{marginBottom: "0px"}}
+                                    control={<Checkbox style={{color: '#0066B3',}} checked={customFilterData.priority.average} onChange={handleChange} name='average'/>}
+                                    label='Medel'
+                                    style={{marginBottom: '0px'}}
                                     />
                                 <FormControlLabel
-                                    control={<Checkbox style={{color: "#0066B3",}} checked={customFilterData.priority.high} onChange={handleChange} name="high" />}
-                                    label="Hög"
-                                    style={{marginBottom: "0px"}}
+                                    control={<Checkbox style={{color: '#0066B3',}} checked={customFilterData.priority.high} onChange={handleChange} name='high' />}
+                                    label='Hög'
+                                    style={{marginBottom: '0px'}}
                                     />
                                 </FormGroup>
                             </FormControl>
                         </div>
                         
                         {/* Sökfält + resultatruta */}
-                        <div className="flex-col w-1/2 p-2 ml-4 mt-5 mb-5" style={{backgroundColor: "rgba(169, 215, 255, 0.3)", borderRadius: "15px"}}>
-                            <FormControl className="flex w-full mt-2" style={{height: "auto"}}>
-                                <InputLabel disabled className="flex m-2" style={{fontWeight: "400", color: "#000"}}>Diagnos:</InputLabel>
+                        <div className='flex-col w-1/2 p-2 ml-4 mt-5 mb-5' style={{backgroundColor: 'rgba(169, 215, 255, 0.3)', borderRadius: '15px'}}>
+                            <FormControl className='flex w-full mt-2' style={{height: 'auto'}}>
+                                <InputLabel disabled className='flex m-2' style={{fontWeight: '400', color: '#000'}}>Diagnos:</InputLabel>
                                 <Input
                                     disableUnderline
                                     className='flex text-gray-800'
                                     style={{ 
-                                        fontSize: "12px",
+                                        fontSize: '12px',
                                         backgroundColor: '#FFF', 
                                         borderRadius: '25px 25px',
                                         borderHeight: '0',
-                                        width: "70%",
-                                        marginLeft: "auto",
-                                        marginRight: "5px",
-                                        marginTop: "0px",
+                                        width: '70%',
+                                        marginLeft: 'auto',
+                                        marginRight: '5px',
+                                        marginTop: '0px',
                                     }}
                                     onChange={handleSearchChange}
                                     value={searchValue}
                                     startAdornment={
-                                    <InputAdornment position="start">
-                                        <Search style={{marginLeft: "5px", color: "#E0E0E0"}}/>
+                                    <InputAdornment position='start'>
+                                        <Search style={{marginLeft: '5px', color: '#E0E0E0'}}/>
                                     </InputAdornment>
                                     }
                                 />
                             </FormControl>
-                            <div style={{marginTop: "10px", width: "80%", marginLeft: "auto", marginRight: "auto", height: "70%", backgroundColor: "#FFFFFF"}}>
+                            <div style={{marginTop: '10px', width: '80%', marginLeft: 'auto', marginRight: 'auto', height: '70%', backgroundColor: '#FFFFFF'}}>
                             {diagnoses.map(item => {
                                 const labelId = `checkbox-list-label-${item}`;
 
                                 return (
-                                  <ListItem key={item} style={{paddingTop: "0px", paddingBottom: "0px"}} role={undefined} button onClick={handleToggle(item)}>
+                                  <ListItem key={item} style={{paddingTop: '0px', paddingBottom: '0px'}} role={undefined} button onClick={handleDiagnoseToggle(item)}>
                                     <ListItemIcon>
                                       <Checkbox
-                                        edge="start"
-                                        checked={checked.indexOf(item) !== -1}
+                                        edge='start'
+                                        checked={toggledDiagnoses.indexOf(item) !== -1}
                                         tabIndex={-1}
                                         disableRipple
                                         inputProps={{ 'aria-labelledby': labelId }}

@@ -33,123 +33,24 @@ const Notification = ({value, text}) => {
   )
 }
 
-// Table filter for values between number x and y
-function NumberRangeColumnFilter({
-  column: { filterValue = [], preFilteredRows, setFilter, id },
-  }) {
-  const [min, max] = useMemo(() => {
-      let min = preFilteredRows.length ? preFilteredRows[0].values[id] : 0
-      let max = preFilteredRows.length ? preFilteredRows[0].values[id] : 0
-      preFilteredRows.forEach(row => {
-      min = Math.min(row.values[id], min)
-      max = Math.max(row.values[id], max)
-      console.log(min);
-      console.log(max);
-      })
-      return [min, max]
-  }, [id, preFilteredRows])
-  
-  return (
-      <div
-      style={{
-          display: 'flex',
-      }}
-      >
-      <input
-          value={filterValue[0] || ''}
-          type='number'
-          onChange={e => {
-          const val = e.target.value
-          setFilter((old = []) => [val ? parseInt(val, 10) : undefined, old[1]])
-          }}
-          placeholder={`Min (${min})`}
-          style={{
-          width: '70px',
-          marginRight: '0.5rem',
-          }}
-      />
-      to
-      <input
-          value={filterValue[1] || ''}
-          type='number'
-          onChange={e => {
-          const val = e.target.value
-          setFilter((old = []) => [old[0], val ? parseInt(val, 10) : undefined])
-          }}
-          placeholder={`Max (${max})`}
-          style={{
-          width: '70px',
-          marginLeft: '0.5rem',
-          }}
-      />
-      </div>
-  )
-  }
-
-// Table filter for selected value
-function SelectColumnFilter({
-  column: { filterValue, setFilter, preFilteredRows, id },
-  }) {
-  // Calculate the options for filtering
-  // using the preFilteredRows
-  const options = useMemo(() => {
-      const options = new Set()
-      preFilteredRows.forEach(row => {
-      options.add(row.values[id])
-      })
-      return [...options.values()]
-  }, [id, preFilteredRows])
-  
-  // Render a multi-select box
-  return (
-      <select
-      value={filterValue}
-      onChange={e => {
-          setFilter(e.target.value || undefined)
-      }}
-      >
-      <option value=''>All</option>
-      {options.map((option, i) => (
-          <option key={i} value={option}>
-          {option}
-          </option>
-      ))}
-      </select>
-  )
-}
-
 const Patients = () => {
 
+  // This will apply filters to the table based on what filterData it recieves, 
+  // it will also toggle the displaying of what the applied filter is and option to clear it 
   const setOwnFilters = (customFilterData) => {
 
-    var priority = [3];
-    if (customFilterData.priority.low) {
-      priority[1] = 1
-    }
-    if (customFilterData.priority.average) {
-      priority[2] = 2
-    }
-    if (customFilterData.priority.high) {
-      priority[3] = 3
-    }
+    // setAllFilters([
+    //   { id: 'gender', value: customFilterData.gender },
+    //   { id: 'priority', value: customFilterData.priority },
+    // ])
+    setAllFilters([]);
 
-    // setAllFilters({
-    //   priority: priority,
-    //   diagnoses: customFilterData.diagnoses,
-    //   age: [customFilterData.minAge, customFilterData.maxAge],
-    //   gender: customFilterData.gender, 
-    //   department: customFilterData.department,
-    //   team: customFilterData.team,
-    // })
-  
-    console.log(customFilterData);
-    console.log(customFilterData.gender);
-
-    setAllFilters(
-      [{ id: 'gender', value: "male" }, { id: 'priority', value: 1 }]
-    )
-
-
+    setFilter('gender', customFilterData.gender);
+    setFilter('priority', customFilterData.priority);
+    setFilter('team', customFilterData.team)
+    setFilter('department', customFilterData.department)
+    setFilter('age', [customFilterData.minAge, customFilterData.maxAge])
+    setFilter('diagnoses', customFilterData.diagnoses)
   }
 
   const data = useMemo(
@@ -164,9 +65,9 @@ const Patients = () => {
           updatedAt: '2020-10-08',
           updatedBy: 'Patienten',
           age: 73,
-          gender: "female",
-          team: "Team 1",
-          department: "Department 1"
+          gender: 'female',
+          team: 'Team 1',
+          department: 'Department 1'
         },
         {
           notices: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
@@ -177,9 +78,9 @@ const Patients = () => {
           updatedAt: '2020-10-08',
           updatedBy: 'Patienten',
           age: 73,
-          gender: "female",
-          team: "Team 1",
-          department: "Department 1"
+          gender: 'female',
+          team: 'Team 1',
+          department: 'Department 1'
         },
         {
           notices: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
@@ -190,9 +91,9 @@ const Patients = () => {
           updatedAt: '2020-10-08',
           updatedBy: 'Patienten',
           age: 73,
-          gender: "female",
-          team: "Team 1",
-          department: "Department 1"
+          gender: 'female',
+          team: 'Team 1',
+          department: 'Department 1'
         },
         {
           notices: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
@@ -203,9 +104,9 @@ const Patients = () => {
           updatedAt: '2020-10-08',
           updatedBy: 'Patienten',
           age: 73,
-          gender: "female",
-          team: "Team 1",
-          department: "Department 1"
+          gender: 'female',
+          team: 'Team 1',
+          department: 'Department 1'
         },
         {
           notices: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
@@ -216,9 +117,9 @@ const Patients = () => {
           updatedAt: '2020-10-08',
           updatedBy: 'Patienten',
           age: 73,
-          gender: "female",
-          team: "Team 1",
-          department: "Department 1"
+          gender: 'female',
+          team: 'Team 1',
+          department: 'Department 1'
         },
         {
           notices: <Notification value={2} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
@@ -229,9 +130,9 @@ const Patients = () => {
           updatedAt: '2020-10-08',
           updatedBy: 'Patienten',
           age: 73,
-          gender: "female",
-          team: "Team 1",
-          department: "Department 1"
+          gender: 'female',
+          team: 'Team 1',
+          department: 'Department 1'
         },
         {
           notices: <Notification value={2} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
@@ -242,9 +143,9 @@ const Patients = () => {
           updatedAt: '2020-10-08',
           updatedBy: 'Patienten',
           age: 73,
-          gender: "female",
-          team: "Team 1",
-          department: "Department 1"
+          gender: 'female',
+          team: 'Team 1',
+          department: 'Department 1'
         },
         {
           notices: <Notification value={2} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
@@ -255,9 +156,9 @@ const Patients = () => {
           updatedAt: '2020-10-08',
           updatedBy: 'Patienten',
           age: 73,
-          gender: "female",
-          team: "Team 1",
-          department: "Department 2"
+          gender: 'female',
+          team: 'Team 1',
+          department: 'Department 2'
         },
         {
           notices: <Notification value={2} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
@@ -268,7 +169,7 @@ const Patients = () => {
           updatedAt: '2020-10-08',
           updatedBy: 'Patienten',
           age: 73,
-          gender: "female",
+          gender: 'female',
         },
         {
           notices: <Notification value={3} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
@@ -279,9 +180,9 @@ const Patients = () => {
           updatedAt: '2020-10-08',
           updatedBy: 'Patienten',
           age: 73,
-          gender: "female",
-          team: "Team 1",
-          department: "Department 2"
+          gender: 'female',
+          team: 'Team 1',
+          department: 'Department 2'
         },
         {
           notices: <Notification value={3} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
@@ -292,9 +193,9 @@ const Patients = () => {
           updatedAt: '2020-10-08',
           updatedBy: 'Patienten',
           age: 73,
-          gender: "female",
-          team: "Team 1",
-          department: "Department 2"
+          gender: 'female',
+          team: 'Team 1',
+          department: 'Department 2'
         },
         {
           notices: <Notification value={3} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
@@ -305,12 +206,12 @@ const Patients = () => {
           updatedAt: '2020-10-08',
           updatedBy: 'Patienten',
           age: 73,
-          gender: "female",
-          team: "Team 2",
-          department: "Department 2"
+          gender: 'female',
+          team: 'Team 2',
+          department: 'Department 2'
         },
         {
-          notices: <Notification value={0} text={""}/>,
+          notices: <Notification value={0} text={''}/>,
           priority: 3,
           name: 'Patrik Andersson',
           sweID: '410203-1324',
@@ -318,9 +219,9 @@ const Patients = () => {
           updatedAt: '2020-10-08',
           updatedBy: 'Patienten',
           age: 79,
-          gender: "male",
-          team: "Team 2",
-          department: "Department 2"
+          gender: 'male',
+          team: 'Team 2',
+          department: 'Department 2'
         },
         {
           notices: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
@@ -331,9 +232,9 @@ const Patients = () => {
           updatedAt: '2020-10-08',
           updatedBy: 'Patienten',
           age: 85,
-          gender: "male",
-          team: "Team 2",
-          department: "Department 2"
+          gender: 'male',
+          team: 'Team 2',
+          department: 'Department 2'
         },
         {
           notices: <Notification value={3} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
@@ -344,9 +245,9 @@ const Patients = () => {
           updatedAt: '2020-10-08',
           updatedBy: 'Patienten',
           age: 21,
-          gender: "male",
-          team: "Team 2",
-          department: "Department 2"
+          gender: 'male',
+          team: 'Team 2',
+          department: 'Department 2'
         },
         {
           notices: <Notification value={3} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
@@ -357,9 +258,9 @@ const Patients = () => {
           updatedAt: '2020-10-08',
           updatedBy: 'Patienten',
           age: 85,
-          gender: "male",
-          team: "Team 2",
-          department: "Department 1"
+          gender: 'male',
+          team: 'Team 2',
+          department: 'Department 1'
         },
         {
           notices: <Notification value={3} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
@@ -370,9 +271,9 @@ const Patients = () => {
           updatedAt: '2020-10-08',
           updatedBy: 'Patienten',
           age: 85,
-          gender: "male",
-          team: "Team 2",
-          department: "Department 1"
+          gender: 'male',
+          team: 'Team 2',
+          department: 'Department 1'
         },
       ],
       []
@@ -387,6 +288,7 @@ const Patients = () => {
         {
           Header: 'Prioritering',
           accessor: 'priority', // accessor is the 'key' in the data
+          filter: 'priorityFilter',
         },
         {
           Header: 'Namn',
@@ -399,7 +301,8 @@ const Patients = () => {
         {
           Header: 'Diagnos',
           accessor: 'diagnoses',
-          Cell: ({ value }) => String(value.join(", "))
+          Cell: ({ value }) => String(value.join(', ')),
+          filter: 'containsMatchingValues',
         },
         {
           Header: 'Senast uppdaterad',
@@ -412,26 +315,100 @@ const Patients = () => {
         {
           Header: 'Ålder',
           accessor: 'age',
+          filter: 'numberInRangeFilter',
         },
         {
           Header: 'Kön',
           accessor: 'gender',
+          filter: 'selectFilter', 
         },
         {
           Header: 'Team',
           accessor: 'team',
+          filter: 'selectFilter', 
         },
         {
           Header: 'Department',
           accessor: 'department',
+          filter: 'selectFilter', 
         },
       ],
       []
     )
+
+  // Returns all rows containing either a selected value or all
+  function selectFilterFn(rows, id, filterValue) {
+    if (filterValue === 'all') {
+      return rows;
+    } 
+    return rows.filter(row => row.values[id] === filterValue)
+  }
   
+  // Returns all rows containing a chosen priority.
+  function priorityFilterFn(rows, id, filterValue) {
+
+    var priority = [];
+    if (filterValue.low) {
+      priority[0] = 3
+    }
+    if (filterValue.average) {
+      priority[1] = 2
+    }
+    if (filterValue.high) {
+      priority[2] = 1
+    }
+
+    if (priority.length > 0) {
+      return rows.filter(row => priority.includes(row.values[id]))
+    } else {
+      return rows
+    }
+
+    // if (filterValue.low) {
+    //   return rows.filter(row => row.values[id] === 3)
+    // }
+    // if (filterValue.average) {
+    //   return rows.filter(row => row.values[id] === 2)
+    // }
+    // if (filterValue.high) {
+    //   return rows.filter(row => row.values[id] === 1)
+    // } 
+    // if (!filterValue.low && !filterValue.average && !filterValue.high) {
+    //   return rows;
+    // }
+    
+  }
+
+  // Returns all rows containing a number inbetween a chosen range.
+  function numberInRangeFilterFn(rows, id, filterValue) {
+    return rows.filter(row => filterValue[0] < row.values[id] && row.values[id] < filterValue[1])
+  }
+
+  // Returns all patients with one of the selected diagnoses
+  function containsMatchingValuesFn(rows, id, filterValue) {
+
+    // This is used to avoid duplicates.
+    var matches = [];
+    // This line goes through all possible filters and sees if any of the rows have one of the filter values in its diagnoses array
+    // , and if this is fulfilled + that row hasen't already been added, we add it.
+    filterValue.forEach(value => rows.forEach((row, index) => {if ((row.values[id].indexOf(value) !== -1) && matches.indexOf(index) === -1) { matches.push(index)}}))
+    
+    return matches.map(index => rows[index])
+  }
+
+  const filterTypes = useMemo(
+    () => ({
+      selectFilter: selectFilterFn,
+      priorityFilter: priorityFilterFn,
+      numberInRangeFilter: numberInRangeFilterFn,
+      containsMatchingValues: containsMatchingValuesFn,
+    }),
+    []
+  );
+
   const [searchValue, setSearchValue] = useState('')
   
-  // Keeps track of sorting options, starting column sorting : "priority"
+  // Keeps track of sorting options, starting column sorting : 'priority'
   const [sortState, setSortState] = useState({columnId: 'priority'});
   
   // Basic structure [{ id: 'name', value: 'Jane'}, { id: 'age', value: 21 }]
@@ -441,7 +418,7 @@ const Patients = () => {
   const initialState = {
     sortBy: [sortState],
     filters: [],
-    hiddenColumns: ["age", "gender", "team", "department"]
+    hiddenColumns: ['age', 'gender', 'team', 'department']
     // filters: [{ id: 'col1', value: 'Green'}]
   };
 
@@ -454,8 +431,9 @@ const Patients = () => {
       prepareRow,
       toggleSortBy,
       setGlobalFilter,
+      setFilter,
       setAllFilters,
-  } = useTable({ columns, data, initialState, },
+  } = useTable({ columns, data, initialState, filterTypes},
     useFilters, // useFilters!
     useGlobalFilter,
     useSortBy,
@@ -477,8 +455,6 @@ const Patients = () => {
           >
               <PatientsSearch 
                   columns={columns}
-                  NumberRangeColumnFilter={NumberRangeColumnFilter} 
-                  SelectColumnFilter={SelectColumnFilter}
                   setSortState={setSortState}
                   searchValue={searchValue}
                   setSearchValue={setSearchValue}
