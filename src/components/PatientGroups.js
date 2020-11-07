@@ -16,7 +16,7 @@ const PatientsGroup = ({setOwnFilters}) => {
             accessor: 'group1', // accessor is the 'key' in the data
             filterData: {
                 minAge: 0,
-                maxAge: 100,
+                maxAge: 200,
                 gender: 'all',
                 team: 'all',
                 department: 'Department 2',
@@ -29,7 +29,7 @@ const PatientsGroup = ({setOwnFilters}) => {
             accessor: 'group2',
             filterData: {
               minAge: 0,
-              maxAge: 100,
+              maxAge: 200,
               gender: 'all',
               team: 'all',
               department: 'all',

@@ -93,7 +93,7 @@ const PatientsTable = ({
             ref={parentRef}
             style={{
               display: 'block',
-              height: `calc(100vh - 520px)`, //calculated other parts to height of 520 + spacing, so table gets whats left
+              maxHeight: `calc(100vh - 620px)`, //calculated other parts to height of 520 + spacing, so table gets whats left
               overflow: 'auto',
               width: `100%`
             }}

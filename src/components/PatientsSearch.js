@@ -1,9 +1,100 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import { InputBase, Button } from '@material-ui/core';
+import { InputBase, Button, Link, ListItem } from '@material-ui/core';
 import { ArrowDropDown } from '@material-ui/icons';
 
 import { FilterModal } from '../components'
+
+// Component rendering applied filters and Rensa filter button
+const AppliedFilterUI = ({activeFiltersState, setIsFilterApplied, setCustomFilterData}) => {
+
+    // setFilter('gender', filterData.gender);
+    // setFilter('priority', filterData.priority);
+    // setFilter('team', filterData.team)
+    // setFilter('department', filterData.department)
+    // setFilter('age', [filterData.minAge, filterData.maxAge])
+    // setFilter('diagnoses', filterData.diagnoses)
+
+    var gender;
+    if (activeFiltersState.gender) {
+        if (activeFiltersState.gender === "male") {
+            gender = "Man";
+        } else if (activeFiltersState.gender === "female") {
+            gender = "Kvinna";
+        }
+    }
+
+    var priority = [];
+    if (activeFiltersState.priority) {
+        if (activeFiltersState.priority.low) {
+            priority.push('Låg')
+        } 
+        if (activeFiltersState.priority.average) {
+            priority.push('Medel')
+        } 
+        if (activeFiltersState.priority.high) {
+            priority.push('Hög')
+        }
+    }
+
+    var ageSpan;
+    if (activeFiltersState.minAge != null && activeFiltersState.maxAge != null) {
+        if (activeFiltersState.minAge !== 0 && activeFiltersState.maxAge !== 200 ) {
+            ageSpan = activeFiltersState.minAge + '-' + activeFiltersState.maxAge;
+        } else if (activeFiltersState.minAge !== 0) {
+            ageSpan = '>' + activeFiltersState.minAge;
+        } else if (activeFiltersState.maxAge !== 200) {
+            ageSpan = '<' + activeFiltersState.maxAge;
+        }
+    }
+
+    useEffect(() => {
+        if (gender || priority.length > 0 || (activeFiltersState.team && activeFiltersState.team !== 'all') 
+        || (activeFiltersState.department && activeFiltersState.department !== 'all') || ageSpan || (activeFiltersState.diagnoses && activeFiltersState.diagnoses.length > 0)) {
+            setIsFilterApplied(true);
+        } else {
+            setIsFilterApplied(false);
+        }
+    })
+    
+    return (
+        <>
+            <ul style={{maxHeight: "150px", display: "flex", flexDirection: "column", flexWrap: "wrap", color: "#275E8E", fontWeight: "700"}}>
+                    {gender ? 
+                        <ListItem style={{maxWidth: "30%", marginTop: "0px", marginBottom: "0px"}}>
+                            Kön: {gender}
+                        </ListItem> 
+                        : ''}
+                    {priority.length > 0 ? 
+                        <ListItem style={{maxWidth: "30%", marginTop: "0px", marginBottom: "0px"}}>
+                            Prioritet: {priority.join(', ')}
+                        </ListItem> 
+                        : ''}
+                    {(activeFiltersState.team && activeFiltersState.team !== 'all') ? 
+                        <ListItem style={{maxWidth: "30%", marginTop: "0px", marginBottom: "0px"}}>
+                            Team: {activeFiltersState.team}
+                        </ListItem> 
+                        : ''}
+                    {(activeFiltersState.department && activeFiltersState.department !== 'all') ? 
+                        <ListItem style={{maxWidth: "30%", marginTop: "0px", marginBottom: "0px"}}>
+                            Department: {activeFiltersState.department}
+                        </ListItem> 
+                        : ''}
+                    { ageSpan ? 
+                        <ListItem style={{maxWidth: "30%", marginTop: "0px", marginBottom: "0px"}}>
+                            Åldersspann: {ageSpan}
+                        </ListItem> 
+                        : ''}
+                    {(activeFiltersState.diagnoses && activeFiltersState.diagnoses.length > 0) ? 
+                        <ListItem style={{ maxWidth: "30%", marginTop: "0px", marginBottom: "0px"}}>
+                            Diagnos: {activeFiltersState.diagnoses.join(', ')}
+                        </ListItem> 
+                        : ''}
+            </ul>
+        </>
+    )
+
+};
 
 // Component rendering a dropdown menu
 const DropdownContent = ({ sortByList, setSortState, setDropdownOpen, dropdownOpen }) => {
@@ -38,7 +129,22 @@ const PatientsSearch = ({setSortState,
                         searchValue,
                         setSearchValue,
                         setOwnFilters,
+                        activeFiltersState,
+                        setActiveFiltersState,
+                        setAllFilters,
                         }) => {
+
+
+    const [customFilterData, setCustomFilterData] = useState({
+        minAge: 0,
+        maxAge: 200,
+        gender: 'all',
+        team: 'all',
+        department: 'all',
+        priority: {low: false, average: false, high: false}, // Either low, medium, high, undefined (translated to 3, 2, 1, 0)
+        diagnoses: [],
+    })
+
 
     // State keeping track of wheter the sort menu has been toggled or not
     const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -76,6 +182,22 @@ const PatientsSearch = ({setSortState,
         setSearchValue(event.target.value);
     };
 
+    const handleResetFilters = () => {
+        setAllFilters([]); // This will clear filters from the table instance
+        setActiveFiltersState({}); // This will clear our interpretation of the filters
+        setIsFilterApplied(false); // This means that no "Rensa filter" button should be present
+        setCustomFilterData({ // This will clear the form inside the modal.
+            minAge: 0,
+            maxAge: 200,
+            gender: 'all',
+            team: 'all',
+            department: 'all',
+            priority: {low: false, average: false, high: false}, // Either low, medium, high, undefined (translated to 3, 2, 1, 0)
+            diagnoses: [],
+        })
+    }
+    const [isFilterApplied, setIsFilterApplied] = useState(false);
+
     return (
     <>
         <div style={{ height: 'auto', marginLeft: 'auto', marginRight: 'auto', width: '95%' }}>
@@ -94,9 +216,12 @@ const PatientsSearch = ({setSortState,
                     value={searchValue} 
                 />
             </div>
+            
 
+            <AppliedFilterUI activeFiltersState={activeFiltersState} setIsFilterApplied={setIsFilterApplied} setCustomFilterData={setCustomFilterData} />
             <div style={{ height: 'auto', paddingTop: '12px', paddingBottom: '2px', marginLeft: 'auto', textAlign: 'end' }}>
-                <FilterModal setDropdownOpen={setDropdownOpen} setOwnFilters={setOwnFilters}/> 
+                {isFilterApplied && <Link underline="always" component="button" variant="body2" style={{color: "#000", marginRight: "2rem" }}onClick={handleResetFilters}>Rensa Filter</Link>}
+                <FilterModal setDropdownOpen={setDropdownOpen} setOwnFilters={setOwnFilters} customFilterData={customFilterData} setCustomFilterData={setCustomFilterData}/> 
                 <Button 
                     onClick={() => setDropdownOpen(!dropdownOpen)}
                     className='shadow' 

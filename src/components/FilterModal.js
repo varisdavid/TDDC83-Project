@@ -118,22 +118,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const FilterModal = ({setDropdownOpen, setOwnFilters}) => {
+const FilterModal = ({setDropdownOpen, customFilterData, setCustomFilterData, setOwnFilters}) => {
 
     const classes = useStyles();
     // getModalStyle is not a pure function, we roll the style only on the first render
     const [modalStyle] = useState(getModalStyle);
     const [open, setOpen] = useState(false);
-
-    const [customFilterData, setCustomFilterData] = useState({
-        minAge: 0,
-        maxAge: 100,
-        gender: 'all',
-        team: 'all',
-        department: 'all',
-        priority: {low: false, average: false, high: false}, // Either low, medium, high, undefined (translated to 3, 2, 1, 0)
-        diagnoses: [],
-    })
 
     // Handles opening of modal window
     const handleOpen = () => {
@@ -215,7 +205,8 @@ const FilterModal = ({setDropdownOpen, setOwnFilters}) => {
     // This will make changes to diagnoses as soon as the searchValue changes. 
     useEffect(() => {
         setDiagnoses(data.filter(diagnosis => diagnosis.toLowerCase().includes(searchValue.toLowerCase())))
-    }, [searchValue])
+        setToggledDiagnoses(customFilterData.diagnoses); // This is for when our custom filter gets reset
+    }, [customFilterData, searchValue])
 
     return (
         <>

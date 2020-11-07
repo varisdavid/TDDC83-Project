@@ -51,6 +51,10 @@ const Patients = () => {
     setFilter('department', filterData.department)
     setFilter('age', [filterData.minAge, filterData.maxAge])
     setFilter('diagnoses', filterData.diagnoses)
+
+    // After we have applied it to our table, we will send it to the PatientsSearch component for displaying.
+    setActiveFiltersState(filterData)
+
   }
 
   const data = useMemo(
@@ -416,7 +420,10 @@ const Patients = () => {
   
   // Keeps track of sorting options, starting column sorting : 'priority'
   const [sortState, setSortState] = useState({columnId: 'priority'});
-  
+
+  // This state will keep track of what filters we have active.flex-row
+  const [activeFiltersState, setActiveFiltersState] = useState({});
+
   // Basic structure [{ id: 'name', value: 'Jane'}, { id: 'age', value: 21 }]
   //const [filterState, setFilterState] = useState({});
 
@@ -438,6 +445,7 @@ const Patients = () => {
       toggleSortBy,
       setGlobalFilter,
       setFilter,
+      setAllFilters,
   } = useTable({ columns, data, initialState, filterTypes},
     useFilters, // useFilters!
     useGlobalFilter,
@@ -459,11 +467,13 @@ const Patients = () => {
               className='flex w-10/12 mt-2 p-2'
           >
               <PatientsSearch 
-                  columns={columns}
                   setSortState={setSortState}
                   searchValue={searchValue}
                   setSearchValue={setSearchValue}
                   setOwnFilters={setOwnFilters}
+                  activeFiltersState={activeFiltersState}
+                  setActiveFiltersState={setActiveFiltersState}
+                  setAllFilters={setAllFilters}
               /> 
           </div>
       </div>
