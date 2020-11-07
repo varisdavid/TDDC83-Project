@@ -6,7 +6,7 @@ import { ArrowDropDown } from '@material-ui/icons';
 import { FilterModal } from '../components'
 
 // Component rendering applied filters and Rensa filter button
-const AppliedFilterUI = ({activeFiltersState, setIsFilterApplied, setCustomFilterData}) => {
+const AppliedFilterUI = ({ activeFiltersState, setIsFilterApplied }) => {
 
     // setFilter('gender', filterData.gender);
     // setFilter('priority', filterData.priority);
@@ -132,22 +132,12 @@ const PatientsSearch = ({setSortState,
                         activeFiltersState,
                         setActiveFiltersState,
                         setAllFilters,
+                        customFilterData,
+                        setCustomFilterData,
+                        dropdownOpen, 
+                        setDropdownOpen,
                         }) => {
 
-
-    const [customFilterData, setCustomFilterData] = useState({
-        minAge: 0,
-        maxAge: 200,
-        gender: 'all',
-        team: 'all',
-        department: 'all',
-        priority: {low: false, average: false, high: false}, // Either low, medium, high, undefined (translated to 3, 2, 1, 0)
-        diagnoses: [],
-    })
-
-
-    // State keeping track of wheter the sort menu has been toggled or not
-    const [dropdownOpen, setDropdownOpen] = useState(false);
 
     // Specifying what we can sort by
     const sortByList = [

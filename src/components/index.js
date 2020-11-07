@@ -18,6 +18,7 @@ import PatientsTable from './PatientsTable'
 import PatientGroups from './PatientGroups';
 
 import FilterModal from './FilterModal';
+import CreateNewFilterModal from './CreateNewFilterModal'
 
 // import Notices from './Notices';
 // import NoticesTable from './NoticesTable';
@@ -36,4 +37,5 @@ export {
     PatientsTable,
     PatientGroups,
     FilterModal,
+    CreateNewFilterModal,
 };

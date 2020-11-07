@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
 
+import { CreateNewFilterModal } from '../components'
 import { Button } from '@material-ui/core';
-import { AddToPhotos } from '@material-ui/icons';
 
-const PatientsGroup = ({setOwnFilters}) => {
+const PatientsGroup = ({setOwnFilters, customFilterData, setCustomFilterData, dropdownOpen, setDropdownOpen}) => {
 
     // Should contain a row of buttons for all the user specified patient groups, as well as a button to add 
     // new patientgroups.
@@ -62,10 +62,14 @@ const PatientsGroup = ({setOwnFilters}) => {
                 )
             })}
 
-            <Button component={'span'}>
-                <AddToPhotos style={{ fontSize: '40px', color: '#0066B3' }} />
-            </Button>
-
+            <CreateNewFilterModal  
+              setOwnFilters={setOwnFilters} 
+              customFilterData={customFilterData} 
+              setCustomFilterData={setCustomFilterData} 
+              dropdownOpen={dropdownOpen}
+              setDropdownOpen={setDropdownOpen}
+              patientGroups={patientGroups}
+            />
         </div>
     </>
     );

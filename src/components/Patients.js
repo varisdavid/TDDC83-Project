@@ -54,6 +54,7 @@ const Patients = () => {
 
     // After we have applied it to our table, we will send it to the PatientsSearch component for displaying.
     setActiveFiltersState(filterData)
+    setCustomFilterData(filterData); // This makes sure our representation of the fields in the filterModal is kept up to date.
 
   }
 
@@ -427,6 +428,20 @@ const Patients = () => {
   // Basic structure [{ id: 'name', value: 'Jane'}, { id: 'age', value: 21 }]
   //const [filterState, setFilterState] = useState({});
 
+  // This keeps track of our current filter in the representation of the field in filterModal
+  const [customFilterData, setCustomFilterData] = useState({
+    minAge: 0,
+    maxAge: 200,
+    gender: 'all',
+    team: 'all',
+    department: 'all',
+    priority: {low: false, average: false, high: false}, // Either low, medium, high, undefined (translated to 3, 2, 1, 0)
+    diagnoses: [],
+})
+
+    // State keeping track of wheter the sort menu has been toggled or not
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+
   // Used for beginning values passed to the PatientTable
   const initialState = {
     sortBy: [sortState],
@@ -474,6 +489,10 @@ const Patients = () => {
                   activeFiltersState={activeFiltersState}
                   setActiveFiltersState={setActiveFiltersState}
                   setAllFilters={setAllFilters}
+                  customFilterData={customFilterData}
+                  setCustomFilterData={setCustomFilterData}
+                  dropdownOpen={dropdownOpen}
+                  setDropdownOpen={setDropdownOpen}
               /> 
           </div>
       </div>
@@ -496,7 +515,13 @@ const Patients = () => {
       <div className='flex justify-center'>
           <div className='w-10/12 mt-3 p-2'>
               <div style={{ width: '100%' }}>
-                  <PatientGroups setOwnFilters={setOwnFilters} />
+                  <PatientGroups 
+                    setOwnFilters={setOwnFilters} 
+                    customFilterData={customFilterData} 
+                    setCustomFilterData={setCustomFilterData}
+                    dropdownOpen={dropdownOpen}
+                    setDropdownOpen={setDropdownOpen}
+                   />
               </div>
           </div>
       </div>

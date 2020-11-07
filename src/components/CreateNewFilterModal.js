@@ -16,7 +16,9 @@ import { Modal,
         ListItem, 
         ListItemIcon, 
         ListItemText} from '@material-ui/core';
-import { FilterList, Search } from '@material-ui/icons';
+import { Search } from '@material-ui/icons';
+import { AddToPhotos } from '@material-ui/icons';
+
 
 // Temporary search data
 const data = ['Diabetes', 'Hypertoni']
@@ -115,14 +117,155 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(2, 4, 3),
         borderRadius: '30px',
     },
+    paper2: {
+        maxWidth: '300px',
+        position: 'absolute',
+        backgroundColor: theme.palette.background.paper,
+        border: '3px solid #0066B3',
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+        borderRadius: '0px',
+    },
 }));
 
 
-const FilterModal = ({setDropdownOpen, customFilterData, setCustomFilterData, setOwnFilters}) => {
-
+const CreateNewFilterModal = ({setDropdownOpen, customFilterData, setCustomFilterData, setOwnFilters, patientGroups}) => {
+    
+    //////////////////////////////////////////////////////////////////////////////////
     const classes = useStyles();
     // getModalStyle is not a pure function, we roll the style only on the first render
     const [modalStyle] = useState(getModalStyle);
+    //////////////////////////////////////////////////////////////////////////////////
+
+
+    // Keeps track of whether or not the popup for confirming the save of filter
+    const [openSaveConfirm, setOpenSaveConfirm] = useState(false);
+    
+    // Handles opening of modal window
+    const handleOpenSaveConfirm = () => {
+        setOpenSaveConfirm(true);
+    };
+
+    // Handles closing of modal window
+    const handleCloseSaveConfirm = () => {
+        handleClose() // Close modal 1
+        handleCloseSave() // Close modal 2
+        setOpenSaveConfirm(false); // Close modal 3
+    };
+
+    const PopupSaveConfirm = () => {
+       
+        return (
+            <Modal
+                open={openSaveConfirm}
+                onClose={handleOpenSaveConfirm}
+                aria-labelledby='modal-popup-2'
+            >
+                <div key="modal-popup-div" style={modalStyle} className={classes.paper2}>
+
+                    <h2 className='font-bold mt-2' id='modal-popup-2'>Ny Överblick Sparad</h2>
+                    <div className="flex" style={{width: "100%"}}>
+                    <Button 
+                        className='flex shadow' 
+                        style={{ border: '2px solid #0066B3', borderRadius: "0px", width: '75px', marginLeft: "auto", marginRight: "auto", marginTop: "1.5rem"}} 
+                        onClick={handleCloseSaveConfirm}>
+                        Ok
+                    </Button>
+                    </div>
+                </div>
+            </Modal>
+        );
+    } 
+    
+    // Keeps track of whether or not the popup for saving the överblick has been triggered.
+    const [openSave, setOpenSave] = useState(false);
+
+    // Handles opening of save new overview modal.
+    const handleOpenSave = () => {
+        setOpenSave(true);
+    };
+
+    // Handles closing of modal window
+    const handleCloseSave = () => {
+        setOpenSave(false);
+    };
+
+    
+    const PopupSave = () => {
+        
+        const handleSaveFilter = () => {
+            setCustomFilterData({...customFilterData, diagnoses: toggledDiagnoses}) // We can't count on customFilterData being upToDate, so we send with the toggled diagnoses straight away.
+            setOwnFilters({...customFilterData, diagnoses: toggledDiagnoses});
+            patientGroups.push({ Name: filterOptions.name, accessor: filterOptions.name, filterData: {...customFilterData, diagnoses: toggledDiagnoses } })
+            handleOpenSaveConfirm(true);
+        }
+
+        const [ filterOptions, setFilterOptions ] = useState({
+            name: '',
+            availableTo: 'all',
+        })
+    
+        const handleChangeInFilterOptions = (event) => {
+            const name = event.target.name;
+            setFilterOptions({
+                ...filterOptions,
+                [name]: event.target.value,
+            })
+        }
+        
+        return (
+            <>
+            <Modal
+                open={openSave}
+                onClose={handleCloseSave}
+                aria-labelledby='modal-popup-title'
+            >
+                <div key="modal-popup-div" style={modalStyle} className={classes.paper2}>
+                    <h2 className='font-bold mt-2' id='modal-popup-title'>Spara ny överblick</h2>
+                
+                    <div className='flex-col items-start'>
+                        {/* Here we need to add validation for not choosing same name as existing groups */}
+                        <TextField
+                            className={classes.textField}
+                            style={{marginTop: "2rem"}}
+                            type="string"
+                            id='name'
+                            label='Namn'
+                            value={filterOptions.name}
+                            onChange={handleChangeInFilterOptions}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            inputProps={{ name: 'name', required: true, }}
+                        />
+                        {/* Here we need to have a fetch call for what menu items we should have. */}
+                        <FormControl key="availableTo-form" className={classes.select} style={{marginTop: "1.5rem"}} variant='outlined'>
+                            <InputLabel>Tillgänglig för:</InputLabel>
+                            <Select
+                                labelId='demo-simple-select-outlined-label'
+                                id='demo-simple-select-outlined'
+                                value={filterOptions.availableTo}
+                                onChange={handleChangeInFilterOptions}
+                                label='Tillgänglig för:' // Needs to be the label your using to calculate the appropriate width in border.
+                            >
+                                <MenuItem value={'all'}><em>Alla</em></MenuItem>
+                                <MenuItem value={'Min avdelning'}>Min avdelning</MenuItem>
+                                <MenuItem value={'Mitt team'}>Mitt team</MenuItem>
+                            </Select>
+                        </FormControl>    
+
+                    </div>
+                    <div className="flex" style={{marginTop: "1.5rem"}}>
+                        <Button className='flex shadow mr-2' style={{ border: '2px solid #0066B3', borderRadius: "0px", marginLeft: "auto", width: '75px'}} onClick={handleCloseSave}>Avbryt</Button>
+                        <Button className='flex shadow mr-2' style={{ border: '2px solid #0066B3', borderRadius: "0px", width: '75px'}} onClick={handleSaveFilter}>Signera</Button>
+                    </div>
+                </div>
+            </Modal>
+            <PopupSaveConfirm /> 
+            </>
+        );
+    }
+
     const [open, setOpen] = useState(false);
 
     // Handles opening of modal window
@@ -195,29 +338,28 @@ const FilterModal = ({setDropdownOpen, customFilterData, setCustomFilterData, se
       setToggledDiagnoses(newChecked);
     };
 
-    // Triggered when OK button pressed, closes the modal and sends the filterData to the table.
-    const handleFinished = () => {
-        setCustomFilterData({...customFilterData, diagnoses: toggledDiagnoses})
-        setOwnFilters({...customFilterData, diagnoses: toggledDiagnoses});
-        handleClose()
+    // Triggered when OK button pressed, triggers popup to open.
+    const handleOk = () => {
+        handleOpenSave()
     }
 
     // This will make changes to diagnoses as soon as the searchValue changes. 
     useEffect(() => {
         setDiagnoses(data.filter(diagnosis => diagnosis.toLowerCase().includes(searchValue.toLowerCase())))
-        setToggledDiagnoses(customFilterData.diagnoses); // This is for when our custom filter gets reset, this also buggs out our toggled Diagnoses.
+        setToggledDiagnoses(customFilterData.diagnoses); // This is for when our custom filter gets reset
     }, [customFilterData, searchValue])
 
     return (
         <>
-        <Button onClick={handleOpen} className='shadow' style={{ borderRadius: '0', backgroundColor: '#FFF', marginRight: '1.5rem' }}>
-                Filtrera
-            <FilterList style={{ marginLeft: '8px', fontSize: '16px' }} />
+        <Button component={'span'} onClick={handleOpen}>
+            <AddToPhotos style={{ fontSize: '40px', color: '#0066B3' }} />
         </Button>
         <Modal
             open={open}
             onClose={handleClose}
             aria-labelledby='modal-title'
+            key="modal-regular"
+
         >
             <div style={modalStyle} className={classes.paper}>
                 <h2 className='font-bold p-2 mt-2' id='modal-title'>Filtrera</h2>
@@ -383,13 +525,14 @@ const FilterModal = ({setDropdownOpen, customFilterData, setCustomFilterData, se
                             </div>
                         </div>                                           
                     </div>
-                    <Button className='flex shadow float-right mr-4' style={{width: '120px'}} onClick={handleFinished}>Ok</Button>
+                    <Button className='flex shadow float-right mr-4' style={{width: '120px'}} onClick={handleOk}>Ok</Button>
                 </div>
             </div>
         </Modal>
+        <PopupSave />
         </>
     );
 }
 
-export default FilterModal;
+export default CreateNewFilterModal;
 
