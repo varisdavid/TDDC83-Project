@@ -34,17 +34,87 @@ return {
 };
 }
 
-// Styling of the triggered modal
+// Styling of the triggered modal + the text and select fields.
 const useStyles = makeStyles((theme) => ({
-paper: {
-    maxWidth: '600px',
-    position: 'absolute',
-    backgroundColor: theme.palette.background.paper,
-    border: '3px solid #0066B3',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-    borderRadius: '30px',
-},
+    textField: {
+        width: '90%',
+        marginRight: '1rem',
+        '& .MuiFormLabel-root': {
+            color: '#0066B3',
+        },
+        '& .MuiInputBase-input': {
+            color: '#0066B3',
+        },
+        '& label.Mui-focused': {
+          color: '#0066B3',
+        },
+        '& .MuiInput-underline:before': {
+            borderBottomColor: '#0066B3',
+        },
+        '& .MuiInput-underline:after': {
+            borderBottomColor: '#0066B3',
+        },
+        '& .MuiOutlinedInput-root': {
+          '& fieldset': {
+            borderColor: '#0066B3',
+          },
+          '&:hover fieldset': {
+            borderColor: '#0066B3',
+          },
+          '&.Mui-focused fieldset': {
+            borderColor: '#0066B3',
+          },
+        },
+    },
+    select: {
+        width: "90%",
+        marginTop: "2rem",
+        '& .Mui-focused': {
+            color: "#0066B3",
+        },
+        '& .MuiFormLabel-root.Mui-focused': {
+            color: "#0066B3",
+        },
+        '& .MuiOutlinedInput-notchedOutline': {
+            color: "#0066B3",
+        },
+        "& .MuiOutlinedInput-input": {
+            color: "#0066B3"
+        },
+        "& .MuiInputLabel-root": {
+            color: "#0066B3"
+        },
+        "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+            borderColor: "#0066B3"
+        },
+        "&:hover .MuiOutlinedInput-input": {
+            color: "#0066B3"
+        },
+        "&:hover .MuiInputLabel-root": {
+            color: "#0066B3"
+        },
+        "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+            borderColor: "#0066B3"
+        },
+        "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-input": {
+            color: "#0066B3"
+        },
+        "& .MuiInputLabel-root.Mui-focused": {
+            color: "#0066B3"
+        },
+        "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: "#0066B3"
+        }
+    },
+    paper: {
+        maxWidth: '600px',
+        position: 'absolute',
+        backgroundColor: theme.palette.background.paper,
+        border: '3px solid #0066B3',
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+        borderRadius: '30px',
+    },
 }));
 
 
@@ -135,14 +205,7 @@ const FilterModal = ({setDropdownOpen, setOwnFilters}) => {
       setToggledDiagnoses(newChecked);
     };
 
-    // col1: 1,
-    // col2: 'Gunnilla Andersson',
-    // col3: '470203-1324',
-    // col4: 'Diabetes, Hypertoni',
-    // col5: '2020-10-08',
-    // col6: 'Patienten',
-    // col7: <Notification va
-
+    // Triggered when OK button pressed, closes the modal and sends the filterData to the table.
     const handleFinished = () => {
         setCustomFilterData({...customFilterData, diagnoses: toggledDiagnoses})
         setOwnFilters({...customFilterData, diagnoses: toggledDiagnoses});
@@ -173,23 +236,22 @@ const FilterModal = ({setDropdownOpen, setOwnFilters}) => {
                     {/* De två första textfälten */}
                     <div className='flex mt-4 p-2'>
                         <TextField
-                            className='mr-5'
+                            className={classes.textField}
                             id='min-age'
                             label='Min ålder'
                             type='number'
-                            style={{width: "90%"}}
                             InputLabelProps={{
                                 shrink: true,
                             }}
-                            inputProps={{name: 'minAge'}}
+                            inputProps={{name: 'minAge' }}
                             value={customFilterData.minAge}
                             onChange={handleChange}
                         />
                         <TextField
+                            className={classes.textField}
                             id='max-age'
                             label='Max ålder'
                             type='number'
-                            style={{width: "90%"}}
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -203,7 +265,7 @@ const FilterModal = ({setDropdownOpen, setOwnFilters}) => {
                     <div className='flex'>
                         {/* De kommande 3 select fälten + checkboxar */}
                         <div className='flex-col w-2/5 p-2 mr-2'>
-                            <FormControl style={{ width: "90%" }} className='mt-2' variant='outlined'>
+                            <FormControl className={classes.select} variant='outlined'>
                                 <InputLabel>Kön</InputLabel>
                                 <Select
                                     labelId='demo-simple-select-outlined-label'
@@ -219,7 +281,7 @@ const FilterModal = ({setDropdownOpen, setOwnFilters}) => {
                                 </Select>
                             </FormControl>
                             
-                            <FormControl style={{ width: "90%" }} className='mt-2' variant='outlined'>
+                            <FormControl className={classes.select} variant='outlined'>
                                 <InputLabel>Team</InputLabel>
                                 <Select
                                     labelId='demo-simple-select-outlined-label'
@@ -235,7 +297,7 @@ const FilterModal = ({setDropdownOpen, setOwnFilters}) => {
                                 </Select>
                             </FormControl>
 
-                            <FormControl style={{ width: "90%" }} className='mt-2' variant='outlined'>
+                            <FormControl className={classes.select} variant='outlined'>
                                 <InputLabel>Department</InputLabel>
                                 <Select
                                     labelId='demo-simple-select-outlined-label'
