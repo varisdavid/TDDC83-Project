@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 
-import { NavBarPatient, Footer, PatientCalendar, PatientHeader } from "../components";
+import { NavBarPatient, Footer, PatientCalendar, PatientHeader, OverviewCalendar } from "../components";
 
 
 const PatientView = () => (
@@ -8,7 +8,7 @@ const PatientView = () => (
   <PatientHeader />
   <NavBarPatient />
     <div className="container flex-grow-1">
-      <PatientCalendar/>
+      <OverviewCalendar/>
     </div>
   <Footer />
 </Fragment>

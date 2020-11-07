@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 import PropTypes from 'prop-types';
-import { Typography, Box } from '@material-ui/core';
+import {  Box } from '@material-ui/core';
 
 
-import { OverviewHeader, Patients, Notices, OverviewCalendar, PatientCalendar } from "../components"
+import { OverviewHeader, Patients, Notices, OverviewCalendar } from "../components"
 
 // Current thinking is that all views described in the 
 // prototype should have this as a baseplate, were either the children 
