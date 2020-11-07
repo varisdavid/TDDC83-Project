@@ -43,7 +43,6 @@ const Patients = () => {
     //   { id: 'gender', value: customFilterData.gender },
     //   { id: 'priority', value: customFilterData.priority },
     // ])
-    setAllFilters([]);
 
     setFilter('gender', customFilterData.gender);
     setFilter('priority', customFilterData.priority);
@@ -389,7 +388,7 @@ const Patients = () => {
 
     // This is used to avoid duplicates.
     var matches = [];
-    
+
     // If we dont have any diagnoses to filter with, all should be returned
     if (filterValue.length > 0) {
       // This line goes through all possible filters and sees if any of the rows have one of the filter values in its diagnoses array
