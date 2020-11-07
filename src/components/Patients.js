@@ -389,11 +389,17 @@ const Patients = () => {
 
     // This is used to avoid duplicates.
     var matches = [];
-    // This line goes through all possible filters and sees if any of the rows have one of the filter values in its diagnoses array
-    // , and if this is fulfilled + that row hasen't already been added, we add it.
-    filterValue.forEach(value => rows.forEach((row, index) => {if ((row.values[id].indexOf(value) !== -1) && matches.indexOf(index) === -1) { matches.push(index)}}))
     
-    return matches.map(index => rows[index])
+    // If we dont have any diagnoses to filter with, all should be returned
+    if (filterValue.length > 0) {
+      // This line goes through all possible filters and sees if any of the rows have one of the filter values in its diagnoses array
+      // , and if this is fulfilled + that row hasen't already been added, we add it.
+      filterValue.forEach(value => rows.forEach((row, index) => {if ((row.values[id].indexOf(value) !== -1) && matches.indexOf(index) === -1) { matches.push(index)}}))
+      return matches.map(index => rows[index])
+    } else {
+      return rows;
+    }
+    
   }
 
   const filterTypes = useMemo(
