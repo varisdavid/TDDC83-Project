@@ -19,8 +19,8 @@ import PatientGroups from './PatientGroups';
 
 import FilterModal from './FilterModal';
 
-import Notices from './Notices';
-import NoticesTable from './NoticesTable';
+// import Notices from './Notices';
+// import NoticesTable from './NoticesTable';
 
 export { 
     HomeContent, 
@@ -36,6 +36,4 @@ export {
     PatientsTable,
     PatientGroups,
     FilterModal,
-    Notices,
-    NoticesTable,
 };
