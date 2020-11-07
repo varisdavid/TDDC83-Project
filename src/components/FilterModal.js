@@ -154,8 +154,6 @@ const FilterModal = ({setDropdownOpen, setOwnFilters}) => {
         setDiagnoses(data.filter(diagnosis => diagnosis.toLowerCase().includes(searchValue.toLowerCase())))
     }, [searchValue])
 
-    const selectWidth = '200px';
-
     return (
         <>
         <Button onClick={handleOpen} className='shadow' style={{ borderRadius: '0', backgroundColor: '#FFF', marginRight: '1.5rem' }}>
@@ -179,7 +177,7 @@ const FilterModal = ({setDropdownOpen, setOwnFilters}) => {
                             id='min-age'
                             label='Min ålder'
                             type='number'
-                            style={{width: selectWidth}}
+                            style={{width: "90%"}}
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -191,7 +189,7 @@ const FilterModal = ({setDropdownOpen, setOwnFilters}) => {
                             id='max-age'
                             label='Max ålder'
                             type='number'
-                            style={{width: selectWidth}}
+                            style={{width: "90%"}}
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -205,7 +203,7 @@ const FilterModal = ({setDropdownOpen, setOwnFilters}) => {
                     <div className='flex'>
                         {/* De kommande 3 select fälten + checkboxar */}
                         <div className='flex-col w-2/5 p-2 mr-2'>
-                            <FormControl className='mt-2' variant='outlined'>
+                            <FormControl style={{ width: "90%" }} className='mt-2' variant='outlined'>
                                 <InputLabel>Kön</InputLabel>
                                 <Select
                                     labelId='demo-simple-select-outlined-label'
@@ -214,8 +212,6 @@ const FilterModal = ({setDropdownOpen, setOwnFilters}) => {
                                     onChange={handleChange}
                                     label='Gender'
                                     inputProps={{name: 'gender'}}
-                                    style={{ width: selectWidth }}
-
                                 >
                                     <MenuItem value={'all'}><em>Alla</em></MenuItem>
                                     <MenuItem value={'male'}>Man</MenuItem>
@@ -223,7 +219,7 @@ const FilterModal = ({setDropdownOpen, setOwnFilters}) => {
                                 </Select>
                             </FormControl>
                             
-                            <FormControl className='mt-2' variant='outlined'>
+                            <FormControl style={{ width: "90%" }} className='mt-2' variant='outlined'>
                                 <InputLabel>Team</InputLabel>
                                 <Select
                                     labelId='demo-simple-select-outlined-label'
@@ -232,8 +228,6 @@ const FilterModal = ({setDropdownOpen, setOwnFilters}) => {
                                     onChange={handleChange}
                                     label='Team'
                                     inputProps={{name: 'team'}}
-                                    style={{ width: selectWidth }}
-
                                 >
                                     <MenuItem value={'all'}><em>Alla</em></MenuItem>
                                     <MenuItem value={'Team 1'}>Team 1</MenuItem>
@@ -241,7 +235,7 @@ const FilterModal = ({setDropdownOpen, setOwnFilters}) => {
                                 </Select>
                             </FormControl>
 
-                            <FormControl className='mt-2' variant='outlined'>
+                            <FormControl style={{ width: "90%" }} className='mt-2' variant='outlined'>
                                 <InputLabel>Department</InputLabel>
                                 <Select
                                     labelId='demo-simple-select-outlined-label'
@@ -250,7 +244,7 @@ const FilterModal = ({setDropdownOpen, setOwnFilters}) => {
                                     onChange={handleChange}
                                     label='Department'
                                     inputProps={{name: 'department'}}
-                                    style={{ width: selectWidth, color: '#0066B3'}}
+                                    style={{ color: '#0066B3'}}
 
                                 >
                                     <MenuItem value={'all'}><em>Alla</em></MenuItem>
@@ -307,14 +301,15 @@ const FilterModal = ({setDropdownOpen, setOwnFilters}) => {
                                     }
                                 />
                             </FormControl>
-                            <div style={{marginTop: '10px', width: '80%', marginLeft: 'auto', marginRight: 'auto', height: '70%', backgroundColor: '#FFFFFF'}}>
+                            <div style={{marginTop: '10px', width: '85%', marginLeft: 'auto', marginRight: 'auto', height: '70%', backgroundColor: '#FFFFFF'}}>
                             {diagnoses.map(item => {
                                 const labelId = `checkbox-list-label-${item}`;
 
                                 return (
                                   <ListItem key={item} style={{paddingTop: '0px', paddingBottom: '0px'}} role={undefined} button onClick={handleDiagnoseToggle(item)}>
-                                    <ListItemIcon>
+                                    <ListItemIcon style={{minWidth: "0px"}}>
                                       <Checkbox
+                                        style={{color: '#0066B3'}}
                                         edge='start'
                                         checked={toggledDiagnoses.indexOf(item) !== -1}
                                         tabIndex={-1}
