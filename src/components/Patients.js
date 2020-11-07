@@ -37,19 +37,20 @@ const Patients = () => {
 
   // This will apply filters to the table based on what filterData it recieves, 
   // it will also toggle the displaying of what the applied filter is and option to clear it 
-  const setOwnFilters = (customFilterData) => {
+  const setOwnFilters = (filterData) => {
 
     // setAllFilters([
     //   { id: 'gender', value: customFilterData.gender },
     //   { id: 'priority', value: customFilterData.priority },
     // ])
+    console.log(filterData);
 
-    setFilter('gender', customFilterData.gender);
-    setFilter('priority', customFilterData.priority);
-    setFilter('team', customFilterData.team)
-    setFilter('department', customFilterData.department)
-    setFilter('age', [customFilterData.minAge, customFilterData.maxAge])
-    setFilter('diagnoses', customFilterData.diagnoses)
+    setFilter('gender', filterData.gender);
+    setFilter('priority', filterData.priority);
+    setFilter('team', filterData.team)
+    setFilter('department', filterData.department)
+    setFilter('age', [filterData.minAge, filterData.maxAge])
+    setFilter('diagnoses', filterData.diagnoses)
   }
 
   const data = useMemo(
@@ -437,7 +438,6 @@ const Patients = () => {
       toggleSortBy,
       setGlobalFilter,
       setFilter,
-      setAllFilters,
   } = useTable({ columns, data, initialState, filterTypes},
     useFilters, // useFilters!
     useGlobalFilter,
@@ -486,7 +486,7 @@ const Patients = () => {
       <div className='flex justify-center'>
           <div className='w-10/12 mt-3 p-2'>
               <div style={{ width: '100%' }}>
-                  <PatientGroups />
+                  <PatientGroups setOwnFilters={setOwnFilters} />
               </div>
           </div>
       </div>
