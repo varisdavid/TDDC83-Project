@@ -536,7 +536,6 @@ const Patients = () => {
 
   // When something happens, we check to see if we change the sorting option, and we check if the search has been triggered
   useEffect(() => {
-    toggleSortBy(sortState.columnId); // We use the value of the sortState to change sorting of the table
     setGlobalFilter(searchValue); // We use the stored searchValue to globally filter our table by. 
   }, [sortState, toggleSortBy, searchValue, setGlobalFilter]);
 
@@ -549,6 +548,7 @@ const Patients = () => {
           >
               <PatientsSearch 
                   setSortState={setSortState}
+                  toggleSortBy={toggleSortBy}
                   searchValue={searchValue}
                   setSearchValue={setSearchValue}
                   setOwnFilters={setOwnFilters}

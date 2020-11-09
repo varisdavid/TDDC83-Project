@@ -97,11 +97,12 @@ const AppliedFilterUI = ({ activeFiltersState, setIsFilterApplied }) => {
 };
 
 // Component rendering a dropdown menu
-const DropdownContent = ({ sortByList, setSortState, setDropdownOpen, dropdownOpen }) => {
+const DropdownContent = ({ sortByList, setSortState, toggleSortBy, setDropdownOpen, dropdownOpen }) => {
 
     // If any of the alternatives are pressed, we keep track of this and close the dropdown menu.
     const handleClick = (id) => {
         setSortState({columnId: id});
+        toggleSortBy(id); // This will trigger the table
         setDropdownOpen(!dropdownOpen);
     }
 
@@ -126,6 +127,7 @@ const DropdownContent = ({ sortByList, setSortState, setDropdownOpen, dropdownOp
 
 // Component rendering blue div, with a searchfield and filtering + sorting buttons.
 const PatientsSearch = ({setSortState,
+                        toggleSortBy,
                         searchValue,
                         setSearchValue,
                         setOwnFilters,
@@ -222,7 +224,7 @@ const PatientsSearch = ({setSortState,
                 </Button>
                 {dropdownOpen && (
                     <div className='relative'>
-                        <DropdownContent sortByList={sortByList} setSortState={setSortState} setDropdownOpen={setDropdownOpen} dropdownOpen={dropdownOpen} />
+                        <DropdownContent sortByList={sortByList} setSortState={setSortState} toggleSortBy={toggleSortBy} setDropdownOpen={setDropdownOpen} dropdownOpen={dropdownOpen} />
                     </div>
                 )}
             </div>
