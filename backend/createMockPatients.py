@@ -160,3 +160,41 @@ for person in all_personalinfo:
     bloodsugar = random.choice(initial_bloodsugar_range)
     oxygen = random.choice(initial_oxygen_range)
     physical_activity = random.choice(physical_activities)
+
+    phys_act = random.choice(range(1,5))
+    payload =  {"ctx/language" :"en",
+        "ctx/territory": "US",
+        "ctx/composer_name" :"Lokalt Optimum",
+        "ctx/id_namespace" : "jaha",
+        "ctx/participation_function" : "ingen aning",
+        "measurements-c3/blood_pressure/any_event:0/systolic|magnitude" : systolic, #changed in loop below
+        "measurements-c3/blood_pressure/any_event:0/diastolic|magnitude" : diastolic, #also changed
+        "measurements-c3/body_weight/any_event:0/weight|magnitude" : weight, # also changed
+        "measurements-c3/body_weight/any_event:0/weight|unit" : "kg",
+        "measurements-c3/blood_glucose/any_event:0/blood_glucose|magnitude" : bloodsugar, #also changed
+        #"measurements-c3/blood_glucose/any_event:0/blood_oxygen" : oxygen, #also changed
+        "measurements-c3/physicalactivityrecord/any_event/type_of_exercise|code" : physical_activity, #also changed
+        "measurements-c3/physicalactivityrecord/any_event/duration|magnitude" : phys_act,
+        "measurements-c3/pulse_heart_beat/any_event:0/pulse_rate|magnitude" : pulse #also changed
+
+        #fysisk aktivitet 1-5
+        }
+    #random amount of historic data
+    for i in range(5, random.randint(5, 10)):
+        payload["measurements-c3/blood_pressure/any_event:0/systolic|magnitude"] += random.choice(max_delta_bp)
+        payload["measurements-c3/blood_pressure/any_event:0/diastolic|magnitude"] -= random.choice(max_delta_bp)
+        payload["measurements-c3/body_weight/any_event:0/weight|magnitude"] += random.choice(max_delta_weight)
+        payload["measurements-c3/pulse_heart_beat/any_event:0/pulse_rate|magnitude"] += random.choice(max_delta_pulse)
+        payload["measurements-c3/blood_glucose/any_event:0/blood_glucose|magnitude"] += random.choice(max_delta_bloodsugar)
+        #payload["measurements-c3/blood_glucose/any_event:0/blood_oxygen"] += random.choice(max_delta_oxygen)
+        payload["measurements-c3/physicalactivityrecord/any_event/type_of_exercise|code"] = random.choice(physical_activities)
+        payload["measurements-c3/physicalactivityrecord/any_event/duration|magnitude"] = random.choice(range(1,5))
+        payload["measurements-c3/physicalactivityrecord/any_event/duration|unit"] = "min"
+
+        response = requests.post(baseurl+'/composition?templateId='+templateid+"&ehrId="+ehrid,
+                                    verify=True,
+                                    auth=(wu,wp),
+                                    headers={"Content-Type":"application/json"},
+                                    json=payload)
+        print(response.text)
+        print("POST MEASUREMENTS: " + str(response))
