@@ -39,10 +39,9 @@ initial_bloodsugar_range = range(3,9)
 max_delta_bloodsugar = range(-1,1)
 initial_oxygen_range = range(70, 100)
 max_delta_oxygen = range(-5,5)
-#physical_activities = ["at0005","at0006","at0007","at0008","at0009"]
+physical_activities = ["at0005","at0006","at0007","at0008","at0009"]
 
-
-#POST call to fejka.nu returns json object with personal information of 200 fake individuals
+#POST call to fejka.nu returns json object with personal information of x fake individuals, specified in no_of_patients variable above
 response = requests.post("https://fejka.nu/?json=1&num="+str(no_of_patients))
 all_personalinfo = response.json()
 
