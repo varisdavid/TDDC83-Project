@@ -14,7 +14,11 @@ def query(aql):
     return response.json() if response.ok else response
 
 
-
+def getParty(ehrid):
+    response = requests.get(baseurl +"/demographics/party/query?ehrId=" + ehrid,
+                            verify=True,
+                            auth=(wu,wp))
+    return response.json() if response.ok else response
 
 
 
