@@ -5,6 +5,10 @@ import Grid from "@material-ui/core/Grid";
 import { enGB } from "date-fns/locale";
 import { DatePickerCalendar } from "react-nice-dates";
 import "react-nice-dates/build/style.css";
+
+//For styling calendar
+import '../../src/OverviewCalendar.css';
+import { getDay, getDate } from 'date-fns';
 //...
 
 //For table
@@ -16,6 +20,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import { date } from "yup";
 
 // - The functions and styles in this file is supposed to be moved to seperate files
 // - Need to store table information in some way, with date as key.
@@ -44,8 +49,8 @@ const Data = [
   },
   {
     time: "10:00",
-    activity: "",
-    description: "",
+    activity: "Patientbesök",
+    description: "Hälsokontroll",
     place: "",
   },
 ];
@@ -79,7 +84,18 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-const Context = React.createContext({ value: null, setValue: () => {} });
+const modifiers = {
+  highlight: date => getDate(date) === 2 || getDate(date) === 9 || getDate(date) === 16
+    || getDate(date) === 23 || getDate(date) === 7 || getDate(date) === 12 || getDate(date) === 18
+    || getDate(date) === 4 || getDate(date) === 12 || getDate(date) === 21
+    || getDate(date) === 30 || getDate(date) === 4 || getDate(date) === 25
+}
+
+const modifiersClassNames = {
+  highlight: '-highlight'
+}
+
+const Context = React.createContext({ value: null, setValue: () => { } });
 
 const BasicTable = (props) => {
   const classes = useStyles();
@@ -95,7 +111,7 @@ const BasicTable = (props) => {
           <StyledTableRow>
             <StyledTableCell>Tid</StyledTableCell>
             <StyledTableCell align="left">Aktivitet</StyledTableCell>
-            <StyledTableCell align="left">Beskrivning</StyledTableCell>
+            <StyledTableCell align="left">Kommentar</StyledTableCell>
             <StyledTableCell align="left">Plats</StyledTableCell>
           </StyledTableRow>
         </TableHead>
@@ -124,8 +140,15 @@ const StaticCalendar = () => {
     setDate(date);
     setValue(date);
   };
+
   return (
-    <DatePickerCalendar date={date} onDateChange={onChange} locale={enGB} />
+    <DatePickerCalendar
+      date={date}
+      onDateChange={onChange}
+      locale={enGB}
+      modifiers={modifiers}
+      modifiersClassNames={modifiersClassNames}
+    />
   );
 };
 
