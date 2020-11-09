@@ -179,33 +179,29 @@ const FilterModal = ({setDropdownOpen, customFilterData, setCustomFilterData, se
     // Keeps track of the list to be mapped
     const [diagnoses, setDiagnoses] = useState(data)
 
-    // Keeps track of which diagnosis are chosen
-    const [toggledDiagnoses, setToggledDiagnoses] = useState(customFilterData.diagnoses);
-
-    // Handles the toggled checkboxes in the resulting diagnosis list.
+    // Handles the toggled checkboxes in our customFilterState. 
     const handleDiagnoseToggle = (value) => () => {
-      const currentIndex = toggledDiagnoses.indexOf(value);
-      const newChecked = [...toggledDiagnoses];
-  
+      const currentIndex = customFilterData.diagnoses.indexOf(value); // This will check if we already have choosen this
+      const newChecked = customFilterData.diagnoses; // We copy over our array to a temporary one.
+
+      // If we don't have it, we add it, else we remove it.
       if (currentIndex === -1) {
         newChecked.push(value);
       } else {
         newChecked.splice(currentIndex, 1);
       }
-      setToggledDiagnoses(newChecked);
+      setCustomFilterData({...customFilterData, diagnoses: [...newChecked]})
     };
 
     // Triggered when OK button pressed, closes the modal and sends the filterData to the table.
     const handleFinished = () => {
-        setCustomFilterData({...customFilterData, diagnoses: toggledDiagnoses})
-        setOwnFilters({...customFilterData, diagnoses: toggledDiagnoses});
+        setOwnFilters(customFilterData);
         handleClose()
     }
 
     // This will make changes to diagnoses as soon as the searchValue changes. 
     useEffect(() => {
         setDiagnoses(data.filter(diagnosis => diagnosis.toLowerCase().includes(searchValue.toLowerCase())))
-        setToggledDiagnoses(customFilterData.diagnoses); // This is for when our custom filter gets reset, this also buggs out our toggled Diagnoses.
     }, [customFilterData, searchValue])
 
     return (
@@ -360,6 +356,7 @@ const FilterModal = ({setDropdownOpen, customFilterData, setCustomFilterData, se
                             </FormControl>
                             <div style={{marginTop: '10px', width: '85%', marginLeft: 'auto', marginRight: 'auto', height: '70%', backgroundColor: '#FFFFFF'}}>
                             {diagnoses.map(item => {
+                                console.log(typeof(customFilterData.diagnoses))
                                 const labelId = `checkbox-list-label-${item}`;
 
                                 return (
@@ -368,7 +365,7 @@ const FilterModal = ({setDropdownOpen, customFilterData, setCustomFilterData, se
                                       <Checkbox
                                         style={{color: '#0066B3'}}
                                         edge='start'
-                                        checked={toggledDiagnoses.indexOf(item) !== -1}
+                                        checked={customFilterData.diagnoses.includes(item)}
                                         tabIndex={-1}
                                         disableRipple
                                         inputProps={{ 'aria-labelledby': labelId }}

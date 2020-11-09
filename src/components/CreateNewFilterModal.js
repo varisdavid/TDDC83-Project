@@ -26,14 +26,14 @@ const data = ['Diabetes', 'Hypertoni']
 // Used to fix the placement of the triggered modal
 const getModalStyle = () => {
 
-const top = 50;
-const left = 50;
+    const top = 50;
+    const left = 50;
 
-return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-};
+    return {
+        top: `${top}%`,
+        left: `${left}%`,
+        transform: `translate(-${top}%, -${left}%)`,
+    };
 }
 
 // Styling of the triggered modal + the text and select fields.
@@ -128,7 +128,6 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-
 const CreateNewFilterModal = ({setDropdownOpen, customFilterData, setCustomFilterData, setOwnFilters, patientGroups}) => {
     
     //////////////////////////////////////////////////////////////////////////////////
@@ -194,9 +193,8 @@ const CreateNewFilterModal = ({setDropdownOpen, customFilterData, setCustomFilte
     const PopupSave = () => {
         
         const handleSaveFilter = () => {
-            setCustomFilterData({...customFilterData, diagnoses: toggledDiagnoses}) // We can't count on customFilterData being upToDate, so we send with the toggled diagnoses straight away.
-            setOwnFilters({...customFilterData, diagnoses: toggledDiagnoses});
-            patientGroups.push({ Name: filterOptions.name, accessor: filterOptions.name, filterData: {...customFilterData, diagnoses: toggledDiagnoses } })
+            setOwnFilters(customFilterData);
+            patientGroups.push({ Name: filterOptions.name, accessor: filterOptions.name, filterData: customFilterData })
             handleOpenSaveConfirm(true);
         }
 
@@ -322,20 +320,18 @@ const CreateNewFilterModal = ({setDropdownOpen, customFilterData, setCustomFilte
     // Keeps track of the list to be mapped
     const [diagnoses, setDiagnoses] = useState(data)
 
-    // Keeps track of which diagnosis are chosen
-    const [toggledDiagnoses, setToggledDiagnoses] = useState(customFilterData.diagnoses);
-
-    // Handles the toggled checkboxes in the resulting diagnosis list.
+    // Handles the toggled checkboxes in our customFilterState. 
     const handleDiagnoseToggle = (value) => () => {
-      const currentIndex = toggledDiagnoses.indexOf(value);
-      const newChecked = [...toggledDiagnoses];
-  
-      if (currentIndex === -1) {
+        const currentIndex = customFilterData.diagnoses.indexOf(value); // This will check if we already have choosen this
+        const newChecked = customFilterData.diagnoses; // We copy over our array to a temporary one.
+
+        // If we don't have it, we add it, else we remove it.
+        if (currentIndex === -1) {
         newChecked.push(value);
-      } else {
+        } else {
         newChecked.splice(currentIndex, 1);
-      }
-      setToggledDiagnoses(newChecked);
+        }
+        setCustomFilterData({...customFilterData, diagnoses: [...newChecked]})
     };
 
     // Triggered when OK button pressed, triggers popup to open.
@@ -346,7 +342,6 @@ const CreateNewFilterModal = ({setDropdownOpen, customFilterData, setCustomFilte
     // This will make changes to diagnoses as soon as the searchValue changes. 
     useEffect(() => {
         setDiagnoses(data.filter(diagnosis => diagnosis.toLowerCase().includes(searchValue.toLowerCase())))
-        setToggledDiagnoses(customFilterData.diagnoses); // This is for when our custom filter gets reset
     }, [customFilterData, searchValue])
 
     return (
@@ -510,7 +505,7 @@ const CreateNewFilterModal = ({setDropdownOpen, customFilterData, setCustomFilte
                                       <Checkbox
                                         style={{color: '#0066B3'}}
                                         edge='start'
-                                        checked={toggledDiagnoses.indexOf(item) !== -1}
+                                        checked={customFilterData.diagnoses.indexOf(item) !== -1}
                                         tabIndex={-1}
                                         disableRipple
                                         inputProps={{ 'aria-labelledby': labelId }}
