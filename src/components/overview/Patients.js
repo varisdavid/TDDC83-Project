@@ -3,7 +3,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { PatientsSearch, PatientsTable, PatientGroups } from '..'
 import { useTable, useFlexLayout, useFilters, useGlobalFilter, useSortBy } from 'react-table'
 
-import { Tooltip } from '@material-ui/core';
+import { Tooltip, Link } from '@material-ui/core';
 import { NotificationImportant } from '@material-ui/icons';
 
 // Component rendering bell icon (color based on value: integer) and hover information based on (text: string) 
@@ -33,6 +33,24 @@ const Notification = ({value, text}) => {
   )
 }
 
+const PatientLink = ({id, name}) => {
+
+  const href= "/patient/overview/" + id;
+
+  return (
+    <Link 
+      href={href}
+      variant="span" 
+      underline="none" 
+      noWrap
+      style={{  textDecoration: "none" }}
+    >
+    { name }
+  </Link>
+
+  );
+}
+
 const Patients = () => {
 
   // This will apply filters to the table based on what filterData it recieves, 
@@ -43,7 +61,6 @@ const Patients = () => {
     //   { id: 'gender', value: customFilterData.gender },
     //   { id: 'priority', value: customFilterData.priority },
     // ])
-    console.log(filterData);
 
     setFilter('gender', filterData.gender);
     setFilter('priority', filterData.priority);
@@ -59,12 +76,13 @@ const Patients = () => {
   }
 
   const data = useMemo(
-    // To get them in the proper order, using numbers to represent priority, 1 = high, 2 = medium, 3 = low
+    // To get them in the proper order, using numbers to represent priority, 1 = high, 2 = medium, 3 = low with notification, 4 = low without notification
       () => [
         {
           notices: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
           priority: 1,
-          name: 'Gunnilla Andersson',
+          href: <PatientLink id='470203-1324' name="Gunilla Andersson" />,
+          name: "Gunilla Andersson",
           sweID: '470203-1324',
           diagnoses: ['Diabetes', 'Hypertoni'],
           updatedAt: '2020-10-08',
@@ -77,7 +95,8 @@ const Patients = () => {
         {
           notices: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
           priority: 1,
-          name: 'Gunnilla Andersson',
+          href: <PatientLink id='470203-1324' name="Gunilla Andersson" />,
+          name: "Gunilla Andersson",
           sweID: '470203-1324',
           diagnoses: ['Diabetes', 'Hypertoni'],
           updatedAt: '2020-10-08',
@@ -90,7 +109,8 @@ const Patients = () => {
         {
           notices: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
           priority: 1,
-          name: 'Gunnilla Andersson',
+          href: <PatientLink id='470203-1324' name="Gunilla Andersson" />,
+          name: "Gunilla Andersson",
           sweID: '470203-1324',
           diagnoses: ['Diabetes', 'Hypertoni'],
           updatedAt: '2020-10-08',
@@ -103,7 +123,8 @@ const Patients = () => {
         {
           notices: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
           priority: 1,
-          name: 'Gunnilla Andersson',
+          href: <PatientLink id='470203-1324' name="Gunilla Andersson" />,
+          name: "Gunilla Andersson",
           sweID: '470203-1324',
           diagnoses: ['Diabetes', 'Hypertoni'],
           updatedAt: '2020-10-08',
@@ -116,7 +137,50 @@ const Patients = () => {
         {
           notices: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
           priority: 1,
-          name: 'Gunnilla Andersson',
+          href: <PatientLink id='470203-1324' name="Gunilla Andersson" />,
+          name: "Gunilla Andersson",
+          sweID: '470203-1324',
+          diagnoses: ['Diabetes', 'Hypertoni'],
+          updatedAt: '2020-10-08',
+          updatedBy: 'Patienten',
+          age: 73,
+          gender: 'female',
+          team: 'Team 1',
+          department: 'Department 1'
+        },
+        {
+          notices: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
+          priority: 1,
+          href: <PatientLink id='470203-1324' name="Gunilla Andersson" />,
+          name: "Gunilla Andersson",
+          sweID: '470203-1324',
+          diagnoses: ['Diabetes', 'Hypertoni'],
+          updatedAt: '2020-10-08',
+          updatedBy: 'Patienten',
+          age: 73,
+          gender: 'female',
+          team: 'Team 1',
+          department: 'Department 1'
+        },
+        {
+          notices: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
+          priority: 1,
+          href: <PatientLink id='470203-1324' name="Gunilla Andersson" />,
+          name: "Gunilla Andersson",
+          sweID: '470203-1324',
+          diagnoses: ['Diabetes', 'Hypertoni'],
+          updatedAt: '2020-10-08',
+          updatedBy: 'Patienten',
+          age: 73,
+          gender: 'female',
+          team: 'Team 1',
+          department: 'Department 1'
+        },
+        {
+          notices: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
+          priority: 1,
+          href: <PatientLink id='470203-1324' name="Gunilla Andersson" />,
+          name: "Gunilla Andersson",
           sweID: '470203-1324',
           diagnoses: ['Diabetes', 'Hypertoni'],
           updatedAt: '2020-10-08',
@@ -129,7 +193,8 @@ const Patients = () => {
         {
           notices: <Notification value={2} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
           priority: 2,
-          name: 'Gunnilla Andersson',
+          href: <PatientLink id='470203-1324' name="Gunilla Andersson" />,
+          name: "Gunilla Andersson",
           sweID: '470203-1324',
           diagnoses: ['Diabetes', 'Hypertoni'],
           updatedAt: '2020-10-08',
@@ -142,7 +207,8 @@ const Patients = () => {
         {
           notices: <Notification value={2} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
           priority: 2,
-          name: 'Gunnilla Andersson',
+          href: <PatientLink id='470203-1324' name="Gunilla Andersson" />,
+          name: "Gunilla Andersson",
           sweID: '470203-1324',
           diagnoses: ['Diabetes', 'Hypertoni'],
           updatedAt: '2020-10-08',
@@ -155,7 +221,8 @@ const Patients = () => {
         {
           notices: <Notification value={2} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
           priority: 2,
-          name: 'Gunnilla Andersson',
+          href: <PatientLink id='470203-1324' name="Gunilla Andersson" />,
+          name: "Gunilla Andersson",
           sweID: '470203-1324',
           diagnoses: ['Diabetes', 'Hypertoni'],
           updatedAt: '2020-10-08',
@@ -168,7 +235,8 @@ const Patients = () => {
         {
           notices: <Notification value={2} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
           priority: 2,
-          name: 'Gunnilla Andersson',
+          href: <PatientLink id='470203-1324' name="Gunilla Andersson" />,
+          name: "Gunilla Andersson",
           sweID: '470203-1324',
           diagnoses: ['Diabetes', 'Hypertoni'],
           updatedAt: '2020-10-08',
@@ -179,20 +247,8 @@ const Patients = () => {
         {
           notices: <Notification value={3} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
           priority: 3,
-          name: 'Gunnilla Andersson',
-          sweID: '470203-1324',
-          diagnoses: ['Diabetes', 'Hypertoni'],
-          updatedAt: '2020-10-08',
-          updatedBy: 'Patienten',
-          age: 73,
-          gender: 'female',
-          team: 'Team 1',
-          department: 'Department 2'
-        },
-        {
-          notices: <Notification value={3} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
-          priority: 3,
-          name: 'Gunnilla Andersson',
+          href: <PatientLink id='470203-1324' name="Gunilla Andersson" />,
+          name: "Gunilla Andersson",
           sweID: '470203-1324',
           diagnoses: ['Diabetes', 'Hypertoni'],
           updatedAt: '2020-10-08',
@@ -205,7 +261,22 @@ const Patients = () => {
         {
           notices: <Notification value={3} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
           priority: 3,
-          name: 'Gunnilla Andersson',
+          href: <PatientLink id='470203-1324' name="Gunilla Andersson" />,
+          name: "Gunilla Andersson",
+          sweID: '470203-1324',
+          diagnoses: ['Diabetes', 'Hypertoni'],
+          updatedAt: '2020-10-08',
+          updatedBy: 'Patienten',
+          age: 73,
+          gender: 'female',
+          team: 'Team 1',
+          department: 'Department 2'
+        },
+        {
+          notices: <Notification value={0} text={''}/>,
+          priority: 4,
+          href: <PatientLink id='470203-1324' name="Gunilla Andersson" />,
+          name: "Gunilla Andersson",
           sweID: '470203-1324',
           diagnoses: ['Diabetes', 'Hypertoni'],
           updatedAt: '2020-10-08',
@@ -217,8 +288,9 @@ const Patients = () => {
         },
         {
           notices: <Notification value={0} text={''}/>,
-          priority: 3,
-          name: 'Patrik Andersson',
+          priority: 4,
+          href: <PatientLink id='410203-1324' name="Patrik Andersson" />,
+          name: "Patrik Andersson",
           sweID: '410203-1324',
           diagnoses: ['Diabetes'],
           updatedAt: '2020-10-08',
@@ -231,7 +303,8 @@ const Patients = () => {
         {
           notices: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
           priority: 1,
-          name: 'Göran Andersson',
+          href: <PatientLink id='350203-1324' name="Göran Andersson" />,
+          name: "Göran Andersson",
           sweID: '350203-1324',
           diagnoses: ['Diabetes'],
           updatedAt: '2020-10-08',
@@ -244,7 +317,8 @@ const Patients = () => {
         {
           notices: <Notification value={3} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
           priority: 3,
-          name: 'Casper Andersson',
+          href: <PatientLink id='998877-1324' name="Casper Andersson" />,
+          name: "Casper Andersson",
           sweID: '998877-1324',
           diagnoses: ['Diabetes'],
           updatedAt: '2020-10-08',
@@ -257,7 +331,8 @@ const Patients = () => {
         {
           notices: <Notification value={3} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
           priority: 3,
-          name: 'Xander Andersson',
+          href: <PatientLink id='350203-1324' name="Xander Andersson" />, 
+          name: "Xander Andersson",
           sweID: '350203-1324',
           diagnoses: ['Diabetes'],
           updatedAt: '2020-10-08',
@@ -270,7 +345,8 @@ const Patients = () => {
         {
           notices: <Notification value={3} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
           priority: 3,
-          name: 'Viktor Andersson',
+          href: <PatientLink id='350203-1324' name="Viktor Andersson" />,
+          name: "Viktor Andersson",
           sweID: '350203-1324',
           diagnoses: ['Diabetes'],
           updatedAt: '2020-10-08',
@@ -297,6 +373,10 @@ const Patients = () => {
         },
         {
           Header: 'Namn',
+          accessor: 'href',
+        },
+        {
+          Header: 'Söknamn', // This is for mapping search queries.
           accessor: 'name',
         },
         {
@@ -368,20 +448,6 @@ const Patients = () => {
     } else {
       return rows
     }
-
-    // if (filterValue.low) {
-    //   return rows.filter(row => row.values[id] === 3)
-    // }
-    // if (filterValue.average) {
-    //   return rows.filter(row => row.values[id] === 2)
-    // }
-    // if (filterValue.high) {
-    //   return rows.filter(row => row.values[id] === 1)
-    // } 
-    // if (!filterValue.low && !filterValue.average && !filterValue.high) {
-    //   return rows;
-    // }
-    
   }
 
   // Returns all rows containing a number inbetween a chosen range.
@@ -446,7 +512,7 @@ const Patients = () => {
   const initialState = {
     sortBy: [sortState],
     filters: [],
-    hiddenColumns: ['age', 'gender', 'team', 'department']
+    hiddenColumns: ['age', 'name', 'gender', 'team', 'department']
     // filters: [{ id: 'col1', value: 'Green'}]
   };
 

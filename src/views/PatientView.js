@@ -4,7 +4,7 @@ import { Box } from '@material-ui/core';
 
 import { PatientViewHeaderBanner, PatientViewHeaderNavigation, PatientCalendar } from '../components'
 
-// Function for retrieving current active tab
+// Function for retrieving current active tab from our url.
 const getActiveTab = (location) => {
   
   if (location.pathname === '/patient/measurements') {
