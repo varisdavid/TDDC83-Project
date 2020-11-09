@@ -1,13 +1,24 @@
+"""This script is only intended for one-time use as it fills the DB with mock-patient data
+To delete the mock data created there is another script,
+deleteMockPatients.py that similarly is only intended for one-time use """
+#for REST-api calls
 import requests
+#for random choices among predefined data
 import random
+#for getting values of environment variables containing the login details with write-access
 import os
+#set the values of environemntvariables according to .env file
 from dotenv import load_dotenv
 load_dotenv()
 
+#get values of environment variable, i.e login details with write-access
 wu = os.environ.get("EHRSCAPE_USERNAME")
 wp = os.environ.get("EHRSCAPE_PASSWORD")
+#base url for all REST api calls
 baseurl = 'https://rest.ehrscape.com/rest/v1'
+#numnber of fake patients to create
 no_of_patients = 5
+#list of some samples to be used in the mock patient data
 medications = ["Ipren", "Alvedon", "Treo-comp", "Voltaren", "Humira", "Abilify", "Enbrel", "Crestor", "Lantus Solostar", "Sovaldi","Advair Diskus", "Nexium", "Januvia", "Lyrica", "Galvus", "Xanax", "Tramadol", "Genotropin", "Cytostatika", "Emtriva"]
 diagnosis = ["Covid", "Diabetes", "Cancer", "HIV", "IBS", "Crohns", "Alzheimers", "Borrelia", "Brutet nyckelben", "Korsbandsskada",
 			"Cystisk fibros", "ALS", "Multipel skleros", "Diskbråck", "Gula febern", "Ebola", "Hypertoni"]
@@ -44,6 +55,7 @@ for person in all_personalinfo:
     print("SKAPA EHRID: " + str(response))
     ehrid = response.json()['ehrId']
     print(ehrid)
+    #Create personal details party in demographics
     response = requests.post(baseurl + '/demographics/party',
                             verify = True,
                             auth =(wu,wp),
@@ -67,6 +79,7 @@ for person in all_personalinfo:
 
     #Create fake details about which medications the patient takes
     templateid="Medications"
+    #this dict contains the details, only the marked line is important
     payload = {
     "ctx/language" : "en",
     "ctx/territory" : "SV",
@@ -88,6 +101,7 @@ for person in all_personalinfo:
         #make random choice from list of predefined
         random.shuffle(medications_copy)
         meds = medications_copy.pop()
+        #change the medicine value in the dict
         payload["medications/medication_instruction:0/order:0/medicine"] = meds
         #POST call to create composition based on template Medications
         response = requests.post(baseurl + '/composition?' + "templateId="+templateid + "&" + "ehrId="+ehrid,
@@ -100,6 +114,7 @@ for person in all_personalinfo:
 
     #Create fake details about what diagnosises the patient has
     templateid = "Medical Diagnosis"
+    #Dict containing the fake details, only the marked line is important
     payload = {
     "ctx/language" : "en",
     "ctx/territory" : "SV",
@@ -125,6 +140,7 @@ for person in all_personalinfo:
         #randomly select a diagnosis from predefined list
         random.shuffle(diagnosis_copy)
         diag = diagnosis_copy.pop() 
+        #change value in dict
         payload["medical_diagnosis/problem_diagnosis:0/clinical_description"] = diag
         #POST call to create new composition based on template Medical Diagnosis
         response = requests.post(baseurl + '/composition?' + "templateId="+templateid + "&" + "ehrId="+ehrid,
@@ -147,7 +163,8 @@ for person in all_personalinfo:
     "ctx/participation_name" : "Dr L. Äkare",
     "ctx/participation_function" : "Onkolog",
     }
-    
+    #POST call to create composition using our template EHR-PUM-C3 effectively only storing the ehrid
+    #enables simpler querying of ehr ids
     response = requests.post(baseurl + '/composition?' + "templateId="+templateid + "&" + "ehrId="+ehrid,
                             verify=True,
                             auth = (wu,wp),
@@ -175,11 +192,16 @@ for person in all_personalinfo:
         "measurements-c3/blood_pressure/any_event:0/systolic|magnitude" : systolic, #changed in loop below
         "measurements-c3/blood_pressure/any_event:0/diastolic|magnitude" : diastolic, #also changed
         "measurements-c3/body_weight/any_event:0/weight|magnitude" : weight, # also changed
+        "measurements-c3/body_weight/any_event:0/weight|unit" : "kg",
+        "measurements-c3/blood_glucose/any_event:0/blood_glucose|magnitude" : bloodsugar, #also changed
+        #"measurements-c3/blood_glucose/any_event:0/blood_oxygen" : oxygen, #also changed
         "measurements-c3/physicalactivityrecord/any_event/type_of_exercise|code" : physical_activity, #also changed
         "measurements-c3/physicalactivityrecord/any_event/duration|magnitude" : phys_act,
         "measurements-c3/pulse_heart_beat/any_event:0/pulse_rate|magnitude" : pulse #also changed
 
+        #fysisk aktivitet 1-5
         }
+    #random amount of historic data
     for i in range(5, random.randint(5, 10)):
         payload["measurements-c3/blood_pressure/any_event:0/systolic|magnitude"] += random.choice(max_delta_bp)
         payload["measurements-c3/blood_pressure/any_event:0/diastolic|magnitude"] -= random.choice(max_delta_bp)
@@ -196,5 +218,5 @@ for person in all_personalinfo:
                                     auth=(wu,wp),
                                     headers={"Content-Type":"application/json"},
                                     json=payload)
+        print(response.text)
         print("POST MEASUREMENTS: " + str(response))
-
