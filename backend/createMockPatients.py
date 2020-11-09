@@ -39,7 +39,7 @@ initial_bloodsugar_range = range(3,9)
 max_delta_bloodsugar = range(-1,1)
 initial_oxygen_range = range(70, 100)
 max_delta_oxygen = range(-5,5)
-physical_activities = ["at0005","at0006","at0007","at0008","at0009"]
+#physical_activities = ["at0005","at0006","at0007","at0008","at0009"]
 
 
 #POST call to fejka.nu returns json object with personal information of 200 fake individuals
@@ -218,5 +218,4 @@ for person in all_personalinfo:
                                     auth=(wu,wp),
                                     headers={"Content-Type":"application/json"},
                                     json=payload)
-        print(response.text)
         print("POST MEASUREMENTS: " + str(response))
