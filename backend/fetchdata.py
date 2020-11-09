@@ -22,7 +22,7 @@ def get_all_patients_personal_details():
     """
     Function that retrieves the personal details for each of our patients in the ehrScape database
     Parameters: None
-    Returns: 
+    Returns: List with dicts for each patient, containing personal information
     """
     aql_ehrids = """SELECT e/ehr_id/value as id
                     FROM EHR e
@@ -44,6 +44,7 @@ def get_all_patients_personal_details():
                             "Telefon" : more_info['phone'], "Email" : more_info['email'] }
         to_return.append(personal_details)
     print(to_return)
+    return to_return
 get_all_patients_personal_details()
 
 
