@@ -43,50 +43,5 @@ def get_all_patients_personal_details():
                             "Address" : more_info['adress'], "Ålder" : more_info['age'],
                             "Telefon" : more_info['phone'], "Email" : more_info['email'] }
         to_return.append(personal_details)
-    print(to_return)
     return to_return
-get_all_patients_personal_details()
 
-
-
-
-def endpoint2():
-    """
-    namn
-    pnr
-    diagnos(er)
-    kön
-    ålder
-    team
-    department
-    PER PATIENT
-    """
-    pass
-def endpoint3():
-    """
-    filtrera baserat på
-    minAge
-    maxAge
-    gender
-    team
-    department
-    priority
-    diagnos
-    """
-    pass
-def endpoint4(diagnosis):
-    """
-    sökning som returnerar de patienter (namn osv?) baserat på diagnos
-    """
-    pass
-
-def endpoint5():
-    pass
-    #går ej
-
-def endpoint6():
-    """
-    till rule-engine
-    measurements historisk data för en patient
-    """
-    pass
