@@ -245,6 +245,7 @@ const CreateNewFilterModal = ({setDropdownOpen, customFilterData, setCustomFilte
                                 value={filterOptions.availableTo}
                                 onChange={handleChangeInFilterOptions}
                                 label='Tillgänglig för:' // Needs to be the label your using to calculate the appropriate width in border.
+                                inputProps={{name: 'availableTo'}} // This is needed to get name value for event.target.
                             >
                                 <MenuItem value={'all'}><em>Alla</em></MenuItem>
                                 <MenuItem value={'Min avdelning'}>Min avdelning</MenuItem>

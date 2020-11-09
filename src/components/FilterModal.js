@@ -356,7 +356,6 @@ const FilterModal = ({setDropdownOpen, customFilterData, setCustomFilterData, se
                             </FormControl>
                             <div style={{marginTop: '10px', width: '85%', marginLeft: 'auto', marginRight: 'auto', height: '70%', backgroundColor: '#FFFFFF'}}>
                             {diagnoses.map(item => {
-                                console.log(typeof(customFilterData.diagnoses))
                                 const labelId = `checkbox-list-label-${item}`;
 
                                 return (
