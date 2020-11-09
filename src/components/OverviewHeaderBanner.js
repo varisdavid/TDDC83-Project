@@ -6,7 +6,7 @@ import { Settings, ExitToAppRounded } from '@material-ui/icons';
 
 import logoRegion from "../assets/logo_region.png"
 
-const OverviewHeaderBanner = ({healthCenter}) => {
+const OverviewHeaderBanner = ({ healthCenter }) => {
    
     const { logout } = useAuth0();
 
