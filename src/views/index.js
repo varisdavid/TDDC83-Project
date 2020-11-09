@@ -4,7 +4,6 @@ import Profile from "./Profile";
 import PatientView from "./PatientView"
 import Overview from "./Overview";
 import OverviewSettings from "./OverviewSettings";
-import PatientView from "./PatientView"
 
 
 export { ExternalApi, Home, Profile, Overview, OverviewSettings, PatientView };
