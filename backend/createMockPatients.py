@@ -1,5 +1,4 @@
 import requests
-
 import os
 from dotenv import load_dotenv
 
@@ -10,7 +9,7 @@ wp = os.environ.get("EHRSCAPE_PASSWORD")
 
 baseurl = 'https://rest.ehrscape.com/rest/v1'
 
-no_of_patients = 5
+no_of_patients = 10
 
 medications = ["Ipren", "Alvedon", "Treo-comp", "Voltaren", "Humira", "Abilify", "Enbrel", "Crestor", "Lantus Solostar", "Sovaldi","Advair Diskus", "Nexium", "Januvia", "Lyrica", "Galvus", "Xanax", "Tramadol", "Genotropin", "Cytostatika", "Emtriva"]
 diagnosis = ["Covid", "Diabetes", "Cancer", "HIV", "IBS", "Crohns", "Alzheimers", "Borrelia", "Brutet nyckelben", "Korsbandsskada",
@@ -79,11 +78,9 @@ for person in all_personalinfo:
     #each patient will take a random number (between 1 and 3) of different medications
     medications_copy = medications[:]
     for i in range(0, random.randint(1,3)):
-        #make random choice from list of predefined
         random.shuffle(medications_copy)
         meds = medications_copy.pop()
         payload["medications/medication_instruction:0/order:0/medicine"] = meds
-        #POST call to create composition based on template Medications
         response = requests.post(baseurl + '/composition?' + "templateId="+templateid + "&" + "ehrId="+ehrid,
                                 verify=True,
                                 auth = (wu,wp),
@@ -109,8 +106,8 @@ for person in all_personalinfo:
     "medical_diagnosis/problem_diagnosis:0/link_to_supporting_medical_documentation" : "google.com",
     "medical_diagnosis/problem_diagnosis:0/problem_context_qualifiers:0/active_status_comment" :"s" ,
     "medical_diagnosis/problem_diagnosis:0/problem_context_qualifiers:0/priority/text_value" :"Priority 89",
-    "medical_diagnosis/problem_diagnosis:0/problem_context_qualifiers:0/summarisation/boolean_value" : "True"
     }
+    print("hej")
     #Each patient can have a random number (between 1 and 3) of diagnosises
     diagnosis_copy = diagnosis[:]
     for i in range(0, random.randint(1,3)):
@@ -130,6 +127,11 @@ for person in all_personalinfo:
 #Create auxiliary composition for easier retrieval of ehrId when fetching data later
     #our own template containing nothing (apart from the ehr-id)
     templateid = "EHR-PUM-C3"
+    a= 12
+    b = 1*12
+    c = a/12
+    if (c==1):
+        print("då")
     #this dict is not important
     payload ={
     "ctx/language" : "en",
