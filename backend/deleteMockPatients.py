@@ -27,14 +27,6 @@ CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.encounter.v1]
 WHERE c/name/value='EHR-PUM-C3'
 OFFSET 0"""
 
-
-#OLD QUERY BELOW
-"""SELECT e/ehr_id/value as id, c/content[openEHR-EHR-ADMIN_ENTRY.personinfo.v0]/data[at0001]/items[at0003]/value/value as tfn
-FROM EHR e
-CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.personinfo.v0]
-WHERE c/name/value='personinfo' AND tfn = '112123123'
-OFFSET 0"""
-
 #Selects all composition ids from compositions we have done, with a patient (ehrId, so our patient), with the template personinfo
 aql_get_personinfo_uid = aql = """SELECT c/uid/value as uid,
 e/ehr_id/value as id
