@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 
 import { Loading } from './components';
-import { Home, Profile, ExternalApi, Overview, OverviewSettings } from './views';
+import { Home, Profile, ExternalApi, Overview, OverviewSettings, PatientView } from './views';
 // import ProtectedRoute from './auth/ProtectedRoute';
 
 import './app.css';
@@ -23,6 +23,7 @@ const App = () => {
         <Route path='/external-api' component={ExternalApi} />
         <Route exact path='/overview/settings' component={OverviewSettings} />
         <Route path='/overview' component={Overview}/>
+        <Route path='/patient' component={PatientView}/>
       </Switch>
     </div>
   );

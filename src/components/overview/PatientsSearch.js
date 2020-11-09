@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { InputBase, Button, Link, ListItem } from '@material-ui/core';
 import { ArrowDropDown } from '@material-ui/icons';
 
-import { FilterModal } from '../components'
+import { FilterModal } from '..'
 
 // Component rendering applied filters and Rensa filter button
 const AppliedFilterUI = ({ activeFiltersState, setIsFilterApplied }) => {

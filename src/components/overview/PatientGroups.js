@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
 
-import { CreateNewFilterModal } from '../components'
+import { CreateNewFilterModal } from '..'
 import { Button } from '@material-ui/core';
 
-const PatientsGroup = ({setOwnFilters, customFilterData, setCustomFilterData, dropdownOpen, setDropdownOpen}) => {
+const PatientGroups = ({setOwnFilters, customFilterData, setCustomFilterData, dropdownOpen, setDropdownOpen}) => {
 
     // Should contain a row of buttons for all the user specified patient groups, as well as a button to add 
     // new patientgroups.
@@ -75,5 +75,5 @@ const PatientsGroup = ({setOwnFilters, customFilterData, setCustomFilterData, dr
     );
 };
 
-export default PatientsGroup;
+export default PatientGroups;
 

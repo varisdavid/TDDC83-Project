@@ -1,24 +1,29 @@
-import HomeContent from './HomeContent';
-import Footer from './Footer';
-import Hero from './Hero';
+import HomeContent from './templatePage/HomeContent';
+import Footer from './templatePage/Footer';
+import Hero from './templatePage/Hero';
 import Loading from './Loading';
-import NavBar from './NavBar';
+import NavBar from './templatePage/NavBar';
 // import PatientCalendar from './PatientCalendar';
 // import PatientHeader from './PatientHeader';
 // import NavBarPatient from './NavBarPatient';
 
-import OverviewHeaderBanner from './OverviewHeaderBanner';
-import OverviewHeaderNavigation from './OverviewHeaderNavigation';
+import OverviewHeaderBanner from './overview/OverviewHeaderBanner';
+import OverviewHeaderNavigation from './overview/OverviewHeaderNavigation';
 
-import OverviewCalendar from './OverviewCalendar';
+import OverviewCalendar from './overview/OverviewCalendar';
 
-import Patients from './Patients';
-import PatientsSearch from './PatientsSearch'
-import PatientsTable from './PatientsTable'
-import PatientGroups from './PatientGroups';
+import Patients from './overview/Patients';
+import PatientsSearch from './overview/PatientsSearch'
+import PatientsTable from './overview/PatientsTable'
+import PatientGroups from './overview/PatientGroups';
 
-import FilterModal from './FilterModal';
-import CreateNewFilterModal from './CreateNewFilterModal'
+import FilterModal from './overview/FilterModal';
+import CreateNewFilterModal from './overview/CreateNewFilterModal';
+
+import PatientCalendar from './PatientCalendar';
+import PatientViewHeaderBanner from './PatientViewHeaderBanner';
+import PatientViewHeaderNavigation from './PatientViewHeaderNavigation';
+
 
 // import Notices from './Notices';
 // import NoticesTable from './NoticesTable';
@@ -38,4 +43,7 @@ export {
     PatientGroups,
     FilterModal,
     CreateNewFilterModal,
+    PatientCalendar,
+    PatientViewHeaderBanner,
+    PatientViewHeaderNavigation,
 };

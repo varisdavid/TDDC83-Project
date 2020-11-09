@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 
-import { PatientsSearch, PatientsTable, PatientGroups } from '../components'
+import { PatientsSearch, PatientsTable, PatientGroups } from '..'
 import { useTable, useFlexLayout, useFilters, useGlobalFilter, useSortBy } from 'react-table'
 
 import { Tooltip } from '@material-ui/core';

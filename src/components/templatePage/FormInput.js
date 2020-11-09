@@ -1,8 +1,8 @@
 import React from 'react';
 import { useField } from 'formik';
 
-import FormError from './../components/common/FormError';
-import Input from './../components/common/Input';
+import FormError from '../common/FormError';
+import Input from '../common/Input';
 
 const FormInput = ({ ariaLabel, name, type, placeholder }) => {
 

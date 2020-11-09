@@ -28,6 +28,14 @@ const MainNav = () => (
       Patient Overview
     </NavLink>
     <NavLink
+      to="/patient"
+      exact
+      className="nav-link"
+      activeClassName="router-link-exact-active"
+    >
+      Patient View
+    </NavLink>
+    <NavLink
       to="/external-api"
       exact
       className="nav-link"
