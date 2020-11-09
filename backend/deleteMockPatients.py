@@ -12,3 +12,9 @@ wp = os.environ.get("EHRSCAPE_PASSWORD")
 #baseurl for all calls to the ehrscape REST-api
 baseurl = 'https://rest.ehrscape.com/rest/v1'
 
+def query(aql):
+    response = requests.get(baseurl+'/query/', params=aql
+                            verify= True,
+                            auth = (wu,wp)
+                            )
+    return response.json() if response.ok else response
