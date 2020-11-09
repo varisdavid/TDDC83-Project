@@ -129,3 +129,25 @@ for person in all_personalinfo:
                                 json = payload
                                 )
         print("POST MEDICAL DIAGNOSIS: "+ str(response))
+#Create auxiliary composition for easier retrieval of ehrId when fetching data later
+    #our own template containing nothing (apart from the ehr-id)
+    templateid = "EHR-PUM-C3"
+    #this dict is not important
+    payload ={
+    "ctx/language" : "en",
+    "ctx/territory" : "US",
+    "ctx/composer_name": "Lokalt Optimum",
+    "ctx/id_namespace" : "Ryds VC",
+    "ctx/participation_name" : "Dr L. Äkare",
+    "ctx/participation_function" : "Onkolog",
+    }
+    #POST call to create composition using our template EHR-PUM-C3 effectively only storing the ehrid
+    #enables simpler querying of ehr ids
+    response = requests.post(baseurl + '/composition?' + "templateId="+templateid + "&" + "ehrId="+ehrid,
+                            verify=True,
+                            auth = (wu,wp),
+                            headers={"Content-Type" : "application/json"},
+                            json = payload
+                            )
+    print("POST EHR-C3: " + str(response))
+   
