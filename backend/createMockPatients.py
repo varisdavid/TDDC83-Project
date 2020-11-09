@@ -20,6 +20,18 @@ department = ["Ryds Vårdcentral", "Capio Vårdcentral Berga", "Jourcentralen LI
                 "Valla Vårdcentral", "Capio Vårdcentral Vasastaden LInköping"]
 team = ["Dermotologi", "Geriatrik", "Onkologi", "Kardiologi", "Öra, näsa & hals", "Kirurgi", "Anestesiologi", "Neurologi",
              "Gynekologi", "Urologi", "Ortopedi"]
+initial_systolic_range = range(100,200)
+initial_diastolic_range = range(70, 150)
+max_delta_bp = range(-15,15)
+initial_pulse_range = range(50,100)
+max_delta_pulse = range(-10,10)
+initial_weight_range = range(40,200)
+max_delta_weight = range(-5,5)
+initial_bloodsugar_range = range(3,9)
+max_delta_bloodsugar = range(-1,1)
+initial_oxygen_range = range(70, 100)
+max_delta_oxygen = range(-5,5)
+physical_activities = ["at0005","at0006","at0007","at0008","at0009"]
 
 response = requests.post("https://fejka.nu/?json=1&num="+str(no_of_patients))
 all_personalinfo = response.json()
