@@ -62,3 +62,21 @@ FROM EHR e
 CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.encounter.v1]
 WHERE c/name/value='EHR-PUM-C3' AND id = '%s'
 OFFSET 0"""
+
+
+def deleteComposition(uid):
+    response = requests.delete(baseurl + '/composition/'+uid,
+                                verify=True,
+                                auth=(wu,wp))
+    return response.json() if response.ok else response
+
+def getPartyId(ehrid):
+    response = requests.get(baseurl +"/demographics/party/query?ehrId=" + ehrid,
+                            verify=True,
+                            auth=(wu,wp))
+    return response.json() if response.ok else response
+def deleteDemographicData(partyId):
+    response = requests.delete(baseurl + "/demographics/party/" + partyId,
+                               verify=True,
+                               auth=(wu,wp))
+    return response.json() if response.ok else response
