@@ -151,3 +151,12 @@ for person in all_personalinfo:
                             )
     print("POST EHR-C3: " + str(response))
    
+
+   
+    diastolic = random.choice(initial_diastolic_range)
+    systolic = random.choice(initial_systolic_range)
+    pulse = random.choice(initial_pulse_range)
+    weight = random.choice(initial_weight_range)
+    bloodsugar = random.choice(initial_bloodsugar_range)
+    oxygen = random.choice(initial_oxygen_range)
+    physical_activity = random.choice(physical_activities)
