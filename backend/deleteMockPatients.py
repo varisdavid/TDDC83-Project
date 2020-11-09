@@ -80,3 +80,18 @@ def deleteDemographicData(partyId):
                                verify=True,
                                auth=(wu,wp))
     return response.json() if response.ok else response
+
+
+
+# SHOWS DEMOGRAPHICS FOR EACH EHRID
+"""
+for d in query(aql_get_mock_patient_ehrids)['resultSet']:
+    id = d['id']
+    parties = getPartyId(id)
+    #print(id)
+    for party in parties['parties']:
+        partyid = party['id']
+        #print(partyid)
+"""
+
+
