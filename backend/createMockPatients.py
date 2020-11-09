@@ -179,7 +179,6 @@ for person in all_personalinfo:
 
         #fysisk aktivitet 1-5
         }
-    #random amount of historic data
     for i in range(5, random.randint(5, 10)):
         payload["measurements-c3/blood_pressure/any_event:0/systolic|magnitude"] += random.choice(max_delta_bp)
         payload["measurements-c3/blood_pressure/any_event:0/diastolic|magnitude"] -= random.choice(max_delta_bp)
@@ -196,5 +195,4 @@ for person in all_personalinfo:
                                     auth=(wu,wp),
                                     headers={"Content-Type":"application/json"},
                                     json=payload)
-        print(response.text)
         print("POST MEASUREMENTS: " + str(response))
