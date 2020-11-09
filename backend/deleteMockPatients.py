@@ -118,15 +118,21 @@ for ehrid_dict in ehrids['resultSet']:
     ehrid = ehrid_dict['id']
         
     #get personinfo composition ids
+    try:
         personinfo_uids = query(aql_get_personinfo_uid % ehrid)
         #delete these compositions
         for uid_dict in personinfo_uids['resultSet']:
             uid = uid_dict['uid']
             deleteComposition(uid)
-  
+    except Exception:
+        pass
+    #get PUM-C3 composition ids
+
+    try:
         pum_c3_uids = query(aql_get_ehrpumc3_uid % ehrid)
-                #delete these compositions
-    for uid_dict in pum_c3_uids['resultSet']:
-          uid = uid_dict['uid']
-        deleteComposition(uid)
-    
+        #delete these compositions
+        for uid_dict in pum_c3_uids['resultSet']:
+            uid = uid_dict['uid']
+            deleteComposition(uid)
+    except Exception:
+        pass
