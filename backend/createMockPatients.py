@@ -81,3 +81,39 @@ for person in all_personalinfo:
                                 json = payload
                                 )
         print("POST MEDICACATION: " + str(response))
+           templateid = "Medical Diagnosis"
+    payload = {
+    "ctx/language" : "en",
+    "ctx/territory" : "SV",
+    "ctx/composer_name": "Lokalt Optimum",
+    "ctx/id_namespace" : "Ryds VC",
+    "ctx/participation_name" : "Dr L. Äkare",
+    "ctx/participation_function" : "Onkolog",
+    "medical_diagnosis/context/context_detail:0/tags:0" : "hejgatan 123",
+
+    "medical_diagnosis/problem_diagnosis:0/clinical_description" : "Medical Diagnosis", #this value is to be changed in loop below
+
+    "medical_diagnosis/problem_diagnosis:0/date_of_onset" : "2010-10-10T20:20",
+    "medical_diagnosis/problem_diagnosis:0/date_of_resolution_remission" : "2020-10-01T19:30",
+    "medical_diagnosis/problem_diagnosis:0/comment" : "I'm not a doctor",
+    "medical_diagnosis/problem_diagnosis:0/link_to_supporting_medical_documentation" : "google.com",
+    "medical_diagnosis/problem_diagnosis:0/problem_context_qualifiers:0/active_status_comment" :"s" ,
+    "medical_diagnosis/problem_diagnosis:0/problem_context_qualifiers:0/priority/text_value" :"Priority 89",
+    "medical_diagnosis/problem_diagnosis:0/problem_context_qualifiers:0/summarisation/boolean_value" : "True"
+    }
+    #Each patient can have a random number (between 1 and 3) of diagnosises
+    diagnosis_copy = diagnosis[:]
+    for i in range(0, random.randint(1,3)):
+        #randomly select a diagnosis from predefined list
+        random.shuffle(diagnosis_copy)
+        diag = diagnosis_copy.pop() 
+        #change value in dict
+        payload["medical_diagnosis/problem_diagnosis:0/clinical_description"] = diag
+        #POST call to create new composition based on template Medical Diagnosis
+        response = requests.post(baseurl + '/composition?' + "templateId="+templateid + "&" + "ehrId="+ehrid,
+                                verify=True,
+                                auth = (wu,wp),
+                                headers={"Content-Type" : "application/json"},
+                                json = payload
+                                )
+        print("POST MEDICAL DIAGNOSIS: "+ str(response))
