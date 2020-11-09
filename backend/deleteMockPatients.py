@@ -112,6 +112,8 @@ for d in query(aql_get_mock_patient_ehrids)['resultSet']:
         #print(partyid)
 """
 
+
+#Script below
 ehrids = query(aql_get_mock_patient_ehrids)
 for ehrid_dict in ehrids['resultSet']:
     #for each ehr id
@@ -129,14 +131,6 @@ for ehrid_dict in ehrids['resultSet']:
     #get PUM-C3 composition ids
 
     try:
-        pum_c3_uids = query(aql_get_ehrpumc3_uid % ehrid)
-        #delete these compositions
-        for uid_dict in pum_c3_uids['resultSet']:
-            uid = uid_dict['uid']
-            deleteComposition(uid)
-    except Exception:
-        pass
-   try:
         pum_c3_uids = query(aql_get_ehrpumc3_uid % ehrid)
         #delete these compositions
         for uid_dict in pum_c3_uids['resultSet']:
