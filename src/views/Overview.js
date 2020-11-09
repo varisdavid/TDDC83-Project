@@ -6,17 +6,17 @@ import { OverviewHeaderBanner, OverviewHeaderNavigation, Patients, OverviewCalen
 
 // Function for retrieving current active tab
 const getActiveTab = (location) => {
-  
+
   if (location.pathname === '/overview/home') {
     return 0;
   } else if (location.pathname === '/overview/patients') {
-    return 1;  
+    return 1;
   } else if (location.pathname === '/overview/notices') {
-    return 2;  
+    return 2;
   } else if (location.pathname === '/overview/calendar') {
-    return 3;  
+    return 3;
   } else {
-    return 0;  
+    return 0;
   }
 
 }
@@ -53,10 +53,10 @@ const Overview = () => {
   // This keeps track of which the currently active tab is.
   const [activeTabValue, setActiveTabValue] = useState(getActiveTab(location));
 
-  // Will be fetched by user information later on. 
+  // Will be fetched by user information later on.
   const healthCenter = 'Ryds vårdcentral';
 
-  // Upon rendering the component, this hook calls a function which 
+  // Upon rendering the component, this hook calls a function which
   // determines which tab is active, depending on this we load a different tab.
   useEffect(() => {
     setActiveTabValue(getActiveTab(location));
@@ -66,7 +66,7 @@ const Overview = () => {
   return (
   <>
     <div className='w-full h-auto'>
-      <OverviewHeaderBanner healthCenter={healthCenter} />  
+      <OverviewHeaderBanner healthCenter={healthCenter} />
       <OverviewHeaderNavigation activeTabValue={activeTabValue} setActiveTabValue={setActiveTabValue} />
     </div>
 
@@ -80,6 +80,7 @@ const Overview = () => {
 
     <TabPanel className='Notices' value={activeTabValue} index={2}>
       {/* <Notices /> */}
+
     </TabPanel>
 
     <TabPanel className='Calendar' value={activeTabValue} index={3}>

@@ -8,7 +8,7 @@ import "react-nice-dates/build/style.css";
 //...
 
 //For table
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -25,7 +25,7 @@ const useStyles = makeStyles({
     Width: 50,
   },
   layout: {
-    marginTop: 50,
+    marginTop: "1%",
   },
 });
 
@@ -50,6 +50,35 @@ const Data = [
   },
 ];
 
+const StyledHeaderCell = withStyles((theme) => ({
+  head: {
+    backgroundColor: theme.palette.common.white,
+    fontSize: 25,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
+const StyledTableCell = withStyles((theme) => ({
+  head: {
+    backgroundColor: "#275E8E",
+    color: theme.palette.common.white,
+    fontWeight: 700,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+  root: {
+    "&:nth-of-type(even)": {
+      backgroundColor: theme.palette.action.hover,
+    },
+  },
+}))(TableRow);
+
 const Context = React.createContext({ value: null, setValue: () => {} });
 
 const BasicTable = (props) => {
@@ -60,23 +89,26 @@ const BasicTable = (props) => {
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
-          <TableRow>
-            <TableCell>Tid</TableCell>
-            <TableCell align="right">Aktivitet</TableCell>
-            <TableCell align="right">Beskrivning</TableCell>
-            <TableCell align="right">Plats</TableCell>
-          </TableRow>
+          <StyledTableRow>
+            <StyledHeaderCell>{props.value} </StyledHeaderCell>
+          </StyledTableRow>
+          <StyledTableRow>
+            <StyledTableCell>Tid</StyledTableCell>
+            <StyledTableCell align="left">Aktivitet</StyledTableCell>
+            <StyledTableCell align="left">Beskrivning</StyledTableCell>
+            <StyledTableCell align="left">Plats</StyledTableCell>
+          </StyledTableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <TableRow key={row.time}>
-              <TableCell component="th" scope="row">
+            <StyledTableRow key={row.time}>
+              <StyledTableCell align="left" component="th" scope="row">
                 {row.time}
-              </TableCell>
-              <TableCell align="right">{row.activity}</TableCell>
-              <TableCell align="right">{row.description}</TableCell>
-              <TableCell align="right">{row.place}</TableCell>
-            </TableRow>
+              </StyledTableCell>
+              <StyledTableCell align="left">{row.activity}</StyledTableCell>
+              <StyledTableCell align="left">{row.description}</StyledTableCell>
+              <StyledTableCell align="left">{row.place}</StyledTableCell>
+            </StyledTableRow>
           ))}
         </TableBody>
       </Table>
@@ -109,8 +141,7 @@ const UserCalendar = () => {
             <StaticCalendar />
           </Grid>
           <Grid item xs={5} className={classes.layout}>
-            <p>{value.toUTCString().slice(0, 16)}</p>
-            <BasicTable props={Data} />
+            <BasicTable props={Data} value={value.toUTCString().slice(0, 16)} />
           </Grid>
         </Grid>
       </Context.Provider>
