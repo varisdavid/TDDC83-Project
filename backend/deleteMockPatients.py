@@ -38,3 +38,29 @@ FROM EHR e
 CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.encounter.v1]
 WHERE c/name/value='Medications' AND id='%s'
 OFFSET 0"""
+
+
+#Selects all composition ids from compositions we have done, with a patient (ehrId, so our patient), with the template personinfo
+aql_get_personinfo_uid = aql = """SELECT c/uid/value as uid,
+e/ehr_id/value as id
+FROM EHR e
+CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.personinfo.v0]
+WHERE c/name/value='personinfo' AND id='%s'
+OFFSET 0
+"""
+
+aql_get_medications_uid = """SELECT c/uid/value as uid, e/ehr_id/value as id
+FROM EHR e
+CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.encounter.v1]
+WHERE c/name/value='Medications' AND id='%s'
+OFFSET 0"""
+aql_get_medicaldiagnosis_uid= """SELECT c/uid/value as uid, e/ehr_id/value as id
+FROM EHR e
+CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.encounter.v1]
+WHERE c/name/value='Medical diagnosis' AND id ='%s'
+OFFSET 0"""
+aql_get_measurements_uid = """SELECT c/uid/value as uid, e/ehr_id/value as id
+FROM EHR e
+CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.encounter.v1]
+WHERE c/name/value='Measurements-C3' and id = '%s'
+OFFSET 0"""
