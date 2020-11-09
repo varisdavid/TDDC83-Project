@@ -112,3 +112,21 @@ for d in query(aql_get_mock_patient_ehrids)['resultSet']:
         #print(partyid)
 """
 
+ehrids = query(aql_get_mock_patient_ehrids)
+for ehrid_dict in ehrids['resultSet']:
+    #for each ehr id
+    ehrid = ehrid_dict['id']
+        
+    #get personinfo composition ids
+        personinfo_uids = query(aql_get_personinfo_uid % ehrid)
+        #delete these compositions
+        for uid_dict in personinfo_uids['resultSet']:
+            uid = uid_dict['uid']
+            deleteComposition(uid)
+  
+        pum_c3_uids = query(aql_get_ehrpumc3_uid % ehrid)
+                #delete these compositions
+    for uid_dict in pum_c3_uids['resultSet']:
+          uid = uid_dict['uid']
+        deleteComposition(uid)
+    
