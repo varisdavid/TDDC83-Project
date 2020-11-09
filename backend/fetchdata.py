@@ -12,3 +12,50 @@ def query(aql):
                             auth = (wu,wp)
                             )
     return response.json() if response.ok else response
+
+
+
+
+
+
+
+def endpoint2():
+    """
+    namn
+    pnr
+    diagnos(er)
+    kön
+    ålder
+    team
+    department
+    PER PATIENT
+    """
+    pass
+def endpoint3():
+    """
+    filtrera baserat på
+    minAge
+    maxAge
+    gender
+    team
+    department
+    priority
+    diagnos
+    """
+    pass
+def endpoint4(diagnosis):
+    """
+    sökning som returnerar de patienter (namn osv?) baserat på diagnos
+    """
+    pass
+
+def endpoint5():
+    pass
+    #går ej
+
+def endpoint6():
+    """
+    till rule-engine
+    measurements historisk data för en patient
+    """
+    pass
