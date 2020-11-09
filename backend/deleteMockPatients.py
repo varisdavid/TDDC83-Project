@@ -136,3 +136,52 @@ for ehrid_dict in ehrids['resultSet']:
             deleteComposition(uid)
     except Exception:
         pass
+   try:
+        pum_c3_uids = query(aql_get_ehrpumc3_uid % ehrid)
+        #delete these compositions
+        for uid_dict in pum_c3_uids['resultSet']:
+            uid = uid_dict['uid']
+            deleteComposition(uid)
+    except Exception:
+        pass
+
+    #get medications composition ids
+    try:
+        medications_uids = query(aql_get_medications_uid % ehrid)
+        #delete these compositions
+        for uid_dict in medications_uids['resultSet']:
+            uid = uid_dict['uid']
+            deleteComposition(uid)
+    except Exception:
+        pass
+    
+    #get medical diagnosis composition ids   
+    try:
+        medicaldiagnosis_uids = query(aql_get_medicaldiagnosis_uid % ehrid)
+        #delete these compositions
+        for uid_dict in medicaldiagnosis_uids['resultSet']:
+            uid = uid_dict['uid']
+            deleteComposition(uid)
+    except Exception:
+        pass
+        
+    #get demographics party id    
+    try:
+        parties = getPartyId(ehrid)
+        for party in parties['parties']:
+            partyid = party['id']
+            #delete the party
+            deleteDemographicData(partyid)
+    except Exception:
+        pass
+    
+    #get measurements composotion ids (will be multiple per patient)   
+    try:
+        measurements_uids = query(aql_get_measurements_uid % ehrid)
+        #delete these compositions
+        for uid_dict in measurements_uids['resultSet']:
+            uid = uid_dict['uid']
+            deleteComposition(uid)
+    except Exception:
+        pass
+
