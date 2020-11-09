@@ -125,14 +125,7 @@ for person in all_personalinfo:
                                 )
         print("POST MEDICAL DIAGNOSIS: "+ str(response))
 #Create auxiliary composition for easier retrieval of ehrId when fetching data later
-    #our own template containing nothing (apart from the ehr-id)
-    templateid = "EHR-PUM-C3"
-    a= 12
-    b = 1*12
-    c = a/12
-    if (c==1):
-        print("då")
-    #this dict is not important
+   
     payload ={
     "ctx/language" : "en",
     "ctx/territory" : "US",
