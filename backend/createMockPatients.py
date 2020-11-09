@@ -31,7 +31,6 @@ initial_bloodsugar_range = range(3,9)
 max_delta_bloodsugar = range(-1,1)
 initial_oxygen_range = range(70, 100)
 max_delta_oxygen = range(-5,5)
-physical_activities = ["at0005","at0006","at0007","at0008","at0009"]
 
 response = requests.post("https://fejka.nu/?json=1&num="+str(no_of_patients))
 all_personalinfo = response.json()
@@ -83,7 +82,6 @@ for person in all_personalinfo:
         #make random choice from list of predefined
         random.shuffle(medications_copy)
         meds = medications_copy.pop()
-        #change the medicine value in the dict
         payload["medications/medication_instruction:0/order:0/medicine"] = meds
         #POST call to create composition based on template Medications
         response = requests.post(baseurl + '/composition?' + "templateId="+templateid + "&" + "ehrId="+ehrid,
@@ -177,7 +175,6 @@ for person in all_personalinfo:
         "measurements-c3/physicalactivityrecord/any_event/duration|magnitude" : phys_act,
         "measurements-c3/pulse_heart_beat/any_event:0/pulse_rate|magnitude" : pulse #also changed
 
-        #fysisk aktivitet 1-5
         }
     for i in range(5, random.randint(5, 10)):
         payload["measurements-c3/blood_pressure/any_event:0/systolic|magnitude"] += random.choice(max_delta_bp)
@@ -195,4 +192,3 @@ for person in all_personalinfo:
                                     auth=(wu,wp),
                                     headers={"Content-Type":"application/json"},
                                     json=payload)
-        print("POST MEASUREMENTS: " + str(response))
