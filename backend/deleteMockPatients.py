@@ -24,4 +24,17 @@ def query(aql):
                             auth = (wu,wp)
                             )
     return response.json() if response.ok else response
-query(aql_get_mock_patient_ehrids)
+
+aql_get_personinfo_uid = aql = """SELECT c/uid/value as uid,
+e/ehr_id/value as id
+FROM EHR e
+CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.personinfo.v0]
+WHERE c/name/value='personinfo' AND id='%s'
+OFFSET 0
+"""
+
+aql_get_medications_uid = """SELECT c/uid/value as uid, e/ehr_id/value as id
+FROM EHR e
+CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.encounter.v1]
+WHERE c/name/value='Medications' AND id='%s'
+OFFSET 0"""
