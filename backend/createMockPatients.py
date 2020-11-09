@@ -39,7 +39,7 @@ initial_bloodsugar_range = range(3,9)
 max_delta_bloodsugar = range(-1,1)
 initial_oxygen_range = range(70, 100)
 max_delta_oxygen = range(-5,5)
-physical_activities = ["at0005","at0006","at0007","at0008","at0009"]
+#physical_activities = ["at0005","at0006","at0007","at0008","at0009"]
 
 #POST call to fejka.nu returns json object with personal information of x fake individuals, specified in no_of_patients variable above
 response = requests.post("https://fejka.nu/?json=1&num="+str(no_of_patients))
@@ -70,7 +70,10 @@ for person in all_personalinfo:
                                     "city" : person['city'],
                                     "adress": person['address'],
                                     "phone": person['phone'],
-                                    "age" : 2020-int(person['pnr_full'][:4])} }
+                                    "age" : 2020-int(person['pnr_full'][:4])
+                                    "team" : random.choice(team),
+                                    "department" : random.choice(department)
+                                    } }
                             )#kontaktperson från fejka.nu
                             #GLÖM INTE DEPARTMENT OCH TEAM
                             
