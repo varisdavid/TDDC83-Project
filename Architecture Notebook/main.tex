@@ -1,5 +1,6 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
+\usepackage[margin=1.2in]{geometry}
 
 %Package enabling roman numerals in lists
 \usepackage{enumitem}
@@ -17,7 +18,7 @@
 \title{Architecture Notebook}
 
 \author{Jonas Malm}
-\date{October 2020\\---\\Version 0.4.4}
+\date{October 2020\\---\\Version 0.5.2}
 
 \begin{document}
 
@@ -30,25 +31,29 @@
 \begin{tabular}{|l|l|l|l|}
 \hline
 Version & Date & Author & Description \\ \hline
-0.1 & 2020-10-15 & Jonas Malm & Creation of document\\ 
-0.2 & 2020-10-16 & Jonas Malm & Added architectural goals, finished ASRs\\
+0.1.0 & 2020-10-15 & Jonas Malm & Creation of document\\ 
+0.2.0 & 2020-10-16 & Jonas Malm & Added architectural goals, finished ASRs\\
 0.2.1 & 2020-11-02 & Jonas Malm & Added architectural constrains\\ 
-0.3 & 2020-11-02 & Jonas Malm & Added architectural decisions\\
+0.3.0 & 2020-11-02 & Jonas Malm & Added architectural decisions\\
 0.3.1 & 2020-11-04 & Jonas Malm & Refined decisions and ASRs\\
-0.4 & 2020-11-04 & Jonas Malm & Added key abstractions and started layers\\
+0.4.0 & 2020-11-04 & Jonas Malm & Added key abstractions and started layers\\
 0.4.1 & 2020-11-05 & Jonas Malm & Wrote detailed layers\\
 0.4.2 & 2020-11-09 & Jonas Malm & Added a glossary\\
 0.4.3 & 2020-11-09 & Jonas Malm & Mades revisions based on feedback from Gustaf Eriksson\\
 0.4.4 & 2020-11-09 & Jonas Malm & Re-wrote ASR to facilitate traceability\\
+0.5.0 & 2020-11-10 & Jonas Malm & Added user cases\\
+0.5.1 & 2020-11-10 & Jonas Malm & Modified box and line to separate filtration module\\
+0.5.2 & 2020-11-10 & Jonas Malm & Added overview sequence diagram\\
 
 \hline
 \end{tabular}
 \end{table}
 \textbf{TODO:}
-\begin{enumerate}[label=(\roman*)]
-\item  Improve section 5
-\item  Write section 6
-\item Add user cases?
+\begin{enumerate}[label=(\roman*)
+\item Add more sequence diagrams
+\item Write dependencies
+\item Write section 6 - product in the future
+\item Add deployment view
 \item Update ASRs when requirements are re-numbered
 \item Populate appendix
 \end{enumerate}
@@ -122,7 +127,7 @@ Python & 15 & 58\% \\
 \item The customer uses a openEHR system to store EHRs, and the same templates as 
 \item The rules used in the rule engine are set by the HCUs admin and not by HeartByte. HeartByte thus cannot take responsibility over if scientifically correct rules are applied, only that the patients are prioritized according to them.
 \end{enumerate}
-\subsection{Dependencies}
+\subsubsection{Dependencies}
 
 
 \section{Architecturally significant requirements}
@@ -138,7 +143,7 @@ Listed below are the Architecturally significant requirements (ARSs), the requir
 \end{tabularx}
 \\ \\
 
-Below, ASRs about these two views will be presented. The view displaying many patients will we refere
+Below, ASRs concerning these two views will be presented.
 
 \subsubsection{Patient overview}
 \begin{tabularx}{\linewidth}{| l | X |}
@@ -310,27 +315,37 @@ The EHR Database is the database that store the patient EHRs. It will also store
 
 
 \section{Architectural views}
+\subsection{User cases}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.5]{user-cases}
+    \caption{Significant system user cases}
+    \label{fig:user-cases}
+\end{figure}
+
+In Figure \ref{fig:user-cases} above, some of the more central user cases are illustrated. They are not exhaustive, but are presented to provide some context for the architectural design.
+
 \subsection{System layers}
 This section will describe components of the system in a detailed way through four layers: the GUI, the Front End Logic, the HeartByte Server and the EhrScape Server. The direction of the arrows indicate the direction of data flow.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[scale = 0.3]{box-and-line}
+    \includegraphics[scale = 0.45]{box-and-line}
     \caption{A box and line diagram illustrating layers of the system and its submodules}
     \label{fig:execution-view}
 \end{figure}
 
-As seen in Figure \ref{fig:execution-view} the front end and back end interface will utilize the facade design pattern, so coupling and modularity is ensured. Below, the modules in the figure will be described by layer.
+As seen in Figure \ref{fig:execution-view}, the front end and back end interface will utilize the facade design pattern, so coupling and modularity is ensured. Below, the modules in the figure will be described by layer.
 
 \subsubsection{GUI Layer}
 The GUI consists of four main modules. The Interface is what the user will interact with and what will display the web app. From the Interface the user can access the Patient Overview, displaying many patients, and through the Patient Selector select a specific patient to be displayed in the Patient View. 
 
-The Interface also allows a user to log in and for superusers, to customize the rules applied in the Rule Engine through the Rule Customizer and how components in the Interface are displayed through the View Customizer.
+The Interface also allows a user to log in and for superusers, to customize the rules applied in the Rule Engine through the Rule Customizer and views of the patients through the View Customizer.
 
 \subsubsection{Front End Logic Layer}
 The Front End Logic contains the "middleware" interacting with the HeartByte Server and the GUI to deliver data to the GUI. The most central module is the Client Data Retriever. This module will handle calls from Patient Overview to get general data about a group of patients and calls from Patient View to get detailed data about a specific patient. 
 
-When Patient Overview makes a call to this module, the servers response is passed to the Rule Engine for classification of how critical the patients health status is. Then the classified data is passed through the Filtration Module and then to the Patient Overview to be displayed. The Patient Overview can also make calls directly to the Filtration Module to change the filters applied to the data already retrieved. When the Patient View makes calls to the Client Data Retriever, the results returned from the server are passed directly to the Patient View.
+When Patient Overview makes a call to this module, the servers response is passed to the Rule Engine for classification of how critical the patients health status is. The classified data is then passed back to the Patient Overview. The Patient Overview can then make calls to the Filtration Module to change the filters applied to the data already retrieved. When the Patient View makes calls to the Client Data Retriever, the results returned from the server are passed directly to the Patient View.
 
 This layer also contains the modules used for authentication as well as the customization a superuser can do. To customize classification rules, the Interface calls the Rule Customizer which in turn loads or stores rules in the Customization Database. The View Customizer works in the same fashion. The Authentication module will make a call to the Personnel Database to determine what role the user has, and thus what information should be displayed.
 
@@ -342,7 +357,20 @@ The EHR Retriever is the module responsible for loading data from EHRs. This mod
 \subsubsection{EhrScape Server Layer}
 This layer is a database stored on an external server, which is accessed using the EhrScape API. The API is queried using stored custom Archetype Query Language (AQL) queries as well as using its REST API. Since this is the openEHR database query language it is easy to substitute this layer with another openEHR server in the future.
 
+\subsection{Sequence diagrams}
+In this section a few relevant sequence diagrams will be displayed, to further clarify how the modules will interact in typical user cases.
 
+\subsubsection{Calls from the overview module}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.45]{overview-sequence}
+    \caption{A sequence diagram illustrating how the Patient Overview calls are handled by the system}
+    \label{fig:overview-sequence}
+\end{figure}
+
+Worth noting from Figure \ref{fig:overview-sequence}, is that all relevant data is retrieved to the Overview. Once the data has been retrieved, filters can be applied without retrieving the data again. Since no sensitive data will be displayed to the user through the Overview, there is no need to log this in the access log.
+
+\clearpage
 \section{The system in the future}
 \textbf{TODO:} 
 This is only a stub, to be completed in the future
@@ -359,7 +387,7 @@ Due to the time constraint, some functionality was cut. In this section these mo
 
 \section{Appendix}
 \textbf{TODO:} Populate
-\subsubsection{OpenEHR Templates}
+\subsection{OpenEHR Templates}
 
 
 \end{document}
