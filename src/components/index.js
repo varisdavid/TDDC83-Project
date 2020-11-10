@@ -27,6 +27,8 @@ import PatientOverview from './patientview/PatientOverview.js';
 import Admin from './patientview/Admin.js';
 import Measurements from './patientview/Measurements.js';
 
+import PatientTables from './patientview/PatientTables.js'
+
 
 // import Notices from './Notices';
 // import NoticesTable from './NoticesTable';
@@ -52,4 +54,5 @@ export {
     PatientOverview,
     Admin,
     Measurements,
+    PatientTables,
 };
