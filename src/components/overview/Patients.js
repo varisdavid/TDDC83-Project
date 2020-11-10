@@ -7,6 +7,8 @@ import { Tooltip, Modal, Button, Link } from '@material-ui/core';
 import { NotificationImportant } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 
+import { useAuth0 } from "@auth0/auth0-react";
+
 import { useHistory } from 'react-router-dom';
 
 // Component rendering bell icon (color based on value: integer) and hover information based on (text: string) 
@@ -137,7 +139,7 @@ const PatientLink = ({id, name}) => {
 }
 
 const Patients = () => {
-
+  
   // This will apply filters to the table based on what filterData it recieves, 
   // it will also toggle the displaying of what the applied filter is and option to clear it 
   const setOwnFilters = (filterData) => {
@@ -159,6 +161,11 @@ const Patients = () => {
     setCustomFilterData(filterData); // This makes sure our representation of the fields in the filterModal is kept up to date.
 
   }
+
+  // This can later be used to save our retrieved patientlist from our API.
+  // const setPatientList = () => {
+
+  // }
 
   const data = useMemo(
     // To get them in the proper order, using numbers to represent priority, 1 = high, 2 = medium, 3 = low with notification, 4 = low without notification
@@ -619,10 +626,35 @@ const Patients = () => {
     useFlexLayout,
   );
 
+  const { getAccessTokenSilently } = useAuth0();
+
+
   // When something happens, we check to see if we change the sorting option, and we check if the search has been triggered
   useEffect(() => {
-    setGlobalFilter(searchValue); // We use the stored searchValue to globally filter our table by. 
-  }, [sortState, toggleSortBy, searchValue, setGlobalFilter]);
+     // Basic example of how to make a authorized fetch call to our backend endpoints
+    const getPatientList = async () => {
+      const domain =  "http://127.0.0.1:5000/api/patientlist";
+
+      try {
+        const token = await getAccessTokenSilently();
+          const response = await fetch(domain,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+    
+          const responseData = await response.json();
+          console.log(responseData);
+        } catch (error) {
+          console.log(error.message);
+        }
+      };
+      getPatientList();
+      toggleSortBy(sortState.columnId);
+      setGlobalFilter(searchValue); // We use the stored searchValue to globally filter our table by. 
+  }, [searchValue, sortState, toggleSortBy, setGlobalFilter, getAccessTokenSilently]);
 
   return (
   <>
