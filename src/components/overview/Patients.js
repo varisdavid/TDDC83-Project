@@ -164,7 +164,6 @@ const Patients = () => {
 
   // This can later be used to save our retrieved patientlist from our API.
   // const setPatientList = () => {
-
   // }
 
   const data = useMemo(
