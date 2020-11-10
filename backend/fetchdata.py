@@ -1,14 +1,3 @@
-from flask import Flask, request, redirect, url_for, jsonify
-
-app = Flask(__name__)
-
-
-@app.route("/patientlist", methods=["GET"])
-def patient_list():
-    patient_list = get_all_patients_personal_details()
-    return jsonify(patient_list)
-
-
 import requests
 import json
 
@@ -63,6 +52,3 @@ def get_all_patients_personal_details():
         to_return.append(personal_details)
     return to_return
 
-
-if __name__ == "__main__":
-    app.run(debug=True)

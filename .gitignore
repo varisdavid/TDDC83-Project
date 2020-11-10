@@ -25,4 +25,6 @@
 .env
 node_modules
 build/
-backend/env
+backend/venv
+.vscode
+__pycache__
