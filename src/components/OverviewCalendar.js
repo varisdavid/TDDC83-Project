@@ -36,22 +36,23 @@ const useStyles = makeStyles({
 
 const Data = [
   {
-    time: "8:00",
+    time: "08:00-09:00",
     activity: "Rond",
     description: "Ta upp något särskilt",
     place: "R34",
   },
+
   {
-    time: "9:00",
-    activity: "",
-    description: "",
-    place: "",
-  },
-  {
-    time: "10:00",
+    time: "10:00-11:00",
     activity: "Patientbesök",
     description: "Hälsokontroll",
     place: "",
+  },
+  {
+    time: "15:00-17:00",
+    activity: "Rapportering",
+    description: "Rapportera dagens arbete",
+    place: "Mitt kontor",
   },
 ];
 
@@ -86,9 +87,7 @@ const StyledTableRow = withStyles((theme) => ({
 
 const modifiers = {
   highlight: date => getDate(date) === 2 || getDate(date) === 9 || getDate(date) === 16
-    || getDate(date) === 23 || getDate(date) === 7 || getDate(date) === 12 || getDate(date) === 18
-    || getDate(date) === 4 || getDate(date) === 12 || getDate(date) === 21
-    || getDate(date) === 30 || getDate(date) === 4 || getDate(date) === 25
+    || getDate(date) === 21 || getDate(date) === 30
 }
 
 const modifiersClassNames = {
@@ -100,7 +99,7 @@ const Context = React.createContext({ value: null, setValue: () => { } });
 const BasicTable = (props) => {
   const classes = useStyles();
   const [rows] = useState(props.props);
-  if (tableDay == 2 || tableDay == 7 || tableDay ==21) {
+  if (tableDay == 2 || tableDay == 9 || tableDay ==21 || tableDay == 16 || tableDay == 30) {
     return (
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="simple table">
@@ -130,8 +129,10 @@ const BasicTable = (props) => {
           </Table>
         </TableContainer>
     );
+
   }else{
-    return (
+      return (
+
         <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
