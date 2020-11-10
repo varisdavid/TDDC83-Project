@@ -50,9 +50,23 @@
   padding: 6px !Important; 
 }
 
+.cell-table-body-red{
+  text-align: left;
+  background-color: #F5C1B7;
+  border-color: #E5E5E5;
+  width: 90%;
+  padding: 6px !Important; 
+  min-height: 30px;
+}
+
 .table-patient{
   background: #FFFFFF;
   border: 1px solid #E5E5E5;
   box-sizing: border-box;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.div-table-patient-view{
+  width: 80%; 
+  margin-Bottom: 30px;
 }

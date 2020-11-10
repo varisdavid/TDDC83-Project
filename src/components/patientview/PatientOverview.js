@@ -35,7 +35,7 @@ const PatientOverview = () => {
   return (
     <div className='flex justify-center'>
         <div style={{ width: '25%' }}>        
-          <div style={{ width: '80%', marginBottom: '30px'}}>
+          <div className='div-table-patient-view'> 
           {data.map((data) => (
             <Table className='table-patient'>
               <TableHead>
@@ -50,7 +50,7 @@ const PatientOverview = () => {
                   <TableCell className='cell-table-body' style={{background:'#FFF'}}> Kön: {data.gender} </TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell className='cell-table-body'> Ålder: {data.age} </TableCell>
+                  <TableCell className='cell-table-body' > Ålder: {data.age} </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell className='cell-table-body' style={{background:'#FFF'}}> Längd (cm): {data.length} </TableCell>
@@ -63,7 +63,7 @@ const PatientOverview = () => {
           ))}
           </div>
 
-          <div style={{ width: '80%' }}>
+          <div className='div-table-patient-view'>
           {data.map((data) => (
             <Table className='table-patient'>
               <TableHead>
@@ -88,7 +88,7 @@ const PatientOverview = () => {
           ))}
           </div>
 
-          <div style={{ width: '80%' }} className='vertical-align' >
+          <div className='div-table-patient-view'>
           {data.map((data) => (
             <Table className='table-patient'>
               <TableHead>
@@ -100,13 +100,16 @@ const PatientOverview = () => {
               </TableHead>
               <TableBody>
                 <TableRow>
-                  <TableCell className='cell-table-body' style={{background:'#FFF'}}> Kön: {data.gender} </TableCell>
+                  <TableCell className='cell-table-body' style={{background:'#FFF'}}> Namn: {data.emergencyContact} </TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell className='cell-table-body'> Ålder: {data.age} </TableCell>
+                  <TableCell className='cell-table-body'> Telefon: {data.emergencyContactPhone} </TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell className='cell-table-body' style={{background:'#FFF'}}> Längd (cm): {data.length} </TableCell>
+                  <TableCell className='cell-table-body' style={{background:'#FFF'}}> Mejladress: {data.emergencyContactEmail} </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell className='cell-table-body'> Adress: {data.emergencyContactAddress} </TableCell>
                 </TableRow>
               </TableBody>
             </Table>
@@ -115,43 +118,81 @@ const PatientOverview = () => {
 
         </div>
 
-        <div style={{ width: '25%' }} className='vertical-align'>
-          <div style={{ width: '80%' }}>
-            <Table>
+        <div style={{ width: '25%' }}>        
+          <div className='div-table-patient-view'> 
+          {data.map((data) => (
+            <Table className='table-patient'>
               <TableHead>
                 <TableRow>
                   <TableCell className='cell-table-header'>
-                    {data.name}
+                    Nuvarande diagnoser
                   </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 <TableRow>
-                  <TableCell>
-                    Text
-                  </TableCell>
+                  <TableCell className='cell-table-body-red' style={{background:'#FFF'}}> {data.diagnoses[0]} &nbsp; </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell className='cell-table-body-red'> {data.diagnoses[1]} &nbsp; </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell className='cell-table-body-red' style={{background:'#FFF'}}> {data.diagnoses[2]}&nbsp; </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell className='cell-table-body-red'> {data.diagnoses[3]} &nbsp; </TableCell>
                 </TableRow>
               </TableBody>
             </Table>
+          ))}
           </div>
-          <div style={{ width: '80%' }} className='vertical-align'>
-            <Table>
-              <TableHead>
+
+          <div className='div-table-patient-view'>
+          {data.map((data) => (
+            <Table className='table-patient'>
+              <TableHead columnSpan='all'>
                 <TableRow>
                   <TableCell className='cell-table-header'>
-                    {data.name}
+                    Aktuellt medicinintag
                   </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 <TableRow>
-                  <TableCell>
-                    Text
-                  </TableCell>
+                  <TableCell className='cell-table-body-red'> Alvedon </TableCell>
+                  <TableCell className='cell-table-body-red'> Tablett </TableCell>
+                  <TableCell className='cell-table-body-red'> 500mg </TableCell>
                 </TableRow>
               </TableBody>
             </Table>
+          ))}
           </div>
+
+          <div className='div-table-patient-view'>
+          {data.map((data) => (
+            <Table className='table-patient'>
+              <TableHead>
+                <TableRow>
+                  <TableCell className='cell-table-header'>
+                    Mätvärden - Snitt senaste 7 dagarna
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow>
+                  <TableCell className='cell-table-body' style={{background:'#FFF'}}> Vikt: </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell className='cell-table-body'> Blodtryck: </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell className='cell-table-body' style={{background:'#FFF'}}> Fysisk aktivitet: </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          ))}
+          </div>
+
         </div>
 
         <div style={{ width: '50%' }}>
