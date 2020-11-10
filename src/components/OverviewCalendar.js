@@ -131,7 +131,22 @@ const BasicTable = (props) => {
         </TableContainer>
     );
   }else{
-    return null;
+    return (
+        <TableContainer component={Paper}>
+      <Table className={classes.table} aria-label="simple table">
+        <TableHead>
+          <StyledTableRow>
+            <StyledHeaderCell>{props.value} </StyledHeaderCell>
+          </StyledTableRow>
+          <StyledTableRow>
+            <StyledTableCell>Tid</StyledTableCell>
+            <StyledTableCell align="left">Aktivitet</StyledTableCell>
+            <StyledTableCell align="left">Kommentar</StyledTableCell>
+            <StyledTableCell align="left">Plats</StyledTableCell>
+          </StyledTableRow>
+        </TableHead>
+      </Table>
+        </TableContainer>);
   }
 };
 let tableDay;
