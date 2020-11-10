@@ -5,6 +5,10 @@ import Grid from "@material-ui/core/Grid";
 import { enGB } from "date-fns/locale";
 import { DatePickerCalendar } from "react-nice-dates";
 import "react-nice-dates/build/style.css";
+
+//For styling calendar
+import '../../../src/OverviewCalendar.css';
+import { getDay, getDate } from 'date-fns';
 //...
 
 //For table
@@ -16,6 +20,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import { date } from "yup";
 
 // - The functions and styles in this file is supposed to be moved to seperate files
 // - Need to store table information in some way, with date as key.
@@ -31,22 +36,23 @@ const useStyles = makeStyles({
 
 const Data = [
   {
-    time: "8:00",
+    time: "08:00-09:00",
     activity: "Rond",
     description: "Ta upp något särskilt",
     place: "R34",
   },
+
   {
-    time: "9:00",
-    activity: "",
-    description: "",
+    time: "10:00-11:00",
+    activity: "Patientbesök",
+    description: "Hälsokontroll",
     place: "",
   },
   {
-    time: "10:00",
-    activity: "",
-    description: "",
-    place: "",
+    time: "15:00-17:00",
+    activity: "Rapportering",
+    description: "Rapportera dagens arbete",
+    place: "Mitt kontor",
   },
 ];
 
@@ -79,14 +85,55 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-const Context = React.createContext({ value: null, setValue: () => {} });
+const modifiers = {
+  highlight: date => getDate(date) === 2 || getDate(date) === 9 || getDate(date) === 16
+    || getDate(date) === 21 || getDate(date) === 30
+}
+
+const modifiersClassNames = {
+  highlight: '-highlight'
+}
+
+const Context = React.createContext({ value: null, setValue: () => { } });
 
 const BasicTable = (props) => {
   const classes = useStyles();
   const [rows] = useState(props.props);
+  if (tableDay == 2 || tableDay == 9 || tableDay ==21 || tableDay == 16 || tableDay == 30) {
+    return (
+        <TableContainer component={Paper}>
+          <Table className={classes.table} aria-label="simple table">
+            <TableHead>
+              <StyledTableRow>
+                <StyledHeaderCell>{props.value} </StyledHeaderCell>
+              </StyledTableRow>
+              <StyledTableRow>
+                <StyledTableCell>Tid</StyledTableCell>
+                <StyledTableCell align="left">Aktivitet</StyledTableCell>
+                <StyledTableCell align="left">Kommentar</StyledTableCell>
+                <StyledTableCell align="left">Plats</StyledTableCell>
+              </StyledTableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                  <StyledTableRow key={row.time}>
+                    <StyledTableCell align="left" component="th" scope="row">
+                      {row.time}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">{row.activity}</StyledTableCell>
+                    <StyledTableCell align="left">{row.description}</StyledTableCell>
+                    <StyledTableCell align="left">{row.place}</StyledTableCell>
+                  </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+    );
 
-  return (
-    <TableContainer component={Paper}>
+  }else{
+      return (
+
+        <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <StyledTableRow>
@@ -95,26 +142,19 @@ const BasicTable = (props) => {
           <StyledTableRow>
             <StyledTableCell>Tid</StyledTableCell>
             <StyledTableCell align="left">Aktivitet</StyledTableCell>
-            <StyledTableCell align="left">Beskrivning</StyledTableCell>
+            <StyledTableCell align="left">Kommentar</StyledTableCell>
             <StyledTableCell align="left">Plats</StyledTableCell>
           </StyledTableRow>
         </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.time}>
-              <StyledTableCell align="left" component="th" scope="row">
-                {row.time}
-              </StyledTableCell>
-              <StyledTableCell align="left">{row.activity}</StyledTableCell>
-              <StyledTableCell align="left">{row.description}</StyledTableCell>
-              <StyledTableCell align="left">{row.place}</StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
       </Table>
-    </TableContainer>
-  );
+        </TableContainer>);
+  }
 };
+let tableDay;
+function setTableDay(date) {
+   tableDay = date.toString().slice(8, 11);
+}
+
 
 const StaticCalendar = () => {
   const [date, setDate] = useState(new Date());
@@ -123,9 +163,17 @@ const StaticCalendar = () => {
   const onChange = (date) => {
     setDate(date);
     setValue(date);
+    setTableDay(date);
   };
+
   return (
-    <DatePickerCalendar date={date} onDateChange={onChange} locale={enGB} />
+    <DatePickerCalendar
+      date={date}
+      onDateChange={onChange}
+      locale={enGB}
+      modifiers={modifiers}
+      modifiersClassNames={modifiersClassNames}
+    />
   );
 };
 
