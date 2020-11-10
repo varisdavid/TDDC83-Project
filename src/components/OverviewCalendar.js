@@ -100,37 +100,45 @@ const Context = React.createContext({ value: null, setValue: () => { } });
 const BasicTable = (props) => {
   const classes = useStyles();
   const [rows] = useState(props.props);
-
-  return (
-    <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <StyledTableRow>
-            <StyledHeaderCell>{props.value} </StyledHeaderCell>
-          </StyledTableRow>
-          <StyledTableRow>
-            <StyledTableCell>Tid</StyledTableCell>
-            <StyledTableCell align="left">Aktivitet</StyledTableCell>
-            <StyledTableCell align="left">Kommentar</StyledTableCell>
-            <StyledTableCell align="left">Plats</StyledTableCell>
-          </StyledTableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.time}>
-              <StyledTableCell align="left" component="th" scope="row">
-                {row.time}
-              </StyledTableCell>
-              <StyledTableCell align="left">{row.activity}</StyledTableCell>
-              <StyledTableCell align="left">{row.description}</StyledTableCell>
-              <StyledTableCell align="left">{row.place}</StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  );
+  if (tableDay == 2 || tableDay == 7 || tableDay ==21) {
+    return (
+        <TableContainer component={Paper}>
+          <Table className={classes.table} aria-label="simple table">
+            <TableHead>
+              <StyledTableRow>
+                <StyledHeaderCell>{props.value} </StyledHeaderCell>
+              </StyledTableRow>
+              <StyledTableRow>
+                <StyledTableCell>Tid</StyledTableCell>
+                <StyledTableCell align="left">Aktivitet</StyledTableCell>
+                <StyledTableCell align="left">Kommentar</StyledTableCell>
+                <StyledTableCell align="left">Plats</StyledTableCell>
+              </StyledTableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                  <StyledTableRow key={row.time}>
+                    <StyledTableCell align="left" component="th" scope="row">
+                      {row.time}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">{row.activity}</StyledTableCell>
+                    <StyledTableCell align="left">{row.description}</StyledTableCell>
+                    <StyledTableCell align="left">{row.place}</StyledTableCell>
+                  </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+    );
+  }else{
+    return null;
+  }
 };
+let tableDay;
+function setTableDay(date) {
+   tableDay = date.toString().slice(8, 11);
+}
+
 
 const StaticCalendar = () => {
   const [date, setDate] = useState(new Date());
@@ -139,6 +147,7 @@ const StaticCalendar = () => {
   const onChange = (date) => {
     setDate(date);
     setValue(date);
+    setTableDay(date);
   };
 
   return (
