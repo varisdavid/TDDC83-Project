@@ -1,8 +1,7 @@
 from flask import Flask, request, redirect, url_for, jsonify
 
-from fetchdata import get_all_patients_personal_details
+from fetch_patient_list import get_all_patients_personal_details
 from auth import AuthError, requires_auth
-
 
 app = Flask(__name__)
 
