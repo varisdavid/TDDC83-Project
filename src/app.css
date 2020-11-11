@@ -52,13 +52,29 @@
 
 .cell-table-body-red{
   text-align: left;
+  border-color: #E5E5E5;
+  padding: 6px !Important; 
+  min-height: 30px;
+  border-right: 2px solid #275E8E;
+}
+
+.cell-table-body-red:last-child{
+  text-align: left;
+  border-color: #E5E5E5;
+  padding: 6px !Important; 
+  min-height: 30px;
+}
+.row-table-body-red{
+  text-align: left;
   background-color: #F5C1B7;
   border-color: #E5E5E5;
-  width: 90%;
   padding: 6px !Important; 
   min-height: 30px;
 }
 
+.row-table-body-red:nth-child(odd){
+  background-color: #FFF;
+}
 .table-patient{
   background: #FFFFFF;
   border: 1px solid #E5E5E5;

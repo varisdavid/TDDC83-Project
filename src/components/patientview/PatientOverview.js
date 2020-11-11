@@ -25,9 +25,26 @@ const PatientOverview = () => {
         emergencyContact: "Per Andersson",
         emergencyContactPhone: '070-9292929',
         emergencyContactEmail: "per@andersson.se",
-        emergencyContactAddress: "Linköpingsvägen 1"
+        emergencyContactAddress: "Linköpingsvägen 1",
       },
     ],
+    []
+  )
+
+  const medications = useMemo (
+    () => [
+        {medication:'Alvedon', type: 'Tablett', amount:'500mg'},
+        {medication:'Actrapid', type: 'Injektionsvätska', amount:'400mg'},
+      ],
+    []
+  )
+
+  const earlierDisease = useMemo (
+    () => [
+        {disease:'Hjärtinfarkt', year: 2018},
+        {disease:'Hjärtinfarkt', year: 2008},
+        {disease:'Höftoperation', year: 2011},
+      ],
     []
   )
 
@@ -130,16 +147,16 @@ const PatientOverview = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                <TableRow>
+                <TableRow className='row-table-body-red'>
                   <TableCell className='cell-table-body-red' style={{background:'#FFF'}}> {data.diagnoses[0]} &nbsp; </TableCell>
                 </TableRow>
-                <TableRow>
+                <TableRow className='row-table-body-red'>
                   <TableCell className='cell-table-body-red'> {data.diagnoses[1]} &nbsp; </TableCell>
                 </TableRow>
-                <TableRow>
+                <TableRow className='row-table-body-red'>
                   <TableCell className='cell-table-body-red' style={{background:'#FFF'}}> {data.diagnoses[2]}&nbsp; </TableCell>
                 </TableRow>
-                <TableRow>
+                <TableRow className='row-table-body-red'>
                   <TableCell className='cell-table-body-red'> {data.diagnoses[3]} &nbsp; </TableCell>
                 </TableRow>
               </TableBody>
@@ -148,24 +165,24 @@ const PatientOverview = () => {
           </div>
 
           <div className='div-table-patient-view'>
-          {data.map((data) => (
             <Table className='table-patient'>
-              <TableHead columnSpan='all'>
+              <TableHead>
                 <TableRow>
-                  <TableCell className='cell-table-header'>
+                  <TableCell className='cell-table-header' colSpan='3'>
                     Aktuellt medicinintag
                   </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                <TableRow>
-                  <TableCell className='cell-table-body-red'> Alvedon </TableCell>
-                  <TableCell className='cell-table-body-red'> Tablett </TableCell>
-                  <TableCell className='cell-table-body-red'> 500mg </TableCell>
+              {medications.map((medications, index) => (
+                <TableRow className='row-table-body-red' key={medications.medication}>
+                  <TableCell className='cell-table-body-red'> {medications.medication} </TableCell>
+                  <TableCell className='cell-table-body-red'> {medications.type} </TableCell>
+                  <TableCell className='cell-table-body-red'> {medications.amount} </TableCell>
                 </TableRow>
+                ))}
               </TableBody>
             </Table>
-          ))}
           </div>
 
           <div className='div-table-patient-view'>
