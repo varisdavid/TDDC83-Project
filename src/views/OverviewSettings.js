@@ -1,7 +1,7 @@
 import React from "react";
 
 import { OverviewHeaderBanner } from "../components"
-import ActivityLog from "../components/SettingsActivityLog";
+import ActivityLog from "../components/overview/SettingsActivityLog";
 
 // Current thinking is that all views described in the 
 // prototype should have this as a baseplate, were either the children 

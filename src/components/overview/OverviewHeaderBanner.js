@@ -4,7 +4,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "@material-ui/core"
 import { Settings, ExitToAppRounded } from '@material-ui/icons';
 
-import logoRegion from "../assets/logo_region.png"
+import logoRegion from "../../assets/logo_region.png"
 
 const OverviewHeaderBanner = ({ healthCenter }) => {
    
