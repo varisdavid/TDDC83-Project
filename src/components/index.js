@@ -20,9 +20,9 @@ import PatientGroups from './overview/PatientGroups';
 import FilterModal from './overview/FilterModal';
 import CreateNewFilterModal from './overview/CreateNewFilterModal';
 
-import PatientCalendar from './patientview/PatientCalendar';
-import PatientViewHeaderBanner from './patientview/PatientViewHeaderBanner';
-import PatientViewHeaderNavigation from './patientview/PatientViewHeaderNavigation';
+import PatientCalendar from './patientview/PatientCalendar.js';
+import PatientViewHeaderBanner from './patientview/PatientViewHeaderBanner.js';
+import PatientViewHeaderNavigation from './patientview/PatientViewHeaderNavigation.js';
 import PatientOverview from './patientview/PatientOverview.js';
 import Admin from './patientview/Admin.js';
 import Measurements from './patientview/Measurements.js';
