@@ -83,3 +83,9 @@
   width: 60%;
   margin-Bottom: 30px;
 }
+
+.img-overview-page{
+  width: 60%;
+  margin-Bottom: 30px;
+  max-height: 120px;
+}
