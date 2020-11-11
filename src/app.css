@@ -44,32 +44,24 @@
 
 .cell-table-body{
   text-align: left;
-  background-color: #E5E5E5;
-  border-color: #E5E5E5;
-  width: 90%;
-  padding: 6px !Important; 
-}
-
-.cell-table-body-red{
-  text-align: left;
   border-color: #E5E5E5;
   padding: 6px !Important; 
-  min-height: 30px;
   border-right: 2px solid #275E8E;
 }
 
-.cell-table-body-red:last-child{
-  text-align: left;
-  border-color: #E5E5E5;
-  padding: 6px !Important; 
-  min-height: 30px;
+.cell-table-body:last-child{
+  border-right: none;
 }
+.row-table-body{
+  background-color: #E5E5E5;
+}
+
+.row-table-body:nth-child(odd){
+  background-color: #FFF;
+}
+
 .row-table-body-red{
-  text-align: left;
   background-color: #F5C1B7;
-  border-color: #E5E5E5;
-  padding: 6px !Important; 
-  min-height: 30px;
 }
 
 .row-table-body-red:nth-child(odd){
@@ -84,5 +76,10 @@
 
 .div-table-patient-view{
   width: 80%; 
+  margin-Bottom: 30px;
+}
+
+.div-table-patient-view-personal{
+  width: 60%;
   margin-Bottom: 30px;
 }

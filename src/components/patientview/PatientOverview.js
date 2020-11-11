@@ -26,6 +26,7 @@ const PatientOverview = () => {
         emergencyContactPhone: '070-9292929',
         emergencyContactEmail: "per@andersson.se",
         emergencyContactAddress: "Linköpingsvägen 1",
+        personalInfo: "Rädd för sprutor",
       },
     ],
     []
@@ -48,32 +49,43 @@ const PatientOverview = () => {
     []
   )
 
+  const measurments = useMemo (
+    () => [
+        {measure:'Vikt', average: '60 kg', goal: '62 kg'},
+        {measure:'Blodtryck', average: '140 - 160 / 90 - 100', goal: '140 - 160 / 90 - 100'},
+        {measure:'Fysisk aktivitet', average: 'Nivå 3 (av 5)', goal: 'Nivå 5 (av 5)'},
+      ],
+    []
+  )
+
+  const responsibleCaregivers = useMemo (
+    () => [
+        {name:'Anders Persson', title: 'Med', clinic: 'Medicinkliniken', status: 'Inskriven'},
+        {name:'Per Persson', title: 'Ortoped', clinic: 'Ortopedkliniken', status: 'Inskriven'},
+        {name:'Nina Eriksson', title: 'Allmän läk', clinic: 'Lyckans vårdcentral', status: 'Skrevs ut 2020-03-13'},
+      ],
+    []
+  )
+
   // One after another the tables for Förnamn Efternamn, Kontaktinformation, Nödkontakt, Nuvarnade Diagnoser...
   return (
     <div className='flex justify-center'>
-        <div style={{ width: '25%' }}>        
-          <div className='div-table-patient-view'> 
+        <div style={{ width: '25%' }}> 
+          <div className='div-table-patient-view'>
+            Här ska det vara en bild
+          </div>      
+
+          <div className='div-table-patient-view-personal'> 
           {data.map((data) => (
             <Table className='table-patient'>
               <TableHead>
                 <TableRow>
-                  <TableCell className='cell-table-header'>
-                    {data.name}
-                  </TableCell>
+                  <TableCell className='cell-table-header'> Personligt </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                <TableRow>
-                  <TableCell className='cell-table-body' style={{background:'#FFF'}}> Kön: {data.gender} </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className='cell-table-body' > Ålder: {data.age} </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className='cell-table-body' style={{background:'#FFF'}}> Längd (cm): {data.length} </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className='cell-table-body'> Vikt (kg): {data.weight} </TableCell>
+                <TableRow className='row-table-body'>
+                  <TableCell className='cell-table-body'> {data.personalInfo} </TableCell>
                 </TableRow>
               </TableBody>
             </Table>
@@ -85,20 +97,18 @@ const PatientOverview = () => {
             <Table className='table-patient'>
               <TableHead>
                 <TableRow>
-                  <TableCell className='cell-table-header'>
-                    Kontaktinformation
-                  </TableCell>
+                  <TableCell className='cell-table-header'> Kontaktinformation</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                <TableRow>
-                  <TableCell className='cell-table-body' style={{background:'#FFF'}}> Telefon: {data.phone} </TableCell>
+                <TableRow className='row-table-body'>
+                  <TableCell className='cell-table-body'> Telefon: {data.phone} </TableCell>
                 </TableRow>
-                <TableRow>
+                <TableRow className='row-table-body'>
                   <TableCell className='cell-table-body'> Mejladress: {data.email} </TableCell>
                 </TableRow>
-                <TableRow>
-                  <TableCell className='cell-table-body' style={{background:'#FFF'}}> Adress: {data.address} </TableCell>
+                <TableRow className='row-table-body'>
+                  <TableCell className='cell-table-body'> Adress: {data.address} </TableCell>
                 </TableRow>
               </TableBody>
             </Table>
@@ -110,22 +120,20 @@ const PatientOverview = () => {
             <Table className='table-patient'>
               <TableHead>
                 <TableRow>
-                  <TableCell className='cell-table-header'>
-                    Nödkontakt
-                  </TableCell>
+                  <TableCell className='cell-table-header'> Nödkontakt </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                <TableRow>
-                  <TableCell className='cell-table-body' style={{background:'#FFF'}}> Namn: {data.emergencyContact} </TableCell>
+                <TableRow className='row-table-body'>
+                  <TableCell className='cell-table-body'> Namn: {data.emergencyContact} </TableCell>
                 </TableRow>
-                <TableRow>
+                <TableRow className='row-table-body'>
                   <TableCell className='cell-table-body'> Telefon: {data.emergencyContactPhone} </TableCell>
                 </TableRow>
-                <TableRow>
-                  <TableCell className='cell-table-body' style={{background:'#FFF'}}> Mejladress: {data.emergencyContactEmail} </TableCell>
+                <TableRow className='row-table-body'>
+                  <TableCell className='cell-table-body'> Mejladress: {data.emergencyContactEmail} </TableCell>
                 </TableRow>
-                <TableRow>
+                <TableRow className='row-table-body'>
                   <TableCell className='cell-table-body'> Adress: {data.emergencyContactAddress} </TableCell>
                 </TableRow>
               </TableBody>
@@ -141,23 +149,21 @@ const PatientOverview = () => {
             <Table className='table-patient'>
               <TableHead>
                 <TableRow>
-                  <TableCell className='cell-table-header'>
-                    Nuvarande diagnoser
-                  </TableCell>
+                  <TableCell className='cell-table-header'> Nuvarande diagnoser </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 <TableRow className='row-table-body-red'>
-                  <TableCell className='cell-table-body-red' style={{background:'#FFF'}}> {data.diagnoses[0]} &nbsp; </TableCell>
+                  <TableCell className='cell-table-body'> {data.diagnoses[0]} &nbsp; </TableCell>
                 </TableRow>
                 <TableRow className='row-table-body-red'>
-                  <TableCell className='cell-table-body-red'> {data.diagnoses[1]} &nbsp; </TableCell>
+                  <TableCell className='cell-table-body'> {data.diagnoses[1]} &nbsp; </TableCell>
                 </TableRow>
                 <TableRow className='row-table-body-red'>
-                  <TableCell className='cell-table-body-red' style={{background:'#FFF'}}> {data.diagnoses[2]}&nbsp; </TableCell>
+                  <TableCell className='cell-table-body'> {data.diagnoses[2]} &nbsp; </TableCell>
                 </TableRow>
                 <TableRow className='row-table-body-red'>
-                  <TableCell className='cell-table-body-red'> {data.diagnoses[3]} &nbsp; </TableCell>
+                  <TableCell className='cell-table-body'> {data.diagnoses[3]} &nbsp; </TableCell>
                 </TableRow>
               </TableBody>
             </Table>
@@ -168,17 +174,15 @@ const PatientOverview = () => {
             <Table className='table-patient'>
               <TableHead>
                 <TableRow>
-                  <TableCell className='cell-table-header' colSpan='3'>
-                    Aktuellt medicinintag
-                  </TableCell>
+                  <TableCell className='cell-table-header' colSpan='3'> Aktuellt medicinintag </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
               {medications.map((medications, index) => (
                 <TableRow className='row-table-body-red' key={medications.medication}>
-                  <TableCell className='cell-table-body-red'> {medications.medication} </TableCell>
-                  <TableCell className='cell-table-body-red'> {medications.type} </TableCell>
-                  <TableCell className='cell-table-body-red'> {medications.amount} </TableCell>
+                  <TableCell className='cell-table-body'> {medications.medication} </TableCell>
+                  <TableCell className='cell-table-body'> {medications.type} </TableCell>
+                  <TableCell className='cell-table-body'> {medications.amount} </TableCell>
                 </TableRow>
                 ))}
               </TableBody>
@@ -186,48 +190,68 @@ const PatientOverview = () => {
           </div>
 
           <div className='div-table-patient-view'>
-          {data.map((data) => (
             <Table className='table-patient'>
               <TableHead>
                 <TableRow>
-                  <TableCell className='cell-table-header'>
-                    Mätvärden - Snitt senaste 7 dagarna
-                  </TableCell>
+                  <TableCell className='cell-table-header' colSpan='2'> Tidigare sjukdomar </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                <TableRow>
-                  <TableCell className='cell-table-body' style={{background:'#FFF'}}> Vikt: </TableCell>
+              {earlierDisease.map((earlierDisease, index) => (
+                <TableRow className='row-table-body' key={earlierDisease.disease}>
+                  <TableCell className='cell-table-body'> {earlierDisease.disease} </TableCell>
+                  <TableCell className='cell-table-body'> {earlierDisease.year} </TableCell>
                 </TableRow>
-                <TableRow>
-                  <TableCell className='cell-table-body'> Blodtryck: </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className='cell-table-body' style={{background:'#FFF'}}> Fysisk aktivitet: </TableCell>
-                </TableRow>
+                ))}
               </TableBody>
             </Table>
-          ))}
           </div>
 
         </div>
 
         <div style={{ width: '50%' }}>
-          <div style={{ width: '80%' }}>
-            <Table>
+          <div className='div-table-patient-view'>
+            Här ska det vara en kalender
+          </div>
+          <div className='div-table-patient-view'>
+            <Table className='table-patient'>
               <TableHead>
                 <TableRow>
-                  <TableCell className='cell-table-header'>
-                    {data.name}
+                  <TableCell className='cell-table-header'> Mätvärden </TableCell>
+                  <TableCell className='cell-table-header'> Snitt senaste 7 dagarna </TableCell>
+                  <TableCell className='cell-table-header'> Målvärde </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+              {measurments.map((measurments, index) => (
+                <TableRow className='row-table-body' key={measurments.measure}>
+                  <TableCell className='cell-table-body'> {measurments.measure} </TableCell>
+                  <TableCell className='cell-table-body'> {measurments.average} </TableCell>
+                  <TableCell className='cell-table-body'> {measurments.goal} </TableCell>
+                </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+
+          <div className='div-table-patient-view'>
+            <Table className='table-patient'>
+              <TableHead>
+                <TableRow>
+                  <TableCell className='cell-table-header' colSpan='4'>
+                    Ansvarig vårdpersonal
                   </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                <TableRow>
-                  <TableCell>
-                      Text
-                  </TableCell>
+              {responsibleCaregivers.map((responsibleCaregivers, index) => (
+                <TableRow className='row-table-body' key={responsibleCaregivers.name}>
+                  <TableCell className='cell-table-body'> {responsibleCaregivers.name} </TableCell>
+                  <TableCell className='cell-table-body'> {responsibleCaregivers.title} </TableCell>
+                  <TableCell className='cell-table-body'> {responsibleCaregivers.clinic} </TableCell>
+                  <TableCell className='cell-table-body'> {responsibleCaregivers.status} </TableCell>
                 </TableRow>
+                ))}
               </TableBody>
             </Table>
           </div>
