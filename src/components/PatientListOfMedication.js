@@ -14,23 +14,23 @@ const PatientListOfMedication = () => {
       {
       Läkemedel: 'Alvedon',
       Dos: '1000mg',
-      Intagsform: 'Stolspiller',
+      Intagsform: 'tabletter',
       Intag: '2 tabletter dagligen',
-      Kommentar: 'Blöt tabletten innan',
+      Kommentar: 'Tas i samband med mat',
       },
       {
        Läkemedel: 'Alvedon',
        Dos: '1000mg',
-       Intagsform: 'Stolspiller',
+       Intagsform: 'Tabletter',
        Intag: '2 tabletter dagligen',
-       Kommentar: 'Blöt tabletten innan',
+       Kommentar: 'Tas till maten',
        },
        {
        Läkemedel: 'Alvedon',
        Dos: '1000mg',
-       Intagsform: 'Stolspiller',
+       Intagsform: 'tabletter',
        Intag: '2 tabletter dagligen',
-       Kommentar: 'Blöt tabletten innan',
+       Kommentar: 'Tas i samband med mat',
        },
       ],
       []
@@ -89,6 +89,7 @@ const PatientListOfMedication = () => {
       <>
           <Table {...getTableProps()} >
             <TableHead>
+            Aktuella läkemedelsbehandlingar
             {headerGroups.map(headerGroup => (
                 <TableRow {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map((column, columnIndex) => (
