@@ -28,3 +28,9 @@ __pychache__
 
 #Environment
 venv/
+.env
+node_modules
+build/
+backend/venv
+.vscode
+__pycache__
