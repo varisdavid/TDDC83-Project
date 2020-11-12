@@ -12,36 +12,50 @@ const PatientListOfMedication = () => {
       // To get them in the proper order, using numbers to represent priority, 1 = high, 2 = medium, 3 = low with notification, 4 = low without notification
       () => [
       {
-      name: "Gunilla Andersson",
-      sweID: '470203-1324',
-      diagnoses: ['Diabetes', 'Hypertoni'],
-      updatedAt: '2020-10-08',
-      updatedBy: 'Patienten',
-      age: 73,
-      gender: 'female',
-      team: 'Team 1',
-      department: 'Department 1',
+      Läkemedel: 'Alvedon',
+      Dos: '1000mg',
+      Intagsform: 'Stolspiller',
+      Intag: '2 tabletter dagligen',
+      Kommentar: 'Blöt tabletten innan',
       },
+      {
+       Läkemedel: 'Alvedon',
+       Dos: '1000mg',
+       Intagsform: 'Stolspiller',
+       Intag: '2 tabletter dagligen',
+       Kommentar: 'Blöt tabletten innan',
+       },
+       {
+       Läkemedel: 'Alvedon',
+       Dos: '1000mg',
+       Intagsform: 'Stolspiller',
+       Intag: '2 tabletter dagligen',
+       Kommentar: 'Blöt tabletten innan',
+       },
       ],
       []
       )
 
     const columns = useMemo(
           () => [
+
+          {Header:'TEst 1', //Fixes the problem with Läkemedel doesn't show.
+          },
+
           {Header: 'Läkemedel',
-          accessor:'name',
+          accessor:'Läkemedel',
           },
           {Header: 'Dos',
-          accessor:'sweID',
+          accessor:'Dos',
           },
-          {Header: 'Intagningsform',
-          accessor:'',
+          {Header: 'Intagsform',
+          accessor:'Intagsform',
           },
           {Header: 'Intag',
-          accessor:'',
+          accessor:'Intag',
           },
           {Header: 'Kommentar',
-          accessor:'',
+          accessor:'Kommentar',
           },
           ],
           []
