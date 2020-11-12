@@ -39,9 +39,6 @@ const PatientListOfMedication = () => {
     const columns = useMemo(
           () => [
 
-          {Header:'TEst 1', //Fixes the problem with Läkemedel doesn't show.
-          },
-
           {Header: 'Läkemedel',
           accessor:'Läkemedel',
           },
@@ -68,7 +65,7 @@ const PatientListOfMedication = () => {
                headerGroups,
                rows,
                prepareRow,
-           } = useTable({ columns, data},
+           } = useTable({ columns, data },
              useFlexLayout,
            );
 
@@ -87,19 +84,19 @@ const PatientListOfMedication = () => {
 
       return (
       <>
-          <Table {...getTableProps()} >
-            <TableHead>
             <div style={{padding: "15px"}}></div>
             <b style= {{padding: "50px"}}>Aktuella läkemedelsbehandlingar</b>
+          <Table {...getTableProps()} >
+            <TableHead>
             {headerGroups.map(headerGroup => (
                 <TableRow {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column, columnIndex) => (
+                {headerGroup.headers.map((column) => (
                     <TableCell
                       {...column.getHeaderProps()}
                       style={{
-                        width: (columnIndex === 0) ? '45px' : '16.66667%', //Make first column fixed size
-                        background: (columnIndex === 0) ? '#FFF' : '#275E8E', //Make first column invisible
-                        borderColor: (columnIndex === 0) && '#FFF', //Make first column invisible
+                        width: '20%', //Make first column fixed size
+                        background: '#275E8E', //Make first column invisible
+                        borderColor: '#FFF', //Make first column invisible
                         color: '#FFF',
                         fontWeight: '700',
                         fontSize: '15px',
@@ -156,13 +153,11 @@ const PatientListOfMedication = () => {
                     })}
                   >
 
-                        {row.cells.map((cell, cellIndex) => {
+                        {row.cells.map((cell) => {
                         return (
                           <TableCell {...cell.getCellProps()} style={{padding: '10px',
                                                                       textAlign: 'center',
-                                                                      width: (cellIndex === 0) ? '45px' : '18%', //To make first column fixed size
-                                                                      background: (cellIndex === 0) && '#FFF', //To make first column invisible
-                                                                      borderColor: (cellIndex === 0) && '#FFF', //To make first column invisible
+                                                                      width: '20%', //To make first column fixed size
                                                                     }}>
                             { cell.render('Cell')}
                           </TableCell>
@@ -175,96 +170,93 @@ const PatientListOfMedication = () => {
               </TableBody>
             </div>
         </Table>
+        
+        <div style={{padding: "15px"}}></div>
+          <b style= {{padding: "50px"}}>Vid behov</b>
+          <Table {...getTableProps()} >
+            <TableHead>
+            {headerGroups.map(headerGroup => (
+                <TableRow {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map((column) => (
+                    <TableCell
+                      {...column.getHeaderProps()}
+                      style={{
+                        width: '20%', //Make first column fixed size
+                        background: '#275E8E', //Make first column invisible
+                        borderColor: '#FFF', //Make first column invisible
+                        color: '#FFF',
+                        fontWeight: '700',
+                        fontSize: '15px',
+                        textAlign: 'center',
+                      }}
+                    >
+                    {column.render('Header')}
+                    <span>
+                      {column.isSorted
+                        ? column.isSortedDesc
+                          ? <ArrowDropUp style={{fontSize: '15px' }} />
+                          : <ArrowDropDown style={{fontSize: '15px' }} />
+                        : ''}
+                    </span>
+                    </TableCell>
+                ))}
+                </TableRow>
+            ))}
+            </TableHead>
+              <div
+                ref={parentRef}
+                style={{
+                  display: 'block',
+                  maxHeight: `calc(100vh - 620px)`, //calculated other parts to height of 520 + spacing, so table gets whats left
+                  overflow: 'auto',
+                  width: `100%`
+                }}
+              >
+              <TableBody
+                {...getTableBodyProps}
+                className='ListInner'
+                style={{
+                  display: 'block',
+                  height: `${rowVirtualizer.totalSize}px`,
+                  position: 'relative'
+                }}
+              >
+                {rowVirtualizer.virtualItems.map(virtualRow => {
+                  const row = rows[virtualRow.index];
+                  prepareRow(row);
+                  return (
+                    <TableRow
+                    key={virtualRow.index}
+                    ref={virtualRow.measureRef}
+                    {...row.getRowProps({
+                      style: {
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        transform: `translateY(${virtualRow.start}px)`,
+                        background: (virtualRow.index % 2) ? '#E5E5E5' : '#FFF',
+                      }
+                    })}
+                  >
 
+                        {row.cells.map((cell) => {
+                        return (
+                          <TableCell {...cell.getCellProps()} style={{padding: '10px',
+                                                                      textAlign: 'center',
+                                                                      width: '20%', //To make first column fixed size
+                                                                    }}>
+                            { cell.render('Cell')}
+                          </TableCell>
+                        )
 
-        <Table {...getTableProps()} >
-                    <TableHead>
-                    <div style={{padding: "15px"}}></div>
-                    <b style= {{padding: "50px"}}>Vid behov</b>
-                    {headerGroups.map(headerGroup => (
-                        <TableRow {...headerGroup.getHeaderGroupProps()}>
-                        {headerGroup.headers.map((column, columnIndex) => (
-                            <TableCell
-                              {...column.getHeaderProps()}
-                              style={{
-                                width: (columnIndex === 0) ? '45px' : '16.66667%', //Make first column fixed size
-                                background: (columnIndex === 0) ? '#FFF' : '#275E8E', //Make first column invisible
-                                borderColor: (columnIndex === 0) && '#FFF', //Make first column invisible
-                                color: '#FFF',
-                                fontWeight: '700',
-                                fontSize: '15px',
-                                textAlign: 'center',
-                              }}
-                            >
-                            {column.render('Header')}
-                            <span>
-                              {column.isSorted
-                                ? column.isSortedDesc
-                                  ? <ArrowDropUp style={{fontSize: '15px' }} />
-                                  : <ArrowDropDown style={{fontSize: '15px' }} />
-                                : ''}
-                            </span>
-                            </TableCell>
-                        ))}
-                        </TableRow>
-                    ))}
-                    </TableHead>
-                      <div
-                        ref={parentRef}
-                        style={{
-                          display: 'block',
-                          maxHeight: `calc(100vh - 620px)`, //calculated other parts to height of 520 + spacing, so table gets whats left
-                          overflow: 'auto',
-                          width: `100%`
-                        }}
-                      >
-                      <TableBody
-                        {...getTableBodyProps}
-                        className='ListInner'
-                        style={{
-                          display: 'block',
-                          height: `${rowVirtualizer.totalSize}px`,
-                          position: 'relative'
-                        }}
-                      >
-                        {rowVirtualizer.virtualItems.map(virtualRow => {
-                          const row = rows[virtualRow.index];
-                          prepareRow(row);
-                          return (
-                            <TableRow
-                            key={virtualRow.index}
-                            ref={virtualRow.measureRef}
-                            {...row.getRowProps({
-                              style: {
-                                position: 'absolute',
-                                top: 0,
-                                left: 0,
-                                width: '100%',
-                                transform: `translateY(${virtualRow.start}px)`,
-                                background: (virtualRow.index % 2) ? '#E5E5E5' : '#FFF',
-                              }
-                            })}
-                          >
-
-                                {row.cells.map((cell, cellIndex) => {
-                                return (
-                                  <TableCell {...cell.getCellProps()} style={{padding: '10px',
-                                                                              textAlign: 'center',
-                                                                              width: (cellIndex === 0) ? '45px' : '18%', //To make first column fixed size
-                                                                              background: (cellIndex === 0) && '#FFF', //To make first column invisible
-                                                                              borderColor: (cellIndex === 0) && '#FFF', //To make first column invisible
-                                                                            }}>
-                                    { cell.render('Cell')}
-                                  </TableCell>
-                                )
-
-                                })}
-                            </TableRow>
-                          )}
-                        )}
-                      </TableBody>
-                    </div>
-                </Table>
+                        })}
+                    </TableRow>
+                  )}
+                )}
+              </TableBody>
+            </div>
+        </Table>
       </>
       );
 };
