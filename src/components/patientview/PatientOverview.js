@@ -251,7 +251,7 @@ const PatientOverview = () => {
                   <TableCell className='cell-table-body' title={responsibleCaregivers.typeOfClinic}> {responsibleCaregivers.name} </TableCell>
                   <TableCell className='cell-table-body' title={responsibleCaregivers.typeOfClinic}> {responsibleCaregivers.title} </TableCell>
                   <TableCell className='cell-table-body' title={responsibleCaregivers.typeOfClinic}> {responsibleCaregivers.clinic} </TableCell>
-                  <TableCell className='cell-table-body' title={responsibleCaregivers.typeOfClinic}> {responsibleCaregivers.status} </TableCell>
+                  <TableCell className='cell-table-body' title={responsibleCaregivers.typeOfClinic} status={responsibleCaregivers.status}> {responsibleCaregivers.status} </TableCell>
                 </TableRow>
                 ))}
               </TableBody>
