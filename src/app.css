@@ -52,6 +52,10 @@
 .cell-table-body:last-child{
   border-right: none;
 }
+
+.cell-table-body[title=Primary]{
+  font-weight: bold;
+}
 .row-table-body{
   background-color: #E5E5E5;
 }

@@ -62,9 +62,9 @@ const PatientOverview = () => {
 
   const responsibleCaregivers = useMemo (
     () => [
-        {name:'Anders Persson', title: 'Med', clinic: 'Medicinkliniken', status: 'Inskriven'},
-        {name:'Per Persson', title: 'Ortoped', clinic: 'Ortopedkliniken', status: 'Inskriven'},
-        {name:'Nina Eriksson', title: 'Allmän läk', clinic: 'Lyckans vårdcentral', status: 'Skrevs ut 2020-03-13'},
+        {name:'Anders Persson', title: 'Med', clinic: 'Medicinkliniken', status: 'Inskriven', typeOfClinic: 'Primary'},
+        {name:'Per Persson', title: 'Ortoped', clinic: 'Ortopedkliniken', status: 'Inskriven', typeOfClinic: 'Secondary'},
+        {name:'Nina Eriksson', title: 'Allmän läk', clinic: 'Lyckans vårdcentral', status: 'Skrevs ut 2020-03-13', typeOfClinic: 'Primary'},
       ],
     []
   )
@@ -248,10 +248,10 @@ const PatientOverview = () => {
               <TableBody>
               {responsibleCaregivers.map((responsibleCaregivers, index) => (
                 <TableRow className='row-table-body' key={responsibleCaregivers.name}>
-                  <TableCell className='cell-table-body'> {responsibleCaregivers.name} </TableCell>
-                  <TableCell className='cell-table-body'> {responsibleCaregivers.title} </TableCell>
-                  <TableCell className='cell-table-body'> {responsibleCaregivers.clinic} </TableCell>
-                  <TableCell className='cell-table-body'> {responsibleCaregivers.status} </TableCell>
+                  <TableCell className='cell-table-body' title={responsibleCaregivers.typeOfClinic}> {responsibleCaregivers.name} </TableCell>
+                  <TableCell className='cell-table-body' title={responsibleCaregivers.typeOfClinic}> {responsibleCaregivers.title} </TableCell>
+                  <TableCell className='cell-table-body' title={responsibleCaregivers.typeOfClinic}> {responsibleCaregivers.clinic} </TableCell>
+                  <TableCell className='cell-table-body' title={responsibleCaregivers.typeOfClinic}> {responsibleCaregivers.status} </TableCell>
                 </TableRow>
                 ))}
               </TableBody>
