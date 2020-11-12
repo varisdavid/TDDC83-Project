@@ -23,6 +23,7 @@ import CreateNewFilterModal from './overview/CreateNewFilterModal';
 import PatientCalendar from './PatientCalendar';
 import PatientViewHeaderBanner from './PatientViewHeaderBanner';
 import PatientViewHeaderNavigation from './PatientViewHeaderNavigation';
+import PatientListOfMedication from './PatientListOfMedication';
 
 
 // import Notices from './Notices';
@@ -46,4 +47,5 @@ export {
     PatientCalendar,
     PatientViewHeaderBanner,
     PatientViewHeaderNavigation,
+    PatientListOfMedication,
 };
