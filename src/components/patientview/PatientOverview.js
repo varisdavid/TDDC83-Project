@@ -34,6 +34,14 @@ const PatientOverview = () => {
     []
   )
 
+  const diagnoses = useMemo(
+    () => [
+      {name: 'Diabetes'},
+      {name: 'Hypertoni'},
+    ],
+    []
+  )
+
   const medications = useMemo (
     () => [
         {medication:'Alvedon', type: 'Tablett', amount:'500mg'},
@@ -147,7 +155,6 @@ const PatientOverview = () => {
 
         <div style={{ width: '25%' }}>        
           <div className='div-table-patient-view'> 
-          {data.map((data) => (
             <Table className='table-patient'>
               <TableHead>
                 <TableRow>
@@ -155,21 +162,13 @@ const PatientOverview = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                <TableRow className='row-table-body-red'>
-                  <TableCell className='cell-table-body'> {data.diagnoses[0]} &nbsp; </TableCell>
+              {diagnoses.map((diagnoses,index) => (
+                <TableRow className='row-table-body' key={diagnoses.name}>
+                  <TableCell className='cell-table-body'> {diagnoses.name} </TableCell>
                 </TableRow>
-                <TableRow className='row-table-body-red'>
-                  <TableCell className='cell-table-body'> {data.diagnoses[1]} &nbsp; </TableCell>
-                </TableRow>
-                <TableRow className='row-table-body-red'>
-                  <TableCell className='cell-table-body'> {data.diagnoses[2]} &nbsp; </TableCell>
-                </TableRow>
-                <TableRow className='row-table-body-red'>
-                  <TableCell className='cell-table-body'> {data.diagnoses[3]} &nbsp; </TableCell>
-                </TableRow>
+                 ))}
               </TableBody>
             </Table>
-          ))}
           </div>
 
           <div className='div-table-patient-view'>
@@ -181,7 +180,7 @@ const PatientOverview = () => {
               </TableHead>
               <TableBody>
               {medications.map((medications, index) => (
-                <TableRow className='row-table-body-red' key={medications.medication}>
+                <TableRow className='row-table-body' key={medications.medication}>
                   <TableCell className='cell-table-body'> {medications.medication} </TableCell>
                   <TableCell className='cell-table-body'> {medications.type} </TableCell>
                   <TableCell className='cell-table-body'> {medications.amount} </TableCell>

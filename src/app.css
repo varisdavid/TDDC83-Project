@@ -68,13 +68,6 @@
   background-color: #FFF;
 }
 
-.row-table-body-red{
-  background-color: #F5C1B7;
-}
-
-.row-table-body-red:nth-child(odd){
-  background-color: #FFF;
-}
 .table-patient{
   background: #FFFFFF;
   border: 1px solid #E5E5E5;
