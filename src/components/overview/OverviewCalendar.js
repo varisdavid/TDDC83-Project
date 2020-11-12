@@ -6,10 +6,11 @@ import { enGB } from "date-fns/locale";
 import { DatePickerCalendar } from "react-nice-dates";
 import "react-nice-dates/build/style.css";
 
+
 //For styling calendar
 import '../../../src/OverviewCalendar.css';
-import { getDay, getDate } from 'date-fns';
-//import { getDate } from 'date-fns';
+//import { getDay, getDate } from 'date-fns';
+import { getDate } from 'date-fns';
 //...
 
 //For table
@@ -21,7 +22,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-// import { date } from "yup";
+//import { date } from "yup";
 
 // - The functions and styles in this file is supposed to be moved to seperate files
 // - Need to store table information in some way, with date as key.
