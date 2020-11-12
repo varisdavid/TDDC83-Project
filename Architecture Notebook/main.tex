@@ -1,5 +1,6 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
+\usepackage[margin=1.2in]{geometry}
 
 %Package enabling roman numerals in lists
 \usepackage{enumitem}
@@ -11,10 +12,13 @@
 \usepackage{graphicx}
 \graphicspath{ {./images/} }
 
+%Package to display requirements as in SRS
+\usepackage{tabularx}
+
 \title{Architecture Notebook}
 
 \author{Jonas Malm}
-\date{October 2020\\---\\Version 0.4.1}
+\date{October 2020\\---\\Version 0.5.2}
 
 \begin{document}
 
@@ -27,19 +31,33 @@
 \begin{tabular}{|l|l|l|l|}
 \hline
 Version & Date & Author & Description \\ \hline
-0.1 & 2020-10-15 & Jonas Malm & Creation of document\\ 
-0.2 & 2020-10-16 & Jonas Malm & Added architectural goals, finished ASRs\\
+0.1.0 & 2020-10-15 & Jonas Malm & Creation of document\\ 
+0.2.0 & 2020-10-16 & Jonas Malm & Added architectural goals, finished ASRs\\
 0.2.1 & 2020-11-02 & Jonas Malm & Added architectural constrains\\ 
-0.3 & 2020-11-02 & Jonas Malm & Added architectural decisions\\
+0.3.0 & 2020-11-02 & Jonas Malm & Added architectural decisions\\
 0.3.1 & 2020-11-04 & Jonas Malm & Refined decisions and ASRs\\
-0.4 & 2020-11-04 & Jonas Malm & Added key abstractions and started layers\\
+0.4.0 & 2020-11-04 & Jonas Malm & Added key abstractions and started layers\\
 0.4.1 & 2020-11-05 & Jonas Malm & Wrote detailed layers\\
 0.4.2 & 2020-11-09 & Jonas Malm & Added a glossary\\
+0.4.3 & 2020-11-09 & Jonas Malm & Mades revisions based on feedback from Gustaf Eriksson\\
+0.4.4 & 2020-11-09 & Jonas Malm & Re-wrote ASR to facilitate traceability\\
+0.5.0 & 2020-11-10 & Jonas Malm & Added user cases\\
+0.5.1 & 2020-11-10 & Jonas Malm & Modified box and line to separate filtration module\\
+0.5.2 & 2020-11-10 & Jonas Malm & Added overview sequence diagram\\
 
 \hline
 \end{tabular}
 \end{table}
-\textbf{TODO:} Section 5, Traceability, Section 6, Add user cases?
+\textbf{TODO:}
+\begin{enumerate}[label=(\roman*)
+\item Add more sequence diagrams
+\item Write dependencies
+\item Write section 6 - product in the future
+\item Add deployment view
+\item Update ASRs when requirements are re-numbered
+\item Populate appendix
+\end{enumerate}
+
 
 \clearpage
 
@@ -103,14 +121,57 @@ Python & 15 & 58\% \\
 
 
 \subsection{Assumptions and dependencies}
-\textbf{TODO:}
-Note sure if this section is applicable to the architecture?
+\subsubsection{Assumptions}
+\begin{enumerate}[label=(\roman*)]
+\item The system will not be used on mobile devices, thus platform and OS independence applies only to computers and tablets 
+\item The customer uses a openEHR system to store EHRs, and the same templates as 
+\item The rules used in the rule engine are set by the HCUs admin and not by HeartByte. HeartByte thus cannot take responsibility over if scientifically correct rules are applied, only that the patients are prioritized according to them.
+\end{enumerate}
+\subsubsection{Dependencies}
 
 
 \section{Architecturally significant requirements}
 Listed below are the Architecturally significant requirements (ARSs), the requirements most central to the architectural design. 
 
-\subsection{Patient overview}
+\subsection{Patient views}
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR007  \\ 
+ \hline
+ \textbf{Statement:} & The user shall be able to shift between a "patient view" where many patients are shown and a "overview view" where only one patient are shown. \\
+ \hline
+\end{tabularx}
+\\ \\
+
+Below, ASRs concerning these two views will be presented.
+
+\subsubsection{Patient overview}
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR009  \\ 
+ \hline
+ \textbf{Statement:} & The admin shall be able to specify the variables that affects the health prioritization. The system shall provide the possibility to specify different variables for different health care units. 
+ \\ 
+ \hline
+ 
+ \textbf{ID:} & FR004  \\ 
+ \hline
+ \textbf{Statement:} & The system shall display all patients in preferred order to a user who sort patients by [age, alert-level, measurements, health care unit, team, disease and patients’conditions]. \\ 
+ \hline
+ 
+ \textbf{ID:} & FR003  \\ 
+ \hline
+ \textbf{Statement:} & The system shall display all matching patients to a user who filter patients by [age, alert-level, measurements, health care unit, team, disease and patients’conditions]. \\ 
+ \hline
+
+ \textbf{ID:} & FR011  \\ 
+ \hline
+ \textbf{Statement:} & The admin shall be able to customize and save different views of the system. (e.g. a predefined view over diabetes patients who are over 30 years)
+  \\ 
+ \hline
+\end{tabularx}
+\\ \\
+
 The requirements state that the software shall have an overview of patients where a health care provider can:
 \begin{enumerate}[label=(\roman*)]
 \item prioritize patients assisted by a module implementing care unit-specific triage rules,
@@ -121,22 +182,81 @@ The requirements state that the software shall have an overview of patients wher
 Thus a rule engine will be implemented that loads rule sets created by an admin as well as a database storing custom filter views and custom rules.
 
 
-\subsection{Patient view}
+\subsubsection{Patient view}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR026  \\ 
+ \hline
+ \textbf{Statement:} & In the view of a patient user shall be able to see personal information (gender, age occupation, social security number) 
+ \\ 
+
+ \hline
+ \textbf{ID:} & FR043  \\ 
+ \hline
+ \textbf{Statement:} & In the overview of a patient the user shall at the top of the view be presented with the patient’s current medication(s).
+ \\ 
+ \hline
+
+ \hline
+ \textbf{ID:} & FR044  \\ 
+ \hline
+ \textbf{Statement:} & In the overview of a patient the user shall at the bottom of the view be presented with responsible healthcare provider(s) and associated hospital or clinic.
+ \\ 
+ \hline
+\end{tabularx}
+\\ \\
+
 The requirements state that detailed information about a patient from his or her EHR is to be displayed in a dedicated view for the specific patient. This information includes current medications, next of kin, health data as well as a calendar visualizing upcoming events for the patient.
 
-\subsection{Patient data}
-Another central aspect of the project is that it deals with sensitive data. The health records of patients have certain formats and restrictions by law on access that must be taken into account.
-
 \subsubsection{Format}
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & NFR013  \\ 
+ \hline
+ \textbf{Statement:} & The system shall enable use of openEHR platforms as storage backend for EHR content (e.g. measurements, content from forms filled out by the patient and care plan).
+ \\ 
+ \hline
+\end{tabularx}
+\\ \\
+
 The requirements further stipulate that all patient \emph{Electronic Health Records}, EHRs, have to be stored and loaded from databases in accordance with the \emph{openEHR open standard specification}. This is furthermore of great importance to the customer, since they cannot integrate the software with its existing software and servers without the key requirement being fulfilled.
 
-\subsubsection{Access}
-Health records are highly regulated and one important aspect is who is allowed to see what patient data. Thus the requirements state that the software shall save logs when a user accesses EHRs of patients not belonging to his or her Health Care Unit. The requirements also state that the users have to authenticate themselves using OAuth. 
+\subsubsection{Patient data and access}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR038  \\ 
+ \hline
+ \textbf{Statement:} & The user shall only get access to the data if the user chooses to access it
+  \\ 
+ \hline
+
+ \textbf{ID:} & FR006  \\ 
+ \hline
+ \textbf{Statement:} & The system shall notify the user if they tries to access patient data that they don't have authority to view.\\ 
+ \hline
+
+ \textbf{ID:} & FR008  \\ 
+ \hline
+ \textbf{Statement:} & The system shall log which users who viewing which patients. These activities shall be saved in a log file.
+\\ 
+ \hline
+
+ \textbf{ID:} & NFR002  \\ 
+ \hline
+ \textbf{Statement:} & OAuth shall be used for login and authentication.
+ \\ 
+ \hline
+\end{tabularx}
+\\ \\
+
+Health records are highly regulated and one important aspect is who is allowed to see what patient data. Thus the requirements state that the software shall save logs when a user accesses EHRs. The requirements also state that the users have to authenticate themselves using OAuth. 
 Thus the following modules need to be implemented:
 
 \begin{enumerate}[label=(\roman*)]
 \item A database storing access logs
-\item A database storing which Health Care Unit (HCU) a user belongs to
+\item A database storing which Health Care Unit (HCU) a user belongs to, so it can be determined if a user has authority to access
 \item An authentication system using OAuth
 \end{enumerate}
 
@@ -195,43 +315,67 @@ The EHR Database is the database that store the patient EHRs. It will also store
 
 
 \section{Architectural views}
+\subsection{User cases}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.5]{user-cases}
+    \caption{Significant system user cases}
+    \label{fig:user-cases}
+\end{figure}
+
+In Figure \ref{fig:user-cases} above, some of the more central user cases are illustrated. They are not exhaustive, but are presented to provide some context for the architectural design.
+
 \subsection{System layers}
 This section will describe components of the system in a detailed way through four layers: the GUI, the Front End Logic, the HeartByte Server and the EhrScape Server. The direction of the arrows indicate the direction of data flow.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[scale = 0.3]{box-and-line}
+    \includegraphics[scale = 0.45]{box-and-line}
     \caption{A box and line diagram illustrating layers of the system and its submodules}
     \label{fig:execution-view}
 \end{figure}
 
-As seen in Figure \ref{fig:execution-view} the front end and back end interface will utilize the facade design pattern, so coupling and modularity is ensured. Below, the modules in the figure will be described by layer.
+As seen in Figure \ref{fig:execution-view}, the front end and back end interface will utilize the facade design pattern, so coupling and modularity is ensured. Below, the modules in the figure will be described by layer.
 
 \subsubsection{GUI Layer}
 The GUI consists of four main modules. The Interface is what the user will interact with and what will display the web app. From the Interface the user can access the Patient Overview, displaying many patients, and through the Patient Selector select a specific patient to be displayed in the Patient View. 
 
-The Interface also allows a user to log in and for superusers, to customize the rules applied in the Rule Engine through the Rule Customizer and how components in the Interface are displayed through the View Customizer.
+The Interface also allows a user to log in and for superusers, to customize the rules applied in the Rule Engine through the Rule Customizer and views of the patients through the View Customizer.
 
 \subsubsection{Front End Logic Layer}
 The Front End Logic contains the "middleware" interacting with the HeartByte Server and the GUI to deliver data to the GUI. The most central module is the Client Data Retriever. This module will handle calls from Patient Overview to get general data about a group of patients and calls from Patient View to get detailed data about a specific patient. 
 
-When Patient Overview makes a call to this module, the servers response is passed to the Rule Engine for classification of how critical the patients health status is. Then the classified data is passed through the Filtration Module and then to the Patient Overview to be displayed. The Patient Overview can also make calls directly to the Filtration Module to change the filters applied to the data already retrieved. When the Patient View makes calls to the Client Data Retriever, the results returned from the server are passed directly to the Patient View.
+When Patient Overview makes a call to this module, the servers response is passed to the Rule Engine for classification of how critical the patients health status is. The classified data is then passed back to the Patient Overview. The Patient Overview can then make calls to the Filtration Module to change the filters applied to the data already retrieved. When the Patient View makes calls to the Client Data Retriever, the results returned from the server are passed directly to the Patient View.
 
 This layer also contains the modules used for authentication as well as the customization a superuser can do. To customize classification rules, the Interface calls the Rule Customizer which in turn loads or stores rules in the Customization Database. The View Customizer works in the same fashion. The Authentication module will make a call to the Personnel Database to determine what role the user has, and thus what information should be displayed.
 
 \subsubsection{HeartByte Server Layer}
 The HeartByte Server contains the databases specific to the system and the functionality to retrieve EHRs. The System Database Management allows for storing and loading data in the Personnel Database and the Customization Database. These databases contain data about custom rules and views for specific HCUs and personnel data, respectively.
 
-The EHR Retriever is the module responsible for loading data from EHRs. This module will recieve a call about what data to retrieve, make a call to the EhrScape Server to retrieve the requested data and return the data through the Server Endpoint. The EHR Retriever will also make a call to the Personnel Database in order to check if the user requesting the EHR data works at one of the HCUs responsible for the patient. If this is not the case, the access will be logged in the Access Log database.
+The EHR Retriever is the module responsible for loading data from EHRs. This module will recieve a call about what data to retrieve, make a call to the EhrScape Server to retrieve the requested data and return the data through the Server Endpoint. The EHR Retriever will also make a call to the Personnel Database in order to check if the user requesting the EHR data works at one of the HCUs responsible for the patient. If this is not the case, this will be added to the log entry in the Access Log database.
 
 \subsubsection{EhrScape Server Layer}
 This layer is a database stored on an external server, which is accessed using the EhrScape API. The API is queried using stored custom Archetype Query Language (AQL) queries as well as using its REST API. Since this is the openEHR database query language it is easy to substitute this layer with another openEHR server in the future.
 
+\subsection{Sequence diagrams}
+In this section a few relevant sequence diagrams will be displayed, to further clarify how the modules will interact in typical user cases.
 
+\subsubsection{Calls from the overview module}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.45]{overview-sequence}
+    \caption{A sequence diagram illustrating how the Patient Overview calls are handled by the system}
+    \label{fig:overview-sequence}
+\end{figure}
+
+Worth noting from Figure \ref{fig:overview-sequence}, is that all relevant data is retrieved to the Overview. Once the data has been retrieved, filters can be applied without retrieving the data again. Since no sensitive data will be displayed to the user through the Overview, there is no need to log this in the access log.
+
+\clearpage
 \section{The system in the future}
-
+\textbf{TODO:} 
+This is only a stub, to be completed in the future
 \subsection{Scaleability}
-EHR Retriever & changing the database to live. Rule engine on large scale? Filtration on large sets? Personnel database & the scope tokens?
+EHR Retriever & changing the database to live. Rule engine on large scale? Filtration on large sets? Personnel database and the scope tokens?
 \subsection{Support}
 \subsection{Maintaining}
 Changing database. Leaving openEHR? 
@@ -240,6 +384,10 @@ Due to the time constraint, some functionality was cut. In this section these mo
 \subsubsection{Trend analysis}
 \subsubsection{Calendars}
 \subsubsection{Notifications}
+
+\section{Appendix}
+\textbf{TODO:} Populate
+\subsection{OpenEHR Templates}
 
 
 \end{document}
