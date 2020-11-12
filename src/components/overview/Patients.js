@@ -683,7 +683,6 @@ const Patients = () => {
           <div style={{ width: 'calc(85%)', marginRight: '22.5px' }} className='mt-3 p-2'>
               <div style={{ width: 'calc(100%)' }}>
                   <PatientsTable 
-                    data={data}
                     getTableProps={getTableProps}
                     getTableBodyProps={getTableBodyProps}
                     headerGroups={headerGroups}

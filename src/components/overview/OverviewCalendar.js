@@ -8,8 +8,8 @@ import "react-nice-dates/build/style.css";
 
 //For styling calendar
 import '../../../src/OverviewCalendar.css';
-// import { getDay, getDate } from 'date-fns';
-import { getDate } from 'date-fns';
+import { getDay, getDate } from 'date-fns';
+//import { getDate } from 'date-fns';
 //...
 
 //For table
@@ -100,7 +100,7 @@ const Context = React.createContext({ value: null, setValue: () => { } });
 const BasicTable = (props) => {
   const classes = useStyles();
   const [rows] = useState(props.props);
-  if (tableDay === 2 || tableDay === 9 || tableDay ===21 || tableDay === 16 || tableDay === 30) {
+  if (tableDay === '02' || tableDay === '09' || tableDay === '21' || tableDay === '16' || tableDay === '30') {
     return (
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="simple table">
@@ -153,7 +153,8 @@ const BasicTable = (props) => {
 };
 let tableDay;
 function setTableDay(date) {
-   tableDay = date.toString().slice(8, 11);
+  tableDay = date.toString().slice(8, 10);
+   
 }
 
 
