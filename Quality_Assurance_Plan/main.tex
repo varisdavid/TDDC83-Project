@@ -4,7 +4,13 @@
 \usepackage{graphicx}
 \usepackage{comment}
 \usepackage{hyperref}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{makecell}
 \graphicspath{./Pictures/}
+
+\newcolumntype{n}{>{\hsize=0.7\hsize \raggedright\arraybackslash}X}
+\newcolumntype{w}{>{\hsize=1.6\hsize \raggedright\arraybackslash}X}
 
 \begin{document}
 	% Title Page
@@ -21,70 +27,56 @@
 	
 	% Introduction: Why is this an important document?
 	\section{Introduction}
-	This Software Quality Assurance Plan (SQAP) describes the process, methods, standards and procedures that will be used to ensure the desired quality level of the HeartByte [project name].
+	This Software Quality Assurance Plan (SQAP) describes the process, methods, standards and procedures that will be used to ensure the desired quality level of the HeartByte project.
 	
 	\subsection{Scope}
-	This plan establishes the SQA activities performed throughout the life cycle of [Project name]. The goal of the SQA process is to verify that all software and documentation to be delivered meet all technical requirements and the expectations of both the customer Region Östergötland (RÖ) and CEO Daniel Ståhl. The SQA procedures defined herein shall be used to examine all deliverable software and documentation to determine compliance with tehcnical and performance requirements. 
+	This plan establishes the SQA activities performed throughout the life cycle of the project. The goal of the SQA process is to verify that all software and documentation to be delivered meet all technical requirements and the expectations of both the customer Region Östergötland (RÖ) and CEO Daniel Ståhl. The SQA procedures defined herein shall be used to examine all deliverable software and documentation to determine compliance with tehcnical and performance requirements. 
 	
-	%Possibly course management as well.
-	% Possibly add table with al software lifecycle activities
-	
-	\subsection{Relationship to Other Plans}
-	TBD.
-	
-	\subsection{SQA Roles and Responsibilities}
-	The following chart defines the SQA roles and responsibilities of the members of the project team regarding SQA activities.
-	
-	\begin{tabular}{|l|l|l|l|}
-		\hline
-		Role & Name & Liu-id & Responsibility \\
-		\hline
-		Quality Coordinator & Emma Johansson & emmjo662 & Manages the Quality Assurance function. This include to develop and document quality standard and process for all management process, as well as perform SQA tasks. \\
-		
-		Test Leader & Gustav Karlsson & guska006 & Manages the testing function.
-		content...
-	\end{tabular}
-	
-	To be further specified after discussion with concerned members.
-	
-	%Remove?
-	\section{Software Configuration Management}
-	The purpose of Software Configuration Management (SCM) is to implement a controlled change process and define build and process management. The project uses GitLab as version control tool. The framework on how Git is used within the project is found in \textit{Framework for programming TDDC88}. The main principles specified to assure high quality code is that each function are to be developed on a separate branch and requested to merge to the master development branch when finished. The merge request is then to be audited by [responsible for merge requests] before being accepted and merged to the master. This process work to avoid defects being imported into the running code.
-	
-	[How is the code commented and readme files created?]
 
-	\section{SQA Tasks}
+	\subsection{SQA Roles}
+	Emma Johansson as Quality Coordinator is responsible of conducting the SQAP and its compliance within the project. The company's Document Manager Patrik Palmgren will assist in review and inspection processes. Testing methodologies are conducted by Gustav Karlsson, Test Leader. 
+	
+	All members of HeartByte are responsible to deliver work of good quality and identify shortcomings in both processes and work products.
+	
+	%\clearpage
+	%\section{References}
+	%This chapter includes a reference list to relevant documents. 
+	%document number, name, issue, issue date
+	
+	
+	\clearpage
+	\section{Software Configuration Management}
+	The purpose of Software Configuration Management (SCM) is to implement a controlled change process and define build and process management. The project uses GitLab as version control tool. The framework on how Git is used within the project is found in \textit{Framework for programming TDDC88}. The main principles specified to assure high quality code is the use of several levels of feature branches and merge requests. Each function are to be developed on a separate branch and requested to merge to a higher level feature branch when finished. The merge request is then to be audited by the responsible person for each level before being accepted and merged to the highest level of development feature branches. This process work to avoid defects being imported into the running code.
+	
+	To assure readability of code and traceability to features connected to requirements, processes for generating readme-files and commenting of code are specified (see \textit{Framework for programming TDDC88}).
+	
+	Continuous integration refers to the practice where developers integrate their work continuously. This methodology is used in HeartByte's project in order to improve predictability and easier troubleshooting. By continuously integrating changes there will be no unexpected grand errors when integrating modules.
+
+	\clearpage
+	\section{SQA Activities}
 	The following section describes tasks that lies within the responsibility of SQA. The tasks are dynamic and not occurring only once.  
 	
-	\subsection{Task: Conduct Appraisal processes}
-	The project will throughout its life cycle produce a number of deliverables and work products. The appraisal process of these are to be specified and overseen by SQA in collaboration with responsible team leader. These processes are defined in section~\ref{doc} \nameref{doc}
+	% software quality audits performed focusing on different aspects, e.g.traceability, tool usage, tool configuration, configuration identification, baselines, inspections, change control, test coverage, requirement development, building, loading,, reporting of compiler warnings, etc.
 	
-	List of work products that SQA will review and audit:
-	
-	\begin{tabular}{|l|l|l|l|}
-		\hline	
-		No & Work Product & Permission & Grant to Person \\
-		\hline	
-		\hline
-		1   & Architecture Notebook	& Read	& Emma \\
-		2	& Software Requirements Specification	& Read & Gustav \\
-		3	& Education Plan		& Read	& Emma \\
-		4	& Project Plan			& Read	& Emma \\
-		5	& Software Quality Assurance Plan		& Read	& Axel \\
-	
+	\subsection{Conduct Appraisal processes}
+	The project will throughout its life cycle produce a number of deliverables and work products. The appraisal process of these are to be specified and overseen by SQA in collaboration with responsible team leader. These processes are defined in section~\ref{method} \nameref{method}
 		
-		\hline
-	\end{tabular}
-	
-	
-	\subsection{Task: Evaluate Software Tools}
+	\subsection{Evaluate Software Tools}
 	SQA shall evaluate software tools, both existing and planned, used for software development and support. This is due to ensure that existing tools are adequate for the purpose they are intended and whether the capabilities of the tools are needed. Planned tools are assessed in the same way, but also by determining feasibility in adopting the tool with regard to available knowledge and resources for education within HeartByte. This evaluation is done in consultation with representatives from the management team as well as the team proposing the tool.
 	
-	\subsection{Task:Evaluate Project Planning and Compliance}
-	The Project Plan is a work product under supervision of SQA. The Plan is assessed by ensuring that relevant activities are specified and planned, as well as management processes. SQA shall also evaluate that the project conducts the activities stated in the Project Plan. Each version of the Project Plan shall be reviewed prior to its release. Evaluation of conducted activities are to be done continuously and in detail at the end of each iteration of the project. 
+	\subsection{Evaluate Project Planning and Compliance}
+	The Project Plan is a work product under supervision of SQA. The Plan is assessed by ensuring that relevant activities are specified and planned, as well as management processes. SQA shall also evaluate that the project conducts the activities stated in the Project Plan. Prior to release, each major version is to be inspected according to the process described in  section~\ref{method} \nameref{method}. Evaluation of conducted activities are to be done continuously and in detail at the end of each iteration of the project. 
 	
-	\subsection{Task: Evaluate System Requirements Analysis Process}
+	%\subsection{Evaluate System Requirements Analysis Process}
 	%Requirements analysis establishes a common understanding of the customer’s requirements between that customer and the software project team.  An agreement with the customer on the requirements for the software project is established and maintained.  This agreement is known as allocating system requirements to software and hardware.  Section 4 lists the system requirements documents.
+	
+	
+	\subsection{Evaluate Software Configuration Compliance}
+	SQA is responsible for following the compliance of the software configuration. This includes to asses the use of Gitlab in comparison to specified guidelines as well as the readability and traceability of the code. Furthermore the continuous integration process is to be evaluated in terms of how frequent work is integrated at each level and the size of the integrated work pieces.
+	
+	\subsection{Evaluate Document Review and Inspection Process Compliance}
+	SQA is responsible of ensuring that document review and inspection processes are followed for relevant documents. This includes documentation of the processes as well. 
+	
 	%SQA activities are listed below:
 	\begin{comment}
 		
@@ -104,34 +96,103 @@
 	The results of this task shall be documented using the Process Audit Form described in Section 7 and provided to project management.  SQA recommendation for corrective action requires project management’s disposition and will be processed in accordance with the guidance in Section 7
 	\end{comment}
 	
-	\subsection{Task: Evaluate Coverage Rate of Tests}
+	%\subsection{Evaluate Coverage Rate of Tests}
+	% Quality Factors and metrics
 	
-	\section{Documentation} \label{doc}
-	%Which documentation there shall be, who is reviewing it, where is it supposed to be 
+	\clearpage
 	
-	\section{Tools, Technologies and Methodologies} %?
+	\section{Software Quality Assurance Records} \label{doc}
+	The aim of the software quality assurance record (SQR) is to report activities performed as part of the quality assurance work defined in the SQAP. The SQR shall identify the activity performed, persons involved and documents or data assessed. The resulting observations, suggestions, deviations and/or actions shall also be included. 
+	
+	The SQR's produced shall be gathered in a software quality assurance summary. There, all SQA activities performed are listed with references to respective SQR. The summary shall include a conclusion regarding the adherence to SQAP that is continuously updated.
+	
+	
+	\clearpage
+	\section{Tools, Technologies and Methodologies} \label{method}
+	
+	\subsection{Document Review and Inspection}
+	
+	\subsubsection{Change Log}
+	All documents that are to be reviewed or inspected shall have a document change log. This facilitates in tracking changes and verifying that those are approved by someone other than the author. Version Number provides a means to refer to a specific version. Published Date is the date when the certain version is locked. Description of Revision is a brief description of what has been changed/added/removed and, if applicable, which chapter it concerns. Author is responsible for the changes made to the certain version. Approved by refers to who has conducted a review or inspection, thus only applicable for primary number increments (e.g. 2.0, 3.0). See table \ref{tab:changeLog}.
+	
+	\begin{table}[h]
+		\noindent\makebox[\textwidth]{
+			\begin{tabularx}{1.2\textwidth}{l|l|w|n|n}
+				\toprule
+				\makecell[l]{Version \\ Number} & 
+				\makecell[l]{Published \\ Date} & Description of Revision & Author & Approved by \\
+				\midrule
+				1.0	& 2020-10-23 &	Initial Version	& Emma Johansson & Patrik Palmgren \\
+				1.1 & 2020-11-07 &	Document Review Process added (ch 6) & Emma Johansson & Patrik Palmgren \\
+				\bottomrule
+			\end{tabularx}
+		}
+		\caption{Example of Change Log}
+		\label{tab:changeLog}
+	\end{table}
+	
+	To each revision of a document, an author needs to be chosen among those who have contributed to the changes. This person is responsible for the state of the document and conducting the review process if a new version is to be released. Minor changes to single chapters shall be issued with a decimal increment, for example from 1.1 to 1.2. If the author considers a series of minor changes in total constitute a large difference from the latest reviewed version, the document manager shall be contacted for review or inspection. After such a process, the document is issued as a primary version with a primary number increment, i.e from 1.7 to 2.0.  
+	
+	Each new version of a document shall be included in the change log. At the publishing date it should be added to Teams at applicable location in pdf format. This way each version of the documents are easy to find and locked for changes after approval.
+	
+	\subsubsection{Review Process}
+	The review process shall be applied to all documents that are not strictly internal to a work group (e.g. management, development) or informal. Accordingly all documents intended for someone outside the work group, i.e. to be used in their work or as information, shall be reviewed. 
+	That means that documents with notes or research not interesting for someone outside does not need to be reviewed. All other documents, like test results, guidelines and helping documents should be reviewed. When there are uncertainties, contact our Document Manager for discussion.
+	
+	When an author of a document wants to release the document as a new primary version, for example 2.0, the author needs to contact the Document Manager or Quality Coordinator (before the version is released by being published to Teams). The review is conducted by assigned reviewee who assess the document and return with eventual comment. If something needs to be changed, the author is responsible for this, and within three days the updated document should be handed back to the reviewee. When the document is approved, the reviewee signs the changelog and the document is converted to a pdf before being published on Teams at applicable location.
+	
+	\subsubsection{Inspection Process}
+	The inspection process should be applied to all documents intended for external stakeholders of the project and especially the living documents. This includes all documents that are graded by the course management.
+	The roles of the process are as follows:
+	
+	\smallskip
+	\begin{table}[h]
+		\begin{tabularx}{\textwidth}{lX}
+			Inspection Leader & Responsible for planning and coordinating the process \\
+			Recorder & Responsible of documenting defects, decisions and recommendations \\
+			Reader & Leads the walk-through of the document at the inspection meeting \\
+			Author & Responsible for performing rework to meet the inspection exit criteria \\
+			Inspector & Identifies and describes defects \\
+			&  \\
+		\end{tabularx}
+	\end{table}
+	
+	
+	The role of inspection leader and recorder is taken by Document Manager or Quality Coordinator. This person can be the reader as well, otherwise the test leader chooses someone else to fill the role. For each living document, a specialist inspector is chosen, see table X. The test leader can invite more inspectors if needed. These roles all need to be represented at the inspection meeting. The author may also be present.
+	
+	%make table
+	Inspector for each document:
+	Arch. Lead dev Filip Eriksson
+	SRS  Lead tester Gustav K
+	Educatino Plan Sam Anlér
+	Project Plan Max K och Patrik P
+	QAP Axel
+	
+	
+	The inspection process starts with the author of the document contacting the Document Manager (before the version is released by being published to Teams). A test leader for the current inspection is chosen, who contacts concerned parties to schedule the inspection. The test leader hands out the material, i.e. the document to be inspected and possibly related work products, and gives a brief introduction if needed. The inspectors, including the inspection leader, perform an individual checking of the document. All anomalies and defects, as well as ideas for improval or missing parts, shall be written down and handed to the inspection leader at least the day before the following inspection meeting. During the inspection meeting the reader presents the product and defects from all inspectors are  brought up chronologically. The defects shall be gathered in a single defect list. The inspection meeting shall result in an exit decision where the document is (1) accepted with no further verification, (2) accepted with rework verification performed by one member or (3) not accepted and sent to reinspection. The result is then communicated to the author who resolves eventual defects. The inspection leader shall be informed when the rework is made to verify this and close the inspection process. Finally, the change log is signed by the inspection leader and the document published as a new primary version. The recorder is responsible for publishing documentation of the process including involved members, defect list, exit decision and date of closure.
+	
+	\subsection{Software Quality Metrics}
+	
+	
 	CodeMR is used to assess metrics to evaluate chosen quality factors. These are understandability, reliability and ...
 	
 	TBD.
 	
-	
-	\section{Test}
+	\subsection{Software Testing}
 	%Which testing activities we are to have
-	Reference to Test Plan. Unit testing, function testing, system testing and user testing. 
+	Reference to Test Plan. %Unit testing, function testing, system testing and user testing. 
 	
-	\subsection{Methodology}
+	\subsubsection{Methodology}
 	TBD on discussion with Gustav, Filip and Axel.
 	
-	\subsubsection{User Test}
-	User shall be summarised using the predetermined template which follows here *Make list of content*
+	%\subsubsection{User Test}
+	%User shall be summarised using the predetermined template which follows here *Make list of content*
 		
-	\subsection{Continuous Integration}
-	Continuous integration refers to the practice where developers integrate their work continuously. This methodology is used in HeartByte's project in order to improve predictability and easier troubleshooting. By continuously integrating changes there will be no unexpected grand errors. 
-	
+	 
 
-	
-	\section{Problem Reporting and Corrective Action}
-	TBD.
+	\clearpage
+	\section{Problem Reporting}
+	To encourage HearByte's members to report problems regarding quality or compliance to processes of the process plan, the reporting shall be as easy as possible. Therefore everyone are encouraged to contact the Quality Coordinator preferably through Teams. Depending on the problems nature, the team leader of concerned team will likely be involved. If there is a large issue a representative of the management team will be involved to produce a plan for solving the problem.
 	
 	
 \end{document}
