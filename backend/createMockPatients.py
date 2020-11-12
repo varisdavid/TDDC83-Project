@@ -17,7 +17,7 @@ wp = os.environ.get("EHRSCAPE_PASSWORD")
 #base url for all REST api calls
 baseurl = 'https://rest.ehrscape.com/rest/v1'
 #numnber of fake patients to create
-no_of_patients = 5
+no_of_patients = 50
 #list of some samples to be used in the mock patient data
 medications = ["Ipren", "Alvedon", "Treo-comp", "Voltaren", "Humira", "Abilify", "Enbrel", "Crestor", "Lantus Solostar", "Sovaldi","Advair Diskus", "Nexium", "Januvia", "Lyrica", "Galvus", "Xanax", "Tramadol", "Genotropin", "Cytostatika", "Emtriva"]
 diagnosis = ["Covid", "Diabetes", "Cancer", "HIV", "IBS", "Crohns", "Alzheimers", "Borrelia", "Brutet nyckelben", "Korsbandsskada",
@@ -70,7 +70,7 @@ for person in all_personalinfo:
                                     "city" : person['city'],
                                     "adress": person['address'],
                                     "phone": person['phone'],
-                                    "age" : 2020-int(person['pnr_full'][:4])
+                                    "age" : 2020-int(person['pnr_full'][:4]),
                                     "team" : random.choice(team),
                                     "department" : random.choice(department)
                                     } }
@@ -184,7 +184,7 @@ for person in all_personalinfo:
     weight = random.choice(initial_weight_range)
     bloodsugar = random.choice(initial_bloodsugar_range)
     oxygen = random.choice(initial_oxygen_range)
-    physical_activity = random.choice(physical_activities)
+    #physical_activity = random.choice(physical_activities)
     phys_act = random.choice(range(1,5))
     payload =  {"ctx/language" :"en",
         "ctx/territory": "US",
@@ -197,7 +197,7 @@ for person in all_personalinfo:
         "measurements-c3/body_weight/any_event:0/weight|unit" : "kg",
         "measurements-c3/blood_glucose/any_event:0/blood_glucose|magnitude" : bloodsugar, #also changed
         #"measurements-c3/blood_glucose/any_event:0/blood_oxygen" : oxygen, #also changed
-        "measurements-c3/physicalactivityrecord/any_event/type_of_exercise|code" : physical_activity, #also changed
+        #"measurements-c3/physicalactivityrecord/any_event/type_of_exercise|code" : physical_activity, #also changed
         "measurements-c3/physicalactivityrecord/any_event/duration|magnitude" : phys_act,
         "measurements-c3/pulse_heart_beat/any_event:0/pulse_rate|magnitude" : pulse #also changed
 
@@ -211,7 +211,7 @@ for person in all_personalinfo:
         payload["measurements-c3/pulse_heart_beat/any_event:0/pulse_rate|magnitude"] += random.choice(max_delta_pulse)
         payload["measurements-c3/blood_glucose/any_event:0/blood_glucose|magnitude"] += random.choice(max_delta_bloodsugar)
         #payload["measurements-c3/blood_glucose/any_event:0/blood_oxygen"] += random.choice(max_delta_oxygen)
-        payload["measurements-c3/physicalactivityrecord/any_event/type_of_exercise|code"] = random.choice(physical_activities)
+        #payload["measurements-c3/physicalactivityrecord/any_event/type_of_exercise|code"] = random.choice(physical_activities)
         payload["measurements-c3/physicalactivityrecord/any_event/duration|magnitude"] = random.choice(range(1,5))
         payload["measurements-c3/physicalactivityrecord/any_event/duration|unit"] = "min"
 
