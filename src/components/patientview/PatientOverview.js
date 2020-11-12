@@ -64,7 +64,7 @@ const PatientOverview = () => {
     () => [
         {name:'Anders Persson', title: 'Med', clinic: 'Medicinkliniken', status: 'Inskriven', typeOfClinic: 'Primary'},
         {name:'Per Persson', title: 'Ortoped', clinic: 'Ortopedkliniken', status: 'Inskriven', typeOfClinic: 'Secondary'},
-        {name:'Nina Eriksson', title: 'Allmän läk', clinic: 'Lyckans vårdcentral', status: 'Skrevs ut 2020-03-13', typeOfClinic: 'Primary'},
+        {name:'Nina Eriksson', title: 'Allmän läk', clinic: 'Lyckans vårdcentral', status: 'Skrevs ut 2020-03-13', typeOfClinic: 'Old'},
       ],
     []
   )
