@@ -48,6 +48,8 @@ def get_all_patients_personal_details():
             "Age": more_info["age"],
             "Phone": more_info["phone"],
             "Email": more_info["email"],
+            "Team" : more_info["team"],
+            "Department" : more_info["department"]
         }
         to_return.append(personal_details)
     return to_return
