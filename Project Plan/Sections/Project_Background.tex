@@ -1,10 +1,45 @@
-There is a theory which states that if ever anyone discovers exactly what the Universe is for and why it is here, it will instantly disappear and be replaced by something even more bizarre and inexplicable.
-There is another theory which states that this has already happened.
+\setlength{\parindent}{0pt}
+The text below describes the background to the project that HeartByte is currently working on, to develop a system for Region Östergötland to monitor its many chronically ill patients.
 
 \subsection{Background to the project}
-RECORDING FOR EVERYONE
-\subsection{Relevant constraints (Budget etc.}
+The newly created company HeartByte has just got it's first customer. The customer is Region Östergötland, a region within the Swedish healthcare system who sees a possibility in extending the self-care treatment for some certain patients with chronic diseases. In this way Region Östergötland can reduce the occupancy rate at the hospital as an effect of that these patients doesn't have to visit the hospital periodically. \vspace{5mm}
+
+Region Östergötland says that these patients can be monitored by letting them selves do their samplings of tests at home, and given care through a web based system that we are to deliver. In order to create this value, Region Östergötland needs a new system to handle and monitor many patients at once with focus on good usability for the employees and care givers. Before HeartByte was consulted, Region Östergötland used a service from another company which didn't fulfill this task in a satisfying manner. Therefore, HeartByte was asked to develop this very system. Please read more relevant information below.
+
+\subsection{Relevant constraints}
+Since HeartByte is such a new company with a poor track record of earlier customers, the product delivered to Region Östergötland is be delivered for free. Due to this, HeartByte does not have an ordinary budget to keep track off with cash equivalents. Instead, HeartByte has a budget made up of hours that has to be taken in consideration. \vspace{5mm}
+
+All the 26 employees at HeartByte has 160 hours each to spend throughout the entire project until the end-date the 10th of december, giving us in total $26 \cdot 160 = 4160$ hours to spend. Furthermore, there are some general constraint for the final product that has to be met:
+
+\begin{itemize}
+    \item The system has to be available for fixed Windows workstations.
+    \item The system has to be available for tablets. 
+    \item It has to be a customizeable dashboard available, meaning that the care giver to a limited extent should be able to decide what information and modules that is to be presented for the user.  
+    \item When accessing data from the patient records, Open EHR APIs has to be used
+    \item When accessing data from the patient records, the action has to be logged in the system for an admin user to retrieve if needed.
+\end{itemize}
 
 \subsection{Project goal}
+The goal of this project is to deliver an end-product that satisfies the requirements given by the customer, Region Östergötland. Besides the end delivery, there are some internal goals regarding the process of the project that has to be met as well, please see the table below.
 
+\begin{table}[]
+\begin{tabular}{|l|l|}
+\hline
+\multicolumn{1}{|c|}{\textbf{Goal}}& \multicolumn{1}{c|}{\textbf{Explanation}}\\ \hline
+Implement continuous delivery & Make possible to external stakeholder to monitor the progress \\ \hline
+\begin{tabular}[c]{@{}l@{}}Use a CI-environment for the used \\ repository\end{tabular} &\begin{tabular}[c]{@{}l@{}}Mitigate and avoid major 
+issues when pushing new code to\\ the repository by running unit tests for intended functionality\end{tabular}\\ \hline
+Document all processes & \begin{tabular}[c]{@{}l@{}}To create a reliable \& effective structure of the project,\\ its' processes should be documentet and updated\end{tabular}\\ \hline
+Deliver weekly status reports & \begin{tabular}[c]{@{}l@{}}To keep the entire organization and external stakeholders\\ updated regarding current tasks and progression\end{tabular}\\ \hline
+Use a bugtracking system& \begin{tabular}[c]{@{}l@{}}To make the process of debugging easier. Git issues is \\ planned to be used\end{tabular}\\ \hline
+\begin{tabular}[c]{@{}l@{}}Use a traceability system for \\ tasks and requirements\end{tabular} & \begin{tabular}[c]{@{}l@{}}To increase the satisfaction of the customer, a traceability-\\ system between features, tasks and requirements is to be \\ used. Git is planned to fulfill this task.\end{tabular} \\ \hline
+\begin{tabular}[c]{@{}l@{}}Internal followup on relevant \\ documents\end{tabular} & \begin{tabular}[c]{@{}l@{}}In order to increase the value of having living documents, \\ they also have to be updated accordingly as the project \\ makes progress.\end{tabular} \\ \hline
+\end{tabular}
+\caption{\label{tab:table-name}Internal project goals.}
+\end{table}
 \subsection{Start and expected end date}
+\begin{itemize}
+    \item The start of this project is 2020-09-09
+    \item Intended and plannd code stop set to 2020-11-28
+    \item The delivery of final end-product at VSSE 2020-12-10
+\end{itemize}
