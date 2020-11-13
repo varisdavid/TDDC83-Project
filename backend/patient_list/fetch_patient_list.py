@@ -59,7 +59,8 @@ def get_all_patients_personal_details():
 def get_measurements(ehrid):
     """
     Function that retrieves measurements data for a patient
-    Parameters: ehrId, identifier for a single patient
+    Parameters: ehrid, String, identifier for a patient
+    Returns: List with dicts where each dict is a measurement at a specific time for this patient. All dicts will always contain information
     """
 
     aql = """SELECT x/data[at0002]/events[at0003]/data[at0001]/items[at0004,'Pulse Rate']/value as pulse,
@@ -88,7 +89,6 @@ def get_measurements(ehrid):
                           "Time: " : measurement['bloodsugar']['data']['origin']['value'], #need to reformat time-strings, currently in format "2020-11-13T12:46:36+01:00" for example
                           "Bloodsugar: " : measurement['bloodsugar']['data']['events'][0]['data']['items'][0]['value']['magnitude']})
     return to_return
-
 
     
 
