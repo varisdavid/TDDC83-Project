@@ -66,9 +66,10 @@ def get_measurements(ehrid):
     aql = """SELECT x/data[at0002]/events[at0003]/data[at0001]/items[at0004,'Pulse Rate']/value as pulse,
        a/data[at0001]/events[at0002]/data[at0003]/items[at0011]/value as exercise,
        o/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value as bodyweight,
-       w as bloodsugar,
+       w/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value as bloodsugar,
        i/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value as systolic,
-       i/data[at0001]/events[at0006]/data[at0003]/items[at0005]/value as diastolic
+       i/data[at0001]/events[at0006]/data[at0003]/items[at0005]/value as diastolic,
+       w/data[at0001]/events[at0002]/time/value as time
        FROM EHR e
        CONTAINS COMPOSITION c
        CONTAINS (OBSERVATION x[openEHR-EHR-OBSERVATION.pulse.v1] and 
@@ -78,17 +79,20 @@ def get_measurements(ehrid):
        OBSERVATION i[openEHR-EHR-OBSERVATION.blood_pressure.v2]) 
        WHERE e/ehr_id/value= '%s'
        OFFSET 0""" %ehrid
+    
     response = query(aql)
     to_return= []
     for measurement in response['resultSet']:
-        to_return.append({"Pulse: " : measurement['pulse']['magnitude'],
+        to_return.append(
+                        { "Pulse: " : measurement['pulse']['magnitude'],
                           "Exercise: ":measurement['exercise']['magnitude'],
                           "Weight: " : measurement['bodyweight']['magnitude'],
                           "Diastolic: " : measurement['diastolic']['magnitude'],
                           "Systolic: " : measurement['systolic']['magnitude'],
-                          "Time: " : measurement['bloodsugar']['data']['origin']['value'], #need to reformat time-strings, currently in format "2020-11-13T12:46:36+01:00" for example
-                          "Bloodsugar: " : measurement['bloodsugar']['data']['events'][0]['data']['items'][0]['value']['magnitude']})
+                          "Bloodsugar: " : measurement['bloodsugar']['magnitude'],
+                          "Time: " : measurement['time']
+                          } #need to reformat time-strings, currently in format "2020-11-13T12:46:36+01:00" for example
+                          )
     return to_return
 
     
-
