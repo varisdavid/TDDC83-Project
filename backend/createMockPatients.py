@@ -7,9 +7,11 @@ import requests
 import random
 #for getting values of environment variables containing the login details with write-access
 import os
+import json
 #set the values of environemntvariables according to .env file
 from dotenv import load_dotenv
 load_dotenv()
+
 
 #get values of environment variable, i.e login details with write-access
 wu = os.environ.get("EHRSCAPE_USERNAME")
@@ -17,7 +19,7 @@ wp = os.environ.get("EHRSCAPE_PASSWORD")
 #base url for all REST api calls
 baseurl = 'https://rest.ehrscape.com/rest/v1'
 #numnber of fake patients to create
-no_of_patients = 5
+no_of_patients = 50
 #list of some samples to be used in the mock patient data
 medications = ["Ipren", "Alvedon", "Treo-comp", "Voltaren", "Humira", "Abilify", "Enbrel", "Crestor", "Lantus Solostar", "Sovaldi","Advair Diskus", "Nexium", "Januvia", "Lyrica", "Galvus", "Xanax", "Tramadol", "Genotropin", "Cytostatika", "Emtriva"]
 diagnosis = ["Covid", "Diabetes", "Cancer", "HIV", "IBS", "Crohns", "Alzheimers", "Borrelia", "Brutet nyckelben", "Korsbandsskada",
@@ -44,7 +46,7 @@ max_delta_oxygen = range(-5,5)
 #POST call to fejka.nu returns json object with personal information of x fake individuals, specified in no_of_patients variable above
 response = requests.post("https://fejka.nu/?json=1&num="+str(no_of_patients))
 all_personalinfo = response.json()
-
+fel = 0
 #for each of the fake individuals
 for person in all_personalinfo:
     #Create an ehrId
@@ -75,12 +77,11 @@ for person in all_personalinfo:
                                     "adress": person['address'],
                                     "phone": person['phone'],
                                     "age" : 2020-int(person['pnr_full'][:4]),
-                                    "contact person" : {"name" : contactperson['fname']+" "+contactperson['lname'], "phone" : contactperson['phone']}, 
-                                    "team" : ["hej",random.choice(team)],
+                                    "contactperson" : json.dumps({"name" : contactperson['fname']+" "+contactperson['lname'], "phone" : contactperson['phone']}), 
+                                    "team" : json.dumps(["hej" , random.choice(team)]),
                                     "department" : random.choice(department)
                                     } }
-                            )#kontaktperson från fejka.nu
-                            #GLÖM INTE DEPARTMENT OCH TEAM
+                            )
                             
     print("POST DEMOGRAPHICS: " + str(response))
 
@@ -210,7 +211,6 @@ for person in all_personalinfo:
         }
     #random amount of historic data
     for i in range(0, random.randint(5, 10)):
-        print(i)
         payload["measurements-c3/blood_pressure/any_event:0/systolic|magnitude"] += random.choice(max_delta_bp)
         payload["measurements-c3/blood_pressure/any_event:0/diastolic|magnitude"] -= random.choice(max_delta_bp)
         payload["measurements-c3/body_weight/any_event:0/weight|magnitude"] += random.choice(max_delta_weight)
@@ -227,3 +227,8 @@ for person in all_personalinfo:
                                     headers={"Content-Type":"application/json"},
                                     json=payload)
         print("POST MEASUREMENTS: " + str(response))
+        if not response.ok:
+            fel+=1
+            print(response.text)
+            print(payload["measurements-c3/body_weight/any_event:0/weight|magnitude"])
+print(fel)
