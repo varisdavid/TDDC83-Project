@@ -141,5 +141,3 @@ xkit==0.0.0
 yagmail==0.11.224
 youtube-dl==2018.3.14
 zope.interface==4.3.2
->>>>>>> backend/requirements.txt
->>>>>>> backend/requirements.txt
