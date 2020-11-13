@@ -7,7 +7,7 @@ import { DatePickerCalendar } from "react-nice-dates";
 import "react-nice-dates/build/style.css";
 
 //For styling calendar
-import '../../src/OverviewCalendar.css';
+import '../../OverviewCalendar.css';
 // import { getDay, getDate } from 'date-fns';
 import { getDate } from 'date-fns';
 
