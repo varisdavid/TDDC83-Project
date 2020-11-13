@@ -8,6 +8,7 @@ import random
 #for getting values of environment variables containing the login details with write-access
 import os
 import json
+import numpy as np
 #set the values of environemntvariables according to .env file
 from dotenv import load_dotenv
 load_dotenv()
@@ -38,7 +39,7 @@ max_delta_pulse = range(-10,10)
 initial_weight_range = range(40,200)
 max_delta_weight = range(-5,5)
 initial_bloodsugar_range = range(3,9)
-max_delta_bloodsugar = range(-1,1)
+max_delta_bloodsugar = np.linspace(-0.2, 0.2, num=40)
 initial_oxygen_range = range(70, 100)
 max_delta_oxygen = range(-5,5)
 #physical_activities = ["at0005","at0006","at0007","at0008","at0009"]
@@ -46,7 +47,6 @@ max_delta_oxygen = range(-5,5)
 #POST call to fejka.nu returns json object with personal information of x fake individuals, specified in no_of_patients variable above
 response = requests.post("https://fejka.nu/?json=1&num="+str(no_of_patients))
 all_personalinfo = response.json()
-fel = 0
 #for each of the fake individuals
 for person in all_personalinfo:
     #Create an ehrId
@@ -227,8 +227,4 @@ for person in all_personalinfo:
                                     headers={"Content-Type":"application/json"},
                                     json=payload)
         print("POST MEASUREMENTS: " + str(response))
-        if not response.ok:
-            fel+=1
-            print(response.text)
-            print(payload["measurements-c3/body_weight/any_event:0/weight|magnitude"])
-print(fel)
+        
