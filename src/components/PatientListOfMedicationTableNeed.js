@@ -1,15 +1,70 @@
-import React from 'react';
-
+import React, {useMemo} from "react";
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core'
 import { ArrowDropUp, ArrowDropDown } from '@material-ui/icons';
 import { useVirtual } from 'react-virtual';
+import { useTable, useFlexLayout} from 'react-table'
 
-const PatientListOfMedicationTable = ({   getTableProps,
-                                          getTableBodyProps,
-                                          headerGroups,
-                                          rows,
-                                          prepareRow,
-                                      }) => {
+const PatientListOfMedicationTableNeed = () => {
+
+    const data =  useMemo(
+        () => [
+            {
+                Läkemedel: 'Nässpray',
+                Dos: 'Två spray i varje näsa',
+                Intagsform: 'Genom näsan',
+                Intag: 'Vid behov',
+                Kommentar: 'Tas under vinterhalvåret',
+            },
+            {
+                Läkemedel: 'Nässpray',
+                Dos: 'Två spray i varje näsa',
+                Intagsform: 'Genom näsan',
+                Intag: 'Vid behov',
+                Kommentar: 'Tas under vinterhalvåret',
+            },
+            {
+                Läkemedel: 'Nässpray',
+                Dos: 'Två spray i varje näsa',
+                Intagsform: 'Genom näsan',
+                Intag: 'Vid behov',
+                Kommentar: 'Tas under vinterhalvåret',
+            },
+        ],
+        []
+    )
+
+    const columns = useMemo(
+        () => [
+
+            {Header: 'Läkemedel',
+                accessor:'Läkemedel',
+            },
+            {Header: 'Dos',
+                accessor:'Dos',
+            },
+            {Header: 'Intagsform',
+                accessor:'Intagsform',
+            },
+            {Header: 'Intag',
+                accessor:'Intag',
+            },
+            {Header: 'Kommentar',
+                accessor:'Kommentar',
+            },
+        ],
+        []
+    )
+
+
+    const {
+        getTableProps,
+        getTableBodyProps,
+        headerGroups,
+        rows,
+        prepareRow,
+    } = useTable({ columns, data },
+        useFlexLayout,
+    );
     // Used for keeping track on the wrapper div (needed for virtualization)
     const parentRef = React.useRef();
 
@@ -112,4 +167,4 @@ const PatientListOfMedicationTable = ({   getTableProps,
         </Table>
     );
 };
-export default PatientListOfMedicationTable;
+export default PatientListOfMedicationTableNeed;
