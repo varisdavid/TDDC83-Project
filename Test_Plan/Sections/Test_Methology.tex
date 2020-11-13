@@ -4,6 +4,10 @@ In this project we are using TDD as our methodology for the project. This means 
 \subsection{Test Levels}
 We have a focus on Integration Tests and System tests. We use OpenEHR for our backend and we won't be testing its functionality with Unit-tests, this could be implemented later on, but is not seen as a requirement. SRS are used for mapping the Integration tests and every test has a corresponding Requirement which gets cleared if the test is executed. These will be shown in the XXX.
 
+Continuous Integration (CI) is added to the gitlab pipeline and is made to run a few selected integration tests to make sure that functionality is still present in the pushed code. The CI launches a webdriver via script where it goes through the tests in both chrome and firefox and completes specified test cases, which can be found in our RTM.
+
+For most of our Integration tests we are trying to achieve full code coverage of said requirement. This will also be presented in the RTM where what functionality is tested and to what extent will be presented by either text and/or pictures.
+
 
 \subsection{Suspensions Criteria and Resumption Requirements}
 In this state, we are not sure when the full functionality is set to be done. We will therefore not set a suspension criteria due to the lack of time.
@@ -14,3 +18,8 @@ In this state, we are not sure when the full functionality is set to be done. We
     \item Pass Rate - X \%
 \end{itemize}
 At what criteria is a test considered complete. Needs to be discussed with QA. 
+
+\subsection{Bug Tracking}
+Bug tracking is done via gitlabs own issue boards. The issue is labeled with bug and is then prioritized to either high or low. The test leader have continuous discussions with the development leader to ensure that the bugs are noticed and can provide a further description.
+
+\clearpage

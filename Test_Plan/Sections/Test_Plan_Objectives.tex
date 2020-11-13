@@ -65,13 +65,15 @@ Using a CI in the Gitlab client to ensure that our code meets the functionality 
 \subsubsection{Who will test?}
 The tests will be made by the Test Leader, Testers and Analysts. Primarily the Test Leader and Tester will make the tests but once the Analysis is done with their tasks, they will join the tests. The tests are then executed.
 \subsubsection{When does tests occur?}
-The tests will occur once the following input is done:
+The Integration tests will occur once the following input is done:
 \begin{itemize}
     \item Software is test ready
     \item A test specification is created
     \item The test Environment is complete
 \end{itemize}
-Since testing is done in iterations, we will write tests for the parts of the software that is testable, then as software functionality grows, more tests will be added in later iterations. 
+Since testing is done in iterations, we will write tests for the parts of the software that is testable, then as software functionality grows, more tests will be added in later iterations. This is also called regression testing.
+
+We will add a couple of integration tests in our CI for the pipeline for the development team, just to quickly check functionality to make sure that functionality is kept at every push of code to the git repository.
 \subsection{Roles}
 \begin{flushleft}
    \textbf{Test Leader}
