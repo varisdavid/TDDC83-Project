@@ -20,9 +20,12 @@ import PatientGroups from './overview/PatientGroups';
 import FilterModal from './overview/FilterModal';
 import CreateNewFilterModal from './overview/CreateNewFilterModal';
 
-import PatientCalendar from './PatientCalendar';
-import PatientViewHeaderBanner from './PatientViewHeaderBanner';
-import PatientViewHeaderNavigation from './PatientViewHeaderNavigation';
+import PatientCalendar from './patientview/PatientCalendar.js';
+import PatientViewHeaderBanner from './patientview/PatientViewHeaderBanner.js';
+import PatientViewHeaderNavigation from './patientview/PatientViewHeaderNavigation.js';
+import PatientOverview from './patientview/PatientOverview.js';
+import Admin from './patientview/Admin.js';
+import Measurements from './patientview/Measurements.js';
 import PatientListOfMedication from './PatientListOfMedication';
 import PatientListOfMedicationTableDaily from "./PatientListOfMedicationTableDaily";
 import PatientListOfMedicationTableNeed from "./PatientListOfMedicationTableNeed";
@@ -49,7 +52,10 @@ export {
     PatientCalendar,
     PatientViewHeaderBanner,
     PatientViewHeaderNavigation,
+    PatientOverview,
+    Admin,
+    Measurements,
     PatientListOfMedication,
     PatientListOfMedicationTableDaily,
-    PatientListOfMedicationTableNeed,
+    PatientListOfMedicationTableNeed
 };
