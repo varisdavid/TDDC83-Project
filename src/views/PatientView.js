@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Box } from '@material-ui/core';
 
-import { PatientViewHeaderBanner, PatientViewHeaderNavigation, PatientCalendar } from '../components'
+import { PatientViewHeaderBanner, PatientViewHeaderNavigation, PatientCalendar, PatientListOfMedication } from '../components'
 
 // Function for retrieving current active tab from our url.
 const getActiveTab = (location) => {
@@ -84,6 +84,7 @@ const PatientView = () => {
     </TabPanel>
 
     <TabPanel className='Medications' value={activeTabValue} index={2}>
+      <PatientListOfMedication/>
     </TabPanel>
 
     <TabPanel className='Calendar' value={activeTabValue} index={3}>
