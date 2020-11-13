@@ -60,7 +60,7 @@ const PatientViewHeaderNavigation = ({ activeTabValue }) => {
           />
           <LinkTab 
             style={{ textDecoration: 'none', backgroundColor: activeTabValue === 2 ? '#0066B3' : 'inherit', color: activeTabValue === 2 ? '#FFF' : 'inherit'}} 
-            label='Notislogg' 
+            label='Läkemedelslista'
             href='/patient/medications' 
             {...a11yProps(2)}
           />

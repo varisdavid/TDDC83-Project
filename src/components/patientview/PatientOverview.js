@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
+import { Button, Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 
 import { PatientCalendar } from '..'
 
@@ -34,6 +34,14 @@ const PatientOverview = () => {
     []
   )
 
+  const diagnoses = useMemo(
+    () => [
+      {name: 'Diabetes'},
+      {name: 'Hypertoni'},
+    ],
+    []
+  )
+
   const medications = useMemo (
     () => [
         {medication:'Alvedon', type: 'Tablett', amount:'500mg'},
@@ -62,9 +70,9 @@ const PatientOverview = () => {
 
   const responsibleCaregivers = useMemo (
     () => [
-        {name:'Anders Persson', title: 'Med', clinic: 'Medicinkliniken', status: 'Inskriven'},
-        {name:'Per Persson', title: 'Ortoped', clinic: 'Ortopedkliniken', status: 'Inskriven'},
-        {name:'Nina Eriksson', title: 'Allmän läk', clinic: 'Lyckans vårdcentral', status: 'Skrevs ut 2020-03-13'},
+        {name:'Anders Persson', title: 'Med', clinic: 'Medicinkliniken', status: 'Inskriven', typeOfClinic: 'Primary'},
+        {name:'Per Persson', title: 'Ortoped', clinic: 'Ortopedkliniken', status: 'Inskriven', typeOfClinic: 'Secondary'},
+        {name:'Nina Eriksson', title: 'Allmän läk', clinic: 'Lyckans vårdcentral', status: 'Skrevs ut 2020-03-13', typeOfClinic: 'Old'},
       ],
     []
   )
@@ -147,7 +155,6 @@ const PatientOverview = () => {
 
         <div style={{ width: '25%' }}>        
           <div className='div-table-patient-view'> 
-          {data.map((data) => (
             <Table className='table-patient'>
               <TableHead>
                 <TableRow>
@@ -155,21 +162,13 @@ const PatientOverview = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                <TableRow className='row-table-body-red'>
-                  <TableCell className='cell-table-body'> {data.diagnoses[0]} &nbsp; </TableCell>
+              {diagnoses.map((diagnoses,index) => (
+                <TableRow className='row-table-body' key={diagnoses.name}>
+                  <TableCell className='cell-table-body'> {diagnoses.name} </TableCell>
                 </TableRow>
-                <TableRow className='row-table-body-red'>
-                  <TableCell className='cell-table-body'> {data.diagnoses[1]} &nbsp; </TableCell>
-                </TableRow>
-                <TableRow className='row-table-body-red'>
-                  <TableCell className='cell-table-body'> {data.diagnoses[2]} &nbsp; </TableCell>
-                </TableRow>
-                <TableRow className='row-table-body-red'>
-                  <TableCell className='cell-table-body'> {data.diagnoses[3]} &nbsp; </TableCell>
-                </TableRow>
+                 ))}
               </TableBody>
             </Table>
-          ))}
           </div>
 
           <div className='div-table-patient-view'>
@@ -181,7 +180,7 @@ const PatientOverview = () => {
               </TableHead>
               <TableBody>
               {medications.map((medications, index) => (
-                <TableRow className='row-table-body-red' key={medications.medication}>
+                <TableRow className='row-table-body' key={medications.medication}>
                   <TableCell className='cell-table-body'> {medications.medication} </TableCell>
                   <TableCell className='cell-table-body'> {medications.type} </TableCell>
                   <TableCell className='cell-table-body'> {medications.amount} </TableCell>
@@ -200,11 +199,15 @@ const PatientOverview = () => {
               </TableHead>
               <TableBody>
               {earlierDisease.map((earlierDisease, index) => (
-                <TableRow className='row-table-body' key={earlierDisease.disease}>
+                <TableRow className='row-table-body' title='earlierDiseases' value='1' key={earlierDisease.disease}>
                   <TableCell className='cell-table-body'> {earlierDisease.disease} </TableCell>
                   <TableCell className='cell-table-body'> {earlierDisease.year} </TableCell>
                 </TableRow>
                 ))}
+                <TableRow className='row-table-body'>
+                  <TableCell className='cell-table-body'> <Button>See more</Button> </TableCell>
+                  <TableCell className='cell-table-body'></TableCell>
+                </TableRow> 
               </TableBody>
             </Table>
           </div>
@@ -248,10 +251,10 @@ const PatientOverview = () => {
               <TableBody>
               {responsibleCaregivers.map((responsibleCaregivers, index) => (
                 <TableRow className='row-table-body' key={responsibleCaregivers.name}>
-                  <TableCell className='cell-table-body'> {responsibleCaregivers.name} </TableCell>
-                  <TableCell className='cell-table-body'> {responsibleCaregivers.title} </TableCell>
-                  <TableCell className='cell-table-body'> {responsibleCaregivers.clinic} </TableCell>
-                  <TableCell className='cell-table-body'> {responsibleCaregivers.status} </TableCell>
+                  <TableCell className='cell-table-body' title={responsibleCaregivers.typeOfClinic}> {responsibleCaregivers.name} </TableCell>
+                  <TableCell className='cell-table-body' title={responsibleCaregivers.typeOfClinic}> {responsibleCaregivers.title} </TableCell>
+                  <TableCell className='cell-table-body' title={responsibleCaregivers.typeOfClinic}> {responsibleCaregivers.clinic} </TableCell>
+                  <TableCell className='cell-table-body' title={responsibleCaregivers.typeOfClinic} status={responsibleCaregivers.status}> {responsibleCaregivers.status} </TableCell>
                 </TableRow>
                 ))}
               </TableBody>
