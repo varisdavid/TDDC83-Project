@@ -24,6 +24,7 @@ import PatientCalendar from './PatientCalendar';
 import PatientViewHeaderBanner from './PatientViewHeaderBanner';
 import PatientViewHeaderNavigation from './PatientViewHeaderNavigation';
 import PatientListOfMedication from './PatientListOfMedication';
+import PatientListOfMedicationTable from "./PatientListOfMedicationTable";
 
 
 // import Notices from './Notices';
@@ -48,4 +49,5 @@ export {
     PatientViewHeaderBanner,
     PatientViewHeaderNavigation,
     PatientListOfMedication,
+    PatientListOfMedicationTable,
 };

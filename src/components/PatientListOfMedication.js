@@ -1,15 +1,13 @@
 import React, {useMemo} from "react";
-import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core'
 import { useTable, useFlexLayout} from 'react-table'
-import { ArrowDropUp, ArrowDropDown } from '@material-ui/icons';
-import { useVirtual } from 'react-virtual';
+
+import { PatientListOfMedicationTable } from "../components";
 
 
 const PatientListOfMedication = () => {
 
 
     const data =  useMemo(
-      // To get them in the proper order, using numbers to represent priority, 1 = high, 2 = medium, 3 = low with notification, 4 = low without notification
       () => [
       {
       Läkemedel: 'Alvedon',
@@ -17,6 +15,7 @@ const PatientListOfMedication = () => {
       Intagsform: 'tabletter',
       Intag: '2 tabletter dagligen',
       Kommentar: 'Tas i samband med mat',
+      Typ: 'daglig',
       },
       {
        Läkemedel: 'Alvedon',
@@ -24,6 +23,7 @@ const PatientListOfMedication = () => {
        Intagsform: 'Tabletter',
        Intag: '2 tabletter dagligen',
        Kommentar: 'Tas till maten',
+       Typ: 'Behov',
        },
        {
        Läkemedel: 'Alvedon',
@@ -31,6 +31,7 @@ const PatientListOfMedication = () => {
        Intagsform: 'tabletter',
        Intag: '2 tabletter dagligen',
        Kommentar: 'Tas i samband med mat',
+       Typ: 'daglig',
        },
       ],
       []
@@ -71,192 +72,39 @@ const PatientListOfMedication = () => {
 
 
      // Used for keeping track on the wrapper div (needed for virtualization)
-      const parentRef = React.useRef();
+     // const parentRef = React.useRef();
 
       // Using package 'react-virtual' for virtualization of
       // the table, give it rows.length for how many rows there should be
       // its ref to outer div and the estimated size.
-      const rowVirtualizer = useVirtual({
-        size: rows.length,
-        parentRef,
-        estimateSize: React.useCallback(() => 15, [])
-      });
+    //  const rowVirtualizer = useVirtual({
+      //  size: rows.length,
+      //  parentRef,
+      //  estimateSize: React.useCallback(() => 15, [])
+    //  });
 
       return (
       <>
             <div style={{padding: "15px"}}></div>
-            <b style= {{padding: "50px"}}>Aktuella läkemedelsbehandlingar</b>
-          <Table {...getTableProps()} >
-            <TableHead>
-            {headerGroups.map(headerGroup => (
-                <TableRow {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
-                    <TableCell
-                      {...column.getHeaderProps()}
-                      style={{
-                        width: '20%', //Make first column fixed size
-                        background: '#275E8E', //Make first column invisible
-                        borderColor: '#FFF', //Make first column invisible
-                        color: '#FFF',
-                        fontWeight: '700',
-                        fontSize: '15px',
-                        textAlign: 'center',
-                      }}
-                    >
-                    {column.render('Header')}
-                    <span>
-                      {column.isSorted
-                        ? column.isSortedDesc
-                          ? <ArrowDropUp style={{fontSize: '15px' }} />
-                          : <ArrowDropDown style={{fontSize: '15px' }} />
-                        : ''}
-                    </span>
-                    </TableCell>
-                ))}
-                </TableRow>
-            ))}
-            </TableHead>
-              <div
-                ref={parentRef}
-                style={{
-                  display: 'block',
-                  maxHeight: `calc(100vh - 620px)`, //calculated other parts to height of 520 + spacing, so table gets whats left
-                  overflow: 'auto',
-                  width: `100%`
-                }}
-              >
-              <TableBody
-                {...getTableBodyProps}
-                className='ListInner'
-                style={{
-                  display: 'block',
-                  height: `${rowVirtualizer.totalSize}px`,
-                  position: 'relative'
-                }}
-              >
-                {rowVirtualizer.virtualItems.map(virtualRow => {
-                  const row = rows[virtualRow.index];
-                  prepareRow(row);
-                  return (
-                    <TableRow
-                    key={virtualRow.index}
-                    ref={virtualRow.measureRef}
-                    {...row.getRowProps({
-                      style: {
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        width: '100%',
-                        transform: `translateY(${virtualRow.start}px)`,
-                        background: (virtualRow.index % 2) ? '#E5E5E5' : '#FFF',
-                      }
-                    })}
-                  >
-
-                        {row.cells.map((cell) => {
-                        return (
-                          <TableCell {...cell.getCellProps()} style={{padding: '10px',
-                                                                      textAlign: 'center',
-                                                                      width: '20%', //To make first column fixed size
-                                                                    }}>
-                            { cell.render('Cell')}
-                          </TableCell>
-                        )
-
-                        })}
-                    </TableRow>
-                  )}
-                )}
-              </TableBody>
-            </div>
-        </Table>
+            <b style= {{padding: "10px"}}>Aktuella läkemedelsbehandlingar</b>
+            <PatientListOfMedicationTable data={data}
+                                          getTableProps={getTableProps}
+                                          getTableBodyProps={getTableBodyProps}
+                                          headerGroups={headerGroups}
+                                          rows={rows}
+                                          prepareRow={prepareRow}
+                                          />
         
         <div style={{padding: "15px"}}></div>
-          <b style= {{padding: "50px"}}>Vid behov</b>
-          <Table {...getTableProps()} >
-            <TableHead>
-            {headerGroups.map(headerGroup => (
-                <TableRow {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
-                    <TableCell
-                      {...column.getHeaderProps()}
-                      style={{
-                        width: '20%', //Make first column fixed size
-                        background: '#275E8E', //Make first column invisible
-                        borderColor: '#FFF', //Make first column invisible
-                        color: '#FFF',
-                        fontWeight: '700',
-                        fontSize: '15px',
-                        textAlign: 'center',
-                      }}
-                    >
-                    {column.render('Header')}
-                    <span>
-                      {column.isSorted
-                        ? column.isSortedDesc
-                          ? <ArrowDropUp style={{fontSize: '15px' }} />
-                          : <ArrowDropDown style={{fontSize: '15px' }} />
-                        : ''}
-                    </span>
-                    </TableCell>
-                ))}
-                </TableRow>
-            ))}
-            </TableHead>
-              <div
-                ref={parentRef}
-                style={{
-                  display: 'block',
-                  maxHeight: `calc(100vh - 620px)`, //calculated other parts to height of 520 + spacing, so table gets whats left
-                  overflow: 'auto',
-                  width: `100%`
-                }}
-              >
-              <TableBody
-                {...getTableBodyProps}
-                className='ListInner'
-                style={{
-                  display: 'block',
-                  height: `${rowVirtualizer.totalSize}px`,
-                  position: 'relative'
-                }}
-              >
-                {rowVirtualizer.virtualItems.map(virtualRow => {
-                  const row = rows[virtualRow.index];
-                  prepareRow(row);
-                  return (
-                    <TableRow
-                    key={virtualRow.index}
-                    ref={virtualRow.measureRef}
-                    {...row.getRowProps({
-                      style: {
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        width: '100%',
-                        transform: `translateY(${virtualRow.start}px)`,
-                        background: (virtualRow.index % 2) ? '#E5E5E5' : '#FFF',
-                      }
-                    })}
-                  >
+          <b style= {{padding: "10px"}}>Vid behov</b>
+          <PatientListOfMedicationTable data={data}
+                                        getTableProps={getTableProps}
+                                        getTableBodyProps={getTableBodyProps}
+                                        headerGroups={headerGroups}
+                                        rows={rows}
+                                        prepareRow={prepareRow}
+                                        />
 
-                        {row.cells.map((cell) => {
-                        return (
-                          <TableCell {...cell.getCellProps()} style={{padding: '10px',
-                                                                      textAlign: 'center',
-                                                                      width: '20%', //To make first column fixed size
-                                                                    }}>
-                            { cell.render('Cell')}
-                          </TableCell>
-                        )
-
-                        })}
-                    </TableRow>
-                  )}
-                )}
-              </TableBody>
-            </div>
-        </Table>
       </>
       );
 };
