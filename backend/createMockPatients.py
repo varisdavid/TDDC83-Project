@@ -17,7 +17,7 @@ wp = os.environ.get("EHRSCAPE_PASSWORD")
 #base url for all REST api calls
 baseurl = 'https://rest.ehrscape.com/rest/v1'
 #numnber of fake patients to create
-no_of_patients = 50
+no_of_patients = 5
 #list of some samples to be used in the mock patient data
 medications = ["Ipren", "Alvedon", "Treo-comp", "Voltaren", "Humira", "Abilify", "Enbrel", "Crestor", "Lantus Solostar", "Sovaldi","Advair Diskus", "Nexium", "Januvia", "Lyrica", "Galvus", "Xanax", "Tramadol", "Genotropin", "Cytostatika", "Emtriva"]
 diagnosis = ["Covid", "Diabetes", "Cancer", "HIV", "IBS", "Crohns", "Alzheimers", "Borrelia", "Brutet nyckelben", "Korsbandsskada",
@@ -54,7 +54,11 @@ for person in all_personalinfo:
     print("SKAPA EHRID: " + str(response))
     ehrid = response.json()['ehrId']
     print(ehrid)
+
+
     #Create personal details party in demographics
+    r = requests.post("https://fejka.nu/?json=1&num=1")
+    contactperson = r.json()[0]
     response = requests.post(baseurl + '/demographics/party',
                             verify = True,
                             auth =(wu,wp),
@@ -71,7 +75,8 @@ for person in all_personalinfo:
                                     "adress": person['address'],
                                     "phone": person['phone'],
                                     "age" : 2020-int(person['pnr_full'][:4]),
-                                    "team" : random.choice(team),
+                                    "contact person" : {"name" : contactperson['fname']+" "+contactperson['lname'], "phone" : contactperson['phone']}, 
+                                    "team" : ["hej",random.choice(team)],
                                     "department" : random.choice(department)
                                     } }
                             )#kontaktperson från fejka.nu
@@ -204,7 +209,8 @@ for person in all_personalinfo:
         #fysisk aktivitet 1-5
         }
     #random amount of historic data
-    for i in range(5, random.randint(5, 10)):
+    for i in range(0, random.randint(5, 10)):
+        print(i)
         payload["measurements-c3/blood_pressure/any_event:0/systolic|magnitude"] += random.choice(max_delta_bp)
         payload["measurements-c3/blood_pressure/any_event:0/diastolic|magnitude"] -= random.choice(max_delta_bp)
         payload["measurements-c3/body_weight/any_event:0/weight|magnitude"] += random.choice(max_delta_weight)
