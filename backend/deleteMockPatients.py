@@ -27,15 +27,6 @@ CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.encounter.v1]
 WHERE c/name/value='EHR-PUM-C3'
 OFFSET 0"""
 
-#Selects all composition ids from compositions we have done, with a patient (ehrId, so our patient), with the template personinfo
-aql_get_personinfo_uid = aql = """SELECT c/uid/value as uid,
-e/ehr_id/value as id
-FROM EHR e
-CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.personinfo.v0]
-WHERE c/name/value='personinfo' AND id='%s'
-OFFSET 0
-"""
-#FUNKAR OVAN?
 
 #Selects all composition ids from compositions we have done based on template Medications and a specific patient
 aql_get_medications_uid = """SELECT c/uid/value as uid, e/ehr_id/value as id
@@ -111,17 +102,7 @@ for ehrid_dict in ehrids['resultSet']:
     #for each ehr id
     ehrid = ehrid_dict['id']
         
-    #get personinfo composition ids
-    try:
-        personinfo_uids = query(aql_get_personinfo_uid % ehrid)
-        #delete these compositions
-        for uid_dict in personinfo_uids['resultSet']:
-            uid = uid_dict['uid']
-            deleteComposition(uid)
-    except Exception:
-        pass
     #get PUM-C3 composition ids
-
     try:
         pum_c3_uids = query(aql_get_ehrpumc3_uid % ehrid)
         #delete these compositions
