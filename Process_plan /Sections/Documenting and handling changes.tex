@@ -1,0 +1,51 @@
+This chapter describes how we are to document and handle changes in regards to code. 
+
+\subsection{Issues in GitLab}
+In order to effectively distribute the work load across people in the different teams, issues in GitLab are to be used. This makes sure that we have a good overview of who is doing what during a specific time frame, what has the highest priority right now and so on. GitLab issues is to be found in GitLab in the left section. The issues works like a kanban board where some issues is to be done, some are under progress and some are finished and reviewed. There is one Kanban board for each team as well as one Kanban board that is for the entire group. The management group has started filling in some simple issues from which you can get some inspiration. 
+
+Hur blir man tilldelad en issue? BLir man assignad eller tar man en issue själv? 
+
+\subsection{Branches and Commits}
+
+\subsubsection{Branches}
+When working on a new feature for our software everything is to be done in a separate branch from our master. By working this way, we minimize the probability that something could go wrong with the master branch without anyone in the project group noticing it. When the software feature is done it is to be merged with master, but before the merge in accepted we run our continuous integration builds and tests. 
+
+\textbf{Feature branches} that are directly branched from master should be named as follows: 
+\begin{itemize}
+    \item Feature/$<$FeatureName$>$
+\end{itemize}
+To clarify, we are going to have two branches branched out from master that is going to be called "Feature/FrontEnd" and "Feature/BackEnd". Merging of the Feature branches into master is going to be handled by our lead developer Filip Eriksson together with Architect Jonas Malm as well as Git master Martin Friberg. 
+
+
+\textbf{Sub branches} which are children of the feature branches, should be named: 
+\begin{itemize}
+    \item Subfeature/$<$FeaturebranchName$>$/$<$subfeatureName$>$
+    \item Example: Subfeature/frontend/overview.
+
+\end{itemize}
+
+For the sub feature branches, tests are to be set up by the test team. These tests are run whenever are sub branch is merged with a feature branch. Filip Eriksson together with Axel Malmström are to be responsible for that the documentation as well as used functions and code efficiency for these merges are following good practices.
+
+\textbf{Subsub branches}, which are children of the sub feature branches are to be named: 
+\begin{itemize}
+    \item Subsubfeature/$<$SubfeaturebranchName$>$/$<$SubsubfeatureName$>$
+    \item Example: Subsubfeature/Frontend/Overview/DropDown
+\end{itemize}
+
+
+The subsub branches is where developers are supposed to work on specific features of the web application. Developers are to merge their work after every active coding session to avoid large chunks of code being merged at a time which could potentially lead to errors that are hard to track. The team that works on the children of a sub branch is also responsible for evaluating each others code before merging. 
+
+
+\subsubsection{Commits}
+In order to have an easily read git repository history, commits should be done separately for every file that is commited, with a specific commit message for each file. Doing it this way makes it easier to track what work have been done to what file at a specific point in time. An example of a good commit message for a could be "Add patient table filling function". If you need to use "and" in your commit message, the commit includes too much new code or functionality.
+
+\subsubsection{Comments in code}
+When a subsub feature is merged with a sub feature, the code in the subsub feature must be well documented. This includes a summary of what the file is doing and how it works as well as more concrete information about every single function in the file. 
+
+\subsubsection{READMEs}
+To every new package that is created, a new readme file should also be created describing the functionality of the package as well as how it can be used. 
+
+
+
+\subsection{CI/CD workflow}
+We are to develop suitable unittests as well as automated web tests with Selenium, which is to be implemented in our CI-pipe. Our integrator Emil Strömberg has set up a basic CI-pipeline (as much as possible) and we're now able to perform continuous integration to our "pure react" branch.
