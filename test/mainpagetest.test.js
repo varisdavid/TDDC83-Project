@@ -42,5 +42,21 @@ it('should click on navbar button to display a drawer', async () => {
   const expected = 'Home'
   expect(actual).toEqual(expected)
 })
+it ('should click on log out and check if log in option is available', async () => {
+  //Klicka Log out
+  let el = await driver.findElement(By.xpath('/html/body/div/div/div[1]/nav/div/div[3]/button'));
+  await driver.findElement(By.xpath('/html/body/div/div/div[1]/nav/div/div[3]/button')).click();
+  await new Promise(r => setTimeout(r, 3500));
+
+  //Leta upp Log in-knappen
+  let ej = await driver.findElement(By.xpath('/html/body/div/div/div[1]/nav/div/div[3]/button'));
+  await driver.wait(until.elementIsVisible(ej),100);
+
+  const actual = await driver.findElement(By.xpath('/html/body/div/div/div[1]/nav/div/div[3]/button')).getText();
+  const expected = 'Log In'
+  expect(actual).toEqual(expected);
+
+
+})
 
 
