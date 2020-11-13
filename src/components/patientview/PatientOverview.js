@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
+import { Button, Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 
 import { PatientCalendar } from '..'
 
@@ -199,11 +199,15 @@ const PatientOverview = () => {
               </TableHead>
               <TableBody>
               {earlierDisease.map((earlierDisease, index) => (
-                <TableRow className='row-table-body' key={earlierDisease.disease}>
+                <TableRow className='row-table-body' title='earlierDiseases' value='1' key={earlierDisease.disease}>
                   <TableCell className='cell-table-body'> {earlierDisease.disease} </TableCell>
                   <TableCell className='cell-table-body'> {earlierDisease.year} </TableCell>
                 </TableRow>
                 ))}
+                <TableRow className='row-table-body'>
+                  <TableCell className='cell-table-body'> <Button>See more</Button> </TableCell>
+                  <TableCell className='cell-table-body'></TableCell>
+                </TableRow> 
               </TableBody>
             </Table>
           </div>

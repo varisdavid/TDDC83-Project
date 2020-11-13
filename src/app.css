@@ -68,6 +68,10 @@
   background-color: #FFF;
 }
 
+.row-table-body[title=earlierDiseases]:nth-child(n+var(--c)){
+  display: none;
+}
+
 .table-patient{
   background: #FFFFFF;
   border: 1px solid #E5E5E5;
@@ -90,3 +94,4 @@
   margin-Bottom: 30px;
   max-height: 120px;
 }
+
