@@ -1,0 +1,38 @@
+When working with a project, a key aspect is to define risks and to map out in what areas they might appear. This makes it easier to be prepared and to handle the risks once they appear. 
+\subsection{Risks, probability, impact and the mitigation and contingency plans}
+In order to develop and create a successful project, it is crucial to acknowledge the risks that are present that is hard to avoid completely. The team leaders of the project group talked with their team members and had a discussion regarding what risks that they believed could arise that is hard to avoid completely. The risks that was brought to the table can be seen in the table below. 
+
+\begin{table}[h!]
+
+\begin{center}
+\tiny
+\begin{tabular}{ | m{0.3cm} |m{2.8cm} |m{0.65cm} |m{0.6cm} |m{0.6cm} |m{0.6cm} |m{0.7cm} |m{0.6cm} |m{2.8cm} |m{2.8cm} | } 
+\hline
+
+risk nr & Description & Proba bility & Impact&Risk magnitude  & Project Specific Y/N & Direct/ Indirect & Avoid/ Transfer/ Mitigate & Explanation & Mitigation \\ 
+\hline
+1 & Git version handling & 3 & 3 & \cellcolor{yellow!40}9 & Y & Direct & Mitigate & Someone in the project overwrites an old 
+working feature of the master branch without them knowing & We appoint someone responsible to handle tests for the master branch 
+and makes sure that the master branch is working at all times. \\ 
+\hline
+2 & Our development environment for the CI stops working in GitLab & 1 & 3 & \cellcolor{green!40}3& N & indirect & mitigate & If the environment for the CI stops working the code can not be validated and tested through the CI. Since CI is a vital part of keeping a good standard of code and to minimize the risk of bugs in the deployment this is a risk for the project & In order to mitigate the risk we can use an external git handler that has a functioning CI and use this to test the code where after the code is pushed to our repository \\ 
+
+\hline
+
+3 & We do not get the possibility of doing user tests with the end user & 2 & 4 & \cellcolor{yellow!40}8& N & indirect & mitigate & The lack of user tests with the end user makes us create functionality that they can not use and makes us miss implementing crucial software functionality & The risk can be mitigated by making user tests with the end user continuously. \\ 
+
+\hline
+
+
+4 & Region Östergötland does not buy our product & 3 & 4 & \cellcolor{red!40}12 & N & indirect & Mitigate & Another project group contracted by Region Östergötland breaks new ground and develops a product that is extraordinary or Region Östergötland is more satisfied with the software that they are currently using & Have a continuous dialog with Region Östergötland to make sure that we develop much of the functionality that they require from the software\\
+\hline
+5 & Region Östergötland's open EHR database stops working & 1 & 4 & \cellcolor{green!40}4 & Y & indirect &  Mitigate & We can not use RÖ's open EHR database since it crashes which in its turn prevents us from creating the functionality we would like for our product & We mock a lot of things in order to not be completely reliant on the EHR database \\
+\hline
+
+
+\end{tabular}
+
+\end{center}
+\caption{\label{tab:table-name}Table of unavoidable risks for the project}
+
+\end{table}
