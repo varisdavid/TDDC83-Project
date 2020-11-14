@@ -4,15 +4,35 @@ import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/c
 
 const PatientCurrentDiagnosesTable = () => {
 
-    const diagnoses = useMemo(
+  const diagnoses = useMemo(
         () => [
           {name: 'Diabetes'},
           {name: 'Hypertoni'},
         ],
         []
-    )
+  )
+  
+  //Gör som en const istället?
+  function checkIfEmpty() {
+    console.log("Function is called")
+    if (diagnoses !== null){
+      return(
+          //<TableRow className='row-table-body' key={diagnoses.name}>
+            //<TableCell className='cell-table-body'> {diagnoses.name} </TableCell>
+          //</TableRow>
+        <TableRow className='row-table-body'>
+          <TableCell className='cell-table-body'> Hej </TableCell>
+        </TableRow>
+      )
+    } else {
+      return (
+        <TableRow className='row-table-body'>
+          <TableCell className='cell-table-body'> Hej </TableCell>
+        </TableRow>
+      )
 
-
+    }
+  }
     return(
         <div>
             <Table className='table-patient'>
@@ -22,11 +42,7 @@ const PatientCurrentDiagnosesTable = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-              {diagnoses.map((diagnoses,index) => (
-                <TableRow className='row-table-body' key={diagnoses.name}>
-                  <TableCell className='cell-table-body'> {diagnoses.name} </TableCell>
-                </TableRow>
-                 ))}
+                {checkIfEmpty()}
               </TableBody>
             </Table>
         </div>
