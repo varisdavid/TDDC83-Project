@@ -47,3 +47,13 @@ yarn-error.log*
 *.out
 *.synctex.gz
 *.pdf
+
+#Python Cache
+__pychache__
+
+#Environment
+venv/
+.env
+backend/venv
+.vscode
+__pycache__
