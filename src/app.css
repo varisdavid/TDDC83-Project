@@ -1,0 +1,97 @@
+.next-steps .fa-link {
+  margin-right: 5px;
+}
+
+/* Fix for use only flexbox in content area */
+.next-steps .row {
+  margin-bottom: 0;
+}
+
+.next-steps .col-md-5 {
+  margin-bottom: 3rem;
+}
+
+@media (max-width: 768px) {
+  .next-steps .col-md-5 {
+    margin-bottom: 0;
+  }
+}
+
+.spinner {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: white;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.result-block-container .result-block {
+  opacity: 1;
+}
+
+.cell-table-header{
+    background:#275E8E; 
+    color: #FFF !Important;
+    font-weight: 700 !Important;
+    font-size: 15px !Important;
+    text-align: center;
+}
+
+.cell-table-body{
+  text-align: left;
+  border-color: #E5E5E5;
+  padding: 6px !Important; 
+  border-right: 2px solid #275E8E;
+}
+
+.cell-table-body:last-child{
+  border-right: none;
+}
+
+.cell-table-body[title=Primary]{
+  font-weight: bold;
+}
+
+.cell-table-body[status=Inskriven]{
+  color: #27AE60;
+}
+.row-table-body{
+  background-color: #E5E5E5;
+}
+
+.row-table-body:nth-child(odd){
+  background-color: #FFF;
+}
+
+.row-table-body[title=earlierDiseases]:nth-child(n+var(--c)){
+  display: none;
+}
+
+.table-patient{
+  background: #FFFFFF;
+  border: 1px solid #E5E5E5;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.div-table-patient-view{
+  width: 80%; 
+  margin-Bottom: 30px;
+}
+
+.div-table-patient-view-personal{
+  width: 60%;
+  margin-Bottom: 30px;
+}
+
+.img-overview-page{
+  width: 60%;
+  margin-Bottom: 30px;
+  max-height: 120px;
+}
+
