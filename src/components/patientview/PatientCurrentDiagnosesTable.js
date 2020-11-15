@@ -12,7 +12,10 @@ const PatientCurrentDiagnosesTable = () => {
         []
   )
   
-  //Gör som en const istället?
+  /* Checks if input data is empty and if thats the case
+  * returns and empty row (blankspace) else returns a row for
+  * each input 
+  */
   function checkIfEmpty() {
     console.log("Function is called")
     if (diagnoses.length===0){
