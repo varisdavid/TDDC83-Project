@@ -9,37 +9,56 @@ const PatientEarlierDiseasesTable = () => {
       { disease: 'Hjärtinfarkt', year: 2018 },
       { disease: 'Hjärtinfarkt', year: 2008 },
       { disease: 'Höftoperation', year: 2011 },
+      { disease: 'Trött på distans', year: 2020 },
+      { disease: 'Koffeinberoende', year: 2018 },
+      { disease: 'Höftoperation', year: 2011 },
     ],
     []
   )
 
-  //var nrOfRows = 3; - Använd denna till att bestämma 
-  //antal rader som ska visas tillsammans med funktionen
+  var n = 3; 
 
   /* Checks if input data is empty and if thats the case
   * returns and empty row (blankspace) else returns a row for
   * each input 
   */
- function checkIfEmpty() {
-  console.log("Function is called")
-  if (earlierDisease.length===0){
-    return(
-      <TableRow className='row-table-body'>
-        <TableCell className='cell-table-body'> &nbsp; </TableCell>
-      </TableRow>
-    )
-  } else {
-    return (
-      earlierDisease.map((earlierDisease, index) => (
-        <TableRow className='row-table-body' key={earlierDisease.disease}>
-          <TableCell className='cell-table-body'> {earlierDisease.disease}</TableCell>
-          <TableCell className='cell-table-body'> {earlierDisease.year}</TableCell>
+  function checkIfEmpty() {
+    if (earlierDisease.length === 0) {
+      return (
+        <TableRow className='row-table-body'>
+          <TableCell className='cell-table-body'> &nbsp; </TableCell>
         </TableRow>
-      ))
-    )
+      )
+    } else {
 
+      return (
+        earlierDisease.slice(0, n).map((earlierDisease, index) => (
+          <TableRow className='row-table-body' key={earlierDisease.disease}>
+            <TableCell className='cell-table-body'> {earlierDisease.disease}</TableCell>
+            <TableCell className='cell-table-body'> {earlierDisease.year}</TableCell>
+          </TableRow>
+        ))
+      )
+
+    }
   }
-}
+
+  function checkButton() {
+    if (n+1 > earlierDisease.length){
+      return null; 
+    } else {
+      return ( 
+        <TableRow className='row-table-body'>
+            <TableCell className='cell-table-body'> <Button onClick={clickButton()}>See more</Button> </TableCell>
+            <TableCell className='cell-table-body'></TableCell>
+          </TableRow>
+      )
+    }
+  }
+
+  function clickButton() { //Behöver uppdatera tabellen
+    n = n+3;
+  }
 
 
   return (
@@ -52,10 +71,7 @@ const PatientEarlierDiseasesTable = () => {
         </TableHead>
         <TableBody>
           {checkIfEmpty()}
-          <TableRow className='row-table-body'>
-            <TableCell className='cell-table-body'> <Button>See more</Button> </TableCell>
-            <TableCell className='cell-table-body'></TableCell>
-          </TableRow>
+          {checkButton()}
         </TableBody>
       </Table>
     </div>
