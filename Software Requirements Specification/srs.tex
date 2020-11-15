@@ -1,0 +1,840 @@
+\documentclass{scrreprt}
+\usepackage{listings}
+\usepackage{underscore}
+\usepackage{graphicx}
+\usepackage[bookmarks=true]{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{hyperref}
+\usepackage{tabularx}
+\usepackage{imakeidx}
+\makeindex[intoc]
+\usepackage{graphicx}
+\graphicspath{ {./Pictures/} }
+
+\hypersetup{
+    bookmarks=false,    % show bookmarks bar?
+    pdftitle={Software Requirement Specification},    % title
+    pdfauthor={Sara Lindholm},                     % author
+    pdfsubject={TeX and LaTeX},                        % subject of the document
+    pdfkeywords={TeX, LaTeX, graphics, images}, % list of keywords
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=blue,       % color of internal links
+    citecolor=black,       % color of links to bibliography
+    filecolor=black,        % color of file links
+    urlcolor=purple,        % color of external links
+    linktoc=page            % only page is linked
+}%
+\def\myversion{1.0 }
+\title{Software Requirements Specification}
+\author{Sara Lindholm \\ Patrick Asman \\ Jacob Rhan}
+
+\date{October 2020}
+
+
+\begin{document}
+
+\begin{titlepage}
+    \begin{center}
+    \begin{bfseries}
+        \Huge{SOFTWARE REQUIREMENTS SPECIFICATION}\\
+        \vspace{1.5cm}
+        \LARGE Patrick Asman \\ Sara Lindholm \\ Jacob Rhan \\
+        \vspace{1.5cm}
+        %Submitted to : - \\Lecturer\\
+        %\vspace{1.5cm}
+        \today\\
+        %\vspace{5cm}
+        \vspace{1.5cm}
+        {Version \myversion}\\
+        \vfill
+        \includegraphics[width=\linewidth]{Pictures/logo.png} \\
+    \end{bfseries}
+    \end{center}
+\end{titlepage}
+
+\tableofcontents
+
+\chapter{Introduction}
+This section gives an overview of everything included in this document. The purpose and scope for this document is described and a list of abbreviations, acronyms and definitions is provided. 
+
+\section{Purpose}
+The purpose of this document is to give a detailed description of \textcolor{red}{[system name?]}. It will illustrate the purpose and features of the system. It will also explain system constraints, interfaces of the system and interactions with external applications. This document is intended primarily to be proposed to the stakeholders for approval and as a reference for the developers.
+
+\section{Scope}
+\textcolor{red}{[System name?]} is a web-based application to aid Region Östergötland's health care staff in overseeing and handling many patients. The system will make it easier for the health care staff to oversee many patients' measured health data and prioritize which patients are in most need of care. The system will have customizable overviews, customizable alert-levels and sorting and filtering functions to make prioritization easier. The system will in addition to a better overview of all patients be able to give more detailed overview about the individual patients' health information, such as current medications, health conditions and the measured data. 
+
+
+\section{Definitions, acronyms and abbreviations}
+\begin{center}
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{Term} & \textbf{Definition} \\ 
+ \hline
+  User  & Health care staff who interacts with the web application.  \\
+  \hline
+  Admin/Administrator & System administrator who is given specific permission for managing and controlling the system  \\ 
+  \hline
+  RÖ  & Region Östergötland  \\ 
+  \hline
+\end{tabularx}
+\end{center}
+
+\section{References}
+IEEE Recommended Practice for Software Requirements Specifications," in IEEE Std 830-1998 , vol., no., pp.1-40, 20 Oct. 1998, doi: 10.1109/IEEESTD.1998.88286.
+
+\section{Overview}
+The second chapter of the document, Overall Description, gives an overview of the functionality of the product.
+
+
+The third chapter, Requirements Specification, gives a more  detailed description of the system and its features. 
+
+\chapter{Overall Description}
+This section will present an overview of the entire system. The system's basic functionality and how it interacts with other systems will be introduced. % The constraints and assumptions for the system will also be presented. 
+
+\section{Product Perspective}
+\textbf{TODO:} fix. \\ put the product into perspective with other related products
+\begin{itemize}
+    \item web application
+    \item communicates with openEHR (store and recieve health data?), OAuth, RÖ's personell lists, Swedish population register and online health care services (such as 1177, Fass etc).
+\end{itemize}
+
+
+\section{Product functions}
+This web application will aid health care staff in handling many patients and their health data. The system will have an overview in which the user will be able to see all patients in their care unit. These patients can then be sorted and filtered by different criteria, which will aid the user in prioritizing which patients are in most need of care. 
+
+
+The user will also be able to show more detailed information about the individual patients should they choose to click on a patient. In the individual patient view the user will get access to more information than what was available in the overview of all patients. The individual patient may have measured health data, medical information and history, and scheduled appointments which will be displayed in different tabs on the web application.
+
+
+The application will also be able to send out notifications to the users when there are updates on patients. The specifics for notifications are to be set by the admin so as to avoid being overwhelmed by notifications. 
+
+\section{User Characteristics}
+There are two intended users of the system: users and administrators. These two types of users will have different roles and therefore not have access to all the same functionalities. Some of the customizable elements shall only be customizable by an admin and the admin will also be the one to set the criteria for the different alert levels as well as the notifications.
+
+
+\section{Constraints}
+
+
+\section{Assumptions and dependencies}
+%"This subsection of the SRS should list each of the factors that affect the requirements stated in the SRS. These factors are not design constraints on the software but are, rather, any changes to them that can affect the requirements in the SRS. For example, an assumption may be that a specific operating system will be available on the hardware designated for the software product. If, in fact, the operating system is not available, the SRS would then have to change accordingly."
+
+\section{Apporting of requirements}
+%There are some requirements that could be delayed until future versions of the systems if the project is delayed.
+
+\chapter{Specific requirements}
+This chapter contains the software requirements and gives a detailed
+description of the system and its features. 
+
+\section{External interface requirements}
+\textbf{TODO: fix}
+\begin{itemize}
+    \item openEHR
+    \item OAuth
+    \item Region Östergötland's personell lists 
+    \item Swedish population register 
+    \item online health care services (e.g. rådgivningsstöd, 1177, vårdhandboken, FASS, internetmedicin) 
+\end{itemize}
+
+%\subsection{User interfaces}
+%\subsection{Software interfaces}
+%\subsection{Communication interfaces}
+
+\section{Functional requirements}
+The following section includes the requirements that specify all the fundamental actions of the software system.
+\subsection{System}
+\subsubsection{Data Access}
+\begin{center}
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR038  \\ 
+ \hline
+ \textbf{Statement:} & The user shall only get access to the data if the user chooses to access it
+  \\ 
+ \hline
+\end{tabularx}
+
+\end{center}
+
+\subsubsection{General}
+\begin{center}
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR016  \\ 
+ \hline
+ \textbf{Statement:} & The system shall work on different devices (desktop computers and mobile devices)
+  \\ 
+ \hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR014  \\ 
+ \hline
+ \textbf{Statement:} & 80 percent of the users shall perceive that the information in the system are presented easy and unambiguously 
+  \\ 
+ \hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR011  \\ 
+ \hline
+ \textbf{Statement:} & The admin shall be able to customize and save different views of the system. (e.g. a predefined view over diabetes patients who are over 30 years)
+  \\ 
+ \hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR009  \\ 
+ \hline
+ \textbf{Statement:} & The admin shall be able to specify the variables that affects the health prioritization. The system shall provide the possibility to specify different variables for different health care units. 
+
+ \\ 
+ \hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR007  \\ 
+ \hline
+ \textbf{Statement:} & The user shall be able to shift between a "patient view" where many patients are shown and a "overview view" where only one patient are shown.
+ \\ 
+ \hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR002  \\ 
+ \hline
+ \textbf{Statement:} & As long as a user is logged into the system, the system shall be able to notify the user. \\ 
+ \hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR041  \\ 
+ \hline
+ \textbf{Statement:} & The system shall display which user currently handles a patient. \\ 
+ \hline
+\end{tabularx}
+\end{center}
+
+
+\subsubsection{Notifications}
+\begin{center}
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR024  \\ 
+ \hline
+ \textbf{Statement:} & The system shall be able to alert caregivers of patients with deviating health status \\ 
+ \hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR034  \\ 
+ \hline
+ \textbf{Statement:} & An admin shall be able to configure at what level (based on health care status, health data etc) the system should alert caregivers\\ 
+ \hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR035  \\ 
+ \hline
+ \textbf{Statement:} & The admin shall be able to determine when notifications shall be sent to users\\ 
+ \hline
+\end{tabularx}
+
+\end{center}
+\subsubsection{"Patienter" and "Notislogg" in overview view}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR015  \\ 
+ \hline
+ \textbf{Statement:} & In the overview view under the tab home: 
+When a user hover over the notification symbol the user shall be able to see the value that triggered the notification.
+\\ 
+ \hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR008  \\ 
+ \hline
+ \textbf{Statement:} & The system shall log which users who viewing which patients. These activities shall be saved in a log file.
+\\ 
+ \hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR006  \\ 
+ \hline
+ \textbf{Statement:} & The system shall notify the user if they tries to access patient data that they don't have authority to view.\\ 
+ \hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR005  \\ 
+ \hline
+ \textbf{Statement:} & The system shall notify the user if patients have fail twice to submit medical data according to their individual health care plan. First time a patient fail to submit medial data the app reminds the user. \\ 
+ \hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR031  \\ 
+ \hline
+ \textbf{Statement:} & In the Overview view under the tab notise-log: there should be three symbols: 1. "warning for exceeded limit value" 2. "message" and 3. "Lack of measured value of the patient (due to forgotten or technical problems)" \\ 
+ \hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR040  \\ 
+ \hline
+ \textbf{Statement:} & The user of the system shall be presented with communication options (i.e. chat, telephone number, contact information) when notified about a patient. \\ 
+ \hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR048  \\ 
+ \hline
+ \textbf{Statement:} & The active hover state of a notification-element shall present relevant text information for the user.  \\ 
+ \hline
+\end{tabularx}
+
+\end{center}
+
+\subsubsection{"Patienter" and "Notislogg" in overview view and "Mätvärden" in patient view}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR003  \\ 
+ \hline
+ \textbf{Statement:} & The system shall display all matching patients to a user who filter patients by [age, alert-level, measurements, health care unit, team, disease and patients’conditions]. \\ 
+ \hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR004  \\ 
+ \hline
+ \textbf{Statement:} & The system shall display all patients in preferred order to a user who sort patients by [age, alert-level, measurements, health care unit, team, disease and patients’conditions]. \\ 
+ \hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR025  \\ 
+ \hline
+ \textbf{Statement:} & When the filter view is open, the user should be able to filter based on priority level \\ 
+ \hline
+\end{tabularx}
+
+\end{center}
+
+\subsection{Overview view}
+
+\subsubsection{"Hem"}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR023  \\ 
+ \hline
+ \textbf{Statement:} & In the overview view under the home tab, the user should be able to sort based on disease type, latest date, name, updated by. It must also be clear which measured value the sorting is based on
+ \\ 
+ \hline
+\end{tabularx}
+
+\subsubsection{"Patienter"}
+\subsubsection{"Kalender"}
+\subsubsection{"Notislogg"}
+
+\subsection{Patient view} 
+\subsubsection{Data Access}
+\begin{center}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR037  \\ 
+ \hline
+ \textbf{Statement:} & The user shall be given a choice between accessing the data or not before getting access to said data
+ \\ 
+ \hline
+\end{tabularx}
+\end{center}
+
+\subsubsection{Tab: "Mätvärden"}
+\begin{center}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR020  \\ 
+ \hline
+ \textbf{Statement:} & The system shall be able to track patient health trends
+ \\ 
+ \hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR022  \\ 
+ \hline
+ \textbf{Statement:} & The system shall be able to present patient health trends
+ \\ 
+ \hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR022  \\ 
+ \hline
+ \textbf{Statement:} & The system shall be able to present patient health trends
+ \\ 
+ \hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR033  \\ 
+ \hline
+ \textbf{Statement:} & In the overview of a patient the user shall in the middle of the view be presented with measurements and a seven-day measurement average.
+ \\ 
+ \hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR042  \\ 
+ \hline
+ \textbf{Statement:} & In the view of the individual patient's measured data the user of the system shall be able to resize diagram area and list of entered data.
+ \\ 
+ \hline
+\end{tabularx}
+
+\end{center}
+
+\subsubsection{Tab: "Översikt"}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR019  \\ 
+ \hline
+ \textbf{Statement:} & All metrics shall be presented together with the period of time that metrics was collected. 
+ \\ 
+ \hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR017  \\ 
+ \hline
+ \textbf{Statement:} & The user shall be able to see patients currently "activity level" and the measured values "Alcohol" and "Smoking" should not be included.
+ \\ 
+ \hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR013  \\ 
+ \hline
+ \textbf{Statement:} & The user shall be able to see a profile picture of the patient
+ \\ 
+ \hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR012  \\ 
+ \hline
+ \textbf{Statement:} & The system shall be integrated with online health care services (i.e. rådgivningsstöd, 1177, vårdhandboken, FASS, internetmedicin) \\ 
+ \hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR021  \\ 
+ \hline
+ \textbf{Statement:} & In the patient overview under the tab “översikt”, should include information about allergies or other care restrictions
+ \\ 
+ \hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR026  \\ 
+ \hline
+ \textbf{Statement:} & In the view of a patient user shall be able to see personal information (gender, age occupation, social security number) 
+ \\ 
+ \hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR028  \\ 
+ \hline
+ \textbf{Statement:} & In the view of a patient, the user shall be able to see contact info to the patient and emergency contacts if available
+ \\ 
+ \hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR030  \\ 
+ \hline
+ \textbf{Statement:} & In the overview of a patient the user shall at the top of the view be presented with the patient’s current diagnosis/noses together with a collapsible list of past diagnosis/noses.
+ \\ 
+ \hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR032  \\ 
+ \hline
+ \textbf{Statement:} & In the view of a patient, the user shall be able to see relevant parts of system activity log. (e.g Jacob sent out a form, Sara commented)
+ \\ 
+ \hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR036  \\ 
+ \hline
+ \textbf{Statement:} & Overview-dashboard shall display information (about the patient etc) according to the user preference settings
+ \\ 
+ \hline
+\end{tabularx}
+
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR039  \\ 
+ \hline
+ \textbf{Statement:} & In the view of the patient the current diagnosis/noses shall be presented in the heading 
+ \\ 
+ \hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR043  \\ 
+ \hline
+ \textbf{Statement:} & In the overview of a patient the user shall at the top of the view be presented with the patient’s current medication(s).
+ \\ 
+ \hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR044  \\ 
+ \hline
+ \textbf{Statement:} & In the overview of a patient the user shall at the bottom of the view be presented with responsible healthcare provider(s) and associated hospital or clinic.
+ \\ 
+ \hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR045  \\ 
+ \hline
+ \textbf{Statement:} & The user shall, if required, be presented with warning symbols (as used in the Swedish health record system) in the overview of a patient.
+ \\ 
+ \hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR046  \\ 
+ \hline
+ \textbf{Statement:} & When search filtering, the active list shall be filtered dynamically as the user types in the search query.
+ \\ 
+ \hline
+\end{tabularx}
+
+\end{center}
+
+\subsubsection{Tab: "Läkemedelslista"}
+
+
+\subsubsection{Tab: "Kalender"}
+\begin{center}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR027  \\ 
+ \hline
+ \textbf{Statement:} & In the patient view under the calendar tab, the calendar activities must be color-coded based on the activity type
+ \\ 
+ \hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR029  \\ 
+ \hline
+ \textbf{Statement:} & In the patient view under the calendar tab, the Calendar must be able to be linked to "timebooks" / “tidböcker”
+ \\ 
+ \hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & FR047  \\ 
+ \hline
+ \textbf{Statement:} & In the calendar view of a patient the user shall for an upcoming activity be presented with the date, time, description, place, and comments.
+ \\ 
+ \hline
+\end{tabularx}
+
+\end{center}
+
+
+\subsubsection{Tab: "Symptomskattning"}
+
+
+
+
+\section{Performance requirements}
+The requirements in this section provide specification of the system performance. 
+
+\begin{center}
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & NFR005  \\ 
+ \hline
+ \textbf{Statement:} & The system shall be able to store and handle 10 000 simultaneous active patients.
+ \\ 
+ \hline
+\end{tabularx}
+\end{center}
+
+
+\section{Software system attributes}
+The requirements in this section specify the required usability, security, maintainability and portability.
+of the software system.
+
+\subsection{Usability}
+\begin{center}
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & NFR008  \\ 
+ \hline
+ \textbf{Statement:} & 90\% of the system users shall perceive the system as easy to use and flexible.
+ \\ 
+ \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & NFR016  \\ 
+ \hline
+ \textbf{Statement:} & The system shall be easy to navigate (e.g. low Lostness-score, follow the ISO 9241-11 standard).
+ \\ 
+ \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & NFR017  \\ 
+ \hline
+ \textbf{Statement:} & The system shall provide good user experience (follow the ISO 9241-11 standard).
+ \\ 
+ \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & NFR018  \\ 
+ \hline
+ \textbf{Statement:} & The system shall be accessible for people with disabilities and follow WCAG guidelines. 
+ \\ 
+ \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & NFR012  \\ 
+ \hline
+ \textbf{Statement:} & The Google Material Design system themed with Region Östergötland’s color palette shall be used.
+ \\ 
+ \hline
+\end{tabularx}
+\end{center}
+
+\subsection{Security}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & NFR002  \\ 
+ \hline
+ \textbf{Statement:} & OAuth shall be used for login and authentication.
+ \\ 
+ \hline
+\end{tabularx}
+\end{center}
+
+\subsection{Maintainability}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & NFR013  \\ 
+ \hline
+ \textbf{Statement:} & The system shall enable use of openEHR platforms as storage backend for EHR content (e.g. measurements, content from forms filled out by the patient and care plan).
+ \\ 
+ \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & NFR014  \\ 
+ \hline
+ \textbf{Statement:} & The system shall be integrable with RÖ’s systems for personell lists from their database.
+ \\ 
+ \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & NFR015  \\ 
+ \hline
+ \textbf{Statement:} & The system shall be integrable with the Swedish population register (folkbokföringsregister). 
+ \\ 
+ \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & NFR019  \\ 
+ \hline
+ \textbf{Statement:} & Online health care services (i.e. rådgivningsstöd, 1177, vårdhandboken, FASS, internetmedicin) shall be integrated in the system.
+ \\ 
+ \hline
+\end{tabularx}
+\end{center}
+
+\subsection{Portability}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & NFR001  \\ 
+ \hline
+ \textbf{Statement:} & The system shall be OS independent.
+ \\ 
+ \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & NFR004  \\ 
+ \hline
+ \textbf{Statement:} & It shall be possible to deploy the system using Docker orchestrated by Kubernetes.
+ \\ 
+ \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & NFR006  \\ 
+ \hline
+ \textbf{Statement:} & Standardized terms and national language for special purposes (LSP) shall be used. 
+ \\ 
+ \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & NFR007  \\ 
+ \hline
+ \textbf{Statement:} & The system shall be written in TypeScript (instead of JavaScript).
+ \\ 
+ \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & NFR009  \\ 
+ \hline
+ \textbf{Statement:} & The system shall implement a scalable UI that works seamlessly across a broad range of screen sizes.
+ \\ 
+ \hline
+\end{tabularx}
+\end{center}
+
+
+\section{Other requirements}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & NFR003  \\ 
+ \hline
+ \textbf{Statement:} & The server-side functionality shall be based on open source parts.
+ \\ 
+ \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & NFR010  \\ 
+ \hline
+ \textbf{Statement:} & The system shall be developed in open source, Apache 2 license.
+ \\ 
+ \hline
+\end{tabularx}
+\end{center}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{| l | X |}
+ \hline
+ \textbf{ID:} & NFR011  \\ 
+ \hline
+ \textbf{Statement:} & The graphical interface components shall be continuously and openly documented/tested/published through Storybook.
+ \\ 
+ \hline
+\end{tabularx}
+\end{center}
+
+
+\appendix
+\chapter{Appendix Title}
+
+%\printindex
+
+\end{document}

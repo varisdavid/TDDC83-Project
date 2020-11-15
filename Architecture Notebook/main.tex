@@ -18,7 +18,7 @@
 \title{Architecture Notebook}
 
 \author{Jonas Malm}
-\date{October 2020\\---\\Version 0.5.2}
+\date{October 2020\\---\\Version 0.6.5}
 
 \begin{document}
 
@@ -44,16 +44,22 @@ Version & Date & Author & Description \\ \hline
 0.5.0 & 2020-11-10 & Jonas Malm & Added user cases\\
 0.5.1 & 2020-11-10 & Jonas Malm & Modified box and line to separate filtration module\\
 0.5.2 & 2020-11-10 & Jonas Malm & Added overview sequence diagram\\
-
+0.6.0 & 2020-11-11 & Jonas Malm & Started work on the authentication section\\
+0.6.1 & 2020-11-12 & Jonas Malm & Added new section to arch. decisions: Using Auth0\\
+0.6.2 & 2020-11-13 & Jonas Malm & Added subsection to AD: Role-based access control\\
+0.6.3 & 2020-11-13 & Jonas Malm & Added RBAC Roles to authentication section\\
+0.6.4 & 2020-11-13 & Jonas Malm & Added an authentication sequence diagram\\
+0.6.5 & 2020-11-13 & Jonas Malm & Added Patient View sequence diagram\\
 \hline
 \end{tabular}
 \end{table}
+
 \textbf{TODO:}
-\begin{enumerate}[label=(\roman*)
-\item Add more sequence diagrams
+\begin{enumerate}[label=(\roman*)]
 \item Write dependencies
 \item Write section 6 - product in the future
 \item Add deployment view
+\item Finish work on authentication section
 \item Update ASRs when requirements are re-numbered
 \item Populate appendix
 \end{enumerate}
@@ -72,9 +78,10 @@ This document describes the software architecture of the system. Furthermore it 
 \begin{description}
 \item [EHR] An \emph{Electronic Health Record} is a record containing patient health data in an electronic form.
 \item [OpenEHR] is a collection of open industry specifications, models and software for e-health.
-\item [HCU] 
-\item [OAuth] is an open standard for authorization delegation. It allows a service owner to allow third-party server access without sharing credentials, instead using access tokens. 
 \item [AQL] The \emph{Archetype Query Language} is a declarative query language developed to search and retrieve data in archetype-based repositories, such as an OpenEHR-database.
+\item [HCU] is an abreviation of Health Care Unit.
+\item [OAuth] is an open standard for authorization delegation. It allows a service owner to allow third-party server access without sharing credentials, instead using access tokens. 
+\item RBAC Role-Based Access Control is a way to assign access levels based on what role a user has.
 \end{description}
 
 \subsection{Goal of the project}
@@ -291,6 +298,11 @@ Since members are experienced with SQL and the back end will be developed in Pyt
 \subsection{Using EhrScape}
 As specified in the ASRs, the patient EHRs must be stored using the openEHR standard. Due to the time constraint and the skill constraint, the project does not have time to either train developers or to develop a server storing EHRs in accordance to the openEHR standard. In order to accommodate this requirement the project will instead use EhrScape, a health data platform. The platform contains tools for easy handling of clinical models, health data queries and vendor independent data storage. This is accessed through an API and data is stored on EhrScape's EHR server.
 
+\subsection{Using Auth0}
+As stated in the ASRs, the system has to implement OAuth for authentication. Due to the time and skill constraints as well as the scope of the project, developing a authentication system utilizing OAuth would not be a good decision. In order to facilitate integration with the customers current Identity Management solution, HeartByte will implement its authentication solution through the Auth0 service. Auth0 uses OAuth 2.0, which is supported by the customer's Identity Management solution and which will make the future integration easy. Through the Auth0 API, authentication can be handled from the HeartByte system and permission scopes can be quickly set up and managed from the Auth0 webpage.
+
+\subsubsection{Role-Based Access Control}
+The authentication system will implement RBAC. In RBAC you analyze the needs of users and group them into roles. Since patient access is based on what HCU you work at and some functionality is limited to admins, it is simple to split users into groups and to see what access roles these groups require.
 
 
 \section{Key abstractions}
@@ -357,10 +369,35 @@ The EHR Retriever is the module responsible for loading data from EHRs. This mod
 \subsubsection{EhrScape Server Layer}
 This layer is a database stored on an external server, which is accessed using the EhrScape API. The API is queried using stored custom Archetype Query Language (AQL) queries as well as using its REST API. Since this is the openEHR database query language it is easy to substitute this layer with another openEHR server in the future.
 
+\clearpage
+\subsection{Authentication} \label{Authentication}
+In this part the authentication functionality is discussed in further detail.
+
+\subsubsection{Patients and HCUs}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.45]{departments}
+    \caption{A sequence diagram illustrating how the Patient Overview calls are handled by the system}
+    \label{fig:departments}
+\end{figure}
+
+The users using the system belong to one or more groups. The structure of these groups are illustrated in the simple tree in Figure \ref{fig:departments}. A department is a health care institution and could be e.g. a hospital or a health center, such as the Linköping University Hospital. These departments are divided into subdepartments, such as Cardiology,  Infectious Diseases or Pediatrics. These subdepartments are in turn comprised of teams.  
+As illustrated, a patient is handled by one or many departments. Thus, a health care professional working at any subdepartment in Department B is authorized to view the EHR of Patient B, but not the EHR of Patient A.
+However, it is in the interest of the health care professionals working at Department B to be able to access the EHR of Patient A, in case of an emergency. The system will facilitate this, but such accesses will be logged in the access log.
+
+\subsubsection{RBAC Roles}
+By analyzing the needs of users using the information above, they can be grouped and assigned access roles to be implemented in the RBAC system in Auth0.
+
+\begin{description}
+\item [Operation] The Operation role consists of several roles, one for each operation. A user that e.g. has the \emph{Operation A} role has access to the EHRs of all patients serviced by Operation A.
+\item [Admin] The Admin role allows a user to make some customization changes for the other members in the same Operation as the user. This includes changing the rules used in the Rule Engine and adding custom filtered views, through accessing the modules Rule Customizer and View Customizer illustrated in Figure \ref{fig:execution-view}.
+\end{description}
+
+
 \subsection{Sequence diagrams}
 In this section a few relevant sequence diagrams will be displayed, to further clarify how the modules will interact in typical user cases.
 
-\subsubsection{Calls from the overview module}
+\subsubsection{Calls from the Overview module}
 \begin{figure}[h]
     \centering
     \includegraphics[scale = 0.45]{overview-sequence}
@@ -369,6 +406,26 @@ In this section a few relevant sequence diagrams will be displayed, to further c
 \end{figure}
 
 Worth noting from Figure \ref{fig:overview-sequence}, is that all relevant data is retrieved to the Overview. Once the data has been retrieved, filters can be applied without retrieving the data again. Since no sensitive data will be displayed to the user through the Overview, there is no need to log this in the access log.
+
+\subsubsection{Calls from the Patient View module}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.45]{patient-sequence}
+    \caption{A sequence diagram illustrating how the Patient View calls are handled by the system}
+    \label{fig:patient-sequence}
+\end{figure}
+
+In Figure \ref{fig:patient-sequence}, EHR data about a specific patient is retrieved. The access token, with the user's access authentication from the role inside, is passed to the EHR Retriever. After retrieving the data about the requested patient, this module will compare the Department the patient belongs to with the role of the user from the access token. If these do not match, the access in unauthorized and this will be logged before structuring the returned data and passing it to the Patient View. Note that the data is returned even though the access is unauthorized, as specified in Section \ref{Authentication}. However, no data will be returned if the access token is invalid or missing.
+
+\subsubsection{Authentication}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.45]{auth-sequence}
+    \caption{A sequence diagram illustrating how authentication is handled}
+    \label{fig:auth-sequence}
+\end{figure}
+
+As seen in Figure \ref{fig:auth-sequence}, Auth0 makes a request to the Personnel DB in the HeartByte server to get information about the user that logged in. Then this information is evaluated to assign one or several roles to the user. Then these roles are stored in the access token that is returned, that is required to access end points e.g. to load the Patient Overview.
 
 \clearpage
 \section{The system in the future}
