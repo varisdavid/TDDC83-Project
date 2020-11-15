@@ -1,9 +1,8 @@
 This chapter describes how we are to document and handle changes in regards to code. 
 
 \subsection{Issues in GitLab}
-In order to effectively distribute the work load across people in the different teams, issues in GitLab are to be used. This makes sure that we have a good overview of who is doing what during a specific time frame, what has the highest priority right now and so on. GitLab issues is to be found in GitLab in the left section. The issues works like a kanban board where some issues is to be done, some are under progress and some are finished and reviewed. There is one Kanban board for each team as well as one Kanban board that is for the entire group. The management group has started filling in some simple issues from which you can get some inspiration. 
+In order to effectively distribute the work load across people in the different teams, issues in GitLab are to be used. This makes sure that we have a good overview of who is doing what during a specific time frame, what has the highest priority right now and so on. GitLab issues is to be found in GitLab in the left section. The issues works like a kanban board where some issues is to be done, some are under progress and some are finished and reviewed. The issues are to be categorized in three ways, to be done, doing and done. The Issues shall also have high or low priority regarding whether or not we believe them to be critical. The developers themselves are to select an issue that has a high priority if such an issue exists. 
 
-Hur blir man tilldelad en issue? BLir man assignad eller tar man en issue själv? 
 
 \subsection{Branches and Commits}
 
@@ -12,15 +11,15 @@ When working on a new feature for our software everything is to be done in a sep
 
 \textbf{Feature branches} that are directly branched from master should be named as follows: 
 \begin{itemize}
-    \item Feature/$<$FeatureName$>$
+    \item $<$FeatureName$>$
 \end{itemize}
-To clarify, we are going to have two branches branched out from master that is going to be called "Feature/FrontEnd" and "Feature/BackEnd". Merging of the Feature branches into master is going to be handled by our lead developer Filip Eriksson together with Architect Jonas Malm as well as Git master Martin Friberg. 
+To clarify, we are going to have two branches branched out from master that is going to be called "Feature\_FrontEnd" and "Feature\_BackEnd". Merging of the Feature branches into master is going to be handled by Emil Strömberg. 
 
 
 \textbf{Sub branches} which are children of the feature branches, should be named: 
 \begin{itemize}
-    \item Subfeature/$<$FeaturebranchName$>$/$<$subfeatureName$>$
-    \item Example: Subfeature/frontend/overview.
+    \item $<$FeaturebranchName$>$\_$<$subfeatureName$>$
+    \item Example: frontend\_overview.
 
 \end{itemize}
 
@@ -28,8 +27,8 @@ For the sub feature branches, tests are to be set up by the test team. These tes
 
 \textbf{Subsub branches}, which are children of the sub feature branches are to be named: 
 \begin{itemize}
-    \item Subsubfeature/$<$SubfeaturebranchName$>$/$<$SubsubfeatureName$>$
-    \item Example: Subsubfeature/Frontend/Overview/DropDown
+    \item $<$feature-branchname$>$\_$<$SubfeaturebranchName$>$\_$<$SubsubfeatureName$>$
+    \item Example: Frontend\_Overview\_DropDown
 \end{itemize}
 
 
@@ -48,4 +47,5 @@ To every new package that is created, a new readme file should also be created d
 
 
 \subsection{CI/CD workflow}
-We are to develop suitable unittests as well as automated web tests with Selenium, which is to be implemented in our CI-pipe. Our integrator Emil Strömberg has set up a basic CI-pipeline (as much as possible) and we're now able to perform continuous integration to our "pure react" branch.
+We are to develop suitable unittests as well as automated web tests with Selenium, which is to be implemented in our CI-pipe. Our integrator Emil Strömberg has set up a basic CI-pipeline (as much as possible) and we're now able to perform continuous delivery to our "Frontend" branch. We are to work with continuous integration where we are to push our work to the subsub branch that we are working on after every work session. When the respective subsub tasks and sub tasks are done. They are to be merged their parent branch. The frontend branch is to be updated daily. As of now, we do not have any continuous delivery in our master branch since the backend branch is not yet ready. Getting the backend branch ready for continuous delivery is of high priority. When the backend branch is ready, the backend and frontend branches are to be merged with master at least once every week. 
+
