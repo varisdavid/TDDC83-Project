@@ -15,20 +15,19 @@ const PatientCurrentDiagnosesTable = () => {
   //Gör som en const istället?
   function checkIfEmpty() {
     console.log("Function is called")
-    if (diagnoses !== null){
+    if (diagnoses.length===0){
       return(
-          //<TableRow className='row-table-body' key={diagnoses.name}>
-            //<TableCell className='cell-table-body'> {diagnoses.name} </TableCell>
-          //</TableRow>
         <TableRow className='row-table-body'>
-          <TableCell className='cell-table-body'> Hej </TableCell>
+          <TableCell className='cell-table-body'> &nbsp; </TableCell>
         </TableRow>
       )
     } else {
       return (
-        <TableRow className='row-table-body'>
-          <TableCell className='cell-table-body'> Hej </TableCell>
-        </TableRow>
+        diagnoses.map((diagnoses, index) => (
+          <TableRow className='row-table-body' key={diagnoses.name}>
+            <TableCell className='cell-table-body'> {diagnoses.name}</TableCell>
+          </TableRow>
+        ))
       )
 
     }
