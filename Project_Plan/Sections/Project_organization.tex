@@ -13,15 +13,126 @@ After the applications for different roles were handed in to the project group, 
 The project group is divided into two major departments, the Research and Development department and the Product and Sales department. Within and across these groups there are also a number of smaller groups that are responsible for working with a certain task such as testing, developing, analyzing the system or managing the group.Cross-functional groups will be created in order to apply a broader knowledge when developing a certain feature or working with a certain task requiring knowledge from different departments. For example it is a good idea to include an analyst when developing a feature in order to assure that the quality and function of the feature is in line with what the software is supposed to achieve according the the applicable requirements. \\ 
 
 The different roles within our organization all fills different purposes. The main goal is to create an organization where we're able to deliver the product ordered by our customer, on time and with the intended quality. In order to be able to do so, the organization has to be built up b a couple of different teams, see description below. 
+\begin{table}[H]
 
-\subsubsection{Management}
-The main purpose for the management team is to coordinate the different tasks that has to be done in order to meet the goals for the project. Furthermore, the management team is responsible for coordinating the communication within the organization and to make sure that all the different sub teams has the information needed in order to pursue a certain task. The management team is built up by five different managers with different areas management questions to handle. Axel Trolme as the project manager is responsible for making sure that the project is on time and to deliver the information needed to the different parts of the organisation. Max Klasson as the strategic product manager is responsible for having the communication with our customer and to make sure that the information is correctly reflected in the requirements list as well as communicating with our development team. Patrik Palmgren as the line manager has become responsible for the safe keeping of documents and to make sure that all the living documents are up to date and with the quality needed. Sam Anlér as the configuration manager is responsible for keeping a continuous communication with all the team members and to make sure that the correct information is provided. Martin Friberg as the Process manager is responsible for mapping all the processes and to document them in the process plan. 
+\begin{center}
+\begin{huge}
+    Management
+\end{huge}
+\begin{tabular}{ | m{4cm} |m{3cm} |m{10cm}| } 
+\hline
+\textbf{Position} & \textbf{People} & \textbf{Description} \\ 
+\hline
+Project Manager & Axel Trolme & Ensures that the goals for the project are met by planning and following up the tasks, as well as planning the resource allocation. Also responsible for communication with the company CEO Daniel Ståhl. \\
+\hline
+Process Manager & Martin Friberg & Decides and structures the processes that are to be used throughout the project. Communicates with the different departments of the project organisation in order to map what education plans they need in order to fulfill given tasks.  \\
+\hline
+Strategic Product Manager & Max Klasson & Responsible for communication with the customer as well as with the analysis team. He also decides how the product features should be prioritized and has to keep a constant communication with the different departments and groups within the project.  \\
+\hline
+Configuration Manager & Sam Anlér & Responsible for deciding what artefacts and documents that are to be put under version control and what parts of the product that should be available for a specific release. Also, Sam has become responsible for pursuing company health evaluations every second week. He also ensures that the resources given to the project in terms of tools are used properly and therefore has a constant communication with the development team. \\
+\hline
+Line Manager & Patrik Palmgren & Responsible for book keeping and the structure of the documents, to make sure that they are stored in the correct way and that the documents are updated accordingly when needed. Also, Patrik is responsible for communicating with the different groups within the company in order to get a clear picture of what's needed to put in the different documents.   \\
+\hline
+\end{tabular}
+\end{center}
+\caption{\label{tab:table-name}Description of project roles within management}
+\end{table}
+\vspace{10cm}
+\begin{table}[H]
 
-\subsubsection{Development}
-The development team is responsible for writing the code of the product and to make detailed development decisions. 
-\subsubsection{Validation}
-\subsubsection{Customer Service}
-\subsubsection{Analysis}
+\begin{center}
+\begin{huge}
+    Development
+\end{huge}
+\begin{tabular}{ | m{4cm} |m{3cm} |m{10cm}| } 
+\hline
+\textbf{Position} & \textbf{People} & \textbf{Description} \\ 
+\hline
+UX Designer & Anna Wadsten & Expert on how the interaction between the user and the product / system is to be performed. Anna has also been our chief in command for the development of the Hi-Fi as well as Lo-Fi prototypes, and has a constant contact witht the customer in order to brief the design of the prototypes with the end users. The UX designer has also been involved in the process of user testing in order to be able to bring the information from these tests into the development of the prototypes.  \\
+\hline
+Architect & Jonas Malm & Is responsible for what target environment to be in use when developing the product. He is also the responsible person for making key decisions regarding the hgh-level architecture. Also, Jonas makes sure that our non-functional requirements are met as well as judging future capabilities and outcomes of design decision being made.  \\
+\hline
+Integrator & Emil Strömberg & Responsible for putting the different pieces of software developed together, in order to create a functional product.  \\
+\hline
+Lead Developer & Filip Eriksson & Leads the work for the developers and hands out the tasks to the different groups within the development team. Also, Filip is the SCRUM-master on the weekly SCRUM-meetings being held for the development group. This way of working enhances the productivity and flow of information through the team. \\
+\hline
+Usability Designer & Jessica Södereng & Works in close connection with Anna Wadsten with development of the Hi-Fi and Lo-Fi prototypes. Also, Jessica is responsible for designing the navigation through the system that the end-user will work with. \\
+\hline
+Data Engineer & Erik Lindgren & Prepares the infrastructure and integrates the data from different sources. Since the product developed isn't much about big data, Eriks position within the company has became an ordinary developer working alongside Filip Eriksson as lead developer as well as the other developers. \\
+\hline
+Developer & Oscar Lindström, 
+Gustaf Eriksson, 
+Axel Malmström, Jonathan Vikblad, Aditya Pankaj Thanekar, Kajsa Kastberg, Lukas Eveborn   & Writes the code and develops the software components that the system / product is be built up from. Reports to Filip Eriksson (Lead Developer). \\
+\hline
+\end{tabular}
+
+\end{center}
+\caption{\label{tab:table-name}Description of project roles within development}
+
+\end{table}
+\begin{table}[H]
+
+\begin{center}
+\begin{huge}
+    Customer Service
+\end{huge}
+\begin{tabular}{ | m{4cm} |m{3cm} |m{10cm}|| } 
+\hline
+\textbf{Position} & \textbf{People} & \textbf{Description} \\ 
+\hline
+Deployment Manager & David Varis & Responsible for making the product available for the customer, including launching the product with docker as well as making it available as a web application. \\
+\hline
+\end{tabular}
+
+
+\end{center}
+\caption{\label{tab:table-name}Description of project roles within Customer Service}
+
+\end{table}
+\begin{table}[!hbtp]
+
+\begin{center}
+\begin{huge}
+    Validation
+\end{huge}
+\begin{tabular}{ | m{4cm} |m{3cm} |m{10cm}| } 
+\hline
+\textbf{Position} & \textbf{People} & \textbf{Description} \\ 
+\hline
+Quality Coordinator & Emma Johansson & Responsible for measuring the product in terms of requirement-specific metrics as well as initation of needed changes and fixes. Emma determines the quality of the product, and organizes the reviews of both software and documents.  \\
+\hline
+Test Leader & Gustav Karlsson & Works in close connection with both the development team and the analysis team. The main responsibilities for the test leader is to evaluate our requirements and to make sure that test are developed in order to realize the testing of the product. Also, Gustav is responsible for organizing the process reagrding user tests.   \\
+\hline
+Tester & Hjalmar Svensson \& Mattis Bark & Works in close contact to the test leades, Gustav Karlsson, and assists him in the development of the tests needed. Both automated tests as well as user tests are developed by the testers \\
+\hline
+\end{tabular}
+
+
+\end{center}
+\caption{\label{tab:table-name}Description of project roles within Validation}
+
+\end{table}
+\begin{table}[!hbtp]
+
+\begin{center}
+\begin{huge}
+    Analysis
+\end{huge}
+\begin{tabular}{ | m{4cm} |m{3cm} |m{10cm}| } 
+\hline
+\textbf{Position} & \textbf{People} & \textbf{Description} \\ 
+\hline
+Lead Analyst & Sara Lindholm & Responsible for defining and describing the requirements that the system are to meet. Sara is responsible for keeping up the communication with the customer regarding the requirements, and to documents these decisions in the SRS-document.  \\
+\hline
+Analyst & Jacob Rahn \& Patrick Asman & Assists the lead analyst, Sara Lindholm, in the communication with the customer as well as in the process of defining and describing the requirements. \\
+\hline
+\end{tabular}
+
+
+\end{center}
+\caption{\label{tab:table-name}Description of project roles within Analysis}
+
+\end{table}
 
 \subsection{Knowledge/skill}
 The company management sent out a form to all the members of the company where the members were supposed to fill in what knowledge they have from before and what knowledge they are currently lacking. In this way, management is able to locate in what areas the skill and knowledge is high and in what areas we are lacking skill and knowledge. The languages chosen by our architect Jonas Malm for developing our Handle Many Platform is: React for front-end development and a combination of Flask and Python for the back-end development. Since React was not mapped in the knowledge and skill survey, the management makes the assumption after talking to most of the developers, that the knowledge within React is fairly limited. This fact has made the management produce a short term plan for introducing the new environment to the developers, where the first step is to watch the tutorial videos regarding react. In regards to further development the management outsources the major responsibility of sharing knowledge, acquiring a knowledge base and making the development of the project to the lead developer Filip Eriksson. 
