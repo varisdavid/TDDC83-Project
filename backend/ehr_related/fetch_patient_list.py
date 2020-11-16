@@ -134,6 +134,11 @@ def get_medications(ehrid):
 #medical diagnosis endpoint
 
 def get_diagnosis(ehrid):
+    """
+    Function that retrieves measurements data for a patient
+    Parameters: ehrid, string, identifier for a patient
+    Returns: List with dicts (1-3 dicts) with currently only a string (the medical diagnosis)
+    """
 
     aql = """SELECT y/data[at0001]/items[at0009]/value as diagnos
         FROM EHR e
