@@ -6,51 +6,25 @@ import { useVirtual } from 'react-virtual';
 
 import { useTable, useFlexLayout} from 'react-table'
 
-const PatientListOfMedicationTableDaily = () => {
-    const data =  useMemo(
-        () => [
-            {
-                Läkemedel: 'Alvedon',
-                Dos: '1000mg',
-                Intagsform: 'tabletter',
-                Intag: '2 tabletter dagligen',
-                Kommentar: 'Tas i samband med mat',
-            },
-            {
-                Läkemedel: 'Alvedon',
-                Dos: '1000mg',
-                Intagsform: 'Tabletter',
-                Intag: '2 tabletter dagligen',
-                Kommentar: 'Tas till maten',
-            },
-            {
-                Läkemedel: 'Alvedon',
-                Dos: '1000mg',
-                Intagsform: 'tabletter',
-                Intag: '2 tabletter dagligen',
-                Kommentar: 'Tas i samband med mat',
-            },
-        ],
-        []
-    )
-
-
+const PatientListOfMedicationTableDaily = ( data, ) => {
+console.log("dailyyyyy");
+console.log(data);
     const columns = useMemo(
         () => [
 
-            {Header: 'Läkemedel',
+            {Header: 'Medication',
                 accessor:'Läkemedel',
             },
-            {Header: 'Dos',
+            {Header: 'Amount',
                 accessor:'Dos',
             },
-            {Header: 'Intagsform',
+            {Header: 'Type',
                 accessor:'Intagsform',
             },
-            {Header: 'Intag',
+            {Header: 'Dosage',
                 accessor:'Intag',
             },
-            {Header: 'Kommentar',
+            {Header: 'Comments',
                 accessor:'Kommentar',
             },
         ],
