@@ -20,7 +20,7 @@ wp = os.environ.get("EHRSCAPE_PASSWORD")
 #base url for all REST api calls
 baseurl = 'https://rest.ehrscape.com/rest/v1'
 #numnber of fake patients to create
-no_of_patients = 50
+no_of_patients = 5
 #list of some samples to be used in the mock patient data
 #medications = ["Ipren", "Alvedon", "Treo-comp", "Voltaren", "Humira", "Abilify", "Enbrel", "Crestor", "Lantus Solostar", "Sovaldi","Advair Diskus", "Nexium", "Januvia", "Lyrica", "Galvus", "Xanax", "Tramadol", "Genotropin", "Cytostatika", "Emtriva"]
 diagnosis = ["Covid", "Diabetes", "Cancer", "HIV", "IBS", "Crohns", "Alzheimers", "Borrelia", "Brutet nyckelben", "Korsbandsskada",
@@ -119,7 +119,7 @@ for person in all_personalinfo:
 
     #Create fake details about which medications the patient takes
     templateid="Medications"
-    #this dict contains the details, only the marked line is important
+    #this dict contains the details
     payload = {
     "ctx/language" : "en",
     "ctx/territory" : "SV",
@@ -132,8 +132,14 @@ for person in all_personalinfo:
 
     "medications/medication_instruction:0/order:0/medicine" : "tbd", #Ipren
     "medications/medication_instruction:0/order:0/directions" : "tbd", # "tas i samband med mat"
+    "medications/medication_instruction:0/order:0/dose/quantity|magnitude" : "tbd",
+    "medications/medication_instruction:0/order:0/dose/quantity|unit" : "mg"
+    "medications/medication_instruction:0/order:0/dose/description" : "tbd",
+    "medications/medication_instruction:0/order:0/additional_instruction:0" : "tbd",
+    "medications/medication_instruction:0/order:0/comment:0" : "tbd"
     }
-    # "Ipren", "1000mg", "tablett", "2 gånger om dagen", "Tas i samband med mat", True}
+
+
     #each patient will take a random number (between 1 and 3) of different medications
     medications_copy = medications[:]
     for i in range(0, random.randint(1,3)):
