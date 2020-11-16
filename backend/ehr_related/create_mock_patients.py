@@ -130,11 +130,10 @@ for person in all_personalinfo:
     "medications/context/context_detail:0/tags:0" : "hejgatan 123",
     "medications/medication_instruction:0/_uid" : "vem fan vet",
 
-    "medications/medication_instruction:0/order:0/medicine" : "Medicine", #Value to be changed in loop below
-
-    "medications/medication_instruction:0/order:0/directions" : "Varje halvtimme",
-    "medications/medication_instruction:0/order:0/dose/description" : "I'm not a doctor"
+    "medications/medication_instruction:0/order:0/medicine" : "tbd", #Ipren
+    "medications/medication_instruction:0/order:0/directions" : "tbd", # "tas i samband med mat"
     }
+    # "Ipren", "1000mg", "tablett", "2 gånger om dagen", "Tas i samband med mat", True}
     #each patient will take a random number (between 1 and 3) of different medications
     medications_copy = medications[:]
     for i in range(0, random.randint(1,3)):
