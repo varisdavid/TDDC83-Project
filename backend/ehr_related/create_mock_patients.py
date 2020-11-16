@@ -60,6 +60,9 @@ unindexed_medications= [["Ipren", "1000mg", "tablett", "2 gånger om dagen", "Ta
 ["Natpar", 7, "tablett", "2 gånger om dagen", "Tas i samband med mat", True],
 ["Narop", 2, "Lösning", "7 gånger om dagen", "varannan timme", True]]
 
+auxiliary = ["Medication", "Dosage", "Intake form", "Frequency", "Comment", "Daily"]
+medications = [dict(zip(auxiliary, x)) for x in unindexed_medications]
+
 initial_systolic_range = range(100,200)
 initial_diastolic_range = range(70, 150)
 max_delta_bp = range(-15,15)
