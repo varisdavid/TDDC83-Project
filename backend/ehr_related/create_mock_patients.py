@@ -22,7 +22,7 @@ baseurl = 'https://rest.ehrscape.com/rest/v1'
 #numnber of fake patients to create
 no_of_patients = 50
 #list of some samples to be used in the mock patient data
-medications = ["Ipren", "Alvedon", "Treo-comp", "Voltaren", "Humira", "Abilify", "Enbrel", "Crestor", "Lantus Solostar", "Sovaldi","Advair Diskus", "Nexium", "Januvia", "Lyrica", "Galvus", "Xanax", "Tramadol", "Genotropin", "Cytostatika", "Emtriva"]
+#medications = ["Ipren", "Alvedon", "Treo-comp", "Voltaren", "Humira", "Abilify", "Enbrel", "Crestor", "Lantus Solostar", "Sovaldi","Advair Diskus", "Nexium", "Januvia", "Lyrica", "Galvus", "Xanax", "Tramadol", "Genotropin", "Cytostatika", "Emtriva"]
 diagnosis = ["Covid", "Diabetes", "Cancer", "HIV", "IBS", "Crohns", "Alzheimers", "Borrelia", "Brutet nyckelben", "Korsbandsskada",
 			"Cystisk fibros", "ALS", "Multipel skleros", "Diskbråck", "Gula febern", "Ebola", "Hypertoni"]
 
@@ -30,6 +30,35 @@ department = ["Ryds Vårdcentral", "Capio Vårdcentral Berga", "Jourcentralen LI
                 "Valla Vårdcentral", "Capio Vårdcentral Vasastaden LInköping"]
 team = ["Dermotologi", "Geriatrik", "Onkologi", "Kardiologi", "Öra, näsa & hals", "Kirurgi", "Anestesiologi", "Neurologi",
              "Gynekologi", "Urologi", "Ortopedi"]
+unindexed_medications= [["Ipren", "1000mg", "tablett", "2 gånger om dagen", "Tas i samband med mat", True],
+["Alvedon", 1000, "tablett", "2 gånger om dagen", "Tas morgon och kväll", True],
+["Treo-comp", 1000, "tablett", "2 gånger om dagen", "Tas i samband med migrän", True],
+["Voltaren", 1000, "tablett", "7 gånger om dagen", "Tas vid värk", True],
+["Humira", 300, "tablett", "3 gånger om dagen", "Tas vid duschning", True],
+["Abilify", 400, "tablett","6  gånger om dagen", "Tas innan förtäring", True],
+["Enbrel", 700, "tablett", "3 gånger om dagen", "Tas med ett glas mjölk", True],
+["Crestor", 970, "tablett"," 4 gånger om dagen", "Tas i samband med mat", True],
+["Lantus", 400, "tablett", "7 gånger om dagen", "Vid trötthet", True],
+["Solostar", 340, "pulver","vid behov", "Vid trötthet", False],
+["Sovaldi", 500, "kräm", "Två skedar", "Får inte tas med vatten", True],
+["Advaor Diskus", 750, "tablett", "8 till 9 gånger om dagen", "tas med vatten", True],
+["Nexium", 345, "lösning", "2 gånger om dagen", "Tas i samband med mat", True],
+["Januvia", 1000, "tablett", "2 gånger om dagen", "Tas i samband med mat", True],
+["Lycrica", 450, "tablett", "vid behov", "Tas vid illa mående", False],
+["Galvus", 300, "kräm", "9 gånger om dagen", "Smörj rikligt så det täcker såret", True],
+["Xanax", 1000, "tablett","4 gånger om dagen", "Tas i samband med att fokus börjar dippa", True],
+["Tramadol", 650, "tablett", "2 gånger om dagen", "Tas vid torr mun", True],
+["Genotropin", 400, "tablett", "2 gånger om dagen", "Tas i samband med mat", True],
+["Cytostatika", 1000, "pulver","vid behov", "När du känner dig deprimerad", False],
+["Emtriva", 300, "pulver", "2 gånger om dagen", "Morgon och kväll", True],
+["Ipren", 1000, "tablett", "vid behov", "Tas vid tandvärk", False],
+["Voltaren", 10, "kräm", "vid behov", "Tas i samband med träningsvärk", False],
+["Xanax", 1000, "tablett", "5 gånger om dagen", "Tas i samband med kaffe", True],
+["Nalonone", 4, "lösning", "vid behov", "Tas vid magensmärta", False],
+["Nasin", 3, "lösning", "vid behov", "vid nästäppa", False],
+["Nasonex", 6, "tablett", "2 gånger om dagen", "Tas I samband med tandborstning", True],
+["Natpar", 7, "tablett", "2 gånger om dagen", "Tas i samband med mat", True],
+["Narop", 2, "Lösning", "7 gånger om dagen", "varannan timme", True]]
 
 initial_systolic_range = range(100,200)
 initial_diastolic_range = range(70, 150)
