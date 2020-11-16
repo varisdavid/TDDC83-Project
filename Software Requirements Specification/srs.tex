@@ -25,7 +25,7 @@
     urlcolor=purple,        % color of external links
     linktoc=page            % only page is linked
 }%
-\def\myversion{1.0 }
+\def\myversion{1.1 }
 \title{Software Requirements Specification}
 \author{Sara Lindholm \\ Patrick Asman \\ Jacob Rhan}
 
@@ -54,6 +54,23 @@
 \end{titlepage}
 
 \tableofcontents
+
+\chapter*{Revision History}
+\begin{center}
+\begin{tabular}{|p{1,9cm}|p{1,5cm}|p{6cm}|p{4cm}|}
+ \hline
+ \textbf{Date} & \textbf{Version} & \textbf{Description} & \textbf{Author} \\ 
+ \hline
+ 2020-10-xx & 0.9 & Initial SRS structure & Sara Lindholm \\
+ \hline
+ 2020-10-15 & 1.0 & First Draft & Patrick Asman, Sara Lindholm, Jacob Rhan \\ 
+ \hline
+ 2020-11-11 & 1.1 & Updated and added functional requirements & Sara Lindholm \\
+ \hline
+\end{tabular}
+\end{center}
+
+
 
 \chapter{Introduction}
 This section gives an overview of everything included in this document. The purpose and scope for this document is described and a list of abbreviations, acronyms and definitions is provided. 
@@ -142,467 +159,371 @@ description of the system and its features.
 
 \section{Functional requirements}
 The following section includes the requirements that specify all the fundamental actions of the software system.
+
+\subsection{Admin}
+\subsubsection{Översikt/Hem}
+\begin{center}
+\begin{tabularx}{\linewidth}{| l | X | X | l |}
+\hline
+\textbf{ID:} & \textbf{Statement} & \textbf{Description} & \textbf{Priority} \\ 
+\hline
+FR001 & The admin shall be able to customize and save views of the system (e.g. diabetes over 30 years, a view that filter out all diabetes patients that are older than 30 years) & \textbf{Input:} Selected filter settings by Admin. \newline \textbf{Action:} System generating new view. \newline \textbf{Output:} New view for users. & Medium \\ 
+\hline
+FR002 & The "Översiktsinställningar" shall only be customizable by the administrator. & \textbf{Input:} Selected settings by Admin. \newline \textbf{Action:} System generating new views. \newline \textbf{Output:} Updated views for users. & Medium \\ 
+\hline
+FR003 & The admin shall be able to determine when notifications shall be sent to users. & \textbf{Input:} Selecting the notifications to receive for a specific patient (e.g. Want to receive notifications when patient goes from one priority level to another one).
+\newline \textbf{Action:} System sets notifications for patient.
+\newline \textbf{Output:} "Notification prefences updated" message. & Medium \\ 
+\hline
+\end{tabularx}
+\end{center}
+
+\subsection{Patient}
+\subsubsection{Admin}
+\begin{center}
+\begin{tabularx}{\linewidth}{| l | X | X | l |}
+\hline
+\textbf{ID:} & \textbf{Statement} & \textbf{Description} & \textbf{Priority} \\ 
+\hline
+FR004 & The system shall log users accessing patient information. & \textbf{Input:} User opens individual patient view / User ID.
+\newline \textbf{Action:} System logs ID and updates activity log.\newline \textbf{Output:} Updated activity log. & High \\ 
+\hline
+FR005 & Admin shall configure at what level (based on health care status, health data etc) a measurement shall be to trigger a priority level change about the patient & \textbf{Input:} Limit values.
+\newline \textbf{Action:} Save patient specific prioritization limits.
+\newline \textbf{Output:} Settings displayed. &  High \\ 
+\hline
+FR006 & The system shall log users updating patient information. & \textbf{Input:} User updates patient information (e.g measurements).
+\newline \textbf{Action:} System logs ID and updates activity log.
+\newline \textbf{Output:} Updated activity log. & High \\ 
+\hline
+\end{tabularx}
+\end{center}
+
+\subsubsection{Alla flikar}
+\begin{center}
+\begin{tabularx}{\linewidth}{| l | X | X | l |}
+\hline
+\textbf{ID:} & \textbf{Statement} & \textbf{Description} & \textbf{Priority} \\ 
+\hline
+FR007 & In the view of the patient the current diagnosis/diagnoses shall be presented in the heading  & \textbf{Input:} Click in on individual patient.
+\newline \textbf{Action:} Data loading.
+\newline \textbf{Output:} Diagnosis information displayed. & Medium \\ 
+\hline
+FR008 & The user shall be able to switch to Overview view. & \textbf{Input:} User clicks on the Home button.
+\newline \textbf{Action:} Loading Overview view.
+\newline \textbf{Output:} System displays Overview View. & High \\ 
+\hline
+\end{tabularx}
+\end{center}
+
+\subsubsection{Kalender}
+\begin{center}
+\begin{tabularx}{\linewidth}{| l | X | X | l |}
+\hline
+\textbf{ID:} & \textbf{Statement} & \textbf{Description} & \textbf{Priority} \\ 
+\hline
+FR009 & In the patient view under the calendar tab, the calendar activities must be color-coded based on the activity type. & \textbf{Input:} input.
+\newline \textbf{Action:} action.
+\newline \textbf{Output:} output. & Low \\ 
+\hline
+FR010 & In the patient view under the calendar tab, the Calendar must be able to be linked to "timebooks" / “tidböcker”. & \textbf{Input:} input.
+\newline \textbf{Action:} action.
+\newline \textbf{Output:} output. & Low \\ 
+\hline
+FR011 & In the calendar view of a patient the user shall for an upcoming activity be presented with the date, time, description, place, and comments. & \textbf{Input:} Click tab "Patient/Kalender".
+\newline \textbf{Action:} Load activity information.
+\newline \textbf{Output:} Display upcoming  activity information. & Low \\ 
+\hline
+FR012 & The user shall be able to add activities to a patient's calendar.  & \textbf{Input:} input.
+\newline \textbf{Action:} action.
+\newline \textbf{Output:} output. & Low \\ 
+\hline
+\end{tabularx}
+\end{center}
+
+\subsubsection{Mätvärden}
+\begin{center}
+\begin{tabularx}{\linewidth}{| l | X | X | l |}
+\hline
+\textbf{ID:} & \textbf{Statement} & \textbf{Description} & \textbf{Priority} \\ 
+\hline
+FR013 & In the view of the individual patient's measured data the user of the system shall be able to zoom in and out in the view.  & \textbf{Input:} Press zoom in/out button.
+\newline \textbf{Action:} Resizing diagram and list of measurements.
+\newline \textbf{Output:} Resized diagrams and list of measurements. & Low \\ 
+\hline
+FR014 & It must be specified during what period the shown measurments have been collected. & \textbf{Input:} Click tab "Patient/Mätvärden".
+\newline \textbf{Action:} Measurment loading.
+\newline \textbf{Output:} Diagrams of measurments with dates on axis. & Low \\ 
+\hline
+FR015 & The system shall present measurement history in a diagram. & \textbf{Input:} Click tab "Patient/Mätvärden".
+\newline \textbf{Action:} Data loading.
+\newline \textbf{Output:} Information displayed on view. & Medium \\ 
+\hline
+FR016 & The user shall be able to accept or deny unexpected measured values submitted by a patient.  & \textbf{Input:} Click on unexpected measurement value.
+\newline \textbf{Action:} System accepts or denies measured value.
+\newline \textbf{Output:} Displays changes. & Medium \\ 
+\hline
+FR017 & The user shall be able to update a patients measured values.  & \textbf{Input:} Clicks on measurement to update.
+\newline \textbf{Action:} System updates measured value.
+\newline \textbf{Output:} Displays value. & High \\ 
+\hline
+\end{tabularx}
+\end{center}
+
+\subsubsection{Översikt}
+\begin{center}
+\begin{tabularx}{\linewidth}{| l | X | X | l |}
+\hline
+\textbf{ID:} & \textbf{Statement} & \textbf{Description} & \textbf{Priority} \\ 
+\hline
+FR018 & Information about allergies and other care restrictions must be visible in patient overview. & \textbf{Input:} Click tab "Patient/Översikt".
+\newline \textbf{Action:} Data loading.
+\newline \textbf{Output:} Information displayed on view. & High \\ 
+\hline
+FR019 & Personal information (gender, age, personal number) of the patient shall be included in the view. & \textbf{Input:} Click tab "Patient/Översikt".
+\newline \textbf{Action:} Data loading.
+\newline \textbf{Output:} Information displayed. & Medium \\ 
+\hline
+FR020 & Contact information and emergency contacts, if available, shall be included in the view. & \textbf{Input:} Click tab "Patient/Översikt".
+\newline \textbf{Action:} Data loading.
+\newline \textbf{Output:} Information displayed. & Medium \\ 
+\hline
+FR021 & At the top of the view, the patient's current diagnosis/diagnoses shall be visible together with a collapsible list of past diagnosis/noses & \textbf{Input:} Click tab "Patient/Översikt".
+\newline \textbf{Action:} Data loading.
+\newline \textbf{Output:} Information displayed at the top of the view. & Medium \\ 
+\hline
+FR022 & In the overview of a patient the user shall in the middle of the view be presented with measurements and a seven-day measurement average & \textbf{Input:} Click tab "Patient/Översikt".
+\newline \textbf{Action:} Data loading.
+\newline \textbf{Output:} Display measurements and a seven day average & Medium \\ 
+\hline
+FR023 & In the overview of a patient the user shall at the top of the view be presented with the patient’s current medication(s) & \textbf{Input:} Click tab "Patient/Översikt".
+\newline \textbf{Action:} Data loading.
+\newline \textbf{Output:} Information displayed at the top of the view. & Medium \\ 
+\hline
+FR024 & In the overview of a patient the user shall at the bottom of the view be presented with responsible healthcare provider(s) and associated hospital or clinic.  & \textbf{Input:} Click tab "Patient/Översikt".
+\newline \textbf{Action:} Data loading.
+\newline \textbf{Output:} Information displayed at the bottom of the view.  & Low \\
+\hline
+\end{tabularx}
+\begin{tabularx}{\linewidth}{| l | X | X | l |}
+\hline
+FR025 & The user shall, if necessary, be presented with "Uppmärksamhetssymbolen" in the overview of a patient & \textbf{Input:} Click tab "Patient/Översikt".
+\newline \textbf{Action:} Data loading.
+\newline \textbf{Output:} Information displayed in the view. & Medium \\ 
+\hline
+\end{tabularx}
+\end{center}
+
 \subsection{System}
-\subsubsection{Data Access}
 \begin{center}
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR038  \\ 
- \hline
- \textbf{Statement:} & The user shall only get access to the data if the user chooses to access it
-  \\ 
- \hline
-\end{tabularx}
-
-\end{center}
-
-\subsubsection{General}
-\begin{center}
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR016  \\ 
- \hline
- \textbf{Statement:} & The system shall work on different devices (desktop computers and mobile devices)
-  \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR014  \\ 
- \hline
- \textbf{Statement:} & 80 percent of the users shall perceive that the information in the system are presented easy and unambiguously 
-  \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR011  \\ 
- \hline
- \textbf{Statement:} & The admin shall be able to customize and save different views of the system. (e.g. a predefined view over diabetes patients who are over 30 years)
-  \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR009  \\ 
- \hline
- \textbf{Statement:} & The admin shall be able to specify the variables that affects the health prioritization. The system shall provide the possibility to specify different variables for different health care units. 
-
- \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR007  \\ 
- \hline
- \textbf{Statement:} & The user shall be able to shift between a "patient view" where many patients are shown and a "overview view" where only one patient are shown.
- \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR002  \\ 
- \hline
- \textbf{Statement:} & As long as a user is logged into the system, the system shall be able to notify the user. \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR041  \\ 
- \hline
- \textbf{Statement:} & The system shall display which user currently handles a patient. \\ 
- \hline
+\begin{tabularx}{\linewidth}{| l | X | X | l |}
+\hline
+\textbf{ID:} & \textbf{Statement} & \textbf{Description} & \textbf{Priority} \\ 
+\hline
+FR026 & The system shall notify the user if patients have not submitted medical data according to their individual health care plan. & \textbf{Input:} Time limit, according to individual health care plan, expires.
+\newline \textbf{Action:} Notification printing and sending to responsible user.
+\newline \textbf{Output:} The system sends notification to user. & High \\ 
+\hline
+FR027 & The system shall provide the user with instructions on how to use the system. For example, if a field is to be filled in, there is information about what is to be specified in the field. & \textbf{Input:} User clicks on button "Help".
+\newline \textbf{Action:} Loading help information message.
+\newline \textbf{Output:} The system displays help information message. & Low \\ 
+\hline
+FR028 & The system shall send a notification when a patient measurement exceeds limit value. & \textbf{Input:} Patient measurement.
+\newline \textbf{Action:} Comparing to limit value.
+\newline \textbf{Output:} Send notification. & High \\
+\hline
+FR029 & The user of the system shall be presented with the option to access communication information (i.e. chat, telephone number, contact information) when notified about a patient & \textbf{Input:} Notification sent with patient identification.
+\newline \textbf{Action:} Load contact information about patient.
+\newline \textbf{Output:} Display patient's contact information in notification if uses so chooses. & Low \\
+\hline
 \end{tabularx}
 \end{center}
 
+\subsection{Översikt}
 
-\subsubsection{Notifications}
+\subsubsection{Hem}
 \begin{center}
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR024  \\ 
- \hline
- \textbf{Statement:} & The system shall be able to alert caregivers of patients with deviating health status \\ 
- \hline
+\begin{tabularx}{\linewidth}{| l | X | X | l |}
+\hline
+\textbf{ID:} & \textbf{Statement} & \textbf{Description} & \textbf{Priority} \\ 
+\hline
+FR030 & When the filter view is open, the user shall be able to filter patients by [age, priority-level, measurements, health care unit, team, disease and patients’conditions among others].  & \textbf{Input:} Filter values from categories [age, priority-level, measurements, health care unit, team, disease and patients’conditions among others].
+\newline \textbf{Action:} The system searches for patients matching filter criteria.
+\newline \textbf{Output:} The system displays all patients who matched the filters. & High \\ 
+\hline
+FR031 & The user of the system shall be able to sort patients by [age, priority-level, measurements, health care unit, team, patients’ conditions, disease type, latest date, name, updated by ] & \textbf{Input:} Sorting values from categories [age, priority-level, measurements, health care unit, team, disease, patients’conditions, disease type, latest date, name, updated by].
+\newline \textbf{Action:} The system rearranges the list of patients according to sorting criteria.
+\newline \textbf{Output:} The system displays all patients according to the sorting criteria. & High \\ 
+\hline
+FR032 & When the user tries to access patient data from other departments the system shall display a message & \textbf{Input:} Clicks on patient not in user's department.
+\newline \textbf{Action:} The system confirms that user wants to access patient data not in their department.
+\newline \textbf{Output:} Display message about accessing patient data outside user's department. & High \\ 
+\hline
+FR033 & The overview page shall be shown to users as starting page after login. & \textbf{Input:} User logs in.
+\newline \textbf{Action:} Loading starting page (Overview view).
+\newline \textbf{Output:} System displays Overview view. & High \\ 
+\hline
 \end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR034  \\ 
- \hline
- \textbf{Statement:} & An admin shall be able to configure at what level (based on health care status, health data etc) the system should alert caregivers\\ 
- \hline
+\begin{tabularx}{\linewidth}{| l | X | X | l |}
+\hline
+FR034 & It must be visible which parameter the sorting is based on. & \textbf{Input:} Click sort.
+\newline \textbf{Action:} Data loading.
+\newline \textbf{Output:} Information displayed in relation to search result. & Low \\ 
+\hline
+FR035 & Overview-dashboard shall display information according to the admin preference settings (e.g name, personal number, prioritization, diagnosis, health care provider responsible for patient, last updated, updated by) & \textbf{Input:} Selecting which "Översiktsinställningar" to show in overview.
+\newline \textbf{Action:} The system updates the settings.
+\newline \textbf{Output:} The system displays all the selected settings for the patients. & Medium \\ 
+\hline
+FR036 & The user shall be given a choice between accessing the data or not before getting access to said data. & \textbf{Input:} Clicking on a patient in overview.
+\newline \textbf{Action:} The system checks if user wants to access patient data.
+\newline \textbf{Output:} Display message checking if user wants to access data. & High \\ 
+\hline
+FR037 & The user shall only get access to the data if the user chooses to access it. & \textbf{Input:} Clicking on "Bekräfta" button to access patient data.
+\newline \textbf{Action:} The system confirms that data shall be displayed.
+\newline \textbf{Output:} The system displays patient data. & High \\ 
+\hline
+FR038 & When search filtering, the active list shall be filtered dynamically as the user types in the search query. & \textbf{Input:} Text string in diagnosis filter.
+\newline \textbf{Action:} System checks for diagnosis that matches text string.
+\newline \textbf{Output:} Displays diagnosis that matches string. & Low \\
+\hline
+FR039 & The active hover state of a notification-symbol shall present relevant text information (e.g. Unexpected measurement value, or delayed time) for the user   & \textbf{Input:} Mouse hover over notification.
+\newline \textbf{Action:} System loads data.
+\newline \textbf{Output:} Displays relevant infromation. & Medium \\ 
+\hline
+FR040 & The user shall be able to switch to patient view. & \textbf{Input:} User clicks on a patient.
+\newline \textbf{Action:} Loading Patient view.
+\newline \textbf{Output:} System displays Patient View. & High \\ 
+\hline
 \end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR035  \\ 
- \hline
- \textbf{Statement:} & The admin shall be able to determine when notifications shall be sent to users\\ 
- \hline
-\end{tabularx}
-
-\end{center}
-\subsubsection{"Patienter" and "Notislogg" in overview view}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR015  \\ 
- \hline
- \textbf{Statement:} & In the overview view under the tab home: 
-When a user hover over the notification symbol the user shall be able to see the value that triggered the notification.
-\\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR008  \\ 
- \hline
- \textbf{Statement:} & The system shall log which users who viewing which patients. These activities shall be saved in a log file.
-\\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR006  \\ 
- \hline
- \textbf{Statement:} & The system shall notify the user if they tries to access patient data that they don't have authority to view.\\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR005  \\ 
- \hline
- \textbf{Statement:} & The system shall notify the user if patients have fail twice to submit medical data according to their individual health care plan. First time a patient fail to submit medial data the app reminds the user. \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR031  \\ 
- \hline
- \textbf{Statement:} & In the Overview view under the tab notise-log: there should be three symbols: 1. "warning for exceeded limit value" 2. "message" and 3. "Lack of measured value of the patient (due to forgotten or technical problems)" \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR040  \\ 
- \hline
- \textbf{Statement:} & The user of the system shall be presented with communication options (i.e. chat, telephone number, contact information) when notified about a patient. \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR048  \\ 
- \hline
- \textbf{Statement:} & The active hover state of a notification-element shall present relevant text information for the user.  \\ 
- \hline
-\end{tabularx}
-
-\end{center}
-
-\subsubsection{"Patienter" and "Notislogg" in overview view and "Mätvärden" in patient view}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR003  \\ 
- \hline
- \textbf{Statement:} & The system shall display all matching patients to a user who filter patients by [age, alert-level, measurements, health care unit, team, disease and patients’conditions]. \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR004  \\ 
- \hline
- \textbf{Statement:} & The system shall display all patients in preferred order to a user who sort patients by [age, alert-level, measurements, health care unit, team, disease and patients’conditions]. \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR025  \\ 
- \hline
- \textbf{Statement:} & When the filter view is open, the user should be able to filter based on priority level \\ 
- \hline
-\end{tabularx}
-
-\end{center}
-
-\subsection{Overview view}
-
-\subsubsection{"Hem"}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR023  \\ 
- \hline
- \textbf{Statement:} & In the overview view under the home tab, the user should be able to sort based on disease type, latest date, name, updated by. It must also be clear which measured value the sorting is based on
- \\ 
- \hline
-\end{tabularx}
-
-\subsubsection{"Patienter"}
-\subsubsection{"Kalender"}
-\subsubsection{"Notislogg"}
-
-\subsection{Patient view} 
-\subsubsection{Data Access}
-\begin{center}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR037  \\ 
- \hline
- \textbf{Statement:} & The user shall be given a choice between accessing the data or not before getting access to said data
- \\ 
- \hline
+\begin{tabularx}{\linewidth}{| l | X | X | l |}
+\hline
+FR041 & The system shall have a symbol that indicates what type of notification it is [1. Exceeded limit value, 2. Delayed measurment] & \textbf{Input:} Click on "Översikt/Notislogg".
+\newline \textbf{Action:} Load symbols.
+\newline \textbf{Output:} Display symbols. & Medium \\ 
+\hline
 \end{tabularx}
 \end{center}
 
-\subsubsection{Tab: "Mätvärden"}
+\subsubsection{Kalender}
 \begin{center}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR020  \\ 
- \hline
- \textbf{Statement:} & The system shall be able to track patient health trends
- \\ 
- \hline
+\begin{tabularx}{\linewidth}{| l | X | X | l |}
+\hline
+\textbf{ID:} & \textbf{Statement} & \textbf{Description} & \textbf{Priority} \\ 
+\hline
+FR042 & In the calendar view of a patient the user shall for an upcoming activity be presented with the date, time, description, place, and comments & \textbf{Input:} Click tab "Översikt/Kalender".
+\newline \textbf{Action:} Load activity information.
+\newline \textbf{Output:} Display upcoming  activity information. & Low \\ 
+\hline
 \end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR022  \\ 
- \hline
- \textbf{Statement:} & The system shall be able to present patient health trends
- \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR022  \\ 
- \hline
- \textbf{Statement:} & The system shall be able to present patient health trends
- \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR033  \\ 
- \hline
- \textbf{Statement:} & In the overview of a patient the user shall in the middle of the view be presented with measurements and a seven-day measurement average.
- \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR042  \\ 
- \hline
- \textbf{Statement:} & In the view of the individual patient's measured data the user of the system shall be able to resize diagram area and list of entered data.
- \\ 
- \hline
-\end{tabularx}
-
 \end{center}
 
-\subsubsection{Tab: "Översikt"}
-
+\subsubsection{Notislogg}
 \begin{center}
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR019  \\ 
- \hline
- \textbf{Statement:} & All metrics shall be presented together with the period of time that metrics was collected. 
- \\ 
- \hline
+\begin{tabularx}{\linewidth}{| l | X | X | l |}
+\hline
+\textbf{ID:} & \textbf{Statement} & \textbf{Description} & \textbf{Priority} \\ 
+\hline
+FR043 & The system shall have a symbol that indicates what type of item it is [1. Exceeded limit value, 2. Delayed measurment] & \textbf{Input:} Click on "Översikt/Notislogg".
+\newline \textbf{Action:} Load symbols.
+\newline \textbf{Output:} Display symbols. & Medium \\
+\hline
+FR044 & The user shall be given a choice between accessing the data or not before getting access to said data. & \textbf{Input:} Clicking on a patient in overview.
+\newline \textbf{Action:} The system checks if user wants to access patient data.
+\newline \textbf{Output:} Display message checking if user wants to access data. & High \\
+\hline
+FR045 & The user shall only get access to the data if the user chooses to access it. & \textbf{Input:} Clicking on "Bekräfta" button to access patient data.
+\newline \textbf{Action:} The system confirms that data shall be displayed.
+\newline \textbf{Output:} The system displays patient data. & High \\ 
+\hline
+FR046 & It must be visible which parameter the sorting is based on. & \textbf{Input:} Click sort.
+\newline \textbf{Action:} Data loading.
+\newline \textbf{Output:} Information displayed in relation to search result. & Low \\ 
+\hline
+FR047 & The active hover state of a notification-symbol shall present relevant text information (e.g. Unexpected measurement value, or delayed time) for the user   & \textbf{Input:} Mouse hover over notification.
+\newline \textbf{Action:} System loads data.
+\newline \textbf{Output:} Displays relevant information. & Medium \\ 
+\hline
 \end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR017  \\ 
- \hline
- \textbf{Statement:} & The user shall be able to see patients currently "activity level" and the measured values "Alcohol" and "Smoking" should not be included.
- \\ 
- \hline
+\begin{tabularx}{\linewidth}{| l | X | X | l |}
+\hline
+FR048 & The user of the system shall be able to sort patients by [age, priority-level, measurements, health care unit, team, patients’ conditions, disease type, latest date, name, updated by] & \textbf{Input:} Sorting values from categories [age, priority-level, measurements, health care unit, team, disease, patients’conditions, disease type, latest date, name, updated by]. .
+\newline \textbf{Action:} The system rearranges the list of patients according to sorting criteria.
+\newline \textbf{Output:} The system displays all patients according to the sorting criteria. & High \\ 
+\hline
+FR049 & When the user tries to access patient data from other departments the system shall display a message & \textbf{Input:} Clicks on patient not in user's department.
+\newline \textbf{Action:} The system confirms that user wants to access patient data not in their department.
+\newline \textbf{Output:} Display message about accessing patient data outside user's department. & High \\ 
+\hline
+FR050 & When search filtering, the active list shall be filtered dynamically as the user types in the search query     & \textbf{Input:} Text string in diagnosis filter.
+\newline \textbf{Action:} System checks for diagnosis that matches text string.
+\newline \textbf{Output:} Displays diagnosis that matches string. & Medium \\ 
+\hline
+FR051 & The system shall filter patients by [age, alert-level, measurements, health care unit, team, disease and patients’conditions among others].  & \textbf{Input:} Filter values from categories [age, alert-level, measurements, health care unit, team, disease and patients’conditions among others].
+\newline \textbf{Action:} The system searches for patients matching filter criteria.
+\newline \textbf{Output:} The system displays all patients who matched the filters. & High \\ 
+\hline
+FR052 & The user shall be able to switch to patient view. & \textbf{Input:} User clicks on a patient.
+\newline \textbf{Action:} Loading Patient view.
+\newline \textbf{Output:} System displays Patient View. & High \\ 
+\hline
 \end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR013  \\ 
- \hline
- \textbf{Statement:} & The user shall be able to see a profile picture of the patient
- \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR012  \\ 
- \hline
- \textbf{Statement:} & The system shall be integrated with online health care services (i.e. rådgivningsstöd, 1177, vårdhandboken, FASS, internetmedicin) \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR021  \\ 
- \hline
- \textbf{Statement:} & In the patient overview under the tab “översikt”, should include information about allergies or other care restrictions
- \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR026  \\ 
- \hline
- \textbf{Statement:} & In the view of a patient user shall be able to see personal information (gender, age occupation, social security number) 
- \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR028  \\ 
- \hline
- \textbf{Statement:} & In the view of a patient, the user shall be able to see contact info to the patient and emergency contacts if available
- \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR030  \\ 
- \hline
- \textbf{Statement:} & In the overview of a patient the user shall at the top of the view be presented with the patient’s current diagnosis/noses together with a collapsible list of past diagnosis/noses.
- \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR032  \\ 
- \hline
- \textbf{Statement:} & In the view of a patient, the user shall be able to see relevant parts of system activity log. (e.g Jacob sent out a form, Sara commented)
- \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR036  \\ 
- \hline
- \textbf{Statement:} & Overview-dashboard shall display information (about the patient etc) according to the user preference settings
- \\ 
- \hline
-\end{tabularx}
-
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR039  \\ 
- \hline
- \textbf{Statement:} & In the view of the patient the current diagnosis/noses shall be presented in the heading 
- \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR043  \\ 
- \hline
- \textbf{Statement:} & In the overview of a patient the user shall at the top of the view be presented with the patient’s current medication(s).
- \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR044  \\ 
- \hline
- \textbf{Statement:} & In the overview of a patient the user shall at the bottom of the view be presented with responsible healthcare provider(s) and associated hospital or clinic.
- \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR045  \\ 
- \hline
- \textbf{Statement:} & The user shall, if required, be presented with warning symbols (as used in the Swedish health record system) in the overview of a patient.
- \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR046  \\ 
- \hline
- \textbf{Statement:} & When search filtering, the active list shall be filtered dynamically as the user types in the search query.
- \\ 
- \hline
-\end{tabularx}
-
 \end{center}
 
-\subsubsection{Tab: "Läkemedelslista"}
-
-
-\subsubsection{Tab: "Kalender"}
+\subsubsection{Patienter}
 \begin{center}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR027  \\ 
- \hline
- \textbf{Statement:} & In the patient view under the calendar tab, the calendar activities must be color-coded based on the activity type
- \\ 
- \hline
+\begin{tabularx}{\linewidth}{| l | X | X | l |}
+\hline
+\textbf{ID:} & \textbf{Statement} & \textbf{Description} & \textbf{Priority} \\ 
+\hline
+FR053 & The system shall filter patients by [age, alert-level, measurements, health care unit, team, disease and patients’conditions among others]. The system shall filter patients by [age, alert-level, measurements, health care unit, team, disease and patients’conditions among others]. & \textbf{Input:} Filter values from categories [age, alert-level, measurements, health care unit, team, disease and patients’conditions among others].
+\newline \textbf{Action:} The system searches for patients matching filter criteria.
+\newline \textbf{Output:} The system displays all patients who matched the filters. & High \\ 
+\hline
+FR054 & The user shall be given a choice between accessing the data or not before getting access to said data. & \textbf{Input:} Clicking on a patient in overview.
+\newline \textbf{Action:} The system checks if user wants to access patient data.
+\newline \textbf{Output:} Display message checking if user wants to access data. & High \\ 
+\hline
+FR055 & The user shall only get access to the data if the user chooses to access it. & \textbf{Input:} Clicking on "Bekräfta" button to access patient data.
+\newline \textbf{Action:} The system confirms that data shall be displayed.
+\newline \textbf{Output:} The system displays patient data. & High \\ 
+\hline
+FR056 & It must be visible which parameter the sorting is based on. & \textbf{Input:} Click sort.
+\newline \textbf{Action:} Data loading.
+\newline \textbf{Output:} Information displayed in relation to search result. & Low \\ 
+\hline
+FR057 & When search filtering, the active list shall be filtered dynamically as the user types in the search query. & \textbf{Input:} Text string in diagnosis filter.
+\newline \textbf{Action:} System checks for diagnosis that matches text string.
+\newline \textbf{Output:} Displays diagnosis that matches string. & Medium \\ 
+\hline
 \end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR029  \\ 
- \hline
- \textbf{Statement:} & In the patient view under the calendar tab, the Calendar must be able to be linked to "timebooks" / “tidböcker”
- \\ 
- \hline
+\begin{tabularx}{\linewidth}{| l | X | X | l |}
+\hline
+FR058 & The active hover state of a notification-symbol shall present relevant text information (e.g. Unexpected measurement value, or delayed time) for the user   & \textbf{Input:} Mouse hover over notification.
+\newline \textbf{Action:} System loads data.
+\newline \textbf{Output:} Displays relevant information. & Medium \\ 
+\hline
+FR059 & The user of the system shall be able to sort patients by [age, priority-level, measurements, health care unit, team, patients’ conditions, disease type, latest date, name, updated by] & \textbf{Input:} Sorting values from categories [age, priority-level, measurements, health care unit, team, disease, patients’conditions, disease type, latest date, name, updated by].
+\newline \textbf{Action:} The system rearranges the list of patients according to sorting criteria.
+\newline \textbf{Output:} The system displays all patients according to the sorting criteria. & High \\ 
+\hline
+FR060 & The system shall have a symbol that indicates what type of notification it is [1. Exceeded limit value, 2. Delayed measurement] & \textbf{Input:} Click on "Översikt/Notislogg".
+\newline \textbf{Action:} Load symbols.
+\newline \textbf{Output:} Display symbols. & Medium \\ 
+\hline
+FR061 & When the user tries to access patient data from other departments the system shall display a message & \textbf{Input:} Clicks on patient not in user's department.
+\newline \textbf{Action:} The system confirms that user wants to access patient data not in their department.
+\newline \textbf{Output:} Display message about accessing patient data outside user's department. & High \\ 
+\hline
+FR062 & Overview-dashboard shall display information according to the admin preference settings (e.g name, personal number, prioritization, diagnosis, health care provider responsible for patient, last updated, updated by) & \textbf{Input:} Input: Selecting which "Översiktsinställningar" to show in overview.
+\newline \textbf{Action:} The system updates the settings.
+\newline \textbf{Output:}  The system displays all the selected settings for the patients. & Medium \\ 
+\hline
+FR063 & The user shall be able to switch to patient view. & \textbf{Input:} User clicks on a patient.
+\newline \textbf{Action:} Loading Patient view.
+\newline \textbf{Output:} System displays Patient View. & High \\ 
+\hline
 \end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR047  \\ 
- \hline
- \textbf{Statement:} & In the calendar view of a patient the user shall for an upcoming activity be presented with the date, time, description, place, and comments.
- \\ 
- \hline
-\end{tabularx}
-
 \end{center}
-
-
-\subsubsection{Tab: "Symptomskattning"}
-
-
-
 
 \section{Performance requirements}
 The requirements in this section provide specification of the system performance. 
