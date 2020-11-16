@@ -131,6 +131,24 @@ def get_medications(ehrid):
     
 
 
+#medical diagnosis endpoint
+
+def get_diagnosis(ehrid):
+
+    aql = """SELECT y/data[at0001]/items[at0009]/value as diagnos
+        FROM EHR e
+        CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.encounter.v1]
+        CONTAINS EVALUATION y[openEHR-EHR-EVALUATION.problem_diagnosis.v1] 
+        WHERE c/name/value='Medical diagnosis' and e/ehr_id/value = '%s'
+        OFFSET 0""" %ehrid
+
+    response = query(aql)
+    to_return = []
+    for diagnosis in response['resultSet']:
+        to_return.append({"Diagnosis" : diagnosis['diagnos']['value']})
+    return to_return
+
+
 
 
 
