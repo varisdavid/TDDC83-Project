@@ -7,7 +7,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 # Imports personnel database data
-from server.database.personnel_db import personnel_db, Employee, Team, Department
+from server.database.personnel_db import personnel_db, Employee, Hospital, Team, Department
 from server.database.access_log_db import access_log_db, AccessLog
 
 # Imports personnel blueprints

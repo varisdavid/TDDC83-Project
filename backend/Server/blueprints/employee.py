@@ -1,5 +1,4 @@
 from flask import Blueprint, request, jsonify, Response
-from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
 
 # You can import the database from a blueprint
 from server.personnel_database import db, Employee
@@ -17,5 +16,13 @@ def employees():
             employeeList[i] = Employee.serialize(employeeList[i])
             serializedEmployeeList.append(employeeList[i])
     return jsonify(serializedEmployeeList)
+
+# Route for fetching specific employee
+@bp.route("/<string:employeeID>", methods=['GET'])
+def employee(employeeID):
+        employee = Employee.query.filter_by(id = employeeID).first_or_404()
+        return jsonify(Employee.serialize(employee))
+
+
 
 
