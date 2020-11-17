@@ -27,8 +27,7 @@ import PatientOverview from './patientview/PatientOverview.js';
 import Admin from './patientview/Admin.js';
 import Measurements from './patientview/Measurements.js';
 import PatientListOfMedication from './PatientListOfMedication';
-import PatientListOfMedicationTableDaily from "./PatientListOfMedicationTableDaily";
-import PatientListOfMedicationTableNeed from "./PatientListOfMedicationTableNeed";
+import PatientListOfMedicationTable from "./PatientListOfMedicationTable";
 
 
 // import Notices from './Notices';
@@ -56,6 +55,5 @@ export {
     Admin,
     Measurements,
     PatientListOfMedication,
-    PatientListOfMedicationTableDaily,
-    PatientListOfMedicationTableNeed
+    PatientListOfMedicationTable,
 };

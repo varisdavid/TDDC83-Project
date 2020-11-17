@@ -1,7 +1,7 @@
 import React, {useMemo} from "react";
 
 
-import { PatientListOfMedicationTableDaily, PatientListOfMedicationTableNeed } from "../components";
+import { PatientListOfMedicationTable } from "../components";
 
 
 const PatientListOfMedication = () => {
@@ -38,30 +38,41 @@ const PatientListOfMedication = () => {
         ],
         []
     )
-    //Filter the data if it is when needed or daily medication.
-        function filter(data){
+    //Filter the data to an array that will show the current medication
+        function filterDaily(data){
             let newArr = []
             for(let i =0; i< data.length; i++){
                 if(data[i]['Daily']  === 'True'){
                     newArr.push(data[i])
                 }
             }
-            console.log(data)
-            console.log(newArr)
             return (newArr)
         }
-        const test = filter (data)
+        const dataDaily = filterDaily (data)
+
+    //Filter the data to an array with when needed medication
+    function filterNeed(data){
+                let newArr = []
+                for(let i =0; i< data.length; i++){
+                    if(data[i]['Daily']  === 'False'){
+                        newArr.push(data[i])
+                    }
+                }
+
+                return (newArr)
+            }
+            const dataNeed = filterNeed (data)
 
 
       return (
       <>
             <div style={{padding: "15px"}}></div>
             <b style= {{padding: "10px"}}>Aktuella läkemedelsbehandlingar</b>
-            <PatientListOfMedicationTableDaily data = {test}/>
+            <PatientListOfMedicationTable data = {dataDaily}/>
         
         <div style={{padding: "15px"}}></div>
           <b style= {{padding: "10px"}}>Vid behov</b>
-          <PatientListOfMedicationTableNeed/>
+          <PatientListOfMedicationTable data = {dataNeed}/>
 
 
       </>

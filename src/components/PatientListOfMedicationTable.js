@@ -6,7 +6,7 @@ import { useVirtual } from 'react-virtual';
 
 import { useTable, useFlexLayout} from 'react-table'
 
-const PatientListOfMedicationTableDaily = ({data}) => {
+const PatientListOfMedicationTable = ({data}) => {
 
 
     const columns = useMemo(
@@ -145,4 +145,4 @@ const PatientListOfMedicationTableDaily = ({data}) => {
         </Table>
     );
 };
-export default PatientListOfMedicationTableDaily;
+export default PatientListOfMedicationTable;
