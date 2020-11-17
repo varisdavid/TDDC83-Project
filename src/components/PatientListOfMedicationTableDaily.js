@@ -6,40 +6,8 @@ import { useVirtual } from 'react-virtual';
 
 import { useTable, useFlexLayout} from 'react-table'
 
-const PatientListOfMedicationTableDaily = () => {
-///Hämta datan här och filtrera den skicka bara ett personnummer hit
-    const data =  useMemo(
-        () => [
+const PatientListOfMedicationTableDaily = ({data}) => {
 
-            {
-                Medication: 'Tramadol',
-                Amount: '650mg',
-                Type: 'tablett',
-                Dosage:'2 gånger om dagen',
-                Comments: 'Tas vid torr mun',
-                Daily: 'True',
-            },
-
-            {
-                Medication:'Genotropin',
-                Amount: '400mg',
-                Type: 'tablett',
-                Dosage:'2 gånger om dagen',
-                Comments: 'Tas i samband med mat',
-                Daily: 'True',
-            },
-
-            {
-                Medication: 'Cytostatika',
-                Amount: '1000mg',
-                Type: 'pulver',
-                Dosage: 'vid behov',
-                Comments: 'När du känner dig deprimerad',
-                Daily: 'False',
-            },
-        ],
-        []
-    )
 
     const columns = useMemo(
         () => [
@@ -63,25 +31,14 @@ const PatientListOfMedicationTableDaily = () => {
         []
     )
 
-    function filter(data){
-        let newArr = []
-        for(let i =0; i< data.length; i++){
-            if(data[i][5]  === 'True'){
-                console.log(data[i])
-                newArr.push(data[i])
-            }
-        }
-        return (newArr)
-    }
 
-    const test = filter(data);
     const {
         getTableProps,
         getTableBodyProps,
         headerGroups,
         rows,
         prepareRow,
-    } = useTable({ columns, test },
+    } = useTable({ columns, data },
         useFlexLayout,
     );
 
