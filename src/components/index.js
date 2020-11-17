@@ -24,17 +24,18 @@ import PatientCalendar from './PatientCalendar';
 import PatientViewHeaderBanner from './PatientViewHeaderBanner';
 import PatientViewHeaderNavigation from './PatientViewHeaderNavigation';
 
+import Notices from './overview/Notices';
+import NoticesTable from './overview/NoticesTable';
+import NoticesGroups from './overview/NoticesGroups';
+import NoticesSearch from './overview/NoticesSearch';
 
-// import Notices from './Notices';
-// import NoticesTable from './NoticesTable';
-
-export { 
-    HomeContent, 
-    Footer, 
-    Hero, 
-    Loading, 
+export {
+    HomeContent,
+    Footer,
+    Hero,
+    Loading,
     NavBar,
-    OverviewHeaderBanner, 
+    OverviewHeaderBanner,
     OverviewHeaderNavigation,
     OverviewCalendar,
     Patients,
@@ -46,4 +47,8 @@ export {
     PatientCalendar,
     PatientViewHeaderBanner,
     PatientViewHeaderNavigation,
+    Notices,
+    NoticesTable,
+    NoticesGroups,
+    NoticesSearch,
 };
