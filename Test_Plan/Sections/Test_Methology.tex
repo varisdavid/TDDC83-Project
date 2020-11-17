@@ -2,9 +2,23 @@
 In this project we are using TDD as our methodology for the project. This means that after development is done tests are ran to ensure functionality of the application. If tests are not cleared the application is then changed to fit tests and then refactored.  
 
 \subsection{Test Levels}
-We have a focus on Integration Tests and System tests. We use OpenEHR for our backend and we won't be testing its functionality with Unit-tests, this could be implemented later on, but is not seen as a requirement. SRS are used for mapping the Integration tests and every test has a corresponding Requirement which gets cleared if the test is executed. These will be shown in the XXX.
+We have a focus on Integration Tests, Regression tests and System tests. We use OpenEHR for our backend and we won't be testing its functionality with Unit-tests, this could be implemented later on, but is not seen as a requirement. SRS are used for mapping the Integration tests and every test has a corresponding Requirement which gets cleared if the test is executed. These will be shown in the RTM.
 
-Continuous Integration (CI) is added to the gitlab pipeline and is made to run a few selected integration tests to make sure that functionality is still present in the pushed code. The CI launches a webdriver via script where it goes through the tests in both chrome and firefox and completes specified test cases, which can be found in our RTM.
+The test defining process goes as follows for integration testing:
+It is good to know that every Requirement can have many tests.
+
+\begin{enumerate}
+    \item Pick functional requirement that is developed and ready to be tested. This can be done in our testing backlog in the validation page. 
+    \item Start the server on your own computer and try to complete the task manually.
+    \item Write down the steps that you take manually and fill this into the test description field in the RTM document. RTM will hopefully be updated to Gitlab in the near future.
+    \item Map these steps in a selenium script
+    \item If it runs and is completed: turn color of field in RTM green.
+    \item Add Gustav Karlsson to the testing backlog item and I will validate the test.
+    \item If the test is deemed correct, it will be added to the CI and move the item to complete.
+\end{enumerate}
+
+
+Continuous Integration (CI) is added to the gitlab pipeline and is made to run a few selected integration tests to make sure that functionality is still present in the pushed code. The CI launches a webdriver via script where it goes through the tests in both chrome and firefox and completes specified test cases, which can be found in our RTM. The tests now act as regression tests since every code push have to pass the older tests that ensures functionality. 
 
 For most of our Integration tests we are trying to achieve full code coverage of said requirement. This will also be presented in the RTM where what functionality is tested and to what extent will be presented by either text and/or pictures.
 
@@ -15,9 +29,9 @@ In this state, we are not sure when the full functionality is set to be done. We
 \subsection{Test Completeness}
 \begin{itemize}
     \item Run Rate - 100 \% mandatory unless stated.
-    \item Pass Rate - X \%
+    \item Pass Rate - 90 \% unless stated otherwise in QA.
 \end{itemize}
-At what criteria is a test considered complete. Needs to be discussed with QA. 
+The quality of the tests will be done according to the metrics in QA. 
 
 \subsection{Bug Tracking}
 Bug tracking is done via gitlabs own issue boards. The issue is labeled with bug and is then prioritized to either high or low. The test leader have continuous discussions with the development leader to ensure that the bugs are noticed and can provide a further description.
