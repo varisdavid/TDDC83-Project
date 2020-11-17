@@ -1,17 +1,17 @@
-from flask import Flask
+from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
 
-#Change to include real path
 app = Flask(__name__)
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-#WIP
-#Imports database data
-from server.database import db, Employee, Team, Department
+from personnel_database import db, Employee, Hospital, Department, Team
+from blueprints import employee
 
-#Imports blueprints
-#from server.blueprints import pers_data ...
+app.register_blueprint(employee.bp)
 
-#Register defined routes of blueprints
-#app.register_blueprint(pers_data.bp)
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
