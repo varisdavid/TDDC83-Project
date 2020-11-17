@@ -25,12 +25,15 @@
     urlcolor=purple,        % color of external links
     linktoc=page            % only page is linked
 }%
-\def\myversion{1.1 }
+\def\myversion{1.2}
 \title{Software Requirements Specification}
 \author{Sara Lindholm \\ Patrick Asman \\ Jacob Rhan}
 
 \date{October 2020}
 
+\newcolumntype{s}{>{\hsize=3.75\hsize}X}
+\newcolumntype{m}{>{\hsize=7\hsize}X}
+\newcolumntype{b}{>{\hsize=11\hsize}X}
 
 \begin{document}
 
@@ -66,6 +69,8 @@
  2020-10-15 & 1.0 & First Draft & Patrick Asman, Sara Lindholm, Jacob Rhan \\ 
  \hline
  2020-11-11 & 1.1 & Updated and added functional requirements & Sara Lindholm \\
+ \hline
+ 2020-11-17 & 1.2 & Added category descriptions & Jacob Rhan, Sara Lindholm\\
  \hline
 \end{tabular}
 \end{center}
@@ -158,28 +163,56 @@ description of the system and its features.
 %\subsection{Communication interfaces}
 
 \section{Functional requirements}
-The following section includes the requirements that specify all the fundamental actions of the software system.
+The following section includes the requirements that specify all the fundamental actions of the software system. The section is divided into four main categories: "Admin", "Patient", "System" and "Översikt". These categories are then divided into subcategories based on the different views in each category. 
+\\ \\
+To clarify how the requirements presented in tables see explanation below. 
+
+\begin{center}
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+\textbf{ID:} & \textbf{Title} & \textbf{Precondition} & \textbf{Description} & \textbf{Priority} \\ 
+\hline
+FRXXX & 
+Title to briefly explain the requirement & 
+Explains any preconditions for requirement & 
+Description of what will happen in the system.  
+    \newline \textbf{Input:} What triggers the function  
+    \newline \textbf{Action:} How the system responds to the input 
+    \newline \textbf{Output:} The function's output &
+Priority level (Low-Medium-High) \\ 
+\hline
+\end{tabularx}
+\end{center}
 
 \subsection{Admin}
-\subsubsection{Översikt/Hem}
+In section 3.2.1. we describe functional requirements for the Admin. A precondition is that the admin is logged in to the system. 
+\subsubsection{Översikt/Patienter}
+A precondition is that the admin is logged in and on the view “Oversikt/Patienter”
 \begin{center}
 \begin{tabularx}{\linewidth}{| l | X | X | l |}
 \hline
 \textbf{ID:} & \textbf{Statement} & \textbf{Description} & \textbf{Priority} \\ 
 \hline
-FR001 & The admin shall be able to customize and save views of the system (e.g. diabetes over 30 years, a view that filter out all diabetes patients that are older than 30 years) & \textbf{Input:} Selected filter settings by Admin. \newline \textbf{Action:} System generating new view. \newline \textbf{Output:} New view for users. & Medium \\ 
+FR001 & 
+The admin shall be able to customize and save views of the system (e.g. diabetes over 30 years, a view that filter out all diabetes patients that are older than 30 years) & 
+\textbf{Input:} Selected filter settings by Admin. \newline \textbf{Action:} System generating new view. \newline \textbf{Output:} New view for users. &
+Medium \\ 
 \hline
-FR002 & The "Översiktsinställningar" shall only be customizable by the administrator. & \textbf{Input:} Selected settings by Admin. \newline \textbf{Action:} System generating new views. \newline \textbf{Output:} Updated views for users. & Medium \\ 
+FR002 & The "Översiktsinställningar" shall only be customizable by the administrator. & \textbf{Input:} Selected settings by Admin. \newline \textbf{Action:} System generating new views. \newline \textbf{Output:} Updated views for users. & Medium \\
 \hline
-FR003 & The admin shall be able to determine when notifications shall be sent to users. & \textbf{Input:} Selecting the notifications to receive for a specific patient (e.g. Want to receive notifications when patient goes from one priority level to another one).
+FR003 & 
+The admin shall be able to determine when notifications shall be sent to users. & \textbf{Input:} Selecting the notifications to receive for a specific patient (e.g. Want to receive notifications when patient goes from one priority level to another one).
 \newline \textbf{Action:} System sets notifications for patient.
-\newline \textbf{Output:} "Notification prefences updated" message. & Medium \\ 
+\newline \textbf{Output:} "Notification prefences updated" message. & 
+Medium \\ 
 \hline
 \end{tabularx}
 \end{center}
 
 \subsection{Patient}
+In section 3.2.2. we describe functional requirements for the User. A precondition is that the user is logged in to the system and, on the view “Patient”
 \subsubsection{Admin}
+A precondition is that the admin is logged in and on the view “Patient/Admin” 
 \begin{center}
 \begin{tabularx}{\linewidth}{| l | X | X | l |}
 \hline
@@ -217,6 +250,7 @@ FR008 & The user shall be able to switch to Overview view. & \textbf{Input:} Use
 \end{center}
 
 \subsubsection{Kalender}
+A precondition is that the user is logged in and on the view “Patient” and, on the tab “Kalender”
 \begin{center}
 \begin{tabularx}{\linewidth}{| l | X | X | l |}
 \hline
@@ -242,6 +276,7 @@ FR012 & The user shall be able to add activities to a patient's calendar.  & \te
 \end{center}
 
 \subsubsection{Mätvärden}
+A precondition is that the user is logged in and on the view “Patient” and, on the tab “Mätvärden”
 \begin{center}
 \begin{tabularx}{\linewidth}{| l | X | X | l |}
 \hline
@@ -271,6 +306,7 @@ FR017 & The user shall be able to update a patients measured values.  & \textbf{
 \end{center}
 
 \subsubsection{Översikt}
+A precondition is that the user is logged in and on the view “Patient” and, on the tab “Översikt”
 \begin{center}
 \begin{tabularx}{\linewidth}{| l | X | X | l |}
 \hline
@@ -315,6 +351,7 @@ FR025 & The user shall, if necessary, be presented with "Uppmärksamhetssymbolen
 \end{center}
 
 \subsection{System}
+In section 3.2.3. we describe functional requirements for the system. A precondition is that the user is logged in to the system.
 \begin{center}
 \begin{tabularx}{\linewidth}{| l | X | X | l |}
 \hline
@@ -340,7 +377,7 @@ FR029 & The user of the system shall be presented with the option to access comm
 \end{center}
 
 \subsection{Översikt}
-
+In section 3.2.4. we describe functional requirements for the User. A precondition is that the user is logged in to the system and, on the view “Översikt”
 \subsubsection{Hem}
 \begin{center}
 \begin{tabularx}{\linewidth}{| l | X | X | l |}
@@ -405,6 +442,7 @@ FR041 & The system shall have a symbol that indicates what type of notification 
 \end{center}
 
 \subsubsection{Kalender}
+A precondition is that the user is logged in, on the view “Översikt” and, on the tab “Kalender”
 \begin{center}
 \begin{tabularx}{\linewidth}{| l | X | X | l |}
 \hline
@@ -418,6 +456,7 @@ FR042 & In the calendar view of a patient the user shall for an upcoming activit
 \end{center}
 
 \subsubsection{Notislogg}
+A precondition is that the user is logged in, on the view “Översikt” and, on the tab “Notislog”
 \begin{center}
 \begin{tabularx}{\linewidth}{| l | X | X | l |}
 \hline
@@ -470,6 +509,7 @@ FR052 & The user shall be able to switch to patient view. & \textbf{Input:} User
 \end{center}
 
 \subsubsection{Patienter}
+A precondition is that the user is logged in, on the view “Översikt” and, on the tab “Patienter”
 \begin{center}
 \begin{tabularx}{\linewidth}{| l | X | X | l |}
 \hline
