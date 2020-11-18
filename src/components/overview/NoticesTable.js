@@ -5,10 +5,9 @@ import { ArrowDropUp, ArrowDropDown } from '@material-ui/icons';
 import { useVirtual } from 'react-virtual';
 //import { RowCells } from '@material-ui/data-grid';
 
-// Takes a priority (value: integer) and renders a visual blob 
-const Prio = ({ value }) => {
+// Takes a priority (value: integer) and renders text for priority in cell 
+const PrioText = ({ value }) => {
 
-  var color;
   var text;
 
   if (value === 1) {
@@ -22,14 +21,7 @@ const Prio = ({ value }) => {
   }
 
   return (
-    <div style={{
-      backgroundColor: color,
-      marginRight: 'auto',
-      marginLeft: 'auto',
-      borderRadius: '15px',
-      width: '90px',
-      height: '27px'
-    }}>
+    <div>
       <span style={{ lineHeight: '27px', color: 'rgba(0, 0, 0, 0.87)', }}>{text}</span>
     </div>
   )
@@ -108,6 +100,20 @@ const NoticesTable = ({
             {rowVirtualizer.virtualItems.map(virtualRow => {
               const row = rows[virtualRow.index];
               prepareRow(row);
+
+              // Checks what priority a patient has and assigns variable rowColor a color according to the priority.
+              var rowColor;
+
+              if (row.cells[4].value === 1) {
+                rowColor = '#FF6464';
+              } else if (row.cells[4].value === 2) {
+                rowColor = '#FED765';
+              } else if (row.cells[4].value === 3) {
+                rowColor = '#27AE60';
+              } else {
+                return;
+              }
+
               return (
                 <TableRow
                   key={virtualRow.index}
@@ -119,7 +125,7 @@ const NoticesTable = ({
                       left: 0,
                       width: '100%',
                       transform: `translateY(${virtualRow.start}px)`,
-                      background: (virtualRow.index % 2) ? '#E5E5E5' : '#FFF',
+                      background: rowColor, // Sets color of row according to priority using rowColor variable.
                     }
                   })}
                 >
@@ -130,10 +136,10 @@ const NoticesTable = ({
                         textAlign: (cellIndex === 4) ? 'center' : 'left',
                         width: (cellIndex === 3) ? '700px' : '18%', //Makes column "Notis" fixed size.
                       }}>
-                        { (cellIndex === 4 && cell.value === 1) && <Prio value={1} />}
-                        { (cellIndex === 4 && cell.value === 2) && <Prio value={2} />}
-                        { (cellIndex === 4 && cell.value === 3) && <Prio value={3} />}
-                        { (cellIndex === 4 && cell.value === 4) && <Prio value={3} />}
+                        { (cellIndex === 4 && cell.value === 1) && <PrioText value={1} />}
+                        { (cellIndex === 4 && cell.value === 2) && <PrioText value={2} />}
+                        { (cellIndex === 4 && cell.value === 3) && <PrioText value={3} />}
+                        { (cellIndex === 4 && cell.value === 4) && <PrioText value={3} />}
                         { (cellIndex != 4) && cell.render('Cell')}
                       </TableCell>
                     )
