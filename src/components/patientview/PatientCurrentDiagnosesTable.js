@@ -17,7 +17,6 @@ const PatientCurrentDiagnosesTable = () => {
   * each input 
   */
   function checkIfEmpty() {
-    console.log("Function is called")
     if (diagnoses.length===0){
       return(
         <TableRow className='row-table-body'>

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 
 import { Table, TableBody, TableCell, TableHead, TableRow, Button } from '@material-ui/core';
 
@@ -16,13 +16,13 @@ const PatientEarlierDiseasesTable = () => {
     []
   )
 
-  var n = 3; 
+  const [lengthOfTable, setLenghtOfTable] = useState(3);
 
   /* Checks if input data is empty and if thats the case
   * returns and empty row (blankspace) else returns a row for
   * each input 
   */
-  function checkIfEmpty() {
+  function checkIfEmpty() { 
     if (earlierDisease.length === 0) {
       return (
         <TableRow className='row-table-body'>
@@ -32,10 +32,10 @@ const PatientEarlierDiseasesTable = () => {
     } else {
 
       return (
-        earlierDisease.slice(0, n).map((earlierDisease, index) => (
-          <TableRow className='row-table-body' key={earlierDisease.disease}>
-            <TableCell className='cell-table-body'> {earlierDisease.disease}</TableCell>
-            <TableCell className='cell-table-body'> {earlierDisease.year}</TableCell>
+        earlierDisease.slice(0,lengthOfTable).map((earlierDiseaseUsed, index) => (
+          <TableRow className='row-table-body' key={index}>
+            <TableCell className='cell-table-body'> {earlierDiseaseUsed.disease}</TableCell>
+            <TableCell className='cell-table-body'> {earlierDiseaseUsed.year}</TableCell>
           </TableRow>
         ))
       )
@@ -44,26 +44,21 @@ const PatientEarlierDiseasesTable = () => {
   }
 
   function checkButton() {
-    if (n+1 > earlierDisease.length){
+    if (lengthOfTable+1 > earlierDisease.length){
       return null; 
     } else {
       return ( 
         <TableRow className='row-table-body'>
-            <TableCell className='cell-table-body'> <Button onClick={clickButton()}>See more</Button> </TableCell>
+            <TableCell className='cell-table-body'> <Button onClick={() => setLenghtOfTable(lengthOfTable + 3)}>See more</Button> </TableCell>
             <TableCell className='cell-table-body'></TableCell>
           </TableRow>
       )
     }
   }
 
-  function clickButton() { //Behöver uppdatera tabellen
-    n = n+3;
-  }
-
-
   return (
     <div>
-      <Table className='table-patient'>
+      <Table className='table-patient' id='table-with-hidden-rows'>
         <TableHead>
           <TableRow>
             <TableCell className='cell-table-header' colSpan='2'> Tidigare sjukdomar </TableCell>
