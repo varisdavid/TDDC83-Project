@@ -1,12 +1,16 @@
 \documentclass[12pt]{article}
-
 \usepackage{authblk}
-
-
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
 \usepackage[utf8]{inputenc}
-
 \usepackage{subcaption}
-
 \usepackage{natbib}
 \usepackage{graphicx}
 \usepackage[a4paper,width=165mm,top=25mm,bottom=25mm]{geometry}
@@ -18,12 +22,11 @@
     
     \input{titlepage}
 \clearpage
+%%
+%%Daniels kommentarer: 
+%Konkreta milstolpar och åtgärder för gruppens kompetensutveckling, gärna mappade mot projektplanens %milstolpar så att det blir tydligt hur kompetensen svarar mot behoven i projektplanen.
+%Inte (bara) en önskelista över vad som behövs, utan vad som faktiskt ska göras: Vem ska göra vad %för att lära sig vad, på vilket sätt, när, varför, vem tar ansvar för det och hur följs det upp?
 
-%Guidelines for learning
-    \section{Guidelines for learning}
-We have now decided on using React as our front-end development environment. Team leader Filip Eriksson, have decided on some basic learning activities and material in order to secure basic knowledge across the development team. The first step in this process is to go through basic tutorials through react.js own website. There is also material that can be used through Code Academy, W3schools and Udemy that is good for getting the basic knowledge needed for the project. 
-
-For the testing team our integrator Emil Strömberg has acquired a course on Udemy that is good for learning how to integrate tests into our continuous integration process. The concerned members of the project group is to go through this material during the exam period in order to gain the required knowledge before the development process kick starts again after the exams. 
 
 % Workshops
     \section{Workshops}
@@ -45,7 +48,70 @@ The team is divided into different teams, both smaller cross-functional teams an
 
 %communication directives
     \section{Communication directives}
-Through set up communication directives every person in the group should know who their main contact is for sharing the information that they want to spread or to obtain the information that they want to acquire. The communication structure has also been set up in order to streamline the communication throughout the company. 
 
-The management in mainly in contact with the different team leaders as well as the architect and the integrator. The team leaders are to be responsible for communicating with other team leaders concerning correlated matters or when they are developing a software function which requires input from several groups like testing and development. Larger problems that are to be shared through the entire project group is to be first shared with management and there after shared by management via Microsoft Teams and via the project group meetings where the CEO is present. Sharing the information via two channels assures that the information is actually obtained by all the project members. 
+
+The management should mainly be in contact with the different team leaders as well as the architect and the integrator. The different teams such as development, testing etc it to mainly have contact with each other within the teams, but other temporary chats are set up when working in small cross-functional teams. Examples of this is when the UX team as well as the testing team assures that the usability of the prototype is good through user tests with the end user. 
+
+The communication is mainly to be done through chats in Teams, since messages in a channel either pops up for the entire project group when tagging the channel or not being that visible for the people concerned when not tagging the channel. 
+
+The team leaders are to be responsible for communicating with other team leaders concerning correlated matters or when they are developing a software function which requires input from several groups like testing and development. Larger problems that are to be shared through the entire project group is to be first shared with management and there after shared by management via Microsoft Teams and via the project group meetings where the CEO is present. Sharing the information via two channels assures that the information is actually obtained by all the project members. 
+
+\section{Plans for education}
+\subsection{Management}
+\begin{itemize}
+    \item Continue to present the current status of the project during group meetings in order for all project members to get a good overview of the project.
+\end{itemize}
+ 
+\subsection{Developers}'
+Developers are continuously educating themselves within their team in order to be able to provide a satisfying product before the code stop on the 4th of December. 
+\begin{itemize}
+    \item Filip Eriksson shall hold workshops continuously for new people entering the development team. 
+    \item Lukas Everborn and Axel Malmström will hold workshop on the development process for front-end and back-end development respectively for new developers. 
+    \item Continuous education in Yarn by Gustaf Eriksson for setting up the environment for developers. This is done to get more of the rest of the team to have an easy time joining the development. 
+    \item READme in GitLab for setting up Yarn environment
+\end{itemize}
+\subsection{Testers}
+\subsection{Analysis}
+
+
+    \section{History of education}
+\subsection{Education from management}
+\begin{itemize}
+ \item \textbf{[2020-09-11]} Workshop on how Azure DevOps works and how it is integrated with GitLab.
+    \item \textbf{[2020-09-17]} Presentation of basic commands such cloning repo, pushing, pulling, merging in GitLab for the whole company. 
+        \item \textbf{[2020-09-25]} Workshop on risks. Six group members brainstormed about what potential risks there might be for the project.
+
+    \item \textbf{[2020-09-26]} Creation of guide on how to version handle LaTeX documents in Git.
+    \item \textbf{[2020-11-12]} Workshop on how to be more explicit with inspection of documents as well as the change log to be more on the clear about how documents are revised and different versions of them. 
+\end{itemize}
+\subsection{Developers}
+\begin{itemize}
+    \item For the testing team our integrator Emil Strömberg acquired a course on Udemy that is good for learning how to integrate tests into our continuous integration process. The concerned members of the project group went through this material during the exam period in order to gain the required knowledge before the development process started again after the exams. 
+    
+    \item \textbf{[2020-09-26]} Team leader Filip Eriksson, decided on some basic learning activities and material in order to secure basic knowledge across the development team. The first step in this process is to go through basic tutorials through react.js own website. There is also material that can be used through Code Academy, W3schools and Udemy that is good for getting the basic knowledge needed for the project. 
+    \item Continuous education in Yarn by Gustaf Eriksson for setting up the environment for developers. 
+    \item READme in GitLab for setting up Yarn environment
+    \item Guides in \href{https://teams.microsoft.com/l/file/615C62C2-B9BB-4CBA-BEA8-7DE9C1A7FAC5?tenantId=913f18ec-7f26-4c5f-a816-784fe9a58edd&fileType=docx&objectUrl=https%3A%2F%2Fliuonline.sharepoint.com%2Fsites%2FTeam_TDDC88_2020_C3%2FDelade%20dokument%2FGeneral%2FDevelopment%2FFramework%20for%20programming%20TDDC88.docx&baseUrl=https%3A%2F%2Fliuonline.sharepoint.com%2Fsites%2FTeam_TDDC88_2020_C3&serviceName=teams&threadId=19:2e5b2f7b1d9c4b17a70ddd8351b41898@thread.tacv2&groupId=ddbf5407-89}{Teams}}
+    that covers frameworks for development and guides for the learning process. 
+\end{itemize}
+
+
+\subsection{Testers}
+Testers have been educating themselves in how to perform suitable tests for prototypes as well as for the web application. Performing relevant testing is important, since it allows the project to be sure that the finished product meets the requirements in the SRS. Meeting these requirements also means that the customer gets the product that they assume to be getting.
+\begin{itemize}
+    \item \href{(https://www.udemy.com/course/what-a-java-software-developer-must-know-about-testing/)} {Course on Udemy regarding testing, TDD, Junit and Selenium.} This course is meant to be complementary to the introductory lecture and labs we had on testing. The testing group felt that it was hard to grasp the essence of testing so we opted for a full course in this. After everyone took the course we had a meeting discussing it and went through if anyone had any questions. This was done during Tenta-P.
+    \item \textbf{[2020-11-05 - 2020-11-12]} Watching a testing lecture on  \href{(https://www.youtube.com/watch?v=mRW2E8uweEc)}{youtube} regarding using Jest and selenium which is more project specific and went through some test cases in our own project. Tests were made together to make sure everybody in the group understood what was said in the lecture. 
+    \item \textbf{[2020-11-05 - 2020-11-12]} An environment setup was made by Gustav Karlsson to make sure that all our testing is made from the same environment. As of now there is not a document on it but it will come. The testers shared their screens for installing, in order for Gustav to be able to troubleshoot any problems that could have arisen. 
+    \item \textbf{[16/11-20]} As a last step in the education, the testleader created a seminar on testing with Magnus Nielsen where he held a small presentation on what the essence of testing is and if we had any questions we could ask them in this seminar. Since our testers are already familiar with the framework and have started developing tests, more in depth questions could be asked. The day after the seminar the test group debriefed on what was said, and to see if there was any questions. 
+\end{itemize}
+\subsection{UX}
+\begin{itemize}
+    \item Released recording shows the Hi-Fi prototype being tested. This assures that developers have an easy time to acquire knowledge for how the design should look on the web application. Having the right design in the finished product is crucial to able to deliver a viable product to the customer at the VSSE on the 10th of December. 
+\end{itemize}
+\subsection{Analysis}
+\begin{itemize}
+    \item \textbf{[Throughout the project]} Read a lot themselves about how SRS are supposed to be structured. Some relevant resources were shared with the group by Sara Lindholm. 
+    \item \textbf{[Throughout the project]} Workshops on how to structure the SRS. 
+\end{itemize}
+
 \end{document}
