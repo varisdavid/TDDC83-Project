@@ -15,7 +15,6 @@ load_dotenv()
 #get the values of the environment variables
 wu = os.environ.get("EHRSCAPE_USERNAME")
 wp = os.environ.get("EHRSCAPE_PASSWORD")
-
 #baseurl for all calls to the ehrscape REST-api
 baseurl = 'https://rest.ehrscape.com/rest/v1'
 

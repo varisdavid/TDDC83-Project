@@ -95,4 +95,68 @@ def get_measurements(ehrid):
                           )
     return to_return
 
+
+
+#medications endpoint
+def get_medications(ehrid):
+    """
+    Function that retrieves measurements data for a patient
+    Parameters: ehrid, string, identifier for a patient
+    Returns: List with dicts (1-3 dicts) with data for each medicaction the patient is taking
+    """
+    aql = """SELECT n/activities[at0001]/description[at0002]/items[at0003]/value as med,
+       n/activities[at0001]/description[at0002]/items[at0009]/value as directions,
+       l/items[at0001,'Quantity']/value as quantity,
+       l/items[at0003]/value as intakeform,
+       n/activities[at0001]/description[at0002]/items[at0044]/value as frequency,
+       n/activities[at0001]/description[at0002]/items[at0035]/value as daily
+       FROM EHR e
+       CONTAINS COMPOSITION c
+       CONTAINS INSTRUCTION n[openEHR-EHR-INSTRUCTION.medication.v1] CONTAINS (CLUSTER l[openEHR-EHR-CLUSTER.medication_amount.v1]) 
+       WHERE e/ehr_id/value = '%s'
+       OFFSET 0""" %ehrid
+    
+    response = query(aql)
+    to_return = []
+    for medication in response['resultSet']:
+        to_return.append({ "Medication" : medication["med"]["value"],
+                           "Directions" : medication["directions"]["value"],
+                           "Quantity" : str(medication["quantity"]["magnitude"]) + " mg",
+                           "Intakeform" : medication["intakeform"]["value"],
+                           "Frequency" : medication["frequency"]["value"],
+                           "Daily" : medication["daily"]["value"]
+        })
+    return to_return
+
+    
+
+
+#medical diagnosis endpoint
+
+def get_diagnosis(ehrid):
+    """
+    Function that retrieves measurements data for a patient
+    Parameters: ehrid, string, identifier for a patient
+    Returns: List with dicts (1-3 dicts) with currently only a string (the medical diagnosis)
+    """
+
+    aql = """SELECT y/data[at0001]/items[at0009]/value as diagnos
+        FROM EHR e
+        CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.encounter.v1]
+        CONTAINS EVALUATION y[openEHR-EHR-EVALUATION.problem_diagnosis.v1] 
+        WHERE c/name/value='Medical diagnosis' and e/ehr_id/value = '%s'
+        OFFSET 0""" %ehrid
+
+    response = query(aql)
+    to_return = []
+    for diagnosis in response['resultSet']:
+        to_return.append({"Diagnosis" : diagnosis['diagnos']['value']})
+    return to_return
+
+
+
+
+
+
+
     

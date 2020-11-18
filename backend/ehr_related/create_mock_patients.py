@@ -22,7 +22,7 @@ baseurl = 'https://rest.ehrscape.com/rest/v1'
 #numnber of fake patients to create
 no_of_patients = 50
 #list of some samples to be used in the mock patient data
-medications = ["Ipren", "Alvedon", "Treo-comp", "Voltaren", "Humira", "Abilify", "Enbrel", "Crestor", "Lantus Solostar", "Sovaldi","Advair Diskus", "Nexium", "Januvia", "Lyrica", "Galvus", "Xanax", "Tramadol", "Genotropin", "Cytostatika", "Emtriva"]
+#medications = ["Ipren", "Alvedon", "Treo-comp", "Voltaren", "Humira", "Abilify", "Enbrel", "Crestor", "Lantus Solostar", "Sovaldi","Advair Diskus", "Nexium", "Januvia", "Lyrica", "Galvus", "Xanax", "Tramadol", "Genotropin", "Cytostatika", "Emtriva"]
 diagnosis = ["Covid", "Diabetes", "Cancer", "HIV", "IBS", "Crohns", "Alzheimers", "Borrelia", "Brutet nyckelben", "Korsbandsskada",
 			"Cystisk fibros", "ALS", "Multipel skleros", "Diskbråck", "Gula febern", "Ebola", "Hypertoni"]
 
@@ -30,6 +30,38 @@ department = ["Ryds Vårdcentral", "Capio Vårdcentral Berga", "Jourcentralen LI
                 "Valla Vårdcentral", "Capio Vårdcentral Vasastaden LInköping"]
 team = ["Dermotologi", "Geriatrik", "Onkologi", "Kardiologi", "Öra, näsa & hals", "Kirurgi", "Anestesiologi", "Neurologi",
              "Gynekologi", "Urologi", "Ortopedi"]
+unindexed_medications= [["Ipren", "1000mg", "tablett", "2 gånger om dagen", "Tas i samband med mat", True],
+["Alvedon", 1000, "tablett", "2 gånger om dagen", "Tas morgon och kväll", True],
+["Treo-comp", 1000, "tablett", "2 gånger om dagen", "Tas i samband med migrän", True],
+["Voltaren", 1000, "tablett", "7 gånger om dagen", "Tas vid värk", True],
+["Humira", 300, "tablett", "3 gånger om dagen", "Tas vid duschning", True],
+["Abilify", 400, "tablett","6  gånger om dagen", "Tas innan förtäring", True],
+["Enbrel", 700, "tablett", "3 gånger om dagen", "Tas med ett glas mjölk", True],
+["Crestor", 970, "tablett"," 4 gånger om dagen", "Tas i samband med mat", True],
+["Lantus", 400, "tablett", "7 gånger om dagen", "Vid trötthet", True],
+["Solostar", 340, "pulver","vid behov", "Vid trötthet", False],
+["Sovaldi", 500, "kräm", "Två skedar", "Får inte tas med vatten", True],
+["Advaor Diskus", 750, "tablett", "8 till 9 gånger om dagen", "tas med vatten", True],
+["Nexium", 345, "lösning", "2 gånger om dagen", "Tas i samband med mat", True],
+["Januvia", 1000, "tablett", "2 gånger om dagen", "Tas i samband med mat", True],
+["Lycrica", 450, "tablett", "vid behov", "Tas vid illa mående", False],
+["Galvus", 300, "kräm", "9 gånger om dagen", "Smörj rikligt så det täcker såret", True],
+["Xanax", 1000, "tablett","4 gånger om dagen", "Tas i samband med att fokus börjar dippa", True],
+["Tramadol", 650, "tablett", "2 gånger om dagen", "Tas vid torr mun", True],
+["Genotropin", 400, "tablett", "2 gånger om dagen", "Tas i samband med mat", True],
+["Cytostatika", 1000, "pulver","vid behov", "När du känner dig deprimerad", False],
+["Emtriva", 300, "pulver", "2 gånger om dagen", "Morgon och kväll", True],
+["Ipren", 1000, "tablett", "vid behov", "Tas vid tandvärk", False],
+["Voltaren", 10, "kräm", "vid behov", "Tas i samband med träningsvärk", False],
+["Xanax", 1000, "tablett", "5 gånger om dagen", "Tas i samband med kaffe", True],
+["Nalonone", 4, "lösning", "vid behov", "Tas vid magensmärta", False],
+["Nasin", 3, "lösning", "vid behov", "vid nästäppa", False],
+["Nasonex", 6, "tablett", "2 gånger om dagen", "Tas I samband med tandborstning", True],
+["Natpar", 7, "tablett", "2 gånger om dagen", "Tas i samband med mat", True],
+["Narop", 2, "Lösning", "7 gånger om dagen", "varannan timme", True]]
+
+auxiliary = ["Medication", "Dosage", "Intake form", "Frequency", "Comment", "Daily"]
+medications = [dict(zip(auxiliary, x)) for x in unindexed_medications]
 
 initial_systolic_range = range(100,200)
 initial_diastolic_range = range(70, 150)
@@ -55,7 +87,6 @@ for person in all_personalinfo:
                                     auth = (wu,wp))
     print("SKAPA EHRID: " + str(response))
     ehrid = response.json()['ehrId']
-    print(ehrid)
 
 
     #Create personal details party in demographics
@@ -87,7 +118,7 @@ for person in all_personalinfo:
 
     #Create fake details about which medications the patient takes
     templateid="Medications"
-    #this dict contains the details, only the marked line is important
+    #this dict contains the details
     payload = {
     "ctx/language" : "en",
     "ctx/territory" : "SV",
@@ -98,11 +129,17 @@ for person in all_personalinfo:
     "medications/context/context_detail:0/tags:0" : "hejgatan 123",
     "medications/medication_instruction:0/_uid" : "vem fan vet",
 
-    "medications/medication_instruction:0/order:0/medicine" : "Medicine", #Value to be changed in loop below
-
-    "medications/medication_instruction:0/order:0/directions" : "Varje halvtimme",
-    "medications/medication_instruction:0/order:0/dose/description" : "I'm not a doctor"
+    "medications/medication_instruction:0/order:0/medicine" : "tbd", #Ipren
+    "medications/medication_instruction:0/order:0/directions" : "tbd", # "tas i samband med mat"
+    "medications/medication_instruction:0/order:0/dose/quantity|magnitude": "tbd",
+    "medications/medication_instruction:0/order:0/dose/quantity|unit": "mg", #won't change
+    "medications/medication_instruction:0/order:0/dose/description" : "tbd",
+    "medications/medication_instruction:0/order:0/additional_instruction:0" : "tbd",
+    "medications/medication_instruction:0/order:0/comment:0" : "tbd"
     }
+    # "Ipren", "1000mg", "tablett", "2 gånger om dagen", "Tas i samband med mat", True}
+    
+
     #each patient will take a random number (between 1 and 3) of different medications
     medications_copy = medications[:]
     for i in range(0, random.randint(1,3)):
@@ -110,7 +147,12 @@ for person in all_personalinfo:
         random.shuffle(medications_copy)
         meds = medications_copy.pop()
         #change the medicine value in the dict
-        payload["medications/medication_instruction:0/order:0/medicine"] = meds
+        payload["medications/medication_instruction:0/order:0/medicine"] = meds["Medication"]
+        payload["medications/medication_instruction:0/order:0/directions"] = meds["Comment"]
+        payload["medications/medication_instruction:0/order:0/dose/quantity|magnitude"] = meds["Dosage"]
+        payload["medications/medication_instruction:0/order:0/dose/description"] = meds["Intake form"]
+        payload["medications/medication_instruction:0/order:0/additional_instruction:0"] = meds["Frequency"]
+        payload["medications/medication_instruction:0/order:0/comment:0"] = str(meds["Daily"])
         #POST call to create composition based on template Medications
         response = requests.post(baseurl + '/composition?' + "templateId="+templateid + "&" + "ehrId="+ehrid,
                                 verify=True,
