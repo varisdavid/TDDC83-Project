@@ -7,13 +7,13 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 # Imports personnel database data
-from server.database.personnel_db import personnel_db, Employee, Hospital, Team, Department
-from server.database.access_log_db import access_log_db, AccessLog
+from backend.server.personnel_db import db, Employee, Hospital, Team, Department
+from backend.database.models import db, AccessLog
 
 # Imports personnel blueprints
 # from server.blueprints.employee_bp import ...
-from server.blueprints.patient_list_bp import patient_list_bp
-from server.blueprints.access_log_bp import access_log_bp
+from backend.blueprints.patient_list_bp import patient_list_bp
+from backend.blueprints.access_log_bp import access_log_bp
 
 
 # Register defined routes of blueprints

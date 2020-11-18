@@ -1,8 +1,8 @@
 from flask import Blueprint, request, jsonify, Response
 
 # You can import the database from a blueprint
-from server.personnel_database import db, Team
-from server import app
+from backend.server.personnel_db import db, Team
+from backend.main import app
 
 # Creates Blueprint
 bp = Blueprint('team', __name__, url_prefix='/team')
