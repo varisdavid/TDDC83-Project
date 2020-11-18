@@ -18,7 +18,7 @@
 \title{Architecture Notebook}
 
 \author{Jonas Malm}
-\date{October 2020\\---\\Version 0.6.5}
+\date{October 2020\\---\\Version 0.7.3}
 
 \begin{document}
 
@@ -50,6 +50,13 @@ Version & Date & Author & Description \\ \hline
 0.6.3 & 2020-11-13 & Jonas Malm & Added RBAC Roles to authentication section\\
 0.6.4 & 2020-11-13 & Jonas Malm & Added an authentication sequence diagram\\
 0.6.5 & 2020-11-13 & Jonas Malm & Added Patient View sequence diagram\\
+0.6.6 & 2020-11-16 & Jonas Malm & Added Placement of modules in Arch. dec. section\\
+0.7.0 & 2020-11-16 & Jonas Malm & Wrote the scaleability in future section\\
+0.7.1 & 2020-11-18 & Jonas Malm & Wrote the support in future section\\
+0.7.2 & 2020-11-18 & Jonas Malm & Started maintainability in future section\\
+0.7.3 & 2020-11-18 & Jonas Malm & More maintainabillity: more data and replacing EhrScape\\
+
+
 \hline
 \end{tabular}
 \end{table}
@@ -62,6 +69,8 @@ Version & Date & Author & Description \\ \hline
 \item Finish work on authentication section
 \item Update ASRs when requirements are re-numbered
 \item Populate appendix
+\item Run tests on the Rule Engine and Filtration Module in order to determine how performance is affected by number of patients
+\item Ensure consistency in how HCU terms are used: Operation, department, subdepartment and team
 \end{enumerate}
 
 
@@ -79,9 +88,9 @@ This document describes the software architecture of the system. Furthermore it 
 \item [EHR] An \emph{Electronic Health Record} is a record containing patient health data in an electronic form.
 \item [OpenEHR] is a collection of open industry specifications, models and software for e-health.
 \item [AQL] The \emph{Archetype Query Language} is a declarative query language developed to search and retrieve data in archetype-based repositories, such as an OpenEHR-database.
-\item [HCU] is an abreviation of Health Care Unit.
-\item [OAuth] is an open standard for authorization delegation. It allows a service owner to allow third-party server access without sharing credentials, instead using access tokens. 
-\item RBAC Role-Based Access Control is a way to assign access levels based on what role a user has.
+\item [HCU] An abbreviation of Health Care Unit.
+\item [OAuth] An open standard for authorization delegation. It allows a service owner to allow third-party server access without sharing credentials, instead using access tokens. 
+\item [RBAC] Role-Based Access Control is a way to assign access levels based on what role a user has.
 \end{description}
 
 \subsection{Goal of the project}
@@ -304,6 +313,15 @@ As stated in the ASRs, the system has to implement OAuth for authentication. Due
 \subsubsection{Role-Based Access Control}
 The authentication system will implement RBAC. In RBAC you analyze the needs of users and group them into roles. Since patient access is based on what HCU you work at and some functionality is limited to admins, it is simple to split users into groups and to see what access roles these groups require.
 
+\subsection{Placement of modules}\label{placement-modules}
+Due to the security concerns presented above and due to some data being shared between all users, the databases and EHR Retriever will be placed in the back end. However, there are two more modules that have to be placed in either the front end or the back end: the Rule Engine prioritizing patients and the Filtration Module filtrating patients.
+
+\subsubsection{Rule Engine}
+The Rule Engine will be placed in the front end. This is due to that using a pure two-tier, thin-client would place a large workload on the back end if a large numbers of users request data at the same time. To avoid this the Rule Engine can be placed in the front end. 
+
+\subsubsection{Filtration Module}
+Some rudimentary filtration functionality will have to be implemented in the back end, when retrieving EHR data. Otherwise every user would receive the EHR data of all patients - even patients they are not treating. However, in order to minimize total loading time the main functionality will be placed in the front end. If all relevant patients are retrieved to the client and then applying the filtration, filtration will be faster. Otherwise many calls would have to be made to the back end. This would make the loading time longer since a call will have to be made to the back end and then the back end has to call the EhrScape Server.
+
 
 \section{Key abstractions}
 The key abstractions of the system is the front end, the back end and the EHR Database. The front end is what the user interacts with and the services supporting this. The back end contains the two databases and functionality to get data from these databases. The EHR Database is the external database storing the patient's EHR.
@@ -431,16 +449,62 @@ As seen in Figure \ref{fig:auth-sequence}, Auth0 makes a request to the Personne
 \section{The system in the future}
 \textbf{TODO:} 
 This is only a stub, to be completed in the future
+
 \subsection{Scaleability}
-EHR Retriever & changing the database to live. Rule engine on large scale? Filtration on large sets? Personnel database and the scope tokens?
+In this section the factors relevant to scaling the system up, in terms of number of patients and users, will be discussed.
+
+\subsubsection{Prioritizing of large data sets}
+The Rule Engine is placed in the Front end logic layer, as seen in Figure \ref{fig:execution-view}, due to the reasons outlined in section \ref{placement-modules}. The Rule Engine only prioritizes patients based on the most recent measurements, so the classification is not computationally heavy. Due to this, a large number of patients should not affect the performance of the system in a major way. This is not the case if the Rule Engine would implement more computationally heavy classification rules, as mentioned in section \ref{trend-analysis}.
+
+However, with a very large data set and many patients displayed in the Patient Overview another potential problem would be created. If there are e.g. 100 patients displayed unfiltered, there might be many patients classified as high priority. Then it would not be easy to see which ones are the most relevant. This can be addressed by the user, in the existing system, by filtrating on some factors to reduce the number of displayed patients, but a potentially better solution is discussed in section \ref{future-prioritization}.
+
+\subsubsection{Filtration of large data set}
+Since the filtration functionality is placed in the front end, performance could be expected to suffer when working with very large data sets. The rationale laid out in section \ref{placement-modules} is based on assumptions of a moderately sized data set and frequent filtration. However, if the data set would be very large and the filtration isn't happening frequently then the rationale might not be valid. The time lost due to calls to the back end and EhrScape could be offset by time lost due to hardware limitations on the client side. It is considered unlikely that this will be the case however, since simple tests on larger sets of patients have not shown a drop in performance.
+
+If however performance were to be affected due to a larger number of patients, the recommended solution would be to limit the number of patients that are returned to the overview. In the current implementation, all patients that the user has authority to access are returned. This could be changed so that only patients tended  to by the user's subdepartment or team are returned. To implement this, additional data fields in the demographic database in EhrScape could be added.
+
+\subsubsection{Increasing the number of users}
+Increasing the number of users should not affect the performance of the system, since the system is designed utilizing a two-tier fat-client where no computationally heavy functionality is implemented in the back end. 
+
 \subsection{Support}
+HeartByte will work alongside the customer to implement and integrate the system. Once the implementation is secured the operation of the system will be transferred to the customer. During the transfer process, members of the HeartByte development team will be deeply involved to ensure that the customer fully understands how the system is constructed. This, alongside the documentation will enable the operation of the system to be transferred to the customer. HeartByte will also provide some support during the first year after delivery of the product. This support includes answering questions and fixing any bugs shipped in the product.
+
 \subsection{Maintaining}
-Changing database. Leaving openEHR? 
+This section will handle the topic of the maintaining of the system and extending with new functionality as needed. Because the system has been built with maintainability in mind though modularity, in most cases this is relatively simple. This is not true for all functionality though, as discussed below.
+
+\subsubsection{Adding more health data}
+As of now, the system is only built to handle a few selected health data points. These include weight, blood pressure and
+physical activity. If more are to be added this would mean extending the functionality in the areas below.
+
+\begin{description}
+\item [openEHR Templates] If one does not already exist for the measurement, a new template will have to be constructed and added to EhrScape. Since the customer are experienced using the tools required to do this, this would not pose a significant challange.
+
+\item [EHR Retriever] In the EHR Retriever module in the HeartByte back end, some functionality has to be extended. A function to retrieve the individual measurements through the EhrScape API will have to be constructed.
+
+\item [Patient View] In order to visualize the new measurements, the functionality of the Patient View has to be extended. Since the modules used to display the graphs are constructed in a modular fashion, these can easily be reused and applied to new measurements. However, this only holds true for quantitative data. The Patietn View only has functionality to plot numerical data. If the data however is either qualitative or non-numerically categorical this functionality will have to be constructed.
+\end{description}
+
+\subsubsection{Replacing EhrScape}
+In the event that the customer in the future would be interested in changing the EHR Database provider this would impact the back end. There is however a big difference between replaceing EhrScape with another system using the openEHR standard and a system using some separate standard.
+
+\begin{description}
+\item [With another openEHR system] The way the EHR Retriever functions would have to be changed somewhat. The AQL queries would not have to be changed, given that all templates are transferred, since the AQL language is built on openEHR. Any calls to the REST API would however have to be changed, since they may not function the same in the new system. Since openEHR is a standard for handling EHRs, it can be assumed that the other system should have similar functionalities in its API so migrating this should not pose a major challenge.
+
+\item [With a different system] Migrating from openEHR would pose a challenge. In order to not break functionality of other modules, the same data structure of the EHR Data has to be maintained when migrating. This would force a total rework of the EHR Retriever. The EHR Retriever has to be changed to it can retrieve data from the new source and some re-packaging of the retrieved data would have to be done. Depending on the new system, this might be quite straight forward or very difficult. If the developers would decide against re-packaging the data so other modules can remain unchanged, many modules would have to have minor changes applied to them to be able to handle the new data formats.
+\end{description}
+
+
 \subsection{Future development}
 Due to the time constraint, some functionality was cut. In this section these modules will be described in more general terms. As this section is not finished and the final functionality of the product is not yet set, what is listed below might be implemented.
-\subsubsection{Trend analysis}
+
+
+\subsubsection{Trend analysis}\label{trend-analysis}
+Right now RE only looks at most recent value.
+Statistics, ML to classify. Modular --> can be implemented.
 \subsubsection{Calendars}
-\subsubsection{Notifications}
+\subsubsection{Prioritization}\label{future-prioritization}
+Dynamic rule engine - prioritizing among many patients
+
 
 \section{Appendix}
 \textbf{TODO:} Populate
