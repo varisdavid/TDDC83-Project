@@ -2,23 +2,26 @@ import React, { useMemo } from 'react';
 
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 
+//Renders a table displaying a patients current diagnoses
 const PatientCurrentDiagnosesTable = () => {
 
   const diagnoses = useMemo(
-        () => [
-          {name: 'Diabetes'},
-          {name: 'Hypertoni'},
-        ],
-        []
+    () => [
+      { name: 'Diabetes' },
+      { name: 'Hypertoni' },
+      { name: 'Nedsatt hörsel'}
+    ],
+    []
   )
-  
-  /* Checks if input data is empty and if thats the case
-  * returns and empty row (blankspace) else returns a row for
-  * each input 
+
+  /* 
+  Checks if input data is empty and if thats the case
+  returns and empty row (blankspace) else returns a row for
+  each input 
   */
   function checkIfEmpty() {
-    if (diagnoses.length===0){
-      return(
+    if (diagnoses.length === 0) {
+      return (
         <TableRow className='row-table-body'>
           <TableCell className='cell-table-body'> &nbsp; </TableCell>
         </TableRow>
@@ -34,19 +37,19 @@ const PatientCurrentDiagnosesTable = () => {
 
     }
   }
-    return(
-        <div>
-            <Table className='table-patient'>
-              <TableHead>
-                <TableRow>
-                  <TableCell className='cell-table-header'> Nuvarande diagnoser </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {checkIfEmpty()}
-              </TableBody>
-            </Table>
-        </div>
-    );
+  return (
+    <div>
+      <Table className='table-patient'>
+        <TableHead>
+          <TableRow>
+            <TableCell className='cell-table-header'> Nuvarande diagnoser </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {checkIfEmpty()}
+        </TableBody>
+      </Table>
+    </div>
+  );
 };
 export default PatientCurrentDiagnosesTable;

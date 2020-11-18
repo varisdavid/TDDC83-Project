@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 
+//Renders a table displaying a patients personal info
 const PatientPersonalInfoTable = () => {
 
     const data = useMemo(
