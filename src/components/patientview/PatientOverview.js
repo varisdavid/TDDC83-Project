@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {
-  PatientCalendar, PatientContactTable, PatientEmergencyContactTable,
+  PatientOverviewCalendar, PatientContactTable, PatientEmergencyContactTable,
   PatientPersonalInfoTable, PatientCurrentDiagnosesTable, PatientCurrentMedicationsTable,
   PatientEarlierDiseasesTable, PatientOverviewMeasurementsTable, PatientResponsibleCaregiversTable
 } from '..'
@@ -38,7 +38,7 @@ const PatientOverview = () => {
       </div>
       <div style={{ width: '50%' }}>
         <div className='div-table-patient-view'>
-          <PatientCalendar />
+          <PatientOverviewCalendar />
         </div>
         <div className='div-table-patient-view'>
           <PatientOverviewMeasurementsTable />

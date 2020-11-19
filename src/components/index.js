@@ -42,6 +42,7 @@ import PatientOverviewMeasurementsTable from "./patientview/PatientOverviewMeasu
 import PatientResponsibleCaregiversTable from "./patientview/PatientResponsibleCaregiversTable"
 import WeightChart from "./patientview/WeightChart";
 import BloodPressure from "./patientview/BloodPressure";
+import PatientOverviewCalendar from "./patientview/PatientOverviewCalendar";
 
 
 // import Notices from './Notices';
@@ -80,4 +81,5 @@ export {
     PatientListOfMedicationTable,
     WeightChart,
     BloodPressure,
+    PatientOverviewCalendar,
 };

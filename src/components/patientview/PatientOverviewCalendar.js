@@ -61,7 +61,7 @@ const StyledTableCell = withStyles((theme) => ({
         width: 150,
     },
     body: {
-        width: 15,
+        width: 20,
         fontSize: 14,
     },
 
@@ -98,8 +98,6 @@ const BasicTable = (props) => {
                         <StyledTableRow>
                             <StyledTableCell>Tid</StyledTableCell>
                             <StyledTableCell align="left">Aktivitet</StyledTableCell>
-                            <StyledTableCell align="left">Kommentar</StyledTableCell>
-                            <StyledTableCell align="left">Plats</StyledTableCell>
                         </StyledTableRow>
                     </TableHead>
 
@@ -111,8 +109,6 @@ const BasicTable = (props) => {
                                     {row.time}
                                 </StyledTableCell>
                                 <StyledTableCell align="left">{row.activity}</StyledTableCell>
-                                <StyledTableCell align="left">{row.description}</StyledTableCell>
-                                <StyledTableCell align="left">{row.place}</StyledTableCell>
                             </StyledTableRow>
                         ))}
                     </TableBody>
@@ -129,8 +125,6 @@ const BasicTable = (props) => {
                         <StyledTableRow>
                             <StyledTableCell>Tid</StyledTableCell>
                             <StyledTableCell align="left">Aktivitet</StyledTableCell>
-                            <StyledTableCell align="left">Kommentar</StyledTableCell>
-                            <StyledTableCell align="left">Plats</StyledTableCell>
                         </StyledTableRow>
                     </TableHead>
                 </Table>
@@ -165,7 +159,7 @@ const StaticCalendar = () => {
     );
 };
 
-const PatientCalendar = () => {
+const PatientOverviewCalendar = () => {
     const [value, setValue] = useState(new Date());
     const classes = useStyles();
 
@@ -177,10 +171,6 @@ const PatientCalendar = () => {
                         <StaticCalendar />
                     </Grid>
                     <Grid item xs={5} className={classes.layout}>
-                        <div style={{ fontSize: '30px',
-
-                        }} >
-                            {value.toUTCString().slice(0,16)} </div>
                         <BasicTable props={Data} value={value.toUTCString().slice(0, 16)} />
                     </Grid>
                 </Grid>
@@ -190,4 +180,4 @@ const PatientCalendar = () => {
 };
 
 
-export default PatientCalendar;
+export default PatientOverviewCalendar;
