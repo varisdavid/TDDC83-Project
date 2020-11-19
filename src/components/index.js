@@ -47,6 +47,7 @@ import PatientOverviewCalendar from "./patientview/PatientOverviewCalendar";
 import PhysicalActivityChart from "./patientview/PhysicalActivityChart";
 import BloodPressurePage from "./patientview/BloodPressurePage";
 import WeightChartPage from "./patientview/WeightChartPage";
+import PhysicalActivityPage from "./patientview/PhysicalActivityPage";
 
 import PatientViewMeasurementsHeaderNavigation from "./patientview/PatientViewMeasurementsHeaderNavigation";
 
@@ -93,4 +94,5 @@ export {
     BloodPressurePage,
     WeightChartPage,
     PatientViewMeasurementsHeaderNavigation,
+    PhysicalActivityPage,
 };

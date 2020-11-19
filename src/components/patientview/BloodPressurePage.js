@@ -6,7 +6,6 @@ const BloodPressurePage  = () => {
     return (
         <>
             <div>
-                <div>Blodtryck</div>
                 <BloodPressure/>
             </div>
         </>

@@ -33,10 +33,14 @@ const data = [
     },
 ];
 
+//Skulle behöva en responsiveContainer för att få olika storlek beroende på skärmstorlek samt val av sida
+
 export default class BloodPressure extends PureComponent {
 
     render() {
         return (
+            <div>
+            <div className='header-measurement'>Blodtryck</div>
             <LineChart
                 width={500}
                 height={300}
@@ -58,6 +62,7 @@ export default class BloodPressure extends PureComponent {
                 <Line type="monotone" dataKey="Högt" stroke="#8884d8" />
                 <Line type="monotone" dataKey="Lågt" stroke="#8884d8" />
             </LineChart>
+            </div>
         );
     }
 }

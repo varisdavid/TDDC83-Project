@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Box } from '@material-ui/core';
 
-import { PatientViewHeaderBanner, PatientViewHeaderNavigation, PatientCalendar, PatientListOfMedication, PatientOverview, Measurements, Admin } from '../components'
+import { PatientViewHeaderBanner, PatientViewHeaderNavigation, PatientCalendar, PatientListOfMedication, PatientOverview, Admin } from '../components'
 import { MeasurementsView} from '../views';
 
 // Function for retrieving current active tab from our url.

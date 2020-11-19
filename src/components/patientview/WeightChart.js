@@ -34,6 +34,8 @@ export default class WeightChart extends PureComponent {
 
     render() {
         return (
+            <div>
+            <div className='header-measurement'>Vikt</div>
             <LineChart
                 width={500}
                 height={300}
@@ -51,6 +53,7 @@ export default class WeightChart extends PureComponent {
                 <ReferenceLine y={60} stroke="green" strokeDasharray="5 5"/>
                 <Line type="monotone" dataKey="Vikt" stroke="#8884d8"/>
             </LineChart>
+            </div>
         );
     }
 }

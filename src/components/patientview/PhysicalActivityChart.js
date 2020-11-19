@@ -30,6 +30,8 @@ const data = [
 export default class PhysicalActivityChart extends PureComponent {
     render() {
         return (
+            <div>
+            <div className='header-measurement'>Fysisk aktivitet</div>
             <BarChart
                 width={500}
                 height={300}
@@ -46,6 +48,7 @@ export default class PhysicalActivityChart extends PureComponent {
                 <ReferenceLine y={7}  stroke="green" strokeDasharray="5 5" />
                 <Bar dataKey="Timmar" fill="#8884d8" />
             </BarChart>
+            </div>
         );
     }
 }

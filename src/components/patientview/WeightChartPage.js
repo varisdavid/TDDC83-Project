@@ -7,7 +7,6 @@ const BloodPressurePage  = () => {
     return (
         <>
             <div>
-                <div>Vikt</div>
                 <WeightChart/>
             </div>
         </>

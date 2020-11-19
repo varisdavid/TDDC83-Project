@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppBar, Tabs, Tab } from '@material-ui/core';
+import { AppBar, Tabs, Tab} from '@material-ui/core';
 
 import { useHistory } from 'react-router-dom';
 
@@ -26,13 +26,17 @@ const LinkTab = (props) => {
   );
 }
 
-const PatientViewMeasurementsHeaderNavigation = ({ activeTabValue }) => {
+const PatientViewMeasurementsHeaderNavigation = ({ activeTabValueM }) => {
 
   return (
     <>
       <AppBar 
         position='relative'
-        style={{ boxShadow: 'none' }}
+        style={{ boxShadow: 'none', 
+            backgroundColor: '#FFF !important',
+            //background: 'transparent',
+            //color: "none"
+        }}
       >
         <Tabs
           TabIndicatorProps={{
@@ -40,33 +44,43 @@ const PatientViewMeasurementsHeaderNavigation = ({ activeTabValue }) => {
               height:'0px',
             }
           }}
-          style={{ backgroundColor: '#A9D7FF', color: '#000' }} 
-          className='text-gray-800'
-          variant='fullWidth'
-          value={activeTabValue}
+          style={{ 
+            backgroundColor: '#FFF', 
+            color: '#275E8E', 
+            fontStyle: 'normal',
+            fontWeight: 'normal',
+            fontSize: '14px'
+        }} 
+          value={activeTabValueM}
           aria-label='overview-navtab'
         >
           <LinkTab 
-            style={{ textDecoration: 'none', backgroundColor: activeTabValue === 0 ? '#0066B3' : 'inherit', color: activeTabValue === 0 ? '#FFF' : 'inherit' }} 
-            label='Mätvärden' 
+            style={{display: activeTabValueM === 0 ? 'none' : 'inherit'}} 
+            label='Mätvärden -' 
             href='/patient/measurements' 
             {...a11yProps(0)}
           />
           <LinkTab 
-            style={{ textDecoration: 'none', backgroundColor: activeTabValue === 1 ? '#0066B3' : 'inherit', color: activeTabValue === 1 ? '#FFF' : 'inherit'}} 
+            style={{textDecoration: activeTabValueM === 1 ? 'underline' : 'inherit',
+                    fontWeight: activeTabValueM === 1 ? 'bold' : 'inherit',
+                    display: activeTabValueM !== 1 ? 'none' : 'inherit'}} 
             label='Vikt' 
             href='/patient/measurements/weight' 
             {...a11yProps(1)}
           />
           <LinkTab 
-            style={{ textDecoration: 'none', backgroundColor: activeTabValue === 2 ? '#0066B3' : 'inherit', color: activeTabValue === 2 ? '#FFF' : 'inherit'}} 
+            style={{textDecoration: activeTabValueM === 2 ? 'underline' : 'inherit',
+                    fontWeight: activeTabValueM === 2 ? 'bold' : 'inherit',
+                    display: activeTabValueM !== 2 ? 'none' : 'inherit'}} 
             label='Blodtryck'
             href='/patient/measurements/blood-pressure' 
             {...a11yProps(2)}
           />
           
           <LinkTab 
-            style={{ textDecoration: 'none', backgroundColor: activeTabValue === 3 ? '#0066B3' : 'inherit', color: activeTabValue === 3 ? '#FFF' : 'inherit'}} 
+            style={{textDecoration: activeTabValueM === 3 ? 'underline' : 'inherit',
+                    fontWeight: activeTabValueM === 3 ? 'bold' : 'inherit',
+                    display: activeTabValueM !== 3 ? 'none' : 'inherit'}} 
             label='Fysisk Aktivitet' 
             href='/patient/measurements/physical-activity' 
             {...a11yProps(3)}
