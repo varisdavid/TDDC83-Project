@@ -1,19 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-import { InputBase, Button, Link, ListItem } from '@material-ui/core';
-import { ArrowDropDown } from '@material-ui/icons';
+import { InputBase, Link, ListItem } from '@material-ui/core';
+//import { ArrowDropDown } from '@material-ui/icons';
 
 import { FilterModal } from '..'
 
 // Component rendering applied filters and Rensa filter button
 const AppliedFilterUI = ({ activeFiltersState, setIsFilterApplied }) => {
-
-  // setFilter('gender', filterData.gender);
-  // setFilter('priority', filterData.priority);
-  // setFilter('team', filterData.team)
-  // setFilter('department', filterData.department)
-  // setFilter('age', [filterData.minAge, filterData.maxAge])
-  // setFilter('diagnoses', filterData.diagnoses)
 
   var gender;
   if (activeFiltersState.gender) {
@@ -96,38 +89,8 @@ const AppliedFilterUI = ({ activeFiltersState, setIsFilterApplied }) => {
 
 };
 
-// Component rendering a dropdown menu
-const DropdownContent = ({ sortByList, setSortState, toggleSortBy, setDropdownOpen, dropdownOpen }) => {
-
-  // If any of the alternatives are pressed, we keep track of this and close the dropdown menu.
-  const handleClick = (id) => {
-    setSortState({ columnId: id });
-    toggleSortBy(id); // This will trigger the table
-    setDropdownOpen(!dropdownOpen);
-  }
-
-  return (
-    <div
-      style={{ width: '175px' }}
-      className='bg-white z-10 text-center grey-400 w-inherit absolute right-0 p-2 shadow-lg rounded-lg mt-2'
-    >
-
-      {sortByList.map((item, i) => {
-        return (
-          <div className='mt-1' key={i}>
-            <Button onClick={() => handleClick(item.id)}>
-              {item.sortBy}
-            </Button>
-          </div>
-        );
-      })}
-    </div>
-  );
-};
-
 // Component rendering blue div, with a searchfield and filtering + sorting buttons.
-const NoticesSearch = ({ setSortState,
-  toggleSortBy,
+const NoticesSearch = ({
   searchValue,
   setSearchValue,
   setOwnFilters,
@@ -139,35 +102,6 @@ const NoticesSearch = ({ setSortState,
   dropdownOpen,
   setDropdownOpen,
 }) => {
-
-
-  // Specifying what we can sort by
-  const sortByList = [
-    {
-      sortBy: 'Prioritering',
-      id: 'priority',
-    },
-    {
-      sortBy: 'Namn',
-      id: 'name',
-    },
-    {
-      sortBy: 'Personnummer',
-      id: 'sweID',
-    },
-    {
-      sortBy: 'Diagnos',
-      id: 'diagnoses',
-    },
-    {
-      sortBy: 'Senast uppdaterad',
-      id: 'updatedAt',
-    },
-    {
-      sortBy: 'Uppdaterad av',
-      id: 'updatedBy',
-    },
-  ];
 
   // Handling dynamic search based on what is entered into the search field 
   const handleSearchChange = (event) => {
@@ -208,28 +142,12 @@ const NoticesSearch = ({ setSortState,
             value={searchValue}
           />
         </div>
-
-
         <AppliedFilterUI activeFiltersState={activeFiltersState} setIsFilterApplied={setIsFilterApplied} setCustomFilterData={setCustomFilterData} />
         <div style={{ height: 'auto', paddingTop: '12px', paddingBottom: '2px', marginLeft: 'auto', textAlign: 'end' }}>
           {isFilterApplied && <Link underline="always" component="button" variant="body2" style={{ color: "#000", marginRight: "2rem" }} onClick={handleResetFilters}>Rensa Filter</Link>}
           <FilterModal setDropdownOpen={setDropdownOpen} setOwnFilters={setOwnFilters} customFilterData={customFilterData} setCustomFilterData={setCustomFilterData} />
-          <Button
-            onClick={() => setDropdownOpen(!dropdownOpen)}
-            className='shadow'
-            style={{ borderRadius: '0', backgroundColor: '#FFF' }}
-          >
-            Sortera efter
-                    <ArrowDropDown style={{ marginLeft: '20px', fontSize: '16px' }} />
-          </Button>
-          {dropdownOpen && (
-            <div className='relative'>
-              <DropdownContent sortByList={sortByList} setSortState={setSortState} toggleSortBy={toggleSortBy} setDropdownOpen={setDropdownOpen} dropdownOpen={dropdownOpen} />
-            </div>
-          )}
         </div>
       </div>
-
     </>
   );
 };
