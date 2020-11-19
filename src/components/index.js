@@ -40,12 +40,16 @@ import PatientCurrentMedicationsTable from "./patientview/PatientCurrentMedicati
 import PatientEarlierDiseasesTable from "./patientview/PatientEarlierDiseasesTable";
 import PatientOverviewMeasurementsTable from "./patientview/PatientOverviewMeasurementsTable";
 import PatientResponsibleCaregiversTable from "./patientview/PatientResponsibleCaregiversTable"
+
 import WeightChart from "./patientview/WeightChart";
 import BloodPressure from "./patientview/BloodPressure";
 import PatientOverviewCalendar from "./patientview/PatientOverviewCalendar";
 import PhysicalActivityChart from "./patientview/PhysicalActivityChart";
 import BloodPressurePage from "./patientview/BloodPressurePage";
-import WeightChartPage from "./patientview/WeightChartPage"
+import WeightChartPage from "./patientview/WeightChartPage";
+
+import PatientViewMeasurementsHeaderNavigation from "./patientview/PatientViewMeasurementsHeaderNavigation";
+
 
 
 // import Notices from './Notices';
@@ -88,4 +92,5 @@ export {
     PhysicalActivityChart,
     BloodPressurePage,
     WeightChartPage,
+    PatientViewMeasurementsHeaderNavigation,
 };

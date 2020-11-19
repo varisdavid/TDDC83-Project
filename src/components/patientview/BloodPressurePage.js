@@ -1,12 +1,10 @@
 import React from 'react';
-import {BloodPressure, PatientViewHeaderBanner, PatientViewHeaderNavigation} from "..";
+import {BloodPressure} from "..";
 
 const BloodPressurePage  = () => {
 
     return (
         <>
-            <PatientViewHeaderBanner/>
-            <PatientViewHeaderNavigation/>
             <div>
                 <div>Blodtryck</div>
                 <BloodPressure/>

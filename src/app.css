@@ -95,3 +95,14 @@
   max-height: 120px;
 }
 
+.header-measurement{
+  font-style: normal;
+  font-weight: normal;
+  font-size: 36px;
+  line-height: 72px;
+  align-items: center;
+  text-align: center;
+  color: #000000;
+  cursor: pointer !important;
+}
+

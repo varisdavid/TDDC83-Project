@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 
-import { Loading, BloodPressurePage, WeightChartPage } from './components';
+import { Loading} from './components';
 import { Home, Profile, ExternalApi, Overview, OverviewSettings, PatientView } from './views';
 // import ProtectedRoute from './auth/ProtectedRoute';
 
@@ -24,11 +24,9 @@ const App = () => {
         <Route exact path='/overview/settings' component={OverviewSettings} />
         <Route path='/overview' component={Overview}/>
         <Route path='/patient' component={PatientView}/>
-        <Route path='/BloodPressurePage' component={BloodPressurePage}/>
-        <Route path='/WeightChartPage' component={WeightChartPage}/>
+
       </Switch>
     </div>
   );
 };
-
 export default App;

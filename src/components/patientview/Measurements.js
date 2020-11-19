@@ -1,27 +1,30 @@
 import React from 'react';
 import { WeightChart, BloodPressure, PhysicalActivityChart } from "..";
 
-const Measurements  = () => {
+const Measurements  = ({setActiveTabValue}) => {
 
     return (
         <>
             <div className='flex justify-center' style={{ paddingTop: '5%'}} >
             <div onClick={(e) => {
                 e.preventDefault();
-                window.location.href='/WeightChartPage';
-            }}>
-                <div>Vikt</div>
+                setActiveTabValue(1);
+            }} >
+                <div className='header-measurement'>Vikt</div>
                 <WeightChart/>
             </div>
             <div onClick={(e) => {
                 e.preventDefault();
-                window.location.href='/BloodPressurePage';
+                setActiveTabValue(2);
             }}>
-                <div>Blodtryck</div>
+                <div className='header-measurement'>Blodtryck</div>
                 <BloodPressure/>
             </div>
-            <div>
-                <div>Fysisk aktivitet</div>
+            <div onClick={(e) => {
+                e.preventDefault();
+                setActiveTabValue(3);
+            }}>
+                <div className='header-measurement'>Fysisk aktivitet</div>
                 <PhysicalActivityChart/>
             </div>
             </div>
