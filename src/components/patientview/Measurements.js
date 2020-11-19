@@ -1,10 +1,14 @@
 import React from 'react';
+import { WeightChart } from "..";
 
-const Measurements = () => {
-    return(
-        <div>
-            Measurementssida
-        </div>
+const Measurements  = () => {
+
+    return (
+        <>
+            <WeightChart/>
+        </>
     );
+
 };
+
 export default Measurements;

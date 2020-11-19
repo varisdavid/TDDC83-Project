@@ -40,6 +40,7 @@ import PatientCurrentMedicationsTable from "./patientview/PatientCurrentMedicati
 import PatientEarlierDiseasesTable from "./patientview/PatientEarlierDiseasesTable";
 import PatientOverviewMeasurementsTable from "./patientview/PatientOverviewMeasurementsTable";
 import PatientResponsibleCaregiversTable from "./patientview/PatientResponsibleCaregiversTable"
+import WeightChart from "./patientview/WeightChart";
 
 
 // import Notices from './Notices';
@@ -75,5 +76,6 @@ export {
     PatientEarlierDiseasesTable,
     PatientOverviewMeasurementsTable,
     PatientResponsibleCaregiversTable,
-    PatientListOfMedicationTable
+    PatientListOfMedicationTable,
+    WeightChart,
 };
