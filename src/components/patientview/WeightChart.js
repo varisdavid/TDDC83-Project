@@ -5,25 +5,28 @@ import {
 
 const data = [
     {
-        name: '18/5',  pv: 2400, amt: 2400,
+       name: '11/4', Vikt: 30,
     },
     {
-        name: '13/6',  pv: 1398, amt: 2210,
+        name: '18/5',  Vikt: 67,
     },
     {
-        name: '23/7',  pv: 9800, amt: 2290,
+        name: '13/6',  Vikt: 50,
     },
     {
-        name: '1/9',  pv: 3908, amt: 2000,
+        name: '25/7',  Vikt: 67,
     },
     {
-        name: '10/9',  pv: 4800, amt: 2181,
+        name: '1/9',  Vikt: 60,
     },
     {
-        name: '2/10', pv: 3800, amt: 2500,
+        name: '10/9',  Vikt: 65,
     },
     {
-        name: '10/10',  pv: 4300, amt: 2100,
+        name: '2/10', Vikt: 30,
+    },
+    {
+        name: '10/10',  Vikt: 60,
     },
 ];
 
@@ -44,10 +47,9 @@ export default class WeightChart extends PureComponent {
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                <ReferenceLine x="Page C" stroke="red" label="Max PV PAGE" />
-                <ReferenceLine y={9800} label="Max" stroke="red" />
-                <Line type="monotone" dataKey="pv" stroke="#8884d8" />
-                <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+                <ReferenceLine y={70} stroke="green" strokeDasharray="5 5"/>
+                <ReferenceLine y={60} stroke="green" strokeDasharray="5 5"/>
+                <Line type="monotone" dataKey="Vikt" stroke="#8884d8"/>
             </LineChart>
         );
     }
