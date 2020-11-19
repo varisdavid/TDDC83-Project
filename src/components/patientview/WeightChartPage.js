@@ -1,10 +1,13 @@
 import React from 'react';
-import {  WeightChart } from "..";
+import {  WeightChart, PatientViewHeaderBanner, PatientViewHeaderNavigation } from "..";
+
 
 const BloodPressurePage  = () => {
 
     return (
         <>
+            <PatientViewHeaderBanner/>
+            <PatientViewHeaderNavigation/>
             <div>
                 <div>Vikt</div>
                 <WeightChart/>
