@@ -6,7 +6,10 @@ const Measurements  = () => {
     return (
         <>
             <div className='flex justify-center' style={{ paddingTop: '5%'}} >
-            <div>
+            <div onClick={(e) => {
+                e.preventDefault();
+                window.location.href='/WeightChartPage';
+            }}>
                 <div>Vikt</div>
                 <WeightChart/>
             </div>
