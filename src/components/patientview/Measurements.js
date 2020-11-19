@@ -1,11 +1,13 @@
 import React from 'react';
-import { WeightChart } from "..";
+import { WeightChart, BloodPressure } from "..";
 
 const Measurements  = () => {
 
     return (
         <>
             <WeightChart/>
+            <BloodPressure/>
+
         </>
     );
 
