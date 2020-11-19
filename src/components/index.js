@@ -20,15 +20,26 @@ import PatientGroups from './overview/PatientGroups';
 import FilterModal from './overview/FilterModal';
 import CreateNewFilterModal from './overview/CreateNewFilterModal';
 
-import PatientCalendar from './patientview/PatientCalendar.js';
 import PatientViewHeaderBanner from './patientview/PatientViewHeaderBanner.js';
 import PatientViewHeaderNavigation from './patientview/PatientViewHeaderNavigation.js';
-import PatientOverview from './patientview/PatientOverview.js';
+
+import PatientCalendar from './patientview/PatientCalendar.js';
+
 import Admin from './patientview/Admin.js';
 import Measurements from './patientview/Measurements.js';
+
 import PatientListOfMedication from './PatientListOfMedication';
-import PatientListOfMedicationTableDaily from "./PatientListOfMedicationTableDaily";
-import PatientListOfMedicationTableNeed from "./PatientListOfMedicationTableNeed";
+import PatientListOfMedicationTable from "./PatientListOfMedicationTable";
+
+import PatientOverview from './patientview/PatientOverview.js';
+import PatientContactTable from "./patientview/PatientContactTable";
+import PatientEmergencyContactTable from "./patientview/PatientEmergencyContactTable";
+import PatientPersonalInfoTable from "./patientview/PatientPersonalInfoTable";
+import PatientCurrentDiagnosesTable from "./patientview/PatientCurrentDiagnosesTable";
+import PatientCurrentMedicationsTable from "./patientview/PatientCurrentMedicationsTable";
+import PatientEarlierDiseasesTable from "./patientview/PatientEarlierDiseasesTable";
+import PatientOverviewMeasurementsTable from "./patientview/PatientOverviewMeasurementsTable";
+import PatientResponsibleCaregiversTable from "./patientview/PatientResponsibleCaregiversTable"
 
 
 // import Notices from './Notices';
@@ -56,6 +67,13 @@ export {
     Admin,
     Measurements,
     PatientListOfMedication,
-    PatientListOfMedicationTableDaily,
-    PatientListOfMedicationTableNeed
+    PatientContactTable,
+    PatientEmergencyContactTable,
+    PatientPersonalInfoTable,
+    PatientCurrentDiagnosesTable,
+    PatientCurrentMedicationsTable,
+    PatientEarlierDiseasesTable,
+    PatientOverviewMeasurementsTable,
+    PatientResponsibleCaregiversTable,
+    PatientListOfMedicationTable
 };
