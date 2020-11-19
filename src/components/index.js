@@ -44,6 +44,7 @@ import WeightChart from "./patientview/WeightChart";
 import BloodPressure from "./patientview/BloodPressure";
 import PatientOverviewCalendar from "./patientview/PatientOverviewCalendar";
 import PhysicalActivityChart from "./patientview/PhysicalActivityChart";
+import BloodPressurePage from "./patientview/BloodPressurePage";
 
 
 // import Notices from './Notices';
@@ -84,4 +85,5 @@ export {
     BloodPressure,
     PatientOverviewCalendar,
     PhysicalActivityChart,
+    BloodPressurePage,
 };

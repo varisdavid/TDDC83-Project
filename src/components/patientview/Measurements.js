@@ -10,7 +10,10 @@ const Measurements  = () => {
                 <div>Vikt</div>
                 <WeightChart/>
             </div>
-            <div>
+            <div onClick={(e) => {
+                e.preventDefault();
+                window.location.href='/BloodPressurePage';
+            }}>
                 <div>Blodtryck</div>
                 <BloodPressure/>
             </div>
