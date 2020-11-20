@@ -1,46 +1,79 @@
 import React, {useMemo} from 'react';
 import {BloodPressure} from "..";
-import {Button, Table, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
+import {Button,  Table, TableBody, TableCell, TableHead, TableRow, Tooltip} from "@material-ui/core";
 import {ArrowDropDown, ArrowDropUp} from "@material-ui/icons";
 import {useFlexLayout, useTable} from "react-table";
 import {useVirtual} from "react-virtual";
+import {NotificationImportant} from '@material-ui/icons';
 
 const BloodPressurePage = () => {
+    // Component rendering bell icon (color based on value: integer) and hover information based on (text: string)
+    const Notification = ({value, text}) => {
+
+        var color;
+        if (value === 1) {
+            color = '#FF6464';
+        } else if (value === 2) {
+            color = '#FED765';
+        } else if (value === 3) {
+            color = '#27AE60';
+        } else if (value === 0) {
+            color = '#FFF'; // This is for rendering bug, empty cell not taking same space.
+        }
+
+        return (
+            <Tooltip title={text} placement='left-start'>
+                <NotificationImportant style={{
+                    color: color,
+                    fontSize: '30px',
+                }}
+                />
+            </Tooltip>
+        )
+    }
+
     //Fake data to the table rendering below
     const data = useMemo(
         () => [
 
             {
+                notices: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
                 Date: '2020-05-18',
                 BloodPressure: '135/80',
                 UpdatedBy: 'Patient',
             },
             {
+                notices: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
                 Date: '2020-06-13',
                 BloodPressure: '135/80',
                 UpdatedBy: 'Patient',
             },
             {
+                notices: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
                 Date: '2020-07-25',
                 BloodPressure: '135/80',
                 UpdatedBy: 'Vårdpersonal',
             },
             {
+                notices: <Notification value={2} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
                 Date: '2020-09-01',
                 BloodPressure: '135/80',
                 UpdatedBy: 'Vårdoersonal',
             },
             {
+                notices: <Notification value={0} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
                 Date: '2020-09-10',
                 BloodPressure: '135/80',
                 UpdatedBy: 'Patient',
             },
             {
+                notices: <Notification value={3} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
                 Date: '2020-10-02',
                 BloodPressure: '135/80',
                 UpdatedBy: 'Vårdpersonal',
             },
             {
+                notices: <Notification value={2} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
                 Date: '2020-10-10',
                 BloodPressure: '135/80',
                 UpdatedBy: 'Patient',
@@ -52,6 +85,10 @@ const BloodPressurePage = () => {
     //Setting the table heads in the table as well as which data goes where
     const columns = useMemo(
         () => [
+            {
+                Header: '',
+                accessor: 'notices',
+            },
 
             {
                 Header: 'Datum',
@@ -91,7 +128,6 @@ const BloodPressurePage = () => {
         parentRef,
         estimateSize: React.useCallback(() => 15, [])
     });
-
 
     return (
         <>
