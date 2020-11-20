@@ -48,7 +48,7 @@ const BloodPressurePage = () => {
             setOpenPatientViewConfirm(false); // Close modal
         };
 
-        const ConfirmAccessingPatient = () => {
+        const ConfirmWarning = () => {
 
             return (
                 <Modal
@@ -95,7 +95,7 @@ const BloodPressurePage = () => {
             </Tooltip>
 
                 </Link>
-                <ConfirmAccessingPatient />
+                <ConfirmWarning />
                 </>
 
         )
