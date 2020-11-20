@@ -57,20 +57,25 @@ const BloodPressurePage = () => {
                     aria-labelledby='modal-popup'
                 >
                     <div key="modal-popup-div" style={modalStyle} className={classes.paper}>
-
-                        <h2 className='font-bold mt-2' id='modal-popup'>Vill du se data för ?</h2>
+                        <NotificationImportant style={{
+                            color: color,
+                            fontSize: '30px',
+                        }}/>
+                        <text className='font-bold mt-2' id='modal-popup'>Uppmärksammat mätvärde</text>
+                        <h2 className='font-bold mt-3' id='modal-popup'>/sätt in datum/ uppmättes vikten /vikt/ av /person/ ?</h2>
+                        <h2 className='font-bold mt-3 flex justify-center' id='modal-popup'> Vill du hantera mätvärdet?</h2>
                         <div className="flex" style={{width: "100%"}}>
                             <Button
                                 className='flex shadow'
                                 style={{ border: '2px solid #0066B3', borderRadius: "0px", width: '110px', marginLeft: "auto", marginRight: "auto", marginTop: "1.5rem"}}
                                 onClick={handleCloseConfirmation}>
-                                Tillbaka
+                                Avbryt
                             </Button>
                             <Button
                                 className='flex shadow'
                                 style={{ border: '2px solid #0066B3', borderRadius: "0px", width: '110px', marginLeft: "auto", marginRight: "auto", marginTop: "1.5rem"}}
                                 onClick={navigateToPatientView}>
-                                Bekräfta
+                                Kvittera
                             </Button>
                         </div>
                     </div>
