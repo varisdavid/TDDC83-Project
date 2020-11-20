@@ -5,8 +5,8 @@ import {ArrowDropDown, ArrowDropUp} from "@material-ui/icons";
 import {useFlexLayout, useTable} from "react-table";
 import {useVirtual} from "react-virtual";
 
-const BloodPressurePage  = () => {
-    const data =  useMemo(
+const BloodPressurePage = () => {
+    const data = useMemo(
         () => [
 
             {
@@ -51,14 +51,17 @@ const BloodPressurePage  = () => {
     const columns = useMemo(
         () => [
 
-            {Header: 'Datum',
-                accessor:'Date',
+            {
+                Header: 'Datum',
+                accessor: 'Date',
             },
-            {Header: 'Blodtryck',
-                accessor:'BloodPressure',
+            {
+                Header: 'Blodtryck',
+                accessor: 'BloodPressure',
             },
-            {Header: 'Uppdaterades Av',
-                accessor:'UpdatedBy',
+            {
+                Header: 'Uppdaterades Av',
+                accessor: 'UpdatedBy',
             },
         ],
         []
@@ -70,7 +73,7 @@ const BloodPressurePage  = () => {
         headerGroups,
         rows,
         prepareRow,
-    } = useTable({ columns, data },
+    } = useTable({columns, data},
         useFlexLayout,
     );
 
@@ -96,7 +99,7 @@ const BloodPressurePage  = () => {
                 </div>
 
                 <div>
-                    <Table {...getTableProps()} >
+                    <Table {...getTableProps()} style={{boxShadow: "5px 7px 20px lightgrey"}}>
                         <TableHead>
                             {headerGroups.map(headerGroup => (
                                 <TableRow {...headerGroup.getHeaderGroupProps()}>
@@ -183,22 +186,47 @@ const BloodPressurePage  = () => {
                         </div>
                     </Table>
 
-                    <form style={{ border: '1px solid black', marginLeft: "auto", marginRight: "auto", marginTop: "1.5rem"}}>
-                        <h1>Uppdatera information</h1>
-                        <br/>
-                        <text>Datum:</text>
-                        <input style={{ border: '1px solid black', marginLeft: "auto", marginRight: "auto"}} name="date"/>
-                        <br/>
-                        <text>Fyll i ny uppmätt vikt:</text>
-                        <input style={{ border: '1px solid black', marginLeft: "auto", marginRight: "auto", marginTop: "1.5rem"}} name="BloodPressureMeasurement"/>
-                        <br/>
+                    <form style={{
+                        border: '1px solid black',
+                        marginLeft: "auto",
+                        marginRight: "auto",
+                        marginTop: "1.5rem",
+                        boxShadow: "5px 7px 20px lightgrey",
 
-                    <Button
-                        className='flex shadow'
-                        style={{ border: '2px solid #0066B3', borderRadius: "0px", width: '110px', marginLeft: "auto", marginRight: "auto", marginTop: "1.5rem"}}
-                        >
-                        Uppdatera
-                    </Button>
+                    }}>
+                        <h1 style={{marginLeft: "10px", marginRight: "10px", marginTop: "10px", fontWeight: "500"}}>Uppdatera
+                            information</h1>
+                        <br/>
+                        <text style={{marginLeft: "10px", marginRight: "10px", marginTop: "10px"}}>Datum:</text>
+                        <input style={{border: '1px solid black', marginLeft: "auto", marginRight: "auto"}}
+                               name="date"/>
+                        <br/>
+                        <text style={{marginLeft: "10px", marginRight: "10px", marginTop: "10px"}}>Fyll i ny uppmätt
+                            vikt:
+                        </text>
+                        <input style={{
+                            border: '1px solid black',
+                            marginLeft: "auto",
+                            marginRight: "auto",
+                            marginTop: "1.5rem",
+
+                        }} name="BloodPressureMeasurement"/>
+                        <br/>
+                        <div align='right' style={{marginRight:"10px", marginBottom:"10px"}}>
+                            <Button
+                                className='flex shadow'
+                                style={{
+                                    border: '2px solid #0066B3',
+                                    borderRadius: "0px",
+                                    width: '110px',
+                                    marginLeft: "auto",
+                                    marginRight: "auto",
+                                    marginTop: "1.5rem",
+                                }}
+                            >
+                                Bekräfta
+                            </Button>
+                        </div>
                     </form>
 
 
