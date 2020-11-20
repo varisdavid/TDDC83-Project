@@ -219,7 +219,7 @@ const BloodPressurePage = () => {
                             marginRight: "10px",
                             marginTop: "10px"
                         }}>Fyll i ny uppmätt
-                            vikt:
+                            blodtryck:
                         </text>
                         <input style={{
                             border: '1px solid lightgrey',
