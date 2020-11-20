@@ -6,6 +6,7 @@ import {useFlexLayout, useTable} from "react-table";
 import {useVirtual} from "react-virtual";
 
 const BloodPressurePage = () => {
+    //Fake data to the table rendering below
     const data = useMemo(
         () => [
 
@@ -48,6 +49,7 @@ const BloodPressurePage = () => {
         []
     )
 
+    //Setting the table heads in the table as well as which data goes where
     const columns = useMemo(
         () => [
 
@@ -93,12 +95,37 @@ const BloodPressurePage = () => {
 
     return (
         <>
+            {/* Setting up the big div on the page */}
             <div className='flex justify-center'>
+                {/* div to dived the page in two parts*/}
                 <div>
+                    {/* The blood pressure chart  */}
                     <BloodPressure/>
+                    {/*The button below the chart with its styling*/}
+                    <Button
+                        className='flex shadow'
+                        style={{
+                            border: '0.5px solid lightgrey',
+                            borderRadius: "0px",
+                            width: '180px',
+                            marginLeft: "auto",
+                            marginRight: "auto",
+                            marginTop: "1.5rem",
+                        }}>
+                        Ändra intervall
+                    </Button>
+                    {/*The checkbox next to the button below the chart*/}
+                    <input
+                        type='checkbox'
+                        style={{
+                            marginLeft: "10px",
+                            marginRight: "auto",
+                        }}/>
+                    <text> Visa intervall</text>
                 </div>
 
                 <div>
+                    {/* This is the Table which get its data from the data constant above */}
                     <Table {...getTableProps()} style={{boxShadow: "5px 7px 20px lightgrey"}}>
                         <TableHead>
                             {headerGroups.map(headerGroup => (
@@ -186,6 +213,7 @@ const BloodPressurePage = () => {
                         </div>
                     </Table>
 
+                    {/*The form which contains a header and two inputs and a button and styling */}
                     <form style={{
                         border: '1px solid lightgrey',
                         marginLeft: "auto",
@@ -206,7 +234,8 @@ const BloodPressurePage = () => {
                             marginLeft: "10px",
                             marginRight: "10px",
                             marginTop: "10px"
-                        }}>Datum:</text>
+                        }}>Datum:
+                        </text>
                         <input style={{
                             border: '1px solid lightgrey',
                             marginLeft: "auto",
@@ -230,8 +259,8 @@ const BloodPressurePage = () => {
                         }} name="BloodPressureMeasurement"/>
                         <br/>
                         <div align='right' style={{
-                            marginRight:"10px",
-                            marginBottom:"10px"
+                            marginRight: "10px",
+                            marginBottom: "10px"
                         }}>
                             <Button
                                 className='flex shadow'

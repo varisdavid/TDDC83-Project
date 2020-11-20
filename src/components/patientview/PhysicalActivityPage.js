@@ -6,7 +6,9 @@ import {Button, Table, TableBody, TableCell, TableHead, TableRow} from "@materia
 import {ArrowDropDown, ArrowDropUp} from "@material-ui/icons";
 
 
-const PhysicalActivityPage  = () => {
+const PhysicalActivityPage = () => {
+
+    //Fake data to the table below which can be updated to live data if needed
     const data = useMemo(
         () => [
 
@@ -48,7 +50,7 @@ const PhysicalActivityPage  = () => {
         ],
         []
     )
-
+    //Setting the name on the table rows as well as which data is place where
     const columns = useMemo(
         () => [
 
@@ -96,10 +98,12 @@ const PhysicalActivityPage  = () => {
         <>
             <div className='flex justify-center'>
                 <div>
+                    {/* Placing the Physical activity chart on the page */}
                     <PhysicalActivityChart/>
                 </div>
 
                 <div>
+                    {/* Code for the table to be used. Featching the fake data from above */}
                     <Table {...getTableProps()} style={{boxShadow: "5px 7px 20px lightgrey"}}>
                         <TableHead>
                             {headerGroups.map(headerGroup => (
@@ -186,7 +190,8 @@ const PhysicalActivityPage  = () => {
                             </TableBody>
                         </div>
                     </Table>
-
+                    {/* The form below the table which contains a button and two inputs to add activity. Does not
+                    save the data anywhere*/}
                     <form style={{
                         border: '1px solid lightgrey',
                         marginLeft: "auto",
@@ -207,7 +212,8 @@ const PhysicalActivityPage  = () => {
                             marginLeft: "10px",
                             marginRight: "10px",
                             marginTop: "10px"
-                        }}>Datum:</text>
+                        }}>Datum:
+                        </text>
                         <input style={{
                             border: '1px solid lightgrey',
                             marginLeft: "auto",
@@ -231,8 +237,8 @@ const PhysicalActivityPage  = () => {
                         }} name="BloodPressureMeasurement"/>
                         <br/>
                         <div align='right' style={{
-                            marginRight:"10px",
-                            marginBottom:"10px"
+                            marginRight: "10px",
+                            marginBottom: "10px"
                         }}>
                             <Button
                                 className='flex shadow'

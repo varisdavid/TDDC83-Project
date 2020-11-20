@@ -1,12 +1,13 @@
 import React, {useMemo} from 'react';
-import { WeightChart} from "..";
+import {WeightChart} from "..";
 import {Button, Table, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
 import {ArrowDropDown, ArrowDropUp} from "@material-ui/icons";
 import {useFlexLayout, useTable} from "react-table";
 import {useVirtual} from "react-virtual";
 
 
-const WeightChartPage  = () => {
+const WeightChartPage = () => {
+    //Fake data to be used in the table code below can be changed to real data
     const data = useMemo(
         () => [
 
@@ -48,7 +49,7 @@ const WeightChartPage  = () => {
         ],
         []
     )
-
+    //setting the table head in the table below
     const columns = useMemo(
         () => [
 
@@ -95,10 +96,12 @@ const WeightChartPage  = () => {
         <>
             <div className='flex justify-center'>
                 <div>
+                    {/* This is the weight chart being displayed */}
                     <WeightChart/>
                 </div>
 
                 <div>
+                    {/* The table taking the data from above and printing it in the table as the column above specified*/}
                     <Table {...getTableProps()} style={{boxShadow: "5px 7px 20px lightgrey"}}>
                         <TableHead>
                             {headerGroups.map(headerGroup => (
@@ -186,6 +189,8 @@ const WeightChartPage  = () => {
                         </div>
                     </Table>
 
+                    {/* The form which you can fill in information about your weight does not save the data any where.
+                     Contains two text fields and a button*/}
                     <form style={{
                         border: '1px solid lightgrey',
                         marginLeft: "auto",
@@ -206,7 +211,8 @@ const WeightChartPage  = () => {
                             marginLeft: "10px",
                             marginRight: "10px",
                             marginTop: "10px"
-                        }}>Datum:</text>
+                        }}>Datum:
+                        </text>
                         <input style={{
                             border: '1px solid lightgrey',
                             marginLeft: "auto",
@@ -230,8 +236,8 @@ const WeightChartPage  = () => {
                         }} name="BloodPressureMeasurement"/>
                         <br/>
                         <div align='right' style={{
-                            marginRight:"10px",
-                            marginBottom:"10px"
+                            marginRight: "10px",
+                            marginBottom: "10px"
                         }}>
                             <Button
                                 className='flex shadow'
