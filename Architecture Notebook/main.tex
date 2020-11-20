@@ -25,6 +25,7 @@
 \maketitle
 \clearpage
 
+\newgeometry{margin=0.7in}
 \begin{table}
 \section*{Version history}
 \centering
@@ -55,22 +56,24 @@ Version & Date & Author & Description \\ \hline
 0.7.1 & 2020-11-18 & Jonas Malm & Wrote the support in future section\\
 0.7.2 & 2020-11-18 & Jonas Malm & Started maintainability in future section\\
 0.7.3 & 2020-11-18 & Jonas Malm & More maintainabillity: more data and replacing EhrScape\\
+0.7.4 & 2020-11-20 & Jonas Malm & Fixed inconsistencies in how HCU were named\\
+0.8.0 & 2020-11-20 & Jonas Malm & Future dev: Added trend analysis\\
 
 
 \hline
 \end{tabular}
 \end{table}
+\restoregeometry
 
 \textbf{TODO:}
 \begin{enumerate}[label=(\roman*)]
 \item Write dependencies
-\item Write section 6 - product in the future
+\item Continue system in the future section: maintainability & future development
 \item Add deployment view
 \item Finish work on authentication section
 \item Update ASRs when requirements are re-numbered
 \item Populate appendix
 \item Run tests on the Rule Engine and Filtration Module in order to determine how performance is affected by number of patients
-\item Ensure consistency in how HCU terms are used: Operation, department, subdepartment and team
 \end{enumerate}
 
 
@@ -399,9 +402,9 @@ In this part the authentication functionality is discussed in further detail.
     \label{fig:departments}
 \end{figure}
 
-The users using the system belong to one or more groups. The structure of these groups are illustrated in the simple tree in Figure \ref{fig:departments}. A department is a health care institution and could be e.g. a hospital or a health center, such as the Linköping University Hospital. These departments are divided into subdepartments, such as Cardiology,  Infectious Diseases or Pediatrics. These subdepartments are in turn comprised of teams.  
-As illustrated, a patient is handled by one or many departments. Thus, a health care professional working at any subdepartment in Department B is authorized to view the EHR of Patient B, but not the EHR of Patient A.
-However, it is in the interest of the health care professionals working at Department B to be able to access the EHR of Patient A, in case of an emergency. The system will facilitate this, but such accesses will be logged in the access log.
+The users using the system belong to one or more groups. The structure of these groups are illustrated in the simple tree in Figure \ref{fig:departments}. An operation is a health care institution and could be e.g. a hospital or a health center, such as the Linköping University Hospital. These operations are divided into departments, such as Cardiology,  Infectious Diseases or Pediatrics. These departments are in turn comprised of teams.  
+As illustrated, a patient is handled by one or many departments. Thus, a health care professional working at any department in Operation B is authorized to view the EHR of Patient B, but not the EHR of Patient A.
+However, it is in the interest of the health care professionals working at Operation B to be able to access the EHR of Patient A, in case of an emergency. The system will facilitate this, but such accesses will be logged in the access log.
 
 \subsubsection{RBAC Roles}
 By analyzing the needs of users using the information above, they can be grouped and assigned access roles to be implemented in the RBAC system in Auth0.
@@ -433,7 +436,7 @@ Worth noting from Figure \ref{fig:overview-sequence}, is that all relevant data 
     \label{fig:patient-sequence}
 \end{figure}
 
-In Figure \ref{fig:patient-sequence}, EHR data about a specific patient is retrieved. The access token, with the user's access authentication from the role inside, is passed to the EHR Retriever. After retrieving the data about the requested patient, this module will compare the Department the patient belongs to with the role of the user from the access token. If these do not match, the access in unauthorized and this will be logged before structuring the returned data and passing it to the Patient View. Note that the data is returned even though the access is unauthorized, as specified in Section \ref{Authentication}. However, no data will be returned if the access token is invalid or missing.
+In Figure \ref{fig:patient-sequence}, EHR data about a specific patient is retrieved. The access token, with the user's access authentication from the role inside, is passed to the EHR Retriever. After retrieving the data about the requested patient, this module will compare the operation the patient belongs to with the role of the user from the access token. If these do not match, the access in unauthorized and this will be logged before structuring the returned data and passing it to the Patient View. Note that the data is returned even though the access is unauthorized, as specified in Section \ref{Authentication}. However, no data will be returned if the access token is invalid or missing.
 
 \subsubsection{Authentication}
 \begin{figure}[h]
@@ -461,7 +464,7 @@ However, with a very large data set and many patients displayed in the Patient O
 \subsubsection{Filtration of large data set}
 Since the filtration functionality is placed in the front end, performance could be expected to suffer when working with very large data sets. The rationale laid out in section \ref{placement-modules} is based on assumptions of a moderately sized data set and frequent filtration. However, if the data set would be very large and the filtration isn't happening frequently then the rationale might not be valid. The time lost due to calls to the back end and EhrScape could be offset by time lost due to hardware limitations on the client side. It is considered unlikely that this will be the case however, since simple tests on larger sets of patients have not shown a drop in performance.
 
-If however performance were to be affected due to a larger number of patients, the recommended solution would be to limit the number of patients that are returned to the overview. In the current implementation, all patients that the user has authority to access are returned. This could be changed so that only patients tended  to by the user's subdepartment or team are returned. To implement this, additional data fields in the demographic database in EhrScape could be added.
+If however performance were to be affected due to a larger number of patients, the recommended solution would be to limit the number of patients that are returned to the overview. In the current implementation, all patients that the user has authority to access are returned. This could be changed so that only patients tended  to by the user's department or team are returned. To implement this, additional data fields in the demographic database in EhrScape could be added.
 
 \subsubsection{Increasing the number of users}
 Increasing the number of users should not affect the performance of the system, since the system is designed utilizing a two-tier fat-client where no computationally heavy functionality is implemented in the back end. 
@@ -495,15 +498,40 @@ In the event that the customer in the future would be interested in changing the
 
 
 \subsection{Future development}
-Due to the time constraint, some functionality was cut. In this section these modules will be described in more general terms. As this section is not finished and the final functionality of the product is not yet set, what is listed below might be implemented.
+Due to the time constraint, some planned functionality had to be cut. In this section the modules that would implement the functionality are described, so that the system can be extended with these modules in the future.
 
 
 \subsubsection{Trend analysis}\label{trend-analysis}
-Right now RE only looks at most recent value.
-Statistics, ML to classify. Modular --> can be implemented.
-\subsubsection{Calendars}
+Due to the time constraint, the Rule Engine only classifies patients using the most recent measured value since this is simple to implement. This is however not the best solution, since the customer has mentioned that absolute values are often not the most relevant factor when prioritizing patients. The customer thinks that individual patient trends are more relevant. Originally, this was in the scope of the project but there was not enough time to implement this. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.45]{trend-module}
+    \caption{A sequence diagram illustrating the Trend module}
+    \label{fig:trend-module}
+\end{figure}
+
+As illustrated in Figure \ref{fig:trend-module}, this module would consist of three components. A listener listening for changes in the EHR database, a trend analyzer applying some algorithm to predict future values and a trend database to store this.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.45]{trend-sequence}
+    \caption{A sequence diagram illustrating how the Trend module would work}
+    \label{fig:trend-sequence}
+\end{figure}
+
+Figure \ref{fig:trend-sequence} illustrates how it would work. Since the computations required to make these predictions would be complex, it would be best to do them only once: when the data is added to the EHR Database. Then this data is stored in a separate database to be accessed by the Client Data Getter, seen in Figure \ref{fig:execution-view}, and could be used by the Rule Engine to prioritize patients. This data could also be used in combination with the patient specific data in the Patient View, to enable the care giver to get further insights into the health trends of the patient.
+
+Due to the modularity of the code base, this module could be implemented without a major integration effort. It would require extending the functionality of the Rule Engine to take trends into account as well as extending the visualization components in the Patient View to display the trends.
+
+
+
+
+\subsubsection{A more advanced notification log}
+\textbf{TODO:} Implement like trend analyzer. Add logs to DB.
+
 \subsubsection{Prioritization}\label{future-prioritization}
-Dynamic rule engine - prioritizing among many patients
+\textbf{TODO:} Dynamic rule engine - prioritizing among many patients
 
 
 \section{Appendix}
