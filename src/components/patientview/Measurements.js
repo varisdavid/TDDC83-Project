@@ -5,7 +5,7 @@ const Measurements  = ({setActiveTabValueM}) => {
 
     return (
         <>
-            <div className='flex justify-center' style={{ paddingTop: '0%'}} >
+            <div className='flex justify-center'  >
             <div onClick={(e) => {
                 e.preventDefault();
                 setActiveTabValueM(1);
