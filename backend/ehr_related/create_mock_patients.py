@@ -26,10 +26,10 @@ no_of_patients = 50
 diagnosis = ["Covid", "Diabetes", "Cancer", "HIV", "IBS", "Crohns", "Alzheimers", "Borrelia", "Brutet nyckelben", "Korsbandsskada",
 			"Cystisk fibros", "ALS", "Multipel skleros", "Diskbråck", "Gula febern", "Ebola", "Hypertoni"]
 
-department = ["Ryds Vårdcentral", "Capio Vårdcentral Berga", "Jourcentralen LInköping", "Jourcentralen Motala","Vårdcentralen Linghem",
-                "Valla Vårdcentral", "Capio Vårdcentral Vasastaden LInköping"]
-team = ["Dermotologi", "Geriatrik", "Onkologi", "Kardiologi", "Öra, näsa & hals", "Kirurgi", "Anestesiologi", "Neurologi",
+operation = ["Ryds Vårdcentral","Valla Vårdcentral", "Universitetssjukhuset"]
+department = ["Dermotologi", "Geriatrik", "Onkologi", "Kardiologi", "Öra, näsa & hals", "Kirurgi", "Anestesiologi", "Neurologi",
              "Gynekologi", "Urologi", "Ortopedi"]
+team  = [x for x in "ABCDEFGH"]
 unindexed_medications= [["Ipren", "1000mg", "tablett", "2 gånger om dagen", "Tas i samband med mat", True],
 ["Alvedon", 1000, "tablett", "2 gånger om dagen", "Tas morgon och kväll", True],
 ["Treo-comp", 1000, "tablett", "2 gånger om dagen", "Tas i samband med migrän", True],
@@ -88,6 +88,7 @@ for person in all_personalinfo:
     print("SKAPA EHRID: " + str(response))
     ehrid = response.json()['ehrId']
 
+    
 
     #Create personal details party in demographics
     r = requests.post("https://fejka.nu/?json=1&num=1")
@@ -109,6 +110,7 @@ for person in all_personalinfo:
                                     "phone": person['phone'],
                                     "age" : 2020-int(person['pnr_full'][:4]),
                                     "contactperson" : json.dumps({"name" : contactperson['fname']+" "+contactperson['lname'], "phone" : contactperson['phone']}), 
+                                    "operation" : random.choice(operation),
                                     "team" : json.dumps(["hej" , random.choice(team)]),
                                     "department" : random.choice(department)
                                     } }

@@ -50,7 +50,8 @@ def get_all_patients_personal_details():
             "Email": more_info["email"],
             "Team" : more_info["team"], #is now a list so it can contain more than 1 team
             "Department" : more_info["department"], #for now department is still string, but will be made into list like team soon
-            "Contactperson" : more_info["contactperson"] #Dict containing Name (string on form "Firstname Lastname" and phonenummer)
+            "Contactperson" : more_info["contactperson"],
+            "Operation" : more_info["operation"] #Dict containing Name (string on form "Firstname Lastname" and phonenummer)
         }
         to_return.append(personal_details)
     return to_return
@@ -83,6 +84,8 @@ def get_measurements(ehrid):
     response = query(aql)
     to_return= []
     for measurement in response['resultSet']:
+        
+        time = measurement['time'][:10]
         to_return.append(
                         { "Pulse: " : measurement['pulse']['magnitude'],
                           "Exercise: ":measurement['exercise']['magnitude'],
@@ -90,7 +93,7 @@ def get_measurements(ehrid):
                           "Diastolic: " : measurement['diastolic']['magnitude'],
                           "Systolic: " : measurement['systolic']['magnitude'],
                           "Bloodsugar: " : measurement['bloodsugar']['magnitude'],
-                          "Time: " : measurement['time']
+                          "Time: " : time
                           } #need to reformat time-strings, currently in format "2020-11-13T12:46:36+01:00" for example
                           )
     return to_return
@@ -155,6 +158,14 @@ def get_diagnosis(ehrid):
 
 
 
+def get_overview():
+    patient_info = get_all_patients_personal_details()
+    for patient in patient_info:
+        diagnosis = get_diagnosis(patient["EhrID"])
+        patient.update({"Diagnosises" : diagnosis})
+        measurement = get_measurements(patient["EhrID"])[-1:]
+        patient.update({"Measurement" : measurement})
+    return patient_info
 
 
 
