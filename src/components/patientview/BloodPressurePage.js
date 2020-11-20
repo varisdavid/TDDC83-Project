@@ -162,17 +162,17 @@ const BloodPressurePage = () => {
 
                 <div>
                     {/* This is the Table which get its data from the data constant above */}
-                    <Table {...getTableProps()} style={{boxShadow: "5px 7px 20px lightgrey"}}>
+                    <Table {...getTableProps()}>
                         <TableHead>
                             {headerGroups.map(headerGroup => (
                                 <TableRow {...headerGroup.getHeaderGroupProps()}>
-                                    {headerGroup.headers.map((column) => (
+                                    {headerGroup.headers.map((column, columnIndex) => (
                                         <TableCell
                                             {...column.getHeaderProps()}
                                             style={{
-                                                width: '100%', //Make first column fixed size
-                                                background: '#275E8E', //Make first column invisible
-                                                borderColor: '#FFF', //Make first column invisible
+                                                width: (columnIndex === 0) ? '45px' : '30%', //Make first column fixed size
+                                                background: (columnIndex === 0) ? '#FFF' : '#275E8E', //Make first column invisible
+                                                borderColor: (columnIndex === 0) && '#FFF', //Make first column invisible
                                                 color: '#FFF',
                                                 fontWeight: '700',
                                                 fontSize: '15px',
@@ -229,12 +229,14 @@ const BloodPressurePage = () => {
                                                 })}
                                             >
 
-                                                {row.cells.map((cell) => {
+                                                {row.cells.map((cell, cellIndex) => {
                                                     return (
                                                         <TableCell {...cell.getCellProps()} style={{
                                                             padding: '10px',
                                                             textAlign: 'center',
-                                                            width: '100%', //To make first column fixed size
+                                                            width: (cellIndex === 0) ? '45px' : '30%', //To make first column fixed size
+                                                            background: (cellIndex === 0) && '#FFF', //To make first column invisible
+                                                            borderColor: (cellIndex === 0) && '#FFF', //To make first column invisible
                                                         }}>
                                                             {cell.render('Cell')}
                                                         </TableCell>
