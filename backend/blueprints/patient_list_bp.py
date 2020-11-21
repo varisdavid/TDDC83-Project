@@ -6,7 +6,7 @@ patient_list_bp = Blueprint("patient_list", __name__)
 
 
 @patient_list_bp.route("/api/patientlist", methods=["GET"])
-@requires_auth
+#@requires_auth
 def patient_list():
     patient_list = get_all_patients_personal_details()
     return jsonify(patient_list)

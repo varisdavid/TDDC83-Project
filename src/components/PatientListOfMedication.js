@@ -1,10 +1,40 @@
-import React, {useMemo} from "react";
+import React, {useMemo, useEffect} from "react";
 
 
 import { PatientListOfMedicationTable } from "../components";
 
 
 const PatientListOfMedication = () => {
+
+
+  // When something happens, we check to see if we change the sorting option, and we check if the search has been triggered
+  useEffect(() => {
+     // Basic example of how to make a authorized fetch call to our backend endpoints
+    const get_medication = async () => {
+      const domain =  "http://127.0.0.1:5000/api/medicationlist";
+
+      try {
+        //const token = await getAccessTokenSilently();
+          const response = await fetch(domain,
+            {
+              headers: {
+               // Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+
+          const responseData = await response.json();
+          console.log(responseData);
+        } catch (error) {
+          console.log(error.message);
+        }
+      };
+      get_medication();
+      console.log(get_medication());
+  }, []);
+
+
+
 
  const data =  useMemo(
         () => [
@@ -38,6 +68,7 @@ const PatientListOfMedication = () => {
         ],
         []
     )
+
     //Filter the data to an array that will show the current medication
         function filterDaily(data){
             let newArr = []
