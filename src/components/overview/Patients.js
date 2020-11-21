@@ -844,7 +844,7 @@ const Patients = () => {
         </Grid>
       </Grid>
       <Grid container xs={11}>
-          <Grid xs = {4}>
+          <Grid xs = {4} style={{paddingLeft: "45px", marginTop: "8px"}}>
             <JourTable />
           </Grid> 
         <Grid xs = {8}>

@@ -33,6 +33,9 @@ const useStyles = makeStyles((theme) => ({
 
 const ColorButton = withStyles((theme) => ({
     root: {
+      borderRadius: "0px",
+      width: "130px",
+      textTransform: "Capitalize",
       color:"#ffffff" ,
       backgroundColor: "#275E8E",
       '&:hover': {
