@@ -39,7 +39,7 @@ import PatientCurrentDiagnosesTable from "./patientview/PatientCurrentDiagnosesT
 import PatientCurrentMedicationsTable from "./patientview/PatientCurrentMedicationsTable";
 import PatientEarlierDiseasesTable from "./patientview/PatientEarlierDiseasesTable";
 import PatientOverviewMeasurementsTable from "./patientview/PatientOverviewMeasurementsTable";
-import PatientResponsibleCaregiversTable from "./patientview/PatientResponsibleCaregiversTable"
+import PatientResponsibleCaregiversTable from "./patientview/PatientResponsibleCaregiversTable";
 
 
 // import Notices from './Notices';
@@ -75,5 +75,5 @@ export {
     PatientEarlierDiseasesTable,
     PatientOverviewMeasurementsTable,
     PatientResponsibleCaregiversTable,
-    PatientListOfMedicationTable
+    PatientListOfMedicationTable,
 };
