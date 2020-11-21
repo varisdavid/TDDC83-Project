@@ -4,39 +4,11 @@ import { NoticesSearch, NoticesTable, NoticesGroups } from '..'
 import { useTable, useFlexLayout, useFilters, useGlobalFilter, useSortBy } from 'react-table'
 
 import { Tooltip, Modal, Button, Link } from '@material-ui/core';
-import { NotificationImportant } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { useAuth0 } from "@auth0/auth0-react";
 
 import { useHistory } from 'react-router-dom';
-
-// Component rendering bell icon (color based on value: integer) and hover information based on (text: string) 
-const Notification = ({ value, text }) => {
-
-  var color;
-  if (value === 1) {
-    color = '#FF6464';
-  } else if (value === 2) {
-    color = '#FED765';
-  } else if (value === 3) {
-    color = '#27AE60';
-  } else if (value === 0) {
-    color = '#FFF'; // This is for rendering bug, empty cell not taking same space.
-  }
-
-  return (
-    <Tooltip title={text} placement='left-start'>
-      <NotificationImportant style={{
-        color: color,
-        fontSize: '30px',
-      }}
-      />
-    </Tooltip>
-
-
-  )
-}
 
 // Used to fix the placement of the triggered modal
 const getModalStyle = () => {
@@ -170,8 +142,12 @@ const Notices = () => {
     // To get them in the proper order, using numbers to represent priority, 1 = high, 2 = medium, 3 = low with notification, 4 = low without notification
     () => [
       {
-        href: <PatientLink id='470203-1324' name="Gunilla Andersson" />,
         priority: 1,
+        href: "2020-11-17",
+      },
+      {
+        priority: 1,
+        href: <PatientLink id='470203-1324' name="Gunilla Andersson" />,
         name: "Gunilla Andersson",
         sweID: '470203-1324',
         diagnoses: ['Diabetes', 'Hypertoni'],
@@ -207,6 +183,10 @@ const Notices = () => {
       },
       {
         priority: 1,
+        href: "2020-11-14",
+      },
+      {
+        priority: 1,
         href: <PatientLink id='470203-1324' name="Gunilla Andersson" />,
         name: "Gunilla Andersson",
         sweID: '470203-1324',
@@ -228,6 +208,10 @@ const Notices = () => {
         age: 73,
         gender: 'female',
         team: 'Team 1',
+      },
+      {
+        priority: 1,
+        href: "2020-11-12",
       },
       {
         priority: 1,
@@ -266,6 +250,10 @@ const Notices = () => {
         team: 'Team 1',
       },
       {
+        priority: 1,
+        href: "2020-11-07",
+      },
+      {
         priority: 2,
         href: <PatientLink id='470203-1324' name="Gunilla Andersson" />,
         name: "Gunilla Andersson",
@@ -288,6 +276,10 @@ const Notices = () => {
         age: 73,
         gender: 'female',
         team: 'Team 1',
+      },
+      {
+        priority: 2,
+        href: "2020-11-01",
       },
       {
         priority: 2,
@@ -343,11 +335,15 @@ const Notices = () => {
         name: "Göran Andersson",
         sweID: '350203-1324',
         diagnoses: ['Diabetes'],
-        datum: '2020-10-29',
+        datum: '2020-11-07',
         notis: 'Fem missade mätningar av blodtryck.',
         age: 85,
         gender: 'male',
         team: 'Team 2',
+      },
+      {
+        priority: 3,
+        href: "2020-10-29",
       },
       {
         priority: 3,

@@ -5,28 +5,6 @@ import { ArrowDropUp, ArrowDropDown } from '@material-ui/icons';
 import { useVirtual } from 'react-virtual';
 //import { RowCells } from '@material-ui/data-grid';
 
-// Takes a priority (value: integer) and renders text for priority in cell 
-const PrioText = ({ value }) => {
-
-  var text;
-
-  if (value === 1) {
-    text = 'Hög'
-  } else if (value === 2) {
-    text = 'Medel'
-  } else if (value === 3) {
-    text = 'Låg'
-  } else {
-    return;
-  }
-
-  return (
-    <div>
-      <span style={{ lineHeight: '27px', color: 'rgba(0, 0, 0, 0.87)', }}>{text}</span>
-    </div>
-  )
-}
-
 // Renders a table based on props passed down from useTable
 const NoticesTable = ({
   getTableProps,
@@ -103,8 +81,12 @@ const NoticesTable = ({
 
               // Checks what priority a patient has and assigns variable rowColor a color according to the priority.
               var rowColor;
+              var rowIndex;
+              rowIndex = virtualRow.index;
 
-              if (row.cells[4].value === 1) {
+              if (rows[rowIndex].cells[1].value === undefined) {
+                rowColor = '#e8e8e8';
+              } else if (row.cells[4].value === 1) {
                 rowColor = '#FF6464';
               } else if (row.cells[4].value === 2) {
                 rowColor = '#FED765';
@@ -112,6 +94,31 @@ const NoticesTable = ({
                 rowColor = '#27AE60';
               } else {
                 return;
+              }
+
+              // Takes a priority (value: integer) and renders text for priority in cell
+              // If it is a row with only a date no priority text will be rendered
+              const PrioText = ({ value }) => {
+
+                var text;
+
+                if (rows[rowIndex].cells[1].value === undefined) {
+                  text = ''
+                } else if (value === 1) {
+                  text = 'Hög'
+                } else if (value === 2) {
+                  text = 'Medel'
+                } else if (value === 3) {
+                  text = 'Låg'
+                } else {
+                  return;
+                }
+
+                return (
+                  <div>
+                    <span style={{ lineHeight: '27px', color: 'rgba(0, 0, 0, 0.87)', }}>{text}</span>
+                  </div>
+                )
               }
 
               return (
@@ -139,7 +146,6 @@ const NoticesTable = ({
                         { (cellIndex === 4 && cell.value === 1) && <PrioText value={1} />}
                         { (cellIndex === 4 && cell.value === 2) && <PrioText value={2} />}
                         { (cellIndex === 4 && cell.value === 3) && <PrioText value={3} />}
-                        { (cellIndex === 4 && cell.value === 4) && <PrioText value={3} />}
                         { (cellIndex != 4) && cell.render('Cell')}
                       </TableCell>
                     )
