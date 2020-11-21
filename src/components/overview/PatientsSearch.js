@@ -5,6 +5,8 @@ import { ArrowDropDown } from '@material-ui/icons';
 
 import { FilterModal } from '..'
 
+import {ColumnFilter} from "./ColumnFilter"
+
 // Component rendering applied filters and Rensa filter button
 const AppliedFilterUI = ({ activeFiltersState, setIsFilterApplied }) => {
 
@@ -212,6 +214,7 @@ const PatientsSearch = ({setSortState,
 
             <AppliedFilterUI activeFiltersState={activeFiltersState} setIsFilterApplied={setIsFilterApplied} setCustomFilterData={setCustomFilterData} />
             <div style={{ height: 'auto', paddingTop: '12px', paddingBottom: '2px', marginLeft: 'auto', textAlign: 'end' }}>
+            <ColumnFilter/>
                 {isFilterApplied && <Link underline="always" component="button" variant="body2" style={{color: "#000", marginRight: "2rem" }}onClick={handleResetFilters}>Rensa Filter</Link>}
                 <FilterModal setDropdownOpen={setDropdownOpen} setOwnFilters={setOwnFilters} customFilterData={customFilterData} setCustomFilterData={setCustomFilterData}/> 
                 <Button 

@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect, useContext} from 'react';
 
 import { PatientsSearch, PatientsTable, PatientGroups } from "..";
 import {
@@ -17,6 +17,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 import { useHistory } from "react-router-dom";
 import JourTable from "./JourTable";
+import {settingsContext} from "./ColumnFilter"
 
 // Component rendering bell icon (color based on value: integer) and hover information based on (text: string)
 const Notification = ({ value, text }) => {
@@ -756,25 +757,29 @@ const Patients = () => {
     hiddenColumns: ["age", "name", "gender", "team", "department"],
     // filters: [{ id: 'col1', value: 'Green'}]
   };
-
+  const {settings} = useContext(settingsContext);
   // Creates an instance of table, given columns, data and an initial state.
   const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-    toggleSortBy,
-    setGlobalFilter,
-    setFilter,
-    setAllFilters,
-  } = useTable(
-    { columns, data, initialState, filterTypes },
+      getTableProps,
+      getTableBodyProps,
+      headerGroups,
+      rows,
+      prepareRow,
+      toggleSortBy,
+      setGlobalFilter,
+      setFilter,
+      setAllFilters,
+      setHiddenColumns
+  } = useTable({ columns, data, initialState, filterTypes},
     useFilters, // useFilters!
     useGlobalFilter,
     useSortBy,
     useFlexLayout
   );
+  
+  useMemo(() => {
+    setHiddenColumns(prev => {return (['age', 'name', 'gender', 'team', 'department'].concat(settings))})
+  }, [setHiddenColumns, settings])
 
   const { getAccessTokenSilently } = useAuth0();
 
