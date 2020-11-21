@@ -1,14 +1,13 @@
 from flask import Blueprint, request, jsonify, Response
 
 # You can import the database from a blueprint
-from backend.server.personnel_db import db, Hospital
-from backend.main import app
+from backend.database.models import db, Hospital
 
 # Creates Blueprint
-bp = Blueprint('hospital', __name__, url_prefix='/hospital')
+hospital_bp = Blueprint('hospital', __name__, url_prefix='/hospital')
 
 # Route for fetching all hospitals
-@bp.route("/all", methods=['GET'])
+@hospital_bp.route("/all", methods=['GET'])
 def hospitals():
     hospitalList = Hospital.query_all()
     serializedHospitalList = []
@@ -18,7 +17,7 @@ def hospitals():
     return jsonify(serializedHospitalList)
 
 # Route for fetching specific hospital
-@bp.route("/<string:hospitalID>", methods=['GET'])
+@hospital_bp.route("/<string:hospitalID>", methods=['GET'])
 def hospital(hospitalID):
         hospital = Hospital.query.filter_by(id = hospitalID).first_or_404()
         return jsonify(Hospital.serialize(hospital))

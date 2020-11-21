@@ -2,14 +2,13 @@
 from flask import Blueprint, request, jsonify, Response
 
 # You can import the database from a blueprint
-from backend.server.personnel_db import db, Department
-from backend.main import app
+from backend.database.models import db, Department
 
 # Creates Blueprint
-bp = Blueprint('department', __name__, url_prefix='/department')
+department_bp = Blueprint('department', __name__, url_prefix='/department')
 
 # Route for fetching all departments
-@bp.route("/all", methods=['GET'])
+@department_bp.route("/all", methods=['GET'])
 def departments():
     departmentList = Department.query_all()
     serializeddepartmentList = []
@@ -19,7 +18,7 @@ def departments():
     return jsonify(serializeddepartmentList)
 
 # Route for fetching specific department
-@bp.route("/<string:departmentID>", methods=['GET'])
+@department_bp.route("/<string:departmentID>", methods=['GET'])
 def department(departmentID):
         department = Department.query.filter_by(id = departmentID).first_or_404()
         return jsonify(Department.serialize(department))

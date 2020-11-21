@@ -1,7 +1,7 @@
 from flask import Flask, Blueprint, request, jsonify
 from backend.database.models import add_log_to_database, AccessLog
 
-access_log_bp = Blueprint("access_log", __name__)
+access_log_bp = Blueprint("access_log", __name__, url_prefix='/access_log')
 
 # In order to add log to the database, use this api endpoint.
 # Send request to this endpoint using method POST and having content type JSON(application/json)
@@ -11,7 +11,7 @@ access_log_bp = Blueprint("access_log", __name__)
 # 	"care_giver_pnumber": "6789067890",
 # 	"department_name": "kidney"
 # }
-@access_log_bp.route("/add_log", methods=["POST"])
+@access_log_bp.route("/add", methods=["POST"])
 def add_log():
     if request.method == "POST" and request.json is not None:
         care_giver_pnumber = request.json.get("care_giver_pnumber", None)
@@ -56,7 +56,7 @@ def add_log():
 # e.g. 11/11/2020 18:17:35.281832
 
 
-@access_log_bp.route("/access_logs", methods=["POST"])
+@access_log_bp.route("/all", methods=["POST"])
 def access_logs():
     if request.method == "POST" and request.json is not None:
         care_giver_pnumber = request.json.get("care_giver_pnumber", None)

@@ -4,22 +4,25 @@ from .config import Config
 
 db = SQLAlchemy()
 
-
 def create_app(test_config=None):
     app = Flask(__name__)
     app.config.from_object("backend.config.Config")
 
     db.init_app(app)
 
-    from .blueprints.access_log_bp import access_log_bp
-    from .blueprints.patient_list_bp import patient_list_bp
-
-    # from .blueprints.employee_bp import employee_bp
-
-    app.register_blueprint(patient_list_bp)
+    from .blueprints.access_log import access_log_bp
+    from .blueprints.department import department_bp
+    from .blueprints.employee import employee_bp
+    from .blueprints.hospital import hospital_bp
+    from .blueprints.patients import patients_bp
+    from .blueprints.team import team_bp
+    
     app.register_blueprint(access_log_bp)
-
-    # app.register_blueprint(employee_bp)
+    app.register_blueprint(department_bp)
+    app.register_blueprint(employee_bp)
+    app.register_blueprint(hospital_bp)
+    app.register_blueprint(patients_bp)
+    app.register_blueprint(team_bp)
 
     from .cli_commands import cli
 
