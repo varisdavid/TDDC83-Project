@@ -2,7 +2,7 @@ import React, {useMemo, useEffect} from "react";
 
 
 import { PatientListOfMedicationTable } from "../components";
-import {useAuth0} from "@auth0/auth0-react";
+// import {useAuth0} from "@auth0/auth0-react";
 
 
 const PatientListOfMedication = () => {
@@ -18,11 +18,12 @@ const PatientListOfMedication = () => {
   useEffect(() => {
      // Basic example of how to make a authorized fetch call to our backend endpoints
     const medication_list = async () => {
-        const domain =  "http://127.0.0.1:5000/api/medicationlist";
+        const ehrid = "c784e009-c51b-437c-9c8d-a4a87dc18a72"
+        const domain =  "http://127.0.0.1:5000/medication_list/";
 
       try {
         // const token = await getAccessTokenSilently();
-          const response = await fetch(domain,
+          const response = await fetch(domain+ehrid,
             {
               headers: {
            //     Authorization: `Bearer ${token}`,
