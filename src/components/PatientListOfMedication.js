@@ -2,23 +2,30 @@ import React, {useMemo, useEffect} from "react";
 
 
 import { PatientListOfMedicationTable } from "../components";
+import {useAuth0} from "@auth0/auth0-react";
 
 
 const PatientListOfMedication = () => {
 
 
+
+
+
+
+
+    //    const { getAccessTokenSilently } = useAuth0();
   // When something happens, we check to see if we change the sorting option, and we check if the search has been triggered
   useEffect(() => {
      // Basic example of how to make a authorized fetch call to our backend endpoints
-    const get_medication = async () => {
-      const domain =  "http://127.0.0.1:5000/api/medicationlist";
+    const medication_list = async () => {
+        const domain =  "http://127.0.0.1:5000/api/medicationlist";
 
       try {
-        //const token = await getAccessTokenSilently();
+        // const token = await getAccessTokenSilently();
           const response = await fetch(domain,
             {
               headers: {
-               // Authorization: `Bearer ${token}`,
+           //     Authorization: `Bearer ${token}`,
               },
             }
           );
@@ -29,10 +36,10 @@ const PatientListOfMedication = () => {
           console.log(error.message);
         }
       };
-      get_medication();
-      console.log(get_medication());
-  }, []);
-
+      medication_list();
+      console.log(medication_list());
+  },[] );
+    // [getAccessTokenSilently]
 
 
 
