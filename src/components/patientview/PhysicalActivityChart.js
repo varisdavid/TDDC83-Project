@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import {
-    BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ReferenceLine,
+    BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ReferenceLine, ResponsiveContainer,
 } from 'recharts';
 //Fake data that is being displayed in the chart below. Can be made in to real data
 const data = [
@@ -30,12 +30,11 @@ const data = [
 export default class PhysicalActivityChart extends PureComponent {
     render() {
         return (
-            <div>
+            <div style={{width: '100%', height: '100%'}}>
                 {/* Header displayed over the chart*/}
                 <div className='header-measurement'>Fysisk aktivitet</div>
+                <ResponsiveContainer>
                 <BarChart
-                    width={500}
-                    height={300}
                     data={data}
                     margin={{
                         top: 5, right: 30, left: 20, bottom: 5,
@@ -52,6 +51,7 @@ export default class PhysicalActivityChart extends PureComponent {
                     {/* Prints bars from the data above*/}
                     <Bar dataKey="Timmar" fill="#8884d8"/>
                 </BarChart>
+                </ResponsiveContainer>
             </div>
         );
     }

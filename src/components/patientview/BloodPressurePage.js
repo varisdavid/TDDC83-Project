@@ -230,12 +230,15 @@ const BloodPressurePage = () => {
     return (
         <>
             {/* Setting up the big div on the page */}
-            <div className='flex justify-center'>
+            <div className='flex justify-center' style={{height: '50vh'}}>
                 {/* div to dived the page in two parts*/}
-                <div>
+                <div style={{width: '50%'}}> 
                     {/* The blood pressure chart  */}
+                    <div style={{height: '80%'}}>
                     <BloodPressure/>
+                    </div>
                     {/*The button below the chart with its styling*/}
+                    <div>
                     <Button
                         className='flex shadow'
                         style={{
@@ -256,6 +259,7 @@ const BloodPressurePage = () => {
                             marginRight: "auto",
                         }}/>
                     <text> Visa intervall</text>
+                    </div>
                 </div>
 
                 <div>

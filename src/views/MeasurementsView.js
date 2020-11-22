@@ -69,21 +69,21 @@ const MeasurementsView = () => {
       <PatientViewMeasurementsHeaderNavigation activeTabValueM={activeTabValueM} setActiveTabValueM={setActiveTabValueM} />
     </div>
 
-    <TabPanel id='tab-scroll' className='Measurements' value={activeTabValueM} index={0}>
+    <TabPanel className='Measurements' value={activeTabValueM} index={0}>
       <Measurements
       setActiveTabValueM={setActiveTabValueM}
       />
     </TabPanel>
 
-    <TabPanel id='tab-scroll' className='Weight' value={activeTabValueM} index={1}>
+    <TabPanel className='Weight' value={activeTabValueM} index={1}>
       <WeightChartPage/>
     </TabPanel>
 
-    <TabPanel id='tab-scroll' className='Blood-pressure' value={activeTabValueM} index={2}>
+    <TabPanel className='Blood-pressure' value={activeTabValueM} index={2}>
       <BloodPressurePage/>
     </TabPanel>
 
-    <TabPanel id='tab-scroll' className='Physical-activity' value={activeTabValueM} index={3}>
+    <TabPanel className='Physical-activity' value={activeTabValueM} index={3}>
       <PhysicalActivityPage/>
     </TabPanel>
   </>

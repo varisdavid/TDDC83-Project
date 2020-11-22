@@ -5,20 +5,20 @@ const Measurements  = ({setActiveTabValueM}) => {
 
     return (
         <>
-            <div className='flex justify-center'  >
-            <div onClick={(e) => {
+            <div className='flex justify-center' style={{height: '40vh', marginTop:'none'}}>
+            <div style={{width: '30%'}} onClick={(e) => {
                 e.preventDefault();
                 setActiveTabValueM(1);
             }} >
                 <WeightChart/>
             </div>
-            <div onClick={(e) => {
+            <div style={{width: '30%'}} onClick={(e) => {
                 e.preventDefault();
                 setActiveTabValueM(2);
             }}>
                 <BloodPressure/>
             </div>
-            <div onClick={(e) => {
+            <div style={{width: '30%'}} onClick={(e) => {
                 e.preventDefault();
                 setActiveTabValueM(3);
             }}>

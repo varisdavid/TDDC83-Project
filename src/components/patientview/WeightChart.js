@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import {
-    LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
+    LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine, ResponsiveContainer,
 } from 'recharts';
 
 //Fake data that is being displayed in the chart below
@@ -35,13 +35,12 @@ export default class WeightChart extends PureComponent {
 
     render() {
         return (
-            <div>
+            <div style={{width: '100%', height: '100%'}}>
                 {/* Header name on the chart*/}
                 <div className='header-measurement'>Vikt</div>
                 {/* Setting the size of the chart*/}
+                <ResponsiveContainer>
                 <LineChart
-                    width={500}
-                    height={300}
                     data={data}
                     margin={{
                         top: 20, right: 50, left: 20, bottom: 5,
@@ -60,6 +59,7 @@ export default class WeightChart extends PureComponent {
                     {/* The line that is printed with the data from above*/}
                     <Line type="monotone" dataKey="Vikt" stroke="#8884d8"/>
                 </LineChart>
+                </ResponsiveContainer>
             </div>
         );
     }

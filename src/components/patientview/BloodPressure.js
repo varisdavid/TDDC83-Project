@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import {
-    LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
+    LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine, ResponsiveContainer,
 } from 'recharts';
 
 //fake data that is being displayed in the chart
@@ -69,13 +69,12 @@ export default class BloodPressure extends PureComponent {
 
     render() {
         return (
-            <div>
+            <div style={{width: '100%', height: '100%'}}>
                 {/* The header above the chart */}
                 <div className='header-measurement'>Blodtryck</div>
                 {/* Setting up the charts size*/}
+                <ResponsiveContainer>
                 <LineChart
-                    width={500}
-                    height={300}
                     data={data}
                     margin={{
                         top: 20, right: 50, left: 20, bottom: 5,
@@ -112,6 +111,7 @@ export default class BloodPressure extends PureComponent {
                     <Line type="monotone" dataKey="Högt" stroke="#8884d8" dot={<CustomizedDot/>}/>
                     <Line type="monotone" dataKey="Lågt" stroke="#8884d8" dot={<CustomizedDot/>}/>
                 </LineChart>
+                </ResponsiveContainer>
             </div>
         );
     }
