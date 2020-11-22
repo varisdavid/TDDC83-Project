@@ -15,7 +15,6 @@ import {
   makeStyles
 } from "@material-ui/core";
 
-
 export const settingsContext = React.createContext({
   settings: null,
   setSettings: () => {},
@@ -51,6 +50,8 @@ const init = {
   updatedBy: true,
 };
 
+//This component is used to filter the table located in patients.js. It sets the settingsContext with an list of 
+//strings representing the names of the columns to be shown. 
 export const ColumnFilter = () => {
   const classes = useStyles();
   const {setSettings } = useContext(settingsContext);
@@ -69,6 +70,8 @@ export const ColumnFilter = () => {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
 
+  //This function loops over the local state(key, value) and pushes the keys to the 
+  //context object if the value is false. 
   const submitChange = () => {
     var obj = [];
     for (var key in state) {
