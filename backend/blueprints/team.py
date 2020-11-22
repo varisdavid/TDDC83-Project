@@ -3,21 +3,31 @@ from flask import Blueprint, request, jsonify, Response
 # You can import the database from a blueprint
 from backend.database.models import db, Team
 
+from backend.auth import _build_cors_preflight_response, _corsify_actual_response
+
+
 # Creates Blueprint
-team_bp = Blueprint('team', __name__, url_prefix='/team')
+team_bp = Blueprint("team", __name__, url_prefix="/team")
 
 # Route for fetching all teams
-@team_bp.route("/all", methods=['GET'])
+@team_bp.route("/all", methods=["GET", "OPTIONS"])
 def teams():
-    teamList = Team.query_all()
-    serializedteamList = []
-    for i in range(len(teamList)):
+    if request.method == "OPTIONS":  # CORS preflight
+        return _build_cors_preflight_response()
+    elif request.method == "GET":
+        teamList = Team.query_all()
+        serializedteamList = []
+        for i in range(len(teamList)):
             teamList[i] = Team.serialize(teamList[i])
             serializedteamList.append(teamList[i])
-    return jsonify(serializedteamList)
+        return _corsify_actual_response(jsonify(serializedteamList))
+
 
 # Route for fetching specific team
-@team_bp.route("/<string:teamID>", methods=['GET'])
+@team_bp.route("/<string:teamID>", methods=["GET", "OPTIONS"])
 def team(teamID):
-        team = Team.query.filter_by(id = teamID).first_or_404()
-        return jsonify(team.serialize(team))
+    if request.method == "OPTIONS":  # CORS preflight
+        return _build_cors_preflight_response()
+    elif request.method == "GET":
+        team = Team.query.filter_by(id=teamID).first_or_404()
+        return _corsify_actual_response(jsonify(team.serialize(team)))

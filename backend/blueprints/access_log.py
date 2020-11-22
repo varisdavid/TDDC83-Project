@@ -1,7 +1,9 @@
 from flask import Flask, Blueprint, request, jsonify
 from backend.database.models import add_log_to_database, AccessLog
 
-access_log_bp = Blueprint("access_log", __name__, url_prefix='/access_log')
+from backend.auth import _build_cors_preflight_response, _corsify_actual_response
+
+access_log_bp = Blueprint("access_log", __name__, url_prefix="/access_log")
 
 # In order to add log to the database, use this api endpoint.
 # Send request to this endpoint using method POST and having content type JSON(application/json)
@@ -11,9 +13,11 @@ access_log_bp = Blueprint("access_log", __name__, url_prefix='/access_log')
 # 	"care_giver_pnumber": "6789067890",
 # 	"department_name": "kidney"
 # }
-@access_log_bp.route("/add", methods=["POST"])
+@access_log_bp.route("/add", methods=["POST", "OPTIONS"])
 def add_log():
-    if request.method == "POST" and request.json is not None:
+    if request.method == "OPTIONS":  # CORS preflight
+        return _build_cors_preflight_response()
+    elif request.method == "POST" and request.json is not None:
         care_giver_pnumber = request.json.get("care_giver_pnumber", None)
         accessed_patients_pnumber = request.json.get("accessed_patients_pnumber", None)
         department_name = request.json.get("department_name", None)
@@ -26,7 +30,7 @@ def add_log():
             return resp
     resp = jsonify(success=False)
     resp.status_code = 400
-    return resp
+    return _corsify_actual_response(response), 200
 
     # In order to access the logs, use this api endpoint. It will return all the logs queried for in json format.
 
@@ -56,9 +60,11 @@ def add_log():
 # e.g. 11/11/2020 18:17:35.281832
 
 
-@access_log_bp.route("/all", methods=["POST"])
+@access_log_bp.route("/all", methods=["POST", "OPTIONS"])
 def access_logs():
-    if request.method == "POST" and request.json is not None:
+    if request.method == "OPTIONS":  # CORS preflight
+        return _build_cors_preflight_response()
+    elif request.method == "POST" and request.json is not None:
         care_giver_pnumber = request.json.get("care_giver_pnumber", None)
         accessed_patients_pnumber = request.json.get("accessed_patients_pnumber", None)
         start_datetime = request.json.get("start_datetime", None)
@@ -89,8 +95,6 @@ def access_logs():
         results = results.all()
 
         resp = jsonify(success=True, json_list=[i.serialize for i in results])
-        resp.status_code = 200
-        return resp
+        return _corsify_actual_response(resp), 200
     resp = jsonify(success=False)
-    resp.status_code = 400
-    return resp
+    return _corsify_actual_response(resp), 400
