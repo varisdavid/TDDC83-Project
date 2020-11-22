@@ -62,7 +62,7 @@ export const ColumnFilter = () => {
   };
   const handleClickClose = () =>{
     setState(init);
-    setOpen(false);
+    setOpen(false)
   }
 
   const handleChange = (event) => {
