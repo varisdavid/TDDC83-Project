@@ -60,6 +60,10 @@ export const ColumnFilter = () => {
   const handleClickOpen = () => {
     setOpen(true);
   };
+  const handleClickClose = () =>{
+    setState(init);
+    setOpen(false);
+  }
 
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
@@ -81,7 +85,7 @@ export const ColumnFilter = () => {
       <IconButton onClick={handleClickOpen}>
         <SettingsIcon />
       </IconButton>
-      <Dialog aria-labelledby="simple-dialog-title" open={open}>
+      <Dialog aria-labelledby="simple-dialog-title" open={open} onClose={handleClickClose}>
         <Card className={classes.root}>
           <CardHeader
             title="Översiktsinställningar"
