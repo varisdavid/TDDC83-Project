@@ -37,7 +37,7 @@ const PatientContactTable = () => {
   return (
     <div>
       {data.map((data) => (
-        <Table className='table-patient'>
+        <Table className='table-patient' key="contact-table">
           <TableHead>
             <TableRow>
               <TableCell className='cell-table-header'> Kontaktinformation</TableCell>
