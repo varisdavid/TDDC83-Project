@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify, Response
 
 # You can import the database from a blueprint
-from backend.database.models import db, Hospital
+from backend.database.models import Hospital
 
 from backend.auth import _build_cors_preflight_response, _corsify_actual_response
 
@@ -15,7 +15,7 @@ def hospitals():
     if request.method == "OPTIONS":  # CORS preflight
         return _build_cors_preflight_response()
     elif request.method == "GET":
-        hospitalList = Hospital.query_all()
+        hospitalList = Hospital.query.all()
         serializedHospitalList = []
         for i in range(len(hospitalList)):
             hospitalList[i] = Hospital.serialize(hospitalList[i])

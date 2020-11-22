@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify, Response
 
 # You can import the database from a blueprint
-from backend.database.models import db, Team
+from backend.database.models import Team
 
 from backend.auth import _build_cors_preflight_response, _corsify_actual_response
 
@@ -15,7 +15,7 @@ def teams():
     if request.method == "OPTIONS":  # CORS preflight
         return _build_cors_preflight_response()
     elif request.method == "GET":
-        teamList = Team.query_all()
+        teamList = Team.query.all()
         serializedteamList = []
         for i in range(len(teamList)):
             teamList[i] = Team.serialize(teamList[i])

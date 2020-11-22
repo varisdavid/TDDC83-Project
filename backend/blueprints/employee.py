@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify, Response
 
 # You can import the database from a blueprint
-from backend.database.models import db, Employee
+from backend.database.models import Employee
 
 from backend.auth import _build_cors_preflight_response, _corsify_actual_response
 
@@ -14,7 +14,7 @@ def employees():
     if request.method == "OPTIONS":  # CORS preflight
         return _build_cors_preflight_response()
     elif request.method == "GET":
-        employeeList = Employee.query_all()
+        employeeList = Employee.query.all()
         serializedEmployeeList = []
         for i in range(len(employeeList)):
             employeeList[i] = Employee.serialize(employeeList[i])
