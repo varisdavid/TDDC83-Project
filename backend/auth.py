@@ -7,7 +7,7 @@ from jose import jwt
 
 AUTH0_DOMAIN = "https://dev-mlj1m1lm.eu.auth0.com/"
 ALGORITHMS = ["RS256"]
-API_AUDIENCE = "https://localhost:5000/api"
+API_AUDIENCE = "https://localhost:5000/"
 
 
 class AuthError(Exception):
@@ -122,3 +122,17 @@ def requires_auth(f):
         )
 
     return decorated
+
+
+# CORS functions
+def _build_cors_preflight_response():
+    response = make_response()
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    response.headers.add("Access-Control-Allow-Headers", "*")
+    response.headers.add("Access-Control-Allow-Methods", "*")
+    return response
+
+
+def _corsify_actual_response(response):
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    return response
