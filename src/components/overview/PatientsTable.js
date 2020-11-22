@@ -67,7 +67,7 @@ const PatientsTable = ({
                 <TableCell
                   {...column.getHeaderProps()}
                   style={{
-                    width: (columnIndex === 0) ? '45px' : '16.66667%', //Make first column fixed size
+                    width: (columnIndex === 0) ? '45px' : '100%', //Make first column fixed size
                     background: (columnIndex === 0) ? '#FFF' : '#275E8E', //Make first column invisible
                     borderColor: (columnIndex === 0) && '#FFF', //Make first column invisible
                     color: '#FFF',
@@ -130,7 +130,7 @@ const PatientsTable = ({
                     return (
                       <TableCell {...cell.getCellProps()} style={{padding: '10px', 
                                                                   textAlign: 'center', 
-                                                                  width: (cellIndex === 0) ? '45px' : '18%', //To make first column fixed size
+                                                                  width: (cellIndex === 0) ? '45px' : '100%', //To make first column fixed size
                                                                   background: (cellIndex === 0) && '#FFF', //To make first column invisible
                                                                   borderColor: (cellIndex === 0) && '#FFF', //To make first column invisible
                                                                 }}>
