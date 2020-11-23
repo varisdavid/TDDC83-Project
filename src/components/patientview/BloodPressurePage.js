@@ -237,29 +237,6 @@ const BloodPressurePage = () => {
                     <div style={{height: '80%'}}>
                     <BloodPressure/>
                     </div>
-                    {/*The button below the chart with its styling*/}
-                    <div>
-                    <Button
-                        className='flex shadow'
-                        style={{
-                            border: '0.5px solid lightgrey',
-                            borderRadius: "0px",
-                            width: '180px',
-                            marginLeft: "auto",
-                            marginRight: "auto",
-                            marginTop: "1.5rem",
-                        }}>
-                        Ändra intervall
-                    </Button>
-                    {/*The checkbox next to the button below the chart*/}
-                    <input
-                        type='checkbox'
-                        style={{
-                            marginLeft: "10px",
-                            marginRight: "auto",
-                        }}/>
-                    <text> Visa intervall</text>
-                    </div>
                 </div>
 
                 <div>

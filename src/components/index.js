@@ -51,7 +51,7 @@ import PhysicalActivityPage from "./patientview/PhysicalActivityPage";
 
 import PatientViewMeasurementsHeaderNavigation from "./patientview/PatientViewMeasurementsHeaderNavigation";
 
-
+import TableForChart from "./patientview/TableForChart";
 
 // import Notices from './Notices';
 // import NoticesTable from './NoticesTable';
@@ -95,4 +95,5 @@ export {
     WeightChartPage,
     PatientViewMeasurementsHeaderNavigation,
     PhysicalActivityPage,
+    TableForChart,
 };

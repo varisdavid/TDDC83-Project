@@ -1,5 +1,5 @@
 import React, {useMemo} from 'react';
-import {WeightChart} from "..";
+import {WeightChart, TableForChart} from "..";
 import {Button, Table, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
 import {ArrowDropDown, ArrowDropUp} from "@material-ui/icons";
 import {useFlexLayout, useTable} from "react-table";
@@ -101,93 +101,7 @@ const WeightChartPage = () => {
                 </div>
 
                 <div>
-                    {/* The table taking the data from above and printing it in the table as the column above specified*/}
-                    <Table {...getTableProps()} style={{boxShadow: "5px 7px 20px lightgrey"}}>
-                        <TableHead>
-                            {headerGroups.map(headerGroup => (
-                                <TableRow {...headerGroup.getHeaderGroupProps()}>
-                                    {headerGroup.headers.map((column) => (
-                                        <TableCell
-                                            {...column.getHeaderProps()}
-                                            style={{
-                                                width: '100%', //Make first column fixed size
-                                                background: '#275E8E', //Make first column invisible
-                                                borderColor: '#FFF', //Make first column invisible
-                                                color: '#FFF',
-                                                fontWeight: '700',
-                                                fontSize: '15px',
-                                                textAlign: 'center',
-                                            }}
-                                        >
-                                            {column.render('Header')}
-                                            <span>
-                                        {column.isSorted
-                                            ? column.isSortedDesc
-                                                ? <ArrowDropUp style={{fontSize: '15px'}}/>
-                                                : <ArrowDropDown style={{fontSize: '15px'}}/>
-                                            : ''}
-                                            </span>
-                                        </TableCell>
-                                    ))}
-                                </TableRow>
-                            ))}
-                        </TableHead>
-                        <div
-                            ref={parentRef}
-                            style={{
-                                display: 'block',
-                                maxHeight: `calc(100vh - 620px)`, //calculated other parts to height of 520 + spacing, so table gets whats left
-                                overflow: 'auto',
-                                width: `100%`
-                            }}
-                        >
-                            <TableBody
-                                {...getTableBodyProps}
-                                className='ListInner'
-                                style={{
-                                    display: 'block',
-                                    height: `${rowVirtualizer.totalSize}px`,
-                                    position: 'relative'
-                                }}
-                            >
-                                {rowVirtualizer.virtualItems.map(virtualRow => {
-                                        const row = rows[virtualRow.index];
-                                        prepareRow(row);
-                                        return (
-                                            <TableRow
-                                                key={virtualRow.index}
-                                                ref={virtualRow.measureRef}
-                                                {...row.getRowProps({
-                                                    style: {
-                                                        position: 'absolute',
-                                                        top: 0,
-                                                        left: 0,
-                                                        width: '100%',
-                                                        transform: `translateY(${virtualRow.start}px)`,
-                                                        background: (virtualRow.index % 2) ? '#E5E5E5' : '#FFF',
-                                                    }
-                                                })}
-                                            >
-
-                                                {row.cells.map((cell) => {
-                                                    return (
-                                                        <TableCell {...cell.getCellProps()} style={{
-                                                            padding: '10px',
-                                                            textAlign: 'center',
-                                                            width: '100%', //To make first column fixed size
-                                                        }}>
-                                                            {cell.render('Cell')}
-                                                        </TableCell>
-                                                    )
-
-                                                })}
-                                            </TableRow>
-                                        )
-                                    }
-                                )}
-                            </TableBody>
-                        </div>
-                    </Table>
+                    <TableForChart/>
 
                     {/* The form which you can fill in information about your weight does not save the data any where.
                      Contains two text fields and a button*/}
