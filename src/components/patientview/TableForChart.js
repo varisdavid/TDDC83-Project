@@ -2,7 +2,6 @@ import React, {} from 'react';
 import {Table, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
 import {ArrowDropDown, ArrowDropUp} from "@material-ui/icons";
 import {useVirtual} from "react-virtual";
-import {Notifications} from '..';
 
 // Renders a table based on props passed down from useTable
 const TableForChart = ({

@@ -95,8 +95,8 @@ const Context = React.createContext({
 const BasicTable = (props) => {
     const classes = useStyles();
     const [rows] = useState(props.props);
-    {/*Prints activites on the dates below in the if. Is the same dates as in const modifiers*/
-    }
+    
+    /*Prints activites on the dates below in the if. Is the same dates as in const modifiers*/
     if (tableDay === '02' || tableDay === '09' || tableDay === '21' || tableDay === '16' || tableDay === '30') {
         return (
             <TableContainer component={Paper}>
