@@ -9,7 +9,7 @@ The living documents are to be produced with a start in the beginning of iterati
     \item Architecture notebook: Filip Eriksson
     \item Software requirement specification: Gustav Karlsson
     \item Education plan: Sam Anlér
-    \item Project plan: Max Karlsson and Patrik Palmgren
+    \item Project plan: Max Klasson and Patrik Palmgren
     \item Quality assurance plan: Axel Trolme 
 \end{itemize}
 The people responsible for making sure that the inspection of the documents is done are: 
@@ -21,3 +21,77 @@ Inspection of the living documents is done in order to ensure that they are up t
 
 \subsection{Version handling of documents} 
 The document is preferably to be edited in Overleaf or in another editor that handles LaTeX code. The LaTeX code is thereafter pushed to a child branch of master where all the commits are to be pushed to. This ensures that the group is able to refer back to certain commits that cohere to a specific version of the document. 
+
+\subsection{Document Review and Inspection}
+	
+	\subsubsection{Change Log}
+	All documents that are to be reviewed or inspected shall have a document change log. This facilitates in tracking changes and verifying that those are approved by someone other than the author. Version Number provides a means to refer to a specific version. Published Date is the date when the certain version is locked. Description of Revision is a brief description of what has been changed/added/removed and, if applicable, which chapter it concerns. Author is responsible for the changes made to the certain version. Approved by refers to who has conducted a review or inspection, thus only applicable for primary number increments (e.g. 2.0, 3.0). See table \ref{tab:changeLog}.
+	
+	
+	\begin{table}[h]
+		\noindent\makebox[\textwidth]{
+			\begin{tabularx}{\textwidth}{l|l|w|n|n}
+				\toprule
+				\makecell[l]{Version \\ Number} & 
+				\makecell[l]{Published \\ Date} & Description of Revision & Author & Approved by \\
+				\midrule
+				1.0	& 2020-10-23 &	Initial Version	& Emma Johansson & Patrik Palmgren \\
+				1.1 & 2020-11-07 &	Document Review Process added (ch 6) & Emma Johansson &  \\
+				\bottomrule
+			\end{tabularx}
+		}
+		\caption{Example of Change Log}
+		\label{tab:changeLog}
+	\end{table}
+	
+	To each revision of a document, an author needs to be chosen among those who have contributed to the changes. This person is responsible for the state of the document and conducting the review process if a new version is to be released. Minor changes to single chapters shall be issued with a decimal increment, for example from 1.1 to 1.2. If the author considers a series of minor changes in total constitute a large difference from the latest reviewed version, the document manager shall be contacted for review or inspection. After such a process, the document is issued as a primary version with a primary number increment, i.e from 1.7 to 2.0.  
+	
+	Each new version of a document shall be included in the change log. At the publishing date it should be added to Teams at applicable location in pdf format. This way each version of the documents are easy to find and locked for changes after approval.
+	
+	\subsubsection{Review Process}
+	The review process shall be applied to all documents that are not strictly internal to a work group (e.g. management, development) or informal. Accordingly all documents intended for someone outside the work group, i.e. to be used in their work or as information, shall be reviewed. 
+	That means that documents with notes or research not interesting for someone outside does not need to be reviewed. All other documents, like test results, guidelines and helping documents should be reviewed. When there are uncertainties, contact our Document Manager for discussion.
+	
+	When an author of a document wants to release the document as a new primary version, for example 2.0, the author needs to contact the Document Manager or Quality Coordinator (before the version is released by being published to Teams). The review is conducted by assigned reviewee who assess the document and return with eventual comment. If something needs to be changed, the author is responsible for this, and within three days the updated document should be handed back to the reviewee. When the document is approved, the reviewee signs the changelog and the document is converted to a pdf before being published on Teams at applicable location.
+	
+	\subsubsection{Inspection Process}
+	The inspection process should be applied to all documents intended for external stakeholders of the project and especially the living documents. This includes all documents that are graded by the course management.
+	The roles of the process are as follows:
+	
+	\smallskip
+	\begin{table}[h]
+		\begin{tabularx}{\textwidth}{lX}
+			Inspection Leader & Responsible for planning and coordinating the process \\
+			Recorder & Responsible of documenting defects, decisions and recommendations \\
+			Reader & Leads the walk-through of the document at the inspection meeting \\
+			Author & Responsible for performing rework to meet the inspection exit criteria \\
+			Inspector & Identifies and describes defects \\
+			&  \\
+		\end{tabularx}
+	\end{table}
+	
+	
+	The role of inspection leader and recorder is taken by Document Manager or Quality Coordinator. This person can be the reader as well, otherwise the test leader chooses someone else to fill the role. For each living document, a specialist inspector is chosen, see table X. The test leader can invite more inspectors if needed. These roles all need to be represented at the inspection meeting. The author may also be present.
+	
+		
+	\smallskip
+	\begin{table}[h]
+		{\renewcommand{\arraystretch}{1.8}
+		\begin{tabularx}{\textwidth}{lab}
+			\toprule
+			Document & \multicolumn{2}{l}{Inspector} \\
+			\cline{2-3}
+					 & Role	& Name \\
+			\midrule
+			Architecture Notebook & Lead Developer & Filip Eriksson \\
+			\makecell[l]{Software Requirement \\ Specification} & Lead Tester & Gustav Karlsson \\
+			Education Plan & Configuration Manager & Sam Anlér \\
+			Project Plan & Strategic Product Manager & Max Klasson \\
+				& \& Line Manager & Patrik Palmgren \\
+			\makecell[l]{Software Quality \\ Assurance Plan} & Project Manager & Axel Trolme \\
+			Test Plan &	Quality Coordinator	& Emma Johansson \\
+			\bottomrule
+		\end{tabularx}}
+	\end{table}
+	
+	The inspection process starts with the author of the document contacting the Document Manager (before the version is released by being published to Teams). A test leader for the current inspection is chosen, who contacts concerned parties to schedule the inspection. The test leader hands out the material, i.e. the document to be inspected and possibly related work products, and gives a brief introduction if needed. The inspectors, including the inspection leader, perform an individual checking of the document. All anomalies and defects, as well as ideas for improval or missing parts, shall be written down and handed to the inspection leader at least the day before the following inspection meeting. During the inspection meeting the reader presents the product and defects from all inspectors are  brought up chronologically. The defects shall be gathered in a single defect list. The inspection meeting shall result in an exit decision where the document is (1) accepted with no further verification, (2) accepted with rework verification performed by one member or (3) not accepted and sent to reinspection. The result is then communicated to the author who resolves eventual defects. The inspection leader shall be informed when the rework is made to verify this and close the inspection process. Finally, the change log is signed by the inspection leader and the document published as a new primary version. The recorder is responsible for publishing documentation of the process including involved members, defect list, exit decision and date of closure.
