@@ -1,226 +1,9 @@
-import React, {useMemo, useState} from 'react';
-import {BloodPressure} from "..";
-import {Button, Link, Modal, Table, TableBody, TableCell, TableHead, TableRow, Tooltip} from "@material-ui/core";
-import {ArrowDropDown, ArrowDropUp} from "@material-ui/icons";
+import React, {useMemo} from 'react';
+import {BloodPressure, Notification, TableForChart, FormForUpdateValues} from "..";
 import {useFlexLayout, useTable} from "react-table";
-import {useVirtual} from "react-virtual";
-import {NotificationImportant} from '@material-ui/icons';
-import {useHistory} from "react-router-dom";
-import {makeStyles} from "@material-ui/core/styles";
+
 
 const BloodPressurePage = () => {
-    // Component rendering bell icon (color based on value: integer) and hover information based on (text: string)
-    const Notification = ({value, text}) => {
-
-        var color;
-        if (value === 1) {
-            color = '#FF6464';
-        } else if (value === 2) {
-            color = '#FED765';
-        } else if (value === 3) {
-            color = '#27AE60';
-        } else if (value === 0) {
-            color = '#FFF'; // This is for rendering bug, empty cell not taking same space.
-        }
-
-        const classes = useStyles();
-        // getModalStyle is not a pure function, we roll the style only on the first render
-        const [modalStyle] = useState(getModalStyle);
-
-        const href= "";
-        const history = useHistory();
-
-        // Keeps track of whether or not the popup for a specific alert  has been toggled.
-        const [openWarningConfirm, setOpenWarningConfirm] = useState(false);
-        const [openWarningConfirm2, setOpenWarningConfirm2] = useState(false);
-        const [openWarningConfirm3, setOpenWarningConfirm3] = useState(false);
-
-        // Handles opening of modal window
-        const handleOpenConfirmation = () => {
-            setOpenWarningConfirm(true);
-        };
-
-        // Handles closing of modal window
-        const handleCloseConfirmation = () => {
-            setOpenWarningConfirm(false); // Close modal
-        };
-        //Handels closing of modal no.2 window
-        const handleCloseConfirmation2 = () => {
-            setOpenWarningConfirm2(false); // Close modal
-        };
-        //Handels closing of modal no.3 window
-        const handleCloseConfirmation3 = () => {
-            setOpenWarningConfirm3(false); // Close modal
-        };
-        //Closes the first modal and opens the second one
-        const OpenWarning2 = () => {
-            setOpenWarningConfirm2( true); //Open modal no. 2
-            setOpenWarningConfirm(false); // Close modal
-        };
-        //Sends us to the PatientView Overview
-        const sendToPatient = () => {
-            history.push(href); //Should be switched to patientview overview refrens
-            setOpenWarningConfirm2 (false); // Close modal no.2
-        };
-        //Closes the second modal and opens the third
-        const OpenWarning3 = () => {
-            setOpenWarningConfirm3 (true);
-            setOpenWarningConfirm2 (false);
-        };
-
-        const ConfirmWarning = () => {
-
-            return (
-                <Modal
-                    open={openWarningConfirm}
-                    onClose={handleCloseConfirmation}
-                    aria-labelledby='modal-popup'
-                >
-                    <div key="modal-popup-div" style={modalStyle} className={classes.paper}>
-                        <NotificationImportant style={{
-                            color: color,
-                            fontSize: '30px',
-                        }}/>
-                        <text className='font-bold mt-2' id='modal-popup'>Uppmärksammat mätvärde</text>
-                        <h2 className='font-bold mt-3' id='modal-popup'>/sätt in datum/ uppmättes vikten /vikt/ av /person/ ?</h2>
-                        <h2 className='font-bold mt-3 flex justify-center' id='modal-popup'> Vill du hantera mätvärdet?</h2>
-                        <div className="flex" style={{width: "100%"}}>
-                            <Button
-                                className='flex shadow'
-                                style={{ border: '2px solid #0066B3', borderRadius: "0px", width: '110px', marginLeft: "auto", marginRight: "auto", marginTop: "1.5rem"}}
-                                onClick={handleCloseConfirmation}>
-                                Avbryt
-                            </Button>
-                            <Button
-                                className='flex shadow'
-                                style={{ border: '2px solid #0066B3', borderRadius: "0px", width: '110px', marginLeft: "auto", marginRight: "auto", marginTop: "1.5rem"}}
-                                onClick={OpenWarning2}>
-                                Kvittera
-                            </Button>
-                        </div>
-                    </div>
-                </Modal>
-            );
-        }
-
-        const ConfirmWarning2 =()=> {
-            return (
-                <Modal
-                    open={openWarningConfirm2}
-                    onClose={handleCloseConfirmation2}
-                    aria-labelledby='modal-popup'
-                >
-                    <div key="modal-popup-div" style={modalStyle} className={classes.paper}>
-                        <NotificationImportant style={{
-                            color: color,
-                            fontSize: '30px',
-                        }}/>
-                        <text className='font-bold mt-2' id='modal-popup'>Uppmärksammat mätvärde</text>
-                        <h2 className='font-bold mt-3' id='modal-popup'>/sätt in datum/ uppmättes vikten /vikt/ av /person/ ?</h2>
-                        <button className='flex shadow'
-                                style={{ border: '2px solid #0066B3', borderRadius: "0px", width: '270px', marginLeft: "auto", marginRight: "auto", marginTop: "1.5rem"}}
-                                onClick={sendToPatient}>
-                            Gå till patientens kontaktuppgifter
-                        </button>
-                        <div className="flex" style={{width: "100%"}}>
-                            <Button
-                                className='flex shadow'
-                                style={{ border: '2px solid #0066B3', borderRadius: "0px", width: '180px', marginLeft: "auto", marginRight: "auto", marginTop: "1.5rem"}}
-                                onClick={OpenWarning3}>
-                                Ta om mätvärde
-                            </Button>
-                            <Button
-                                className='flex shadow'
-                                style={{ border: '2px solid #0066B3', borderRadius: "0px", width: '180px', marginLeft: "auto", marginRight: "auto", marginTop: "1.5rem"}}
-                                onClick={handleCloseConfirmation2}>
-                                Godkänn mätvärde
-                            </Button>
-                        </div>
-                    </div>
-                </Modal>
-            );
-
-        }
-        const ConfirmWarning3 =()=> {
-            return (
-                <Modal
-                    open={openWarningConfirm3}
-                    onClose={handleCloseConfirmation3}
-                    aria-labelledby='modal-popup'
-                >
-                    <div key="modal-popup-div" style={modalStyle} className={classes.paper}>
-                        <NotificationImportant style={{
-                            color: color,
-                            fontSize: '30px',
-                        }}/>
-                        <text className='font-bold mt-2' id='modal-popup'>Uppmärksammat mätvärde</text>
-                        <h2 className='font-bold mt-3' id='modal-popup'>Notis har skickats till patient. Ombedd att ta ett nytt mätvärde</h2>
-                        <div align='right' style={{
-                            marginRight: "10px",
-                            marginBottom: "10px"
-                        }}>
-                            <Button
-                                className='flex shadow'
-                                style={{ border: '2px solid #0066B3', borderRadius: "0px", width: '110px', marginLeft: "auto", marginRight: "auto", marginTop: "1.5rem"}}
-                                onClick={handleCloseConfirmation3}>
-                                Ok
-                            </Button>
-                        </div>
-                    </div>
-                </Modal>
-            );
-
-        }
-
-
-
-        return (
-            <>
-                <Link
-                    component="button"
-                    style={{color: "#000"}}
-                    onClick={handleOpenConfirmation}
-                >
-            <Tooltip title={text} placement='left-start'>
-                <NotificationImportant style={{
-                    color: color,
-                    fontSize: '30px',
-                }}
-                />
-            </Tooltip>
-
-                </Link>
-                <ConfirmWarning />
-                <ConfirmWarning2/>
-                <ConfirmWarning3/>
-                </>
-
-        )
-    }
-
-    // Used to fix the placement of the triggered modal
-    const getModalStyle = () => {
-
-        const top = 50;
-        const left = 50;
-
-        return {
-            top: `${top}%`,
-            left: `${left}%`,
-            transform: `translate(-${top}%, -${left}%)`,
-        };
-    }
-    // Styling of the triggered modal + the text and select fields.
-    const useStyles = makeStyles((theme) => ({
-        paper: {
-            maxWidth: '600px',
-            position: 'absolute',
-            backgroundColor: theme.palette.background.paper,
-            border: '3px solid #0066B3',
-            boxShadow: theme.shadows[5],
-            padding: theme.spacing(2, 4, 3),
-        },
-    }));
 
     //Fake data to the table rendering below
     const data = useMemo(
@@ -306,187 +89,34 @@ const BloodPressurePage = () => {
         useFlexLayout,
     );
 
-
-    // Used for keeping track on the wrapper div (needed for virtualization)
-    const parentRef = React.useRef();
-
-    // Using package 'react-virtual' for virtualization of
-    // the table, give it rows.length for how many rows there should be
-    // its ref to outer div and the estimated size.
-    const rowVirtualizer = useVirtual({
-        size: rows.length,
-        parentRef,
-        estimateSize: React.useCallback(() => 15, [])
-    });
-
     return (
         <>
             {/* Setting up the big div on the page */}
-            <div className='flex justify-center' style={{height: '50vh'}}>
+            <div className='flex justify-center' style={{ height: '55vh' }}>
                 {/* div to dived the page in two parts*/}
-                <div style={{width: '50%'}}> 
-                    {/* The blood pressure chart  */}
-                    <div style={{height: '80%'}}>
-                    <BloodPressure/>
+                <div style={{ width: '50%' }}>
+                    {/* This is the bloodpressure chart being displayed */}
+                    <div style={{ height: '85%' }}>
+                        <BloodPressure />
                     </div>
                 </div>
 
-                <div>
-                    {/* This is the Table which get its data from the data constant above */}
-                    <Table {...getTableProps()}>
-                        <TableHead>
-                            {headerGroups.map(headerGroup => (
-                                <TableRow {...headerGroup.getHeaderGroupProps()}>
-                                    {headerGroup.headers.map((column, columnIndex) => (
-                                        <TableCell
-                                            {...column.getHeaderProps()}
-                                            style={{
-                                                width: (columnIndex === 0) ? '45px' : '30%', //Make first column fixed size
-                                                background: (columnIndex === 0) ? '#FFF' : '#275E8E', //Make first column invisible
-                                                borderColor: (columnIndex === 0) && '#FFF', //Make first column invisible
-                                                color: '#FFF',
-                                                fontWeight: '700',
-                                                fontSize: '15px',
-                                                textAlign: 'center',
-                                            }}
-                                        >
-                                            {column.render('Header')}
-                                            <span>
-                                        {column.isSorted
-                                            ? column.isSortedDesc
-                                                ? <ArrowDropUp style={{fontSize: '15px'}}/>
-                                                : <ArrowDropDown style={{fontSize: '15px'}}/>
-                                            : ''}
-                                            </span>
-                                        </TableCell>
-                                    ))}
-                                </TableRow>
-                            ))}
-                        </TableHead>
-                        <div
-                            ref={parentRef}
-                            style={{
-                                display: 'block',
-                                maxHeight: `calc(100vh - 620px)`, //calculated other parts to height of 520 + spacing, so table gets whats left
-                                overflow: 'auto',
-                                width: `100%`
-                            }}
-                        >
-                            <TableBody
-                                {...getTableBodyProps}
-                                className='ListInner'
-                                style={{
-                                    display: 'block',
-                                    height: `${rowVirtualizer.totalSize}px`,
-                                    position: 'relative'
-                                }}
-                            >
-                                {rowVirtualizer.virtualItems.map(virtualRow => {
-                                        const row = rows[virtualRow.index];
-                                        prepareRow(row);
-                                        return (
-                                            <TableRow
-                                                key={virtualRow.index}
-                                                ref={virtualRow.measureRef}
-                                                {...row.getRowProps({
-                                                    style: {
-                                                        position: 'absolute',
-                                                        top: 0,
-                                                        left: 0,
-                                                        width: '100%',
-                                                        transform: `translateY(${virtualRow.start}px)`,
-                                                        background: (virtualRow.index % 2) ? '#E5E5E5' : '#FFF',
-                                                    }
-                                                })}
-                                            >
+                <div style={{ width: '30%' }}>
+                    <div>
+                        <TableForChart
+                            getTableProps={getTableProps}
+                            getTableBodyProps={getTableBodyProps}
+                            headerGroups={headerGroups}
+                            rows={rows}
+                            prepareRow={prepareRow}
+                        />
+                    </div>
 
-                                                {row.cells.map((cell, cellIndex) => {
-                                                    return (
-                                                        <TableCell {...cell.getCellProps()} style={{
-                                                            padding: '10px',
-                                                            textAlign: 'center',
-                                                            width: (cellIndex === 0) ? '45px' : '30%', //To make first column fixed size
-                                                            background: (cellIndex === 0) && '#FFF', //To make first column invisible
-                                                            borderColor: (cellIndex === 0) && '#FFF', //To make first column invisible
-                                                        }}>
-                                                            {cell.render('Cell')}
-                                                        </TableCell>
-                                                    )
-
-                                                })}
-                                            </TableRow>
-                                        )
-                                    }
-                                )}
-                            </TableBody>
-                        </div>
-                    </Table>
-
-                    {/*The form which contains a header and two inputs and a button and styling */}
-                    <form style={{
-                        border: '1px solid lightgrey',
-                        marginLeft: "auto",
-                        marginRight: "auto",
-                        marginTop: "1.5rem",
-                        boxShadow: "5px 7px 20px lightgrey",
-
-                    }}>
-                        <h1 style={{
-                            marginLeft: "10px",
-                            marginRight: "10px",
-                            marginTop: "10px",
-                            fontWeight: "500"
-                        }}>Uppdatera
-                            information</h1>
-                        <br/>
-                        <text style={{
-                            marginLeft: "10px",
-                            marginRight: "10px",
-                            marginTop: "10px"
-                        }}>Datum:
-                        </text>
-                        <input style={{
-                            border: '1px solid lightgrey',
-                            marginLeft: "auto",
-                            marginRight: "auto",
-                            boxShadow: "inset 0 2px 3px lightgrey"
-                        }} name="date"/>
-                        <br/>
-                        <text style={{
-                            marginLeft: "10px",
-                            marginRight: "10px",
-                            marginTop: "10px"
-                        }}>Fyll i ny uppmätt
-                            blodtryck:
-                        </text>
-                        <input style={{
-                            border: '1px solid lightgrey',
-                            marginLeft: "auto",
-                            marginRight: "20px",
-                            marginTop: "1.5rem",
-                            boxShadow: "inset 0 2px 3px lightgrey",
-                        }} name="BloodPressureMeasurement"/>
-                        <br/>
-                        <div align='right' style={{
-                            marginRight: "10px",
-                            marginBottom: "10px"
-                        }}>
-                            <Button
-                                className='flex shadow'
-                                style={{
-                                    border: '2px solid #0066B3',
-                                    borderRadius: "0px",
-                                    width: '110px',
-                                    marginLeft: "auto",
-                                    marginRight: "auto",
-                                    marginTop: "1.5rem",
-                                }}>
-                                Bekräfta
-                            </Button>
-                        </div>
-                    </form>
-
-
+                    {/* The form which you can fill in information about your weight does not save the data any where.
+                     Contains two text fields and a button*/}
+                    <div style={{ width: '90%',  float: 'right' }}>
+                        <FormForUpdateValues />
+                    </div>
                 </div>
             </div>
         </>

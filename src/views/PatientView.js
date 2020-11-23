@@ -76,7 +76,7 @@ const PatientView = () => {
       <PatientViewHeaderNavigation activeTabValue={activeTabValue} setActiveTabValue={setActiveTabValue} />
     </div>
 
-    <TabPanel id='tab-scroll' className='Measurements' value={activeTabValue} index={0}>
+    <TabPanel className='Measurements' value={activeTabValue} index={0}>
       <MeasurementsView/>
     </TabPanel>
 

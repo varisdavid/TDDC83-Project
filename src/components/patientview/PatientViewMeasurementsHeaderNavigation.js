@@ -34,8 +34,7 @@ const PatientViewMeasurementsHeaderNavigation = ({ activeTabValueM }) => {
         position='relative'
         style={{ boxShadow: 'none', 
             backgroundColor: '#FFF !important',
-            //background: 'transparent',
-            //color: "none"
+            margin: 'none',
         }}
       >
         <Tabs
@@ -49,7 +48,8 @@ const PatientViewMeasurementsHeaderNavigation = ({ activeTabValueM }) => {
             color: '#275E8E', 
             fontStyle: 'normal',
             fontWeight: 'normal',
-            fontSize: '14px'
+            fontSize: '14px',
+            margin: 'none',
         }} 
           value={activeTabValueM}
           aria-label='overview-navtab'
