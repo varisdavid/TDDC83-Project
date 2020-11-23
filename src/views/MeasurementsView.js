@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Box } from '@material-ui/core';
-
 import {PatientViewMeasurementsHeaderNavigation, Measurements, WeightChartPage, BloodPressurePage, PhysicalActivityPage } from '../components'
 
 // Function for retrieving current active tab from our url.
@@ -59,10 +58,8 @@ const MeasurementsView = () => {
     setActiveTabValueM(getActiveTabM(locationM));
   }, [locationM] );
 
-  // --------------------------------------------------------------
-  // Insert your components inside a tabPanel, like PatientCalendar.
-  // --------------------------------------------------------------
-
+ 
+  // Components inserted inside a tabPanel,.
   return (
   <>
     <div className='w-full h-auto'>

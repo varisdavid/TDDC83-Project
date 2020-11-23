@@ -4,6 +4,7 @@ import { NotificationImportant } from '@material-ui/icons';
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
+//Renders a notification with a value and a text with possibilities to click on with the help of modals
 const Notification = ({ value, text }) => {
 
     var color;

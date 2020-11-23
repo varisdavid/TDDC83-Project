@@ -99,6 +99,7 @@ const WeightChartPage = () => {
                 </div>
 
                 <div style={{ width: '30%' }}>
+                    {/* This is the weight table being displayed */}
                     <div>
                         <TableForChart
                             getTableProps={getTableProps}

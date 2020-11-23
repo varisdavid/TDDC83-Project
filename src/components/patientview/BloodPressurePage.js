@@ -101,7 +101,9 @@ const BloodPressurePage = () => {
                     </div>
                 </div>
 
+
                 <div style={{ width: '30%' }}>
+                    {/* This is the bloodpressure table being displayed */}
                     <div>
                         <TableForChart
                             getTableProps={getTableProps}

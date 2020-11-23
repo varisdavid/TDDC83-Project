@@ -99,6 +99,7 @@ const PhysicalActivityPage = () => {
                 </div>
 
                 <div style={{ width: '30%' }}>
+                    {/* This is the physical activity table being displayed */}
                     <div>
                         <TableForChart
                             getTableProps={getTableProps}

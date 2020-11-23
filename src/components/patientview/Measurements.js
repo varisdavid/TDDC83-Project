@@ -1,11 +1,13 @@
 import React from 'react';
 import { WeightChart, BloodPressure, PhysicalActivityChart } from "..";
 
+//Displays three charts (Measurment page)
 const Measurements = ({ setActiveTabValueM }) => {
 
     return (
         <>
             <div>
+                {/*Displays a clickable weightChart*/}
                 <div className='flex justify-center' style={{marginTop: 'none', marginBottom: 'none'}}>
                     <div style={{ width: '30%', height: '40vh'}} onClick={(e) => {
                         e.preventDefault();
@@ -13,12 +15,16 @@ const Measurements = ({ setActiveTabValueM }) => {
                     }} >
                         <WeightChart />
                     </div>
+                    
+                    {/*Displays a clickable BloodPressureChart*/}
                     <div style={{ width: '30%', height: '40vh'}} onClick={(e) => {
                         e.preventDefault();
                         setActiveTabValueM(2);
                     }}>
                         <BloodPressure />
                     </div>
+
+                    {/*Displays a clickable physicalChart*/}
                     <div style={{ width: '30%', height: '40vh'}} onClick={(e) => {
                         e.preventDefault();
                         setActiveTabValueM(3);
