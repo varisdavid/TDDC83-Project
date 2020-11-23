@@ -1,0 +1,32 @@
+function addRolesFromSqlServer(user, context, callback) {
+  const axios = require('axios@0.19.2');
+  const assignedRoles = (context.authorization || {}).roles;
+  
+  const options = { method: 'POST',
+    url: `http://a5ccf8f10255.eu.ngrok.io/get_user`,
+    headers: { 'content-type': 'application/json' },
+                  data: `{"email":"${user.email}"}`
+    };
+  
+  console.log("trying connecting to ngrox");
+  axios(options)
+    .then( res => {
+    	if(res.data.success === true) {
+    		context.idToken['https://company3.com/pnumber'] = res.data.user.pnumber;
+        context.idToken['https://company3.com/roles'] = assignedRoles;
+    		console.log("ngrox request successful");
+    		console.log(res.data.user.email + " has pnumber " + res.data.user.pnumber);
+        console.log("logging user object");
+        console.log(user);
+        console.log("logging context object");
+        console.log(context);
+        return callback(null, user, context);
+      } else {
+        return callback(new Error("email was not in the database"));
+      }
+    })
+    .catch( err => {
+      console.log(err);
+    	return callback(err);
+    });  
+}
