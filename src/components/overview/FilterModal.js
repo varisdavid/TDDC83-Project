@@ -207,7 +207,7 @@ const FilterModal = ({setDropdownOpen, customFilterData, setCustomFilterData, se
     return (
         <>
         <Button onClick={handleOpen} >
-            <FilterList style={{ fontSize: '20px' }} />
+            <FilterList style={{ fontSize: '25px' }} />
         </Button>
         <Modal
             open={open}

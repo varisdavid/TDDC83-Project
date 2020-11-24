@@ -852,15 +852,6 @@ const Patients = () => {
           <Grid xs = {4} style={{paddingLeft: "45px", marginTop: "8px"}}>
             <JourTable />
           </Grid> 
-        <Grid xs = {8}>
-          <PatientGroups
-            setOwnFilters={setOwnFilters}
-            customFilterData={customFilterData}
-            setCustomFilterData={setCustomFilterData}
-            dropdownOpen={dropdownOpen}
-            setDropdownOpen={setDropdownOpen}
-          />
-        </Grid>
       </Grid>
     </Grid>
   );
