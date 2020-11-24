@@ -58,15 +58,6 @@ const Data = [
   },
 ];
 
-const StyledHeaderCell = withStyles((theme) => ({
-  head: {
-    backgroundColor: theme.palette.common.white,
-    fontSize: 25,
-  },
-  body: {
-    fontSize: 14,
-  },
-}))(TableCell);
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -107,9 +98,6 @@ const BasicTable = (props) => {
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <StyledTableRow>
-                <StyledHeaderCell>{props.value} </StyledHeaderCell>
-              </StyledTableRow>
-              <StyledTableRow>
                 <StyledTableCell>Tid</StyledTableCell>
                 <StyledTableCell align="left">Aktivitet</StyledTableCell>
                 <StyledTableCell align="left">Kommentar</StyledTableCell>
@@ -138,9 +126,6 @@ const BasicTable = (props) => {
         <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
-          <StyledTableRow>
-            <StyledHeaderCell>{props.value} </StyledHeaderCell>
-          </StyledTableRow>
           <StyledTableRow>
             <StyledTableCell>Tid</StyledTableCell>
             <StyledTableCell align="left">Aktivitet</StyledTableCell>
@@ -192,6 +177,8 @@ const UserCalendar = () => {
             <StaticCalendar />
           </Grid>
           <Grid item xs={5} className={classes.layout}>
+            <div style={{ fontSize: '30px'}} >
+              {value.toUTCString().slice(0,16)} </div>
             <BasicTable props={Data} value={value.toUTCString().slice(0, 16)} />
           </Grid>
         </Grid>

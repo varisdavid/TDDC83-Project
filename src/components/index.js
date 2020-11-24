@@ -41,6 +41,19 @@ import PatientEarlierDiseasesTable from "./patientview/PatientEarlierDiseasesTab
 import PatientOverviewMeasurementsTable from "./patientview/PatientOverviewMeasurementsTable";
 import PatientResponsibleCaregiversTable from "./patientview/PatientResponsibleCaregiversTable"
 
+import WeightChart from "./patientview/WeightChart";
+import BloodPressure from "./patientview/BloodPressure";
+import PatientOverviewCalendar from "./patientview/PatientOverviewCalendar";
+import PhysicalActivityChart from "./patientview/PhysicalActivityChart";
+import BloodPressurePage from "./patientview/BloodPressurePage";
+import WeightChartPage from "./patientview/WeightChartPage";
+import PhysicalActivityPage from "./patientview/PhysicalActivityPage";
+
+import PatientViewMeasurementsHeaderNavigation from "./patientview/PatientViewMeasurementsHeaderNavigation";
+
+import TableForChart from "./patientview/TableForChart";
+import Notification from "./patientview/Notification";
+import FormForUpdateValues from "./patientview/FormForUpdateValues";
 
 // import Notices from './Notices';
 // import NoticesTable from './NoticesTable';
@@ -75,5 +88,16 @@ export {
     PatientEarlierDiseasesTable,
     PatientOverviewMeasurementsTable,
     PatientResponsibleCaregiversTable,
-    PatientListOfMedicationTable
+    PatientListOfMedicationTable,
+    WeightChart,
+    BloodPressure,
+    PatientOverviewCalendar,
+    PhysicalActivityChart,
+    BloodPressurePage,
+    WeightChartPage,
+    PatientViewMeasurementsHeaderNavigation,
+    PhysicalActivityPage,
+    TableForChart,
+    Notification,
+    FormForUpdateValues,
 };

@@ -56,7 +56,7 @@ const PatientEarlierDiseasesTable = () => {
     } else {
       return ( 
         <TableRow className='row-table-body'>
-            <TableCell className='cell-table-body'> <Button onClick={() => setLenghtOfTable(lengthOfTable + 3)} 
+            <TableCell className='cell-table-body'> <Button onClick={() => setLenghtOfTable(lengthOfTable + 10)} 
             style={{
             textTransform: 'none',
             font: 'inherit', 
