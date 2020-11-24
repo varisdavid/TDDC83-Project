@@ -44,6 +44,14 @@ const PatientGroups = ({setOwnFilters, customFilterData, setCustomFilterData, dr
     return (
     <>
         <div style={{ width: 'auto', textAlign: 'end' }}>
+            <CreateNewFilterModal  
+              setOwnFilters={setOwnFilters} 
+              customFilterData={customFilterData} 
+              setCustomFilterData={setCustomFilterData} 
+              dropdownOpen={dropdownOpen}
+              setDropdownOpen={setDropdownOpen}
+              patientGroups={patientGroups}
+            />
 
             {patientGroups.map(group => {
                 return (
@@ -54,22 +62,14 @@ const PatientGroups = ({setOwnFilters, customFilterData, setCustomFilterData, dr
                         paddingBottom: '2px', 
                         paddingLeft: '15px', 
                         paddingRight: '15px', 
-                        borderRadius: '0' }}
+                        borderRadius: '0',
+                      backgroundColor: '#FFF' }}
                       onClick={() => setOwnFilters(group.filterData)}
                       >
                         { group.Name }
                     </Button>
                 )
-            })}
-
-            <CreateNewFilterModal  
-              setOwnFilters={setOwnFilters} 
-              customFilterData={customFilterData} 
-              setCustomFilterData={setCustomFilterData} 
-              dropdownOpen={dropdownOpen}
-              setDropdownOpen={setDropdownOpen}
-              patientGroups={patientGroups}
-            />
+            })} 
         </div>
     </>
     );

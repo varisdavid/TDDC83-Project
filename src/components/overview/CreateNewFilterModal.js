@@ -17,7 +17,7 @@ import { Modal,
         ListItemIcon, 
         ListItemText} from '@material-ui/core';
 import { Search } from '@material-ui/icons';
-import { AddToPhotos } from '@material-ui/icons';
+import { AddCircle } from '@material-ui/icons';
 
 
 // Temporary search data
@@ -347,8 +347,16 @@ const CreateNewFilterModal = ({setDropdownOpen, customFilterData, setCustomFilte
 
     return (
         <>
-        <Button component={'span'} onClick={handleOpen}>
-            <AddToPhotos style={{ fontSize: '40px', color: '#0066B3' }} />
+        <Button component={'span'} onClick={handleOpen} className="shadow mr-2" 
+        style={{ 
+            paddingTop: '2px', 
+            paddingBottom: '2px',
+            paddingLeft: '15px',
+            paddingRight: '15px',
+            borderRadius: '0',
+            backgroundColor: '#FFF'}}>
+            <AddCircle style={{ color: '#275E8E', marginRight: '10px' }} />
+            {'Lägg till ny vy'}
         </Button>
         <Modal
             open={open}
