@@ -206,9 +206,8 @@ const FilterModal = ({setDropdownOpen, customFilterData, setCustomFilterData, se
 
     return (
         <>
-        <Button onClick={handleOpen} className='shadow' style={{ borderRadius: '0', backgroundColor: '#FFF', marginRight: '1.5rem' }}>
-                Filtrera
-            <FilterList style={{ marginLeft: '8px', fontSize: '16px' }} />
+        <Button onClick={handleOpen} >
+            <FilterList style={{ fontSize: '20px' }} />
         </Button>
         <Modal
             open={open}
