@@ -194,8 +194,8 @@ const PatientsSearch = ({setSortState,
 
     return (
     <>
-        <div style={{ height: 'auto', marginLeft: 'auto', marginRight: 'auto', width: '95%' }}>
-            <div style={{ height: '45px', width: 'inherit', marginLeft: 'auto', marginRight: 'auto', backgroundColor: '#FFF', borderRadius: '25px 25px' }}>
+        <div style={{ height: 'auto', marginLeft: '10px', marginRight: '10px', width: '100%' }}>
+            <div style={{ float: 'left', height: '45px', width: '25%', backgroundColor: '#FFF', borderRadius: '25px 25px' }}>
                 <InputBase
                     inputComponent='input'               
                     className='text-gray-800'
