@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { WeightChart, TableForChart, Notification, FormForUpdateValues } from "..";
+import { WeightChart, TableForChart, Notification, FormForUpdateValues, SliderMeasurements } from "..";
 import { useFlexLayout, useTable } from "react-table";
 
 
@@ -96,6 +96,10 @@ const WeightChartPage = () => {
                     <div style={{ height: '85%' }}>
                         <WeightChart />
                     </div>
+                </div>
+
+                <div style={{ width: '10%' }}>
+                    <SliderMeasurements/>
                 </div>
 
                 <div style={{ width: '30%' }}>
