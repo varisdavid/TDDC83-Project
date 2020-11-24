@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect, useContext} from 'react';
 
-import { PatientsSearch, PatientsTable, PatientGroups } from "..";
+import { PatientsSearch, PatientsTable } from "..";
 import {
   useTable,
   useFlexLayout,
