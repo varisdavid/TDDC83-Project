@@ -144,6 +144,7 @@ const Notices = () => {
       { 
         href: "2020-11-17", // This is for displaying purposes
         date: "2020-11-17:00", // the added :00 makes it so this sorts above patient info with the same date.
+        dateRow: true,
       },
       {
         priority: 1,
@@ -184,6 +185,7 @@ const Notices = () => {
       {
         href: "2020-11-14",
         date: "2020-11-14:00",
+        dateRow: true,
       },
       {
         priority: 1,
@@ -212,6 +214,7 @@ const Notices = () => {
       {
         href: "2020-11-12",
         date: "2020-11-12:00",
+        dateRow: true,
       },
       {
         priority: 1,
@@ -252,6 +255,7 @@ const Notices = () => {
       {
         href: "2020-11-07",
         date: "2020-11-07:00",
+        dateRow: true,
       },
       {
         priority: 2,
@@ -280,6 +284,7 @@ const Notices = () => {
       {
         href: "2020-11-01",
         date: "2020-11-01:00",
+        dateRow: true,
       },
       {
         priority: 2,
@@ -344,6 +349,7 @@ const Notices = () => {
       {
         href: "2020-10-29",
         date: "2020-10-29:00",
+        dateRow: true,
       },
       {
         priority: 3,
@@ -447,7 +453,10 @@ const Notices = () => {
     if (filterValue === 'all') {
       return rows;
     }
-    return rows.filter(row => row.values[id] === filterValue)
+    // If it either matches, or it is a dateRow we keep it.
+    console.log(rows);
+    console.log(rows.filter(row => row.values[id] === filterValue || row.original["dateRow"]))
+    return rows.filter(row => row.values[id] === filterValue || row.original["dateRow"]) 
   }
 
   // Returns all rows containing a chosen priority.
@@ -465,7 +474,7 @@ const Notices = () => {
     }
 
     if (priority.length > 0) {
-      return rows.filter(row => priority.includes(row.values[id]))
+      return rows.filter(row => priority.includes(row.values[id] || row.original["dateRow"]))
     } else {
       return rows
     }
@@ -473,7 +482,7 @@ const Notices = () => {
 
   // Returns all rows containing a number inbetween a chosen range.
   function numberInRangeFilterFn(rows, id, filterValue) {
-    return rows.filter(row => filterValue[0] < row.values[id] && row.values[id] < filterValue[1])
+    return rows.filter(row => filterValue[0] < row.values[id] && row.values[id] < filterValue[1] || row.original["dateRow"])
   }
 
   // Returns all patients with one of the selected diagnoses
@@ -486,7 +495,12 @@ const Notices = () => {
     if (filterValue.length > 0) {
       // This line goes through all possible filters and sees if any of the rows have one of the filter values in its diagnoses array
       // , and if this is fulfilled + that row hasen't already been added, we add it.
-      filterValue.forEach(value => rows.forEach((row, index) => { if ((row.values[id].indexOf(value) !== -1) && matches.indexOf(index) === -1) { matches.push(index) } }))
+      filterValue.forEach(value => rows.forEach((row, index) => { 
+        if ((row.original["dateRow"] || row.values[id].indexOf(value) !== -1) && matches.indexOf(index) === -1) { 
+          // It is very important that it first checks if it is a dateRow, because it wont have be able to use the function indexOf for these rows.
+          matches.push(index) 
+        } 
+      }))
       return matches.map(index => rows[index])
     } else {
       return rows;
