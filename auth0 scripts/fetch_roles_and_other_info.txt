@@ -1,9 +1,11 @@
-function addRolesFromSqlServer(user, context, callback) {
+function addInformation(user, context, callback) {
   const axios = require('axios@0.19.2');
   const assignedRoles = (context.authorization || {}).roles;
   
+  
+  //When you run ngrok, you get a url. Use that url here.
   const options = { method: 'POST',
-    url: `http://a5ccf8f10255.eu.ngrok.io/get_user`,
+    url: `http://1ffe071f0eff.eu.ngrok.io/get_user`,
     headers: { 'content-type': 'application/json' },
                   data: `{"email":"${user.email}"}`
     };

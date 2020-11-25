@@ -4,15 +4,14 @@ from datetime import datetime
 
 
 app = Flask(__name__)
-# This is just the uri for dummy database I created. We can put actual database in this place.
-# Following is the example if we want to use MySql database instead of sqlite. I also tested it with MySql Database.
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:adibaba1995@localhost/patients'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
+
+# This is the model for the employee details
 class User(db.Model):
-	__tablename__ = 'access_logs'
+	__tablename__ = 'user'
 
 	id = db.Column(db.Integer, primary_key=True)
 	pnumber = db.Column(db.String(10))
@@ -27,6 +26,7 @@ class User(db.Model):
     		'pnumber': self.pnumber
     	}
 
+# This route is used by the auth0 rule to get details about the employee logging in.
 @app.route('/get_user', methods=["POST"])
 def access_logs():
 	if request.method == 'POST' and request.json is not None:
