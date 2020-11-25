@@ -3,7 +3,7 @@ from backend.ehr_related.fetch_patient_list import get_measurements
 
 from backend.auth import _build_cors_preflight_response, _corsify_actual_response
 
-measurements_bp = Blueprint("department", __name__, url_prefix="/measurements")
+measurements_bp = Blueprint("measurements", __name__, url_prefix="/measurements")
 
 
 @measurements_bp.route("/<string:ehrid>", methods=["GET", "OPTIONS"])
