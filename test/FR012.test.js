@@ -31,11 +31,11 @@ it('should navigate from patient/overview, to patient/measurements, click on a m
     await new Promise(r => setTimeout(r, 1500));
 
     //Locate text (date and measurement) fields and fill in new date and measurements 
-    let measureDate = await driver.findElement(By.id('')); //has a name="date", awaiting ID"
+    let measureDate = await driver.findElement(By.id('')); //has a name="date", awaiting ID
     await driver.wait(until.elementIsVisible(measureDate), 3000);
     measureDate.sendKeys('2020-11-24');
 
-    let measurement = await driver.findElement(By.id('')); //has a name="BloodPressureMeasurement", awaiting ID"
+    let measurement = await driver.findElement(By.id('')); //has a name="BloodPressureMeasurement", awaiting ID
     await driver.wait(until.elementIsVisible(measurement), 3000);
     measureDate.sendKeys('10000???');
 

@@ -21,13 +21,13 @@ it('should click on the notification symbol in patient/measurements and accept u
         //Locate and click on notification symbol
         let notification = await driver.findElement(By.id(''));
         await driver.wait(until.elementIsVisible(notification), 3000);
-        await driver.findElement(By.id('')).click();
+        notification.click();
         await new Promise(r => setTimeout(r, 1500));
 
         //Locate and click on the "Signera/Bekräfta"-button in popup window
         let confirmButt = await driver.findElement(By.id(''));
         await driver.wait(until.elementIsVisible(confirmButt), 3000);
-        await driver.findElement(By.id('')).click();
+        confirmButt.click();
         await new Promise(r => setTimeout(r, 1500));
 
         // Check that notification symbol is no longer present on page
