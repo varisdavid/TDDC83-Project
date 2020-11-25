@@ -24,7 +24,7 @@ it('should navigate from patient/overview, to patient/measurements, click on a m
     await driver.findElement(By.id('')).click();
     await new Promise(r => setTimeout(r, 1500));
 
-    //Locate and click on a measurement value
+    //Locate and click on a measurement value in a graph
     let measurementVal = await driver.findElement(By.id(''));
     await driver.wait(until.elementIsVisible(measurementVal), 3000);
     await driver.findElement(By.id('')).click();
@@ -46,7 +46,7 @@ it('should navigate from patient/overview, to patient/measurements, click on a m
 
     /*
     Här kan vi göra fler tester med ogiltiga datum etc för att se vad som händer. För att rensa ett textfält
-    ska man kunna skriva typ measureDate.clear(). 
+    i Selenium ska man kunna skriva typ measureDate.clear(). 
     */
 
 })
