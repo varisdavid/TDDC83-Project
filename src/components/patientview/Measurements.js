@@ -1,8 +1,6 @@
 import React from 'react';
 import { WeightChart, BloodPressure, PhysicalActivityChart } from "..";
-import {
-    patientPrioritizationScore
-} from '../ruleEngine/ruleEngine'
+import { patientPrioritizationScore } from '../ruleEngine/ruleEngine';
 
 //Displays three charts (Measurment page)
 const Measurements = ({ setActiveTabValueM }) => {
@@ -39,4 +37,6 @@ const Measurements = ({ setActiveTabValueM }) => {
             </div>
         </> 
     );
+}
+
 export default Measurements;
