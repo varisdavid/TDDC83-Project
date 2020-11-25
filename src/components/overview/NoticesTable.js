@@ -68,13 +68,6 @@ const NoticesTable = ({
                   }}
                 >
                   {column.render('Header')}
-                  <span>
-                    {column.isSorted
-                      ? column.isSortedDesc
-                        ? <ArrowDropUp style={{ fontSize: '15px' }} />
-                        : <ArrowDropDown style={{ fontSize: '15px' }} />
-                      : ''}
-                  </span>
                 </TableCell>
               ))}
             </TableRow>
