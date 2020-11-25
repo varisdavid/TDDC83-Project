@@ -611,7 +611,7 @@ const Notices = () => {
 
       <div className='flex justify-center'>
         <div style={{ width: 'calc(85%)', marginRight: '22.5px' }} className='mt-3 p-2'>
-          <div style={{ width: 'calc(100%)' }}>
+          <div style={{ width: 'calc(97%)', marginLeft: 'calc(3%)' }}>
             <NoticesTable
               data={data}
               getTableProps={getTableProps}
