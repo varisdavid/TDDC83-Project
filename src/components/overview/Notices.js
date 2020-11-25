@@ -474,7 +474,7 @@ const Notices = () => {
     }
 
     if (priority.length > 0) {
-      return rows.filter(row => priority.includes(row.values[id] || row.original["dateRow"]))
+      return rows.filter(row => priority.includes(row.values[id]) || row.original["dateRow"])
     } else {
       return rows
     }
@@ -482,7 +482,7 @@ const Notices = () => {
 
   // Returns all rows containing a number inbetween a chosen range.
   function numberInRangeFilterFn(rows, id, filterValue) {
-    return rows.filter(row => filterValue[0] < row.values[id] && row.values[id] < filterValue[1] || row.original["dateRow"])
+    return rows.filter(row => (filterValue[0] < row.values[id] && row.values[id] < filterValue[1]) || row.original["dateRow"])
   }
 
   // Returns all patients with one of the selected diagnoses
@@ -496,7 +496,7 @@ const Notices = () => {
       // This line goes through all possible filters and sees if any of the rows have one of the filter values in its diagnoses array
       // , and if this is fulfilled + that row hasen't already been added, we add it.
       filterValue.forEach(value => rows.forEach((row, index) => { 
-        if ((row.original["dateRow"] || row.values[id].indexOf(value) !== -1) && matches.indexOf(index) === -1) { 
+        if ((row.original["dateRow"] || row.values[id].indexOf(value)) !== -1 && matches.indexOf(index) === -1) { 
           // It is very important that it first checks if it is a dateRow, because it wont have be able to use the function indexOf for these rows.
           matches.push(index) 
         } 
