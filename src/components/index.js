@@ -39,7 +39,7 @@ import PatientCurrentDiagnosesTable from "./patientview/PatientCurrentDiagnosesT
 import PatientCurrentMedicationsTable from "./patientview/PatientCurrentMedicationsTable";
 import PatientEarlierDiseasesTable from "./patientview/PatientEarlierDiseasesTable";
 import PatientOverviewMeasurementsTable from "./patientview/PatientOverviewMeasurementsTable";
-import PatientResponsibleCaregiversTable from "./patientview/PatientResponsibleCaregiversTable"
+import PatientResponsibleCaregiversTable from "./patientview/PatientResponsibleCaregiversTable";
 
 import WeightChart from "./patientview/WeightChart";
 import BloodPressure from "./patientview/BloodPressure";

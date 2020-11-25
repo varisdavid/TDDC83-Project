@@ -4,6 +4,7 @@ from .config import Config
 
 db = SQLAlchemy()
 
+
 def create_app(test_config=None):
     app = Flask(__name__)
     app.config.from_object("backend.config.Config")
@@ -16,13 +17,19 @@ def create_app(test_config=None):
     from .blueprints.hospital import hospital_bp
     from .blueprints.patients import patients_bp
     from .blueprints.team import team_bp
-    
+
+    from .blueprints.medication_list_bp import medication_list_bp
+    from .blueprints.overview_bp import overview_bp
+
     app.register_blueprint(access_log_bp)
     app.register_blueprint(department_bp)
     app.register_blueprint(employee_bp)
     app.register_blueprint(hospital_bp)
     app.register_blueprint(patients_bp)
     app.register_blueprint(team_bp)
+
+    app.register_blueprint(overview_bp)
+    app.register_blueprint(medication_list_bp)
 
     from .cli_commands import cli
 
