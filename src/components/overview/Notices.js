@@ -3,7 +3,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { NoticesSearch, NoticesTable, NoticesGroups } from '..'
 import { useTable, useFlexLayout, useFilters, useGlobalFilter, useSortBy } from 'react-table'
 
-import { Tooltip, Modal, Button, Link } from '@material-ui/core';
+import { Modal, Button, Link } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { useAuth0 } from "@auth0/auth0-react";
@@ -141,9 +141,9 @@ const Notices = () => {
   const data = useMemo(
     // To get them in the proper order, using numbers to represent priority, 1 = high, 2 = medium, 3 = low with notification, 4 = low without notification
     () => [
-      {
-        priority: 1,
-        href: "2020-11-17",
+      { 
+        href: "2020-11-17", // This is for displaying purposes
+        date: "2020-11-17:00", // the added :00 makes it so this sorts above patient info with the same date.
       },
       {
         priority: 1,
@@ -151,7 +151,7 @@ const Notices = () => {
         name: "Gunilla Andersson",
         sweID: '470203-1324',
         diagnoses: ['Diabetes', 'Hypertoni'],
-        datum: '2020-11-17',
+        date: '2020-11-17',
         notis: 'Oväntat mätvärde: Vikt: 30 kg. 28 kg under målvärde.',
         age: 73,
         gender: 'female',
@@ -163,7 +163,7 @@ const Notices = () => {
         name: "Gunilla Andersson",
         sweID: '470203-1324',
         diagnoses: ['Diabetes', 'Hypertoni'],
-        datum: '2020-11-17',
+        date: '2020-11-17',
         notis: 'Oväntat mätvärde: Blodtryck: 180/110. Avvikande från patients normalvärde: 130/70.',
         age: 73,
         gender: 'female',
@@ -175,15 +175,15 @@ const Notices = () => {
         name: "Gunilla Andersson",
         sweID: '470203-1324',
         diagnoses: ['Diabetes', 'Hypertoni'],
-        datum: '2020-11-17',
+        date: '2020-11-17',
         notis: 'Oväntat mätvärde: Vikt: 30 kg. 28 kg under målvärde',
         age: 73,
         gender: 'female',
         team: 'Team 1',
       },
       {
-        priority: 1,
         href: "2020-11-14",
+        date: "2020-11-14:00",
       },
       {
         priority: 1,
@@ -191,7 +191,7 @@ const Notices = () => {
         name: "Gunilla Andersson",
         sweID: '470203-1324',
         diagnoses: ['Diabetes', 'Hypertoni'],
-        datum: '2020-11-14',
+        date: '2020-11-14',
         notis: 'Fem missade mätningar av vikt.',
         age: 73,
         gender: 'female',
@@ -203,15 +203,15 @@ const Notices = () => {
         name: "Gunilla Andersson",
         sweID: '470203-1324',
         diagnoses: ['Diabetes', 'Hypertoni'],
-        datum: '2020-11-14',
+        date: '2020-11-14',
         notis: 'Oväntat mätvärde: Vikt: 30 kg. 28 kg under målvärde',
         age: 73,
         gender: 'female',
         team: 'Team 1',
       },
       {
-        priority: 1,
         href: "2020-11-12",
+        date: "2020-11-12:00",
       },
       {
         priority: 1,
@@ -219,7 +219,7 @@ const Notices = () => {
         name: "Gunilla Andersson",
         sweID: '470203-1324',
         diagnoses: ['Diabetes', 'Hypertoni'],
-        datum: '2020-11-12',
+        date: '2020-11-12',
         notis: 'Fem missade mätningar av vikt.',
         age: 73,
         gender: 'female',
@@ -231,7 +231,7 @@ const Notices = () => {
         name: "Gunilla Andersson",
         sweID: '470203-1324',
         diagnoses: ['Diabetes', 'Hypertoni'],
-        datum: '2020-11-12',
+        date: '2020-11-12',
         notis: 'Oväntat mätvärde: Vikt: 30 kg. 28 kg under målvärde',
         age: 73,
         gender: 'female',
@@ -243,15 +243,15 @@ const Notices = () => {
         name: "Gunilla Andersson",
         sweID: '470203-1324',
         diagnoses: ['Diabetes', 'Hypertoni'],
-        datum: '2020-11-12',
+        date: '2020-11-12',
         notis: 'Oväntat mätvärde: Blodtryck: 180/110. Avvikande från patients normalvärde: 130/70.',
         age: 73,
         gender: 'female',
         team: 'Team 1',
       },
       {
-        priority: 1,
         href: "2020-11-07",
+        date: "2020-11-07:00",
       },
       {
         priority: 2,
@@ -259,7 +259,7 @@ const Notices = () => {
         name: "Gunilla Andersson",
         sweID: '470203-1324',
         diagnoses: ['Diabetes', 'Hypertoni'],
-        datum: '2020-11-07',
+        date: '2020-11-07',
         notis: 'Två missade mätningar av vikt.',
         age: 73,
         gender: 'female',
@@ -271,15 +271,15 @@ const Notices = () => {
         name: "Gunilla Andersson",
         sweID: '470203-1324',
         diagnoses: ['Diabetes', 'Hypertoni'],
-        datum: '2020-11-07',
+        date: '2020-11-07',
         notis: 'Oväntat mätvärde: Vikt:50 kg. 8 kg från målvärde.',
         age: 73,
         gender: 'female',
         team: 'Team 1',
       },
       {
-        priority: 2,
         href: "2020-11-01",
+        date: "2020-11-01:00",
       },
       {
         priority: 2,
@@ -287,7 +287,7 @@ const Notices = () => {
         name: "Gunilla Andersson",
         sweID: '470203-1324',
         diagnoses: ['Diabetes', 'Hypertoni'],
-        datum: '2020-11-01',
+        date: '2020-11-01',
         notis: 'Två missade mätningar av blodtryck.',
         age: 73,
         gender: 'female',
@@ -299,7 +299,7 @@ const Notices = () => {
         name: "Gunilla Andersson",
         sweID: '470203-1324',
         diagnoses: ['Diabetes', 'Hypertoni'],
-        datum: '2020-11-01',
+        date: '2020-11-01',
         notis: 'Två missade mätningar av vikt.',
         age: 73,
         gender: 'female',
@@ -311,7 +311,7 @@ const Notices = () => {
         name: "Gunilla Andersson",
         sweID: '470203-1324',
         diagnoses: ['Diabetes', 'Hypertoni'],
-        datum: '2020-11-01',
+        date: '2020-11-01',
         notis: 'En missad mätning av vikt.',
         age: 73,
         gender: 'female',
@@ -323,7 +323,7 @@ const Notices = () => {
         name: "Gunilla Andersson",
         sweID: '470203-1324',
         diagnoses: ['Diabetes', 'Hypertoni'],
-        datum: '2020-11-01',
+        date: '2020-11-01',
         notis: 'Nytt mätvärde: Vikt: 65 kg. Mätvärde överensstämmer med målvikt.',
         age: 73,
         gender: 'female',
@@ -335,15 +335,15 @@ const Notices = () => {
         name: "Göran Andersson",
         sweID: '350203-1324',
         diagnoses: ['Diabetes'],
-        datum: '2020-11-07',
+        date: '2020-11-07',
         notis: 'Fem missade mätningar av blodtryck.',
         age: 85,
         gender: 'male',
         team: 'Team 2',
       },
       {
-        priority: 3,
         href: "2020-10-29",
+        date: "2020-10-29:00",
       },
       {
         priority: 3,
@@ -351,7 +351,7 @@ const Notices = () => {
         name: "Casper Andersson",
         sweID: '998877-1324',
         diagnoses: ['Diabetes'],
-        datum: '2020-10-29',
+        date: '2020-10-29',
         notis: 'En missad mätning av blodtryck.',
         age: 21,
         gender: 'male',
@@ -363,7 +363,7 @@ const Notices = () => {
         name: "Xander Andersson",
         sweID: '350203-1324',
         diagnoses: ['Diabetes'],
-        datum: '2020-10-29',
+        date: '2020-10-29',
         notis: 'Nytt mätvärde: Vikt: 65 kg. Mätvärde överensstämmer med målvikt.',
         age: 85,
         gender: 'male',
@@ -375,7 +375,7 @@ const Notices = () => {
         name: "Viktor Andersson",
         sweID: '350203-1324',
         diagnoses: ['Diabetes'],
-        datum: '2020-10-29',
+        date: '2020-10-29',
         notis: 'Nytt mätvärde: Vikt: 65 kg. Mätvärde överensstämmer med målvikt.',
         age: 85,
         gender: 'male',
@@ -407,7 +407,7 @@ const Notices = () => {
       },
       {
         Header: 'Datum',
-        accessor: 'datum',
+        accessor: 'date',
       },
       {
         Header: 'Notis',
@@ -506,9 +506,6 @@ const Notices = () => {
 
   const [searchValue, setSearchValue] = useState('')
 
-  // Keeps track of sorting options, starting column sorting : 'priority'
-  const [sortState, setSortState] = useState({ columnId: 'priority' });
-
   // This state will keep track of what filters we have active.flex-row
   const [activeFiltersState, setActiveFiltersState] = useState({});
 
@@ -531,7 +528,12 @@ const Notices = () => {
 
   // Used for beginning values passed to the PatientTable
   const initialState = {
-    sortBy: [sortState],
+    sortBy: [
+      {
+          id: 'date',
+          desc: true
+      }
+  ],
     filters: [],
     hiddenColumns: ['age', 'name', 'gender', 'team', 'department', 'diagnoses']
     // filters: [{ id: 'col1', value: 'Green'}]
@@ -581,9 +583,8 @@ const Notices = () => {
       }
     };
     getPatientList();
-    toggleSortBy(sortState.columnId);
     setGlobalFilter(searchValue); // We use the stored searchValue to globally filter our table by. 
-  }, [searchValue, sortState, toggleSortBy, setGlobalFilter, getAccessTokenSilently]);
+  }, [searchValue, toggleSortBy, setGlobalFilter, getAccessTokenSilently]);
 
   return (
     <>
@@ -593,7 +594,6 @@ const Notices = () => {
           className='flex w-10/12 mt-2 p-2'
         >
           <NoticesSearch
-            setSortState={setSortState}
             toggleSortBy={toggleSortBy}
             searchValue={searchValue}
             setSearchValue={setSearchValue}
