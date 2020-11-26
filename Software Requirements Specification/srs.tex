@@ -25,12 +25,15 @@
     urlcolor=purple,        % color of external links
     linktoc=page            % only page is linked
 }%
-\def\myversion{1.0 }
+\def\myversion{2.0}
 \title{Software Requirements Specification}
 \author{Sara Lindholm \\ Patrick Asman \\ Jacob Rhan}
 
 \date{October 2020}
 
+\newcolumntype{s}{>{\hsize=3.75\hsize}X}
+\newcolumntype{m}{>{\hsize=7\hsize}X}
+\newcolumntype{b}{>{\hsize=11\hsize}X}
 
 \begin{document}
 
@@ -39,7 +42,7 @@
     \begin{bfseries}
         \Huge{SOFTWARE REQUIREMENTS SPECIFICATION}\\
         \vspace{1.5cm}
-        \LARGE Patrick Asman \\ Sara Lindholm \\ Jacob Rhan \\
+        \LARGE Analysis Team \\
         \vspace{1.5cm}
         %Submitted to : - \\Lecturer\\
         %\vspace{1.5cm}
@@ -53,19 +56,41 @@
     \end{center}
 \end{titlepage}
 
+\chapter*{Revision History}
+\begin{center}
+\begin{tabular}{|p{1,8cm}|p{1,4cm}|p{4.6cm}|p{2.5cm}|p{2.5cm}|}
+ \hline
+ \textbf{Date} & \textbf{Version} & \textbf{Description of revision} & \textbf{Author} & \textbf{Approved by} \\ 
+ \hline
+ 2020-10-11 & 0.9 & Initial SRS structure & Sara Lindholm & \\
+ \hline
+ 2020-10-15 & 1.0 & First Draft & Sara Lindholm & \\ 
+ \hline
+ 2020-11-11 & 1.1 & Updated and added functional requirements & Sara Lindholm & \\
+ \hline
+ 2020-11-17 & 1.2 & Added category descriptions & Jacob Rhan & \\
+ \hline
+ 2020-11-17 & 1.3 & Revised and updated functional requirements with titles and preconditions, as well as updated table format for non-functional requirements. & Sara Lindholm & \\
+ \hline 
+ 2020-11-24 & 2.0 & Box and line diagram from Architecture Notebook v. 0.5.2 added in section 2.1. Constraints, assumptions and dependencies added in section 2.4-2.5. Added interface requirements. Updated functional and non-functional requirements according to excel-file with requirements v.1.8. & Sara Lindholm & \\
+ \hline
+\end{tabular}
+\end{center}
+
 \tableofcontents
 
 \chapter{Introduction}
 This section gives an overview of everything included in this document. The purpose and scope for this document is described and a list of abbreviations, acronyms and definitions is provided. 
 
 \section{Purpose}
-The purpose of this document is to give a detailed description of \textcolor{red}{[system name?]}. It will illustrate the purpose and features of the system. It will also explain system constraints, interfaces of the system and interactions with external applications. This document is intended primarily to be proposed to the stakeholders for approval and as a reference for the developers.
+The purpose of this document is to give a detailed description of HeartByte's product. It will illustrate the purpose and features of the system. It will also explain system constraints, interfaces of the system and interactions with external applications. This document is intended primarily to be proposed to the stakeholders for approval and as a reference for the developers.
 
 \section{Scope}
-\textcolor{red}{[System name?]} is a web-based application to aid Region Östergötland's health care staff in overseeing and handling many patients. The system will make it easier for the health care staff to oversee many patients' measured health data and prioritize which patients are in most need of care. The system will have customizable overviews, customizable alert-levels and sorting and filtering functions to make prioritization easier. The system will in addition to a better overview of all patients be able to give more detailed overview about the individual patients' health information, such as current medications, health conditions and the measured data. 
+HeartByte's product is a web-based application to aid Region Östergötland's health care staff in overseeing and handling many patients. The system aims to make it easier for the health care staff to oversee many patients' measured health data and prioritize which patients are in most need of care. The system aim to  have customizable overviews, customizable alert-levels and sorting and filtering functions to make prioritization easier. The system will in addition to a better overview of all patients be able to give more detailed overview about the individual patients' health information, such as current medications, health conditions and the measured data. 
 
 
 \section{Definitions, acronyms and abbreviations}
+\label{section:def}
 \begin{center}
 \begin{tabularx}{\linewidth}{| l | X |}
  \hline
@@ -73,15 +98,31 @@ The purpose of this document is to give a detailed description of \textcolor{red
  \hline
   User  & Health care staff who interacts with the web application.  \\
   \hline
-  Admin/Administrator & System administrator who is given specific permission for managing and controlling the system  \\ 
+  Admin/Administrator & Health care staff who is given specific permission for managing and controlling the system as an administrator.  \\ 
   \hline
   RÖ  & Region Östergötland  \\ 
+  \hline
+   Operation & A healthcare center within RÖ \\ 
+  \hline 
+  Department & A subunit of Operation \\
+  \hline
+  Team & A subunit of Department \\ 
+  \hline
+  User group & Either a Operation, Department or Team. \\ 
+  \hline
+  EHR & Electronic Health Record \\ 
   \hline
 \end{tabularx}
 \end{center}
 
 \section{References}
 IEEE Recommended Practice for Software Requirements Specifications," in IEEE Std 830-1998 , vol., no., pp.1-40, 20 Oct. 1998, doi: 10.1109/IEEESTD.1998.88286.
+\newline
+\newline
+Jonas Malm, Architecture Notebook version 0.5.2.
+\newline
+\newline
+Prototype team, Hi-Fi version 2.1. 
 
 \section{Overview}
 The second chapter of the document, Overall Description, gives an overview of the functionality of the product.
@@ -93,601 +134,1287 @@ The third chapter, Requirements Specification, gives a more  detailed descriptio
 This section will present an overview of the entire system. The system's basic functionality and how it interacts with other systems will be introduced. % The constraints and assumptions for the system will also be presented. 
 
 \section{Product Perspective}
-\textbf{TODO:} fix. \\ put the product into perspective with other related products
-\begin{itemize}
-    \item web application
-    \item communicates with openEHR (store and recieve health data?), OAuth, RÖ's personell lists, Swedish population register and online health care services (such as 1177, Fass etc).
-\end{itemize}
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=15cm]{architecture.png}
+    \caption{Box and line diagram illustrating layers of the system and its submodules}
+    \label{fig: boxAndLineDiag}
+\end{figure}
+The web-based application aims to aid Region Östergötland's health care staff in overseeing and handling many patients. The system interfaces can be seen in Figure \ref{fig: boxAndLineDiag} and is described further in the Architecture Notebook version 0.5.2. The system components can be described in four layers: GUI, Front end logic, HeartByte Server and EhrScape Server.
+
+The GUI consists of four main modules. The Interface is what the user will interact with and what
+will display the web app. From the Interface the user can access the Patient Overview, the Patient Selector and the Patient View. The Interface also allows a user to log in and for admins, to customize the rules applied in the Rule Engine and views of the patients.
+
+The Front End Logic contains the ”middleware” interacting with the HeartByte Server and the GUI
+to deliver data to the GUI. The most central module is the Client Data Retriever, which handles calls from Patient Overview and Patient View. 
+
+The HeartByte Server contains the databases specific to the system and the functionality to retrieve
+EHRs. The EHR Retriever is the module responsible for loading data from EHRs. 
+
+The EhrScape Server layer is a database stored on an external server, which is accessed using the EhrScape API. 
 
 
-\section{Product functions}
-This web application will aid health care staff in handling many patients and their health data. The system will have an overview in which the user will be able to see all patients in their care unit. These patients can then be sorted and filtered by different criteria, which will aid the user in prioritizing which patients are in most need of care. 
 
+\section{Product functions} 
+This web application aims to aid health care staff in handling many patients and their health data. The system aims to have an overview in which the user will be able to see all patients in their department. These patients can then be sorted and filtered by different criteria, which will aid the user in prioritizing which patients are in most need of care. It will also be possible to customize views with specific patients based on different criteria, such as diagnosis and teams.
 
-The user will also be able to show more detailed information about the individual patients should they choose to click on a patient. In the individual patient view the user will get access to more information than what was available in the overview of all patients. The individual patient may have measured health data, medical information and history, and scheduled appointments which will be displayed in different tabs on the web application.
+The user will also be able to show more detailed information about the individual patients should they choose to click on a patient. In the individual patient view the user will get access to more information than what was available in the overview of all patients. The individual patient may have measured health data, medical information and history, and scheduled appointments which will be displayed in different tabs on the web application. 
 
+In the individual patient view the admin of the system will also be able to set at which values the system shall trigger a change in the patient's priority level. 
 
-The application will also be able to send out notifications to the users when there are updates on patients. The specifics for notifications are to be set by the admin so as to avoid being overwhelmed by notifications. 
 
 \section{User Characteristics}
-There are two intended users of the system: users and administrators. These two types of users will have different roles and therefore not have access to all the same functionalities. Some of the customizable elements shall only be customizable by an admin and the admin will also be the one to set the criteria for the different alert levels as well as the notifications.
+There are two intended users of the system: users and administrators, as defined in section~\ref{section:def}. The admin shall have access to all the same functionalities as the user, but the user shall not have access to any admin functionality. Some of the customizable elements shall only be customizable by an admin and the admin will also be the one to set the criteria for the different priority levels.
 
 
 \section{Constraints}
-
+The main constraint for this product concerns confidentiality and security. Since this product is designed to be used by health care providers there are some regulations concerning patient data security, such as "patientdatalagen". These regulations mainly affect patient data confidentiality and what health care staff should have access to what patient information.
 
 \section{Assumptions and dependencies}
+An assumption is that the system will be used on computers and tablets with a web browser. Since the system requires the user to be logged in to access any functionality it is also assumed that the user has logged in.
+
+The system needs to interact with other systems to function. OAuth is to be used for authentication and log in functionality. The system will also need to interact with an OpenEHR-database to access and store EHRs. 
+
 %"This subsection of the SRS should list each of the factors that affect the requirements stated in the SRS. These factors are not design constraints on the software but are, rather, any changes to them that can affect the requirements in the SRS. For example, an assumption may be that a specific operating system will be available on the hardware designated for the software product. If, in fact, the operating system is not available, the SRS would then have to change accordingly."
 
-\section{Apporting of requirements}
+%\section{Apporting of requirements}
 %There are some requirements that could be delayed until future versions of the systems if the project is delayed.
 
 \chapter{Specific requirements}
 This chapter contains the software requirements and gives a detailed
 description of the system and its features. 
 
-\section{External interface requirements}
-\textbf{TODO: fix}
-\begin{itemize}
-    \item openEHR
-    \item OAuth
-    \item Region Östergötland's personell lists 
-    \item Swedish population register 
-    \item online health care services (e.g. rådgivningsstöd, 1177, vårdhandboken, FASS, internetmedicin) 
-\end{itemize}
+\section{Interface requirements}
+The main system interface is the user interface. The user interfaces are divided into two subsections: the user view and the admin view. The admin has, as previously mentioned, every functionality the user has. Meanwhile the user lacks som functionality that only an admin has access to. 
 
-%\subsection{User interfaces}
+\subsection{User interfaces -  User View}
+This section describes the user interfaces as the pages/views defined in the document "Hi-Fi" version 2.1 from the prototype team.
+
+\subsubsection{Login page}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=15cm]{login.png}
+    \caption{Login page}
+    \label{fig: login}
+\end{figure}
+
+First page shown when signing in to the system. Start by selecting the operation and then log in with the employment-ID or username and then enter a password. See Figure \ref{fig: login}. Successful login with OAuth leads to the “Mina Patienter” page. 
+
+\subsubsection{Patient view}
+The individual patient view is divided into several tabs: "Mätvärden", "Översikt", "Läkmedelslista" and  "Kalender". The following sections are based on these tabs. 
+
+\subsubsection{"Mätvärden"}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=15cm]{meas.png}
+    \caption{Measurements}
+    \label{fig: meas}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=15cm]{measweight.png}
+    \caption{Measurements Weight}
+    \label{fig: measweight}
+\end{figure}
+All the current measurements for the specific patient are displayed in graphs. Warning symbols if something needs to be handled. See Figure \ref{fig: meas}.
+The graphs in the first page of the measurement are displayed with only a target range. When entering a specific measurement, see Figure \ref{fig: measweight}, intervals are also shown for what triggers yellow and red notifications. This is shown by default, but the user can choose to not display the intervals by clicking the check box “Visa intervall”. The "Ändra intervall"-button in Figure \ref{fig: measweight} is not visible for regular users.
+
+\clearpage
+
+\subsubsection{"Översikt"}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=15cm]{patoverview.png}
+    \caption{Patient overview}
+    \label{fig: patoverview}
+\end{figure}
+Information about the specific patient with contact information and emergency contact. Shows current diagnoses, current medication intake, average of current measurement values, previous diagnoses and caregivers and staff who handle the patient. Picture of the specific patient.
+
+The tables length is adapted to the number of diagnoses, medications, measurements, responsible staff members etc. 
+
+Table of “tidigare sjukdomar” is shown with a maximum of 4 rows with the see more text included. When pressing see more, the table expands in length and shows the rest of the information.
+
+
+\clearpage
+
+\subsubsection{"Läkemedelslista"}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=15cm]{medications.png}
+    \caption{Medications list}
+    \label{fig: medications}
+\end{figure}
+Table of medicines that shows current/relevant medication intake for a specific patient and a table of medicines that a specific patient can take if necessary.
+
+\clearpage
+
+\subsubsection{"Kalender"}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=15cm]{patcalendar.png}
+    \caption{Patient Calendar}
+    \label{fig: patcalendar}
+\end{figure}
+
+Displays a calendar view over a month. When interacting with a specific day in the calendar the booked activities are displayed in a view in a table next to it. All the upcoming activities are also shown in the table that you can scroll. By default, the current day is displayed. Ability to choose a day view or a view with a list of all the upcoming activities (this should be the default view). The tables are possible to expand. Ability to add activities into the calendar, this function is not necessary to build, can only show the button.
+
+
+\subsubsection{Overview}
+The overview of patients is also divided into several tabs: "Mina Patienter", "Alla Patienter", "Notislogg" and "Kalender". The following sections are based on these tabs. 
+
+\subsubsection{"Mina Patienter"}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=15cm]{mypat.png}
+    \caption{My Patients}
+    \label{fig: mypat}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=15cm]{mypatfilter.png}
+    \caption{My Patients Filter}
+    \label{fig: mypatfilter}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=15cm]{createnewview.png}
+    \caption{Create new view}
+    \label{fig: createnewview}
+\end{figure}
+
+Shows table of all patients in the system connected to the department you are logged in to. See Figure \ref{fig: mypat}. Ability to search for specific patients and filter and sort the list. See Figure \ref{fig: mypatfilter} for filter function. The sort functions are placed on each heading in the table. Doctors icons in the table show who is handling the notification.
+
+Ability to add new views visible only to the currently logged in user, can add up to 7 views, so there will be 4 buttons on top (including the “lägg till ny vy” button) and 4 buttons under when adding more. Also ability to remove these filters by clicking on “X”. See Figure \ref{fig: createnewview}
+
+The gear icon in the filter/search box is not visible for users.
+
+
+\clearpage
+
+\subsubsection{"Alla Patienter"}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=15cm]{allpat.png}
+    \caption{All Patients}
+    \label{fig: allpat}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=15cm]{allpatdiabetes.png}
+    \caption{All Patients Specific View}
+    \label{fig: allpatdiabetes}
+\end{figure}
+Can show all the patients in the system. Patients are shown in the table when searched for. The information of patients the user does not have access to that can be shown is the name, social security number and level of alertness. The rest of the information of the patients to whom the user does not have access shall be blurred, until the user has asked for permission to access said information. 
+
+\clearpage
+
+\subsubsection{"Notislogg"}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=15cm]{notifications.png}
+    \caption{Notifications}
+    \label{fig: notifications}
+\end{figure}
+All the activities that happen are gathered in this notification log with a prioritization of how important the notification is to be handled. For example, if a measured value is taken with a large deviation from the average value, this should indicate a high prioritized notification.
+Same sorting and search box as in “Mina patienter” and “Alla patienter”.
+
+
+\subsubsection{"Kalender"}
+The difference between this calendar and the calendar under the patient specific view, see Figure \ref{fig: patcalendar}, is that the calendar for the logged-in staff is displayed here. Therefore, the activities displayed in the patient specific calendar will differ from those activities that will appear in this calendar. Here activities will be about booked meetings with patients. 
+
+\subsection{User interfaces -  Admin View}
+\label{section: admin}
+This section describes the admin views as defined in the document "Hi-Fi" version 2.1 from the prototype team. As the admin has the same functionality as the user only the functionality the user does not have access to but the admin does is described in this section. The section is divided into different subsections based on the system's different pages.
+
+\subsubsection{"Översikt"}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=15cm]{mypatsettings.png}
+    \caption{My Patients Settings}
+    \label{fig: mypatsettings}
+\end{figure}
+
+The gear icon in the filter/search box is only visible for admins and leads to a pop-up window of display settings "Översiktsinställningar" where the admin can determine which columns shall be visible in the dashboard, see Figure \ref{fig: mypatsettings}.
+
+\subsubsection{"Patient"}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=15cm]{patadmin.png}
+    \caption{Patient - Admin}
+    \label{fig: patadmin}
+\end{figure}
+
+Page only visible for admins. See Figure \ref{fig: patadmin}.
+
+"Inställningar Prioriteringar Mätvärden"
+Set the settings for intervals on the patient measurements. For changing the intervals you press “Ändra intervall” and are directed to the measurement page where you can change the interval and seeing the graph and measurements at the same time. The the user presses “Ändra intervall” once on admin page to see the setting in measurement.
+
+"Aktivitetslogg"
+Shows all the activity that happens on a patient specific page. All activities must be logged for the patient's integrity. The admin shall be able to sort and filter activity log in order to find specific logs.
+
+\subsubsection{"Mätvärden"}
+In the page "Mätvärden" only admins have a visible  “Ändra intervall”-button. When interacting with the button, the interval setting is displayed next to the graph. See Figure \ref{fig: measweight}.
+
+
 %\subsection{Software interfaces}
+%Same as 2.1???? 
+
+%\subsection{Hardware interfaces}
 %\subsection{Communication interfaces}
 
+
 \section{Functional requirements}
-The following section includes the requirements that specify all the fundamental actions of the software system.
+The following section includes the requirements that specify all the fundamental actions of the software system. The section is divided into four main categories: "Admin", "Patient", "System" and "Översikt". These categories are then divided into subcategories based on the different views in each category. 
+\\ \\
+To clarify how the requirements presented in tables see explanation below. 
+
+\begin{center}
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+\textbf{ID:} & \textbf{Title} & \textbf{Precondition} & \textbf{Description} & \textbf{Priority} \\
+\hline
+FRXXX id of requirement & 
+Title to briefly explain the requirement & 
+Explains any preconditions for requirement & 
+Description of what will happen in the system.  
+    \newline \textbf{Input:} What triggers the function  
+    \newline \textbf{Action:} How the system responds to the input 
+    \newline \textbf{Output:} The function's output &
+Priority level (Low-Medium-High) \\ 
+\hline
+\end{tabularx}
+\end{center}
+
+\subsection{Admin}
+In section 3.2.1. we describe functional requirements for the Admin. A precondition is that the admin is logged in to the system. 
+
+\subsubsection{Översikt/Notislogg}
+A precondition is that the admin is logged in and on the view “Oversikt/Notislogg”
+\begin{center}
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+\textbf{ID:} & \textbf{Title} & \textbf{Precondition} & \textbf{Description} & \textbf{Priority} \\
+\hline
+FR001 & 
+Create new view &
+New-view-button has been pressed and system currently displays "Skapa ny överblick" window. & 
+\textbf{Input:} Button with ID = "" is pressed 
+    \newline \textbf{Action:} System loading new window with customization settings
+    \newline \textbf{Output:} Pop-up window with customization settings options is displayed&
+Medium \\ 
+\hline
+\end{tabularx} 
+
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+FR002 & 
+Customization of overview dashboard &
+& 
+\textbf{Input:} Click on the settings-symbol (displayed as a cog) with ID ="", choose between different checkboxes of display columns (Namn, Personnummer, Prioritet, Diagnos, Notis, Senast Uppdaterad). Each of these shall have its own ID number. Click on save-button with ID = "".
+    \newline \textbf{Action:} System displays customization popup window. After preferences have been set and user clicks save-button the system generates and saves display-settings. 
+    \newline \textbf{Output:} Overview dashboard updated according to selected settings.
+    & 
+Medium \\
+\hline
+FR046 & 
+Create new customized view based on age & 
+FR001 is fulfilled &  
+    \newline \textbf{Input:} Minimum age and maximum age in text fields with ID = "minage" \& "maxage" and presses button "OK" with ID = "okview". 
+    \newline \textbf{Action:} System generates new view based on age settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window where the user must confirm the new view. 
+    & 
+Medium \\
+\hline
+\end{tabularx} 
+
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+FR047 & 
+Create new customized view based on gender & 
+FR001 is fulfilled &  
+    \newline \textbf{Input:} Click on dropdown menu "Kön" with ID = "gender" and choose between "Alla" (ID = "all"), "Man" (ID = "male") or "Kvinna" (ID = "female") and presses button "OK" with ID = "okview".
+    \newline \textbf{Action:}  System generates new view based on gender settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window where the user must confirm the new view. 
+    & 
+Medium \\
+\hline
+FR048 & 
+Create new customized view based on team & 
+FR001 is fulfilled &  
+    \newline \textbf{Input:} Click on dropdown menu "Team" with ID = "teammenu" and choose between "Alla" (ID = "all"),  or "Team 1..*" (ID = "team1..*") and presses button "OK" with ID = "okview". 
+    \newline \textbf{Action:} System generates new view based on team settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window where the user must confirm the new view. 
+    & 
+Medium \\
+\hline
+\end{tabularx} 
+
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+FR049 & 
+Create new customized view based on department & 
+FR001 is fulfilled &  
+    \newline \textbf{Input:} Click on dropdownmenu with ID = "departmentMenu" and choose between "Alla" (ID = 'all'), Department 1 (ID = 'Department1) or Department 2 (ID = 'Department2') and presses button "OK" with ID = "okview".
+    \newline \textbf{Action:} System generates new view based on age settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window where the user must confirm the new view. 
+    & 
+Medium \\
+\hline
+FR050 & 
+Create new customized view based on priority  & 
+FR001 is fulfilled &  
+    \newline \textbf{Input:} Priority level selected in checkboxes (Low, Medium, High) and presses button "OK" with ID = "okview". 
+    \newline \textbf{Action:} System generates new view based on priority settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window where the user must confirm the new view. 
+    & 
+Medium \\
+\hline
+FR051 & 
+Create new customized view based on diagnosis  & 
+FR001 is fulfilled &  
+    \newline \textbf{Input:} Diagnosis in text field with ID "customizeViewDiagnosis" OR click on the diagnosis  checkbox with ID = "diagnosisname" and press button "OK" with ID = "okview".
+    \newline \textbf{Action:} System generates new view based on diagnosis settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window where the user must confirm the new view. 
+    & 
+Medium \\
+\hline
+\end{tabularx} 
+
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+FR052 & 
+Confirm created view & 
+FR001, FR0046-Fr0051 are fulfilled &  
+    \newline \textbf{Input:} Title of new view in text field with ID "saveNewView", the selected user group in drop-down menu with ID "viewAvailableFor" and sign button with ID "confirmCustomizedView"
+    \newline \textbf{Action:}  System generates new view based on previously selected settings and saves to database.
+    \newline \textbf{Output:} New view available for all users in the chosen user group.
+    & 
+Medium \\
+\hline
+\end{tabularx}
+\end{center}
+
+\subsubsection{Översikt/Mina-Patienter}
+A precondition is that the admin is logged in and on the view “Översikt/Mina-Patienter”
+\begin{center}
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+\textbf{ID:} & \textbf{Title} & \textbf{Precondition} & \textbf{Description} & \textbf{Priority} \\
+\hline
+FR003 & 
+Create new view &
+New-view-button has been pressed and system currently displays "Skapa ny överblick" window. & 
+\textbf{Input:} Button with ID = "" is pressed 
+    \newline \textbf{Action:} System loading new window with customization settings
+    \newline \textbf{Output:} Pop-up window with customization settings options is displayed &
+Medium \\ 
+\hline
+\end{tabularx}
+
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+FR004 & 
+Customization of overview dashboard &
+& 
+\textbf{Input:} Click on the settings-symbol (displayed as a cog) with ID ="", choose between different checkboxes of display columns (Namn, Personnummer, Prioritet, Diagnos, Notis, Senast Uppdaterad). Each of these shall have its own ID number. Click on save-button with ID = "".
+    \newline \textbf{Action:} System displays customization popup window. After preferences have been set and user clicks save-button the system generates and saves display-settings. 
+    \newline \textbf{Output:} Overview dashboard updated according to selected settings. & 
+Medium \\
+\hline
+FR038 & 
+Create new customized view based on age & 
+FR003 is fulfilled &  
+    \newline \textbf{Input:} Minimum age and maximum age in text fields with ID = "minage" \& "maxage" and presses button "OK" with ID = "okview". 
+    \newline \textbf{Action:} System generates new view based on age settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window where the user must confirm the new view. 
+    & 
+Medium \\
+\hline
+\end{tabularx} 
+
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+FR039 & 
+Create new customized view based on gender & 
+FR003 is fulfilled &  
+    \newline \textbf{Input:} Click on dropdown menu "Kön" with ID = "gender" and choose between "Alla" (ID = "all"), "Man" (ID = "male") or "Kvinna" (ID = "female") and presses button "OK" with ID = "okview".
+    \newline \textbf{Action:}  System generates new view based on gender settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window where the user must confirm the new view. 
+    & 
+Medium \\
+\hline
+FR040 & 
+Create new customized view based on team & 
+FR003 is fulfilled &  
+    \newline \textbf{Input:} Click on dropdown menu "Team" with ID = "teammenu" and choose between "Alla" (ID = "all"),  or "Team 1..*" (ID = "team1..*") and presses button "OK" with ID = "okview". 
+    \newline \textbf{Action:} System generates new view based on team settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window where the user must confirm the new view. 
+    & 
+Medium \\
+\hline
+\end{tabularx} 
+
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+FR041 & 
+Create new customized view based on department & 
+FR003 is fulfilled &  
+    \newline \textbf{Input:} Click on dropdownmenu with ID = "departmentMenu" and choose between "Alla" (ID = 'all'), Department 1 (ID = 'Department1) or Department 2 (ID = 'Department2') and presses button "OK" with ID = "okview".
+    \newline \textbf{Action:} System generates new view based on age settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window where the user must confirm the new view. 
+    & 
+Medium \\
+\hline
+FR042 & 
+Create new customized view based on priority  & 
+FR003 is fulfilled &  
+    \newline \textbf{Input:} Priority level selected in checkboxes (Low, Medium, High) and presses button "OK" with ID = "okview". 
+    \newline \textbf{Action:} System generates new view based on priority settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window where the user must confirm the new view. 
+    & 
+Medium \\
+\hline
+FR043 & 
+Create new customized view based on diagnosis  & 
+FR003 is fulfilled &  
+    \newline \textbf{Input:} Diagnosis in text field with ID "customizeViewDiagnosis" OR click on the diagnosis  checkbox with ID = "diagnosisname" and press button "OK" with ID = "okview".
+    \newline \textbf{Action:} System generates new view based on diagnosis settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window where the user must confirm the new view. 
+    & 
+Medium \\
+\hline
+\end{tabularx} 
+
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+FR044 & 
+Confirm created view & 
+FR003, FR038-FR043 are fulfilled &  
+    \newline \textbf{Input:} Title of new view in text field with ID "saveNewView", the selected user group in drop-down menu with ID "viewAvailableFor" and sign button with ID "confirmCustomizedView"
+    \newline \textbf{Action:}  System generates new view based on previously selected settings and saves to database.
+    \newline \textbf{Output:} New view available for all users in the chosen user group.
+    & 
+Medium \\
+\hline
+\end{tabularx}
+\end{center}
+
+\subsubsection{Översikt/Alla-Patienter}
+A precondition is that the admin is logged in and on the view “Översikt/Alla-Patienter”
+
+\begin{center}
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+\textbf{ID:} & \textbf{Title} & \textbf{Precondition} & \textbf{Description} & \textbf{Priority} \\
+\hline
+FR053 & 
+Create new view &
+New-view-button has been pressed and system currently displays "Skapa ny överblick" window. & 
+\textbf{Input:} Button with ID = "" is pressed 
+    \newline \textbf{Action:} System loading new window with customization settings
+    \newline \textbf{Output:} Pop-up window with customization settings options is displayed &
+Medium \\ 
+\hline
+\end{tabularx} 
+
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+FR054 & 
+Create new customized view based on age & 
+FR053 is fulfilled &  
+    \newline \textbf{Input:} Minimum age and maximum age in text fields with ID = "minage" \& "maxage" and presses button "OK" with ID = "okview". 
+    \newline \textbf{Action:} System generates new view based on age settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window where the user must confirm the new view. 
+    & 
+Medium \\
+\hline
+FR055 & 
+Create new customized view based on gender & 
+FR053 is fulfilled &  
+    \newline \textbf{Input:} Click on dropdown menu "Kön" with ID = "gender" and choose between "Alla" (ID = "all"), "Man" (ID = "male") or "Kvinna" (ID = "female") and presses button "OK" with ID = "okview".
+    \newline \textbf{Action:}  System generates new view based on gender settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window where the user must confirm the new view. 
+    & 
+Medium \\
+\hline
+FR056 & 
+Create new customized view based on team & 
+FR053 is fulfilled &  
+    \newline \textbf{Input:} Click on dropdown menu "Team" with ID = "teammenu" and choose between "Alla" (ID = "all"),  or "Team 1..*" (ID = "team1..*") and presses button "OK" with ID = "okview". 
+    \newline \textbf{Action:} System generates new view based on team settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window where the user must confirm the new view. 
+    & 
+Medium \\
+\hline
+\end{tabularx} 
+
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+FR057 & 
+Create new customized view based on department & 
+FR053 is fulfilled &  
+    \newline \textbf{Input:} Click on dropdownmenu with ID = "departmentMenu" and choose between "Alla" (ID = 'all'), Department 1 (ID = 'Department1) or Department 2 (ID = 'Department2') and presses button "OK" with ID = "okview".
+    \newline \textbf{Action:} System generates new view based on age settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window where the user must confirm the new view. 
+    & 
+Medium \\
+\hline
+FR058 & 
+Create new customized view based on priority  & 
+FR053 is fulfilled &  
+    \newline \textbf{Input:} Priority level selected in checkboxes (Low, Medium, High) and presses button "OK" with ID = "okview". 
+    \newline \textbf{Action:} System generates new view based on priority settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window where the user must confirm the new view. 
+    & 
+Medium \\
+\hline
+FR059 & 
+Create new customized view based on diagnosis  & 
+FR053 is fulfilled &  
+    \newline \textbf{Input:} Diagnosis in text field with ID "customizeViewDiagnosis" OR click on the diagnosis  checkbox with ID = "diagnosisname" and press button "OK" with ID = "okview".
+    \newline \textbf{Action:} System generates new view based on diagnosis settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window where the user must confirm the new view. 
+    & 
+Medium \\
+\hline
+\end{tabularx} 
+
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+FR060 & 
+Confirm created view & 
+FR053-Fr059 are fulfilled &  
+    \newline \textbf{Input:} Title of new view in text field with ID "saveNewView", the selected user group in drop-down menu with ID "viewAvailableFor" and sign button with ID "confirmCustomizedView"
+    \newline \textbf{Action:}  System generates new view based on previously selected settings and saves to database.
+    \newline \textbf{Output:} New view available for all users in the chosen user group.
+    & 
+Medium \\
+\hline
+FR061 & 
+Customization of overview dashboard &
+& 
+\textbf{Input:} Click on the settings-symbol (displayed as a cog) with ID ="", choose between different checkboxes of display columns (Namn, Personnummer, Prioritet, Diagnos, Notis, Senast Uppdaterad). Each of these shall have its own ID number. Click on save-button with ID = "".
+    \newline \textbf{Action:} System displays customization popup window. After preferences have been set and user clicks save-button the system generates and saves display-settings. 
+    \newline \textbf{Output:} Overview dashboard updated according to selected settings. & 
+Medium \\
+\hline
+\end{tabularx}
+\end{center}
+
+\subsubsection{Patient/Admin}
+A precondition is that the admin is logged in and on the view “Patient/Admin” 
+
+\begin{center}
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+\textbf{ID:} & \textbf{Title} & \textbf{Precondition} & \textbf{Description} & \textbf{Priority} \\
+\hline
+FR006 & 
+Set limit values for priority levels & 
+ & 
+    \textbf{Input}: Limit values for different measurements in text fields with specific IDs and click "save"-button with ID = "".
+    \newline \textbf{Action}: System saves and sets patient specific prioritization limits
+    \newline \textbf{Output}: Settings displayed &
+High \\ 
+\hline 
+FR007 & 
+Accessing activity log & 
+ & 
+\textbf{Input}: Click on ""Admin"" tab \newline
+\textbf{Action}: Load activity log from database \newline 
+\textbf{Output}: Display activity log &
+Medium \\ 
+\hline 
+FR008 & 
+Search in activity log & 
+ & 
+\textbf{Input}: Text string (search parameter) in text field with ID = "".\newline 
+\textbf{Action}: System checks for activities or users that matches text string \newline 
+\textbf{Output}: Displays activities and/or users that matches string. &
+Low \\ 
+\hline
+\end{tabularx} 
+
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+FR009 & 
+Filter in activity log & 
+Filter-button with ID ="" has been pressed and system currently displays "Filter" window.  & 
+\textbf{Input}: Filter check boxes containing different options (Nya mätvärden, Besökare, Ändringar gjorda) with IDs = "" selected and "OK"-button with ID = "" pressed.  \newline 
+\textbf{Action}:  System filter activities based on filter settings. \newline 
+\textbf{Output}: Displays activities that matches filter in the activity log. &
+Low \\ 
+\hline
+\end{tabularx}
+\end{center}
+
+\subsection{Patient}
+In section 3.2.2. we describe functional requirements for the User. A precondition is that the user is logged in to the system and, on the view “Patient”
+
+\begin{center}
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+\textbf{ID:} & \textbf{Title} & \textbf{Precondition} & \textbf{Description} & \textbf{Priority} \\
+\hline
+FR005 & 
+Switch to Home view & 
+ & 
+    \newline \textbf{Input:} User clicks on the Home button with ID = "".
+    \newline \textbf{Action:} System loading Overview view.
+    \newline \textbf{Output:} System displays "Mina Patienter" . &
+High \\ 
+\hline
+\end{tabularx}
+\end{center}
+
+\subsubsection{Kalender}
+A precondition is that the user is logged in and on the view “Patient” and, on the tab “Kalender”
+\begin{center}
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+\textbf{ID:} & \textbf{Title} & \textbf{Precondition} & \textbf{Description} & \textbf{Priority} \\
+\hline
+FR010 & 
+Add calendar activity &
+& 
+\textbf{Input}: Click on a date in calendar, click "Add Activity"-button with ID = "", write a title and description in text fields with IDs, and click save-button with ID = "".  \newline 
+\textbf{Action}: Activity added \newline 
+\textbf{Output}: The chosen date is marked and the activity is added to the chosen date. & 
+Low \\ 
+\hline
+\end{tabularx}
+\end{center}
+
+\subsubsection{Mätvärden}
+A precondition is that the user is logged in and on the view “Patient” and, on the tab “Mätvärden”
+\begin{center}
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+\textbf{ID:} & \textbf{Title} & \textbf{Precondition} & \textbf{Description} & \textbf{Priority} \\
+\hline
+FR011 & 
+Detailed graph and list of measurement &
+& 
+\textbf{Input}:Click on a measurement value in a graph. Each graph and measurement value point shall have its own ID. \newline 
+\textbf{Action}: Load diagram and list of measurements \newline 
+\textbf{Output}: Display diagrams and list of measurements & 
+Low \\ 
+\hline 
+FR012 & 
+Add patient's measurement values &
+& 
+\textbf{Input}: Add measurement in text fields with ID = "", and click "Signera"-button with ID = "". \newline 
+\textbf{Action}: System stores measured value in database and updates the patient profile. \newline 
+\textbf{Output}: Displays confirmation message and updated patient information. & 
+High \\ 
+\hline 
+\end{tabularx} 
+
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+FR013 & 
+Accept patient's measurement values &
+User has clicked on the notification symbol and system currently displays the "Uppmärksammat värde" window. &
+\textbf{Input}: Clicking "Signera"-button with ID = "" to accept the changed measurement value. \newline 
+\textbf{Action}:System stores measured value in database. \newline 
+\textbf{Output}: Updated patient profile. & 
+Medium \\ 
+\hline 
+FR014 & 
+Deny patient's measurement values &
+User has clicked on the notification symbol and system currently displays the "Uppmärksammat värde" window. &
+\textbf{Input}: Deny unexpected measurement value by clicking "Avbryt"-button with ID = "". \newline 
+\textbf{Action}: System remove measured value from patient profile. \newline 
+\textbf{Output}: Displays changes and updated patient information. & 
+Medium \\ 
+\hline 
+\end{tabularx}
+\end{center}
+
+\subsubsection{Läkemedelslista}
+A precondition is that the user is logged in and on the view “Patient” and, on the tab “Läkemedelslista”.
+\begin{center}
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+\textbf{ID:} & \textbf{Title} & \textbf{Precondition} & \textbf{Description} & \textbf{Priority} \\
+\hline
+FR087 & 
+Fetch medication information from FASS &
+& 
+\textbf{Input}:Click on a medication in "Läkemedelslista" \newline 
+\textbf{Action}:Fetch URL from FASS \newline 
+\textbf{Output}: Directed to fetched URL & 
+Low \\ 
+\hline
+\end{tabularx}
+\end{center}
+
+\subsubsection{Översikt}
+A precondition is that the user is logged in and on the view “Patient” and, on the tab “Översikt”.
+\begin{center}
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+\textbf{ID:} & \textbf{Title} & \textbf{Precondition} & \textbf{Description} & \textbf{Priority} \\
+\hline
+FR088 & 
+Fetch diagnosis information from 1177 &
+& 
+\textbf{Input}:Click on a diagnosis in "Översikt" \newline 
+\textbf{Action}:Fetch URL from 1177 \newline 
+\textbf{Output}: Directed to fetched URL & 
+Low \\ 
+\hline
+\end{tabularx}
+\end{center}
+
 \subsection{System}
-\subsubsection{Data Access}
+In section 3.2.3. we describe functional requirements for the system. A precondition is that the user is logged in to the system.
 \begin{center}
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR038  \\ 
- \hline
- \textbf{Statement:} & The user shall only get access to the data if the user chooses to access it
-  \\ 
- \hline
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+\textbf{ID:} & \textbf{Title} & \textbf{Precondition} & \textbf{Description} & \textbf{Priority} \\
+\hline
+FR015 & 
+Log users accessing patient information &
+& 
+\textbf{Input}: Patient profile page is accessed by user \newline 
+\textbf{Action}: System logs user ID, date and activity as "Besökte", saves to database and updates activity log. \newline 
+\textbf{Output}:  Updated activity log with information regarding user, date and activity. & 
+High \\ 
+\hline 
+FR016 & 
+Log users updating patient information &
+& 
+\textbf{Input}: Patient information (measurements, diagnosis) is updated by user by text string in text fields with IDs. \newline 
+\textbf{Action}: System logs user ID, date and activity as [activity] with new measurements or information, saves to database and updates activity log. \newline 
+\textbf{Output}: Updated activity log with information regarding user, date and activity. &
+High \\ 
+\hline 
+FR017 & 
+Not submitted data notification &
+Time limit for measurement is set for a specific patient.& 
+\textbf{Input}: Time limit, according to individual health care plan, expires. \newline 
+\textbf{Action}: Notification printing and sending to responsible user(s). \newline 
+\textbf{Output}:  The system sends notification to user and updates "Notislogg". & 
+High \\ 
+\hline 
 \end{tabularx}
 
-\end{center}
-
-\subsubsection{General}
-\begin{center}
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR016  \\ 
- \hline
- \textbf{Statement:} & The system shall work on different devices (desktop computers and mobile devices)
-  \\ 
- \hline
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+FR018 & 
+Limit notification &
+FR006 (Admin specific) is fulfilled and the input exceeds the limit. & 
+\textbf{Input}: Patient measurement exceeds the set limit for that specific patient. \newline 
+\textbf{Action}:  Notification regarding reached limit printing and sending to responsible user(s). \newline 
+\textbf{Output}: The system sends "Uppmärksammat mätvärde"-notification to user and updates "Notislogg".& 
+High \\ 
+\hline 
+FR019 & 
+Log out & 
+&
+\textbf{Input}:User clicks on the log out button with ID = "". \newline 
+\textbf{Action}: SSystem logs out user and loads start page. \newline 
+\textbf{Output}: System displays start page. & 
+High \\ 
+\hline 
+FR020 & 
+System help &
+A help-button shall be available in all views. & 
+\textbf{Input}: User clicks on button "Help" with ID = "". \newline 
+\textbf{Action}: Loading instruction information message regarding a specific view/function. \newline 
+\textbf{Output}: The system displays instructional information message regarding a specific view/function. & 
+Low \\ 
+\hline 
+FR021 & 
+Check patient contact alternatives &
+User has clicked on the notification symbol and system currently displays the "Uppmärksammat värde"- window.  & 
+\textbf{Input}: Click on the "Gå till patientens kontaktuppgifter"-button with ID ="". \newline
+\textbf{Action}: The system loads contact information about the patient. \newline 
+\textbf{Output}: Display patient's contact information. & 
+Low \\ 
+\hline 
 \end{tabularx}
 
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR014  \\ 
- \hline
- \textbf{Statement:} & 80 percent of the users shall perceive that the information in the system are presented easy and unambiguously 
-  \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR011  \\ 
- \hline
- \textbf{Statement:} & The admin shall be able to customize and save different views of the system. (e.g. a predefined view over diabetes patients who are over 30 years)
-  \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR009  \\ 
- \hline
- \textbf{Statement:} & The admin shall be able to specify the variables that affects the health prioritization. The system shall provide the possibility to specify different variables for different health care units. 
-
- \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR007  \\ 
- \hline
- \textbf{Statement:} & The user shall be able to shift between a "patient view" where many patients are shown and a "overview view" where only one patient are shown.
- \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR002  \\ 
- \hline
- \textbf{Statement:} & As long as a user is logged into the system, the system shall be able to notify the user. \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR041  \\ 
- \hline
- \textbf{Statement:} & The system shall display which user currently handles a patient. \\ 
- \hline
-\end{tabularx}
-\end{center}
-
-
-\subsubsection{Notifications}
-\begin{center}
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR024  \\ 
- \hline
- \textbf{Statement:} & The system shall be able to alert caregivers of patients with deviating health status \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR034  \\ 
- \hline
- \textbf{Statement:} & An admin shall be able to configure at what level (based on health care status, health data etc) the system should alert caregivers\\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR035  \\ 
- \hline
- \textbf{Statement:} & The admin shall be able to determine when notifications shall be sent to users\\ 
- \hline
-\end{tabularx}
-
-\end{center}
-\subsubsection{"Patienter" and "Notislogg" in overview view}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR015  \\ 
- \hline
- \textbf{Statement:} & In the overview view under the tab home: 
-When a user hover over the notification symbol the user shall be able to see the value that triggered the notification.
-\\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR008  \\ 
- \hline
- \textbf{Statement:} & The system shall log which users who viewing which patients. These activities shall be saved in a log file.
-\\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR006  \\ 
- \hline
- \textbf{Statement:} & The system shall notify the user if they tries to access patient data that they don't have authority to view.\\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR005  \\ 
- \hline
- \textbf{Statement:} & The system shall notify the user if patients have fail twice to submit medical data according to their individual health care plan. First time a patient fail to submit medial data the app reminds the user. \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR031  \\ 
- \hline
- \textbf{Statement:} & In the Overview view under the tab notise-log: there should be three symbols: 1. "warning for exceeded limit value" 2. "message" and 3. "Lack of measured value of the patient (due to forgotten or technical problems)" \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR040  \\ 
- \hline
- \textbf{Statement:} & The user of the system shall be presented with communication options (i.e. chat, telephone number, contact information) when notified about a patient. \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR048  \\ 
- \hline
- \textbf{Statement:} & The active hover state of a notification-element shall present relevant text information for the user.  \\ 
- \hline
-\end{tabularx}
-
-\end{center}
-
-\subsubsection{"Patienter" and "Notislogg" in overview view and "Mätvärden" in patient view}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR003  \\ 
- \hline
- \textbf{Statement:} & The system shall display all matching patients to a user who filter patients by [age, alert-level, measurements, health care unit, team, disease and patients’conditions]. \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR004  \\ 
- \hline
- \textbf{Statement:} & The system shall display all patients in preferred order to a user who sort patients by [age, alert-level, measurements, health care unit, team, disease and patients’conditions]. \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR025  \\ 
- \hline
- \textbf{Statement:} & When the filter view is open, the user should be able to filter based on priority level \\ 
- \hline
-\end{tabularx}
-
-\end{center}
-
-\subsection{Overview view}
-
-\subsubsection{"Hem"}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR023  \\ 
- \hline
- \textbf{Statement:} & In the overview view under the home tab, the user should be able to sort based on disease type, latest date, name, updated by. It must also be clear which measured value the sorting is based on
- \\ 
- \hline
-\end{tabularx}
-
-\subsubsection{"Patienter"}
-\subsubsection{"Kalender"}
-\subsubsection{"Notislogg"}
-
-\subsection{Patient view} 
-\subsubsection{Data Access}
-\begin{center}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR037  \\ 
- \hline
- \textbf{Statement:} & The user shall be given a choice between accessing the data or not before getting access to said data
- \\ 
- \hline
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+FR045 & 
+Log in &
+ & 
+\textbf{Input}: Click Login-button with ID = "". Username in text field with ID "" and password in text field with ID "". \newline
+\textbf{Action}: System verifies correct log in credentials, logs in user and loads HOME page OR system denies incorrect login credentials and the user is not logged in.\newline 
+\textbf{Output}: System displays start page if log in credentials are correct and verified, else the system displays a warning stating that credentials are incorrect.  & 
+High \\ 
+\hline 
 \end{tabularx}
 \end{center}
 
-\subsubsection{Tab: "Mätvärden"}
+\subsection{Översikt}
+In section 3.2.4. we describe functional requirements for the User. A precondition is that the user is logged in to the system and, on the view “Översikt”
+
+\subsubsection{Kalender}
+A precondition is that the user is logged in, on the view “Översikt” and, on the tab “Kalender”
 \begin{center}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR020  \\ 
- \hline
- \textbf{Statement:} & The system shall be able to track patient health trends
- \\ 
- \hline
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+\textbf{ID:} & \textbf{Title} & \textbf{Precondition} & \textbf{Description} & \textbf{Priority} \\
+\hline
+FR022 & 
+Add calendar activity & 
+&
+\textbf{Input}: Click on a date in calendar, click "Add Activity"-button with ID = "", write a title and description in text fields with IDs, and click save-button with ID = "".  \newline 
+\textbf{Action}: Adds activity in calendar. \newline
+\textbf{Output}: The chosen date is marked and the activity is added to the chosen date. & 
+Low \\ 
+\hline
 \end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR022  \\ 
- \hline
- \textbf{Statement:} & The system shall be able to present patient health trends
- \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR022  \\ 
- \hline
- \textbf{Statement:} & The system shall be able to present patient health trends
- \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR033  \\ 
- \hline
- \textbf{Statement:} & In the overview of a patient the user shall in the middle of the view be presented with measurements and a seven-day measurement average.
- \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR042  \\ 
- \hline
- \textbf{Statement:} & In the view of the individual patient's measured data the user of the system shall be able to resize diagram area and list of entered data.
- \\ 
- \hline
-\end{tabularx}
-
 \end{center}
 
-\subsubsection{Tab: "Översikt"}
+\subsubsection{Notislogg}
+A precondition is that the user is logged in, on the view “Översikt” and, on the tab “Notislogg”
 
 \begin{center}
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR019  \\ 
- \hline
- \textbf{Statement:} & All metrics shall be presented together with the period of time that metrics was collected. 
- \\ 
- \hline
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+\textbf{ID:} & \textbf{Title} & \textbf{Precondition} & \textbf{Description} & \textbf{Priority} \\
+\hline
+FR025 & 
+Sorting patients & 
+&
+\textbf{Input}: Click on one of the column titles (Namn, Personnummer, Prioritet, Diagnos, Senast Uppdaterad). Each title shall have its own ID. Click once for descending alphabetical order, click twice for descending alphabetical order. \newline 
+\textbf{Action}: The system rearranges the list of patients according to sorting criteria. \newline 
+\textbf{Output}: The system displays the list of patients in the order of the sorting criteria. & 
+High \\ 
+\hline
+FR027 & 
+Switch to patient view & 
+All patients in "Notislogg" are available to the user to access. &
+\textbf{Input}: User clicks on a patient. \newline
+\textbf{Action}: Loading Patient view. \newline
+\textbf{Output}: System displays Patient View. & 
+High \\ 
+\hline
+FR028 & 
+Hover over notification to present detailed information  & 
+User is actively hovering over a notification-symbol in "Notislogg"&
+\textbf{Input}: Mouse hover over notification-symbol \newline
+\textbf{Action}: System loads data \newline
+\textbf{Output}: Displays detailed information regarding expired measurement time limit OR exceeded measurement value OR unexpected measurement value. & 
+Medium \\ 
+\hline
 \end{tabularx}
 
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR017  \\ 
- \hline
- \textbf{Statement:} & The user shall be able to see patients currently "activity level" and the measured values "Alcohol" and "Smoking" should not be included.
- \\ 
- \hline
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+FR029 & 
+Dynamic search/filter box & 
+&
+\textbf{Input}:  Text string in search box with ID = "". \newline 
+\textbf{Action}: System checks for patients that matches text string and rearranges list of patients.\newline
+\textbf{Output}: Displays patients that matches string dynamically in the list of patients. & 
+Medium \\ 
+\hline
+FR030 & 
+Visible sorting parameters & 
+FR025 fulfilled &
+\textbf{Input}: The list of patients have been sorted. \newline 
+\textbf{Action}: Load sorting parameter \newline
+\textbf{Output}: Display sorting parameter & 
+Low \\ 
+\hline
 \end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR013  \\ 
- \hline
- \textbf{Statement:} & The user shall be able to see a profile picture of the patient
- \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR012  \\ 
- \hline
- \textbf{Statement:} & The system shall be integrated with online health care services (i.e. rådgivningsstöd, 1177, vårdhandboken, FASS, internetmedicin) \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR021  \\ 
- \hline
- \textbf{Statement:} & In the patient overview under the tab “översikt”, should include information about allergies or other care restrictions
- \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR026  \\ 
- \hline
- \textbf{Statement:} & In the view of a patient user shall be able to see personal information (gender, age occupation, social security number) 
- \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR028  \\ 
- \hline
- \textbf{Statement:} & In the view of a patient, the user shall be able to see contact info to the patient and emergency contacts if available
- \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR030  \\ 
- \hline
- \textbf{Statement:} & In the overview of a patient the user shall at the top of the view be presented with the patient’s current diagnosis/noses together with a collapsible list of past diagnosis/noses.
- \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR032  \\ 
- \hline
- \textbf{Statement:} & In the view of a patient, the user shall be able to see relevant parts of system activity log. (e.g Jacob sent out a form, Sara commented)
- \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR036  \\ 
- \hline
- \textbf{Statement:} & Overview-dashboard shall display information (about the patient etc) according to the user preference settings
- \\ 
- \hline
-\end{tabularx}
-
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR039  \\ 
- \hline
- \textbf{Statement:} & In the view of the patient the current diagnosis/noses shall be presented in the heading 
- \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR043  \\ 
- \hline
- \textbf{Statement:} & In the overview of a patient the user shall at the top of the view be presented with the patient’s current medication(s).
- \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR044  \\ 
- \hline
- \textbf{Statement:} & In the overview of a patient the user shall at the bottom of the view be presented with responsible healthcare provider(s) and associated hospital or clinic.
- \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR045  \\ 
- \hline
- \textbf{Statement:} & The user shall, if required, be presented with warning symbols (as used in the Swedish health record system) in the overview of a patient.
- \\ 
- \hline
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR046  \\ 
- \hline
- \textbf{Statement:} & When search filtering, the active list shall be filtered dynamically as the user types in the search query.
- \\ 
- \hline
-\end{tabularx}
-
 \end{center}
 
-\subsubsection{Tab: "Läkemedelslista"}
+\subsubsection{Mina Patienter}
+A precondition is that the user is logged in, on the view “Översikt” and, on the tab “Mina Patienter”
 
-
-\subsubsection{Tab: "Kalender"}
 \begin{center}
-
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR027  \\ 
- \hline
- \textbf{Statement:} & In the patient view under the calendar tab, the calendar activities must be color-coded based on the activity type
- \\ 
- \hline
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+\textbf{ID:} & \textbf{Title} & \textbf{Precondition} & \textbf{Description} & \textbf{Priority} \\
+\hline
+FR031 & 
+Filtering patients & 
+Filter-button with ID ="" has been pressed and system currently displays "Filter" window. &
+\textbf{Input}: Click on "Filter"-buttonfilter and insert values from categories [Ålder, Prioritering, Verksamhet, Avdelning, Team, Diagnos]. \newline
+\textbf{Action}: The system searches for patients matching filter criteria. \newline
+\textbf{Output}: The system displays all patients who matched the filters. & 
+High \\ 
+\hline
 \end{tabularx}
 
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR029  \\ 
- \hline
- \textbf{Statement:} & In the patient view under the calendar tab, the Calendar must be able to be linked to "timebooks" / “tidböcker”
- \\ 
- \hline
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+FR034 & 
+Sorting patients & 
+&
+\textbf{Input}: Click on one of the column titles (Namn, Personnummer, Prioritet, Diagnos, Senast Uppdaterad, Uppdaterad av, Team). Each column title shall have its own ID. Click once for descending alphabetical order OR click twice for descending alphabetical order.  \newline 
+\textbf{Action}: The system rearranges the list of patients according to sorting criteria. \newline 
+\textbf{Output}: The system displays all patients according to the sorting criteria. & 
+High \\
+\hline
+FR035 & 
+Switch to patient view & 
+&
+\textbf{Input}: User clicks on a patient. \newline
+\textbf{Action}: Loading Patient view. \newline
+\textbf{Output}: System displays Patient View. & 
+High \\ 
+\hline
+FR036 & 
+Dynamic search/filter box & 
+&
+\textbf{Input}:  Text string in search box with ID = "". \newline 
+\textbf{Action}: System checks for patients that matches text string and rearranges list of patients.\newline
+\textbf{Output}: Displays patients that matches string dynamically in the list of patients. & 
+Medium \\ 
+\hline
+FR037 & 
+Hover over notification to present detailed information  & 
+User is actively hovering over a notification-symbol in "Mina Patienter"&
+\textbf{Input}: Mouse hover over notification-symbol \newline
+\textbf{Action}: System loads data \newline
+\textbf{Output}: Displays detailed information regarding expired measurement time limit OR exceeded measurement value OR unexpected measurement value. & 
+Medium \\ 
+\hline
 \end{tabularx}
 
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR047  \\ 
- \hline
- \textbf{Statement:} & In the calendar view of a patient the user shall for an upcoming activity be presented with the date, time, description, place, and comments.
- \\ 
- \hline
-\end{tabularx}
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+FR062 & 
+Create new view &
+New-view-button has been pressed and system currently displays "Skapa ny överblick" window. & 
+\textbf{Input:} Button with ID = "" is pressed 
+    \newline \textbf{Action:} System loading new window with customization settings
+    \newline \textbf{Output:} Pop-up window with customization settings options is displayed &
+Medium \\ 
+\hline
+FR063 & 
+Create new customized view based on age & 
+FR062 is fulfilled &  
+    \newline \textbf{Input:} Minimum age and maximum age in text fields with ID = "minage" \& "maxage" and presses button "OK" with ID = "okview". 
+    \newline \textbf{Action:} System generates new view based on age settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window where the user must confirm the new view. 
+    & 
+Medium \\
+\hline
+FR064 & 
+Create new customized view based on gender & 
+FR062 is fulfilled &  
+    \newline \textbf{Input:} Click on dropdown menu "Kön" with ID = "gender" and choose between "Alla" (ID = "all"), "Man" (ID = "male") or "Kvinna" (ID = "female") and presses button "OK" with ID = "okview".
+    \newline \textbf{Action:}  System generates new view based on gender settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window where the user must confirm the new view. 
+    & 
+Medium \\
+\hline
+\end{tabularx} 
 
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+FR065 & 
+Create new customized view based on team & 
+FR062 is fulfilled &  
+    \newline \textbf{Input:} Click on dropdown menu "Team" with ID = "teammenu" and choose between "Alla" (ID = "all"),  or "Team 1..*" (ID = "team1..*") and presses button "OK" with ID = "okview". 
+    \newline \textbf{Action:} System generates new view based on team settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window where the user must confirm the new view. 
+    & 
+Medium \\
+\hline
+FR066 & 
+Create new customized view based on department & 
+FR062 is fulfilled &  
+    \newline \textbf{Input:} Click on dropdownmenu with ID = "departmentMenu" and choose between "Alla" (ID = 'all'), Department 1 (ID = 'Department1) or Department 2 (ID = 'Department2') and presses button "OK" with ID = "okview".
+    \newline \textbf{Action:} System generates new view based on age settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window where the user must confirm the new view. 
+    & 
+Medium \\
+\hline
+FR067 & 
+Create new customized view based on priority  & 
+FR062 is fulfilled &  
+    \newline \textbf{Input:} Priority level selected in checkboxes (Low, Medium, High) and presses button "OK" with ID = "okview". 
+    \newline \textbf{Action:} System generates new view based on priority settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window where the user must confirm the new view. 
+    & 
+Medium \\
+\hline
+\end{tabularx} 
+
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+FR068 & 
+Create new customized view based on diagnosis  & 
+FR062 is fulfilled &  
+    \newline \textbf{Input:} Diagnosis in text field with ID "customizeViewDiagnosis" OR click on the diagnosis  checkbox with ID = "diagnosisname" and press button "OK" with ID = "okview".
+    \newline \textbf{Action:} System generates new view based on diagnosis settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window where the user must confirm the new view. 
+    & 
+Medium \\
+\hline
+FR069 & 
+Confirm created view & 
+FR062-FR068 are fulfilled &  
+    \newline \textbf{Input:} Title of new view in text field with ID "", the selected user group in drop-down menu with ID "" and sign button with ID ""
+    \newline \textbf{Action:}  System generates new view based on previously selected settings and saves to database.
+    \newline \textbf{Output:} New view available for currently logged in user only.
+    & 
+Medium \\
+\hline
+FR079 & 
+Visible sorting parameters & 
+FR034 fulfilled &
+\textbf{Input}: The list of patients have been sorted. \newline 
+\textbf{Action}: Load sorting parameter \newline
+\textbf{Output}: Display sorting parameter & 
+Low \\ 
+\hline
+\end{tabularx}
 \end{center}
 
+\subsubsection{Alla Patienter}
+A precondition is that the user is logged in, on the view “Översikt” and, on the tab “Alla Patienter”
+\begin{center}
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+\textbf{ID:} & \textbf{Title} & \textbf{Precondition} & \textbf{Description} & \textbf{Priority} \\
+\hline
+FR032 & 
+Active choice of accessing patient information outside of user's unit & 
+User in a certain unit tries to access patient information about a patient not in user's unit. &
+\textbf{Input}: Clicking on a patient in overview \newline
+\textbf{Action}: The system checks if user wants to access patient data. \newline
+\textbf{Output}: Display message checking if user wants to access data. & 
+High \\ 
+\hline
+FR033 & 
+Accessing patient information outside of user's unit &
+User in a certain unit tries to access patient information about a patient not in user's unit. &
+\textbf{Input}: Clicking on "Bekräfta" button to access patient data \newline
+\textbf{Action}: The system confirms that data shall be displayed \newline 
+\textbf{Output}: The system displays patient data & 
+High \\ 
+\hline
+FR070 &
+Create new view &
+New-view-button has been pressed and system currently displays "Skapa ny överblick" window. & 
+\textbf{Input:} Button with ID = "" is pressed 
+    \newline \textbf{Action:} System loading new window with customization settings
+    \newline \textbf{Output:} Pop-up window with customization settings options is displayed &
+Medium \\ 
+\hline
+FR071 & 
+Create new customized view based on age & 
+FR070 is fulfilled &  
+    \newline \textbf{Input:} Minimum age and maximum age in text fields with ID = "minage" \& "maxage" and presses button "OK" with ID = "okview". 
+    \newline \textbf{Action:} System generates new view based on age settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window where the user must confirm the new view. 
+    & 
+Medium \\
+\hline
+\end{tabularx} 
 
-\subsubsection{Tab: "Symptomskattning"}
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+FR072 & 
+Create new customized view based on gender & 
+FR070 is fulfilled &  
+    \newline \textbf{Input:} Click on dropdown menu "Kön" with ID = "gender" and choose between "Alla" (ID = "all"), "Man" (ID = "male") or "Kvinna" (ID = "female") and presses button "OK" with ID = "okview".
+    \newline \textbf{Action:}  System generates new view based on gender settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window where the user must confirm the new view. 
+    & 
+Medium \\
+\hline
+FR073 & 
+Create new customized view based on team & 
+FR070 is fulfilled &  
+    \newline \textbf{Input:} Click on dropdown menu "Team" with ID = "teammenu" and choose between "Alla" (ID = "all"),  or "Team 1..*" (ID = "team1..*") and presses button "OK" with ID = "okview". 
+    \newline \textbf{Action:} System generates new view based on team settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window where the user must confirm the new view. 
+    & 
+Medium \\
+\hline
+FR074 & 
+Create new customized view based on department & 
+FR070 is fulfilled &  
+    \newline \textbf{Input:} Click on dropdownmenu with ID = "departmentMenu" and choose between "Alla" (ID = 'all'), Department 1 (ID = 'Department1) or Department 2 (ID = 'Department2') and presses button "OK" with ID = "okview".
+    \newline \textbf{Action:} System generates new view based on age settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window where the user must confirm the new view. 
+    & 
+Medium \\
+\hline
+\end{tabularx} 
 
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+FR075 & 
+Create new customized view based on priority  & 
+FR070 is fulfilled &  
+    \newline \textbf{Input:} Priority level selected in checkboxes (Low, Medium, High) and presses button "OK" with ID = "okview". 
+    \newline \textbf{Action:} System generates new view based on priority settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window where the user must confirm the new view. 
+    & 
+Medium \\
+\hline
+FR076 & 
+Create new customized view based on diagnosis  & 
+FR070 is fulfilled &  
+    \newline \textbf{Input:} Diagnosis in text field with ID "customizeViewDiagnosis" OR click on the diagnosis  checkbox with ID = "diagnosisname" and press button "OK" with ID = "okview".
+    \newline \textbf{Action:} System generates new view based on diagnosis settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window where the user must confirm the new view. 
+    & 
+Medium \\
+\hline
+FR077 & 
+Confirm created view & 
+FR070-FR076 are fulfilled &  
+    \newline \textbf{Input:} Title of new view in text field with ID "", the selected user group in drop-down menu with ID "" and sign button with ID ""
+    \newline \textbf{Action:}  System generates new view based on previously selected settings and saves to database.
+    \newline \textbf{Output:} New view available for currently logged in user only.
+    & 
+Medium \\
+\hline
+\end{tabularx} 
 
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+FR078 & 
+Hide sensitive patient information outside user's department & 
+A view has previously been created.  &  
+    \newline \textbf{Input:} Click on predefined view 
+    \newline \textbf{Action:}  Load patients in view
+    \newline \textbf{Output:} Display non-sensitive patient information and blur sensitive patient information for patients outside of user's department 
+    & 
+Medium \\
+\hline
+FR080 & 
+Filtering patients & 
+Filter-button with ID ="" has been pressed and system currently displays "Filter" window.  &  
+    \newline \textbf{Input:} Click on "Filter"-buttonfilter and insert values from categories [Ålder, Prioritering, Verksamhet, Team, Avdelning, Diagnos].
+    \newline \textbf{Action:} The system searches for patients matching filter criteria. 
+    \newline \textbf{Output:} The system displays all patients who matched the filters.
+    & 
+High \\
+\hline
+FR081 & 
+Sorting patients & 
+&
+    \newline \textbf{Input:} Click on one of the column titles (Namn, Personnummer, Prioritet, Diagnos, Senast Uppdaterad). Each title shall have its own ID. Click once for descending alphabetical order, click twice for descending alphabetical order.  
+    \newline \textbf{Action:}The system rearranges the list of patients according to sorting criteria.  
+    \newline \textbf{Output:} The system displays the list of patients in the order of the sorting criteria. 
+    & 
+High \\
+\hline
+FR082 & 
+Switch to patient view & 
+The patient must be registered in the user's department. &  
+    \newline \textbf{Input:}  User clicks on a patient.
+    \newline \textbf{Action:} Loading Patient view. 
+    \newline \textbf{Output:} System displays Patient View.
+    & 
+High \\
+\hline
+\end{tabularx} 
 
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+FR083 & 
+Dynamic search/filter box & 
+&
+\textbf{Input}:  Text string in search box with ID = "". \newline 
+\textbf{Action}: System checks for patients that matches text string and rearranges list of patients.\newline
+\textbf{Output}: Displays patients that matches string dynamically in the list of patients. & 
+Medium \\ 
+\hline
+FR084 & 
+Hover over notification to present detailed information  & 
+User is actively hovering over a notification-symbol in "Alla Patienter"&
+\textbf{Input}: Mouse hover over notification-symbol \newline
+\textbf{Action}: System loads data \newline
+\textbf{Output}: Displays detailed information regarding expired measurement time limit OR exceeded measurement value OR unexpected measurement value. & 
+Medium \\ 
+\hline
+FR085 & 
+Visible sorting parameters & 
+FR081 fulfilled &
+\textbf{Input}: The list of patients have been sorted. \newline 
+\textbf{Action}: Load sorting parameter \newline
+\textbf{Output}: Display sorting parameter & 
+Low \\ 
+\hline
+FR086 & 
+Show sensitive patient information outside user's department & 
+A view has previously been created and displayed &  
+    \newline \textbf{Input:}  Click on 'Begär patientdata' button for a patient 
+    \newline \textbf{Action:} Load sensitive patient information 
+    \newline \textbf{Output:} Display sensitive patient information
+    & 
+Medium \\
+\hline
+\end{tabularx}
+\end{center} 
 
 \section{Performance requirements}
 The requirements in this section provide specification of the system performance. 
-
 \begin{center}
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & NFR005  \\ 
- \hline
- \textbf{Statement:} & The system shall be able to store and handle 10 000 simultaneous active patients.
- \\ 
- \hline
+\begin{tabularx}{\linewidth}{| l | X | l |}
+\hline
+\textbf{ID:} & \textbf{Statement} & \textbf{Priority} \\
+\hline
+NFR005 & 
+The system shall be able to store and handle 10 000 simultaneous active patients. & 
+High \\ 
+\hline
 \end{tabularx}
 \end{center}
-
 
 \section{Software system attributes}
 The requirements in this section specify the required usability, security, maintainability and portability.
 of the software system.
 
 \subsection{Usability}
-\begin{center}
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & NFR008  \\ 
- \hline
- \textbf{Statement:} & 90\% of the system users shall perceive the system as easy to use and flexible.
- \\ 
- \hline
-\end{tabularx}
-\end{center}
 
 \begin{center}
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & NFR016  \\ 
- \hline
- \textbf{Statement:} & The system shall be easy to navigate (e.g. low Lostness-score, follow the ISO 9241-11 standard).
- \\ 
- \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & NFR017  \\ 
- \hline
- \textbf{Statement:} & The system shall provide good user experience (follow the ISO 9241-11 standard).
- \\ 
- \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & NFR018  \\ 
- \hline
- \textbf{Statement:} & The system shall be accessible for people with disabilities and follow WCAG guidelines. 
- \\ 
- \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & NFR012  \\ 
- \hline
- \textbf{Statement:} & The Google Material Design system themed with Region Östergötland’s color palette shall be used.
- \\ 
- \hline
+\begin{tabularx}{\linewidth}{| l | X | l |}
+\hline
+\textbf{ID:} & \textbf{Statement} & \textbf{Priority} \\
+\hline
+NFR008 & 
+90\% of the system users shall perceive the system as easy to use and flexible. & 
+Low \\ 
+\hline
+NFR012 & 
+The Google Material Design system themed with Region Östergötland’s color palette shall be used. & 
+Medium \\ 
+\hline
+NFR016 & 
+The system shall be easy to navigate (have a low Lostness-score, i.e. < 0.4) &
+Low \\ 
+\hline
+NFR017 & 
+The system shall provide good user experience (have high SUS-score, i.e. > 68) & 
+Low \\ 
+\hline
+NFR018 & 
+The system shall be accessible for people with disabilities and follow WCAG guidelines. &
+Low \\ 
+\hline
 \end{tabularx}
 \end{center}
 
 \subsection{Security}
 
 \begin{center}
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & NFR002  \\ 
- \hline
- \textbf{Statement:} & OAuth shall be used for login and authentication.
- \\ 
+\begin{tabularx}{\linewidth}{| l | X | l |}
+\hline
+\textbf{ID:} & \textbf{Statement} & \textbf{Priority} \\
+\hline
+NFR002 & 
+OAuth shall be used for login and authentication. &
+High \\ 
  \hline
 \end{tabularx}
 \end{center}
@@ -695,103 +1422,44 @@ of the software system.
 \subsection{Maintainability}
 
 \begin{center}
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & NFR013  \\ 
- \hline
- \textbf{Statement:} & The system shall enable use of openEHR platforms as storage backend for EHR content (e.g. measurements, content from forms filled out by the patient and care plan).
- \\ 
- \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & NFR014  \\ 
- \hline
- \textbf{Statement:} & The system shall be integrable with RÖ’s systems for personell lists from their database.
- \\ 
- \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & NFR015  \\ 
- \hline
- \textbf{Statement:} & The system shall be integrable with the Swedish population register (folkbokföringsregister). 
- \\ 
- \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & NFR019  \\ 
- \hline
- \textbf{Statement:} & Online health care services (i.e. rådgivningsstöd, 1177, vårdhandboken, FASS, internetmedicin) shall be integrated in the system.
- \\ 
- \hline
+\begin{tabularx}{\linewidth}{| l | X | l |}
+\hline
+\textbf{ID:} & \textbf{Statement} & \textbf{Priority} \\
+\hline
+NFR013 & 
+The system shall enable use of openEHR platforms as storage backend for EHR content (e.g. measurements, content from forms filled out by the patient and care plan) &
+High \\ 
+\hline
+NFR019 & 
+Online health care services (i.e. 1177, FASS) shall be integrated in the system. & 
+Low \\ 
+\hline
 \end{tabularx}
 \end{center}
 
 \subsection{Portability}
 
 \begin{center}
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & NFR001  \\ 
- \hline
- \textbf{Statement:} & The system shall be OS independent.
- \\ 
- \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & NFR004  \\ 
- \hline
- \textbf{Statement:} & It shall be possible to deploy the system using Docker orchestrated by Kubernetes.
- \\ 
- \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & NFR006  \\ 
- \hline
- \textbf{Statement:} & Standardized terms and national language for special purposes (LSP) shall be used. 
- \\ 
- \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & NFR007  \\ 
- \hline
- \textbf{Statement:} & The system shall be written in TypeScript (instead of JavaScript).
- \\ 
- \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & NFR009  \\ 
- \hline
- \textbf{Statement:} & The system shall implement a scalable UI that works seamlessly across a broad range of screen sizes.
- \\ 
- \hline
+\begin{tabularx}{\linewidth}{| l | X | l |}
+\hline
+\textbf{ID:} & \textbf{Statement} & \textbf{Priority} \\
+\hline
+NFR001 & 
+The system shall be OS independent. &
+High \\ 
+\hline
+NFR004 & 
+It shall be possible to deploy the system using Docker orchestrated by Kubernetes.&
+High \\ 
+\hline
+NFR006 & 
+Standardized terms and national language for special purposes (LSP) shall be used. &
+Low \\ 
+\hline
+NFR009 & 
+The system shall implement a scalable UI that works seamlessly across a broad range of screen sizes (desktop computers and mobile devices). &
+Medium \\ 
+\hline
 \end{tabularx}
 \end{center}
 
@@ -799,41 +1467,87 @@ of the software system.
 \section{Other requirements}
 
 \begin{center}
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & NFR003  \\ 
- \hline
- \textbf{Statement:} & The server-side functionality shall be based on open source parts.
- \\ 
- \hline
+\begin{tabularx}{\linewidth}{| l | X | l |}
+\hline
+\textbf{ID:} & \textbf{Statement} & \textbf{Priority} \\
+\hline
+NFR003 & 
+The server-side functionality shall be based on open source parts. &
+High \\ 
+\hline
+NFR010 & 
+The system shall be developed in open source, Apache 2 license. &
+Medium \\ 
+\hline
+NFR011 & 
+The graphical interface components shall be continuously and openly documented/tested/published through Storybook. &
+Medium \\ 
+\hline
+NFR020 & 
+In the view of a patient user shall be able to see the patient's profile picture &
+Low \\ 
+\hline
+NFR021 & 
+In the view of the patient the current diagnosis/diagnoses shall be presented in the heading  &
+Medium \\ 
+\hline
+NFR022 & 
+In the calendar view of a patient the user shall for an upcoming activity be presented with the date, time, description, place, and comments &
+Low \\ 
+\hline
+NFR023 & 
+The system shall have a symbol that indicates which priority level the notification has. &
+Medium \\ 
+\hline
+NFR024 & 
+It must be specified during what period the shown measurments have been collected. &
+Low \\ 
+\hline
+NFR025 & 
+The system shall present measurement history in a diagram. &
+Medium \\ 
+\hline
+NFR026 & 
+Information about patient care considerations shall be visible in patient overview (e.g. Fear of needles)  &
+Medium \\ 
+\hline
+NFR027 & 
+Personal information (gender, age, personal number) of the patient shall be included in the view. &
+Medium \\ 
+\hline
+NFR028 & 
+Contact information and emergency contacts, if available, shall be included in the view. &
+Medium \\ 
+\hline
+NFR029 & 
+At the top of the view, the patient's current diagnosis/diagnoses shall be visible together with a collapsible list of past diagnosis/diagnoses &
+Medium \\ 
+\hline
+NFR030 & 
+In the overview of a patient the user shall in the middle of the view be presented with measurements and a seven-day measurement average &
+Medium \\ 
+\hline
+NFR031 & 
+In the overview of a patient the user shall be presented with the patient’s current medication(s) &
+Medium \\ 
+\hline
+NFR032 & 
+In the overview of a patient the user shall at the bottom of the view be presented with responsible healthcare provider(s) and associated hospital or clinic &
+Low \\ 
+\hline
+NFR033 & 
+The user shall, if necessary, be presented with "Uppmärksamhetssymbolen" in the overview of a patient &
+Medium \\ 
+\hline
+NFR034 & 
+Display a list of all of patient's current medications.  &
+Medium \\ 
+\hline
 \end{tabularx}
 \end{center}
 
-\begin{center}
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & NFR010  \\ 
- \hline
- \textbf{Statement:} & The system shall be developed in open source, Apache 2 license.
- \\ 
- \hline
-\end{tabularx}
-\end{center}
-
-\begin{center}
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & NFR011  \\ 
- \hline
- \textbf{Statement:} & The graphical interface components shall be continuously and openly documented/tested/published through Storybook.
- \\ 
- \hline
-\end{tabularx}
-\end{center}
-
-
-\appendix
-\chapter{Appendix Title}
+%\appendix
+%\chapter{Appendix Title}
 
 %\printindex
 

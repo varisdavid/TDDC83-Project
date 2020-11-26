@@ -1,12 +1,18 @@
 \documentclass[12pt]{article}
-
 \usepackage{authblk}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{ragged2e}
 
-
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
 \usepackage[utf8]{inputenc}
-
 \usepackage{subcaption}
-
 \usepackage{natbib}
 \usepackage{graphicx}
 \usepackage[a4paper,width=165mm,top=25mm,bottom=25mm]{geometry}
@@ -18,34 +24,150 @@
     
     \input{titlepage}
 \clearpage
+%%
+%%Daniels kommentarer: 
+%Konkreta milstolpar och åtgärder för gruppens kompetensutveckling, gärna mappade mot projektplanens %milstolpar så att det blir tydligt hur kompetensen svarar mot behoven i projektplanen.
+%Inte (bara) en önskelista över vad som behövs, utan vad som faktiskt ska göras: Vem ska göra vad %för att lära sig vad, på vilket sätt, när, varför, vem tar ansvar för det och hur följs det upp?
 
-%Guidelines for learning
-    \section{Guidelines for learning}
-We have now decided on using React as our front-end development environment. Team leader Filip Eriksson, have decided on some basic learning activities and material in order to secure basic knowledge across the development team. The first step in this process is to go through basic tutorials through react.js own website. There is also material that can be used through Code Academy, W3schools and Udemy that is good for getting the basic knowledge needed for the project. 
+    
+     
+     % Table of contents, list of figures, and list of tables
+    {
+ 
+        \renewcommand{\contentsname}{Innehåll}
+        \tableofcontents
+    }
+    
+    
+    \newpage
+    
+   \begin{flushleft} \section{Change log}
+   \end{flushleft}
+    \begin{center}
+    
 
-For the testing team our integrator Emil Strömberg has acquired a course on Udemy that is good for learning how to integrate tests into our continuous integration process. The concerned members of the project group is to go through this material during the exam period in order to gain the required knowledge before the development process kick starts again after the exams. 
+
+\begin{tabular}{ | m{5em} | m{5em}| m{10em} |m{5em}| m{5em} |m{5em} |  } 
+\hline
+Version Number& Published Date & Description of revision & Author & Approved by \\ 
+\hline
+1.0 & 2020-09-22 & Sections about Workshops, Presentations, Resource sharing, Group meetings and discussions, Communication directives & Martin Friberg & Patrik Palmgren \\
+\hline
+1.1 & 2020-11-18 & Education to be done, education history and rewrote all the other sections. How to follow up on education & Martin Friberg & Sam Anlér, Emma Johansson, Patrik Palmgren \\
+\hline
+2.0 & 2020-11-21 & \textbf{Fixing inspection comments}. Adding section on individual education and fixing spelling errors as well as making general processes into subsections. Adding table of contents & Martin Friberg & Patrik Palmgren \\
+\hline
+
+\end{tabular}
+\end{center}
+            
+\newpage
+
+    
+
+\section{Introduction}
+The intended use of this document is for project members and external stakeholders to get an overview of the intended methods for education that is used throughout the project. Its purpose is also to describe what has been done so far in terms of educating the team members in order to make sure that every department have the required knowledge to reach the goals in the project plan. The document is supposed to make it clearer which member of the project group that is supposed to do what at a specific point in time in order to assure a broad knowledge base within the company. This document is continuously updated through the course of the project. 
 
 % Workshops
-    \section{Workshops}
-  When development methods include new tools, we select someone responsible for the area who is supposed to gain a deeper understanding about the fore-mentioned tool. The person mentioned is then in charge of making sure that the rest of the team that is supposed to work with the tool gains the required knowledge about it. This is done via workshops online where the responsible person goes through the basics of the tool.  A workshop could also include different brainstorming activities, where the participants are to come up with ideas regarding risks, company name, requirements for the system or tools to use for a specific system.
+\section{General processes}
+    \subsection{Workshops}
+  When development methods include new tools, management or a team leader, depending on the specificity of the task, select a person responsible for the area who is to gain a deeper understanding about the fore-mentioned tool. The person mentioned is then in charge of making sure that the rest of the team that is supposed to work with the tool gains the required knowledge about it. This is done via workshops online where the responsible person goes through the basics of the tool.  A workshop could also include different brainstorming activities, where the participants are to come up with ideas regarding risks, company name, requirements for the system or tools to use for a specific system.
   
 % Presentations
-    \section{Presentations}
+    \subsection{Presentations}
 The management produces presentations to give during CEO meetings to educate the team in what has been done during the week and what is to be done during the upcoming weeks. The management is also supposed to highlight what in the process that is the most critical to get done as soon as possible. The presentations might also be used to educate the team in processes and tools that makes the work more effective. Example of tools that this may include is GitLab, GitLab Issues, React.js, Flask etc. The presentations could also be about how to handle documents and where to place documents in order for them to be easily found by project group members once they are needed in order to obtain certain information. 
 
 % Resource Sharing
-    \section{Resource sharing}
- Through sharing resources in Teams and GitLab the team tries to share the knowledge and progression within their work. This assures that the whole team gets to take part of each other’s knowledge and where they currently are in terms of progression. It also prevents two people doing the same thing on different ends. 
+    \subsection{Resource sharing}
+ Through sharing resources in Teams and GitLab the team tries to share the knowledge and progression within their work. This assures that the whole team gets to take part of each other’s knowledge and where they currently are in terms of progression. It also prevents two people from doing the same thing on different ends. 
  
  The process has starting according to plan where for example the UX-designer and Usability designer have shared their finished lo-fi prototype with the entire team through our shared resources in General in Microsoft Teams. A usability test of the lo-fi prototype has also been done together with the testing group and this test has also been shared with the entire group in the same way, making sure that the entire project group stays updated on the progress and latest information that has been acquired from the customer. 
  
 % Group meeting & discussions
-    \section{Group meetings and discussions}
+    \subsection{Group meetings and discussions}
 The team is divided into different teams, both smaller cross-functional teams and teams where the whole group is working together on a specific task in regards to usability tests and development. The cross-functional teams makes it easier to share the information between the R\&D department and the P\&S department and makes sure that the information is shared and spread across the whole company. They are also good in making sure that we have all aspects of the software in mind when developing components for it. Through our weekly group meetings that are supposed to take place at least once every week we assure that we have a good communication in the project group where we can have emphasis on the current important matters.
 
 %communication directives
-    \section{Communication directives}
-Through set up communication directives every person in the group should know who their main contact is for sharing the information that they want to spread or to obtain the information that they want to acquire. The communication structure has also been set up in order to streamline the communication throughout the company. 
+    \subsection{Communication directives}
 
-The management in mainly in contact with the different team leaders as well as the architect and the integrator. The team leaders are to be responsible for communicating with other team leaders concerning correlated matters or when they are developing a software function which requires input from several groups like testing and development. Larger problems that are to be shared through the entire project group is to be first shared with management and there after shared by management via Microsoft Teams and via the project group meetings where the CEO is present. Sharing the information via two channels assures that the information is actually obtained by all the project members. 
+
+The management should mainly be in contact with the different team leaders as well as the architect and the integrator. All teams are to mainly have contact with each other within the teams, but other temporary chats are set up when working in small cross-functional teams. Examples of this is when the UX team as well as the testing team assures that the usability of the prototype is good through user tests with the end user. 
+
+The communication is mainly to be done through chats in Microsoft Teams, since messages in a channel either pops up for the entire project group when tagging the channel or not being that visible for the people concerned when not tagging the channel.
+
+For heavier tasks, meetings via Microsoft Teams should be held in order to have a more efficient work flow. Conclusions drawn from the meetings should be noted down for future reference and to have an easier time inserting changes into living documents.
+
+The team leaders are to be responsible for communicating with other team leaders concerning correlated matters or when they are developing a software function which requires input from several groups like testing and development. Larger problems that are to be shared through the entire project group is to be first shared with management and there after shared by management via Microsoft Teams and via the project group meetings where the CEO is present. Sharing the information via two channels assures that the information is actually obtained by all the project members. 
+
+\section{Plans for education}
+\subsection{Individual education}
+All members of the project are to educate themselves in useful techniques whenever there is need for new knowledge in order to implement the project's requirements. Education is done continuously throughout the project where each individual responsible for a specific task is to acquire the knowledge they need in order to effectively implement the tools that fits the task best. The developers are to educate themselves in code writing practices, frameworks and different libraries. The design team is to educate themselves in relevant best practices for design and design principles as well as the tools used to create prototypes. The testing team is to educate themselves in tools used for testing such as Selenium, TDD and JUnit as well as learning how to do insightful usability tests with end users. The analysts are to continually improve their knowledge regarding how to write a good SRS that covers everything that the customer wants from the product.
+
+\subsection{Management}
+\begin{itemize}
+    \item Management shall continue to present the current status of the project during group meetings in order for all project members to get a good overview of the project.
+\end{itemize}
+ 
+\subsection{Development}'
+Developers are continuously educating themselves within their team in order to be able to provide a satisfying product before the code stop on the 4th of December. 
+\begin{itemize}
+    \item Filip Eriksson shall hold workshops continuously for new people entering the development team. 
+    \item Lukas Everborn and Axel Malmström shall hold workshop on the development process for front-end and back-end development respectively for new developers. 
+    \item Continuous education in Yarn shall be done by Gustaf Eriksson for setting up the environment for developers. This is done to get more of the rest of the team to have an easy time joining the development. 
+    \item READme in GitLab for setting up Yarn environment
+\end{itemize}
+\subsection{Testers}
+\begin{itemize}
+    \item Gustav Karlsson shall hold a workshop in how to use the Kanban board in GitLab to easier track the workflow from requirement to setting up TDDs to developing to doing the final testing of the requirement. 
+\end{itemize}
+\subsection{Analysis}
+    \begin{itemize}
+    \item Sara Lindholm shall continue to be in contact with supervisor Sana and communicate any conclusion drawn about the SRS with the rest of the analysts. This might include introducing an overview in form of a picture of the feature mentioned in the requirement. 
+    \item Analysts shall continue to read a lot themselves about how the SRS is supposed to be structured.
+    \item Continuous workshops by Sara Lindholm on how to structure the SRS. 
+
+\end{itemize}
+
+
+    \section{History of education}
+    \subsection{introduction}
+    Listed below is all of the education that has taken place within the company from the different teams up until this point in time. 
+\subsection{Education from management}
+\begin{itemize}
+ \item \textbf{[2020-09-11]} Workshop on how Azure DevOps works and how it is integrated with GitLab.
+    \item \textbf{[2020-09-17]} Presentation of basic commands such cloning repo, pushing, pulling, merging in GitLab for the whole company. 
+        \item \textbf{[2020-09-25]} Workshop on risks. Six group members brainstormed about what potential risks there might be for the project.
+
+    \item \textbf{[2020-09-26]} Creation of guide on how to version handle LaTeX documents in Git.
+    \item \textbf{[2020-11-12]} Workshop on how to be more explicit with inspection of documents as well as the change log to be more on the clear about how documents are revised and different versions of them. 
+\end{itemize}
+\subsection{Developement}
+\begin{itemize}
+    \item For the testing team our integrator Emil Strömberg acquired a course on Udemy that is good for learning how to integrate tests into our continuous integration process. The concerned members of the project group went through this material during the exam period in order to gain the required knowledge before the development process started again after the exams. 
+    
+    \item \textbf{[2020-09-26]} Team leader Filip Eriksson, decided on some basic learning activities and material in order to secure basic knowledge across the development team. The first step in this process is to go through basic tutorials through react.js own website. There is also material that can be used through Code Academy, W3schools and Udemy that is good for getting the basic knowledge needed for the project. 
+    \item Continuous education in Yarn by Gustaf Eriksson for setting up the environment for developers. 
+    \item READme in GitLab for setting up Yarn environment
+    \item Guides in \href{https://teams.microsoft.com/l/file/615C62C2-B9BB-4CBA-BEA8-7DE9C1A7FAC5?tenantId=913f18ec-7f26-4c5f-a816-784fe9a58edd&fileType=docx&objectUrl=https%3A%2F%2Fliuonline.sharepoint.com%2Fsites%2FTeam_TDDC88_2020_C3%2FDelade%20dokument%2FGeneral%2FDevelopment%2FFramework%20for%20programming%20TDDC88.docx&baseUrl=https%3A%2F%2Fliuonline.sharepoint.com%2Fsites%2FTeam_TDDC88_2020_C3&serviceName=teams&threadId=19:2e5b2f7b1d9c4b17a70ddd8351b41898@thread.tacv2&groupId=ddbf5407-89}{Teams}}
+    that covers frameworks for development and guides for the learning process.
+    
+    \item Released recording shows the Hi-Fi prototype being tested. This assures that developers have an easy time to acquire knowledge for how the design should look on the web application. Having the right design in the finished product is crucial to able to deliver a viable product to the customer at the VSSE on the 10th of December.
+\end{itemize}
+
+
+\subsection{Testers}
+Testers have been educating themselves in how to perform suitable tests for prototypes as well as for the web application. Performing relevant testing is important, since it allows the project to be sure that the finished product meets the requirements in the SRS. Meeting these requirements also means that the customer gets the product that they assume to be getting.
+\begin{itemize}
+    \item \textbf{[2020-11-05 - 2020-11-12]} \href{(https://www.udemy.com/course/what-a-java-software-developer-must-know-about-testing/)} {Course on Udemy regarding testing, TDD, Junit and Selenium.} This course is meant to be complementary to the introductory lecture and labs we had on testing. The testing group felt that it was hard to grasp the essence of testing so we opted for a full course in this. After everyone took the course we had a meeting discussing it and went through if anyone had any questions. 
+    \item \textbf{[2020-11-05 - 2020-11-12]} Watching a testing lecture on  \href{(https://www.youtube.com/watch?v=mRW2E8uweEc)}{youtube} regarding using Jest and selenium which is more project specific and went through some test cases in our own project. Tests were made together to make sure everybody in the group understood what was said in the lecture. 
+    \item \textbf{[2020-11-05 - 2020-11-12]} An environment setup was made by Gustav Karlsson to make sure that all our testing is made from the same environment. As of now there is not a document on it but it will come. The testers shared their screens for installing, in order for Gustav to be able to troubleshoot any problems that could have arisen. 
+    \item \textbf{[16/11-20]} As a last step in the education, the testleader created a seminar on testing with Magnus Nielsen where he held a small presentation on what the essence of testing is and if we had any questions we could ask them in this seminar. Since our testers are already familiar with the framework and have started developing tests, more in depth questions could be asked. The day after the seminar the test group debriefed on what was said, and to see if there was any questions. 
+\end{itemize}
+
+\subsection{Analysis}
+\begin{itemize}
+    \item \textbf{[Throughout the project]} Read a lot themselves about how SRS are supposed to be structured. Some relevant resources were shared with the group by Sara Lindholm. 
+    \item \textbf{[Throughout the project]} Workshops on how to structure the SRS. 
+\end{itemize}
+
 \end{document}

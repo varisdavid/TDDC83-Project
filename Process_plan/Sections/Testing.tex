@@ -1,0 +1,29 @@
+In this section, processes regarding the Testing team are described.
+
+\subsection{Testing Structure and Frequency}
+The testing is to be done mostly through Integration and Regression. Integration meaning to test functionality of the software and the user experience rather than code based unit tests.
+Regression meaning that the Integration testing is done iteratively, checking so that previous tests are still fulfilled throughout the process.
+
+Some user tests are to be done and this is to be done in collaboration with the UX/Prototype team as they enable the user tests to be done with a product.
+
+The structure of the testing cycle is determined by what functions the Developers have implemented as this limits what tests can be done. The goal is to have a test for everything that up to that point is developed,
+
+\subsection{Choice of tests}
+All tests are made to evaluate how well the product matches the requirements procured by the Analysis team. Therefore the choice of what tests are to be developed is firmly rooted in the SRS. And mapped to these requirements in a RTM.
+
+Regarding the level of testing to be chosen this is done by evaluation what kind of tests are most important and most manageable. This leads to Regression and Integration tests being prioritised while there is room left for development of system tests.
+
+\subsection{Iterative development of unit tests and automated tests}
+This is limited by the use of openEHR as the backend as this is already a stable codebase and unit tests are limited in functionality here. Automated tests are developed by checking the requirement, simulating the test manually in the application and if possible being formalised into validation.
+
+\subsection{Implementation of tests to CI}
+This has been given a lower priority for this project as the frequency of regressive integration tests simulates some parts of CI and the process of functionality based testing does not lend itself to CI. However basic non user related test are to be implemented in the CI in collaboration with the Development team.
+
+\subsection{Evaluation of tests}
+The tests are documented thoroughly throughout development and formalised in the RTM where the Quality Coordinator can inspect them and see if they meet the requirements. This process is also done internally throughout development.
+\subsection{Documentation of tests}
+As described above the tests are to be documented in a RTM with both a description of the test, matching requirement as well as a follow up describing how it has been working.
+
+\subsection{User tests}
+Mostly based on think out loud, letting the users describe what felt good and bad. These tests are to be recorded to enable them to be used throughout development. A modified SUS is also performed where valuable parameters are assessed based on user scores.
+The results of these tests are then to be formalised in an action plan by Analysis

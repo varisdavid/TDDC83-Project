@@ -6,72 +6,75 @@
 \usepackage{natbib}
 \usepackage{graphicx}
 \usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{makecell}
+\usepackage{multirow}
 \usepackage[table]{xcolor}% http://ctan.org/pkg/xcolor
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{1em}
+\usepackage{hyperref}
+\graphicspath{ {./images/} }
 
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
 
 \usepackage[a4paper,width=165mm,top=25mm,bottom=25mm]{geometry}
-\graphicspath{ {./Pictures/} }
 \title{\Huge Process Plan}
-\author{}
+\author{Klasson M, Trolme A, Anlér S, Friberg M}
+
+%For tables from SQAP
+\newcolumntype{n}{>{\hsize=0.7\hsize \raggedright\arraybackslash}X}
+\newcolumntype{w}{>{\hsize=1.6\hsize \raggedright\arraybackslash}X}
+\newcolumntype{a}{>{\hsize=1.2\hsize \raggedright\arraybackslash}X}
+\newcolumntype{b}{>{\hsize=0.8\hsize \raggedright\arraybackslash}X}
 
 \begin{document}
-\maketitle
 
-\begin{center}
-    \textbf{\large Current Version 2.1 [9-11-20]}
-    \vspace{10mm}
-    
-    \emph{\large Previous Versions}
-    
-\begin{center}
-\tiny
-\begin{tabular}{ | m{5em} | m{5em}| m{10em} |m{5em}| m{5em} |m{5em} |  } 
-\hline
-Version Number& Published Date & Description of revision & Author & Approved by \\ 
-\hline
-1.0 & 2020-10-13 & Document Plan and a bit about GitLab & Martin Friberg & N/A \\
-\hline
-2.0 & 2020-11-04 & Wrote about SCRUM and a bit about eXtreme programming. Added things to GitLab section & Martin Friberg & N/A \\ 
-\hline
-2.1 & 2020-11-15 & Added things to most parts of the process plan. New sections (Cross-functional teams and development) & Martin Friberg & N/A \\
-\hline
-
-\end{tabular}
-\end{center}
-
-\end{center}
+\input{Titlepage}
 
 
-\clearpage
 
 % Document Plan
     \section{Document plan}
     \input{Sections/Documents}
 
     \clearpage
-% GITLABBBBBB
+    % GITLAB
     \section{Processes for GitLab}
-        \input{Sections/GitLab}
+    \input{Sections/GitLab}
 
-%SCRUMMM
+    %SCRUM
+    \pagebreak
     \section{SCRUM}
-        \input{Sections/SCRUM}
-        
-        %eXtreme
-    \section{eXtreme Programming}
-        \input{Sections/eXtreme Programming}
+    \input{Sections/SCRUM}
     
-        %WHAT DO WE DO IN DEVVVV
+    \pagebreak
     \section{Development team}
-        \input{Sections/Development}
-        
-        
-             %In what way are we working in cross-functional teams?
+    \input{Sections/Development}
+   
+    \pagebreak
+    % Processes used by the management team
+    \section{Management team}
+    \input{Sections/Management}
+    
+    \pagebreak
+    % Processes used by the analysis team
+    \section{Analysis team}
+    \input{Sections/Analysis}
+    
+    \pagebreak
+    % Processes used by the testing team
+    \section{Testing team}
+    \input{Sections/Testing}
+ 
+    %In what way are we working in cross-functional teams?
+    \pagebreak
     \section{Cross-functional work}
-        \input{Sections/Cross-functional Teams}
-        
-        
+    \input{Sections/Cross-functional Teams}
     
 \end{document}

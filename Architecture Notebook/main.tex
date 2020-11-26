@@ -18,50 +18,77 @@
 \title{Architecture Notebook}
 
 \author{Jonas Malm}
-\date{October 2020\\---\\Version 0.6.5}
+\date{Fall 2020\\---\\Version 1.11}
 
 \begin{document}
 
 \maketitle
+
+\begin{centering}
+\includegraphics[scale=0.7]{logo-heartbyte}
+\end{centering}
+
 \clearpage
 
+\newgeometry{margin=0.7in}
 \begin{table}
 \section*{Version history}
 \centering
-\begin{tabular}{|l|l|l|l|}
+\begin{tabular}{|l|l|l|p{7cm}|p{3cm}|}
 \hline
-Version & Date & Author & Description \\ \hline
-0.1.0 & 2020-10-15 & Jonas Malm & Creation of document\\ 
-0.2.0 & 2020-10-16 & Jonas Malm & Added architectural goals, finished ASRs\\
-0.2.1 & 2020-11-02 & Jonas Malm & Added architectural constrains\\ 
-0.3.0 & 2020-11-02 & Jonas Malm & Added architectural decisions\\
-0.3.1 & 2020-11-04 & Jonas Malm & Refined decisions and ASRs\\
-0.4.0 & 2020-11-04 & Jonas Malm & Added key abstractions and started layers\\
-0.4.1 & 2020-11-05 & Jonas Malm & Wrote detailed layers\\
-0.4.2 & 2020-11-09 & Jonas Malm & Added a glossary\\
-0.4.3 & 2020-11-09 & Jonas Malm & Mades revisions based on feedback from Gustaf Eriksson\\
-0.4.4 & 2020-11-09 & Jonas Malm & Re-wrote ASR to facilitate traceability\\
-0.5.0 & 2020-11-10 & Jonas Malm & Added user cases\\
-0.5.1 & 2020-11-10 & Jonas Malm & Modified box and line to separate filtration module\\
-0.5.2 & 2020-11-10 & Jonas Malm & Added overview sequence diagram\\
-0.6.0 & 2020-11-11 & Jonas Malm & Started work on the authentication section\\
-0.6.1 & 2020-11-12 & Jonas Malm & Added new section to arch. decisions: Using Auth0\\
-0.6.2 & 2020-11-13 & Jonas Malm & Added subsection to AD: Role-based access control\\
-0.6.3 & 2020-11-13 & Jonas Malm & Added RBAC Roles to authentication section\\
-0.6.4 & 2020-11-13 & Jonas Malm & Added an authentication sequence diagram\\
-0.6.5 & 2020-11-13 & Jonas Malm & Added Patient View sequence diagram\\
+Version & Date & Author & Description & Approved by \\ \hline
+0.1 & 2020-10-15 & Jonas Malm & Creation of document & \\ 
+0.2 & 2020-10-16 & Jonas Malm & Added architectural goals, finished ASRs & \\
+0.3 & 2020-11-02 & Jonas Malm & Added architectural constrains & \\ 
+0.4 & 2020-11-02 & Jonas Malm & Added architectural decisions & \\
+0.5 & 2020-11-04 & Jonas Malm & Refined decisions and ASRs & \\
+0.6 & 2020-11-04 & Jonas Malm & Added key abstractions and started layers & \\
+0.7 & 2020-11-05 & Jonas Malm & Wrote detailed layers & \\
+0.8 & 2020-11-09 & Jonas Malm & Added a glossary & \\
+0.9 & 2020-11-09 & Jonas Malm & Mades revisions based on feedback from Gustaf Eriksson & Gustaf Eriksson\\
+0.10 & 2020-11-09 & Jonas Malm & Re-wrote ASR to facilitate traceability & \\
+0.11 & 2020-11-10 & Jonas Malm & Added user cases & \\
+0.12 & 2020-11-10 & Jonas Malm & Modified box and line to separate filtration module & \\
+0.13 & 2020-11-10 & Jonas Malm & Added overview sequence diagram & \\
+0.14 & 2020-11-11 & Jonas Malm & Started work on the authentication section & \\
+0.15 & 2020-11-12 & Jonas Malm & Added new section to arch. decisions: Using Auth0 & \\
+0.16 & 2020-11-13 & Jonas Malm & Added subsection to AD: Role-based access control & \\
+0.17 & 2020-11-13 & Jonas Malm & Added RBAC Roles to authentication section & \\
+0.18 & 2020-11-13 & Jonas Malm & Added an authentication sequence diagram & \\
+0.19 & 2020-11-13 & Jonas Malm & Added Patient View sequence diagram & \\ \hline
+1.0 & 2020-11-24 & Jonas Malm & Revisions after inspection & Patrik Palmgren\\
+1.1 & 2020-11-16 & Jonas Malm & Added Placement of modules in Arch. dec. section & \\
+1.2 & 2020-11-16 & Jonas Malm & Wrote the scaleability in future section & \\
+1.3 & 2020-11-18 & Jonas Malm & Wrote the support in future section & \\
+1.4 & 2020-11-18 & Jonas Malm & Started maintainability in future section & \\
+1.5 & 2020-11-18 & Jonas Malm & More maintainabillity: more data and replacing EhrScape & \\
+1.6 & 2020-11-20 & Jonas Malm & Fixed inconsistencies in how HCU were named & \\
+1.7 & 2020-11-20 & Jonas Malm & Future dev: Added trend analysis and two figures & \\
+1.8 & 2020-11-22 & Jonas Malm & Future dev: Added advanced notification log and one figure & \\
+1.9 & 2020-11-22 & Jonas Malm & Future dev: Added tweaking rule engine & \\
+1.10 & 2020-11-24 & Jonas Malm & Following the release of SRS v2.0, re-wrote the ASR section & \\
+1.11 & 2020-11-24 & Jonas Malm & Some re-structuting and smaller changes before inspection & \\
+
+
 \hline
 \end{tabular}
 \end{table}
+\restoregeometry
 
 \textbf{TODO:}
 \begin{enumerate}[label=(\roman*)]
 \item Write dependencies
-\item Write section 6 - product in the future
 \item Add deployment view
-\item Finish work on authentication section
+\item Finish work on authentication:
+\begin{itemize}
+    \item Simplify implemented view
+    \item Update box & line
+    \item Update key abstractions
+    \item Write auth in the future with RBAC
+\end{itemize}
 \item Update ASRs when requirements are re-numbered
 \item Populate appendix
+\item Run tests on the Rule Engine and Filtration Module in order to determine how performance is affected by number of patients
 \end{enumerate}
 
 
@@ -79,9 +106,10 @@ This document describes the software architecture of the system. Furthermore it 
 \item [EHR] An \emph{Electronic Health Record} is a record containing patient health data in an electronic form.
 \item [OpenEHR] is a collection of open industry specifications, models and software for e-health.
 \item [AQL] The \emph{Archetype Query Language} is a declarative query language developed to search and retrieve data in archetype-based repositories, such as an OpenEHR-database.
-\item [HCU] is an abreviation of Health Care Unit.
-\item [OAuth] is an open standard for authorization delegation. It allows a service owner to allow third-party server access without sharing credentials, instead using access tokens. 
-\item RBAC Role-Based Access Control is a way to assign access levels based on what role a user has.
+\item [HCU] An abbreviation of Health Care Unit.
+\item [OAuth] An open standard for authorization delegation. It allows a service owner to allow third-party server access without sharing credentials, instead using access tokens. 
+\item [RBAC] Role-Based Access Control is a way to assign access levels based on what role a user has.
+\item [Auth0] A drop-in solution that simplifies the implementation of authentication.
 \end{description}
 
 \subsection{Goal of the project}
@@ -94,11 +122,10 @@ The goal of the architecture is to reach the project goal while fulfilling a few
 The customer, Region Östergötland, wants to be able to combine parts from different systems together. In order for it to be possible to combine parts of HeartByte's software with parts from other systems, the software needs to be designed in a way so it maintains a high degree of modularity and a high degree of cohesion within modules. Otherwise combining functionality from HeartByte's software with other systems would be very difficult. Using pre-built, standardized components further enables this, since they are easily replaced and modular by definition.
 
 \subsubsection{Ensuring integration with existing systems is easy}
-In order to facilitate a simple integration process into existing systems the architecture needs to take existing systems into consideration. This includes loading and storing patient data in the same format as existing systems, loading and storing care giver data in the same format as existing systems and using the same kind of authentication method.
+In order to facilitate a simple integration process into existing systems the architecture needs to take existing systems into consideration. This includes loading and storing patient data in the same format as existing systems, loading and storing care giver data in the same format as existing systems and using the same kind of authentication method. The customer has their EHRs stored in the OpenEHR format and implements an Identity Management solution using OAuth 2.0.
 
 \subsubsection{Creating software independent of OS and platform}
-Furthermore, the customer wants a system that can be used from different operating systems as well as platforms. Some care givers might use tablets running iOS while others use Android and others still use a computer or even a smartphone. In conclusion it is important for the customer that the system can be accessed and used from a multitude of OSs and platforms, which will have implications on the architecture and the choice of stack. 
-
+Furthermore, the customer wants a system that can be used from different operating systems as well as platforms. The software's interface should be web based. Some care givers might use tablets running iOS while others use Android and others still use a computer or even a smartphone. In conclusion it is important for the customer that the system can be accessed and used from a multitude of OSs and platforms, which will have implications on the architecture and the choice of stack. Since the developed software will be a web app, this goal means that the web app can be used from different web browsers on various platforms.
 
 
 \subsection{Architectural constraints}
@@ -130,58 +157,86 @@ Python & 15 & 58\% \\
 \subsection{Assumptions and dependencies}
 \subsubsection{Assumptions}
 \begin{enumerate}[label=(\roman*)]
-\item The system will not be used on mobile devices, thus platform and OS independence applies only to computers and tablets 
-\item The customer uses a openEHR system to store EHRs, and the same templates as 
+\item The system will not be used on mobile devices, thus platform and OS independence applies only to computers and tablets. 
+\item The customer uses a openEHR system to store EHRs, and the same templates as the ones implemented in the HeartByte system.
 \item The rules used in the rule engine are set by the HCUs admin and not by HeartByte. HeartByte thus cannot take responsibility over if scientifically correct rules are applied, only that the patients are prioritized according to them.
 \end{enumerate}
 \subsubsection{Dependencies}
+\begin{enumerate}[label=(\roman*)]
+\item In order to create an accurate representation of the authentication using RBAC, we require information from the customer about the structure of their personnel database.
 
+\end{enumerate}
 
 \section{Architecturally significant requirements}
 Listed below are the Architecturally significant requirements (ARSs), the requirements most central to the architectural design. 
 
-\subsection{Patient views}
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR007  \\ 
- \hline
- \textbf{Statement:} & The user shall be able to shift between a "patient view" where many patients are shown and a "overview view" where only one patient are shown. \\
- \hline
-\end{tabularx}
-\\ \\
-
-Below, ASRs concerning these two views will be presented.
+\subsection{Main views}
+In the SRS there are a few key requirements specifying the properties of the two views: the overview and the patient view. Below, ASRs concerning these two views will be presented.
 
 \subsubsection{Patient overview}
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR009  \\ 
- \hline
- \textbf{Statement:} & The admin shall be able to specify the variables that affects the health prioritization. The system shall provide the possibility to specify different variables for different health care units. 
- \\ 
- \hline
- 
- \textbf{ID:} & FR004  \\ 
- \hline
- \textbf{Statement:} & The system shall display all patients in preferred order to a user who sort patients by [age, alert-level, measurements, health care unit, team, disease and patients’conditions]. \\ 
- \hline
- 
- \textbf{ID:} & FR003  \\ 
- \hline
- \textbf{Statement:} & The system shall display all matching patients to a user who filter patients by [age, alert-level, measurements, health care unit, team, disease and patients’conditions]. \\ 
- \hline
 
- \textbf{ID:} & FR011  \\ 
+\begin{tabularx}{\linewidth}{| l |  X |}
+\hline
+\textbf{ID, Title} & FR006, Set limit values for priority levels  \\ 
+\hline
+\textbf{Input}: & Limit values for different measurements in text fields with specific IDs and click "save"-button with ID = "".\\
+\textbf{Action}: & System saves and sets patient specific prioritization limits \\
+\textbf{Output}: & Settings displayed \\
+\hline
+
+\textbf{ID, Title} & FR034, Sorting patients  \\ 
+\hline
+\textbf{Input}: & Click on one of the column titles (Namn, Personnummer, Prioritet, Diagnos, Senast Uppdaterad, Uppdaterad av, Team). Each column title shall have its own ID. Click once for descending alphabetical order OR click twice for descending alphabetical order.  \\
+\textbf{Action}: & The system rearranges the list of patients according to sorting criteria. \\
+\textbf{Output}: & The system displays all patients according to the sorting criteria\\ 
+\hline
+
+ \textbf{ID, Title} & FR031, Filtering patients  \\ 
  \hline
- \textbf{Statement:} & The admin shall be able to customize and save different views of the system. (e.g. a predefined view over diabetes patients who are over 30 years)
-  \\ 
- \hline
+ \textbf{Input}: &  Click on "Filter"-buttonfilter and insert values from categories [Ålder, Prioritering, Verksamhet, Avdelning, Team, Diagnos]. \\
+\textbf{Action}: & The system searches for patients matching filter criteria. \\
+\textbf{Output}: & The system displays all patients who matched the filters.\\
+\hline
 \end{tabularx}
 \\ \\
+There are also several requirements specifying the need for customizing a filter view. A filter view is a set of filters applied to a list of patients. Identical requirements are repeated for different tabs and user classes, so here only one is mentioned. This filter view creator is visible in four contexts, and thus there are four sets of requirements. The ID of the two filtering requirements below are written about the context of an admin handling the patients belonging to the admin's HCU. The difference between the functionality for an admin and for a regular user, is that an admin can save filter views visible to an entire group of user whereas a regular user only can save it for personal use. Thus the \emph{output} of the \emph{Confirm created view} differs between an admin and a user context.
 
-The requirements state that the software shall have an overview of patients where a health care provider can:
+\begin{tabularx}{\linewidth}{| l |  X |}
+\hline
+\textbf{ID, Title} & FR003, Create new view \\ 
+\hline
+\textbf{Input:} & Button with ID = "" is pressed \\
+\textbf{Action:} & System loading new window with customization settings \\
+\textbf{Output:} & Pop-up window with customization settings options is displayed \\
+\hline
+
+\textbf{ID, Title} & FR044, Confirm created view \\ 
+\hline
+\textbf{Input:} & Title of new view in text field with ID "saveNewView", the selected user group in drop-down menu with ID "viewAvailableFor" and sign button with ID "confirmCustomizedView" \\
+\textbf{Action:} & System generates new view based on previously selected settings and saves to database. \\
+\textbf{Output:} & New view available for all users in the chosen user group. \\
+\hline
+\end{tabularx}
+\\ \\
+All the four requirement sets for creating views also contain six more requirements that specify which parameters can be used to create a filter. For the requirements below, \textbf{FR003} and \textbf{FR044}, these are listed below.
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+ID & Content \\ \hline
+\textbf{FR038} & Filter by age \\
+\textbf{FR039} & Filter by gender \\
+\textbf{FR040} & Filter by team \\
+\textbf{FR041} & Filter by department \\
+\textbf{FR042} & Filter by priority \\
+\textbf{FR043} & Filter by diagnosis \\
+\hline
+\end{tabular}
+\end{table}
+\\ \\
+Summarizing these requirements, they state that the software shall have an overview of patients where a health care provider can:
 \begin{enumerate}[label=(\roman*)]
-\item prioritize patients assisted by a module implementing care unit-specific triage rules,
+\item prioritize patients assisted by a module implementing care unit-specific triage rules set by an admin,
 \item sort patients,
 \item filter patients based on multiple criteria,
 \item save and load these filter views for later use.
@@ -190,74 +245,91 @@ Thus a rule engine will be implemented that loads rule sets created by an admin 
 
 
 \subsubsection{Patient view}
+\begin{tabularx}{\linewidth}{| l |  X |}
+\hline
+\textbf{ID, Title} & NFR025, Patient measurements \\ 
+\hline
+\textbf{Statement}: & The system shall present measurement history in a diagram \\
+\hline
 
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR026  \\ 
- \hline
- \textbf{Statement:} & In the view of a patient user shall be able to see personal information (gender, age occupation, social security number) 
- \\ 
+\textbf{ID, Title} & FR011, Detailed graph and list of measurement \\ 
+\hline
+\textbf{Input}: & Click on a measurement value in a graph. Each graph and measurement value point shall have its own ID. \\
+\textbf{Action}: & Load diagram and list of measurements \\
+\textbf{Output}: & Display diagrams and list of measurements \\
+\hline
 
- \hline
- \textbf{ID:} & FR043  \\ 
- \hline
- \textbf{Statement:} & In the overview of a patient the user shall at the top of the view be presented with the patient’s current medication(s).
- \\ 
- \hline
 
- \hline
- \textbf{ID:} & FR044  \\ 
- \hline
- \textbf{Statement:} & In the overview of a patient the user shall at the bottom of the view be presented with responsible healthcare provider(s) and associated hospital or clinic.
- \\ 
- \hline
+\textbf{ID, Title} & NFR027, Personal information \\ 
+\hline
+\textbf{Statement}: & Personal information (gender, age, personal number) of the
+patient shall be included in the view. \\
+\hline
+
+\textbf{ID, Title} & NFR028, Personal information: contacts \\ 
+\hline
+\textbf{Statement}: & Contact information and emergency contacts, if available, shall
+be included in the view. \\
+\hline
+
+\textbf{ID, Title} & NFR034, Medication information \\ 
+\hline
+\textbf{Statement}: & Display a list of all of patient’s current medications \\
+\hline
+
+\textbf{ID, Title} & NFR032, Diagnoses \\ 
+\hline
+\textbf{Statement}: & In the view of the patient the current diagnosis/diagnoses shall
+be presented in the heading \\
+\hline
 \end{tabularx}
 \\ \\
+The requirements state that detailed information about a patient from his or her EHR is to be displayed in a dedicated view for the specific patient. This information includes current medications, next of kin, health data visualized in graphs as well as the diagnoses the patient has.
 
-The requirements state that detailed information about a patient from his or her EHR is to be displayed in a dedicated view for the specific patient. This information includes current medications, next of kin, health data as well as a calendar visualizing upcoming events for the patient.
+\subsection{Health data}
+There are several specific requirements regarding the health data and EHRs. These, along with their implications, are specified below.
 
 \subsubsection{Format}
 \begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & NFR013  \\ 
- \hline
- \textbf{Statement:} & The system shall enable use of openEHR platforms as storage backend for EHR content (e.g. measurements, content from forms filled out by the patient and care plan).
- \\ 
- \hline
+\hline
+\textbf{ID, Title} & NFR013, OpenEHR \\ 
+\hline
+\textbf{Statement}: & The system shall enable use of openEHR platforms as storage backend for EHR content (e.g. measurements, content from forms filled out by the patient and care plan) \\
+\hline
 \end{tabularx}
 \\ \\
+The requirements further stipulate that all patient \emph{Electronic Health Records}, EHRs, have to be stored and loaded from databases in accordance with the \emph{openEHR open standard specification}. This is furthermore of great importance to the customer, since they cannot integrate the software with its existing software and servers without this key requirement being fulfilled.
 
-The requirements further stipulate that all patient \emph{Electronic Health Records}, EHRs, have to be stored and loaded from databases in accordance with the \emph{openEHR open standard specification}. This is furthermore of great importance to the customer, since they cannot integrate the software with its existing software and servers without the key requirement being fulfilled.
+\subsubsection{Access}
+\begin{tabularx}{\linewidth}{| l |  X |}
+\hline
+\textbf{ID, Title} & FR032, Active choice of accessing patient information outside of user's unit \\ 
+\hline
+\textbf{Input}: & Clicking on a patient in overview \\
+\textbf{Action}: & The system checks if user wants to access patient data. \\
+\textbf{Output}: & Display message checking if user wants to access data. \\
+\hline
 
-\subsubsection{Patient data and access}
+\textbf{ID, Title} & FR033, Accessing patient information outside of user's unit \\ 
+\hline
+\textbf{Input}: & Clicking on "Bekräfta" button to access patient data \\
+\textbf{Action}: & The system confirms that data shall be displayed \\
+\textbf{Output}: & The system displays patient data \\
+\hline
 
-\begin{tabularx}{\linewidth}{| l | X |}
- \hline
- \textbf{ID:} & FR038  \\ 
- \hline
- \textbf{Statement:} & The user shall only get access to the data if the user chooses to access it
-  \\ 
- \hline
+\textbf{ID, Title} & FR015, Log users accessing patient information \\ 
+\hline
+\textbf{Input}: & Patient profile page is accessed by user \\ 
+\textbf{Action}: & System logs user ID, date and activity as "Besökte", saves to database and updates activity log. \\ 
+\textbf{Output}: & Updated activity log with information regarding user, date and activity. \\
+\hline
 
- \textbf{ID:} & FR006  \\ 
- \hline
- \textbf{Statement:} & The system shall notify the user if they tries to access patient data that they don't have authority to view.\\ 
- \hline
-
- \textbf{ID:} & FR008  \\ 
- \hline
- \textbf{Statement:} & The system shall log which users who viewing which patients. These activities shall be saved in a log file.
-\\ 
- \hline
-
- \textbf{ID:} & NFR002  \\ 
- \hline
- \textbf{Statement:} & OAuth shall be used for login and authentication.
- \\ 
- \hline
+\textbf{ID, Title} & NFR002, OAuth \\ 
+\hline
+\textbf{Statement}: & OAuth shall be used for login and authentication.\\
+\hline
 \end{tabularx}
 \\ \\
-
 Health records are highly regulated and one important aspect is who is allowed to see what patient data. Thus the requirements state that the software shall save logs when a user accesses EHRs. The requirements also state that the users have to authenticate themselves using OAuth. 
 Thus the following modules need to be implemented:
 
@@ -267,10 +339,8 @@ Thus the following modules need to be implemented:
 \item An authentication system using OAuth
 \end{enumerate}
 
-
-
 \section{Architectural decisions}
-Below are the most important architectural decisions listed, stemming from the architectural goals, the architectural constraints and the ASRs.
+Below are the most important architectural decisions listed, derived from the architectural goals, the architectural constraints and the ASRs.
 
 \subsection{Using a back end}
 In order to accommodate the two database mentioned in the \emph{Access ASR}, a back end containing the access log and personnel databases needs to be implemented. This is because in order to ensure that EHRs are not served to unauthorized clients, the calls to the actual EHR Database will have to go through a server that logs access. Doing this client side would not be as secure since a modified client could simply bypass the logging or not validate access levels through the personnel database.
@@ -284,6 +354,8 @@ The front end will be developed using the JavaScript framework ReactJS. This is 
 \item Due to the time constraint, we need a language that is \emph{quick to learn and simple to use}. This holds true for React, which due to its wide spread use has many tutorials and good documentation.
 \item One of the architectural goals is to achieve \emph{high modularity through reusable components}. React facilities this through allowing developers to split the UI into independent components and there are many free open-source components because of the popularity of the framework enabling quick development.
 \end{enumerate}
+
+Due to the constraints we want to leverage the development team's existing knowledge. There were some discussions about using TypeScript for front end purposes, but this language will not be used in order to speed up the learning and thus the development process.
 
 \subsection{Choice of back end stack}
 Due to the time and skill constraints, this back end and the databases would ideally leverage existing knowledge in the team. The back end will be developed in Python, using the web framework Flask for the server and the framework SQL Alchemy for the databases. The rationale behind these decisions is explained below.
@@ -303,6 +375,15 @@ As stated in the ASRs, the system has to implement OAuth for authentication. Due
 
 \subsubsection{Role-Based Access Control}
 The authentication system will implement RBAC. In RBAC you analyze the needs of users and group them into roles. Since patient access is based on what HCU you work at and some functionality is limited to admins, it is simple to split users into groups and to see what access roles these groups require.
+
+\subsection{Placement of modules}\label{placement-modules}
+Due to the security concerns presented above and due to some data being shared between all users, the databases and EHR Retriever will be placed in the back end. However, there are two more modules that have to be placed in either the front end or the back end: the Rule Engine prioritizing patients and the Filtration Module filtrating patients.
+
+\subsubsection{Rule Engine}
+The Rule Engine will be placed in the front end. This is due to that using a pure two-tier, thin-client would place a large workload on the back end if a large numbers of users request data at the same time. To avoid this the Rule Engine can be placed in the front end. 
+
+\subsubsection{Filtration Module}
+Some rudimentary filtration functionality will have to be implemented in the back end, when retrieving EHR data. Otherwise every user would receive the EHR data of all patients - even patients they are not treating. However, in order to minimize total loading time the main functionality will be placed in the front end. If all relevant patients are retrieved to the client and then applying the filtration, filtration will be faster. Otherwise many calls would have to be made to the back end. This would make the loading time longer since a call will have to be made to the back end and then the back end has to call the EhrScape Server.
 
 
 \section{Key abstractions}
@@ -335,7 +416,7 @@ The EHR Database is the database that store the patient EHRs. It will also store
     \label{fig:user-cases}
 \end{figure}
 
-In Figure \ref{fig:user-cases} above, some of the more central user cases are illustrated. They are not exhaustive, but are presented to provide some context for the architectural design.
+In Figure \ref{fig:user-cases}, some of the more central user cases are illustrated. They are not exhaustive, but are presented to provide some context for the architectural design.
 
 \subsection{System layers}
 This section will describe components of the system in a detailed way through four layers: the GUI, the Front End Logic, the HeartByte Server and the EhrScape Server. The direction of the arrows indicate the direction of data flow.
@@ -369,7 +450,7 @@ The EHR Retriever is the module responsible for loading data from EHRs. This mod
 \subsubsection{EhrScape Server Layer}
 This layer is a database stored on an external server, which is accessed using the EhrScape API. The API is queried using stored custom Archetype Query Language (AQL) queries as well as using its REST API. Since this is the openEHR database query language it is easy to substitute this layer with another openEHR server in the future.
 
-\clearpage
+
 \subsection{Authentication} \label{Authentication}
 In this part the authentication functionality is discussed in further detail.
 
@@ -377,15 +458,15 @@ In this part the authentication functionality is discussed in further detail.
 \begin{figure}[h]
     \centering
     \includegraphics[scale = 0.45]{departments}
-    \caption{A sequence diagram illustrating how the Patient Overview calls are handled by the system}
+    \caption{A simple tree diagram illustrating the HCU levels and patient responsibility}
     \label{fig:departments}
 \end{figure}
 
-The users using the system belong to one or more groups. The structure of these groups are illustrated in the simple tree in Figure \ref{fig:departments}. A department is a health care institution and could be e.g. a hospital or a health center, such as the Linköping University Hospital. These departments are divided into subdepartments, such as Cardiology,  Infectious Diseases or Pediatrics. These subdepartments are in turn comprised of teams.  
-As illustrated, a patient is handled by one or many departments. Thus, a health care professional working at any subdepartment in Department B is authorized to view the EHR of Patient B, but not the EHR of Patient A.
-However, it is in the interest of the health care professionals working at Department B to be able to access the EHR of Patient A, in case of an emergency. The system will facilitate this, but such accesses will be logged in the access log.
+The users using the system belong to one or more groups. The structure of these groups are illustrated in the simple tree in Figure \ref{fig:departments}. An operation is a health care institution and could be e.g. a hospital or a health center, such as the Linköping University Hospital. These operations are divided into departments, such as Cardiology,  Infectious Diseases or Pediatrics. These departments are in turn comprised of teams.  
+As illustrated, a patient is handled by one or many departments. Thus, a health care professional working at any department in Operation B is authorized to view the EHR of Patient B, but not the EHR of Patient A.
+However, it is in the interest of the health care professionals working at Operation B to be able to access the EHR of Patient A, in case of an emergency. The system will facilitate this, but such accesses will be logged in the access log.
 
-\subsubsection{RBAC Roles}
+\subsubsection{Permission scopes}
 By analyzing the needs of users using the information above, they can be grouped and assigned access roles to be implemented in the RBAC system in Auth0.
 
 \begin{description}
@@ -415,7 +496,7 @@ Worth noting from Figure \ref{fig:overview-sequence}, is that all relevant data 
     \label{fig:patient-sequence}
 \end{figure}
 
-In Figure \ref{fig:patient-sequence}, EHR data about a specific patient is retrieved. The access token, with the user's access authentication from the role inside, is passed to the EHR Retriever. After retrieving the data about the requested patient, this module will compare the Department the patient belongs to with the role of the user from the access token. If these do not match, the access in unauthorized and this will be logged before structuring the returned data and passing it to the Patient View. Note that the data is returned even though the access is unauthorized, as specified in Section \ref{Authentication}. However, no data will be returned if the access token is invalid or missing.
+In Figure \ref{fig:patient-sequence}, EHR data about a specific patient is retrieved. The access token, with the user's access authentication from the role inside, is passed to the EHR Retriever. After retrieving the data about the requested patient, this module will compare the operation the patient belongs to with the role of the user from the access token. If these do not match, the access is unauthorized and this will be logged before structuring the returned data and passing it to the Patient View. Note that the data is returned even though the access is unauthorized, as specified in Section \ref{Authentication}. However, no data will be returned if the access token is invalid or missing.
 
 \subsubsection{Authentication}
 \begin{figure}[h]
@@ -429,18 +510,118 @@ As seen in Figure \ref{fig:auth-sequence}, Auth0 makes a request to the Personne
 
 \clearpage
 \section{The system in the future}
-\textbf{TODO:} 
-This is only a stub, to be completed in the future
+The subsections in this section will discuss what a delivery of the system will look like, how it will perform on larger data sets, how it can be maintained by the end users as well as some suggestions on future development.
+
 \subsection{Scaleability}
-EHR Retriever & changing the database to live. Rule engine on large scale? Filtration on large sets? Personnel database and the scope tokens?
+In this section the factors relevant to scaling the system up, in terms of number of patients and users, will be discussed.
+
+\subsubsection{Prioritizing of large data sets}
+The Rule Engine is placed in the Front end logic layer, as seen in Figure \ref{fig:execution-view}, due to the reasons outlined in section \ref{placement-modules}. The Rule Engine only prioritizes patients based on the most recent measurements, so the classification is not computationally heavy. Due to this, a large number of patients should not affect the performance of the system in a major way. This is not the case if the Rule Engine would implement more computationally heavy classification rules, as mentioned in section \ref{trend-analysis}.
+
+However, with a very large data set and many patients displayed in the Patient Overview another potential problem would be created. If there are e.g. 100 patients displayed unfiltered, there might be many patients classified as high priority. Then it would not be easy to see which ones are the most relevant. This can be addressed by the user, in the existing system, by filtrating on some factors to reduce the number of displayed patients, but a potentially better solution is discussed in section \ref{future-prioritization}.
+
+\subsubsection{Filtration of large data set}
+Since the filtration functionality is placed in the front end, performance could be expected to suffer when working with very large data sets. The rationale laid out in section \ref{placement-modules} is based on assumptions of a moderately sized data set and frequent filtration. However, if the data set would be very large and the filtration isn't happening frequently then the rationale might not be valid. The time lost due to calls to the back end and EhrScape could be offset by time lost due to hardware limitations on the client side. It is considered unlikely that this will be the case however, since simple tests on larger sets of patients have not shown a drop in performance.
+
+If however performance were to be affected due to a larger number of patients, the recommended solution would be to limit the number of patients that are returned to the overview. In the current implementation, all patients that the user has authority to access are returned. This could be changed so that only patients tended  to by the user's department or team are returned. To implement this, additional data fields in the demographic database in EhrScape could be added.
+
+\subsubsection{Increasing the number of users}
+Increasing the number of users should not affect the performance of the system, since the system is designed utilizing a two-tier fat-client where no computationally heavy functionality is implemented in the back end. 
+
 \subsection{Support}
+HeartByte will work alongside the customer to implement and integrate the system. Once the implementation is secured the operation of the system will be transferred to the customer. During the transfer process, members of the HeartByte development team will be deeply involved to ensure that the customer fully understands how the system is constructed. This, alongside the documentation will enable the operation of the system to be transferred to the customer. HeartByte will also provide some support during the first year after delivery of the product. This support includes answering questions and fixing any bugs shipped in the product.
+
 \subsection{Maintaining}
-Changing database. Leaving openEHR? 
+This section will handle the topic of the maintaining of the system and extending with new functionality as needed. Because the system has been built with maintainability in mind though modularity, in most cases this is relatively simple. This is not true for all functionality though, as discussed below.
+
+\subsubsection{Adding more health data}
+As of now, the system is only built to handle a few selected health data points. These include weight, blood pressure and
+physical activity. If more are to be added this would mean extending the functionality in the areas below.
+
+\begin{description}
+\item [openEHR Templates] If one does not already exist for the measurement, a new template will have to be constructed and added to EhrScape. Since the customer are experienced using the tools required to do this, this would not pose a significant challange.
+
+\item [EHR Retriever] In the EHR Retriever module in the HeartByte back end, some functionality has to be extended. A function to retrieve the individual measurements through the EhrScape API will have to be constructed.
+
+\item [Patient View] In order to visualize the new measurements, the functionality of the Patient View has to be extended. Since the modules used to display the graphs are constructed in a modular fashion, these can easily be reused and applied to new measurements. However, this only holds true for quantitative data. The Patietn View only has functionality to plot numerical data. If the data however is either qualitative or non-numerically categorical this functionality will have to be constructed.
+\end{description}
+
+\subsubsection{Replacing EhrScape}
+In the event that the customer in the future would be interested in changing the EHR Database provider this would impact the back end. There is however a big difference between replaceing EhrScape with another system using the openEHR standard and a system using some separate standard.
+
+\begin{description}
+\item [With another openEHR system] The way the EHR Retriever functions would have to be changed somewhat. The AQL queries would not have to be changed, given that all templates are transferred, since the AQL language is built on openEHR. Any calls to the REST API would however have to be changed, since they may not function the same in the new system. Since openEHR is a standard for handling EHRs, it can be assumed that the other system should have similar functionalities in its API so migrating this should not pose a major challenge.
+
+\item [With a different system] Migrating from openEHR would pose a challenge. In order to not break functionality of other modules, the same data structure of the EHR Data has to be maintained when migrating. This would force a total rework of the EHR Retriever. The EHR Retriever has to be changed to it can retrieve data from the new source and some re-packaging of the retrieved data would have to be done. Depending on the new system, this might be quite straight forward or very difficult. If the developers would decide against re-packaging the data so other modules can remain unchanged, many modules would have to have minor changes applied to them to be able to handle the new data formats.
+\end{description}
+
+
 \subsection{Future development}
-Due to the time constraint, some functionality was cut. In this section these modules will be described in more general terms. As this section is not finished and the final functionality of the product is not yet set, what is listed below might be implemented.
-\subsubsection{Trend analysis}
-\subsubsection{Calendars}
-\subsubsection{Notifications}
+Due to the time constraint, some planned functionality had to be cut. In this section the modules that would implement the functionality are described, so that the system can be extended with these modules in the future.
+
+
+\subsubsection{Trend analysis}\label{trend-analysis}
+Due to the time constraint, the Rule Engine only classifies patients using the most recent measured value since this is simple to implement. This is however not the best solution, since the customer has mentioned that absolute values are often not the most relevant factor when prioritizing patients. The customer thinks that individual patient trends are more relevant. Originally, this was in the scope of the project but there was not enough time to implement this. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.45]{trend-module}
+    \caption{An overview illustrating the Trend module}
+    \label{fig:trend-module}
+\end{figure}
+
+As illustrated in Figure \ref{fig:trend-module}, this module would consist of three components. A listener listening for changes in the EHR database, a trend analyzer applying some algorithm to predict future values and a trend database to store this.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.45]{trend-sequence}
+    \caption{A sequence diagram illustrating how the Trend module would work}
+    \label{fig:trend-sequence}
+\end{figure}
+
+Figure \ref{fig:trend-sequence} illustrates how it would work. Since the computations required to make these predictions would be complex, it would be best to do them only once: when the data is added to the EHR Database. Then this data is stored in a separate database to be accessed by the Client Data Getter, seen in Figure \ref{fig:execution-view}, and could be used by the Rule Engine to prioritize patients. This data could also be used in combination with the patient specific data in the Patient View, to enable the care giver to get further insights into the health trends of the patient.
+
+Due to the modularity of the code base, this module could be implemented without a major integration effort. It would require extending the functionality of the Rule Engine to take trends into account as well as extending the visualization components in the Patient View to display the trends.
+
+
+\subsubsection{A more advanced notification log}
+Twp simple notification logs are implemented in the system. The first contains information about all patients handled by the user and the second is a log for a specific patient. The second contains a full log of all events, but the overview notification log for all patients is simplified. Thus the simplified log could be improved and this is discussed below.
+
+In the system now, after the overview data is retrieved to the overview module, this data is then passed to the notification log. The log displays date of the latest measurement added for a patient, as well as which measurements were added this date. It is only the last measurement for a patient that i displayed since it would be slow to send all data for every patient to the front end, and then have the front end derive notifications from this. A better solution would be an implementation closer to the Trend Analysis module, illustrated in Figure \ref{fig:notification-module}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.45]{notification-module}
+    \caption{An overview illustrating the improved Notification Module}
+    \label{fig:notification-module}
+\end{figure}
+
+To improve the overview notification log, the functionality should be extended in the following way: A listener listens for changes in a patients EHR. When a change happens, a notification is created in a database. The notifications are also classified based on importance. A notification that e.g. a patient has changed his emergency contact would be prioritized below e.g. a patient has added a measurement that transitions the patient from one priority class to another in the Rule Engine. The entries in the database are then retrieved and loaded into the overview notification log. This enables the log to contain rich information, but does not significantly impair the performance and loading time. The notification could contain information such as:
+
+\begin{description}
+\item [Measurement added] A new measurement has been added.
+\item [Measurement deviates] A measurement that was added deviates from the previous measurements. This could be flagged as suspected faulty, as something good or as something bad.
+\item [Transition in priority class] If a passenger moves from low priority to high priority, this would be logged.
+\item [Significant trend change] If integrated with the Trend Analyzer, a notification could be created when a new measurement changes the previous trend or prediction significantly.
+\end{description}
+
+Implementing this would require some effort in creating the listener, the component creating the notification and the integration with the Trend Analyzer if this module is also added. However, no major changes elsewhere are required. The front end already contains the functionality necessary to display any notification as well as prioritizing and sorting among notifications.
+
+\subsubsection{Tweaking Rule Engine based on data set size}\label{future-prioritization}
+As the number of patients increase, there is a high likelihood that the Rule Engine will prioritize a large number of patients as the highest priority. In this case it will be quite hard for a health care worker to prioritize between the patients. To handle this there are two possible approaches.
+
+\begin{description}
+\item [Dynamic prioritization] The absolute number of patients classified as the highest priority class is limited. Thus, only the e.g. 20 most critical patients are classified as the highest priority. This would help the system avoid notification fatigue in its users. 
+\item [Non-integer prioritization] In the system now, the classifications are made in integers. One integer corresponds to one group of patients with a condition classified as equally serious. Non-integer prioritization would change this, and instead classify a patient's condition into a non-integer number greater than zero using some mathematical formula.
+\end{description}
+
+There are some problems with both approaches. The first creates a invalid view of the patients. If there are many critical patients, this would not be reflected in the overview as some would be classified as less severe. The second approach makes prioritization less clear as a number is harder to to judge a number than it is to judge a class, such as "Critical condition" or "Low priority".
+
+The best solution would be a combination of the two. In this, the classification into priorities is dynamic so there is a fixed maximum number of patients in the most critical classes. However, next to the symbol representing the class the non-integer number is also displayed. Thus the user can both get a good overview with groups with a graphical symbol or color as well as a number so the user can differentiate between the members of each class. Implementing this would require a re-work of the Rule Engine as well as the database storing the custom rules for the Rule Engine. 
+
+\subsubsection{Integration with other databases}
+In discussions the customer, two other databases were mentioned: both the Swedish Population Register and the customer's personnel database. In the future demographic patient data would be retrieved from the population register, which would ensure that the data in correct. The customer's personnel database would replace the personnel database in the HeartByte back end be used for the RBAC.
+Since HeartByte does not have any knowledge regarding the complexity of retrieving data from the Swedish Population Register, it is hard to estimate how much effort would be required replace the demographic data source. HeartByte does not have any information regarding the structure of the customer's personnel database, it is also difficult to estimate the effort needed to replace the current database. Since this database most likely is not very complex, this should be relatively easy.
 
 \section{Appendix}
 \textbf{TODO:} Populate
