@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
 //Renders a notification with a value and a text with possibilities to click on with the help of modals
-const Notification = ({ value, text,  id }) => {
+const Notification = ({ value, text, id, date, measurement, updatedBy }) => {
 
     var color;
     if (value === 1) {
@@ -63,7 +63,7 @@ const Notification = ({ value, text,  id }) => {
         setOpenWarningConfirm2(false);
     };
 
-    const ConfirmWarning = () => {
+    const ConfirmWarning = ({date, measurement, updatedBy}) => {
 
         return (
             <Modal
@@ -77,7 +77,7 @@ const Notification = ({ value, text,  id }) => {
                         fontSize: '30px',
                     }} />
                     <text className='font-bold mt-2' id='modal-popup'>Uppmärksammat mätvärde</text>
-                    <h2 className='font-bold mt-3' id='modal-popup'>/sätt in datum/ uppmättes vikten /vikt/ av /person/ ?</h2>
+                    <h2 className='font-bold mt-3' id='modal-popup'>{date} uppmättes vikten {measurement} av {updatedBy}</h2>
                     <h2 className='font-bold mt-3 flex justify-center' id='modal-popup'> Vill du hantera mätvärdet?</h2>
                     <div className="flex" style={{ width: "100%" }}>
                         <Button
@@ -100,7 +100,7 @@ const Notification = ({ value, text,  id }) => {
         );
     }
 
-    const ConfirmWarning2 = () => {
+    const ConfirmWarning2 = ({date, measurement, updatedBy}) => {
         return (
             <Modal
                 open={openWarningConfirm2}
@@ -113,7 +113,7 @@ const Notification = ({ value, text,  id }) => {
                         fontSize: '30px',
                     }} />
                     <text className='font-bold mt-2' id='modal-popup'>Uppmärksammat mätvärde</text>
-                    <h2 className='font-bold mt-3' id='modal-popup'>/sätt in datum/ uppmättes vikten /vikt/ av /person/ ?</h2>
+                    <h2 className='font-bold mt-3' id='modal-popup'>{date} uppmättes vikten {measurement} av {updatedBy}</h2>
                     <button className='flex shadow'
                             id= 'noticesSendToPatient'
                         style={{ border: '2px solid #0066B3', borderRadius: "0px", width: '270px', marginLeft: "auto", marginRight: "auto", marginTop: "1.5rem" }}
@@ -191,8 +191,8 @@ const Notification = ({ value, text,  id }) => {
                 </Tooltip>
 
             </Link>
-            <ConfirmWarning />
-            <ConfirmWarning2 />
+            <ConfirmWarning date={date} measurement={measurement} updatedBy={updatedBy}/>
+            <ConfirmWarning2 date={date} measurement={measurement} updatedBy={updatedBy}/>
             <ConfirmWarning3 />
         </>
 

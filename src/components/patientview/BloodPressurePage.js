@@ -1,6 +1,6 @@
 import React, {useMemo} from 'react';
 import {BloodPressure, Notification, TableForChart, FormForUpdateValues} from "..";
-import {useFlexLayout, useTable} from "react-table";
+import { useFlexLayout, useTable } from "react-table";
 
 
 const BloodPressurePage = () => {
@@ -11,43 +11,43 @@ const BloodPressurePage = () => {
         () => [
 
             {
-                notices: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}  id = {id} />,
+                notices: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'} id={id} date={'2020-10-10'} bloodPressure={'135/80'} updatedBy={'Patient'}/>,
                 Date: '2020-05-18',
                 BloodPressure: '135/80',
                 UpdatedBy: 'Patient',
             },
             {
-                notices: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}  id = {id} />,
+                notices: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'} id={id} date={'2020-10-10'} bloodPressure={'135/80'} updatedBy={'Patient'} />,
                 Date: '2020-06-13',
                 BloodPressure: '135/80',
                 UpdatedBy: 'Patient',
             },
             {
-                notices: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'} id = {id}/>,
+                notices: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'} id={id} date={'2020-10-10'} bloodPressure={'135/80'} updatedBy={'Patient'}/>,
                 Date: '2020-07-25',
                 BloodPressure: '135/80',
                 UpdatedBy: 'Vårdpersonal',
             },
             {
-                notices: <Notification value={2} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}  id = {id}/>,
+                notices: <Notification value={2} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}  id={id} date={'2020-10-10'} bloodPressure={'135/80'} updatedBy={'Patient'}/>,
                 Date: '2020-09-01',
                 BloodPressure: '135/80',
                 UpdatedBy: 'Vårdoersonal',
             },
             {
-                notices: <Notification value={0} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}  id = {id}/>,
+                notices: <Notification value={0} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}  id={id} date={'2020-10-10'} bloodPressure={'135/80'} updatedBy={'Patient'}/>,
                 Date: '2020-09-10',
                 BloodPressure: '135/80',
                 UpdatedBy: 'Patient',
             },
             {
-                notices: <Notification value={3} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}  id = {id}/>,
+                notices: <Notification value={3} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}  id={id} date={'2020-10-10'} bloodPressure={'135/80'} updatedBy={'Patient'}/>,
                 Date: '2020-10-02',
                 BloodPressure: '135/80',
                 UpdatedBy: 'Vårdpersonal',
             },
             {
-                notices: <Notification value={2} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}  id = {id}/>,
+                notices: <Notification value={2} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'} id={id} date={'2020-10-10'} bloodPressure={'135/80'} updatedBy={'Patient'}/>,
                 Date: '2020-10-10',
                 BloodPressure: '135/80',
                 UpdatedBy: 'Patient',
@@ -90,6 +90,7 @@ const BloodPressurePage = () => {
         useFlexLayout,
     );
 
+    console.log(rows);
     return (
         <>
             {/* Setting up the big div on the page */}
