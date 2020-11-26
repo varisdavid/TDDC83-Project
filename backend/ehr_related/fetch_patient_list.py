@@ -165,6 +165,19 @@ def get_all_parties():
     )
     return response.json() if response.ok else response
 
+def get_all_diagnosis():
+    aql = """SELECT y/data[at0001]/items[at0009]/value as diagnos
+        FROM EHR e
+        CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.encounter.v1]
+        CONTAINS EVALUATION y[openEHR-EHR-EVALUATION.problem_diagnosis.v1] 
+        WHERE c/name/value='Medical diagnosis' 
+        OFFSET 0""" 
+    response = query(aql)
+    to_return = []
+    for diagnosis in response['resultSet']:
+        to_return.append({"Diagnosis" : diagnosis['diagnos']['value']})
+    return to_return
+
 def get_all_measurements():
     aql = """SELECT x/data[at0002]/events[at0003]/data[at0001]/items[at0004,'Pulse Rate']/value as pulse,
        a/data[at0001]/events[at0002]/data[at0003]/items[at0011]/value as exercise,
