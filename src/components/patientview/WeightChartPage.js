@@ -4,47 +4,50 @@ import { useFlexLayout, useTable } from "react-table";
 
 
 const WeightChartPage = () => {
+    //Sending the personaldata to the notices. This should be used for the ajax call in the futher as well
+    const id="470203-1324"
     //Fake data to be used in the table code below can be changed to real data
     const data = useMemo(
         () => [
 
             {
-                notices: <Notification value={2} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'} />,
+                notices: <Notification value={2} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'} id = {id} />,
                 Date: '2020-05-18',
                 Weight: '65',
                 UpdatedBy: 'Patient',
             },
             {
-                notices: <Notification value={2} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'} />,
+                notices: <Notification value={2} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'} id = {id} />,
                 Date: '2020-06-13',
                 Weight: '62',
                 UpdatedBy: 'Patient',
             },
             {
-                notices: <Notification value={0} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'} />,
+                notices: <Notification value={0} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'} id = {id} />,
                 Date: '2020-07-25',
                 Weight: '67',
                 UpdatedBy: 'Patient',
             },
             {
+                notices: <Notification value={0} text={'Oväntat!'} id = {id} />,
                 Date: '2020-09-01',
                 Weight: '63',
                 UpdatedBy: 'Patient',
             },
             {
-                notices: <Notification value={0} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'} />,
+                notices: <Notification value={0} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'} id = {id} />,
                 Date: '2020-09-10',
                 Weight: '66',
                 UpdatedBy: 'Patient',
             },
             {
-                notices: <Notification value={0} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'} />,
+                notices: <Notification value={0} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'} id = {id} />,
                 Date: '2020-10-02',
                 Weight: '30',
                 UpdatedBy: 'Patient',
             },
             {
-                notices: <Notification value={0} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'} />,
+                notices: <Notification value={0} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'} id = {id} />,
                 Date: '2020-10-10',
                 Weight: '67',
                 UpdatedBy: 'Patient',
