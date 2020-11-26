@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core'
 import { useVirtual } from 'react-virtual';
@@ -100,13 +100,7 @@ const NoticesTable = ({
               var rowColor;
 
               // If it is a data row containing a priority. It should have a color
-              if (row.cells[4].value === 1) {
-                rowColor = '#FF6464';
-              } else if (row.cells[4].value === 2) {
-                rowColor = '#FED765';
-              } else if (row.cells[4].value === 3) {
-                rowColor = '#27AE60';
-              } else if (row.original.dateRow) { // This is the case for printing date rows.
+              if (row.original.dateRow) { // This is the case for printing date rows.
                 
                 rowColor = '#e8e8e8';
                 // We only want the row to print if there is other rows with the same date.
@@ -136,9 +130,16 @@ const NoticesTable = ({
                       </TableCell>
                   </TableRow>
                 );
-              }
+              } else {
 
-              if (!row.original.dateRow) {
+                if (row.cells[4].value === 1) {
+                  rowColor = '#FF6464';
+                } else if (row.cells[4].value === 2) {
+                  rowColor = '#FED765';
+                } else if (row.cells[4].value === 3) {
+                  rowColor = '#27AE60';
+                } 
+
                 return (
                   <TableRow
                     key={virtualRow.index}
