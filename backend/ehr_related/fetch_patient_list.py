@@ -166,7 +166,8 @@ def get_all_parties():
     return response.json() if response.ok else response
 
 def get_all_diagnosis():
-    aql = """SELECT y/data[at0001]/items[at0009]/value as diagnos
+    aql = """SELECT y/data[at0001]/items[at0009]/value as diagnos,
+        e/ehr_id/value as eid
         FROM EHR e
         CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.encounter.v1]
         CONTAINS EVALUATION y[openEHR-EHR-EVALUATION.problem_diagnosis.v1] 
@@ -175,7 +176,8 @@ def get_all_diagnosis():
     response = query(aql)
     to_return = []
     for diagnosis in response['resultSet']:
-        to_return.append({"Diagnosis" : diagnosis['diagnos']['value']})
+        to_return.append({"Diagnosis" : diagnosis['diagnos']['value'], 
+                          "ehrid" : diagnosis["eid"]})
     return to_return
 
 def get_all_measurements():
@@ -214,7 +216,7 @@ def get_all_measurements():
     return to_return
 def get_overview():
     measurements = get_all_measurements()
-    
+    diagnosises = get_all_diagnosis()
     start = time.time()
     response = get_all_parties()
     parties = response['parties']
@@ -222,6 +224,7 @@ def get_overview():
     to_return = []
 
     measurement = None
+    diagnosis= None
     for party in parties:
         ehrid = party['additionalInfo']['ehrId']
         more_info = party["additionalInfo"]
@@ -234,7 +237,15 @@ def get_overview():
             except Exception:
                 pass
         measurements.remove(m)
-        diagnosis = get_diagnosis(ehrid)
+        
+        for d in diagnosises:
+            try:
+                if ehrid == d['eid']:
+                    d.pop('eid')
+                    diagnosis = d
+            except Exception:
+                print(d)
+        diagnosises.remove(d)
        
         personal_details = {
             "Name": party["firstNames"] + " " + party["lastNames"],
@@ -257,7 +268,7 @@ def get_overview():
 
         to_return.append(personal_details)
     stop = time.time()
-    print(stop-start)
+    print(stop-start)   
     print(len(to_return))
     return to_return
 
