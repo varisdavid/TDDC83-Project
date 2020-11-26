@@ -1,5 +1,6 @@
 import requests
 import json
+import time
 
 
 wu = "lio.se1"
@@ -98,6 +99,47 @@ def get_measurements(ehrid):
                           } #need to reformat time-strings, currently in format "2020-11-13T12:46:36+01:00" for example
                           )
     return to_return
+def get_latest_measurement(ehrid):
+    """
+    Function that retrieves measurements data for a patient
+    Parameters: ehrid, String, identifier for a patient
+    Returns: List with dicts where each dict is a measurement at a specific time for this patient. All dicts will always contain information
+    """
+
+    aql = """SELECT x/data[at0002]/events[at0003]/data[at0001]/items[at0004,'Pulse Rate']/value as pulse,
+       a/data[at0001]/events[at0002]/data[at0003]/items[at0011]/value as exercise,
+       o/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value as bodyweight,
+       w/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value as bloodsugar,
+       i/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value as systolic,
+       i/data[at0001]/events[at0006]/data[at0003]/items[at0005]/value as diastolic,
+       w/data[at0001]/events[at0002]/time/value as time
+       FROM EHR e
+       CONTAINS COMPOSITION c
+       CONTAINS (OBSERVATION x[openEHR-EHR-OBSERVATION.pulse.v1] and 
+       OBSERVATION a[openEHR-EHR-OBSERVATION.physicalactivityrecord.v0] and 
+       OBSERVATION o[openEHR-EHR-OBSERVATION.body_weight.v2] and 
+       OBSERVATION w[openEHR-EHR-OBSERVATION.blood_glucose.v1] and 
+       OBSERVATION i[openEHR-EHR-OBSERVATION.blood_pressure.v2]) 
+       WHERE e/ehr_id/value= '%s'
+       OFFSET 0 LIMIT 1""" %ehrid
+    
+    response = query(aql)
+    to_return= []
+    for measurement in response['resultSet']:
+        
+        time = measurement['time'][:10]
+        to_return.append(
+                        { "Pulse: " : measurement['pulse']['magnitude'],
+                          "Exercise: ":measurement['exercise']['magnitude'],
+                          "Weight: " : measurement['bodyweight']['magnitude'],
+                          "Diastolic: " : measurement['diastolic']['magnitude'],
+                          "Systolic: " : measurement['systolic']['magnitude'],
+                          "Bloodsugar: " : measurement['bloodsugar']['magnitude'],
+                          "Time: " : time
+                          } #need to reformat time-strings, currently in format "2020-11-13T12:46:36+01:00" for example
+                          )
+    return to_return
+
 
 
 
@@ -159,14 +201,93 @@ def get_diagnosis(ehrid):
 
 
 
+def get_all_parties():
+    response = requests.get(baseurl + "/demographics/party/query?email=*@fejka.nu", verify=True, auth=(wu, wp)
+    )
+    return response.json() if response.ok else response
+
+def get_all_measurements():
+    aql = """SELECT x/data[at0002]/events[at0003]/data[at0001]/items[at0004,'Pulse Rate']/value as pulse,
+       a/data[at0001]/events[at0002]/data[at0003]/items[at0011]/value as exercise,
+       o/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value as bodyweight,
+       w/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value as bloodsugar,
+       i/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value as systolic,
+       i/data[at0001]/events[at0006]/data[at0003]/items[at0005]/value as diastolic,
+       w/data[at0001]/events[at0002]/time/value as time,
+       e/ehr_id/value as eid
+       FROM EHR e
+       CONTAINS COMPOSITION c
+       CONTAINS (OBSERVATION x[openEHR-EHR-OBSERVATION.pulse.v1] and 
+       OBSERVATION a[openEHR-EHR-OBSERVATION.physicalactivityrecord.v0] and 
+       OBSERVATION o[openEHR-EHR-OBSERVATION.body_weight.v2] and 
+       OBSERVATION w[openEHR-EHR-OBSERVATION.blood_glucose.v1] and 
+       OBSERVATION i[openEHR-EHR-OBSERVATION.blood_pressure.v2]) 
+       ORDER BY time""" 
+    response = query(aql)
+    to_return= []
+    for measurement in response['resultSet']:
+        
+        time = measurement['time'][:10]
+        to_return.append(
+                        { "Pulse: " : measurement['pulse']['magnitude'],
+                          "Exercise: ":measurement['exercise']['magnitude'],
+                          "Weight: " : measurement['bodyweight']['magnitude'],
+                          "Diastolic: " : measurement['diastolic']['magnitude'],
+                          "Systolic: " : measurement['systolic']['magnitude'],
+                          "Bloodsugar: " : measurement['bloodsugar']['magnitude'],
+                          "Time: " : time,
+                          "ehrid" : measurement['eid']
+                          } #need to reformat time-strings, currently in format "2020-11-13T12:46:36+01:00" for example
+                          )
+    return to_return
 def get_overview():
-    patient_info = get_all_patients_personal_details()
-    for patient in patient_info:
-        diagnosis = get_diagnosis(patient["EhrID"])
-        patient.update({"Diagnosises" : diagnosis})
-        measurement = get_measurements(patient["EhrID"])[-1:]
-        patient.update({"Measurement" : measurement})
-    return patient_info
+    measurements = get_all_measurements()
+    
+    start = time.time()
+    response = get_all_parties()
+    parties = response['parties']
+
+    to_return = []
+
+    measurement = None
+    for party in parties:
+        ehrid = party['additionalInfo']['ehrId']
+        more_info = party["additionalInfo"]
+
+        for m in measurements:
+            try:
+                if ehrid == m['ehrid']:
+                    m.pop("ehrid")
+                    measurement = m
+            except Exception:
+                print(m)
+        measurements.remove(m)
+        diagnosis = get_diagnosis(ehrid)
+       
+        personal_details = {
+            "Name": party["firstNames"] + " " + party["lastNames"],
+            "EhrID": more_info["ehrId"],
+            "PNR": more_info["pnummer"],
+            "Gender": more_info["gender"],
+            "City": more_info["city"],
+            "Address": more_info["adress"],
+            "Age": more_info["age"],
+            "Phone": more_info["phone"],
+            "Email": more_info["email"],
+            "Team" : more_info["team"], #is now a list so it can contain more than 1 team
+            "Department" : more_info["department"], #for now department is still string, but will be made into list like team soon
+            "Contactperson" : more_info["contactperson"],  #Dict containing Name (string on form "Firstname Lastname" and phonenummer)
+            "Operation" : more_info["operation"],
+            "Diagnosis" : diagnosis,
+            "Measurement" : measurement
+        }
+
+
+        to_return.append(personal_details)
+    stop = time.time()
+    print(stop-start)
+    return to_return
+
 
 
 
