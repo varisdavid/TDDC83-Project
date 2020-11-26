@@ -219,7 +219,7 @@ def get_overview():
                     m.pop("ehrid")
                     measurement = m
             except Exception:
-                print(m)
+                pass
         measurements.remove(m)
         diagnosis = get_diagnosis(ehrid)
        
@@ -245,6 +245,7 @@ def get_overview():
         to_return.append(personal_details)
     stop = time.time()
     print(stop-start)
+    print(len(to_return))
     return to_return
 
 
