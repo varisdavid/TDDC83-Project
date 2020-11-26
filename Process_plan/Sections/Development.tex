@@ -1,4 +1,4 @@
-In this section, processes regarding the development team are described. 
+In this section, processes regarding the development team are described in short. For more detailed descriptions, see \href{https://teams.microsoft.com/l/file/615C62C2-B9BB-4CBA-BEA8-7DE9C1A7FAC5?tenantId=913f18ec-7f26-4c5f-a816-784fe9a58edd&fileType=docx&objectUrl=https%3A%2F%2Fliuonline.sharepoint.com%2Fsites%2FTeam_TDDC88_2020_C3%2FDelade%20dokument%2FGeneral%2FDevelopment%2FFramework%20for%20programming%20TDDC88.docx&baseUrl=https%3A%2F%2Fliuonline.sharepoint.com%2Fsites%2FTeam_TDDC88_2020_C3&serviceName=teams&threadId=19:2e5b2f7b1d9c4b17a70ddd8351b41898@thread.tacv2&groupId=ddbf5407-892d-41b3-96fe-b65d1bfad5b2}{Framework for programming}
 \subsection{Team work}
 Much of how development is working is also covered in the SCRUM- and pair programming sections which is why these processes will not be covered in depth here. 
 \subsection{Bugs}
@@ -7,7 +7,17 @@ Bugs are corrected directly by the developers if they find a bug while developin
 If developers are confused by the SRS, Hi-Fi prototype or the product backlog this is gone through during a SCRUM-meeting when they talk to their team leader Filip Eriksson who has the knowledge about who to talk to in order to acquire the knowledge needed to resolve the problem. 
 \subsection{Changes in the requirements}
 If the development team notices something that needs to be included in the requirements, Filip Eriksson is to contact the analysis team in order to assure that this is included. 
-\subsection{naming conventions for components} \label{Naming convention}
+\subsection{Naming conventions for components} \label{Naming convention}
+The developers need to give each object/button, that the testers want to test, a unique ID. This ID should follow the naming convention that's stated in the framework (pathObjectFunction). The testers will use the "inspect" function in the browser to identify each object's ID. If a developer feel that a function for a object is hard to describe, it should just be named like whatever the developer feel would make sense. The developers should try their best to use verbs as often as possible, such as "confirm", "add", "remove", etc... These tasks are vital for us to finish the project as soon as possible, since the testers need some time to implement their tests, and for development to have the possibility to improve the code. A person/team is responsible for the page/view that they created to have ID's on every testable object.
+
+\subsubsection{pathObejctFunction}
+The naming convention to be followed is pathObjectFunction. Which could be exemplified by the filter function in the patient overview: The path will in this case consist of two paths, (path1Path2), overviewPatients and the objectFunction and its characteristics will be openFilterBtn – thereby the name of this variable/button will be overviewPatientsOpenFilterBtn. The object name shall be named as descriptive as possible, and through verbs such as “add”, “check”, “remove”, “compute”, “show”, etc. Beyond this the naming convention should follow the guidelines that can be accessed as a whole at https://www.crockford.com/code.html. But as a summary this means that: 
+
+\subsubsection{Format of naming} Names should be formed from the 26 upper- and lower-case letters (A .. Z, a .. z), the 10 digits (0 .. 9), and underbar. Avoid use of international characters because they may not read well or be understood everywhere. Do not use \$ dollar sign or backslash in names. 
+
+Do not use \_ underbar as the first or last character of a name. It is sometimes intended to indicate privacy, but it does not actually provide privacy. If privacy is important, use closure. Avoid conventions that demonstrate a lack of competence. Most variables and functions should start with a lower-case letter. 
+
+Constructor functions that must be used with the new prefix should start with a capital letter. JavaScript issues neither a compile-time warning nor a run-time warning if a required new is omitted. Bad things can happen if new is missing, so the capitalization convention is an important defence. Global variables should be avoided, but when used should be in ALL\_CAPS.
 
 \subsection{eXtreme Programming}
 Except for concepts from scrum the development team is also working with a concept called pair programming taken from agile method eXtreme programming. 
