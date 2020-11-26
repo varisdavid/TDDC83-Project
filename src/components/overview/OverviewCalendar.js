@@ -6,9 +6,10 @@ import { enGB } from "date-fns/locale";
 import { DatePickerCalendar } from "react-nice-dates";
 import "react-nice-dates/build/style.css";
 
+
 //For styling calendar
 import '../../../src/OverviewCalendar.css';
-// import { getDay, getDate } from 'date-fns';
+//import { getDay, getDate } from 'date-fns';
 import { getDate } from 'date-fns';
 //...
 
@@ -21,7 +22,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-// import { date } from "yup";
+//import { date } from "yup";
 
 // - The functions and styles in this file is supposed to be moved to seperate files
 // - Need to store table information in some way, with date as key.
@@ -57,15 +58,6 @@ const Data = [
   },
 ];
 
-const StyledHeaderCell = withStyles((theme) => ({
-  head: {
-    backgroundColor: theme.palette.common.white,
-    fontSize: 25,
-  },
-  body: {
-    fontSize: 14,
-  },
-}))(TableCell);
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -100,14 +92,11 @@ const Context = React.createContext({ value: null, setValue: () => { } });
 const BasicTable = (props) => {
   const classes = useStyles();
   const [rows] = useState(props.props);
-  if (tableDay === 2 || tableDay === 9 || tableDay ===21 || tableDay === 16 || tableDay === 30) {
+  if (tableDay === '02' || tableDay === '09' || tableDay === '21' || tableDay === '16' || tableDay === '30') {
     return (
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
-              <StyledTableRow>
-                <StyledHeaderCell>{props.value} </StyledHeaderCell>
-              </StyledTableRow>
               <StyledTableRow>
                 <StyledTableCell>Tid</StyledTableCell>
                 <StyledTableCell align="left">Aktivitet</StyledTableCell>
@@ -138,9 +127,6 @@ const BasicTable = (props) => {
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <StyledTableRow>
-            <StyledHeaderCell>{props.value} </StyledHeaderCell>
-          </StyledTableRow>
-          <StyledTableRow>
             <StyledTableCell>Tid</StyledTableCell>
             <StyledTableCell align="left">Aktivitet</StyledTableCell>
             <StyledTableCell align="left">Kommentar</StyledTableCell>
@@ -153,7 +139,8 @@ const BasicTable = (props) => {
 };
 let tableDay;
 function setTableDay(date) {
-   tableDay = date.toString().slice(8, 11);
+  tableDay = date.toString().slice(8, 10);
+   
 }
 
 
@@ -190,6 +177,8 @@ const UserCalendar = () => {
             <StaticCalendar />
           </Grid>
           <Grid item xs={5} className={classes.layout}>
+            <div style={{ fontSize: '30px'}} >
+              {value.toUTCString().slice(0,16)} </div>
             <BasicTable props={Data} value={value.toUTCString().slice(0, 16)} />
           </Grid>
         </Grid>

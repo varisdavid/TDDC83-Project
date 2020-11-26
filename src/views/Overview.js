@@ -5,6 +5,8 @@ import { Box } from '@material-ui/core';
 import { OverviewHeaderBanner, OverviewHeaderNavigation, Patients, OverviewCalendar } from '../components'
 import Notices from '../components/overview/Notices';
 
+import {settingsContext} from "../components/overview/ColumnFilter"
+
 // Function for retrieving current active tab
 const getActiveTab = (location) => {
 
@@ -63,6 +65,8 @@ const Overview = () => {
     setActiveTabValue(getActiveTab(location));
   }, [location]);
 
+  const [settings,setSettings] = useState();
+
 
   return (
     <>
@@ -75,9 +79,11 @@ const Overview = () => {
 
       </TabPanel>
 
-      <TabPanel className='Patients' value={activeTabValue} index={1}>
-        <Patients />
-      </TabPanel>
+    <TabPanel className='Patients' value={activeTabValue} index={1}>
+      <settingsContext.Provider value={{ settings, setSettings }}>
+      <Patients />
+      </settingsContext.Provider>
+    </TabPanel>
 
       <TabPanel className='Notices' value={activeTabValue} index={2}>
         <Notices />

@@ -9,15 +9,18 @@ const Auth0ProviderWithHistory = ({ children }) => {
 
   const history = useHistory();
 
-  const onRedirectCallback = (appState) => {
+  const onRedirectCallback = (appState) => {    
     history.push(appState?.returnTo || window.location.pathname);
   };
 
+  console.log(window.location.pathname);
+
   return (
+
     <Auth0Provider
       domain={domain}
       clientId={clientId}
-      redirectUri={window.location.origin}
+      redirectUri={"http://localhost:3000/overview/patients"}
       onRedirectCallback={onRedirectCallback}
       audience={audience}
     >

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Box } from '@material-ui/core';
 
-import { PatientViewHeaderBanner, PatientViewHeaderNavigation, PatientCalendar } from '../components'
+import { PatientViewHeaderBanner, PatientViewHeaderNavigation, PatientCalendar, PatientListOfMedication, PatientOverview, Admin } from '../components'
+import { MeasurementsView} from '../views';
 
 // Function for retrieving current active tab from our url.
 const getActiveTab = (location) => {
@@ -76,21 +77,23 @@ const PatientView = () => {
     </div>
 
     <TabPanel className='Measurements' value={activeTabValue} index={0}>
-
+      <MeasurementsView/>
     </TabPanel>
 
-    <TabPanel className='Overview' value={activeTabValue} index={1}>
-      
+    <TabPanel id='tab-scroll' className='Overview' value={activeTabValue} index={1}>
+      <PatientOverview/>
     </TabPanel>
 
-    <TabPanel className='Medications' value={activeTabValue} index={2}>
+    <TabPanel id='tab-scroll' className='Medications' value={activeTabValue} index={2}>
+      <PatientListOfMedication/>
     </TabPanel>
 
-    <TabPanel className='Calendar' value={activeTabValue} index={3}>
+    <TabPanel id='tab-scroll' className='Calendar' value={activeTabValue} index={3}>
       <PatientCalendar/>
     </TabPanel>
 
-    <TabPanel className='Admin' value={activeTabValue} index={4}>
+    <TabPanel id='tab-scroll' className='Admin' value={activeTabValue} index={4}>
+      <Admin/>
     </TabPanel>
   </>
 
