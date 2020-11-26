@@ -81,12 +81,14 @@ const Notification = ({ value, text,  id }) => {
                     <h2 className='font-bold mt-3 flex justify-center' id='modal-popup'> Vill du hantera mätvärdet?</h2>
                     <div className="flex" style={{ width: "100%" }}>
                         <Button
+                            id= 'noticesCancel'
                             className='flex shadow'
                             style={{ border: '2px solid #0066B3', borderRadius: "0px", width: '110px', marginLeft: "auto", marginRight: "auto", marginTop: "1.5rem" }}
                             onClick={handleCloseConfirmation}>
                             Avbryt
                             </Button>
                         <Button
+                            id= 'noticesConfirm1'
                             className='flex shadow'
                             style={{ border: '2px solid #0066B3', borderRadius: "0px", width: '110px', marginLeft: "auto", marginRight: "auto", marginTop: "1.5rem" }}
                             onClick={OpenWarning2}>
@@ -113,18 +115,21 @@ const Notification = ({ value, text,  id }) => {
                     <text className='font-bold mt-2' id='modal-popup'>Uppmärksammat mätvärde</text>
                     <h2 className='font-bold mt-3' id='modal-popup'>/sätt in datum/ uppmättes vikten /vikt/ av /person/ ?</h2>
                     <button className='flex shadow'
+                            id= 'noticesSendToPatient'
                         style={{ border: '2px solid #0066B3', borderRadius: "0px", width: '270px', marginLeft: "auto", marginRight: "auto", marginTop: "1.5rem" }}
                         onClick={sendToPatient}>
                         Gå till patientens kontaktuppgifter
                         </button>
                     <div className="flex" style={{ width: "100%" }}>
                         <Button
+                            id= 'noticesRetake'
                             className='flex shadow'
                             style={{ border: '2px solid #0066B3', borderRadius: "0px", width: '180px', marginLeft: "auto", marginRight: "auto", marginTop: "1.5rem" }}
                             onClick={OpenWarning3}>
                             Ta om mätvärde
                             </Button>
                         <Button
+                            id= 'noticesConfirm2'
                             className='flex shadow'
                             style={{ border: '2px solid #0066B3', borderRadius: "0px", width: '180px', marginLeft: "auto", marginRight: "auto", marginTop: "1.5rem" }}
                             onClick={handleCloseConfirmation2}>
@@ -155,6 +160,7 @@ const Notification = ({ value, text,  id }) => {
                         marginBottom: "10px"
                     }}>
                         <Button
+                            id= 'noticesConfirm3'
                             className='flex shadow'
                             style={{ border: '2px solid #0066B3', borderRadius: "0px", width: '110px', marginLeft: "auto", marginRight: "auto", marginTop: "1.5rem" }}
                             onClick={handleCloseConfirmation3}>

@@ -17,7 +17,7 @@ const BloodPressurePage = () => {
                 UpdatedBy: 'Patient',
             },
             {
-                notices: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}  id = {id}/>,
+                notices: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}  id = {id} />,
                 Date: '2020-06-13',
                 BloodPressure: '135/80',
                 UpdatedBy: 'Patient',
