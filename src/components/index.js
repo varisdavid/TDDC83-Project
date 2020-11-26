@@ -109,5 +109,4 @@ export {
     TableForChart,
     Notification,
     FormForUpdateValues,
->>>>>>> src/components/index.js
 };
