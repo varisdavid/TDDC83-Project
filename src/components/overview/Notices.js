@@ -127,6 +127,7 @@ const Notices = () => {
     setFilter('department', filterData.department)
     setFilter('age', [filterData.minAge, filterData.maxAge])
     setFilter('diagnoses', filterData.diagnoses)
+    setFilter('dateRow', true)
 
     // After we have applied it to our table, we will send it to the PatientsSearch component for displaying.
     setActiveFiltersState(filterData)
@@ -145,6 +146,7 @@ const Notices = () => {
         href: "2020-11-17", // This is for displaying purposes
         date: "2020-11-17:00", // the added :00 makes it so this sorts above patient info with the same date.
         dateRow: true,
+        print: false,
       },
       {
         priority: 1,
@@ -186,6 +188,8 @@ const Notices = () => {
         href: "2020-11-14",
         date: "2020-11-14:00",
         dateRow: true,
+        print: false,
+
       },
       {
         priority: 1,
@@ -215,6 +219,8 @@ const Notices = () => {
         href: "2020-11-12",
         date: "2020-11-12:00",
         dateRow: true,
+        print: false,
+
       },
       {
         priority: 1,
@@ -256,6 +262,8 @@ const Notices = () => {
         href: "2020-11-07",
         date: "2020-11-07:00",
         dateRow: true,
+        print: false,
+
       },
       {
         priority: 2,
@@ -285,6 +293,8 @@ const Notices = () => {
         href: "2020-11-01",
         date: "2020-11-01:00",
         dateRow: true,
+        print: false,
+
       },
       {
         priority: 2,
@@ -350,6 +360,8 @@ const Notices = () => {
         href: "2020-10-29",
         date: "2020-10-29:00",
         dateRow: true,
+        print: false,
+
       },
       {
         priority: 3,
@@ -444,6 +456,11 @@ const Notices = () => {
         accessor: 'department',
         filter: 'selectFilter',
       },
+      {
+        Header: 'DateRow',
+        accessor: "dateRow",
+        filter: 'clearAllBadDateRows',
+      },
     ],
     []
   )
@@ -454,8 +471,6 @@ const Notices = () => {
       return rows;
     }
     // If it either matches, or it is a dateRow we keep it.
-    console.log(rows);
-    console.log(rows.filter(row => row.values[id] === filterValue || row.original["dateRow"]))
     return rows.filter(row => row.values[id] === filterValue || row.original["dateRow"]) 
   }
 
@@ -508,12 +523,44 @@ const Notices = () => {
 
   }
 
+  function clearAllBadDateRowsFn(rows) {
+
+    var matches = [];
+
+    var dates = []
+
+    rows.forEach(row => {
+      if (!row.original.dateRow && dates.indexOf(row.original.date.substring(0, 10)) === -1) {
+        dates.push(row.original.date.substring(0, 10));
+      }
+    });
+
+    rows.forEach((row, index) => {
+      if (!row.original.dateRow) {
+        matches.push(index)
+      }
+    });
+
+    dates.forEach(date => {
+      rows.forEach((row, index) => {
+        if (row.original.dateRow) {      
+          if (row.original.date.substring(0, 10) === date) {
+            matches.push(index)
+          }
+        }
+      })
+    })
+    
+    return matches.map(index => rows[index])
+  }
+
   const filterTypes = useMemo(
     () => ({
       selectFilter: selectFilterFn,
       priorityFilter: priorityFilterFn,
       numberInRangeFilter: numberInRangeFilterFn,
       containsMatchingValues: containsMatchingValuesFn,
+      clearAllBadDateRows: clearAllBadDateRowsFn,
     }),
     []
   );
@@ -549,7 +596,7 @@ const Notices = () => {
       }
   ],
     filters: [],
-    hiddenColumns: ['age', 'name', 'gender', 'team', 'department', 'diagnoses']
+    hiddenColumns: ['age', 'name', 'gender', 'team', 'department', 'diagnoses', 'dateRow']
     // filters: [{ id: 'col1', value: 'Green'}]
   };
 
@@ -572,8 +619,6 @@ const Notices = () => {
   );
 
   const { getAccessTokenSilently } = useAuth0();
-
-
   // When something happens, we check to see if we change the sorting option, and we check if the search has been triggered
   useEffect(() => {
     // Basic example of how to make a authorized fetch call to our backend endpoints
@@ -599,7 +644,7 @@ const Notices = () => {
     getPatientList();
     setGlobalFilter(searchValue); // We use the stored searchValue to globally filter our table by. 
   }, [searchValue, toggleSortBy, setGlobalFilter, getAccessTokenSilently]);
-
+  
   return (
     <>
       <div className='flex justify-center'>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core'
 import { useVirtual } from 'react-virtual';
@@ -35,6 +35,8 @@ const NoticesTable = ({
   rows,
   prepareRow,
 }) => {
+
+
 
   // Used for keeping track on the wrapper div (needed for virtualization)
   const parentRef = React.useRef();
@@ -104,9 +106,10 @@ const NoticesTable = ({
                 rowColor = '#FED765';
               } else if (row.cells[4].value === 3) {
                 rowColor = '#27AE60';
-              } else {
-                // This is the case for printing date rows.
+              } else if (row.original.dateRow) { // This is the case for printing date rows.
+                
                 rowColor = '#e8e8e8';
+                // We only want the row to print if there is other rows with the same date.
                 
                 // If we print a date row, we simply run it here instead of with all table cells down below.
                 // This allows for better customization of its styling and correct placement of text.
@@ -135,37 +138,39 @@ const NoticesTable = ({
                 );
               }
 
-              return (
-                <TableRow
-                  key={virtualRow.index}
-                  ref={virtualRow.measureRef}
-                  {...row.getRowProps({
-                    style: {
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      width: '100%',
-                      transform: `translateY(${virtualRow.start}px)`,
-                      background: rowColor, // Sets color of row according to priority using rowColor variable.
-                    }
-                  })}
-                >
-                  {row.cells.map((cell, cellIndex) => {
-                    return (
-                      <TableCell {...cell.getCellProps()} style={{
-                        padding: '10px',
-                        textAlign: (cellIndex === 4) ? 'center' : 'left',
-                        width: (cellIndex === 3) ? '700px' : '18%', //Makes column "Notis" fixed size.
-                      }}>
-                        { (cellIndex === 4 && cell.value === 1) && <PrioText value={1} />}
-                        { (cellIndex === 4 && cell.value === 2) && <PrioText value={2} />}
-                        { (cellIndex === 4 && cell.value === 3) && <PrioText value={3} />}
-                        { (cellIndex !== 4) && cell.render('Cell')}
-                      </TableCell>
-                    )
-                  })}
-                </TableRow>
-              )
+              if (!row.original.dateRow) {
+                return (
+                  <TableRow
+                    key={virtualRow.index}
+                    ref={virtualRow.measureRef}
+                    {...row.getRowProps({
+                      style: {
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        transform: `translateY(${virtualRow.start}px)`,
+                        background: rowColor, // Sets color of row according to priority using rowColor variable.
+                      }
+                    })}
+                  >
+                    {row.cells.map((cell, cellIndex) => {
+                      return (
+                        <TableCell {...cell.getCellProps()} style={{
+                          padding: '10px',
+                          textAlign: (cellIndex === 4) ? 'center' : 'left',
+                          width: (cellIndex === 3) ? '700px' : '18%', //Makes column "Notis" fixed size.
+                        }}>
+                          { (cellIndex === 4 && cell.value === 1) && <PrioText value={1} />}
+                          { (cellIndex === 4 && cell.value === 2) && <PrioText value={2} />}
+                          { (cellIndex === 4 && cell.value === 3) && <PrioText value={3} />}
+                          { (cellIndex !== 4) && cell.render('Cell')}
+                        </TableCell>
+                      )
+                    })}
+                  </TableRow>
+                )
+              }
             }
             )}
           </TableBody>
