@@ -23,6 +23,11 @@ import CreateNewFilterModal from './overview/CreateNewFilterModal';
 import PatientViewHeaderBanner from './patientview/PatientViewHeaderBanner.js';
 import PatientViewHeaderNavigation from './patientview/PatientViewHeaderNavigation.js';
 
+import Notices from './overview/Notices';
+import NoticesTable from './overview/NoticesTable';
+import NoticesGroups from './overview/NoticesGroups';
+import NoticesSearch from './overview/NoticesSearch';
+
 import PatientCalendar from './patientview/PatientCalendar.js';
 
 import Admin from './patientview/Admin.js';
@@ -64,7 +69,7 @@ export {
     Hero, 
     Loading, 
     NavBar,
-    OverviewHeaderBanner, 
+    OverviewHeaderBanner,
     OverviewHeaderNavigation,
     OverviewCalendar,
     Patients,
@@ -76,6 +81,10 @@ export {
     PatientCalendar,
     PatientViewHeaderBanner,
     PatientViewHeaderNavigation,
+    Notices,
+    NoticesTable,
+    NoticesGroups,
+    NoticesSearch,
     PatientOverview,
     Admin,
     Measurements,

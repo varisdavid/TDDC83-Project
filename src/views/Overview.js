@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { Box } from '@material-ui/core';
 
 import { OverviewHeaderBanner, OverviewHeaderNavigation, Patients, OverviewCalendar } from '../components'
+import Notices from '../components/overview/Notices';
 
 import {settingsContext} from "../components/overview/ColumnFilter"
 
@@ -62,21 +63,21 @@ const Overview = () => {
   // determines which tab is active, depending on this we load a different tab.
   useEffect(() => {
     setActiveTabValue(getActiveTab(location));
-  }, [location] );
+  }, [location]);
 
   const [settings,setSettings] = useState();
 
 
   return (
-  <>
-    <div className='w-full h-auto'>
-      <OverviewHeaderBanner healthCenter={healthCenter} />
-      <OverviewHeaderNavigation activeTabValue={activeTabValue} setActiveTabValue={setActiveTabValue} />
-    </div>
+    <>
+      <div className='w-full h-auto'>
+        <OverviewHeaderBanner healthCenter={healthCenter} />
+        <OverviewHeaderNavigation activeTabValue={activeTabValue} setActiveTabValue={setActiveTabValue} />
+      </div>
 
-    <TabPanel className='Home' value={activeTabValue} index={0}>
+      <TabPanel className='Home' value={activeTabValue} index={0}>
 
-    </TabPanel>
+      </TabPanel>
 
     <TabPanel className='Patients' value={activeTabValue} index={1}>
       <settingsContext.Provider value={{ settings, setSettings }}>
@@ -84,16 +85,16 @@ const Overview = () => {
       </settingsContext.Provider>
     </TabPanel>
 
-    <TabPanel className='Notices' value={activeTabValue} index={2}>
-      {/* <Notices /> */}
+      <TabPanel className='Notices' value={activeTabValue} index={2}>
+        <Notices />
 
-    </TabPanel>
+      </TabPanel>
 
-    <TabPanel className='Calendar' value={activeTabValue} index={3}>
-      <OverviewCalendar/>
-    </TabPanel>
+      <TabPanel className='Calendar' value={activeTabValue} index={3}>
+        <OverviewCalendar />
+      </TabPanel>
 
-  </>
+    </>
 
   );
 };
