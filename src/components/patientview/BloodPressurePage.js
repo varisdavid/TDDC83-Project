@@ -4,49 +4,50 @@ import {useFlexLayout, useTable} from "react-table";
 
 
 const BloodPressurePage = () => {
-
+//Sending the personaldata to the notices. This should be used for the ajax call in the futher as well
+    const id="470203-1324"
     //Fake data to the table rendering below
     const data = useMemo(
         () => [
 
             {
-                notices: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
+                notices: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}  id = {id} />,
                 Date: '2020-05-18',
                 BloodPressure: '135/80',
                 UpdatedBy: 'Patient',
             },
             {
-                notices: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
+                notices: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}  id = {id}/>,
                 Date: '2020-06-13',
                 BloodPressure: '135/80',
                 UpdatedBy: 'Patient',
             },
             {
-                notices: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
+                notices: <Notification value={1} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'} id = {id}/>,
                 Date: '2020-07-25',
                 BloodPressure: '135/80',
                 UpdatedBy: 'Vårdpersonal',
             },
             {
-                notices: <Notification value={2} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
+                notices: <Notification value={2} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}  id = {id}/>,
                 Date: '2020-09-01',
                 BloodPressure: '135/80',
                 UpdatedBy: 'Vårdoersonal',
             },
             {
-                notices: <Notification value={0} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
+                notices: <Notification value={0} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}  id = {id}/>,
                 Date: '2020-09-10',
                 BloodPressure: '135/80',
                 UpdatedBy: 'Patient',
             },
             {
-                notices: <Notification value={3} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
+                notices: <Notification value={3} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}  id = {id}/>,
                 Date: '2020-10-02',
                 BloodPressure: '135/80',
                 UpdatedBy: 'Vårdpersonal',
             },
             {
-                notices: <Notification value={2} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}/>,
+                notices: <Notification value={2} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'}  id = {id}/>,
                 Date: '2020-10-10',
                 BloodPressure: '135/80',
                 UpdatedBy: 'Patient',

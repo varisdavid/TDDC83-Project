@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
 //Renders a notification with a value and a text with possibilities to click on with the help of modals
-const Notification = ({ value, text }) => {
+const Notification = ({ value, text,  id }) => {
 
     var color;
     if (value === 1) {
@@ -22,7 +22,7 @@ const Notification = ({ value, text }) => {
     // getModalStyle is not a pure function, we roll the style only on the first render
     const [modalStyle] = useState(getModalStyle);
 
-    const href = "";
+    const href = "/patient/overview/" + id;
     const history = useHistory();
 
     // Keeps track of whether or not the popup for a specific alert  has been toggled.
