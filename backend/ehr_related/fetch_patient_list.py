@@ -174,10 +174,12 @@ def get_all_diagnosis():
         WHERE c/name/value='Medical diagnosis' 
         OFFSET 0""" 
     response = query(aql)
-    to_return = []
+    to_return = {}
     for diagnosis in response['resultSet']:
-        to_return.append({"Diagnosis" : diagnosis['diagnos']['value'], 
-                          "ehrid" : diagnosis["eid"]})
+        #to_return.append({diagnosis["eid"] : diagnosis["diagnos"]["value"]})
+        #to_return.append({"Diagnosis" : diagnosis['diagnos']['value'], 
+         #                 "ehrid" : diagnosis["eid"]})
+        to_return[diagnosis["eid"]] = diagnosis['diagnos']['value']
     return to_return
 
 def get_all_measurements():
@@ -196,23 +198,21 @@ def get_all_measurements():
        OBSERVATION o[openEHR-EHR-OBSERVATION.body_weight.v2] and 
        OBSERVATION w[openEHR-EHR-OBSERVATION.blood_glucose.v1] and 
        OBSERVATION i[openEHR-EHR-OBSERVATION.blood_pressure.v2]) 
-       ORDER BY time""" 
+       ORDER BY time DESC""" 
     response = query(aql)
-    to_return= []
+    to_return= {}
     for measurement in response['resultSet']:
         
         time = measurement['time'][:10]
-        to_return.append(
-                        { "Pulse: " : measurement['pulse']['magnitude'],
+        to_return[measurement["eid"]] =  { "Pulse: " : measurement['pulse']['magnitude'],
                           "Exercise: ":measurement['exercise']['magnitude'],
                           "Weight: " : measurement['bodyweight']['magnitude'],
                           "Diastolic: " : measurement['diastolic']['magnitude'],
                           "Systolic: " : measurement['systolic']['magnitude'],
                           "Bloodsugar: " : measurement['bloodsugar']['magnitude'],
                           "Time: " : time,
-                          "ehrid" : measurement['eid']
-                          } #need to reformat time-strings, currently in format "2020-11-13T12:46:36+01:00" for example
-                          )
+                          }
+                          
     return to_return
 def get_overview():
     measurements = get_all_measurements()
@@ -222,30 +222,38 @@ def get_overview():
     parties = response['parties']
 
     to_return = []
-
+    print(len(parties))
+    print(len(measurements))
+    print(len(diagnosises))
     measurement = None
     diagnosis= None
     for party in parties:
         ehrid = party['additionalInfo']['ehrId']
         more_info = party["additionalInfo"]
-
-        for m in measurements:
-            try:
-                if ehrid == m['ehrid']:
-                    m.pop("ehrid")
-                    measurement = m
-            except Exception:
-                pass
-        measurements.remove(m)
         
-        for d in diagnosises:
-            try:
-                if ehrid == d['eid']:
-                    d.pop('eid')
-                    diagnosis = d
-            except Exception:
-                print(d)
-        diagnosises.remove(d)
+        #first_occurence = list(next(filter(lambda x: x[ehrid], measurements)))
+        #a = next((item for item in measurements if item["ehrid"] == ehrid), "Va")
+        try:
+            print(measurements[ehrid])
+        except KeyError as e:
+            print(ehrid)
+
+        print(diagnosises[ehrid])
+       # for m in measurements:
+       #     try:
+       #         if ehrid == m['ehrid']:
+        #            pass
+        #    except Exception as e:
+        #        print(e)
+               # print(m)
+        #for d in diagnosises:
+        #    try:
+        #        if ehrid == d['ehrid']:
+        #           # d.pop('eid')
+        ##            #diagnosis = d
+         #           pass
+         #   except Exception as e:
+         #       print(e)
        
         personal_details = {
             "Name": party["firstNames"] + " " + party["lastNames"],
@@ -269,7 +277,6 @@ def get_overview():
         to_return.append(personal_details)
     stop = time.time()
     print(stop-start)   
-    print(len(to_return))
     return to_return
 
 
