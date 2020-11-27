@@ -10,43 +10,36 @@ const WeightChartPage = () => {
         () => [
 
             {
-                notices: <Notification value={2} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'} id = {id} />,
                 Date: '2020-05-18',
                 Weight: '65',
                 UpdatedBy: 'Patient',
             },
             {
-                notices: <Notification value={2} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'} id = {id} />,
                 Date: '2020-06-13',
                 Weight: '62',
                 UpdatedBy: 'Patient',
             },
             {
-                notices: <Notification value={0} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'} id = {id} />,
                 Date: '2020-07-25',
                 Weight: '67',
                 UpdatedBy: 'Patient',
             },
             {
-                notices: <Notification value={0} text={'Oväntat!'} id = {id} />,
                 Date: '2020-09-01',
                 Weight: '63',
                 UpdatedBy: 'Patient',
             },
             {
-                notices: <Notification value={0} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'} id = {id} />,
                 Date: '2020-09-10',
                 Weight: '66',
                 UpdatedBy: 'Patient',
             },
             {
-                notices: <Notification value={0} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'} id = {id} />,
                 Date: '2020-10-02',
                 Weight: '30',
                 UpdatedBy: 'Patient',
             },
             {
-                notices: <Notification value={0} text={'Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)'} id = {id} />,
                 Date: '2020-10-10',
                 Weight: '67',
                 UpdatedBy: 'Patient',
@@ -60,7 +53,7 @@ const WeightChartPage = () => {
 
         for (let i = 0; i < data.length; i++) {
             newArr.push({
-                notices: <Notification value={3} text={'test'} id={id} date={data[i]['Date']}
+                notices: <Notification value={3} text={'vikten till'} id={id} date={data[i]['Date']}
                                        measurement={data[i]['BloodPressure']} updatedBy={data[i]['UpdatedBy']}/>,
                 Date: data[i]['Date'],
                 Weight: data[i]['Weight'],

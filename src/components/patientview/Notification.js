@@ -1,5 +1,5 @@
 import React, {useState } from 'react';
-import { Button, Link, Modal, Tooltip } from "@material-ui/core";
+import { Button, Link, Modal } from "@material-ui/core";
 import { NotificationImportant } from '@material-ui/icons';
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
@@ -77,7 +77,7 @@ const Notification = ({ value, text, id, date, measurement, updatedBy }) => {
                         fontSize: '30px',
                     }} />
                     <text className='font-bold mt-2' id='modal-popup'>Uppmärksammat mätvärde</text>
-                    <h2 className='font-bold mt-3' id='modal-popup'>{date} uppmättes vikten {measurement} av {updatedBy}</h2>
+                    <h2 className='font-bold mt-3' id='modal-popup'>{date} uppmättes {text} {measurement} av {updatedBy}</h2>
                     <h2 className='font-bold mt-3 flex justify-center' id='modal-popup'> Vill du hantera mätvärdet?</h2>
                     <div className="flex" style={{ width: "100%" }}>
                         <Button
@@ -182,14 +182,11 @@ const Notification = ({ value, text, id, date, measurement, updatedBy }) => {
                 style={{ color: "#000" }}
                 onClick={handleOpenConfirmation}
             >
-                <Tooltip title={text} placement='left-start'>
                     <NotificationImportant style={{
                         color: color,
                         fontSize: '30px',
                     }}
                     />
-                </Tooltip>
-
             </Link>
             <ConfirmWarning date={date} measurement={measurement} updatedBy={updatedBy}/>
             <ConfirmWarning2 date={date} measurement={measurement} updatedBy={updatedBy}/>

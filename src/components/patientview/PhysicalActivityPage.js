@@ -10,43 +10,36 @@ const PhysicalActivityPage = () => {
         () => [
 
             {
-                notices: <Notification value={0} text={'Oväntat!'} id = {id} />,
                 Date: '2020-05-18',
                 PysicalActivity: '3',
                 UpdatedBy: 'Patient',
             },
             {
-                notices: <Notification value={0} text={'Oväntat!'} id = {id} />,
                 Date: '2020-06-13',
                 PysicalActivity: '4',
                 UpdatedBy: 'Patient',
             },
             {
-                notices: <Notification value={0} text={'Oväntat!'} id = {id} />,
                 Date: '2020-07-25',
                 PysicalActivity: '5',
                 UpdatedBy: 'Patient',
             },
             {
-                notices: <Notification value={0} text={'Oväntat!'} id = {id} />,
                 Date: '2020-09-01',
                 PysicalActivity: '6',
                 UpdatedBy: 'Patient',
             },
             {
-                notices: <Notification value={1} text={'Oväntat!'} id = {id} />,
                 Date: '2020-09-10',
                 PysicalActivity: '7',
                 UpdatedBy: 'Patient',
             },
             {
-                notices: <Notification value={0} text={'Oväntat!'} id = {id} />,
                 Date: '2020-10-02',
                 PysicalActivity: '8',
                 UpdatedBy: 'Patient',
             },
             {
-                notices: <Notification value={0} text={'Oväntat!'} id = {id} />,
                 Date: '2020-10-10',
                 PysicalActivity: '9',
                 UpdatedBy: 'Patient',
@@ -60,8 +53,8 @@ const PhysicalActivityPage = () => {
 
         for (let i = 0; i < data.length; i++) {
             newArr.push({
-                notices: <Notification value={3} text={'test'} id={id} date={data[i]['Date']}
-                                       measurement={data[i]['BloodPressure']} updatedBy={data[i]['UpdatedBy']}/>,
+                notices: <Notification value={3} text={'fysisk aktivitet till'} id={id} date={data[i]['Date']}
+                                       measurement={data[i]['PysicalActivity']} updatedBy={data[i]['UpdatedBy']}/>,
                 Date: data[i]['Date'],
                 PysicalActivity: data[i]['PysicalActivity'],
                 UpdatedBy: data[i]['UpdatedBy']})

@@ -11,43 +11,36 @@ const BloodPressurePage = () => {
         () => [
 
             {
-               notice:"",
                 Date: '2020-05-18',
                 BloodPressure: '135/80',
                 UpdatedBy: 'Patient',
             },
             {
-                notices: "",
                 Date: '2020-06-13',
                 BloodPressure: '135/80',
                 UpdatedBy: 'Patient',
             },
             {
-                notices: "",
                 Date: '2020-07-25',
                 BloodPressure: '135/80',
                 UpdatedBy: 'Vårdpersonal',
             },
             {
-                notices: "",
                 Date: '2020-09-01',
                 BloodPressure: '135/80',
                 UpdatedBy: 'Vårdoersonal',
             },
             {
-                notices: "",
                 Date: '2020-09-10',
                 BloodPressure: '135/80',
                 UpdatedBy: 'Patient',
             },
             {
-                notices: "",
                 Date: '2020-10-02',
                 BloodPressure: '135/80',
                 UpdatedBy: 'Vårdpersonal',
             },
             {
-                notices: "",
                 Date: '2020-10-10',
                 BloodPressure: '135/80',
                 UpdatedBy: 'Patient',
@@ -62,7 +55,7 @@ const BloodPressurePage = () => {
 
         for (let i = 0; i < data.length; i++) {
             newArr.push({
-                notices: <Notification value={3} text={'test'} id={id} date={data[i]['Date']}
+                notices: <Notification value={3} text={'blodtrycket till'} id={id} date={data[i]['Date']}
                                        measurement={data[i]['BloodPressure']} updatedBy={data[i]['UpdatedBy']}/>,
                 Date: data[i]['Date'],
                 BloodPressure: data[i]['BloodPressure'],
