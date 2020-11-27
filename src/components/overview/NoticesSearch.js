@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { InputBase, Link, ListItem } from '@material-ui/core';
 //import { ArrowDropDown } from '@material-ui/icons';
 
-import { FilterModal } from '..'
+import { FilterModal, NoticesGroups } from '..'
 
 // Component rendering applied filters and Rensa filter button
 const AppliedFilterUI = ({ activeFiltersState, setIsFilterApplied }) => {
@@ -126,8 +126,8 @@ const NoticesSearch = ({
 
   return (
     <>
-      <div style={{ height: 'auto', marginLeft: 'auto', marginRight: 'auto', width: '95%' }}>
-        <div style={{ height: '45px', width: 'inherit', marginLeft: 'auto', marginRight: 'auto', backgroundColor: '#FFF', borderRadius: '25px 25px' }}>
+      <div style={{ float: 'left', height: 'auto', marginLeft: '10px', marginRight: '10px', width: '100%' }}>
+        <div style={{ float: 'left', height: '45px', marginTop: '10px', width: '25%', backgroundColor: '#FFF', borderRadius: '25px 25px' }}>
           <InputBase
             inputComponent='input'
             className='text-gray-800'
@@ -142,10 +142,34 @@ const NoticesSearch = ({
             value={searchValue}
           />
         </div>
-        <AppliedFilterUI activeFiltersState={activeFiltersState} setIsFilterApplied={setIsFilterApplied} setCustomFilterData={setCustomFilterData} />
+        <div style={{ marginTop: '10px', width: '100%' }} >
+          <NoticesGroups
+            setOwnFilters={setOwnFilters}
+            customFilterData={customFilterData}
+            setCustomFilterData={setCustomFilterData}
+            dropdownOpen={dropdownOpen}
+            setDropdownOpen={setDropdownOpen}
+          />
+        </div>
         <div style={{ height: 'auto', paddingTop: '12px', paddingBottom: '2px', marginLeft: 'auto', textAlign: 'end' }}>
-          {isFilterApplied && <Link underline="always" component="button" variant="body2" style={{ color: "#000", marginRight: "2rem" }} onClick={handleResetFilters}>Rensa Filter</Link>}
-          <FilterModal setDropdownOpen={setDropdownOpen} setOwnFilters={setOwnFilters} customFilterData={customFilterData} setCustomFilterData={setCustomFilterData} />
+          <AppliedFilterUI
+            activeFiltersState={activeFiltersState}
+            setIsFilterApplied={setIsFilterApplied}
+            setCustomFilterData={setCustomFilterData} />
+          {isFilterApplied &&
+            <Link
+              underline="always"
+              component="button"
+              variant="body2"
+              style={{ color: "#000" }}
+              onClick={handleResetFilters}>
+              Rensa Filter
+          </Link>}
+          <FilterModal
+            setDropdownOpen={setDropdownOpen}
+            setOwnFilters={setOwnFilters}
+            customFilterData={customFilterData}
+            setCustomFilterData={setCustomFilterData} />
         </div>
       </div>
     </>

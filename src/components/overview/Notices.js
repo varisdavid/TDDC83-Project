@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 
-import { NoticesSearch, NoticesTable, NoticesGroups } from '..'
+import { NoticesSearch, NoticesTable } from '..'
 import { useTable, useFlexLayout, useFilters, useGlobalFilter, useSortBy } from 'react-table'
 
 import { Modal, Button, Link } from '@material-ui/core';
@@ -142,7 +142,7 @@ const Notices = () => {
   const data = useMemo(
     // To get them in the proper order, using numbers to represent priority, 1 = high, 2 = medium, 3 = low with notification, 4 = low without notification
     () => [
-      { 
+      {
         href: "2020-11-17", // This is for displaying purposes
         date: "2020-11-17:00", // the added :00 makes it so this sorts above patient info with the same date.
         dateRow: true,
@@ -471,7 +471,7 @@ const Notices = () => {
       return rows;
     }
     // If it either matches, or it is a dateRow we keep it.
-    return rows.filter(row => row.values[id] === filterValue || row.original["dateRow"]) 
+    return rows.filter(row => row.values[id] === filterValue || row.original["dateRow"])
   }
 
   // Returns all rows containing a chosen priority.
@@ -510,11 +510,11 @@ const Notices = () => {
     if (filterValue.length > 0) {
       // This line goes through all possible filters and sees if any of the rows have one of the filter values in its diagnoses array
       // , and if this is fulfilled + that row hasen't already been added, we add it.
-      filterValue.forEach(value => rows.forEach((row, index) => { 
-        if ((row.original["dateRow"] || row.values[id].indexOf(value)) !== -1 && matches.indexOf(index) === -1) { 
+      filterValue.forEach(value => rows.forEach((row, index) => {
+        if ((row.original["dateRow"] || row.values[id].indexOf(value)) !== -1 && matches.indexOf(index) === -1) {
           // It is very important that it first checks if it is a dateRow, because it wont have be able to use the function indexOf for these rows.
-          matches.push(index) 
-        } 
+          matches.push(index)
+        }
       }))
       return matches.map(index => rows[index])
     } else {
@@ -543,14 +543,14 @@ const Notices = () => {
 
     dates.forEach(date => {
       rows.forEach((row, index) => {
-        if (row.original.dateRow) {      
+        if (row.original.dateRow) {
           if (row.original.date.substring(0, 10) === date) {
             matches.push(index)
           }
         }
       })
     })
-    
+
     return matches.map(index => rows[index])
   }
 
@@ -591,10 +591,10 @@ const Notices = () => {
   const initialState = {
     sortBy: [
       {
-          id: 'date',
-          desc: true
+        id: 'date',
+        desc: true
       }
-  ],
+    ],
     filters: [],
     hiddenColumns: ['age', 'name', 'gender', 'team', 'department', 'diagnoses', 'dateRow']
     // filters: [{ id: 'col1', value: 'Green'}]
@@ -644,7 +644,7 @@ const Notices = () => {
     getPatientList();
     setGlobalFilter(searchValue); // We use the stored searchValue to globally filter our table by. 
   }, [searchValue, toggleSortBy, setGlobalFilter, getAccessTokenSilently]);
-  
+
   return (
     <>
       <div className='flex justify-center'>
@@ -682,21 +682,6 @@ const Notices = () => {
           </div>
         </div>
       </div>
-
-      <div className='flex justify-center'>
-        <div className='w-10/12 mt-3 p-2'>
-          <div style={{ width: '100%' }}>
-            <NoticesGroups
-              setOwnFilters={setOwnFilters}
-              customFilterData={customFilterData}
-              setCustomFilterData={setCustomFilterData}
-              dropdownOpen={dropdownOpen}
-              setDropdownOpen={setDropdownOpen}
-            />
-          </div>
-        </div>
-      </div>
-
     </>
   );
 };
