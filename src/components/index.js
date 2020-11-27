@@ -51,9 +51,11 @@ import PhysicalActivityPage from "./patientview/PhysicalActivityPage";
 
 import PatientViewMeasurementsHeaderNavigation from "./patientview/PatientViewMeasurementsHeaderNavigation";
 
-import TableForChart from "./patientview/TableForChart";
+import TableForChartBloodPressure from "./patientview/TableForChartBloodPressure";
 import Notification from "./patientview/Notification";
 import FormForUpdateValues from "./patientview/FormForUpdateValues";
+import TableForChartPysicalActivity from "./patientview/TableForChartPysicalActivity";
+import TableForChartWeightChartPage from "./patientview/TableForChartWeightChartPage";
 
 // import Notices from './Notices';
 // import NoticesTable from './NoticesTable';
@@ -97,7 +99,9 @@ export {
     WeightChartPage,
     PatientViewMeasurementsHeaderNavigation,
     PhysicalActivityPage,
-    TableForChart,
+    TableForChartBloodPressure,
     Notification,
     FormForUpdateValues,
+    TableForChartPysicalActivity,
+    TableForChartWeightChartPage,
 };

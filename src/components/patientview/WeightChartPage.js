@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
-import { WeightChart, TableForChart, Notification, FormForUpdateValues } from "..";
-import { useFlexLayout, useTable } from "react-table";
+import { WeightChart, TableForChartWeightChartPage, Notification, FormForUpdateValues } from "..";
 
 
 const WeightChartPage = () => {
@@ -55,40 +54,22 @@ const WeightChartPage = () => {
         ],
         []
     )
-    //setting the table head in the table below
-    const columns = useMemo(
-        () => [
-            {
-                Header: '',
-                accessor: 'notices',
-            },
+    //Adds the Notification to the data array so that the pop-up modals can retrive the correct data
+    function addNotification(data) {
+        let newArr = [];
 
-            {
-                Header: 'Datum',
-                accessor: 'Date',
-            },
-            {
-                Header: 'Vikt',
-                accessor: 'Weight',
-            },
-            {
-                Header: 'Uppdaterades Av',
-                accessor: 'UpdatedBy',
-            },
-        ],
-        []
-    )
+        for (let i = 0; i < data.length; i++) {
+            newArr.push({
+                notices: <Notification value={3} text={'test'} id={id} date={data[i]['Date']}
+                                       measurement={data[i]['BloodPressure']} updatedBy={data[i]['UpdatedBy']}/>,
+                Date: data[i]['Date'],
+                Weight: data[i]['Weight'],
+                UpdatedBy: data[i]['UpdatedBy']})
+        }
+        return (newArr)
+    }
 
-    const {
-        getTableProps,
-        getTableBodyProps,
-        headerGroups,
-        rows,
-        prepareRow,
-    } = useTable({ columns, data },
-        useFlexLayout,
-    );
-
+    const addNotice = addNotification(data);
     return (
         <>
             {/* Setting up the big div on the page */}
@@ -104,12 +85,7 @@ const WeightChartPage = () => {
                 <div style={{ width: '30%' }}>
                     {/* This is the weight table being displayed */}
                     <div>
-                        <TableForChart
-                            getTableProps={getTableProps}
-                            getTableBodyProps={getTableBodyProps}
-                            headerGroups={headerGroups}
-                            rows={rows}
-                            prepareRow={prepareRow}
+                        <TableForChartWeightChartPage data ={addNotice}
                         />
                     </div>
 

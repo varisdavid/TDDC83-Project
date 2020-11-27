@@ -1,5 +1,5 @@
 import React, {useMemo} from 'react';
-import {BloodPressure, Notification, TableForChart, FormForUpdateValues} from "..";
+import {BloodPressure, Notification, TableForChartBloodPressure, FormForUpdateValues} from "..";
 import {useFlexLayout, useTable} from "react-table";
 
 
@@ -11,8 +11,7 @@ const BloodPressurePage = () => {
         () => [
 
             {
-                notices: <Notification value={3} text={'test'} id={id} date={""}
-                                       bloodPressure={""} updatedBy={""}/>,
+               notice:"",
                 Date: '2020-05-18',
                 BloodPressure: '135/80',
                 UpdatedBy: 'Patient',
@@ -64,7 +63,7 @@ const BloodPressurePage = () => {
         for (let i = 0; i < data.length; i++) {
             newArr.push({
                 notices: <Notification value={3} text={'test'} id={id} date={data[i]['Date']}
-                                       bloodPressure={data[i]['BloodPressure']} updatedBy={data[i]['UpdatedBy']}/>,
+                                       measurement={data[i]['BloodPressure']} updatedBy={data[i]['UpdatedBy']}/>,
                 Date: data[i]['Date'],
                 BloodPressure: data[i]['BloodPressure'],
                 UpdatedBy: data[i]['UpdatedBy']})
@@ -73,41 +72,6 @@ const BloodPressurePage = () => {
     }
 
     const addNotice = addNotification(data);
-
-    //Setting the table heads in the table as well as which data goes where
-    const columns = useMemo(
-        () => [
-            {
-                Header: '',
-                accessor: 'notices',
-            },
-
-            {
-                Header: 'Datum',
-                accessor: 'Date',
-            },
-            {
-                Header: 'Blodtryck',
-                accessor: 'BloodPressure',
-            },
-            {
-                Header: 'Uppdaterades Av',
-                accessor: 'UpdatedBy',
-            },
-        ],
-        []
-    );
-
-const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-} = useTable({columns, data},
-    useFlexLayout,
-);
-
 
 return (
     <>
@@ -125,12 +89,7 @@ return (
             <div style={{width: '30%'}}>
                 {/* This is the bloodpressure table being displayed */}
                 <div>
-                    <TableForChart
-                        getTableProps={getTableProps}
-                        getTableBodyProps={getTableBodyProps}
-                        headerGroups={headerGroups}
-                        rows={rows}
-                        prepareRow={prepareRow}
+                    <TableForChartBloodPressure data = {addNotice}
                     />
                 </div>
 
