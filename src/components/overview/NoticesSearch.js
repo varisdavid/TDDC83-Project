@@ -151,13 +151,11 @@ const NoticesSearch = ({
             setDropdownOpen={setDropdownOpen}
           />
         </div>
-        <div style={{ float: 'left', width: '80%' }}>
+        <div style={{ height: 'auto', paddingTop: '12px', paddingBottom: '2px', marginLeft: 'auto', textAlign: 'end' }}>
           <AppliedFilterUI
             activeFiltersState={activeFiltersState}
             setIsFilterApplied={setIsFilterApplied}
             setCustomFilterData={setCustomFilterData} />
-        </div>
-        <div style={{ height: 'auto', paddingTop: '12px', paddingBottom: '2px', marginLeft: 'auto', textAlign: 'end' }}>
           {isFilterApplied &&
             <Link
               underline="always"
