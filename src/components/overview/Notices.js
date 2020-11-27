@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 
-import { NoticesSearch, NoticesTable, NoticesGroups } from '..'
+import { NoticesSearch, NoticesTable } from '..'
 import { useTable, useFlexLayout, useFilters, useGlobalFilter, useSortBy } from 'react-table'
 
 import { Modal, Button, Link } from '@material-ui/core';
@@ -682,21 +682,6 @@ const Notices = () => {
           </div>
         </div>
       </div>
-
-      {/*       <div className='flex justify-center'>
-        <div className='w-10/12 mt-3 p-2'>
-          <div style={{ width: '100%' }}>
-            <NoticesGroups
-              setOwnFilters={setOwnFilters}
-              customFilterData={customFilterData}
-              setCustomFilterData={setCustomFilterData}
-              dropdownOpen={dropdownOpen}
-              setDropdownOpen={setDropdownOpen}
-            />
-          </div>
-        </div>
-      </div> */}
-
     </>
   );
 };
