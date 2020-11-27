@@ -183,6 +183,22 @@ def get_all_diagnosis():
     return to_return
 
 def get_all_measurements():
+    aql_ehrids = """SELECT e/ehr_id/value as id
+                    FROM EHR e
+                    CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.encounter.v1]
+                    WHERE c/name/value='EHR-PUM-C3'
+                    OFFSET 0"""
+    response = query(aql_ehrids)
+    list_ehrids= response["resultSet"]
+    ehrid_string = "("
+    for ehrid_dict in list_ehrids:
+        ehrid = ehrid_dict["id"]
+        ehrid_string+=("eid='%s'"%ehrid)
+        if list_ehrids.index(ehrid_dict) < len(list_ehrids)-1:
+            ehrid_string+=" OR "
+    ehrid_string+=")"
+
+    
     aql = """SELECT x/data[at0002]/events[at0003]/data[at0001]/items[at0004,'Pulse Rate']/value as pulse,
        a/data[at0001]/events[at0002]/data[at0003]/items[at0011]/value as exercise,
        o/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value as bodyweight,
@@ -190,17 +206,22 @@ def get_all_measurements():
        i/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value as systolic,
        i/data[at0001]/events[at0006]/data[at0003]/items[at0005]/value as diastolic,
        w/data[at0001]/events[at0002]/time/value as time,
-       e/ehr_id/value as eid
+       DISTINCT e/ehr_id/value as eid
        FROM EHR e
        CONTAINS COMPOSITION c
        CONTAINS (OBSERVATION x[openEHR-EHR-OBSERVATION.pulse.v1] and 
        OBSERVATION a[openEHR-EHR-OBSERVATION.physicalactivityrecord.v0] and 
        OBSERVATION o[openEHR-EHR-OBSERVATION.body_weight.v2] and 
        OBSERVATION w[openEHR-EHR-OBSERVATION.blood_glucose.v1] and 
-       OBSERVATION i[openEHR-EHR-OBSERVATION.blood_pressure.v2]) 
-       ORDER BY time DESC""" 
+       OBSERVATION i[openEHR-EHR-OBSERVATION.blood_pressure.v2])
+       WHERE %s
+       ORDER BY time DESC OFFSET 0""" %ehrid_string
     response = query(aql)
     to_return= {}
+   # print(aql)
+    print(response["executedAql"])
+    #print(len(response['resultSet']))
+    #print(len(set([x['eid'] for x in response['resultSet']])))
     for measurement in response['resultSet']:
         
         time = measurement['time'][:10]
@@ -212,7 +233,6 @@ def get_all_measurements():
                           "Bloodsugar: " : measurement['bloodsugar']['magnitude'],
                           "Time: " : time,
                           }
-                          
     return to_return
 def get_overview():
     measurements = get_all_measurements()
@@ -222,39 +242,19 @@ def get_overview():
     parties = response['parties']
 
     to_return = []
-    print(len(parties))
-    print(len(measurements))
-    print(len(diagnosises))
+
     measurement = None
-    diagnosis= None
     for party in parties:
         ehrid = party['additionalInfo']['ehrId']
         more_info = party["additionalInfo"]
         
+        try:
+            measurements[ehrid]
+        except KeyError:
+            print(ehrid)
         #first_occurence = list(next(filter(lambda x: x[ehrid], measurements)))
         #a = next((item for item in measurements if item["ehrid"] == ehrid), "Va")
-        try:
-            print(measurements[ehrid])
-        except KeyError as e:
-            print(ehrid)
-
-        print(diagnosises[ehrid])
-       # for m in measurements:
-       #     try:
-       #         if ehrid == m['ehrid']:
-        #            pass
-        #    except Exception as e:
-        #        print(e)
-               # print(m)
-        #for d in diagnosises:
-        #    try:
-        #        if ehrid == d['ehrid']:
-        #           # d.pop('eid')
-        ##            #diagnosis = d
-         #           pass
-         #   except Exception as e:
-         #       print(e)
-       
+        diagnosis = diagnosises[ehrid]
         personal_details = {
             "Name": party["firstNames"] + " " + party["lastNames"],
             "EhrID": more_info["ehrId"],
