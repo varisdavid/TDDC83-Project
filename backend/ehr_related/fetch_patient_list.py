@@ -1,5 +1,6 @@
 import requests
 import json
+import time
 
 
 wu = "lio.se1"
@@ -159,16 +160,135 @@ def get_diagnosis(ehrid):
 
 
 
-def get_overview():
-    patient_info = get_all_patients_personal_details()
-    for patient in patient_info:
-        diagnosis = get_diagnosis(patient["EhrID"])
-        patient.update({"Diagnosises" : diagnosis})
-        measurement = get_measurements(patient["EhrID"])[-1:]
-        patient.update({"Measurement" : measurement})
-    return patient_info
+def get_all_parties():
+    response = requests.get(baseurl + "/demographics/party/query?email=*@fejka.nu", verify=True, auth=(wu, wp)
+    )
+    return response.json() if response.ok else response
 
+def get_all_diagnosis():
+    aql_ehrids = """SELECT e/ehr_id/value as id
+                    FROM EHR e
+                    CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.encounter.v1]
+                    WHERE c/name/value='EHR-PUM-C3'
+                    OFFSET 0"""
+    response = query(aql_ehrids)
+    list_ehrids= response["resultSet"]
+    ehrid_string = "("
+    for ehrid_dict in list_ehrids:
+        ehrid = ehrid_dict["id"]
+        ehrid_string+=("eid='%s'"%ehrid)
+        if list_ehrids.index(ehrid_dict) < len(list_ehrids)-1:
+            ehrid_string+=" OR "
+    ehrid_string+=")"
+    aql = """SELECT y/data[at0001]/items[at0009]/value as diagnos,
+        e/ehr_id/value as eid
+        FROM EHR e
+        CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.encounter.v1]
+        CONTAINS EVALUATION y[openEHR-EHR-EVALUATION.problem_diagnosis.v1] 
+        WHERE c/name/value='Medical diagnosis' AND %s
+        OFFSET 0""" %ehrid_string
+    response = query(aql)
+    to_return = {}
+    for diagnosis in response['resultSet']:
+  
+        to_return[diagnosis["eid"]] = diagnosis['diagnos']['value']
+    return to_return
 
+def get_all_measurements():
 
+    aql_ehrids = """SELECT e/ehr_id/value as id
+                    FROM EHR e
+                    CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.encounter.v1]
+                    WHERE c/name/value='EHR-PUM-C3'
+                    OFFSET 0"""
+    response = query(aql_ehrids)
+    list_ehrids= response["resultSet"]
+    ehrid_string = "("
+    for ehrid_dict in list_ehrids:
+        ehrid = ehrid_dict["id"]
+        ehrid_string+=("eid='%s'"%ehrid)
+        if list_ehrids.index(ehrid_dict) < len(list_ehrids)-1:
+            ehrid_string+=" OR "
+    ehrid_string+=")"
 
+   
+    aql = """SELECT x/data[at0002]/events[at0003]/data[at0001]/items[at0004,'Pulse Rate']/value as pulse,
+       a/data[at0001]/events[at0002]/data[at0003]/items[at0011]/value as exercise,
+       o/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value as bodyweight,
+       w/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value as bloodsugar,
+       i/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value as systolic,
+       i/data[at0001]/events[at0006]/data[at0003]/items[at0005]/value as diastolic,
+       w/data[at0001]/events[at0002]/time/value as time,
+       e/ehr_id/value as eid
+       FROM EHR e
+       CONTAINS COMPOSITION c
+       CONTAINS (OBSERVATION x[openEHR-EHR-OBSERVATION.pulse.v1] and 
+       OBSERVATION a[openEHR-EHR-OBSERVATION.physicalactivityrecord.v0] and 
+       OBSERVATION o[openEHR-EHR-OBSERVATION.body_weight.v2] and 
+       OBSERVATION w[openEHR-EHR-OBSERVATION.blood_glucose.v1] and 
+       OBSERVATION i[openEHR-EHR-OBSERVATION.blood_pressure.v2]) 
+       WHERE %s
+       ORDER BY time DESC
+       OFFSET 0""" %ehrid_string
     
+    response = query(aql)
+    to_return= {}
+
+    for measurement in response['resultSet']:
+        time = measurement['time'][:10]
+     
+        to_return[measurement["eid"]]=  { "Pulse: " : measurement['pulse']['magnitude'],
+                          "Exercise: ":measurement['exercise']['magnitude'],
+                          "Weight: " : measurement['bodyweight']['magnitude'],
+                          "Diastolic: " : measurement['diastolic']['magnitude'],
+                          "Systolic: " : measurement['systolic']['magnitude'],
+                          "Bloodsugar: " : measurement['bloodsugar']['magnitude'],
+                          "Time: " : time,
+                          "ehrid" : measurement['eid']
+                          } 
+                          
+    return to_return
+def get_overview():
+    measurements = get_all_measurements()
+    diagnosises = get_all_diagnosis()
+    response = get_all_parties()
+    parties = response['parties']
+
+    to_return = []
+    
+    for party in parties:
+        ehrid = party['additionalInfo']['ehrId']
+        more_info = party["additionalInfo"]
+        try:
+            measurement = measurements[ehrid]
+        except Exception:
+            measurement = get_measurements(ehrid)[:-1]
+            
+        diagnosis = diagnosises[ehrid]
+        personal_details = {
+            "Name": party["firstNames"] + " " + party["lastNames"],
+            "EhrID": more_info["ehrId"],
+            "PNR": more_info["pnummer"],
+            "Gender": more_info["gender"],
+            "City": more_info["city"],
+            "Address": more_info["adress"],
+            "Age": more_info["age"],
+            "Phone": more_info["phone"],
+            "Email": more_info["email"],
+            "Team" : more_info["team"], 
+            "Department" : more_info["department"], 
+            "Contactperson" : more_info["contactperson"],  
+            "Operation" : more_info["operation"],
+            "Diagnosis" : diagnosis,
+            "Measurement" : measurement
+        }
+
+
+        to_return.append(personal_details)
+
+    return to_return
+
+
+
+
+ 
