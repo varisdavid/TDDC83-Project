@@ -57,6 +57,22 @@ const BloodPressurePage = () => {
         []
     );
 
+    //Adds the Notification to the data array so that the pop-up modals can retrive the correct data
+    function addNotification(data) {
+        let newArr = [];
+
+        for (let i = 0; i < data.length; i++) {
+            newArr.push({
+                notices: <Notification value={3} text={'test'} id={id} date={data[i]['Date']}
+                                       bloodPressure={data[i]['BloodPressure']} updatedBy={data[i]['UpdatedBy']}/>,
+                Date: data[i]['Date'],
+                BloodPressure: data[i]['BloodPressure'],
+                UpdatedBy: data[i]['UpdatedBy']})
+        }
+        return (newArr)
+    }
+
+    const addNotice = addNotification(data);
 
     //Setting the table heads in the table as well as which data goes where
     const columns = useMemo(
@@ -81,25 +97,6 @@ const BloodPressurePage = () => {
         ],
         []
     );
-
-
-    function addNotification(data) {
-        let newArr = [];
-
-        for (let i = 0; i < data.length; i++) {
-            newArr.push({
-            notices: <Notification value={3} text={'test'} id={id} date={data[i]['Date']}
-                          bloodPressure={data[i]['BloodPressure']} updatedBy={data[i]['UpdatedBy']}/>,
-                Date: data[i]['Date'],
-                BloodPressure: data[i]['BloodPressure'],
-                UpdatedBy: data[i]['UpdatedBy']})
-        }
-    return (newArr)
-    }
-
-const addNotice = addNotification(data);
-    console.log(addNotice);
-    console.log (data);
 
 const {
     getTableProps,
