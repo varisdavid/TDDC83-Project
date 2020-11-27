@@ -44,26 +44,6 @@ const NoticesGroups = ({ setOwnFilters, customFilterData, setCustomFilterData, d
   return (
     <>
       <div style={{ width: 'auto', textAlign: 'end' }}>
-
-        {patientGroups.map(group => {
-          return (
-            <Button
-              className='shadow mr-2'
-              key={group.accessor}
-              style={{
-                paddingTop: '2px',
-                paddingBottom: '2px',
-                paddingLeft: '15px',
-                paddingRight: '15px',
-                borderRadius: '0'
-              }}
-              onClick={() => setOwnFilters(group.filterData)}
-            >
-              { group.Name}
-            </Button>
-          )
-        })}
-
         <CreateNewFilterModal
           setOwnFilters={setOwnFilters}
           customFilterData={customFilterData}
@@ -72,6 +52,28 @@ const NoticesGroups = ({ setOwnFilters, customFilterData, setCustomFilterData, d
           setDropdownOpen={setDropdownOpen}
           patientGroups={patientGroups}
         />
+
+        {patientGroups.map(group => {
+          return (
+            <Button
+              className='shadow mr-2'
+              key={group.accessor}
+              style={{
+                marginTop: '5px',
+                marginBottom: '5px',
+                paddingTop: '2px',
+                paddingBottom: '2px',
+                paddingLeft: '15px',
+                paddingRight: '15px',
+                borderRadius: '0',
+                backgroundColor: '#FFF'
+              }}
+              onClick={() => setOwnFilters(group.filterData)}
+            >
+              { group.Name}
+            </Button>
+          )
+        })}
       </div>
     </>
   );
