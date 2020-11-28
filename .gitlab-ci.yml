@@ -33,7 +33,7 @@ build:
       - build
   before_script:
     - yarn config set cache-folder .yarn
-    - yarn install
+    - npm install
   script:
     - npm run build
 
