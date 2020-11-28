@@ -10,6 +10,7 @@ import './app.css';
 
 const App = () => {
   const { isLoading } = useAuth0();
+  const port = process.env.PORT || 3000;
 
   if (isLoading) {
     return <Loading />;
