@@ -20,6 +20,7 @@ stages:
   - build
   - publish
   - test
+  - deploy
   # - staging
   # - openMr
   # - production
@@ -79,6 +80,23 @@ build-app-image:
     - echo ${CI_REGISTRY_IMAGE}
     - buildah build-using-dockerfile --tag "frontend" "."
     - buildah push --creds "${CI_REGISTRY_USER}:${CI_JOB_TOKEN}" "frontend" "docker://${CI_REGISTRY_IMAGE}/frontend:latest"
+
+
+deploy-app:
+  environment: 'production'
+  needs: ["build-app-image", "build-flask-image"]
+  dependencies: []
+  stage: deploy
+  image: lachlanevenson/k8s-kubectl
+  only:
+    refs: 
+      - master
+
+  script:
+    - kubectl delete pods -l app=backend
+    - kubectl delete pods -l app=frontend
+
+
 
 Test:
   image: node:latest

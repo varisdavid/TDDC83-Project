@@ -11,7 +11,7 @@ spec:
     - host: tddc88-company-3-2020.kubernetes-public.it.liu.se
       http:
         paths:
-        - path: /
+        - path: /api/
           backend:
             serviceName: backend
             servicePort: 80
