@@ -115,3 +115,38 @@ class Team(db.Model):
     def serialize(self):
         return dict(id=self.id, name=self.name, departmentNumber=self.departmentNumber)
 
+class CustomizedView(db.Model):
+    __tablename__ = "views"
+    id = db.Column(db-Integer, primary_key=True)
+    minAge = db.Column(db.Integer, nullable=True)
+    maxAge = db.Column(db.Integer, nullable=True)
+    gender = db.Column(db.Boolean, nullable=True)
+    departmentNumber = db.Column(db.Integer, db.ForeignKey("departments.id"), nullable=True)
+    teamNumber = db.Column(db.Integer, db.ForeignKey("teams.id"), nullable=True)
+    #priority = db.Column(db.Integer, )
+    #diagnosis
+    #accessFor ()
+    
+
+    def __repr__(self):
+        return "<View {}: {} {} {} {} {}>".format(
+            self.id,
+            self.minAge,
+            self.maxAge,
+            self.gender,
+            self.departmentNumber,
+            self.teamNumber,
+        )
+
+    def serialize(self):
+        return dict(
+            id = self.id,
+            minAge = self.minAge,
+            maxAge = self.maxAge,
+            gender = self.gender,
+            departmentNumber = self.departmentNumber,
+            teamNumber = self.teamNumber,
+        )
+
+
+    
