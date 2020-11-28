@@ -18,9 +18,9 @@ spec:
         - name: backend
           image: gitlab.liu.se:5000/tddc88-company-3-2020/deploy/backend:latest
           imagePullPolicy: Always
-          envFrom:
-            - secretRef:
-                name: regcred
+          #envFrom:
+           # - secretRef:
+            #    name: regcred
           ports:
           - containerPort: 3000
             protocol: TCP
@@ -31,6 +31,6 @@ spec:
             requests: # ...and what we probably will get by with.
               cpu: 10m
               memory: 42Mi
-      imagePullSecrets:
-        - name: regcred
+      #imagePullSecrets:
+       # - name: regcred
       restartPolicy: Always

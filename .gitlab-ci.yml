@@ -22,18 +22,60 @@ before_script:
 # Order matters.
 stages:
   - build
+  - publish
   - test
   # - staging
   # - openMr
   # - production
 
-Build:
+build:
   stage: build
+  artifacts:
+    paths:
+      - build
   before_script:
     - yarn config set cache-folder .yarn
     - yarn install
   script:
     - npm run build
+
+
+build-flask-image:
+  stage: publish
+  image: docker.io/buildah/buildah
+  only:
+    changes:
+      - backend/*
+  only:
+    refs: 
+      - master
+
+  script:
+    - export _BUILDAH_STARTED_IN_USERNS=''
+    - export BUILDAH_ISOLATION=chroot
+    - export STORAGE_DRIVER=vfs
+    - export BUILDAH_FORMAT=docker
+    - buildah build-using-dockerfile --tag "backend" "backend"
+    - buildah push --creds "${CI_REGISTRY_USER}:${CI_JOB_TOKEN}" "backend" "docker://${CI_REGISTRY_IMAGE}/backend:latest"
+
+
+
+build-app-image:
+  stage: publish
+  image: docker.io/buildah/buildah
+  needs: ["build"]
+  dependencies:
+    - build
+  only:
+    refs: 
+      - master
+  script:
+    - export _BUILDAH_STARTED_IN_USERNS=''
+    - export BUILDAH_ISOLATION=chroot
+    - export STORAGE_DRIVER=vfs
+    - export BUILDAH_FORMAT=docker
+    - buildah build-using-dockerfile --tag "frontend" "."
+    - buildah push --creds "${CI_REGISTRY_USER}:${CI_JOB_TOKEN}" "frontend" "docker://${CI_REGISTRY_IMAGE}/frontend:latest"
 
 Test:
   stage: test
