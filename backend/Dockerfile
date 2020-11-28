@@ -15,4 +15,4 @@ RUN pip3 list
 RUN flask
 EXPOSE 3000
 
-CMD ["gunicorn", "create_app", "-b", "0.0.0.0:3000"]
+CMD ["gunicorn", "run_server:app", "-b", "0.0.0.0:3000"]
