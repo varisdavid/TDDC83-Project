@@ -91,15 +91,18 @@ const WeightChartPage = () => {
     const accLimits = [50, 75];
     const nonAccLimits = [40, 79];
 
+    //Range on the slider
+    const minMax = [0,nonAccLimits[1]+15];
+
     //Marks on the slider
     const marks = [
         {
-            value: 0,
-            label: '0 kg',
+            value: minMax[0],
+            label: minMax[0]+' kg',
         },
         {
-            value: nonAccLimits[1]+15,
-            label: nonAccLimits[1]+15+' kg',
+            value: minMax[1],
+            label: minMax[1]+' kg',
         },
     ];
 
@@ -126,6 +129,7 @@ const WeightChartPage = () => {
                         marks={marks} 
                         referenceValues={referenceValues}
                         setReferenceValues={setReferenceValues}
+                        minMax={minMax}
                         />
                 </div>
 

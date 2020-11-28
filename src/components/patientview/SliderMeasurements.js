@@ -10,6 +10,7 @@ const useStyles = makeStyles({
   },
 });
 
+//Styled the slider
 const StyledSlider = withStyles({
   root: {
     color: "grey",
@@ -64,6 +65,7 @@ const StyledSlider = withStyles({
   }
 })(Slider);
 
+//Renders the thumb component after color
 function MyThumbComponent(props) {
   if (props["data-index"]%6  === 0) {
     props.style.backgroundColor = "red";
@@ -82,11 +84,12 @@ function MyThumbComponent(props) {
 }
 
 
-
-const SliderMeasurments = ({ marks, referenceValues, setReferenceValues }) => {
+//Renders a vertical slider
+const SliderMeasurments = ({marks, referenceValues, setReferenceValues, minMax  }) => {
   const classes = useStyles();
   const [value, setValue] = React.useState(referenceValues);
 
+  //Handles change
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -107,8 +110,8 @@ const SliderMeasurments = ({ marks, referenceValues, setReferenceValues }) => {
           marks={marks}
           aria-label="pretto slider"
           ThumbComponent={MyThumbComponent}
-          max={referenceValues[referenceValues.length-1] + 5}
-          min={referenceValues[0]-2}
+          max={minMax[1]}
+          min={minMax[0]}
           onChange={handleChange}
         />
       </div>

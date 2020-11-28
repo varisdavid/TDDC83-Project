@@ -91,15 +91,18 @@ const PhysicalActivityPage = () => {
     const accLimits = [3];
     const nonAccLimits = [2];
 
+    //Range on the slider
+    const minMax = [0,goalLimits[0]+5];
+
     //Marks on the slider 
     const marks = [
         {
-            value: 0,
-            label: '0 timmar',
+            value: minMax[0],
+            label: minMax[0]+' timmar',
         },
         {
-            value: goalLimits[0]+5,
-            label: goalLimits[0]+5+' timmar',
+            value: minMax[1],
+            label: minMax[1]+' timmar',
         },
     ];
 
@@ -126,6 +129,7 @@ const PhysicalActivityPage = () => {
                             marks={marks}
                             referenceValues={referenceValues}
                             setReferenceValues={setReferenceValues}
+                            minMax={minMax}
                         />
                     </div>
 
