@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { WeightChart, TableForChart, Notification, FormForUpdateValues, SliderMeasurements } from "..";
 import { useFlexLayout, useTable } from "react-table";
 
@@ -86,6 +86,31 @@ const WeightChartPage = () => {
         useFlexLayout,
     );
 
+    //fake data that displays boundaires
+    const goalLimits = [60, 70];
+    const accLimits = [50, 75];
+    const nonAccLimits = [40, 79];
+
+    const marks = [
+        {
+            value: 0,
+            label: '0 kg',
+        },
+        {
+            value: nonAccLimits[1]+15,
+            label: nonAccLimits[1]+15+' kg',
+        },
+    ];
+
+    const [referenceValues, setReferenceValues] = useState({
+        goalLimitHigh: goalLimits[1],
+        goalLimitLow: goalLimits[0],
+        accLimitHigh: accLimits[1],
+        accLimitLow: accLimits[0],
+        nonAccLimitHigh: nonAccLimits[1],
+        nonAccLimitLow: nonAccLimits[0], 
+    });
+
     return (
         <>
             {/* Setting up the big div on the page */}
@@ -99,7 +124,11 @@ const WeightChartPage = () => {
                 </div>
 
                 <div style={{ width: '10%' }}>
-                    <SliderMeasurements/>
+                    <SliderMeasurements
+                        marks={marks} 
+                        referenceValues={referenceValues}
+                        setReferenceValues={setReferenceValues}
+                        />
                 </div>
 
                 <div style={{ width: '30%' }}>
@@ -116,7 +145,7 @@ const WeightChartPage = () => {
 
                     {/* The form which you can fill in information about your weight does not save the data any where.
                      Contains two text fields and a button*/}
-                    <div style={{ width: '90%',  float: 'right' }}>
+                    <div style={{ width: '90%', float: 'right' }}>
                         <FormForUpdateValues />
                     </div>
                 </div>

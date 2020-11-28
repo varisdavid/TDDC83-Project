@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles, withStyles} from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
+import {Button} from '@material-ui/core';
 
 const useStyles = makeStyles({
   root: {
@@ -9,39 +10,29 @@ const useStyles = makeStyles({
   },
 });
 
-function valuetext(value) {
-  return `${value}°C`;
-}
-
-const marks = [
-  {
-    value: 0,
-    label: '0°C',
-  },
-  {
-    value: 100,
-    label: '100°C',
-  },
-];
-
 const StyledSlider = withStyles({
     root: {
-      color: "black",
+      color: "grey",
       height: 50
     },
     thumb: {
-    height: 24,
-    width: 24,
+    height: 20,
+    width: 20,
+    left: 15,
     backgroundColor: '#fff',
-    border: '2px solid currentColor',
+    border: '1px solid currentColor',
     '&:focus, &:hover, &$active': {
       boxShadow: 'inherit',
     },
     },
     active: {},
     valueLabel: {
-        left: "calc(-50% - 14px)",
-        color: "blue",
+      left: "calc(-70% - 14px)",
+        top: 5,
+        '& *': {
+          background: 'transparent',
+          color: '#000',
+        },
     },
     trackInverted: {
         height: 20,
@@ -73,26 +64,64 @@ const StyledSlider = withStyles({
       }
 })(Slider);
 
-export default function SliderMeasurments() {
+function MyThumbComponent(props) {
+  if (props["data-index"] === 0) {
+    props.style.backgroundColor = "red";
+  } else if (props["data-index"] === 1) {
+    props.style.backgroundColor = "yellow";
+  } else if (props["data-index"] === 2) {
+    props.style.backgroundColor = "green";
+  } else if (props["data-index"] === 3) {
+    props.style.backgroundColor = "green";
+  } else if (props["data-index"] === 4) {
+    props.style.backgroundColor = "yellow";
+  } else if (props["data-index"] === 5) {
+    props.style.backgroundColor = "red";
+  }
+  return <span {...props} />;
+}
+
+const SliderMeasurments= ({marks, referenceValues, setReferenceValues}) => {
   const classes = useStyles();
 
   return (
     <React.Fragment>
       <Typography id="vertical-slider" gutterBottom>
-        Temperature
+        Intervall
       </Typography>
       <div className={classes.root}>
         <StyledSlider 
           orientation="vertical"
-          track="inverted"
+          track={false}
           valueLabelDisplay="on"
-          defaultValue={[50, 60]}
+          defaultValue={[referenceValues.goalLimitLow,referenceValues.goalLimitHigh, 
+            referenceValues.accLimitLow,referenceValues.accLimitHigh,
+          referenceValues.nonAccLimitLow, referenceValues.nonAccLimitHigh]}
           aria-labelledby="vertical-slider"
-          getAriaValueText={valuetext}
           marks={marks}
           aria-label="pretto slider"
+          ThumbComponent={MyThumbComponent}
+          max={referenceValues.nonAccLimitHigh+15}
         />
       </div>
+      <Button onClick={() => setReferenceValues({
+         goalLimitHigh: 70,
+         goalLimitLow: 60,
+         accLimitHigh: 80,
+         accLimitLow: 50,
+         nonAccLimitHigh: 90,
+         nonAccLimitLow: 40, 
+      })} 
+            style={{
+            textTransform: 'none',
+            font: 'inherit', 
+            background: 'none',
+            border: 'none',
+            padding: 0,
+            color: '#069',
+            }}>Spara</Button>
     </React.Fragment>
+    
   );
 }
+export default SliderMeasurments;
