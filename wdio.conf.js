@@ -1,4 +1,4 @@
-const url = require('./urls')
+
 const ENV = process.env.ENV
 
 exports.config = {
