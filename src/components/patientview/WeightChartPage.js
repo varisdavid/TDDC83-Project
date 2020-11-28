@@ -102,14 +102,17 @@ const WeightChartPage = () => {
         },
     ];
 
-    const [referenceValues, setReferenceValues] = useState({
+    /*const [referenceValues, setReferenceValues] = useState({
         goalLimitHigh: goalLimits[1],
         goalLimitLow: goalLimits[0],
         accLimitHigh: accLimits[1],
         accLimitLow: accLimits[0],
         nonAccLimitHigh: nonAccLimits[1],
         nonAccLimitLow: nonAccLimits[0], 
-    });
+    });*/
+    const [referenceValues, setReferenceValues] = useState (
+        [nonAccLimits[0], accLimits[0], goalLimits[0], goalLimits[1], accLimits[1], nonAccLimits[1]]
+    );
 
     return (
         <>

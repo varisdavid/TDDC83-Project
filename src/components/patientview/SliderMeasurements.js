@@ -81,8 +81,16 @@ function MyThumbComponent(props) {
   return <span {...props} />;
 }
 
+
+
 const SliderMeasurments= ({marks, referenceValues, setReferenceValues}) => {
   const classes = useStyles();
+  const [value, setValue] = React.useState(referenceValues);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
 
   return (
     <React.Fragment>
@@ -94,24 +102,16 @@ const SliderMeasurments= ({marks, referenceValues, setReferenceValues}) => {
           orientation="vertical"
           track={false}
           valueLabelDisplay="on"
-          defaultValue={[referenceValues.goalLimitLow,referenceValues.goalLimitHigh, 
-            referenceValues.accLimitLow,referenceValues.accLimitHigh,
-          referenceValues.nonAccLimitLow, referenceValues.nonAccLimitHigh]}
+          value={value}
           aria-labelledby="vertical-slider"
           marks={marks}
           aria-label="pretto slider"
           ThumbComponent={MyThumbComponent}
-          max={referenceValues.nonAccLimitHigh+15}
+          max={referenceValues[5]+15}
+          onChange={handleChange}
         />
       </div>
-      <Button onClick={() => setReferenceValues({
-         goalLimitHigh: 70,
-         goalLimitLow: 60,
-         accLimitHigh: 80,
-         accLimitLow: 50,
-         nonAccLimitHigh: 90,
-         nonAccLimitLow: 40, 
-      })} 
+      <Button onClick={() => setReferenceValues(value)} 
             style={{
             textTransform: 'none',
             font: 'inherit', 
