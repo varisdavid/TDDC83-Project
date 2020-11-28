@@ -19,6 +19,8 @@ import { useHistory } from "react-router-dom";
 import JourTable from "./JourTable";
 import {settingsContext} from "./ColumnFilter"
 
+import {FetchAllPatients} from "../dataRetriver"
+
 // Component rendering bell icon (color based on value: integer) and hover information based on (text: string)
 const Notification = ({ value, text }) => {
   var color;
@@ -803,7 +805,6 @@ const Patients = () => {
         console.log(error.message);
       }
     };
-    getPatientList();
     toggleSortBy(sortState.columnId);
     setGlobalFilter(searchValue); // We use the stored searchValue to globally filter our table by.
   }, [
@@ -848,8 +849,8 @@ const Patients = () => {
           />
         </Grid>
       </Grid>
-      <Grid container xs={11}>
-          <Grid xs = {4} style={{paddingLeft: "45px", marginTop: "8px"}}>
+      <Grid container>
+          <Grid item xs = {4} style={{paddingLeft: "45px", marginTop: "8px"}}>
             <JourTable />
           </Grid> 
       </Grid>

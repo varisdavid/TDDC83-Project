@@ -4,17 +4,28 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 import { Loading} from './components';
 import { Home, Profile, ExternalApi, Overview, OverviewSettings, PatientView } from './views';
+import axios from "axios"
 // import ProtectedRoute from './auth/ProtectedRoute';
 
 import './app.css';
 
 const App = () => {
-  const { isLoading } = useAuth0();
+  const { isLoading, getAccessTokenSilently, isAuthenticated} = useAuth0();
 
   if (isLoading) {
     return <Loading />;
   }
 
+  if(isAuthenticated)
+  {
+    const token =  getAccessTokenSilently(); 
+    token.then(value => {axios.defaults.headers.common["Authorization"] = `Bearer ${value}`} )
+    console.log(token); 
+  }
+  else 
+  {
+    delete axios.defaults.headers.common["Authorization"];
+  }
   return (
     <div id='app' className='d-flex flex-column h-100'>
       <Switch>
