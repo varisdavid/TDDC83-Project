@@ -3,7 +3,6 @@
 # multiple node versions to work with it. They come from the docker
 # repo.
 # Uses NodeJS latest
-image: node:latest
 
 # And to cache them as well.
 cache:
@@ -14,9 +13,6 @@ cache:
 # We tell GitLab to install all the packages
 # before running anything.
 # Docker images come with yarn preinstalled
-before_script:
-  - apt-get update -qq && apt-get install
-  - npx browserslist --update-db
 
 # You specify the stages. Those are the steps that GitLab will go through
 # Order matters.
@@ -29,6 +25,7 @@ stages:
   # - production
 
 build:
+  image: node:latest
   stage: build
   artifacts:
     paths:
@@ -78,6 +75,7 @@ build-app-image:
     - buildah push --creds "${CI_REGISTRY_USER}:${CI_JOB_TOKEN}" "frontend" "docker://${CI_REGISTRY_IMAGE}/frontend:latest"
 
 Test:
+  image: node:latest
   stage: test
   before_script:
     - yarn config set cache-folder .yarn
