@@ -52,6 +52,9 @@ build-flask-image:
     - export BUILDAH_ISOLATION=chroot
     - export STORAGE_DRIVER=vfs
     - export BUILDAH_FORMAT=docker
+    - echo ${CI_REGISTRY_USER}
+    - echo ${CI_JOB_TOKEN}
+    - echo ${CI_REGISTRY_IMAGE}
     - buildah build-using-dockerfile --tag "backend" "backend"
     - buildah push --creds "${CI_REGISTRY_USER}:${CI_JOB_TOKEN}" "backend" "docker://${CI_REGISTRY_IMAGE}/backend:latest"
 
@@ -71,6 +74,9 @@ build-app-image:
     - export BUILDAH_ISOLATION=chroot
     - export STORAGE_DRIVER=vfs
     - export BUILDAH_FORMAT=docker
+    - echo ${CI_REGISTRY_USER}
+    - echo ${CI_JOB_TOKEN}
+    - echo ${CI_REGISTRY_IMAGE}
     - buildah build-using-dockerfile --tag "frontend" "."
     - buildah push --creds "${CI_REGISTRY_USER}:${CI_JOB_TOKEN}" "frontend" "docker://${CI_REGISTRY_IMAGE}/frontend:latest"
 
