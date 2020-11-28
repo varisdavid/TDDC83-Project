@@ -5,7 +5,7 @@ With windows:
 
 0. Navigate to stand inside backend
 1. python -m venv venv
-2. pip install -r req.txt 3.
+2. pip install -r req.txt
 3. Navigate out one step (cd ..)
 4. python run_server.py
 

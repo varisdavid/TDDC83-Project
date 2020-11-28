@@ -17,7 +17,7 @@ import {
 
 export const settingsContext = React.createContext({
   settings: null,
-  setSettings: () => {},
+  setSettings: () => { },
 });
 
 const useStyles = makeStyles({
@@ -54,14 +54,14 @@ const init = {
 //strings representing the names of the columns to be shown. 
 export const ColumnFilter = () => {
   const classes = useStyles();
-  const {setSettings } = useContext(settingsContext);
+  const { setSettings } = useContext(settingsContext);
   const [state, setState] = useState(init);
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
   };
-  const handleClickClose = () =>{
+  const handleClickClose = () => {
     setState(init);
     setOpen(false)
   }
@@ -84,7 +84,7 @@ export const ColumnFilter = () => {
   };
 
   return (
-    <div>
+    <div style={{ width: '5%', float: 'right', height: '10px', marginRight: '7px' }}>
       <IconButton onClick={handleClickOpen}>
         <SettingsIcon />
       </IconButton>
