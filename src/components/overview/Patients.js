@@ -19,7 +19,7 @@ import { useHistory } from "react-router-dom";
 import JourTable from "./JourTable";
 import {settingsContext} from "./ColumnFilter"
 
-import {FetchAllPatients} from "../dataRetriver"
+
 
 // Component rendering bell icon (color based on value: integer) and hover information based on (text: string)
 const Notification = ({ value, text }) => {
@@ -788,7 +788,7 @@ const Patients = () => {
   // When something happens, we check to see if we change the sorting option, and we check if the search has been triggered
   useEffect(() => {
     // Basic example of how to make a authorized fetch call to our backend endpoints
-    const getPatientList = async () => {
+    /*const getPatientList = async () => {
       const domain = "http://127.0.0.1:5000/api/patientlist";
 
       try {
@@ -804,7 +804,7 @@ const Patients = () => {
       } catch (error) {
         console.log(error.message);
       }
-    };
+    };*/
     toggleSortBy(sortState.columnId);
     setGlobalFilter(searchValue); // We use the stored searchValue to globally filter our table by.
   }, [
