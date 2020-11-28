@@ -99,13 +99,12 @@ deploy-app:
 
 
 Test:
-  image: node:latest
   stage: test
-  before_script:
-    - yarn config set cache-folder .yarn
-    - yarn install --frozen-lockfile
+  image: trion/ng-cli-e2e
   script:
-    - yarn test
+    - npm install
+    - npm run wdioTest
+
 # Deploy to Staging:
 #   stage: staging
 #   tags:
