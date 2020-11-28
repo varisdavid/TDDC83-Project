@@ -43,7 +43,7 @@ export default class PhysicalActivityChart extends PureComponent {
                     <BarChart
                         data={data}
                         margin={{
-                            top: 5, right: 30, left: 20, bottom: 5,
+                            top: 30, right: 50, left: 20, bottom: 5,
                         }}
                     >
                         {/* Displays the chart axises */}

@@ -54,6 +54,7 @@ const FormForUpdateValues = () => {
                     marginBottom: "10px"
                 }}>
                     <Button
+                    id="addNewMeasurement"
                         className='flex shadow'
                         style={{
                             border: '2px solid #0066B3',
