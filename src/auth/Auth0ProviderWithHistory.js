@@ -7,20 +7,20 @@ const Auth0ProviderWithHistory = ({ children }) => {
   const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
   const audience = process.env.REACT_APP_AUTH0_AUDIENCE;
 
+  const redirectUri = process.env.REACT_APP_URI;
+
   const history = useHistory();
 
   const onRedirectCallback = (appState) => {    
     history.push(appState?.returnTo || window.location.pathname);
   };
 
-  console.log(window.location.pathname);
-
   return (
 
     <Auth0Provider
       domain={domain}
       clientId={clientId}
-      redirectUri={"http://localhost:3000/overview/patients"}
+      redirectUri={redirectUri}
       onRedirectCallback={onRedirectCallback}
       audience={audience}
     >
