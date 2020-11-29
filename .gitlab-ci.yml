@@ -30,6 +30,9 @@ build:
   artifacts:
     paths:
       - build
+  only:
+    refs: 
+      - master
   before_script:
     - yarn config set cache-folder .yarn
     - npm install
