@@ -59,6 +59,7 @@ import PatientViewMeasurementsHeaderNavigation from "./patientview/PatientViewMe
 import TableForChart from "./patientview/TableForChart";
 import Notification from "./patientview/Notification";
 import FormForUpdateValues from "./patientview/FormForUpdateValues";
+import RuleEngine from "./ruleEngine/RuleEngine";
 import SliderMeasurements from "./patientview/SliderMeasurements";
 
 // import Notices from './Notices';
@@ -110,5 +111,6 @@ export {
     TableForChart,
     Notification,
     FormForUpdateValues,
+    RuleEngine,
     SliderMeasurements,
 };

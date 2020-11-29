@@ -2,7 +2,6 @@ import React, { useMemo, useState } from 'react';
 import { WeightChart, TableForChart, Notification, FormForUpdateValues, SliderMeasurements } from "..";
 import { useFlexLayout, useTable } from "react-table";
 
-
 const WeightChartPage = () => {
     //Fake data to be used in the table code below can be changed to real data
     const data = useMemo(
