@@ -33,10 +33,9 @@
   "scripts": {
     "start": "npm start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "wdioTest": "npm run node ./node_modules/.bin/wdio ./wdio.conf.js",
-    "ci": "start-server-and-test start-server http://localhost:3000 wdioTest"
+    "test": "npm run node ./node_modules/.bin/wdio ./wdio.conf.js",
+    "ci": "start-server-and-test start-server http://localhost:3000 test"
   },
   "eslintConfig": {
     "extends": "react-app"
