@@ -17,6 +17,7 @@ cache:
 # You specify the stages. Those are the steps that GitLab will go through
 # Order matters.
 stages:
+  - build
   - publish
   - test
   - deploy
