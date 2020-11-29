@@ -65,13 +65,13 @@
     "@wdio/sync": "^6.9.0",
     "chai": "^4.2.0",
     "chai-webdriverio": "^1.0.0",
+    "chromedriver": "^87.0.0",
+    "fibers": "^5.0.0",
     "local-runner": "^0.1.1-alpha",
     "react-hook-form": "^6.11.3",
+    "start-server-and-test": "^1.5.0",
     "typescript": "^4.0.3",
-    "webdriverio": "^6.10.2",
-    "chromedriver": "^87.0.0",
     "wdio-chromedriver-service": "^6.0.4",
-    "start-server-and-test": "^1.5.0"
-
+    "webdriverio": "^6.10.2"
   }
 }
