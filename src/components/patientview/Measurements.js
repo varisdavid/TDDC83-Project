@@ -1,11 +1,11 @@
 import React from 'react';
 import { RuleEngine, WeightChart, BloodPressure, PhysicalActivityChart } from "..";
-import { addPriority,test } from '../ruleEngine/RuleEngine';
 
 
 const Measurements = ({ setActiveTabValueM }) => {
 
-console.log(RuleEngine());
+    // used to test ruleEngine
+     console.log(RuleEngine());
 
 
     return (

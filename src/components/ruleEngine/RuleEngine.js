@@ -3,6 +3,9 @@ import {useMemo} from "react";
 
 const RuleEngine = () => {
 
+
+        // Mocked data for testing of ruleEngine,
+        // extraction of desired data from a large data call.
         const data = useMemo(
             () => [
 
@@ -109,6 +112,8 @@ const RuleEngine = () => {
             []
         )
 
+
+    // Mocked data for testing of ruleEngine and the importation of rules
         const rules = useMemo(
             () => [
 
@@ -142,11 +147,15 @@ const RuleEngine = () => {
             []
         )
 
+        // This console log starts the testing
         console.log(addPriority(data))
 
+
+        // Extracts the key data from the call and sends it forward to setPriority
+        // Receives a prioirty from setPriority and adds it to the data.
         function addPriority(data) {
 
-            console.log("addpriority");
+            console.log("addPriority");
             console.log("Oändrade data?" + data);
 
             let measurements = [];
@@ -155,7 +164,7 @@ const RuleEngine = () => {
 
                 measurements = (data[i]['Measurement']);
                 let priorityFactor = setPriority(measurements, rules);
-                console.log("prioirtyfActor" + priorityFactor);
+                console.log("priorityFactor" + priorityFactor);
                 data[i].priority = priorityFactor;
 
             }
@@ -164,7 +173,9 @@ const RuleEngine = () => {
         }
 
 
-        function setPriority(measurements, rules) {
+        // Takes in the measurements and accesses them and returns a priorityScore for the patient
+        // Add a call for the rules
+        function setPriority(measurements) {
 
             // let rules = getRules();
             // get rules from database
@@ -173,7 +184,6 @@ const RuleEngine = () => {
             totalPriorityScore = priorityScoreBS = priorityScoreP = priorityScoreSys = priorityScoreDia = priorityScoreW = 0;
 
             for (let i = 0; i < measurements.length; i++) {
-                // measurements.
 
                 console.log("Patientvärde" + measurements[i].BloodSugar);
                 console.log("Gränsvärde" + rules[0].BadLowBloodSugar);
@@ -284,8 +294,6 @@ const RuleEngine = () => {
             console.log("Prioritetsscore för varje patient:" + Math.round(totalPriorityScore));
             return Math.round(totalPriorityScore);
         }
-
-
     }
 ;
 
