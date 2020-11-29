@@ -32,6 +32,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start-server": "npm start",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "test": "npm run node ./node_modules/.bin/wdio ./wdio.conf.js",
