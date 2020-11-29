@@ -1,4 +1,3 @@
-import React from "react";
 import {useMemo} from "react";
 
 const RuleEngine = () => {
@@ -181,7 +180,12 @@ const RuleEngine = () => {
             // get rules from database
             let totalPriorityScore, priorityScoreBS, priorityScoreP, priorityScoreSys, priorityScoreDia, priorityScoreW;
 
-            totalPriorityScore = priorityScoreBS = priorityScoreP = priorityScoreSys = priorityScoreDia = priorityScoreW = 0;
+            totalPriorityScore = 0;
+            priorityScoreBS = 0;
+            priorityScoreP = 0;
+            priorityScoreSys = 0;
+            priorityScoreDia = 0;
+            priorityScoreW = 0;
 
             for (let i = 0; i < measurements.length; i++) {
 
