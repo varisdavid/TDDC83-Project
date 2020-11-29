@@ -3,7 +3,6 @@
 # multiple node versions to work with it. They come from the docker
 # repo.
 # Uses NodeJS latest
-image: node:latest
 
 # And to cache them as well.
 cache:
@@ -14,28 +13,93 @@ cache:
 # We tell GitLab to install all the packages
 # before running anything.
 # Docker images come with yarn preinstalled
-before_script:
-  - apt-get update -qq && apt-get install
-  - npx browserslist --update-db
 
 # You specify the stages. Those are the steps that GitLab will go through
 # Order matters.
 stages:
   - build
+  - publish
   - test
+  - deploy
   # - staging
   # - openMr
   # - production
 
-Build:
+build:
+  image: node:latest
   stage: build
+  artifacts:
+    paths:
+      - build
   before_script:
     - yarn config set cache-folder .yarn
     - yarn install
   script:
     - npm run build
 
+
+build-flask-image:
+  stage: publish
+  image: docker.io/buildah/buildah
+  only:
+    changes:
+      - backend/*
+  only:
+    refs: 
+      - master
+
+  script:
+    - export _BUILDAH_STARTED_IN_USERNS=''
+    - export BUILDAH_ISOLATION=chroot
+    - export STORAGE_DRIVER=vfs
+    - export BUILDAH_FORMAT=docker
+    - echo ${CI_REGISTRY_USER}
+    - echo ${CI_JOB_TOKEN}
+    - echo ${CI_REGISTRY_IMAGE}
+    - buildah build-using-dockerfile --tag "backend" "backend"
+    - buildah push --creds "${CI_REGISTRY_USER}:${CI_JOB_TOKEN}" "backend" "docker://${CI_REGISTRY_IMAGE}/backend:latest"
+
+
+
+build-app-image:
+  stage: publish
+  image: docker.io/buildah/buildah
+  needs: ["build"]
+  dependencies:
+    - build
+  only:
+    refs: 
+      - master
+  script:
+    - export _BUILDAH_STARTED_IN_USERNS=''
+    - export BUILDAH_ISOLATION=chroot
+    - export STORAGE_DRIVER=vfs
+    - export BUILDAH_FORMAT=docker
+    - echo ${CI_REGISTRY_USER}
+    - echo ${CI_JOB_TOKEN}
+    - echo ${CI_REGISTRY_IMAGE}
+    - buildah build-using-dockerfile --tag "frontend" "."
+    - buildah push --creds "${CI_REGISTRY_USER}:${CI_JOB_TOKEN}" "frontend" "docker://${CI_REGISTRY_IMAGE}/frontend:latest"
+
+
+deploy-app:
+  environment: 'production'
+  needs: ["build-app-image", "build-flask-image"]
+  dependencies: []
+  stage: deploy
+  image: lachlanevenson/k8s-kubectl
+  only:
+    refs: 
+      - master
+
+  script:
+    - kubectl delete pods -l app=backend
+    - kubectl delete pods -l app=frontend
+
+
+
 Test:
+  image: node:latest
   stage: test
   before_script:
     - yarn config set cache-folder .yarn

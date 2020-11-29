@@ -1,6 +1,6 @@
-import React, {useMemo} from 'react';
-import {PhysicalActivityChart, Notification,FormForUpdateValues,TableForChart} from "..";
-import {useFlexLayout, useTable} from "react-table";
+import React, { useMemo, useState } from 'react';
+import { PhysicalActivityChart, Notification, FormForUpdateValues, TableForChart, SliderMeasurements } from "..";
+import { useFlexLayout, useTable } from "react-table";
 
 const PhysicalActivityPage = () => {
 
@@ -86,6 +86,31 @@ const PhysicalActivityPage = () => {
         useFlexLayout,
     );
 
+    //fake data that displays boundaires
+    const goalLimits = [5];
+    const accLimits = [3];
+    const nonAccLimits = [2];
+
+    //Range on the slider
+    const minMax = [0,goalLimits[0]+5];
+
+    //Marks on the slider 
+    const marks = [
+        {
+            value: minMax[0],
+            label: minMax[0]+' timmar',
+        },
+        {
+            value: minMax[1],
+            label: minMax[1]+' timmar',
+        },
+    ];
+
+    //The values displayed on slider
+    const [referenceValues, setReferenceValues] = useState (
+        [nonAccLimits[0], accLimits[0], goalLimits[0]]
+    );
+
     return (
         <>
             {/* Setting up the big div on the page */}
@@ -97,6 +122,16 @@ const PhysicalActivityPage = () => {
                         <PhysicalActivityChart />
                     </div>
                 </div>
+
+                 {/*This displays the slider for changing the reference values */}
+                 <div style={{ width: '10%', marginTop: '3vh' }}>
+                        <SliderMeasurements
+                            marks={marks}
+                            referenceValues={referenceValues}
+                            setReferenceValues={setReferenceValues}
+                            minMax={minMax}
+                        />
+                    </div>
 
                 <div style={{ width: '30%' }}>
                     {/* This is the physical activity table being displayed */}
@@ -112,7 +147,7 @@ const PhysicalActivityPage = () => {
 
                     {/* The form which you can fill in information about your weight does not save the data any where.
                      Contains two text fields and a button*/}
-                    <div style={{ width: '90%',  float: 'right' }}>
+                    <div style={{ width: '90%', float: 'right' }}>
                         <FormForUpdateValues />
                     </div>
                 </div>

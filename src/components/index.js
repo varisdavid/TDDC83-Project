@@ -23,6 +23,11 @@ import CreateNewFilterModal from './overview/CreateNewFilterModal';
 import PatientViewHeaderBanner from './patientview/PatientViewHeaderBanner.js';
 import PatientViewHeaderNavigation from './patientview/PatientViewHeaderNavigation.js';
 
+import Notices from './overview/Notices';
+import NoticesTable from './overview/NoticesTable';
+import NoticesGroups from './overview/NoticesGroups';
+import NoticesSearch from './overview/NoticesSearch';
+
 import PatientCalendar from './patientview/PatientCalendar.js';
 
 import Admin from './patientview/Admin.js';
@@ -55,6 +60,7 @@ import TableForChart from "./patientview/TableForChart";
 import Notification from "./patientview/Notification";
 import FormForUpdateValues from "./patientview/FormForUpdateValues";
 import RuleEngine from "./ruleEngine/RuleEngine";
+import SliderMeasurements from "./patientview/SliderMeasurements";
 
 // import Notices from './Notices';
 // import NoticesTable from './NoticesTable';
@@ -65,7 +71,7 @@ export {
     Hero, 
     Loading, 
     NavBar,
-    OverviewHeaderBanner, 
+    OverviewHeaderBanner,
     OverviewHeaderNavigation,
     OverviewCalendar,
     Patients,
@@ -77,6 +83,10 @@ export {
     PatientCalendar,
     PatientViewHeaderBanner,
     PatientViewHeaderNavigation,
+    Notices,
+    NoticesTable,
+    NoticesGroups,
+    NoticesSearch,
     PatientOverview,
     Admin,
     Measurements,
@@ -101,5 +111,6 @@ export {
     TableForChart,
     Notification,
     FormForUpdateValues,
-    RuleEngine
+    RuleEngine,
+    SliderMeasurements,
 };
