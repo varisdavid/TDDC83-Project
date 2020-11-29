@@ -9,6 +9,8 @@ import logoRegion from "../../assets/logo_region.png"
 const OverviewHeaderBanner = ({ healthCenter }) => {
    
     const { logout } = useAuth0();
+    
+    const logoutURL = process.env.REACT_APP_LOGOUT_URL;
 
 
     return (
@@ -38,7 +40,7 @@ const OverviewHeaderBanner = ({ healthCenter }) => {
                         className="text-gray-800 mr-4" 
                         onClick={() =>
                             logout({
-                            returnTo: "http://localhost:3000",
+                            returnTo: logoutURL,
                             })
                         }
                         style={{ cursor: "pointer" }}

@@ -1,8 +1,6 @@
 import axios from "axios";
 
-
 const ref = "http://127.0.0.1:5000";
-
 
 //Temporary function for modifying the 'Time: ' variable.
 //Increaments the time buy 1:N days where N is length of the array

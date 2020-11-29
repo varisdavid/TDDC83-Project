@@ -1,11 +1,4 @@
-import HomeContent from './templatePage/HomeContent';
-import Footer from './templatePage/Footer';
-import Hero from './templatePage/Hero';
 import Loading from './Loading';
-import NavBar from './templatePage/NavBar';
-// import PatientCalendar from './PatientCalendar';
-// import PatientHeader from './PatientHeader';
-// import NavBarPatient from './NavBarPatient';
 
 import OverviewHeaderBanner from './overview/OverviewHeaderBanner';
 import OverviewHeaderNavigation from './overview/OverviewHeaderNavigation';
@@ -66,11 +59,7 @@ import SliderMeasurements from "./patientview/SliderMeasurements";
 // import NoticesTable from './NoticesTable';
 
 export { 
-    HomeContent, 
-    Footer, 
-    Hero, 
     Loading, 
-    NavBar,
     OverviewHeaderBanner,
     OverviewHeaderNavigation,
     OverviewCalendar,
