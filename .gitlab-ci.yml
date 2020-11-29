@@ -106,7 +106,7 @@ Test:
   image: trion/ng-cli-e2e
   script:
     - npm install
-    - npm run start-server-and-test start-server http://localhost:3000 test
+    - npm run ci
 
 # Deploy to Staging:
 #   stage: staging
