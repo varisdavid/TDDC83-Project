@@ -115,9 +115,11 @@ class Team(db.Model):
     def serialize(self):
         return dict(id=self.id, name=self.name, departmentNumber=self.departmentNumber)
 
+# Customized view is a pre-defined filter created by a user
 class CustomizedView(db.Model):
-    __tablename__ = "views"
-    id = db.Column(db-Integer, primary_key=True)
+    __tablename__ = "customizedView"
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, nullable=False)
     minAge = db.Column(db.Integer, nullable=True)
     maxAge = db.Column(db.Integer, nullable=True)
     gender = db.Column(db.Boolean, nullable=True)
@@ -126,11 +128,12 @@ class CustomizedView(db.Model):
     #priority = db.Column(db.Integer, )
     #diagnosis
     #accessFor ()
-    
+
 
     def __repr__(self):
-        return "<View {}: {} {} {} {} {}>".format(
+        return "<View {}: {} {} {} {} {} {}>".format(
             self.id,
+            self.name,
             self.minAge,
             self.maxAge,
             self.gender,
@@ -141,12 +144,10 @@ class CustomizedView(db.Model):
     def serialize(self):
         return dict(
             id = self.id,
+            name = self.name,
             minAge = self.minAge,
             maxAge = self.maxAge,
             gender = self.gender,
             departmentNumber = self.departmentNumber,
             teamNumber = self.teamNumber,
         )
-
-
-    
