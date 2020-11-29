@@ -9,7 +9,7 @@ exports.config = {
     // WebdriverIO allows it to run your tests in arbitrary locations (e.g. locally or
     // on a remote machine).
     runner: 'local',
-    port: 80,
+    port: 3000,
     
 
     //
@@ -87,7 +87,7 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'https://tddc88-company-3-2020.kubernetes-public.it.liu.se/',
+    baseUrl: '10.65.10.78',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
