@@ -60,6 +60,9 @@ import TableForChart from "./patientview/TableForChart";
 import Notification from "./patientview/Notification";
 import FormForUpdateValues from "./patientview/FormForUpdateValues";
 
+import ActivityLogPatient from "./patientview/ActivityLogPatient";
+import FormPatientAdmin from "./patientview/FormPatientAdmin";
+
 // import Notices from './Notices';
 // import NoticesTable from './NoticesTable';
 
@@ -109,4 +112,6 @@ export {
     TableForChart,
     Notification,
     FormForUpdateValues,
+    ActivityLogPatient,
+    FormPatientAdmin,
 };
