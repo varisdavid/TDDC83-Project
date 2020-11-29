@@ -103,7 +103,7 @@ Test:
   image: trion/ng-cli-e2e
   script:
     - npm install
-    - npm run wdioTest
+    - npm ci
 
 # Deploy to Staging:
 #   stage: staging
