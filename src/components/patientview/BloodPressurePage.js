@@ -1,8 +1,8 @@
-import React, {useMemo} from 'react';
+import React, { useMemo } from 'react';
 import {BloodPressure, Notification, TableForChartBloodPressure, FormForUpdateValues , SliderMeasurements} from "..";
 
 const BloodPressurePage = () => {
-//Sending the personaldata to the notices. This should be used for the ajax call in the futher as well
+    //Sending the personaldata to the notices. This should be used for the ajax call in the futher as well
     const id = "470203-1324";
     //Fake data to the table rendering below
     const data = useMemo(
@@ -122,8 +122,7 @@ const BloodPressurePage = () => {
             <div style={{width: '30%'}}>
                 {/* This is the bloodpressure table being displayed */}
                 <div>
-                    <TableForChartBloodPressure data = {addNotice}
-                    />
+                    <TableForChartBloodPressure data = {addNotice} />
                 </div>
 
                 {/* The form which you can fill in information about your weight does not save the data any where.

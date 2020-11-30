@@ -112,8 +112,7 @@ const WeightChartPage = () => {
                 <div style={{ width: '30%' }}>
                     {/* This is the weight table being displayed */}
                     <div>
-                        <TableForChartWeightChartPage data ={addNotice}
-                        />
+                        <TableForChartWeightChartPage data={addNotice} />
                     </div>
 
                     {/* The form which you can fill in information about your weight does not save the data any where.

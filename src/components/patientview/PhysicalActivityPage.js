@@ -1,10 +1,7 @@
-
-import React, {useMemo} from 'react';
-import {PhysicalActivityChart, Notification,FormForUpdateValues,TableForChartPysicalActivity, SliderMeasurements } from "..";
-
-
+import React, { useMemo } from 'react';
+import { PhysicalActivityChart, Notification,FormForUpdateValues,TableForChartPysicalActivity, SliderMeasurements } from "..";
 const PhysicalActivityPage = () => {
-//Sending the personaldata to the notices. This should be used for the ajax call in the futher as well
+    //Sending the personaldata to the notices. This should be used for the ajax call in the futher as well
     const id="470203-1324"
     //Fake data to the table below which can be updated to live data if needed
     const data = useMemo(
@@ -114,8 +111,7 @@ const PhysicalActivityPage = () => {
                 <div style={{ width: '30%' }}>
                     {/* This is the physical activity table being displayed */}
                     <div>
-                        <TableForChartPysicalActivity data = {addNotice}
-                        />
+                        <TableForChartPysicalActivity data = {addNotice} />
                     </div>
 
                     {/* The form which you can fill in information about your weight does not save the data any where.
