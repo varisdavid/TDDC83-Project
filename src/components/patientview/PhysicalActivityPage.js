@@ -1,51 +1,43 @@
 import React, { useMemo, useState } from 'react';
-import { PhysicalActivityChart, Notification, FormForUpdateValues, TableForChart, SliderMeasurements } from "..";
-import { useFlexLayout, useTable } from "react-table";
-
+import { PhysicalActivityChart, Notification,FormForUpdateValues,TableForChartPysicalActivity, SliderMeasurements } from "..";
 const PhysicalActivityPage = () => {
-
+    //Sending the personaldata to the notices. This should be used for the ajax call in the futher as well
+    const id="470203-1324"
     //Fake data to the table below which can be updated to live data if needed
     const data = useMemo(
         () => [
 
             {
-                notices: <Notification value={0} text={'Oväntat!'} />,
                 Date: '2020-05-18',
                 PysicalActivity: '3',
                 UpdatedBy: 'Patient',
             },
             {
-                notices: <Notification value={0} text={'Oväntat!'} />,
                 Date: '2020-06-13',
                 PysicalActivity: '4',
                 UpdatedBy: 'Patient',
             },
             {
-                notices: <Notification value={0} text={'Oväntat!'} />,
                 Date: '2020-07-25',
                 PysicalActivity: '5',
                 UpdatedBy: 'Patient',
             },
             {
-                notices: <Notification value={0} text={'Oväntat!'} />,
                 Date: '2020-09-01',
                 PysicalActivity: '6',
                 UpdatedBy: 'Patient',
             },
             {
-                notices: <Notification value={1} text={'Oväntat!'} />,
                 Date: '2020-09-10',
                 PysicalActivity: '7',
                 UpdatedBy: 'Patient',
             },
             {
-                notices: <Notification value={0} text={'Oväntat!'} />,
                 Date: '2020-10-02',
                 PysicalActivity: '8',
                 UpdatedBy: 'Patient',
             },
             {
-                notices: <Notification value={0} text={'Oväntat!'} />,
                 Date: '2020-10-10',
                 PysicalActivity: '9',
                 UpdatedBy: 'Patient',
@@ -53,39 +45,22 @@ const PhysicalActivityPage = () => {
         ],
         []
     )
-    //Setting the name on the table rows as well as which data is place where
-    const columns = useMemo(
-        () => [
-            {
-                Header: '',
-                accessor: 'notices',
-            },
-            {
-                Header: 'Datum',
-                accessor: 'Date',
-            },
-            {
-                Header: 'Fysisk aktivitet',
-                accessor: 'PysicalActivity',
-            },
-            {
-                Header: 'Uppdaterades Av',
-                accessor: 'UpdatedBy',
-            },
-        ],
-        []
-    )
+    //Adds the Notification to the data array so that the pop-up modals can retrive the correct data
+    function addNotification(data) {
+        let newArr = [];
 
-    const {
-        getTableProps,
-        getTableBodyProps,
-        headerGroups,
-        rows,
-        prepareRow,
-    } = useTable({ columns, data },
-        useFlexLayout,
-    );
+        for (let i = 0; i < data.length; i++) {
+            newArr.push({
+                notices: <Notification value={3} text={'fysisk aktivitet till'} id={id} date={data[i]['Date']}
+                                       measurement={data[i]['PysicalActivity']} updatedBy={data[i]['UpdatedBy']}/>,
+                Date: data[i]['Date'],
+                PysicalActivity: data[i]['PysicalActivity'],
+                UpdatedBy: data[i]['UpdatedBy']})
+        }
+        return (newArr)
+    }
 
+    const addNotice = addNotification(data);
     //fake data that displays boundaires
     const goalLimits = [5];
     const accLimits = [3];
@@ -136,13 +111,7 @@ const PhysicalActivityPage = () => {
                 <div style={{ width: '30%' }}>
                     {/* This is the physical activity table being displayed */}
                     <div>
-                        <TableForChart
-                            getTableProps={getTableProps}
-                            getTableBodyProps={getTableBodyProps}
-                            headerGroups={headerGroups}
-                            rows={rows}
-                            prepareRow={prepareRow}
-                        />
+                        <TableForChartPysicalActivity data = {addNotice} />
                     </div>
 
                     {/* The form which you can fill in information about your weight does not save the data any where.
