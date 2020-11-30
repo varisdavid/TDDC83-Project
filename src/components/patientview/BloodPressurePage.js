@@ -27,7 +27,7 @@ const BloodPressurePage = () => {
             {
                 Date: '2020-09-01',
                 BloodPressure: '135/80',
-                UpdatedBy: 'Vårdoersonal',
+                UpdatedBy: 'Vårdpersonal',
             },
             {
                 Date: '2020-09-10',
