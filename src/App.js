@@ -26,8 +26,8 @@ const App = () => {
     return (
       <div id='app' className='d-flex flex-column h-100'>
         <Switch>
-          <ProtectedRoute path={['/', '/home', '/overview']} component={Overview}/>
-          <ProtectedRoute path='/patient' component={PatientView}/>
+          <ProtectedRoute path={['/patient/overview', '/patient/measurements', '/patient/medications', '/patient/calendar', '/patient/admin']} component={PatientView}/>
+          <ProtectedRoute path={[ '/', '/overview/patients', '/overview/home', '/overview/notices', 'overview/calendar']} component={Overview}/>
           <ProtectedRoute exact path='/overview/settings' component={OverviewSettings} />
         </Switch>
       </div>

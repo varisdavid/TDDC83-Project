@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Link, Modal } from "@material-ui/core";
 import { NotificationImportant } from '@material-ui/icons';
 import { useHistory } from "react-router-dom";
@@ -75,25 +75,40 @@ const Notification = ({ value, text, id, date, measurement, updatedBy }) => {
                     <NotificationImportant style={{
                         color: color,
                         fontSize: '30px',
-                    }} />
+                    }}/>
                     <text className='font-bold mt-2' id='modal-popup'>Uppmärksammat mätvärde</text>
                     <h2 className='font-bold mt-3' id='modal-popup'>{date} uppmättes {text} {measurement} av {updatedBy}</h2>
+                    
                     <h2 className='font-bold mt-3 flex justify-center' id='modal-popup'> Vill du hantera mätvärdet?</h2>
-                    <div className="flex" style={{ width: "100%" }}>
+                    <div className="flex" style={{width: "100%"}}>
                         <Button
                             id= 'noticesCancel'
                             className='flex shadow'
-                            style={{ border: '2px solid #0066B3', borderRadius: "0px", width: '110px', marginLeft: "auto", marginRight: "auto", marginTop: "1.5rem" }}
+                            style={{
+                                border: '2px solid #0066B3',
+                                borderRadius: "0px",
+                                width: '110px',
+                                marginLeft: "auto",
+                                marginRight: "auto",
+                                marginTop: "1.5rem"
+                            }}
                             onClick={handleCloseConfirmation}>
                             Avbryt
-                            </Button>
+                        </Button>
                         <Button
                             id= 'noticesConfirm1'
                             className='flex shadow'
-                            style={{ border: '2px solid #0066B3', borderRadius: "0px", width: '110px', marginLeft: "auto", marginRight: "auto", marginTop: "1.5rem" }}
+                            style={{
+                                border: '2px solid #0066B3',
+                                borderRadius: "0px",
+                                width: '110px',
+                                marginLeft: "auto",
+                                marginRight: "auto",
+                                marginTop: "1.5rem"
+                            }}
                             onClick={OpenWarning2}>
                             Kvittera
-                            </Button>
+                        </Button>
                     </div>
                 </div>
             </Modal>
@@ -111,7 +126,7 @@ const Notification = ({ value, text, id, date, measurement, updatedBy }) => {
                     <NotificationImportant style={{
                         color: color,
                         fontSize: '30px',
-                    }} />
+                    }}/>
                     <text className='font-bold mt-2' id='modal-popup'>Uppmärksammat mätvärde</text>
                     <h2 className='font-bold mt-3' id='modal-popup'>{date} uppmättes vikten {measurement} av {updatedBy}</h2>
                     <button className='flex shadow'
@@ -121,20 +136,35 @@ const Notification = ({ value, text, id, date, measurement, updatedBy }) => {
                         Gå till patientens kontaktuppgifter
                         </button>
                     <div className="flex" style={{ width: "100%" }}>
+                    
                         <Button
                             id= 'noticesRetake'
                             className='flex shadow'
-                            style={{ border: '2px solid #0066B3', borderRadius: "0px", width: '180px', marginLeft: "auto", marginRight: "auto", marginTop: "1.5rem" }}
+                            style={{
+                                border: '2px solid #0066B3',
+                                borderRadius: "0px",
+                                width: '180px',
+                                marginLeft: "auto",
+                                marginRight: "auto",
+                                marginTop: "1.5rem"
+                            }}
                             onClick={OpenWarning3}>
                             Ta om mätvärde
-                            </Button>
+                        </Button>
                         <Button
                             id= 'noticesConfirm2'
                             className='flex shadow'
-                            style={{ border: '2px solid #0066B3', borderRadius: "0px", width: '180px', marginLeft: "auto", marginRight: "auto", marginTop: "1.5rem" }}
+                            style={{
+                                border: '2px solid #0066B3',
+                                borderRadius: "0px",
+                                width: '180px',
+                                marginLeft: "auto",
+                                marginRight: "auto",
+                                marginTop: "1.5rem"
+                            }}
                             onClick={handleCloseConfirmation2}>
                             Godkänn mätvärde
-                            </Button>
+                        </Button>
                     </div>
                 </div>
             </Modal>
@@ -152,9 +182,10 @@ const Notification = ({ value, text, id, date, measurement, updatedBy }) => {
                     <NotificationImportant style={{
                         color: color,
                         fontSize: '30px',
-                    }} />
+                    }}/>
                     <text className='font-bold mt-2' id='modal-popup'>Uppmärksammat mätvärde</text>
-                    <h2 className='font-bold mt-3' id='modal-popup'>Notis har skickats till patient. Ombedd att ta ett nytt mätvärde</h2>
+                    <h2 className='font-bold mt-3' id='modal-popup'>Notis har skickats till patient. Ombedd att ta ett
+                        nytt mätvärde</h2>
                     <div align='right' style={{
                         marginRight: "10px",
                         marginBottom: "10px"
@@ -162,10 +193,17 @@ const Notification = ({ value, text, id, date, measurement, updatedBy }) => {
                         <Button
                             id= 'noticesConfirm3'
                             className='flex shadow'
-                            style={{ border: '2px solid #0066B3', borderRadius: "0px", width: '110px', marginLeft: "auto", marginRight: "auto", marginTop: "1.5rem" }}
+                            style={{
+                                border: '2px solid #0066B3',
+                                borderRadius: "0px",
+                                width: '110px',
+                                marginLeft: "auto",
+                                marginRight: "auto",
+                                marginTop: "1.5rem"
+                            }}
                             onClick={handleCloseConfirmation3}>
                             Ok
-                            </Button>
+                        </Button>
                     </div>
                 </div>
             </Modal>
@@ -174,12 +212,11 @@ const Notification = ({ value, text, id, date, measurement, updatedBy }) => {
     }
 
 
-
     return (
         <>
             <Link
                 component="button"
-                style={{ color: "#000" }}
+                style={{color: "#000"}}
                 onClick={handleOpenConfirmation}
             >
                     <NotificationImportant style={{
