@@ -128,8 +128,7 @@ class CustomizedView(db.Model):
     highPriority = db.Column(db.Boolean, nullable=False)
     medPriority = db.Column(db.Boolean, nullable=False)
     lowPriority = db.Column(db.Boolean, nullable=False)
-    #diagnosis
-    accessFor = db.Column(db.String, db.foreignKey("emlpoyees.id"), nullable=False)
+    accessFor = db.Column(db.String, db.ForeignKey("emlpoyees.id"), nullable=False)
 
 
     def __repr__(self):
@@ -165,7 +164,7 @@ class CustomizedView(db.Model):
 # CustimzedViewDiagnosis is the join table that stores what diagnoses are saved in the custmized view
 class CustomizedViewDiagnosis(db.Model):
     __tablename__ = "customizedViewDiagnosis"
-    customizedViewID = db.Column(db.Integer, primary_key=True, db.foreignKey("customizedView.id"), nullable=False)
+    customizedViewID = db.Column(db.Integer, primary_key=True, db.ForeignKey("customizedView.id"), nullable=False)
     diagnosis = db.Column(db.String, nullable=False)
 
     def __repr__(self):
@@ -182,6 +181,7 @@ class PriorityRule (db.Model):
     highBadmeasurement = db.Column(db.Integer, nullable=False)
     lowGoodmeasurement = db.Column(db.Integer, nullable=True)
     highGoodmeasurement = db.Column(db.Integer, nullable=True)
+    appliesFor = db.Column(db.integer, db.ForeignKey("hospital.id"), nullable=False)
 
     def __repr__(self):
         return "<View {}: {} {} {} {}>".format(
@@ -190,6 +190,7 @@ class PriorityRule (db.Model):
             self.highBadmeasurement,
             self.lowGoodmeasurement,
             self.highGoodmeasurement,
+            self.appliesFor,
         )
     def serialize(self):
         return dict(
@@ -198,4 +199,5 @@ class PriorityRule (db.Model):
             highBadmeasurement = self.highBadmeasurement,
             lowGoodmeasurement = self.lowGoodmeasurement,
             highGoodmeasurement = self.highGoodmeasurement,
+            appliesFor = self.appliesFor,
         )
