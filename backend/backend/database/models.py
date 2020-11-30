@@ -173,3 +173,29 @@ class CustomizedViewDiagnosis(db.Model):
 
     def serialize(self):
         return dict(customizedViewID=self.customizedViewID, diagnosis=self.diagnosis)
+
+
+class PriorityRule (db.Model):
+    __tablename__ = "priorityRules"
+    id = db.Column(db.Integer, primary_key=True)
+    lowBadmeasurement = db.Column(db.Integer, nullable=False)
+    highBadmeasurement = db.Column(db.Integer, nullable=False)
+    lowGoodmeasurement = db.Column(db.Integer, nullable=True)
+    highGoodmeasurement = db.Column(db.Integer, nullable=True)
+
+    def __repr__(self):
+        return "<View {}: {} {} {} {}>".format(
+            self.id,
+            self.lowBadmeasurement,
+            self.highBadmeasurement,
+            self.lowGoodmeasurement,
+            self.highGoodmeasurement,
+        )
+    def serialize(self):
+        return dict(
+            id = self.id,
+            lowBadmeasurement = self.lowBadmeasurement,
+            highBadmeasurement = self.highBadmeasurement,
+            lowGoodmeasurement = self.lowGoodmeasurement,
+            highGoodmeasurement = self.highGoodmeasurement,
+        )
