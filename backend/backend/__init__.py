@@ -21,6 +21,9 @@ def create_app(test_config=None):
     from .blueprints.overview import overview_bp
     from .blueprints.patients import patients_bp
     from .blueprints.team import team_bp
+    from .blueprints.customizedView import customizedView_bp
+    from .blueprints.customizedViewDiagnosis import customizedViewDiagnosis_bp
+
 
     app.register_blueprint(access_log_bp)
     app.register_blueprint(department_bp)
@@ -31,10 +34,11 @@ def create_app(test_config=None):
     app.register_blueprint(overview_bp)
     app.register_blueprint(patients_bp)
     app.register_blueprint(team_bp)
+    app.register_blueprint(customizedView)
+    app.register_blueprint(customizedViewDiagnosis)
 
     from .cli_commands import cli
 
     app.cli.add_command(cli)
 
     return app
-
