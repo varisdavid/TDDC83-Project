@@ -102,7 +102,7 @@ Test:
   stage: test
   image: trion/ng-cli-e2e
   script:
-    - yarn install
+    - npm install
     - npm run ci
 
 # Deploy to Staging:
