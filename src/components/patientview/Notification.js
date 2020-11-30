@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
-import {Button, Link, Modal, Tooltip} from "@material-ui/core";
-import {NotificationImportant} from '@material-ui/icons';
-import {useHistory} from "react-router-dom";
-import {makeStyles} from "@material-ui/core/styles";
+import React, { useState } from 'react';
+import { Button, Link, Modal } from "@material-ui/core";
+import { NotificationImportant } from '@material-ui/icons';
+import { useHistory } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
 
 //Renders a notification with a value and a text with possibilities to click on with the help of modals
-const Notification = ({value, text}) => {
+const Notification = ({ value, text, id, date, measurement, updatedBy }) => {
 
     var color;
     if (value === 1) {
@@ -22,7 +22,7 @@ const Notification = ({value, text}) => {
     // getModalStyle is not a pure function, we roll the style only on the first render
     const [modalStyle] = useState(getModalStyle);
 
-    const href = "";
+    const href = "/patient/overview/" + id;
     const history = useHistory();
 
     // Keeps track of whether or not the popup for a specific alert  has been toggled.
@@ -63,7 +63,7 @@ const Notification = ({value, text}) => {
         setOpenWarningConfirm2(false);
     };
 
-    const ConfirmWarning = () => {
+    const ConfirmWarning = ({date, measurement, updatedBy}) => {
 
         return (
             <Modal
@@ -77,11 +77,12 @@ const Notification = ({value, text}) => {
                         fontSize: '30px',
                     }}/>
                     <text className='font-bold mt-2' id='modal-popup'>Uppmärksammat mätvärde</text>
-                    <h2 className='font-bold mt-3' id='modal-popup'>/sätt in datum/ uppmättes vikten /vikt/ av /person/
-                        ?</h2>
+                    <h2 className='font-bold mt-3' id='modal-popup'>{date} uppmättes {text} {measurement} av {updatedBy}</h2>
+                    
                     <h2 className='font-bold mt-3 flex justify-center' id='modal-popup'> Vill du hantera mätvärdet?</h2>
                     <div className="flex" style={{width: "100%"}}>
                         <Button
+                            id= 'noticesCancel'
                             className='flex shadow'
                             style={{
                                 border: '2px solid #0066B3',
@@ -95,6 +96,7 @@ const Notification = ({value, text}) => {
                             Avbryt
                         </Button>
                         <Button
+                            id= 'noticesConfirm1'
                             className='flex shadow'
                             style={{
                                 border: '2px solid #0066B3',
@@ -113,7 +115,7 @@ const Notification = ({value, text}) => {
         );
     }
 
-    const ConfirmWarning2 = () => {
+    const ConfirmWarning2 = ({date, measurement, updatedBy}) => {
         return (
             <Modal
                 open={openWarningConfirm2}
@@ -126,25 +128,17 @@ const Notification = ({value, text}) => {
                         fontSize: '30px',
                     }}/>
                     <text className='font-bold mt-2' id='modal-popup'>Uppmärksammat mätvärde</text>
-                    <h2 className='font-bold mt-3' id='modal-popup'>/sätt in datum/ uppmättes vikten /vikt/ av /person/
-                        ?</h2>
+                    <h2 className='font-bold mt-3' id='modal-popup'>{date} uppmättes vikten {measurement} av {updatedBy}</h2>
                     <button className='flex shadow'
-                            style={{
-                                border: '2px solid #0066B3',
-                                borderRadius: "0px",
-                                width: '350px',
-                                marginLeft: "auto",
-                                marginRight: "auto",
-                                marginTop: "1.5rem",
-                                height: "45px",
-                                justifyContent: "center",
-                                alignItems:'center'
-                            }}
-                            onClick={sendToPatient}>
-                        GÅ TILL PATIENTENS KONTAKTUPPGIFTER
-                    </button>
-                    <div className="flex" style={{width: "100%"}}>
+                            id= 'noticesSendToPatient'
+                        style={{ border: '2px solid #0066B3', borderRadius: "0px", width: '270px', marginLeft: "auto", marginRight: "auto", marginTop: "1.5rem" }}
+                        onClick={sendToPatient}>
+                        Gå till patientens kontaktuppgifter
+                        </button>
+                    <div className="flex" style={{ width: "100%" }}>
+                    
                         <Button
+                            id= 'noticesRetake'
                             className='flex shadow'
                             style={{
                                 border: '2px solid #0066B3',
@@ -158,6 +152,7 @@ const Notification = ({value, text}) => {
                             Ta om mätvärde
                         </Button>
                         <Button
+                            id= 'noticesConfirm2'
                             className='flex shadow'
                             style={{
                                 border: '2px solid #0066B3',
@@ -196,6 +191,7 @@ const Notification = ({value, text}) => {
                         marginBottom: "10px"
                     }}>
                         <Button
+                            id= 'noticesConfirm3'
                             className='flex shadow'
                             style={{
                                 border: '2px solid #0066B3',
@@ -223,18 +219,15 @@ const Notification = ({value, text}) => {
                 style={{color: "#000"}}
                 onClick={handleOpenConfirmation}
             >
-                <Tooltip title={text} placement='left-start'>
                     <NotificationImportant style={{
                         color: color,
                         fontSize: '30px',
                     }}
                     />
-                </Tooltip>
-
             </Link>
-            <ConfirmWarning/>
-            <ConfirmWarning2/>
-            <ConfirmWarning3/>
+            <ConfirmWarning date={date} measurement={measurement} updatedBy={updatedBy}/>
+            <ConfirmWarning2 date={date} measurement={measurement} updatedBy={updatedBy}/>
+            <ConfirmWarning3 />
         </>
 
     )

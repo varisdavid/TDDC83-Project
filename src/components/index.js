@@ -49,9 +49,11 @@ import PhysicalActivityPage from "./patientview/PhysicalActivityPage";
 
 import PatientViewMeasurementsHeaderNavigation from "./patientview/PatientViewMeasurementsHeaderNavigation";
 
-import TableForChart from "./patientview/TableForChart";
+import TableForChartBloodPressure from "./patientview/TableForChartBloodPressure";
 import Notification from "./patientview/Notification";
 import FormForUpdateValues from "./patientview/FormForUpdateValues";
+import TableForChartPysicalActivity from "./patientview/TableForChartPysicalActivity";
+import TableForChartWeightChartPage from "./patientview/TableForChartWeightChartPage";
 import RuleEngine from "./ruleEngine/RuleEngine";
 import SliderMeasurements from "./patientview/SliderMeasurements";
 
@@ -97,9 +99,11 @@ export {
     WeightChartPage,
     PatientViewMeasurementsHeaderNavigation,
     PhysicalActivityPage,
-    TableForChart,
+    TableForChartBloodPressure,
     Notification,
     FormForUpdateValues,
+    TableForChartPysicalActivity,
+    TableForChartWeightChartPage,
     RuleEngine,
     SliderMeasurements,
 };
