@@ -23,6 +23,7 @@ def create_app(test_config=None):
     from .blueprints.team import team_bp
     from .blueprints.customizedView import customizedView_bp
     from .blueprints.customizedViewDiagnosis import customizedViewDiagnosis_bp
+    from .blueprints.priorityRule import priorityRule_bp
 
 
     app.register_blueprint(access_log_bp)
@@ -36,6 +37,7 @@ def create_app(test_config=None):
     app.register_blueprint(team_bp)
     app.register_blueprint(customizedView)
     app.register_blueprint(customizedViewDiagnosis)
+    app.register_blueprint(priorityRule_bp)
 
     from .cli_commands import cli
 
