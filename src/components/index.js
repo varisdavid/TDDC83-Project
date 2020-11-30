@@ -62,6 +62,7 @@ import FormForUpdateValues from "./patientview/FormForUpdateValues";
 
 import ActivityLogPatient from "./patientview/ActivityLogPatient";
 import FormPatientAdmin from "./patientview/FormPatientAdmin";
+import BlockPatientAdmin from "./patientview/BlockPatientAdmin";
 
 // import Notices from './Notices';
 // import NoticesTable from './NoticesTable';
@@ -114,4 +115,5 @@ export {
     FormForUpdateValues,
     ActivityLogPatient,
     FormPatientAdmin,
+    BlockPatientAdmin,
 };

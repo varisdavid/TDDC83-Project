@@ -106,3 +106,19 @@
   cursor: pointer !important;
 }
 
+input[type=number]{
+    border: 1px solid lightgrey;
+    margin-Left: 5px;
+    margin-Right: 5px;
+    margin-bottom: 0.5rem;
+    box-Shadow: inset 0 2px 3px lightgrey;
+    display: table-cell;
+}
+
+.header-admin-patient{
+  background:#275E8E; 
+  color: #FFF !Important;
+  font-weight: 700 !Important;
+  font-size: 20px !Important;
+  text-align: center;
+}
