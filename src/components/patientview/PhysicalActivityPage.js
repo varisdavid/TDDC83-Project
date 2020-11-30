@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { PhysicalActivityChart, Notification,FormForUpdateValues,TableForChartPysicalActivity, SliderMeasurements } from "..";
 const PhysicalActivityPage = () => {
     //Sending the personaldata to the notices. This should be used for the ajax call in the futher as well

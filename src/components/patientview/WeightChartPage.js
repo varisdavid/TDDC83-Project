@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { WeightChart, TableForChartWeightChartPage, Notification, FormForUpdateValues , SliderMeasurements} from "..";
 
 const WeightChartPage = () => {
