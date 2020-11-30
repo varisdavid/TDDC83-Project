@@ -132,14 +132,16 @@ const Notification = ({value, text}) => {
                             style={{
                                 border: '2px solid #0066B3',
                                 borderRadius: "0px",
-                                width: '270px',
+                                width: '350px',
                                 marginLeft: "auto",
                                 marginRight: "auto",
                                 marginTop: "1.5rem",
-                                justifyContent: "center"
+                                height: "45px",
+                                justifyContent: "center",
+                                alignItems:'center'
                             }}
                             onClick={sendToPatient}>
-                        Gå till patientens kontaktuppgifter
+                        GÅ TILL PATIENTENS KONTAKTUPPGIFTER
                     </button>
                     <div className="flex" style={{width: "100%"}}>
                         <Button
