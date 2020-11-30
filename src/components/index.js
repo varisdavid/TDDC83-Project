@@ -1,11 +1,4 @@
-import HomeContent from './templatePage/HomeContent';
-import Footer from './templatePage/Footer';
-import Hero from './templatePage/Hero';
 import Loading from './Loading';
-import NavBar from './templatePage/NavBar';
-// import PatientCalendar from './PatientCalendar';
-// import PatientHeader from './PatientHeader';
-// import NavBarPatient from './NavBarPatient';
 
 import OverviewHeaderBanner from './overview/OverviewHeaderBanner';
 import OverviewHeaderNavigation from './overview/OverviewHeaderNavigation';
@@ -22,6 +15,11 @@ import CreateNewFilterModal from './overview/CreateNewFilterModal';
 
 import PatientViewHeaderBanner from './patientview/PatientViewHeaderBanner.js';
 import PatientViewHeaderNavigation from './patientview/PatientViewHeaderNavigation.js';
+
+import Notices from './overview/Notices';
+import NoticesTable from './overview/NoticesTable';
+import NoticesGroups from './overview/NoticesGroups';
+import NoticesSearch from './overview/NoticesSearch';
 
 import PatientCalendar from './patientview/PatientCalendar.js';
 
@@ -56,17 +54,15 @@ import Notification from "./patientview/Notification";
 import FormForUpdateValues from "./patientview/FormForUpdateValues";
 import TableForChartPysicalActivity from "./patientview/TableForChartPysicalActivity";
 import TableForChartWeightChartPage from "./patientview/TableForChartWeightChartPage";
+import RuleEngine from "./ruleEngine/RuleEngine";
+import SliderMeasurements from "./patientview/SliderMeasurements";
 
 // import Notices from './Notices';
 // import NoticesTable from './NoticesTable';
 
 export { 
-    HomeContent, 
-    Footer, 
-    Hero, 
     Loading, 
-    NavBar,
-    OverviewHeaderBanner, 
+    OverviewHeaderBanner,
     OverviewHeaderNavigation,
     OverviewCalendar,
     Patients,
@@ -78,6 +74,10 @@ export {
     PatientCalendar,
     PatientViewHeaderBanner,
     PatientViewHeaderNavigation,
+    Notices,
+    NoticesTable,
+    NoticesGroups,
+    NoticesSearch,
     PatientOverview,
     Admin,
     Measurements,
@@ -104,4 +104,6 @@ export {
     FormForUpdateValues,
     TableForChartPysicalActivity,
     TableForChartWeightChartPage,
+    RuleEngine,
+    SliderMeasurements,
 };

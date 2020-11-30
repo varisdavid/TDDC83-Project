@@ -57,6 +57,7 @@ const PatientEarlierDiseasesTable = () => {
       return ( 
         <TableRow className='row-table-body'>
             <TableCell className='cell-table-body'> <Button onClick={() => setLenghtOfTable(lengthOfTable + 10)} 
+            id="showMoreEntries"
             style={{
             textTransform: 'none',
             font: 'inherit', 

@@ -10,6 +10,7 @@ import {
   Button,
 } from "@material-ui/core";
 
+
 const Data = [
   {
     name: "Peter Johnson",
@@ -55,18 +56,6 @@ const StyledTableCell = withStyles((theme) => ({
   },
 }))(TableCell);
 
-const StyledTableRow = withStyles((theme) => ({
-  head: {
-    backgroundColor: "#275E8E",
-    color: theme.palette.common.white,
-    fontWeight: 700,
-  },
-  body: {
-    backgroundColor: "#theme.palette.common.white",
-    color: theme.palette.common.black,
-    fontWeight: 700,
-  },
-}))(TableRow);
 
 const JourTable = (props) => {
   const classes = useStyles();
@@ -87,13 +76,13 @@ const JourTable = (props) => {
         <TableContainer className={classes.table}>
           <Table className={classes.table} aria-label="simple table">
             <TableBody>
-              {Data.map((row) => (
-                <StyledTableRow key={row.time}>
+              {Data.map((row, i) => (
+                <TableRow key={i}>
                   <StyledTableCell component="th" scope="row" align="left">
                     {row.name}
                   </StyledTableCell>
                   <StyledTableCell align="left">{row.phone}</StyledTableCell>
-                </StyledTableRow>
+                </TableRow>
               ))}
             </TableBody>
           </Table>

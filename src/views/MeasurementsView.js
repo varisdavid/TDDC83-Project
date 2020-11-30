@@ -14,7 +14,7 @@ const getActiveTabM = (locationM) => {
     return 2;  
   } else if (locationM.pathname === '/patient/measurements/physical-activity') {
     return 3;   
-  }else {
+  } else {
     return 0;  
   }
 
