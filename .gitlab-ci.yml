@@ -33,7 +33,7 @@ build:
       - build
   before_script:
     - yarn config set cache-folder .yarn
-    - npm install
+    - yarn install
   script:
     - npm run build
 
@@ -102,7 +102,7 @@ Test:
   stage: test
   image: trion/ng-cli-e2e
   script:
-    - npm install
+    - yarn install
     - npm run ci
 
 # Deploy to Staging:
