@@ -48,7 +48,7 @@ const PatientViewHeaderBanner = ({ patientInformation }) => {
                         className="text-gray-800 mr-4" 
                         onClick={() =>
                             logout({
-                            returnTo: "http://localhost:3000",
+                            returnTo: "https://tddc88-company-3-2020.kubernetes-public.it.liu.se/",
                             })
                         }
                         style={{ cursor: "pointer" }}

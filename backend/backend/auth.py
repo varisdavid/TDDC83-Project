@@ -7,7 +7,7 @@ from jose import jwt
 
 AUTH0_DOMAIN = "https://dev-mlj1m1lm.eu.auth0.com/"
 ALGORITHMS = ["RS256"]
-API_AUDIENCE = "https://localhost:5000/api"
+API_AUDIENCE = "https://tddc88-company-3-2020.kubernetes-public.it.liu.se/api"
 
 
 class AuthError(Exception):

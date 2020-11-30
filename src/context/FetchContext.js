@@ -9,7 +9,7 @@ const FetchProvider = ({ children }) => {
   const authContext = useContext(AuthContext);
 
   const authAxios = axios.create({
-    baseURL: 'http://localhost:5000/api', // Generally flask uses 5000, could set it up to anything "API Endpoint"
+    baseURL: 'https://tddc88-company-3-2020.kubernetes-public.it.liu.se/api', // Generally flask uses 5000, could set it up to anything "API Endpoint"
   });
 
   authAxios.interceptors.request.use(

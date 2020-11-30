@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const publicFetch = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  baseURL: 'https://tddc88-company-3-2020.kubernetes-public.it.liu.se/api',
 });
 
 export { publicFetch };
