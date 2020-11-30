@@ -177,6 +177,7 @@ class CustomizedViewDiagnosis(db.Model):
 class PriorityRule (db.Model):
     __tablename__ = "priorityRules"
     id = db.Column(db.Integer, primary_key=True)
+    measurementName = db.Column(db.String, nullable=False)
     lowBadmeasurement = db.Column(db.Integer, nullable=False)
     highBadmeasurement = db.Column(db.Integer, nullable=False)
     lowGoodmeasurement = db.Column(db.Integer, nullable=True)
@@ -186,6 +187,7 @@ class PriorityRule (db.Model):
     def __repr__(self):
         return "<View {}: {} {} {} {}>".format(
             self.id,
+            self.measurementName,
             self.lowBadmeasurement,
             self.highBadmeasurement,
             self.lowGoodmeasurement,
@@ -195,6 +197,7 @@ class PriorityRule (db.Model):
     def serialize(self):
         return dict(
             id = self.id,
+            measurementName = self.measurementName,
             lowBadmeasurement = self.lowBadmeasurement,
             highBadmeasurement = self.highBadmeasurement,
             lowGoodmeasurement = self.lowGoodmeasurement,
