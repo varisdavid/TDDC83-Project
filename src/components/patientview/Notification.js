@@ -131,7 +131,7 @@ const Notification = ({ value, text, id, date, measurement, updatedBy }) => {
                     <h2 className='font-bold mt-3' id='modal-popup'>{date} uppmättes vikten {measurement} av {updatedBy}</h2>
                     <button className='flex shadow'
                             id= 'noticesSendToPatient'
-                        style={{ border: '2px solid #0066B3', borderRadius: "0px", width: '270px', marginLeft: "auto", marginRight: "auto", marginTop: "1.5rem" }}
+                        style={{ border: '2px solid #0066B3', borderRadius: "0px", width: '350px', marginLeft: "auto", marginRight: "auto", marginTop: "1.5rem", height: "45px", justifyContent:"center", alignItems: "center" }}
                         onClick={sendToPatient}>
                         Gå till patientens kontaktuppgifter
                         </button>
