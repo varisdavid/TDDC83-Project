@@ -122,16 +122,18 @@ class CustomizedView(db.Model):
     name = db.Column(db.String, nullable=False)
     minAge = db.Column(db.Integer, nullable=True)
     maxAge = db.Column(db.Integer, nullable=True)
-    gender = db.Column(db.Boolean, nullable=True)
+    gender = db.Column(db.String, nullable=True)
     departmentNumber = db.Column(db.Integer, db.ForeignKey("departments.id"), nullable=True)
     teamNumber = db.Column(db.Integer, db.ForeignKey("teams.id"), nullable=True)
-    #priority = db.Column(db.Integer, )
+    highPriority = db.Column(db.Boolean, nullable=False)
+    medPriority = db.Column(db.Boolean, nullable=False)
+    lowPriority = db.Column(db.Boolean, nullable=False)
     #diagnosis
-    #accessFor ()
+    accessFor = db.Column(db.String, db.foreignKey("emlpoyees.id"), nullable=False)
 
 
     def __repr__(self):
-        return "<View {}: {} {} {} {} {} {}>".format(
+        return "<View {}: {} {} {} {} {} {} {} {} {}>".format(
             self.id,
             self.name,
             self.minAge,
@@ -139,6 +141,10 @@ class CustomizedView(db.Model):
             self.gender,
             self.departmentNumber,
             self.teamNumber,
+            self.highPriority,
+            self.medPriority,
+            self.lowPriority,
+            self.accessFor,
         )
 
     def serialize(self):
@@ -150,4 +156,20 @@ class CustomizedView(db.Model):
             gender = self.gender,
             departmentNumber = self.departmentNumber,
             teamNumber = self.teamNumber,
+            highPriority = self.highPriority,
+            medPriority = self.medPriority,
+            lowPriority = self.lowPriority,
+            accesFor = self.accessFor,
         )
+
+# CustimzedViewDiagnosis is the join table that stores what diagnoses are saved in the custmized view
+class CustomizedViewDiagnosis(db.Model):
+    __tablename__ = "customizedViewDiagnosis"
+    customizedViewID = db.Column(db.Integer, primary_key=True, db.foreignKey("customizedView.id"), nullable=False)
+    diagnosis = db.Column(db.String, nullable=False)
+
+    def __repr__(self):
+        return "<CustomizedViewDiagnosis {}: {}>".format(self.customizedViewID, self.diagnosis)
+
+    def serialize(self):
+        return dict(customizedViewID=self.customizedViewID, diagnosis=self.diagnosis)
