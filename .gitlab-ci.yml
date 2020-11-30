@@ -33,7 +33,7 @@ build:
       - build
   before_script:
     - yarn config set cache-folder .yarn
-    - yarn install
+    - yarn install --ignore-engines
   script:
     - npm run build
 
