@@ -22,8 +22,8 @@ def customizedView(viewID):
         return _corsify_actual_response(jsonify(serializedViewList)))
 
 # Route for fetching specific customized view
-@customizedView_bp.route("/<string:viewID>", methods=["GET", "OPTIONS"])
-def customizedView(viewID):
+@customizedView_bp.route("/<string:customizedViewID>", methods=["GET", "OPTIONS"])
+def customizedView(customizedViewID):
     if request.method == "OPTIONS":  # CORS preflight
         return _build_cors_preflight_response()
     elif request.method == "GET":
