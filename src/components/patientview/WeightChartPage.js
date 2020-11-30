@@ -61,7 +61,6 @@ const WeightChartPage = () => {
         }
         return (newArr)
     }
-
     const addNotice = addNotification(data);
     return (
         <>

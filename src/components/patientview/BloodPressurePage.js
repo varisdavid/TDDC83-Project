@@ -1,6 +1,5 @@
 import React, {useMemo} from 'react';
 import {BloodPressure, Notification, TableForChartBloodPressure, FormForUpdateValues} from "..";
-import {useFlexLayout, useTable} from "react-table";
 
 
 const BloodPressurePage = () => {
