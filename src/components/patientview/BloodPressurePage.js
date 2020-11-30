@@ -107,31 +107,32 @@ const BloodPressurePage = () => {
                         <BloodPressure />
                     </div>
                 </div>
-            </div>
 
-            {/*This displays the slider for changing the reference values */}
-            <div style={{ width: '10%', marginTop: '3vh' }}>
-                <SliderMeasurements
-                    marks={marks}
-                    referenceValues={referenceValues}
-                    setReferenceValues={setReferenceValues}
-                    minMax={minMax}
-                />
-            </div>
-
-            <div style={{width: '30%'}}>
-                {/* This is the bloodpressure table being displayed */}
-                <div>
-                    <TableForChartBloodPressure data = {addNotice} />
+                {/*This displays the slider for changing the reference values */}
+                <div style={{ width: '10%', marginTop: '3vh' }}>
+                    <SliderMeasurements
+                        marks={marks}
+                        referenceValues={referenceValues}
+                        setReferenceValues={setReferenceValues}
+                        minMax={minMax}
+                    />
                 </div>
 
-                {/* The form which you can fill in information about your weight does not save the data any where.
-                     Contains two text fields and a button*/}
+                <div style={{width: '30%'}}>
+                    {/* This is the bloodpressure table being displayed */}
+                    <div>
+                        <TableForChartBloodPressure data = {addNotice} />
+                    </div>
 
-                <div style={{ width: '90%', float: 'right' }}>
-                    <FormForUpdateValues />
-                </div>
+                    {/* The form which you can fill in information about your weight does not save the data any where.
+                        Contains two text fields and a button*/}
+
+                    <div style={{ width: '90%', float: 'right' }}>
+                        <FormForUpdateValues />
+                    </div>
+                </div>            
             </div>
+
         </>
     );
 }
