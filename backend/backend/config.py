@@ -10,4 +10,3 @@ class Config(object):
     API_AUDIENCE = "https://localhost:5000/api"
     DEBUG = True
 
-
