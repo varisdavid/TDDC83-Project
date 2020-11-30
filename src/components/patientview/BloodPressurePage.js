@@ -1,5 +1,5 @@
-import React, { useMemo } from 'react';
-import {BloodPressure, Notification, TableForChartBloodPressure, FormForUpdateValues , SliderMeasurements} from "..";
+import React, { useState, useMemo } from 'react';
+import { BloodPressure, Notification, TableForChartBloodPressure, FormForUpdateValues , SliderMeasurements} from "..";
 
 const BloodPressurePage = () => {
     //Sending the personaldata to the notices. This should be used for the ajax call in the futher as well
