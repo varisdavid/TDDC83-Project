@@ -128,8 +128,7 @@ class CustomizedView(db.Model):
     highPriority = db.Column(db.Boolean, nullable=False)
     medPriority = db.Column(db.Boolean, nullable=False)
     lowPriority = db.Column(db.Boolean, nullable=False)
-    #diagnosis
-    accessFor = db.Column(db.String, db.foreignKey("emlpoyees.id"), nullable=False)
+    accessFor = db.Column(db.String, db.ForeignKey("emlpoyees.id"), nullable=False)
 
 
     def __repr__(self):
@@ -165,7 +164,7 @@ class CustomizedView(db.Model):
 # CustimzedViewDiagnosis is the join table that stores what diagnoses are saved in the custmized view
 class CustomizedViewDiagnosis(db.Model):
     __tablename__ = "customizedViewDiagnosis"
-    customizedViewID = db.Column(db.Integer, primary_key=True, db.foreignKey("customizedView.id"), nullable=False)
+    customizedViewID = db.Column(db.Integer, primary_key=True, db.ForeignKey("customizedView.id"), nullable=False)
     diagnosis = db.Column(db.String, nullable=False)
 
     def __repr__(self):
@@ -173,3 +172,88 @@ class CustomizedViewDiagnosis(db.Model):
 
     def serialize(self):
         return dict(customizedViewID=self.customizedViewID, diagnosis=self.diagnosis)
+
+
+class PriorityRule (db.Model):
+    __tablename__ = "priorityRules"
+    id = db.Column(db.Integer, primary_key=True)
+
+    lowBadBloodsugar = db.Column(db.Integer, nullable=False)
+    lowGoodBloodsugar = db.Column(db.Integer, nullable=False)
+    highGoodBloodsugar = db.Column(db.Integer, nullable=False)
+    highBadBloodsugar = db.Column(db.Integer, nullable=False)
+    lowBadSystolic = db.Column(db.Integer, nullable=False)
+    lowGoodSystolic = db.Column(db.Integer, nullable=False)
+    highGoodSystolic = db.Column(db.Integer, nullable=False)
+    highBadSystolic = db.Column(db.Integer, nullable=False)
+    lowBadDiastolic = db.Column(db.Integer, nullable=False)
+    lowGoodDiastolic = db.Column(db.Integer, nullable=False)
+    highGoodDiastolic = db.Column(db.Integer, nullable=False)
+    highBadDiastolic = db.Column(db.Integer, nullable=False)
+    lowBadPulse = db.Column(db.Integer, nullable=False)
+    lowGoodPulse = db.Column(db.Integer, nullable=False)
+    highGoodPulse = db.Column(db.Integer, nullable=False)
+    highBadPulse = db.Column(db.Integer, nullable=False)
+    lowBadWeight = db.Column(db.Integer, nullable=False)
+    lowGoodWeight = db.Column(db.Integer, nullable=False)
+    highGoodWeight = db.Column(db.Integer, nullable=False)
+    highBadWeight = db.Column(db.Integer, nullable=False)
+    lowBadExercise = db.Column(db.Integer, nullable=False)
+    lowgoodExercise = db.Column(db.Integer, nullable=False)
+
+    appliesFor = db.Column(db.integer, db.ForeignKey("hospital.id"), nullable=False)
+
+    def __repr__(self):
+        return "<priorityRules {}: {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {}>".format(
+            self.id,
+            self.lowBadBloodsugar,
+            self.lowGoodBloodsugar,
+            self.highGoodBloodsugar,
+            self.highBadBloodsugar,
+            self.lowBadSystolic,
+            self.lowGoodSystolic,
+            self.highGoodSystolic,
+            self.highBadSystolic,
+            self.lowBadDiastolic,
+            self.lowGoodDiastolic,
+            self.highGoodDiastolic,
+            self.highBadDiastolic,
+            self.lowBadPulse,
+            self.lowGoodPulse,
+            self.highGoodPulse,
+            self.highBadPulse,
+            self.lowBadWeight,
+            self.lowGoodWeight,
+            self.highGoodWeight,
+            self.highBadWeight,
+            self.lowBadExercise,
+            self.lowGoodExercise,
+            self.appliesFor,
+        )
+    def serialize(self):
+        return dict(
+            id = self.id,
+            lowBadBloodsugar = self.lowBadBloodsugar,
+            lowGoodBloodsugar = self.lowGoodBloodsugar,
+            highGoodBloodsugar = self.highGoodBloodsugar,
+            highBadBloodsugar = self.highBadBloodsugar,
+            lowBadSystolic = self.lowBadSystolic,
+            lowGoodSystolic = self.lowGoodSystolic,
+            highGoodSystolic = self.highGoodSystolic,
+            highBadSystolic = self.highBadSystolic,
+            lowBadDiastolic = self.lowBadDiastolic,
+            lowGoodDiastolic = self.lowGoodDiastolic,
+            highGoodDiastolic = self.highGoodDiastolic,
+            highBadDiastolic = self.highBadDiastolic,
+            lowBadPulse = self.lowBadPulse,
+            lowGoodPulse = self.lowGoodPulse,
+            highGoodPulse = self.highGoodPulse,
+            highBadPulse = self.highBadPulse,
+            lowBadWeight = self.lowBadWeight,
+            lowGoodWeight = self.lowGoodWeight,
+            highGoodWeight = self.highGoodWeight,
+            highBadWeight = self.highBadWeight,
+            lowBadExercise = self.lowBadExercise,
+            lowGoodExercise = self.lowGoodExercise,
+            appliesFor = self.appliesFor,
+        )
