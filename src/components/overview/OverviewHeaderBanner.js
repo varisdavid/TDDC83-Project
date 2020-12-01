@@ -23,7 +23,7 @@ const OverviewHeaderBanner = ({ healthCenter }) => {
                 <div className="w-3/5 text-center text-gray-900 self-center">
                     <Link 
                         className="w-4/5 text-center text-gray-900" 
-                        href="/overview/home" 
+                        href="/overview/my_patients" 
                         variant="h2" 
                         underline="none" 
                         noWrap

@@ -107,46 +107,46 @@ const PatientsTable = ({
               position: 'relative'
             }}
           >
-            {rowVirtualizer.virtualItems.map(virtualRow => {
+            {rowVirtualizer.virtualItems.map((virtualRow) => {
               const row = rows[virtualRow.index];
               prepareRow(row);
-              return (
-                <TableRow 
-                key={virtualRow.index}
-                ref={virtualRow.measureRef}
-                {...row.getRowProps({
-                  style: {
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    transform: `translateY(${virtualRow.start}px)`,
-                    background: (virtualRow.index % 2) ? '#E5E5E5' : '#FFF',
-                  }
-                })}
-              >
-                  
-                    {row.cells.map((cell, cellIndex) => {
-                    return (
-                      <TableCell {...cell.getCellProps()} style={{padding: '10px', 
-                                                                  textAlign: 'center', 
-                                                                  width: (cellIndex === 0) ? '45px' : '100%', //To make first column fixed size
-                                                                  background: (cellIndex === 0) && '#FFF', //To make first column invisible
-                                                                  borderColor: (cellIndex === 0) && '#FFF', //To make first column invisible
-                                                                }}>
-
-                        { (cellIndex === 1 && cell.value === 1) && <Blob value={1}/> }
-                        { (cellIndex === 1 && cell.value === 2) && <Blob value={2}/> }
-                        { (cellIndex === 1 && cell.value === 3) && <Blob value={3}/> }
-                        { (cellIndex === 1 && cell.value === 4) && <Blob value={3}/> }
-                        { cell.value !== 1 && cell.value !== 2 && cell.value !== 3 && cell.value !== 4 && cell.render('Cell')}
-                      </TableCell>
-                    )
-                    
+            
+                return (
+                  <TableRow 
+                    key={virtualRow.index}
+                    ref={virtualRow.measureRef}
+                    {...row.getRowProps({
+                      style: {
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        transform: `translateY(${virtualRow.start}px)`,
+                        background: (virtualRow.index % 2) ? '#E5E5E5' : '#FFF',
+                      }
                     })}
-                </TableRow>
-              )}
-            )}
+                  >
+                    
+                      {row.cells.map((cell, cellIndex) => {
+                      return (
+                        <TableCell {...cell.getCellProps()} style={{padding: '10px', 
+                                                                    textAlign: 'center', 
+                                                                    width: (cellIndex === 0) ? '45px' : '100%', //To make first column fixed size
+                                                                    background: (cellIndex === 0) && '#FFF', //To make first column invisible
+                                                                    borderColor: (cellIndex === 0) && '#FFF', //To make first column invisible
+                                                                  }}>
+
+                          { (cellIndex === 1 && cell.value === 1) && <Blob value={1}/> }
+                          { (cellIndex === 1 && cell.value === 2) && <Blob value={2}/> }
+                          { (cellIndex === 1 && cell.value === 3) && <Blob value={3}/> }
+                          { (cellIndex === 1 && cell.value === 4) && <Blob value={3}/> }
+                          { cell.value !== 1 && cell.value !== 2 && cell.value !== 3 && cell.value !== 4 && cell.render('Cell')}
+                        </TableCell>
+                      )
+                      })}
+                  </TableRow>
+                )
+            })}
           </TableBody>
         </div>
     </Table>

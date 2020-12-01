@@ -5,7 +5,8 @@ import OverviewHeaderNavigation from './overview/OverviewHeaderNavigation';
 
 import OverviewCalendar from './overview/OverviewCalendar';
 
-import Patients from './overview/Patients';
+import MyPatients from './overview/MyPatients';
+import AllPatients from './overview/AllPatients';
 import PatientsSearch from './overview/PatientsSearch'
 import PatientsTable from './overview/PatientsTable'
 import PatientGroups from './overview/PatientGroups';
@@ -69,7 +70,8 @@ export {
     OverviewHeaderBanner,
     OverviewHeaderNavigation,
     OverviewCalendar,
-    Patients,
+    MyPatients,
+    AllPatients,
     PatientsSearch,
     PatientsTable,
     PatientGroups,
