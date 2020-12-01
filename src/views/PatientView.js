@@ -9,7 +9,7 @@ import { MeasurementsView} from '../views';
 let ssn
 const getActiveTab = (location) => {
   const arrssn = location.pathname.split("/");
-   ssn = arrssn [3]
+   ssn = arrssn[3]
   console.log (ssn);
 
   if (location.pathname.includes( '/patient/measurements')) {
@@ -63,7 +63,7 @@ const PatientView = () => {
   const [activeTabValue, setActiveTabValue] = useState(getActiveTab(location));
 
   // Will be fetched by user information later on. 
-  const patientInformation = 'Namn Efternamn, yymmdd-xxxx';
+  const patientInformation = 'Namn Efternamn, '+ ssn;
 
   // Upon rendering the component, this hook calls a function which 
   // determines which tab is active, depending on this we load a different tab.
