@@ -7,16 +7,19 @@ import { MeasurementsView} from '../views';
 
 // Function for retrieving current active tab from our url.
 const getActiveTab = (location) => {
-  
-  if (location.pathname === '/patient/measurements') {
+  const arrssn = location.pathname.split("/");
+  const ssn = arrssn [3]
+  console.log (ssn);
+
+  if (location.pathname === '/patient/measurements/' +ssn) {
     return 0;
-  } else if (location.pathname.includes( '/patient/overview')) {
+  } else if (location.pathname === ( '/patient/overview/' + ssn )) {
     return 1;  
-  } else if (location.pathname === '/patient/medications') {
+  } else if (location.pathname === '/patient/medications/'+ ssn) {
     return 2;  
-  } else if (location.pathname === '/patient/calendar') {
+  } else if (location.pathname === '/patient/calendar/'+ ssn) {
     return 3;  
-  } else if (location.pathname === '/patient/admin') {
+  } else if (location.pathname === '/patient/admin/'+ ssn) {
     return 4;  
   }else {
     return 0;  
@@ -57,7 +60,7 @@ const PatientView = () => {
   const [activeTabValue, setActiveTabValue] = useState(getActiveTab(location));
 
   // Will be fetched by user information later on. 
-  const patientInformation = 'Namn Efternamn, yymmdd-xxxx, Diagnos';
+  const patientInformation = 'Namn Efternamn, yymmdd-xxxx';
 
   // Upon rendering the component, this hook calls a function which 
   // determines which tab is active, depending on this we load a different tab.

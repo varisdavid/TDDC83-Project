@@ -147,15 +147,14 @@ const RuleEngine = () => {
         )
 
         // This console log starts the testing
-        console.log(addPriority(data))
+
 
 
         // Extracts the key data from the call and sends it forward to setPriority
         // Receives a prioirty from setPriority and adds it to the data.
         function addPriority(data) {
 
-            console.log("addPriority");
-            console.log("Oändrade data?" + data);
+
 
             let measurements = [];
 
@@ -163,12 +162,11 @@ const RuleEngine = () => {
 
                 measurements = (data[i]['Measurement']);
                 let priorityFactor = setPriority(measurements, rules);
-                console.log("priorityFactor" + priorityFactor);
+
                 data[i].priority = priorityFactor;
 
             }
-            console.log("altered")
-            console.log(data);
+
         }
 
 
@@ -189,26 +187,19 @@ const RuleEngine = () => {
 
             for (let i = 0; i < measurements.length; i++) {
 
-                console.log("Patientvärde" + measurements[i].BloodSugar);
-                console.log("Gränsvärde" + rules[0].BadLowBloodSugar);
 
 
 
                 //Bloodsugar
                 if (measurements[i].BloodSugar <= rules[0].BadLowBloodSugar) {
-                    console.log("Blodsocker1");
                     priorityScoreBS += 3;
                 } else if (rules[0].BadLowBloodSugar <= measurements[i].BloodSugar <= rules[0].GoodLowBloodSugar) {
-                    console.log("Blodsocker2");
                     priorityScoreBS += 2;
                 } else if (rules[0].GoodLowBloodSugar <= measurements[i].BloodSugar <= rules[0].GoodHighBloodSugar) {
-                    console.log("Blodsocker3");
                     priorityScoreBS += 1;
                 } else if (rules[0].GoodHighBloodSugar <= measurements[i].BloodSugar <= rules[0].BadHighBloodSugar) {
-                    console.log("Blodsocker4");
                     priorityScoreBS += 2;
                 } else {
-                    console.log("Blodsockerr5");
                     priorityScoreBS += 3;
                 }
 
@@ -287,15 +278,8 @@ const RuleEngine = () => {
                 }
             }
 
-            console.log("Viktvärde" + priorityScoreW);
-            console.log("puls" + priorityScoreP);
-            console.log("syst" + priorityScoreSys);
-            console.log("dia" + priorityScoreDia);
-            console.log("bloodsock" + priorityScoreBS);
 
             totalPriorityScore = ((priorityScoreBS + priorityScoreP + priorityScoreSys + priorityScoreDia + priorityScoreW) / (5*measurements.length));
-            console.log("oavrundat, prio" + totalPriorityScore);
-            console.log("Prioritetsscore för varje patient:" + Math.round(totalPriorityScore));
             return Math.round(totalPriorityScore);
         }
     }
@@ -303,7 +287,6 @@ const RuleEngine = () => {
 
 export function test() {
 
-    console.log("test");
 }
 
 
