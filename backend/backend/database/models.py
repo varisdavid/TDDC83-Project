@@ -164,7 +164,7 @@ class CustomizedView(db.Model):
 # CustimzedViewDiagnosis is the join table that stores what diagnoses are saved in the custmized view
 class CustomizedViewDiagnosis(db.Model):
     __tablename__ = "customizedViewDiagnosis"
-    customizedViewID = db.Column(db.Integer, db.ForeignKey("customizedView.id"), primary_key=True)
+    customizedViewID = db.Column(db.Integer, db.ForeignKey("customizedView.id"))
     diagnosis = db.Column(db.String, nullable=False)
 
     def __repr__(self):
@@ -173,7 +173,7 @@ class CustomizedViewDiagnosis(db.Model):
     def serialize(self):
         return dict(customizedViewID=self.customizedViewID, diagnosis=self.diagnosis)
 
-
+# Priority rule keeps track of the different intervalls that determine the level of priority for a certain hospital
 class PriorityRule (db.Model):
     __tablename__ = "priorityRules"
     id = db.Column(db.Integer, primary_key=True)
