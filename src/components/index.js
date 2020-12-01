@@ -57,6 +57,10 @@ import TableForChartWeightChartPage from "./patientview/TableForChartWeightChart
 import RuleEngine from "./ruleEngine/RuleEngine";
 import SliderMeasurements from "./patientview/SliderMeasurements";
 
+import ActivityLogPatient from "./patientview/ActivityLogPatient";
+import FormPatientAdmin from "./patientview/FormPatientAdmin";
+import BlockPatientAdmin from "./patientview/BlockPatientAdmin";
+
 // import Notices from './Notices';
 // import NoticesTable from './NoticesTable';
 
@@ -102,6 +106,9 @@ export {
     TableForChartBloodPressure,
     Notification,
     FormForUpdateValues,
+    ActivityLogPatient,
+    FormPatientAdmin,
+    BlockPatientAdmin,
     TableForChartPysicalActivity,
     TableForChartWeightChartPage,
     RuleEngine,
