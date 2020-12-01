@@ -204,7 +204,7 @@ class PriorityRule (db.Model):
     appliesFor = db.Column(db.integer, db.ForeignKey("hospital.id"), nullable=False)
 
     def __repr__(self):
-        return "<View {}: {} {} {} {}>".format(
+        return "<priorityRules {}: {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {}>".format(
             self.id,
             self.lowBadBloodsugar,
             self.lowGoodBloodsugar,
