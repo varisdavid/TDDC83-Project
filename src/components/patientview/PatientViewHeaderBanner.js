@@ -21,6 +21,7 @@ const PatientViewHeaderBanner = ({ patientInformation }) => {
                 <div className="w-3/5 text-center text-gray-900 self-center">
 
                     <Link 
+                        id='patientHomeButton'
                         className="w-1/5 text-center mr-4 mb-2" 
                         href="/overview/home"
                         style={{ cursor: "pointer" }}

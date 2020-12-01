@@ -150,7 +150,7 @@ const Notification = ({value, text, id, date, measurement, updatedBy}) => {
                     <div className="flex" style={{width: "100%"}}>
 
                         <Button
-                            id='noticesRetake'
+                            id = "PatientMeasurementCancelBtn"
                             className='flex shadow'
                             style={{
                                 border: '2px solid #0066B3',
@@ -164,7 +164,7 @@ const Notification = ({value, text, id, date, measurement, updatedBy}) => {
                             Ta om mätvärde
                         </Button>
                         <Button
-                            id='noticesConfirm2'
+                            id = "PatientMeasurementSignBtn"
                             className='flex shadow'
                             style={{
                                 border: '2px solid #0066B3',

@@ -14,7 +14,7 @@ const Admin = () => {
                 <BlockPatientAdmin consts={{ header: "Blodtryck" }} />
                 <BlockPatientAdmin consts={{ header: "Fysisk aktivitet" }} />
                 <div style={{height: '70px', border: '5px solid #E0E0E0'}}>
-                <Button style={{
+                <Button id = "patientViewAdminBtnValue" style={{
                     border: '1px solid lightgrey',
                     boxShadow: "5px 7px 20px lightgrey",
                     fontSize: '20px',
