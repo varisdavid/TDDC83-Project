@@ -19,4 +19,4 @@ def customizedViewDiagnosis(customizedViewID):
         for i in range(len(diagnosisList)):
             DiagnosisList[i] = CustomizedViewDiagnosis.serialize(diagnosisList[i])
             serializedDiagnosisList.append(diagnosisList[i])
-        return _corsify_actual_response(jsonify(serializedDiagnosisList)))
+        return _corsify_actual_response(jsonify(serializedDiagnosisList))
