@@ -35,8 +35,8 @@ def create_app(test_config=None):
     app.register_blueprint(overview_bp)
     app.register_blueprint(patients_bp)
     app.register_blueprint(team_bp)
-    app.register_blueprint(customizedView)
-    app.register_blueprint(customizedViewDiagnosis)
+    app.register_blueprint(customizedView_bp)
+    app.register_blueprint(customizedViewDiagnosis_bp)
     app.register_blueprint(priorityRule_bp)
 
     from .cli_commands import cli
