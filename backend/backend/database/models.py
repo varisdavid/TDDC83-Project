@@ -164,7 +164,7 @@ class CustomizedView(db.Model):
 # CustimzedViewDiagnosis is the join table that stores what diagnoses are saved in the custmized view
 class CustomizedViewDiagnosis(db.Model):
     __tablename__ = "customizedViewDiagnosis"
-    customizedViewID = db.Column(db.Integer, primary_key=True, db.ForeignKey("customizedView.id"), nullable=False)
+    customizedViewID = db.Column(db.Integer, db.ForeignKey("customizedView.id"), primary_key=True)
     diagnosis = db.Column(db.String, nullable=False)
 
     def __repr__(self):
