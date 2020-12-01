@@ -10,6 +10,7 @@ import ProtectedRoute from './auth/ProtectedRoute';
 import './app.css';
 
 const App = () => {
+
   const { isLoading, getAccessTokenSilently, isAuthenticated} = useAuth0();
 
   if ( isAuthenticated ) {
