@@ -26,7 +26,29 @@ const LinkTab = (props) => {
   );
 }
 
-const PatientViewHeaderNavigation = ({ activeTabValue }) => {
+const PatientViewHeaderNavigation = ({ activeTabValue, ssn }) => {
+    const history = useHistory();
+// functions that adds the ssn to the url so patientView can send the ssn to the other js files
+    const navigateToMeasurement = () => {
+        const href = '/patient/measurements/' + ssn;
+        history.push(href);
+    };
+    const navigateToOverview = () => {
+        const href = '/patient/overview/' + ssn;
+        history.push(href);
+    };
+    const navigateToMedications = () => {
+        const href = '/patient/medications/' + ssn;
+        history.push(href);
+    };
+    const navigateToCalendar = () => {
+        const href = '/patient/calendar/' + ssn;
+        history.push(href);
+    };
+    const navigateToAdmin = () => {
+        const href = '/patient/admin/' + ssn;
+        history.push(href);
+    };
 
   return (
     <>
@@ -48,33 +70,33 @@ const PatientViewHeaderNavigation = ({ activeTabValue }) => {
         >
           <LinkTab 
             style={{ textDecoration: 'none', backgroundColor: activeTabValue === 0 ? '#0066B3' : 'inherit', color: activeTabValue === 0 ? '#FFF' : 'inherit' }} 
-            label='Mätvärden' 
-            href='/patient/measurements' 
+            label='Mätvärden'
+            onClick={navigateToMeasurement}
             {...a11yProps(0)}
           />
           <LinkTab 
             style={{ textDecoration: 'none', backgroundColor: activeTabValue === 1 ? '#0066B3' : 'inherit', color: activeTabValue === 1 ? '#FFF' : 'inherit'}} 
-            label='Översikt' 
-            href='/patient/overview' 
+            label='Översikt'
+            onClick={navigateToOverview}
             {...a11yProps(1)}
           />
           <LinkTab 
             style={{ textDecoration: 'none', backgroundColor: activeTabValue === 2 ? '#0066B3' : 'inherit', color: activeTabValue === 2 ? '#FFF' : 'inherit'}} 
             label='Läkemedelslista'
-            href='/patient/medications' 
+            onClick={navigateToMedications}
             {...a11yProps(2)}
           />
           
           <LinkTab 
             style={{ textDecoration: 'none', backgroundColor: activeTabValue === 3 ? '#0066B3' : 'inherit', color: activeTabValue === 3 ? '#FFF' : 'inherit'}} 
-            label='Kalender' 
-            href='/patient/calendar' 
+            label='Kalender'
+            onClick={navigateToCalendar}
             {...a11yProps(3)}
           />
           <LinkTab 
             style={{ textDecoration: 'none', backgroundColor: activeTabValue === 4 ? '#0066B3' : 'inherit', color: activeTabValue === 4 ? '#FFF' : 'inherit'}} 
-            label='Admin' 
-            href='/patient/admin' 
+            label='Admin'
+            onClick={navigateToAdmin}
             {...a11yProps(4)}
           />
 

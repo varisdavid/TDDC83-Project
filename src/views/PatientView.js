@@ -6,20 +6,21 @@ import { PatientViewHeaderBanner, PatientViewHeaderNavigation, PatientCalendar, 
 import { MeasurementsView} from '../views';
 
 // Function for retrieving current active tab from our url.
+let ssn
 const getActiveTab = (location) => {
   const arrssn = location.pathname.split("/");
-  const ssn = arrssn [3]
+   ssn = arrssn [3]
   console.log (ssn);
 
-  if (location.pathname === '/patient/measurements/' +ssn) {
+  if (location.pathname.includes( '/patient/measurements')) {
     return 0;
-  } else if (location.pathname === ( '/patient/overview/' + ssn )) {
+  } else if (location.pathname.includes('/patient/overview' )) {
     return 1;  
-  } else if (location.pathname === '/patient/medications/'+ ssn) {
+  } else if (location.pathname.includes('/patient/medications')) {
     return 2;  
-  } else if (location.pathname === '/patient/calendar/'+ ssn) {
+  } else if (location.pathname.includes('/patient/calendar')) {
     return 3;  
-  } else if (location.pathname === '/patient/admin/'+ ssn) {
+  } else if (location.pathname.includes('/patient/admin')) {
     return 4;  
   }else {
     return 0;  
@@ -52,6 +53,8 @@ const PatientView = () => {
 
   // Hook to retrieve the currently used url path
   const location = useLocation();
+  console.log(location);
+
 
   // Function call to get dynamic starting tab
   getActiveTab(location)
@@ -76,7 +79,7 @@ const PatientView = () => {
   <>
     <div className='w-full h-auto'>
       <PatientViewHeaderBanner patientInformation={patientInformation} />  
-      <PatientViewHeaderNavigation activeTabValue={activeTabValue} setActiveTabValue={setActiveTabValue} />
+      <PatientViewHeaderNavigation activeTabValue={activeTabValue} setActiveTabValue={setActiveTabValue}  ssn = {ssn}/>
     </div>
 
     <TabPanel className='Measurements' value={activeTabValue} index={0}>
