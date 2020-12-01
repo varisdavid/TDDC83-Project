@@ -780,7 +780,7 @@ const Patients = () => {
   );
   
   useMemo(() => {
-    setHiddenColumns(prev => {return (['age', 'name', 'gender', 'team', 'department'].concat(settings))})
+    setHiddenColumns((prev) => {return (['age', 'name', 'gender', 'team', 'department'].concat(settings))})
   }, [setHiddenColumns, settings])
 
   const { getAccessTokenSilently } = useAuth0();
@@ -805,7 +805,7 @@ const Patients = () => {
         console.log(error.message);
       }
     };*/
-    toggleSortBy(sortState.columnId);
+    toggleSortBy(sortState.columnId); // Based on our chosen sorting column, this toggles.
     setGlobalFilter(searchValue); // We use the stored searchValue to globally filter our table by.
   }, [
     searchValue,
@@ -850,7 +850,7 @@ const Patients = () => {
         </Grid>
       </Grid>
       <Grid container>
-          <Grid item xs = {4} style={{paddingLeft: "45px", marginTop: "8px"}}>
+          <Grid item xs = {4} style={{paddingLeft: "5%", marginTop: "8px"}}>
             <JourTable />
           </Grid> 
       </Grid>

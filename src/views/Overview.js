@@ -2,17 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Box } from '@material-ui/core';
 
-import { OverviewHeaderBanner, OverviewHeaderNavigation, Patients, OverviewCalendar } from '../components'
+import { OverviewHeaderBanner, OverviewHeaderNavigation, MyPatients, AllPatients, OverviewCalendar } from '../components'
 import Notices from '../components/overview/Notices';
 
-import {settingsContext} from "../components/overview/ColumnFilter"
+import { settingsContext } from "../components/overview/ColumnFilter"
 
 // Function for retrieving current active tab
 const getActiveTab = (location) => {
 
-  if (location.pathname === '/overview/home') {
+  if (location.pathname === '/overview/my_patients') {
     return 0;
-  } else if (location.pathname === '/overview/patients') {
+  } else if (location.pathname === '/overview/all_patients') {
     return 1;
   } else if (location.pathname === '/overview/notices') {
     return 2;
@@ -75,19 +75,20 @@ const Overview = () => {
         <OverviewHeaderNavigation activeTabValue={activeTabValue} setActiveTabValue={setActiveTabValue} />
       </div>
 
-      <TabPanel className='Home' value={activeTabValue} index={0}>
-
+      <TabPanel className='MyPatients' value={activeTabValue} index={0}>
+        <settingsContext.Provider value={{ settings, setSettings }}>
+          <MyPatients />
+        </settingsContext.Provider>
       </TabPanel>
 
-    <TabPanel className='Patients' value={activeTabValue} index={1}>
-      <settingsContext.Provider value={{ settings, setSettings }}>
-      <Patients />
-      </settingsContext.Provider>
-    </TabPanel>
+      <TabPanel className='AllPatients' value={activeTabValue} index={1}>
+        <settingsContext.Provider value={{ settings, setSettings }}>
+          <AllPatients />
+        </settingsContext.Provider>
+      </TabPanel>
 
       <TabPanel className='Notices' value={activeTabValue} index={2}>
         <Notices />
-
       </TabPanel>
 
       <TabPanel className='Calendar' value={activeTabValue} index={3}>
