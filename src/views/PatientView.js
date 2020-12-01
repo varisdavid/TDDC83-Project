@@ -76,23 +76,23 @@ const PatientView = () => {
       <PatientViewHeaderNavigation activeTabValue={activeTabValue} setActiveTabValue={setActiveTabValue} />
     </div>
 
-    <TabPanel className='Measurements' value={activeTabValue} index={0}>
+    <TabPanel id='patientViewMeasurementsTabBtn' className='Measurements' value={activeTabValue} index={0}>
       <MeasurementsView/>
     </TabPanel>
 
-    <TabPanel id='tab-scroll' className='Overview' value={activeTabValue} index={1}>
+    <TabPanel id='patientViewOverviewTabBtn' className='tab-scroll' value={activeTabValue} index={1}>
       <PatientOverview/>
     </TabPanel>
 
-    <TabPanel id='tab-scroll' className='Medications' value={activeTabValue} index={2}>
+    <TabPanel id='patientViewMedicationsTabBtn' className='tab-scroll' value={activeTabValue} index={2}>
       <PatientListOfMedication/>
     </TabPanel>
 
-    <TabPanel id='tab-scroll' className='Calendar' value={activeTabValue} index={3}>
+    <TabPanel id="patientViewCalenderTabBtn" className='tab-scroll' value={activeTabValue} index={3}>
       <PatientCalendar/>
     </TabPanel>
 
-    <TabPanel id='tab-scroll' className='Admin' value={activeTabValue} index={4}>
+    <TabPanel  id="patientViewAdminTabBtn" className='tab-scroll' value={activeTabValue} index={4}>
       <Admin/>
     </TabPanel>
   </>

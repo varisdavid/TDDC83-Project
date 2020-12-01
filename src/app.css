@@ -89,6 +89,10 @@
   overflow-y: auto !important;
 }
 
+.tab-scroll{
+  overflow-y: auto !important;
+}
+
 .img-overview-page{
   width: 60%;
   margin-Bottom: 30px;
