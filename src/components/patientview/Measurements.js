@@ -1,10 +1,12 @@
 import React from 'react';
-import { WeightChart, BloodPressure, PhysicalActivityChart } from "..";
-import { patientPrioritizationScore } from '../ruleEngine/ruleEngine';
+import { RuleEngine, WeightChart, BloodPressure, PhysicalActivityChart } from "..";
 
-//Displays three charts (Measurment page)
+
 const Measurements = ({ setActiveTabValueM }) => {
-    console.log(patientPrioritizationScore(123));
+
+    // used to test ruleEngine
+     console.log(RuleEngine());
+
 
     return (
         <>
@@ -16,6 +18,7 @@ const Measurements = ({ setActiveTabValueM }) => {
                         setActiveTabValueM(1);
                     }} >
                         <WeightChart />
+
                     </div>
                     
                     {/*Displays a clickable BloodPressureChart*/}

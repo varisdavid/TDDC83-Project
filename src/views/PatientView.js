@@ -10,7 +10,7 @@ const getActiveTab = (location) => {
   
   if (location.pathname === '/patient/measurements') {
     return 0;
-  } else if (location.pathname === '/patient/overview') {
+  } else if (location.pathname.includes( '/patient/overview')) {
     return 1;  
   } else if (location.pathname === '/patient/medications') {
     return 2;  

@@ -1,5 +1,5 @@
 import json
-from flask import request, _request_ctx_stack
+from flask import request, _request_ctx_stack, make_response
 from functools import wraps
 from urllib.request import urlopen
 from jose import jwt
@@ -19,7 +19,7 @@ class AuthError(Exception):
 def get_token_auth_header():
     """Obtains the Access Token from the Authorization Header
     """
-    auth = request.headers.get("Authorization", None)
+    auth = request.headers["Authorization"]
     if not auth:
         raise AuthError(
             {

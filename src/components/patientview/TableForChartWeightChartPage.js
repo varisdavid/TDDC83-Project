@@ -1,23 +1,53 @@
-import React, {} from 'react';
+import React, {useMemo} from 'react';
 import {Table, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
 import {ArrowDropDown, ArrowDropUp} from "@material-ui/icons";
 import {useVirtual} from "react-virtual";
+import {useFlexLayout, useTable} from "react-table";
 
 // Renders a table based on props passed down from useTable
-const TableForChart = ({
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-}) => {
+const TableForChartWeightChartPage = ({data
+                                    }) => {
+    //Setting the table heads in the table as well as which data goes where
+    const columns = useMemo(
+        () => [
+            {
+                Header: '',
+                accessor: 'notices',
+            },
+
+            {
+                Header: 'Datum',
+                accessor: 'Date',
+            },
+            {
+                Header: 'Vikt',
+                accessor: 'Weight',
+            },
+            {
+                Header: 'Uppdaterades Av',
+                accessor: 'UpdatedBy',
+            },
+        ],
+        []
+    );
+
+    const {
+        getTableProps,
+        getTableBodyProps,
+        headerGroups,
+        rows,
+        prepareRow,
+    } = useTable({columns, data},
+        useFlexLayout,
+    );
+
 
     // Used for keeping track on the wrapper div (needed for virtualization)
     const parentRef = React.useRef();
 
-    // Using package 'react-virtual' for virtualization of 
+    // Using package 'react-virtual' for virtualization of
     // the table, give it rows.length for how many rows there should be
-    // its ref to outer div and the estimated size. 
+    // its ref to outer div and the estimated size.
     const rowVirtualizer = useVirtual({
         size: rows.length,
         parentRef,
@@ -76,41 +106,41 @@ const TableForChart = ({
                         }}
                     >
                         {rowVirtualizer.virtualItems.map(virtualRow => {
-                            const row = rows[virtualRow.index];
-                            prepareRow(row);
-                            return (
-                                <TableRow
-                                    key={virtualRow.index}
-                                    ref={virtualRow.measureRef}
-                                    {...row.getRowProps({
-                                        style: {
-                                            position: 'absolute',
-                                            top: 0,
-                                            left: 0,
-                                            width: '100%',
-                                            transform: `translateY(${virtualRow.start}px)`,
-                                            background: (virtualRow.index % 2) ? '#E5E5E5' : '#FFF',
-                                        }
-                                    })}
-                                >
+                                const row = rows[virtualRow.index];
+                                prepareRow(row);
+                                return (
+                                    <TableRow
+                                        key={virtualRow.index}
+                                        ref={virtualRow.measureRef}
+                                        {...row.getRowProps({
+                                            style: {
+                                                position: 'absolute',
+                                                top: 0,
+                                                left: 0,
+                                                width: '100%',
+                                                transform: `translateY(${virtualRow.start}px)`,
+                                                background: (virtualRow.index % 2) ? '#E5E5E5' : '#FFF',
+                                            }
+                                        })}
+                                    >
 
-                                    {row.cells.map((cell, cellIndex) => {
-                                        return (
-                                            <TableCell {...cell.getCellProps()} style={{
-                                                padding: '10px',
-                                                textAlign: 'center',
-                                                width: (cellIndex === 0) ? '45px' : '30%', //To make first column fixed size
-                                                background: (cellIndex === 0) && '#FFF', //To make first column invisible
-                                                borderColor: (cellIndex === 0) && '#FFF', //To make first column invisible
-                                            }}>
-                                                {cell.render('Cell')}
-                                            </TableCell>
-                                        )
+                                        {row.cells.map((cell, cellIndex) => {
+                                            return (
+                                                <TableCell {...cell.getCellProps()} style={{
+                                                    padding: '10px',
+                                                    textAlign: 'center',
+                                                    width: (cellIndex === 0) ? '45px' : '30%', //To make first column fixed size
+                                                    background: (cellIndex === 0) && '#FFF', //To make first column invisible
+                                                    borderColor: (cellIndex === 0) && '#FFF', //To make first column invisible
+                                                }}>
+                                                    {cell.render('Cell')}
+                                                </TableCell>
+                                            )
 
-                                    })}
-                                </TableRow>
-                            )
-                        }
+                                        })}
+                                    </TableRow>
+                                )
+                            }
                         )}
                     </TableBody>
                 </div>
@@ -119,5 +149,5 @@ const TableForChart = ({
     );
 };
 
-export default TableForChart;
+export default TableForChartWeightChartPage;
 

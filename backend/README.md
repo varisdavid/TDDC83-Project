@@ -7,7 +7,8 @@ With windows:
 1. python -m venv venv
 2. pip install -r req.txt
 3. Navigate out one step (cd ..)
-4. python run_server.py
+
+Start the server: 4. stand in deploy, write python backend\run_server.py
 
 4.1. If you want to use commands connected to the database you can do:
 4.2. set FLASK_APP=run_server.py

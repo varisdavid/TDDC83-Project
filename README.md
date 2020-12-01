@@ -1,3 +1,16 @@
+### Authentication
+
+The routes are now protected, this means you will have to authenticate to be able to access the site.
+
+If you're not signed up yet and have your own credentials you can login via:
+Username: Admin@admin.se
+Password: 123456!a
+
+There is currently no purpose to the select verksamhet field, so no need to use that one.
+
+### Documentation
+
+Living documents, e.g "education plan" and "project plan" are now found under "docs".
 
 ### Get started with the project
 
@@ -6,7 +19,6 @@ Navigate to a desirable folder -> do "git clone -b "pure-react" https://gitlab.l
 "cd deploy"
 "yarn install"
 "yarn start"
-
 
 ### `yarn start`
 
@@ -102,9 +114,3 @@ If you need to add specific styling, you could make a specific css file for that
 - yup (validation)
 - Material ui (component library built on material design, and icons from material ui)
 - React-router (routing in react, do we want this or pure SPA feeling?)
-
-### Status
-
-Had some problem deciding wheter to go down the typescript track (seemed like there were no real proponents for this) so here is a Javascript boilerplate (depending on our needs the package structure might change). Will wait on further instructions from the analyst team to see if this is deemeed a priority or not.
-
-2020-10-13: Basic auth boilerplate up.

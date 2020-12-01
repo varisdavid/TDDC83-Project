@@ -1,11 +1,4 @@
-import HomeContent from './templatePage/HomeContent';
-import Footer from './templatePage/Footer';
-import Hero from './templatePage/Hero';
 import Loading from './Loading';
-import NavBar from './templatePage/NavBar';
-// import PatientCalendar from './PatientCalendar';
-// import PatientHeader from './PatientHeader';
-// import NavBarPatient from './NavBarPatient';
 
 import OverviewHeaderBanner from './overview/OverviewHeaderBanner';
 import OverviewHeaderNavigation from './overview/OverviewHeaderNavigation';
@@ -56,9 +49,13 @@ import PhysicalActivityPage from "./patientview/PhysicalActivityPage";
 
 import PatientViewMeasurementsHeaderNavigation from "./patientview/PatientViewMeasurementsHeaderNavigation";
 
-import TableForChart from "./patientview/TableForChart";
+import TableForChartBloodPressure from "./patientview/TableForChartBloodPressure";
 import Notification from "./patientview/Notification";
 import FormForUpdateValues from "./patientview/FormForUpdateValues";
+import TableForChartPysicalActivity from "./patientview/TableForChartPysicalActivity";
+import TableForChartWeightChartPage from "./patientview/TableForChartWeightChartPage";
+import RuleEngine from "./ruleEngine/RuleEngine";
+import SliderMeasurements from "./patientview/SliderMeasurements";
 
 import ActivityLogPatient from "./patientview/ActivityLogPatient";
 import FormPatientAdmin from "./patientview/FormPatientAdmin";
@@ -68,11 +65,7 @@ import BlockPatientAdmin from "./patientview/BlockPatientAdmin";
 // import NoticesTable from './NoticesTable';
 
 export { 
-    HomeContent, 
-    Footer, 
-    Hero, 
     Loading, 
-    NavBar,
     OverviewHeaderBanner,
     OverviewHeaderNavigation,
     OverviewCalendar,
@@ -110,10 +103,14 @@ export {
     WeightChartPage,
     PatientViewMeasurementsHeaderNavigation,
     PhysicalActivityPage,
-    TableForChart,
+    TableForChartBloodPressure,
     Notification,
     FormForUpdateValues,
     ActivityLogPatient,
     FormPatientAdmin,
     BlockPatientAdmin,
+    TableForChartPysicalActivity,
+    TableForChartWeightChartPage,
+    RuleEngine,
+    SliderMeasurements,
 };

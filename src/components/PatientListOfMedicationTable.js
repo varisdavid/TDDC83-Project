@@ -8,7 +8,6 @@ import { useTable, useFlexLayout} from 'react-table'
 
 const PatientListOfMedicationTable = ({data}) => {
 
-
     const columns = useMemo(
         () => [
 
@@ -31,7 +30,6 @@ const PatientListOfMedicationTable = ({data}) => {
         []
     )
 
-
     const {
         getTableProps,
         getTableBodyProps,
@@ -41,7 +39,6 @@ const PatientListOfMedicationTable = ({data}) => {
     } = useTable({ columns, data },
         useFlexLayout,
     );
-
 
     // Used for keeping track on the wrapper div (needed for virtualization)
     const parentRef = React.useRef();

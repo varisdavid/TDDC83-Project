@@ -1,20 +1,17 @@
-import React, {useContext, useState} from "react";
+import React, { useContext, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 
 //For calendar
-import {enGB} from "date-fns/locale";
-import {DatePickerCalendar} from "react-nice-dates";
+import { enGB } from "date-fns/locale";
+import { DatePickerCalendar } from "react-nice-dates";
 import "react-nice-dates/build/style.css";
 
 //For styling calendar
 import '../../OverviewCalendar.css';
-// import { getDay, getDate } from 'date-fns';
-import {getDate} from 'date-fns';
-
-//...
+import { getDate } from 'date-fns';
 
 //For table
-import {makeStyles, withStyles} from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -22,7 +19,6 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-// import { date } from "yup";
 
 // - The functions and styles in this file is supposed to be moved to seperate files
 // - Need to store table information in some way, with date as key.
@@ -35,6 +31,7 @@ const useStyles = makeStyles({
         marginTop: "1%",
     },
 });
+
 //Fake activity data
 const Data = [
     {
@@ -65,7 +62,6 @@ const StyledTableCell = withStyles((theme) => ({
         fontSize: 14,
     },
 
-
 }))(TableCell);
 
 //Styling for the activity table below
@@ -91,6 +87,7 @@ const Context = React.createContext({
     value: null, setValue: () => {
     }
 });
+
 //The table displaying the activities from the fake data above as well as filtering which dates the activity should be printed on
 const BasicTable = (props) => {
     const classes = useStyles();

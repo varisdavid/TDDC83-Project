@@ -1,32 +1,38 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 
 import { Loading} from './components';
-import { Home, Profile, ExternalApi, Overview, OverviewSettings, PatientView } from './views';
-// import ProtectedRoute from './auth/ProtectedRoute';
+import { Overview, OverviewSettings, PatientView } from './views';
+import axios from "axios"
+import ProtectedRoute from './auth/ProtectedRoute';
 
 import './app.css';
 
 const App = () => {
-  const { isLoading } = useAuth0();
+  const { isLoading, getAccessTokenSilently, isAuthenticated} = useAuth0();
+
+  if (isAuthenticated) {
+    const token =  getAccessTokenSilently(); 
+    token.then(value => {axios.defaults.headers.common["Authorization"] = `Bearer ${value}`} )
+    console.log(token); 
+  } else {
+    delete axios.defaults.headers.common["Authorization"];
+  }
 
   if (isLoading) {
     return <Loading />;
+  } else {
+    return (
+      <div id='app' className='d-flex flex-column h-100'>
+        <Switch>
+          <ProtectedRoute path={['/patient/overview', '/patient/measurements', '/patient/medications', '/patient/calendar', '/patient/admin']} component={PatientView}/>
+          <ProtectedRoute path={[ '/', '/overview/patients', '/overview/home', '/overview/notices', 'overview/calendar']} component={Overview}/>
+          <ProtectedRoute exact path='/overview/settings' component={OverviewSettings} />
+        </Switch>
+      </div>
+    );
   }
 
-  return (
-    <div id='app' className='d-flex flex-column h-100'>
-      <Switch>
-        <Route path='/' exact component={Home} />
-        <Route path='/profile' component={Profile} />
-        <Route path='/external-api' component={ExternalApi} />
-        <Route exact path='/overview/settings' component={OverviewSettings} />
-        <Route path='/overview' component={Overview}/>
-        <Route path='/patient' component={PatientView}/>
-
-      </Switch>
-    </div>
-  );
 };
 export default App;

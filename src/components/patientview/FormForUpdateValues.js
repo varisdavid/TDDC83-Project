@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button} from "@material-ui/core";
+import { Button } from "@material-ui/core";
 
 //Creates a form with forms for date and value (Does not yet work)
 const FormForUpdateValues = () => {
@@ -39,12 +39,12 @@ const FormForUpdateValues = () => {
                     marginLeft: "10px",
                     marginRight: "10px",
                     marginTop: "10px"
-                }}>Fyll i nytt uppmät värde
+                }}>Nytt uppmätt värde:
                         </text>
                 <input style={{
                     border: '1px solid lightgrey',
                     marginLeft: "auto",
-                    marginRight: "20px",
+                    marginRight: "auto",
                     marginTop: "1.5rem",
                     boxShadow: "inset 0 2px 3px lightgrey",
                 }} name="BloodPressureMeasurement" />
@@ -54,6 +54,7 @@ const FormForUpdateValues = () => {
                     marginBottom: "10px"
                 }}>
                     <Button
+                    id="addNewMeasurement"
                         className='flex shadow'
                         style={{
                             border: '2px solid #0066B3',

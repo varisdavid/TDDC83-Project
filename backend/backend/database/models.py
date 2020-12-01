@@ -115,3 +115,61 @@ class Team(db.Model):
     def serialize(self):
         return dict(id=self.id, name=self.name, departmentNumber=self.departmentNumber)
 
+# Customized view is a pre-defined filter created by a user
+class CustomizedView(db.Model):
+    __tablename__ = "customizedView"
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, nullable=False)
+    minAge = db.Column(db.Integer, nullable=True)
+    maxAge = db.Column(db.Integer, nullable=True)
+    gender = db.Column(db.String, nullable=True)
+    departmentNumber = db.Column(db.Integer, db.ForeignKey("departments.id"), nullable=True)
+    teamNumber = db.Column(db.Integer, db.ForeignKey("teams.id"), nullable=True)
+    highPriority = db.Column(db.Boolean, nullable=False)
+    medPriority = db.Column(db.Boolean, nullable=False)
+    lowPriority = db.Column(db.Boolean, nullable=False)
+    #diagnosis
+    accessFor = db.Column(db.String, db.foreignKey("emlpoyees.id"), nullable=False)
+
+
+    def __repr__(self):
+        return "<View {}: {} {} {} {} {} {} {} {} {}>".format(
+            self.id,
+            self.name,
+            self.minAge,
+            self.maxAge,
+            self.gender,
+            self.departmentNumber,
+            self.teamNumber,
+            self.highPriority,
+            self.medPriority,
+            self.lowPriority,
+            self.accessFor,
+        )
+
+    def serialize(self):
+        return dict(
+            id = self.id,
+            name = self.name,
+            minAge = self.minAge,
+            maxAge = self.maxAge,
+            gender = self.gender,
+            departmentNumber = self.departmentNumber,
+            teamNumber = self.teamNumber,
+            highPriority = self.highPriority,
+            medPriority = self.medPriority,
+            lowPriority = self.lowPriority,
+            accesFor = self.accessFor,
+        )
+
+# CustimzedViewDiagnosis is the join table that stores what diagnoses are saved in the custmized view
+class CustomizedViewDiagnosis(db.Model):
+    __tablename__ = "customizedViewDiagnosis"
+    customizedViewID = db.Column(db.Integer, primary_key=True, db.foreignKey("customizedView.id"), nullable=False)
+    diagnosis = db.Column(db.String, nullable=False)
+
+    def __repr__(self):
+        return "<CustomizedViewDiagnosis {}: {}>".format(self.customizedViewID, self.diagnosis)
+
+    def serialize(self):
+        return dict(customizedViewID=self.customizedViewID, diagnosis=self.diagnosis)
