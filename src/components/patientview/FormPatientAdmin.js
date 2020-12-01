@@ -23,7 +23,7 @@ const FormPatientAdmin = () => {
                     marginLeft: '20px',
                     marginRight: '20px',
                     marginTop: '0.5rem',
-                }}> Dagar efter tagning</label>
+                }}> Dagar efter missad tagning</label>
             </p>
             <p style={{ display: "table-row" }}>
                 <label style={{ display: "table-cell" }}> Låg varning </label>
