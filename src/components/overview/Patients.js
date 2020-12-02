@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect, useContext} from 'react';
+import React, { useState, useMemo, useEffect, useContext } from 'react';
 
 import { PatientsSearch, PatientsTable } from "..";
 import {
@@ -17,7 +17,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 import { useHistory } from "react-router-dom";
 import JourTable from "./JourTable";
-import {settingsContext} from "./ColumnFilter"
+import { settingsContext } from "./ColumnFilter"
 
 
 
@@ -81,68 +81,8 @@ const PatientLink = ({ id, name }) => {
   const href = "/patient/overview/" + id;
   const history = useHistory();
 
-  // Keeps track of whether or not the popup for navigating to specific patient view has been toggled.
-  const [openPatientViewConfirm, setOpenPatientViewConfirm] = useState(false);
-
-  // Handles opening of modal window
-  const handleOpenConfirmation = () => {
-    setOpenPatientViewConfirm(true);
-  };
-
-  // Handles closing of modal window
-  const handleCloseConfirmation = () => {
-    setOpenPatientViewConfirm(false); // Close modal
-  };
-
   const navigateToPatientView = () => {
     history.push(href);
-    setOpenPatientViewConfirm(false); // Close modal
-  };
-
-  const ConfirmAccessingPatient = () => {
-    return (
-      <Modal
-        open={openPatientViewConfirm}
-        onClose={handleCloseConfirmation}
-        aria-labelledby="modal-popup"
-      >
-        <div key="modal-popup-div" style={modalStyle} className={classes.paper}>
-          <h2 className="font-bold mt-2" id="modal-popup">
-            Vill du se data för {name}?
-          </h2>
-          <div className="flex" style={{ width: "100%" }}>
-            <Button
-              className="flex shadow"
-              style={{
-                border: "2px solid #0066B3",
-                borderRadius: "0px",
-                width: "110px",
-                marginLeft: "auto",
-                marginRight: "auto",
-                marginTop: "1.5rem",
-              }}
-              onClick={handleCloseConfirmation}
-            >
-              Tillbaka
-            </Button>
-            <Button
-              className="flex shadow"
-              style={{
-                border: "2px solid #0066B3",
-                borderRadius: "0px",
-                width: "110px",
-                marginLeft: "auto",
-                marginRight: "auto",
-                marginTop: "1.5rem",
-              }}
-              onClick={navigateToPatientView}
-            >
-              Bekräfta
-            </Button>
-          </div>
-        </div>
-      </Modal>
-    );
   };
 
   return (
@@ -150,11 +90,10 @@ const PatientLink = ({ id, name }) => {
       <Link
         component="button"
         style={{ color: "#000" }}
-        onClick={handleOpenConfirmation}
+        onClick={navigateToPatientView}
       >
         {name}
       </Link>
-      <ConfirmAccessingPatient />
     </>
   );
 };
@@ -759,28 +698,28 @@ const Patients = () => {
     hiddenColumns: ["age", "name", "gender", "team", "department"],
     // filters: [{ id: 'col1', value: 'Green'}]
   };
-  const {settings} = useContext(settingsContext);
+  const { settings } = useContext(settingsContext);
   // Creates an instance of table, given columns, data and an initial state.
   const {
-      getTableProps,
-      getTableBodyProps,
-      headerGroups,
-      rows,
-      prepareRow,
-      toggleSortBy,
-      setGlobalFilter,
-      setFilter,
-      setAllFilters,
-      setHiddenColumns
-  } = useTable({ columns, data, initialState, filterTypes},
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+    toggleSortBy,
+    setGlobalFilter,
+    setFilter,
+    setAllFilters,
+    setHiddenColumns
+  } = useTable({ columns, data, initialState, filterTypes },
     useFilters, // useFilters!
     useGlobalFilter,
     useSortBy,
     useFlexLayout
   );
-  
+
   useMemo(() => {
-    setHiddenColumns(prev => {return (['age', 'name', 'gender', 'team', 'department'].concat(settings))})
+    setHiddenColumns(prev => { return (['age', 'name', 'gender', 'team', 'department'].concat(settings)) })
   }, [setHiddenColumns, settings])
 
   const { getAccessTokenSilently } = useAuth0();
@@ -850,9 +789,9 @@ const Patients = () => {
         </Grid>
       </Grid>
       <Grid container>
-          <Grid item xs = {4} style={{paddingLeft: "45px", marginTop: "8px"}}>
-            <JourTable />
-          </Grid> 
+        <Grid item xs={4} style={{ paddingLeft: "45px", marginTop: "8px" }}>
+          <JourTable />
+        </Grid>
       </Grid>
     </Grid>
   );
