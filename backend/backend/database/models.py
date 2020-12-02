@@ -124,11 +124,11 @@ class CustomizedView(db.Model):
     maxAge = db.Column(db.Integer, nullable=True)
     gender = db.Column(db.String, nullable=True)
     departmentNumber = db.Column(db.Integer, db.ForeignKey("departments.id"), nullable=True)
-    teamNumber = db.Column(db.Integer, db.ForeignKey("teams.id"), nullable=True)
+    teamNumber = db.Column(db.Integer, db.ForeignKey("teams.id"), nullable=False)
     highPriority = db.Column(db.Boolean, nullable=False)
     medPriority = db.Column(db.Boolean, nullable=False)
     lowPriority = db.Column(db.Boolean, nullable=False)
-    accessFor = db.Column(db.String, db.ForeignKey("emlpoyees.id"), nullable=False)
+    diagnoses = db.Column(db.String, nullable = True)
 
 
     def __repr__(self):
@@ -142,8 +142,7 @@ class CustomizedView(db.Model):
             self.teamNumber,
             self.highPriority,
             self.medPriority,
-            self.lowPriority,
-            self.accessFor,
+            self.lowPriority
         )
 
     def serialize(self):
@@ -158,20 +157,8 @@ class CustomizedView(db.Model):
             highPriority = self.highPriority,
             medPriority = self.medPriority,
             lowPriority = self.lowPriority,
-            accesFor = self.accessFor,
+            diagnoses = self.diagnoses
         )
-
-# CustimzedViewDiagnosis is the join table that stores what diagnoses are saved in the custmized view
-class CustomizedViewDiagnosis(db.Model):
-    __tablename__ = "customizedViewDiagnosis"
-    customizedViewID = db.Column(db.Integer, db.ForeignKey("customizedView.id"), primary_key=True)
-    diagnosis = db.Column(db.String, primary_key=True)
-
-    def __repr__(self):
-        return "<CustomizedViewDiagnosis {}: {}>".format(self.customizedViewID, self.diagnosis)
-
-    def serialize(self):
-        return dict(customizedViewID=self.customizedViewID, diagnosis=self.diagnosis)
 
 # Priority rule keeps track of the different intervalls that determine the level of priority for a certain hospital
 class PriorityRule (db.Model):
