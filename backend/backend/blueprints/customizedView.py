@@ -1,4 +1,5 @@
 from flask import Blueprint, request, jsonify, Response
+from backend import db
 
 # You can import the database from a blueprint
 from backend.database.models import CustomizedView, Employee
@@ -15,7 +16,7 @@ def customizedViews():
         return _build_cors_preflight_response()
     elif request.method == "POST":
         
-        
+        #We need some way to find out who the user is. Implemented with email.
         email = request.get_json().get('email')
         if email is None:
             return _corsify_actual_response(jsonify("Error", "Missing email")), 400
