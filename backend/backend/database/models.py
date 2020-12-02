@@ -55,7 +55,7 @@ class Employee(db.Model):
     isAdmin = db.Column(db.Boolean, nullable=False)
     email = db.Column(db.String, nullable=True)
     phoneNumber = db.Column(db.String, nullable=True)
-    team = db.Column(db.String, db.ForeignKey("teams.id"), nullable=True)
+    team = db.Column(db.String, db.ForeignKey("teams.id"), nullable=False)
 
     def __repr__(self):
         return "<Employee {}: {} {} {} {} {}>".format(
