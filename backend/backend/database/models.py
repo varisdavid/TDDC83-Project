@@ -125,9 +125,9 @@ class CustomizedView(db.Model):
     gender = db.Column(db.String, nullable=True)
     departmentNumber = db.Column(db.Integer, db.ForeignKey("departments.id"), nullable=True)
     teamNumber = db.Column(db.Integer, db.ForeignKey("teams.id"), nullable=False)
-    highPriority = db.Column(db.Boolean, nullable=False)
-    medPriority = db.Column(db.Boolean, nullable=False)
-    lowPriority = db.Column(db.Boolean, nullable=False)
+    highPriority = db.Column(db.Boolean, nullable = True)
+    medPriority = db.Column(db.Boolean, nullable = True)
+    lowPriority = db.Column(db.Boolean, nullable = True)
     diagnoses = db.Column(db.String, nullable = True)
 
 
