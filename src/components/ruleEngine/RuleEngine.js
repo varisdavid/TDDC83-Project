@@ -1,3 +1,4 @@
+/*
 import {useMemo} from "react";
 
 const RuleEngine = () => {
@@ -152,8 +153,8 @@ const RuleEngine = () => {
 
         // Extracts the key data from the call and sends it forward to setPriority
         // Receives a prioirty from setPriority and adds it to the data.
-        function addPriority(data) {
 
+        function addPriority(data) {
 
 
             let measurements = [];
@@ -168,6 +169,7 @@ const RuleEngine = () => {
             }
 
         }
+
 
 
         // Takes in the measurements and accesses them and returns a priorityScore for the patient
@@ -291,3 +293,4 @@ export function test() {
 
 
 export default RuleEngine;
+*/
