@@ -164,8 +164,8 @@ class CustomizedView(db.Model):
 # CustimzedViewDiagnosis is the join table that stores what diagnoses are saved in the custmized view
 class CustomizedViewDiagnosis(db.Model):
     __tablename__ = "customizedViewDiagnosis"
-    customizedViewID = db.Column(db.Integer, db.ForeignKey("customizedView.id"))
-    diagnosis = db.Column(db.String, nullable=False)
+    customizedViewID = db.Column(db.Integer, db.ForeignKey("customizedView.id"), primary_key=True)
+    diagnosis = db.Column(db.String, primary_key=True)
 
     def __repr__(self):
         return "<CustomizedViewDiagnosis {}: {}>".format(self.customizedViewID, self.diagnosis)
@@ -177,7 +177,7 @@ class CustomizedViewDiagnosis(db.Model):
 class PriorityRule (db.Model):
     __tablename__ = "priorityRules"
     id = db.Column(db.Integer, primary_key=True)
-
+    appliesFor = db.Column(db.Integer, db.ForeignKey("hospital.id"), nullable=False)
     lowBadBloodsugar = db.Column(db.Integer, nullable=False)
     lowGoodBloodsugar = db.Column(db.Integer, nullable=False)
     highGoodBloodsugar = db.Column(db.Integer, nullable=False)
@@ -201,11 +201,10 @@ class PriorityRule (db.Model):
     lowBadExercise = db.Column(db.Integer, nullable=False)
     lowgoodExercise = db.Column(db.Integer, nullable=False)
 
-    appliesFor = db.Column(db.integer, db.ForeignKey("hospital.id"), nullable=False)
-
     def __repr__(self):
         return "<priorityRules {}: {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {}>".format(
             self.id,
+            self.appliesFor,
             self.lowBadBloodsugar,
             self.lowGoodBloodsugar,
             self.highGoodBloodsugar,
@@ -228,11 +227,11 @@ class PriorityRule (db.Model):
             self.highBadWeight,
             self.lowBadExercise,
             self.lowGoodExercise,
-            self.appliesFor,
         )
     def serialize(self):
         return dict(
             id = self.id,
+            appliesFor = self.appliesFor,
             lowBadBloodsugar = self.lowBadBloodsugar,
             lowGoodBloodsugar = self.lowGoodBloodsugar,
             highGoodBloodsugar = self.highGoodBloodsugar,
@@ -255,5 +254,4 @@ class PriorityRule (db.Model):
             highBadWeight = self.highBadWeight,
             lowBadExercise = self.lowBadExercise,
             lowGoodExercise = self.lowGoodExercise,
-            appliesFor = self.appliesFor,
         )

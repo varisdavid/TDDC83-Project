@@ -3,14 +3,19 @@ from flask.cli import AppGroup
 
 from datetime import datetime
 from backend import db
-from database.models import *  # Imports all info from the models.py file.
+#from database.models import *  # Imports all info from the models.py file.
 
 cli = AppGroup("cli")
 
 
 @cli.command("seedDB")
 def seedDB():
+ #creates the default priority rules for the different hospitals
+    priorityRule1 = PriorityRule(1, 50, 75, 100, 125, 50, 75, 100, 125, 50, 75, 100, 125, 50, 75, 100, 125, 50, 75, 100, 125, 1, 2)
+    priorityRule2 = PriorityRule(2, 50, 75, 100, 125, 50, 75, 100, 125, 50, 75, 100, 125, 50, 75, 100, 125, 50, 75, 100, 125, 1, 2)
+    priorityRule3 = PriorityRule(3, 50, 75, 100, 125, 50, 75, 100, 125, 50, 75, 100, 125, 50, 75, 100, 125, 50, 75, 100, 125, 1, 2)
 
+    db.session.add([priorityRule1, priorityRule2, priorityRule3])
     db.session.commit()
 
     print("done")

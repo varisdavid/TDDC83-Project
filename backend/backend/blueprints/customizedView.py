@@ -9,8 +9,8 @@ from backend.auth import _build_cors_preflight_response, _corsify_actual_respons
 customizedView_bp = Blueprint("customizedView", __name__, url_prefix="/CustomizedView")
 
 # Route for fetching all available/selectable customized views for a certain user
-@customizedView_bp.route("/<integer: userID", methods=["GET", "OPTIONS"])
-def customizedView(userID):
+@customizedView_bp.route("/<string:userID>", methods=["GET", "OPTIONS"])
+def customizedViews(userID):
     if request.method == "OPTIONS":  # CORS preflight
         return _build_cors_preflight_response()
     elif request.method == "GET":
@@ -19,7 +19,7 @@ def customizedView(userID):
         for i in range(len(viewList)):
             viewList[i] = CustomizedView.serialize(viewList[i])
             serializedViewList.append(viewList[i])
-        return _corsify_actual_response(jsonify(serializedViewList)))
+        return _corsify_actual_response(jsonify(serializedViewList))
 
 # Route for fetching specific customized view
 @customizedView_bp.route("/<string:customizedViewID>", methods=["GET", "OPTIONS"])
