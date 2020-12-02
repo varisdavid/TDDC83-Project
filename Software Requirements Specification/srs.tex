@@ -8,6 +8,7 @@
 \usepackage{hyperref}
 \usepackage{tabularx}
 \usepackage{imakeidx}
+\usepackage[colorinlistoftodos]{todonotes}
 \makeindex[intoc]
 \usepackage{graphicx}
 \graphicspath{ {./Pictures/} }
@@ -25,7 +26,7 @@
     urlcolor=purple,        % color of external links
     linktoc=page            % only page is linked
 }%
-\def\myversion{2.0}
+\def\myversion{2.1}
 \title{Software Requirements Specification}
 \author{Sara Lindholm \\ Patrick Asman \\ Jacob Rhan}
 
@@ -70,23 +71,25 @@
  \hline
  2020-11-17 & 1.2 & Added category descriptions & Jacob Rhan & \\
  \hline
- 2020-11-17 & 1.3 & Revised and updated functional requirements with titles and preconditions, as well as updated table format for non-functional requirements. & Sara Lindholm & \\
+ 2020-11-17 & 1.3 & Revised and updated functional requirements with titles and preconditions. Updated table format for non-functional requirements. & Sara Lindholm & \\
  \hline 
- 2020-11-24 & 2.0 & Box and line diagram from Architecture Notebook v. 0.5.2 added in section 2.1. Constraints, assumptions and dependencies added in section 2.4-2.5. Added interface requirements. Updated functional and non-functional requirements according to excel-file with requirements v.1.8. & Sara Lindholm & \\
+ 2020-11-24 & 2.0 & Box and line diagram from the Architecture Notebook v. 0.5.2 included in section 2.1. Constraints, assumptions and dependencies in section 2.4-2.5 and interface requirements added. Updated functional and non-functional requirements according to the Excel-spreadsheet with requirements v.1.8. & Patrick Asman & \\
  \hline
+ 2020-12-01 & 2.1 & New section 2.1.1 created, use case diagram added in section 2.2 & Patrick Asman & \\
+ \hline 
 \end{tabular}
 \end{center}
 
 \tableofcontents
 
 \chapter{Introduction}
-This section gives an overview of everything included in this document. The purpose and scope for this document is described and a list of abbreviations, acronyms and definitions is provided. 
+This chapter presents the purpose, scope, definitions, references and an overview of the software requirements specification (SRS). 
 
 \section{Purpose}
-The purpose of this document is to give a detailed description of HeartByte's product. It will illustrate the purpose and features of the system. It will also explain system constraints, interfaces of the system and interactions with external applications. This document is intended primarily to be proposed to the stakeholders for approval and as a reference for the developers.
+The purpose of the SRS is to document and present a detailed and structured description of HeartByte's application, a patient management system, developed as requested by Region Östergötland (RÖ). The SRS will describe the purpose and features of the system, the system constraints, interfaces of the system as well as interactions with external applications. The SRS is intended to be used by HeartByte’s stakeholders in their approval process. Furthermore, the purpose of the SRS is to be a reference and/or structural framework for HeartByte designers, developers, testers and managers ensuring a uniform view of the product to be developed. Moreover, the SRS ensures the traceability of requirements.
 
 \section{Scope}
-HeartByte's product is a web-based application to aid Region Östergötland's health care staff in overseeing and handling many patients. The system aims to make it easier for the health care staff to oversee many patients' measured health data and prioritize which patients are in most need of care. The system aim to  have customizable overviews, customizable alert-levels and sorting and filtering functions to make prioritization easier. The system will in addition to a better overview of all patients be able to give more detailed overview about the individual patients' health information, such as current medications, health conditions and the measured data. 
+HeartByte's product is a web-based application developed to aid RÖ's health care staff in overseeing and handling many patients. The aim of the system is to make it easier for the health care staff to oversee many patients' measured health data and prioritize which patients are in most need of care. The system will provide customizable overviews and prioritization-levels, interactive health data visualization, a well thought out notification system and helpful sorting and filtering functions to facilitate in prioritization of patients. In addition to a better overview of all patients, the system will provide a more detailed overview of individual patients' health situation, including for instance current medication, diagnosis and measured health data.
 
 
 \section{Definitions, acronyms and abbreviations}
@@ -96,71 +99,87 @@ HeartByte's product is a web-based application to aid Region Östergötland's he
  \hline
  \textbf{Term} & \textbf{Definition} \\ 
  \hline
+   Admin/Administrator & Health care staff who is given specific permission for managing and controlling the system as an administrator.  \\ 
+  \hline
+    Department & A subunit of Operation \\
+  \hline
+   EHR & Electronic Health Record \\ 
+   \hline
+      Operation & A healthcare center within RÖ \\ 
+  \hline
+    RÖ  & Region Östergötland  \\ 
+  \hline
+    SRS & System Requirements Specification \\
+  \hline
+    Team & A subunit of Department \\ 
+  \hline
   User  & Health care staff who interacts with the web application.  \\
   \hline
-  Admin/Administrator & Health care staff who is given specific permission for managing and controlling the system as an administrator.  \\ 
-  \hline
-  RÖ  & Region Östergötland  \\ 
-  \hline
-   Operation & A healthcare center within RÖ \\ 
-  \hline 
-  Department & A subunit of Operation \\
-  \hline
-  Team & A subunit of Department \\ 
-  \hline
   User group & Either a Operation, Department or Team. \\ 
-  \hline
-  EHR & Electronic Health Record \\ 
   \hline
 \end{tabularx}
 \end{center}
 
 \section{References}
-IEEE Recommended Practice for Software Requirements Specifications," in IEEE Std 830-1998 , vol., no., pp.1-40, 20 Oct. 1998, doi: 10.1109/IEEESTD.1998.88286.
+[1] "IEEE Recommended Practice for Software Requirements Specifications," in IEEE Std 830-1998 , vol., no., pp.1-40, 20 Oct. 1998, doi: 10.1109/IEEESTD.1998.88286.
 \newline
 \newline
-Jonas Malm, Architecture Notebook version 0.5.2.
+[2] Jonas Malm, HeartByte, Architecture Notebook version 0.5.2.
 \newline
 \newline
-Prototype team, Hi-Fi version 2.1. 
+[3] Prototype team, HeartByte, Hi-Fi version 2.1. 
+\newline
+\newline
+[4] SFS. (2008:355). Patientdatalagen. Stockholm: Socialdepartementet. Viewed 1 December 2020, http://www.riksdagen.se/sv/Dokument-Lagar/Lagar/Svenskforfattningssamling/Patientdatalag-2008355_sfs-2008-355/?bet=2008:35
 
 \section{Overview}
-The second chapter of the document, Overall Description, gives an overview of the functionality of the product.
-
-
-The third chapter, Requirements Specification, gives a more  detailed description of the system and its features. 
+The SRS is constructed according to IEEE Std 830-1998 [1] and contains 3 chapters. The first chapter describes the intended use of the SRS and provides a brief description of HeartByte’s application and the application’s value for the user. Furthermore, the first chapter also contains a list of definitions, acronyms and abbreviations to facilitate in reading the SRS. In addition, references are also provided in the first chapter. In the second chapter an overall description of the application is presented which includes the perspectives and functions of the product as well as user characteristics, constraints and assumptions and dependencies. The third and final chapter presents a detailed description of the application including interface requirements, functional and performance requirements, software system attributes and other requirements. 
 
 \chapter{Overall Description}
-This section will present an overview of the entire system. The system's basic functionality and how it interacts with other systems will be introduced. % The constraints and assumptions for the system will also be presented. 
+In this chapter an overview of the entire system is presented. The system's perspective and its basic functionality as well as how it interacts with other systems will be introduced. Furthermore, user characteristics, constraints, assumptions and dependencies will also be described.
 
 \section{Product Perspective}
+HeartByte’s system is a web-based application developed with the intention to aid RÖ’s health care staff in monitoring the health of many patients enrolled in their self-monitoring program. The system is OS independent and utilizes a scalable user interface that works seamlessly across a wide range of screen sizes. Consequently, HeartByte’s system is not limited to stationary desktop computers used in the workplace, it can also be used with mobile devices when visiting patients in their homes. The patients being self-monitored have chronic illness such as diabetes mellitus, chronic obstructive pulmonary disease, or consist of frail older adults susceptible to disease or to other infirmity. In HeartByte’s system the patients under care are clearly organized after healthcare centers within RÖ and their subunits for efficient navigation. Furthermore, the system provides the possibility to create customized views so that only the most important information is presented in a particular view for specific healthcare center or subunit within RÖ. The patients report their health data using compatible patient monitoring devices and then the data is presented in HeartByte’s system for the health care staff to assess. The health data is presented in an unambiguous way and in addition effectively visualized in interactive graphs to further aid the health care staff in their evaluation of patients. HeartByte’s system allows for easy and practical filtering and sorting of patients as well as effective search capabilities which makes it uncomplicated to navigated between patients and patient categories. Prioritization levels can be set to alert health care staff to take appropriate actions when a patient exceed the boundaries for a health parameter. Patient alerts and notification have been thoughtfully implemented in HeartByte’s system to minimize potential alert fatigue faced by the health care staff when monitoring many patients. In order to ensure patient safety and to follow the Swedish Patient Data Act [4], HeartByte’s system logs user activity and patient accesses.  
+
+\subsection{System interfaces}
+The architecture of HeartByte’s system is illustrated in Figure \ref{fig: boxAndLineDiag} and is further described in the Architecture Notebook [2]. The system consists of the following four layers: graphical user interface (GUI), Front-end logic, HeartByte Server and EhrScape Server. The flow of the data is indicated by the direction of the arrows. 
+
+\subsubsection{GUI Layer}
+The GUI is made up of four modules and handles what will be displayed and what the user will interact with in the web application. From the Interface the user can access the Patient Overview which presents an overview of patients. Through the Patient Selector, specific patients can be selected to be viewed in the Patient View. Furthermore, the Interface module allows a user to log in, and for an admin to customize the rules applied in the Rule Engine through the Rule Customizer as well as to customize views via the View Customizer.
+
+\subsubsection{Front End Logic Layer}
+The Front-end Logic contains the “middleware” which interacts with the HeartByte Server and the GUI to deliver data to the GUI. The Client Data Retriever module handles requests from Patient Overview regarding group of patients and the Patient View processes requests for specific patients. The Rule Engine classifies how critical the patient’s health status is. The Filtration module handles filtration of data. Authentication requests are processed by the Authentication module, and customization calls are handled by the customizer modules. The GUI and Front-end Logic layer together constitutes the client part of HeartByte’s system.
+
+\subsubsection{HeartByte Server Layer}
+The HeartByte Server includes the databases specific to the system and the functionality to retrieve EHRs. Loading and storing data from/to the Personnel Database (containing personnel data) and Customization Database (containing views for a specific health care center or subunit within RÖ) is made possible by the System Database Management. Upon requests the EHR Retriever module loads data from EHRs by calling the EHrScape Server. When the EHR Retriever is called it will also check the credentials of the user behind the request. The Access Log database stores patient accesses by users.
+
+\subsubsection{EhrScape Server Layer}
+The EhrScape Server layer is a database stored on an external server and accessed using the EhrScape API. Archetype Query Language and its Representational State Transfer API is used to query the API.
+
 \begin{figure}[htp]
     \centering
     \includegraphics[width=15cm]{architecture.png}
     \caption{Box and line diagram illustrating layers of the system and its submodules}
     \label{fig: boxAndLineDiag}
 \end{figure}
-The web-based application aims to aid Region Östergötland's health care staff in overseeing and handling many patients. The system interfaces can be seen in Figure \ref{fig: boxAndLineDiag} and is described further in the Architecture Notebook version 0.5.2. The system components can be described in four layers: GUI, Front end logic, HeartByte Server and EhrScape Server.
-
-The GUI consists of four main modules. The Interface is what the user will interact with and what
-will display the web app. From the Interface the user can access the Patient Overview, the Patient Selector and the Patient View. The Interface also allows a user to log in and for admins, to customize the rules applied in the Rule Engine and views of the patients.
-
-The Front End Logic contains the ”middleware” interacting with the HeartByte Server and the GUI
-to deliver data to the GUI. The most central module is the Client Data Retriever, which handles calls from Patient Overview and Patient View. 
-
-The HeartByte Server contains the databases specific to the system and the functionality to retrieve
-EHRs. The EHR Retriever is the module responsible for loading data from EHRs. 
-
-The EhrScape Server layer is a database stored on an external server, which is accessed using the EhrScape API. 
-
-
 
 \section{Product functions} 
-This web application aims to aid health care staff in handling many patients and their health data. The system aims to have an overview in which the user will be able to see all patients in their department. These patients can then be sorted and filtered by different criteria, which will aid the user in prioritizing which patients are in most need of care. It will also be possible to customize views with specific patients based on different criteria, such as diagnosis and teams.
+HeartByte’s web application provides an overview of patients self-monitoring their health in which the user of the application will be able to clearly see and efficiently manage all patients in their healthcare center or subunit within RÖ. Patients can be sorted and filtered by different criteria, which will aid the user in the navigation between patients. Health prioritization levels set by a specific healthcare center or subunit will effectively present the patients in most need of care for the health care staff, as well as alert the staff when appropriate actions need to be taken. Admins can set at which values the system will trigger a change in the patient’s priority level. Views in the application can be customized based on for instance diagnosis and team. When a specific patient is accessed the user is presented with detailed information about the patient in question. Detailed information includes measured health data, current medication, contact information, medical information, activity history, scheduled appointments and so on. Furthermore, for each patient the measured health data is presented with interactive graphs of the measured health data to aid the health care staff in their assessment and understanding of a patient’s health situation. 
+\newline
+\newline
+Some significant functions included in HeartByte’s system are illustrated in Figure \ref{fig: useCaseDiag}. The use case diagram is not a complete representation of all functions provided by HeartByte’s system but it rather represents a general overview of significant functions. The use case diagram is further described in the Architecture Notebook [2].
 
-The user will also be able to show more detailed information about the individual patients should they choose to click on a patient. In the individual patient view the user will get access to more information than what was available in the overview of all patients. The individual patient may have measured health data, medical information and history, and scheduled appointments which will be displayed in different tabs on the web application. 
+Listed below as user stories are the significant functions of HeartByte’s web application:
 
-In the individual patient view the admin of the system will also be able to set at which values the system shall trigger a change in the patient's priority level. 
+\todo{add user stories}
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=15cm]{useCase.png}
+    \caption{Use case diagram of significant functions}
+    \label{fig: useCaseDiag}
+\end{figure}
+
 
 
 \section{User Characteristics}
