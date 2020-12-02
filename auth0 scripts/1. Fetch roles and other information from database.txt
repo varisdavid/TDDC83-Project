@@ -1,0 +1,27 @@
+function addRolesFromSqlServer(user, context, callback) {
+  const axios = require('axios@0.19.2');
+  const assignedRolesInDashboard = (context.authorization || {}).roles;
+  const assignedRolesInDatabase = [];
+  
+  const options = { method: 'POST',
+    url: `http://4a3aafa78c4e.eu.ngrok.io/auth0_access_employee`,
+    headers: { 'content-type': 'application/json' },
+                  data: `{"email":"${user.email}"}`
+    };
+  axios(options)
+    .then( res => {
+      if(res.data.success === true) {
+        context.idToken['https://company3.com/personal_number'] = res.data.user.personal_number;
+        context.idToken['https://company3.com/team_name'] = res.data.user.team_name;
+        context.idToken['https://company3.com/department_name'] = res.data.user.department_name;
+        if(res.data.user.role !== null)
+          assignedRolesInDatabase.push(res.data.user.role);
+        context.idToken['https://company3.com/assignedRolesInDashboard'] = assignedRolesInDashboard;
+        context.idToken['https://company3.com/assignedRolesInDatabase'] = assignedRolesInDatabase;
+      }
+      return callback(null, user, context);
+    })
+    .catch( err => {
+      return callback(null, user, context);
+    });  
+}

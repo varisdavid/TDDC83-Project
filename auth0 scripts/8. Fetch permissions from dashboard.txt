@@ -11,7 +11,6 @@ function (user, context, callback) {
     if (err) {
       // Handle error.
       console.log('err: ', err);
-      callback(err);
     } else {
       console.log("fetching permissions successful");
       var permissionsArr = map(permissions.permissions, function (permission) {
@@ -19,6 +18,8 @@ function (user, context, callback) {
       });
       console.log(permissionsArr);
       context.idToken['https://company3.com/permissions'] = permissionsArr;
+      //const assignedRolesInDashboard = (context.authorization || {}).roles;
+  		//context.idToken['https://company3.com/roles'] = assignedRolesInDashboard;
     }
     callback(null, user, context);
   });

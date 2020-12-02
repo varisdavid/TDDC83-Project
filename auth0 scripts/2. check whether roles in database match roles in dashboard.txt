@@ -1,0 +1,33 @@
+function (user, context, callback) {
+  // TODO: implement your rule
+  var assignedRolesInDashboard = context.idToken['https://company3.com/assignedRolesInDashboard'];
+  var assignedRolesInDatabase = context.idToken['https://company3.com/assignedRolesInDatabase'];
+  
+  if(assignedRolesInDashboard !== null && assignedRolesInDatabase !== null && Array.isArray(assignedRolesInDashboard) && Array.isArray(assignedRolesInDatabase)) {
+  for (var i = 0; i < assignedRolesInDatabase.length; i++) { 
+    var database_role = assignedRolesInDatabase[i];
+    var j = 0;
+    var matches = false;
+    for (; j < assignedRolesInDashboard.length; j++) {
+      var dashboard_role = assignedRolesInDashboard[j];
+      if(database_role.toLowerCase() ===  dashboard_role.toLowerCase()) {
+        matches = true;
+        break;
+      }
+    }
+    if(matches) {
+      assignedRolesInDatabase.splice(i, 1);
+      assignedRolesInDashboard.splice(j, 1);
+      i--;
+    }
+  }
+  
+  var roles_to_assign = assignedRolesInDatabase;
+  var roles_to_delete = assignedRolesInDashboard;
+
+  context.idToken['https://company3.com/roles_to_assign'] = roles_to_assign;
+  context.idToken['https://company3.com/roles_to_delete'] = roles_to_delete;
+  }  
+  
+  return callback(null, user, context);
+}

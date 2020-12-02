@@ -12,6 +12,7 @@ def create_app(test_config=None):
     db.init_app(app)
 
     from .blueprints.access_log import access_log_bp
+    from .blueprints.auth0_access_employee import auth0_access_employee_bp
     from .blueprints.department import department_bp
     from .blueprints.diagnosis import diagnosis_bp
     from .blueprints.employee import employee_bp
@@ -23,6 +24,7 @@ def create_app(test_config=None):
     from .blueprints.team import team_bp
 
     app.register_blueprint(access_log_bp)
+    app.register_blueprint(auth0_access_employee_bp)
     app.register_blueprint(department_bp)
     app.register_blueprint(employee_bp)
     app.register_blueprint(hospital_bp)
@@ -37,4 +39,3 @@ def create_app(test_config=None):
     app.cli.add_command(cli)
 
     return app
-

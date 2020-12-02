@@ -1,0 +1,28 @@
+function (user, context, callback) {
+  // TODO: implement your rule
+  var roles_to_delete = context.idToken['https://company3.com/roles_to_delete'];
+  console.log('logging again roles to delete');
+  console.log(roles_to_delete);
+  
+  if(roles_to_delete !== null && Array.isArray(roles_to_delete) && roles_to_delete.length > 0) {
+    var ManagementClient = require('auth0@2.17.0').ManagementClient;
+    var management = new ManagementClient({
+      token: auth0.accessToken,
+      domain: auth0.domain
+    });
+
+    management.removeRolesFromUser(
+      { id : user.user_id}, 
+      { "roles" :roles_to_delete},  // sample role ID of "Standard API Enduser"
+      function (err) {
+        if (err) {
+          console.log('Error deleting role: ' + err);
+        }
+        delete context.idToken['https://company3.com/roles_to_delete'];
+        callback(null, user, context);
+    });
+  } else {
+    delete context.idToken['https://company3.com/roles_to_delete'];
+    callback(null, user, context);
+  }
+}

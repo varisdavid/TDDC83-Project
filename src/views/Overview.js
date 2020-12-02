@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Box } from '@material-ui/core';
+import { useAuth0 } from '@auth0/auth0-react';
 
 import { OverviewHeaderBanner, OverviewHeaderNavigation, Patients, OverviewCalendar } from '../components'
 import Notices from '../components/overview/Notices';
@@ -47,6 +48,7 @@ const TabPanel = (props) => {
 
 const Overview = () => {
 
+  const { user } = useAuth0();
   // Hook to retrieve the currently used url path
   const location = useLocation();
 
@@ -57,7 +59,11 @@ const Overview = () => {
   const [activeTabValue, setActiveTabValue] = useState(getActiveTab(location));
 
   // Will be fetched by user information later on.
-  const healthCenter = 'Ryds vårdcentral';
+  const user_roles = user['https://company3.com/roles']
+
+  var healthCenter = 'User doesnt belong to any health center';
+  if(user_roles != null && Array.isArray(user_roles) && user_roles.length > 0)
+    healthCenter = user_roles[0];
 
   // Upon rendering the component, this hook calls a function which
   // determines which tab is active, depending on this we load a different tab.

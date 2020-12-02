@@ -1,0 +1,9 @@
+function (user, context, callback) {
+  // TODO: implement your rule
+  delete context.idToken['https://company3.com/assignedRolesInDashboard'];
+  delete context.idToken['https://company3.com/assignedRolesInDatabase'];
+ 	delete context.idToken['https://company3.com/roles_to_assign'];
+  delete context.idToken['https://company3.com/roles_to_delete'];
+	delete context.idToken['https://company3.com/management_access_token'];
+  return callback(null, user, context);
+}

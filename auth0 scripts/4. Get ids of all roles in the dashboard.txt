@@ -1,0 +1,75 @@
+function (user, context, callback) {
+  
+  function getRoleIds(roles, arr) {
+    var roleIds = [];
+    for(var i=0; i < arr.length; i++) {
+      for(var j=0; j < roles.length; j++) {
+        var role = roles[j];
+        if(role.name.toLowerCase() === arr[i].toLowerCase()) {
+          roleIds.push(role.id);
+          break;
+        }
+      }
+    }
+    return roleIds;
+  }
+  
+  // TODO: implement your rule
+  var roles_to_assign = context.idToken['https://company3.com/roles_to_assign'];
+  var roles_to_delete = context.idToken['https://company3.com/roles_to_delete'];
+  var access_token = context.idToken['https://company3.com/management_access_token'];
+  //var calledAlready = false;
+  
+  if(((roles_to_assign !== null && Array.isArray(roles_to_assign) && roles_to_assign.length > 0) || (roles_to_delete !== null && Array.isArray(roles_to_delete) && roles_to_delete.length > 0)) && access_token !== null) {
+  
+  var ManagementClient = require('auth0@2.17.0').ManagementClient;
+  var management = new ManagementClient({
+    token: access_token,
+    domain: auth0.domain
+  });
+  var params = {
+    per_page: 100,
+    page: 0
+  };
+  
+  
+
+  management.getRoles(params, function (err, roles) {
+    /*if(calledAlready) {
+      return;
+    }*/
+    //calledAlready = true;
+    console.log("getting the roles");
+    //context.idToken['https://company3.com/roles_to_assign'];
+    //context.idToken['https://company3.com/roles_to_delete'];
+    
+    if(err) {
+      console.log(err);
+    } else {
+      console.log(roles);
+      if(Array.isArray(roles)) {
+        if(roles_to_assign !== null && Array.isArray(roles_to_assign)) {
+          console.log("getting role ids for roles to assign");
+          roles_to_assign = getRoleIds(roles, roles_to_assign);
+          console.log(roles_to_assign);
+        }
+        context.idToken['https://company3.com/roles_to_assign'] = roles_to_assign;
+
+        if(roles_to_delete !== null && Array.isArray(roles_to_delete)) {
+          console.log("getting role ids for roles to delete");
+          roles_to_delete = getRoleIds(roles, roles_to_delete);
+        }
+        context.idToken['https://company3.com/roles_to_delete'] = roles_to_delete;
+
+        console.log("logging ids roles to assign");
+        console.log(roles_to_assign);
+        console.log("logging ids roles to delete");
+        console.log(roles_to_delete);
+      }
+    }
+    callback(null, user, context);
+  });
+  } else {
+    callback(null, user, context);
+  }
+}

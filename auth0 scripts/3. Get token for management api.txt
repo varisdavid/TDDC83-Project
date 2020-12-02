@@ -1,0 +1,22 @@
+function (user, context, callback) {
+  
+  var request = require("request");
+  var options = { method: 'POST',
+    url: 'https://dev-mlj1m1lm.eu.auth0.com/oauth/token',
+    headers: { 'content-type': 'application/json' },
+    body: '{"client_id":"juWy5YZviY0q3W6tDhG7P8Re7jUMxIuz","client_secret":"7Up8rhoANtrK88WhU0zJlMcntcY5DStKgDjXjNeun8L4s0hDnvDpTtAeIpcU_xMa","audience":"https://dev-mlj1m1lm.eu.auth0.com/api/v2/","grant_type":"client_credentials"}' };
+
+  request(options, function (error, response, body) {
+    if (error) {
+      console.log(error); 
+    }
+
+    var body_json = JSON.parse(body);
+    if(body_json !== null) {
+      var token = body_json.access_token;
+      if(token !== null)
+        context.idToken['https://company3.com/management_access_token'] = token;
+    }
+    return callback(null, user, context);
+  });
+}

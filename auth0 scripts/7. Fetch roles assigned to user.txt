@@ -1,0 +1,24 @@
+function (user, context, callback) {
+  // TODO: implement your rule
+ 	var map = require('array-map');
+  var ManagementClient = require('auth0@2.17.0').ManagementClient;
+  var access_token = context.idToken['https://company3.com/management_access_token'];
+  var management = new ManagementClient({
+    token: access_token,
+    domain: auth0.domain
+  });
+	var params = { id: user.user_id, page: 0, per_page: 50, include_totals: true };
+
+  management.getUserRoles(params, function (err, roles) {
+    if (err) {
+      // Handle error.
+      console.log(err);
+    } else {
+      var rolesArr = map(roles.roles, function (role) {
+          return role.name;
+        });
+      context.idToken['https://company3.com/roles'] = rolesArr;
+    }
+    callback(null, user, context);
+  });
+}
