@@ -13,6 +13,22 @@ const addDays = (data) => {
   return data;
 };
 
+//Here is a comment 
+// - Expected input: none 
+// - Expected output: list of json objects with info about all patients 
+export const  FetchOverview = async () => {
+  return await axios
+    .get(`${ref}/overview/`)
+    .then(( data ) => {
+      //console.log(data);
+      return data;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+
 //This function fetches measurement data for one patient
 // - Expected input  : string ehrID, example of valid id: ("c784e009-c51b-437c-9c8d-a4a87dc18a72")
 // - Expected output : list with json objects, containing measurements

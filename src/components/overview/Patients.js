@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect, useContext} from 'react';
+import React, { useState, useMemo, useEffect, useContext } from "react";
 
 import { PatientsSearch, PatientsTable } from "..";
 import {
@@ -17,9 +17,9 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 import { useHistory } from "react-router-dom";
 import JourTable from "./JourTable";
-import {settingsContext} from "./ColumnFilter"
-
-
+import { settingsContext } from "./ColumnFilter";
+import { FetchOverview } from "../dataRetriver";
+import axios from "axios";
 
 // Component rendering bell icon (color based on value: integer) and hover information based on (text: string)
 const Notification = ({ value, text }) => {
@@ -183,8 +183,8 @@ const Patients = () => {
   // This can later be used to save our retrieved patientlist from our API.
   // const setPatientList = () => {
   // }
-
-  const data = useMemo(
+  
+const data = useMemo(
     // To get them in the proper order, using numbers to represent priority, 1 = high, 2 = medium, 3 = low with notification, 4 = low without notification
     () => [
       {
@@ -751,7 +751,7 @@ const Patients = () => {
 
   // State keeping track of wheter the sort menu has been toggled or not
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
+  
   // Used for beginning values passed to the PatientTable
   const initialState = {
     sortBy: [sortState],
@@ -759,52 +759,73 @@ const Patients = () => {
     hiddenColumns: ["age", "name", "gender", "team", "department"],
     // filters: [{ id: 'col1', value: 'Green'}]
   };
-  const {settings} = useContext(settingsContext);
+  const { settings } = useContext(settingsContext);
   // Creates an instance of table, given columns, data and an initial state.
+  const [fetchedData, setFetchedData] = useState([{}]);
   const {
-      getTableProps,
-      getTableBodyProps,
-      headerGroups,
-      rows,
-      prepareRow,
-      toggleSortBy,
-      setGlobalFilter,
-      setFilter,
-      setAllFilters,
-      setHiddenColumns
-  } = useTable({ columns, data, initialState, filterTypes},
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+    toggleSortBy,
+    setGlobalFilter,
+    setFilter,
+    setAllFilters,
+    setHiddenColumns,
+  } = useTable(
+    { columns, data, initialState, filterTypes },
     useFilters, // useFilters!
     useGlobalFilter,
     useSortBy,
     useFlexLayout
   );
-  
+
   useMemo(() => {
-    setHiddenColumns(prev => {return (['age', 'name', 'gender', 'team', 'department'].concat(settings))})
-  }, [setHiddenColumns, settings])
+    setHiddenColumns((prev) => {
+      return ["age", "name", "gender", "team", "department"].concat(settings);
+    });
+  }, [setHiddenColumns, settings]);
 
   const { getAccessTokenSilently } = useAuth0();
 
+  const [loading, setLoading] = useState(true);
+ 
+  
   // When something happens, we check to see if we change the sorting option, and we check if the search has been triggered
   useEffect(() => {
     // Basic example of how to make a authorized fetch call to our backend endpoints
-    /*const getPatientList = async () => {
-      const domain = "http://127.0.0.1:5000/api/patientlist";
 
-      try {
-        const token = await getAccessTokenSilently();
-        const response = await fetch(domain, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+    async function fetchData() {
+      const temp_list = [];
+      const request = await FetchOverview();
 
-        const responseData = await response.json();
-        console.log(responseData);
-      } catch (error) {
-        console.log(error.message);
-      }
-    };*/
+      request.data.forEach((row) => {
+        const temp_data = {};
+        temp_data.notices = 
+          <Notification
+            value={3}
+            text={
+              "Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"
+            }
+          />;
+        temp_data.priority = 3;
+        temp_data.href = <PatientLink id={row.PNR} name={row.Name} />;
+        temp_data.name = row.Name;
+        temp_data.sweID = row.PNR;
+        temp_data.diagnoses = ["Diabetes"];
+        temp_data.updatedAt = "2020-10-08";
+        temp_data.updatedBy = "Patienten";
+        temp_data.age = row.Age;
+        temp_data.gender = row.Gender;
+        temp_data.team = row.Team;
+        temp_data.department = row.Department;
+        temp_list.push(temp_data);
+      });
+      setFetchedData(temp_list);
+      console.log(temp_list); 
+    }
+    fetchData();
     toggleSortBy(sortState.columnId);
     setGlobalFilter(searchValue); // We use the stored searchValue to globally filter our table by.
   }, [
@@ -813,8 +834,7 @@ const Patients = () => {
     toggleSortBy,
     setGlobalFilter,
     getAccessTokenSilently,
-  ]);
-
+  ]); 
   return (
     <Grid container alignItems="center" justify="center">
       <Grid container spacing={3} justify="center">
@@ -850,9 +870,9 @@ const Patients = () => {
         </Grid>
       </Grid>
       <Grid container>
-          <Grid item xs = {4} style={{paddingLeft: "45px", marginTop: "8px"}}>
-            <JourTable />
-          </Grid> 
+        <Grid item xs={4} style={{ paddingLeft: "45px", marginTop: "8px" }}>
+          <JourTable />
+        </Grid>
       </Grid>
     </Grid>
   );

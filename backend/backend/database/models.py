@@ -114,7 +114,7 @@ class Team(db.Model):
 
     def serialize(self):
         return dict(id=self.id, name=self.name, departmentNumber=self.departmentNumber)
-
+"""
 # Customized view is a pre-defined filter created by a user
 class CustomizedView(db.Model):
     __tablename__ = "customizedView"
@@ -173,3 +173,4 @@ class CustomizedViewDiagnosis(db.Model):
 
     def serialize(self):
         return dict(customizedViewID=self.customizedViewID, diagnosis=self.diagnosis)
+"""

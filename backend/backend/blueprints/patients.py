@@ -10,7 +10,6 @@ patients_bp = Blueprint("patients", __name__, url_prefix="/patients")
 
 
 @patients_bp.route("/all", methods=["GET", "OPTIONS"])
-@requires_auth
 def patient_list():
     if request.method == "OPTIONS":  # CORS preflight
         return _build_cors_preflight_response()

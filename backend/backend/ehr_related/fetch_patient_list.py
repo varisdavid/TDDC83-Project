@@ -264,7 +264,7 @@ def get_overview():
         except Exception:
             measurement = get_measurements(ehrid)[:-1]
             
-        diagnosis = diagnosises[ehrid]
+        #diagnosis = diagnosises[ehrid]
         personal_details = {
             "Name": party["firstNames"] + " " + party["lastNames"],
             "EhrID": more_info["ehrId"],
@@ -279,7 +279,7 @@ def get_overview():
             "Department" : more_info["department"], 
             "Contactperson" : more_info["contactperson"],  
             "Operation" : more_info["operation"],
-            "Diagnosis" : diagnosis,
+            #"Diagnosis" : diagnosis,
             "Measurement" : measurement
         }
 
