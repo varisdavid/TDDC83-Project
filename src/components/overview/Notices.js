@@ -3,37 +3,11 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { NoticesSearch, NoticesTable } from '..'
 import { useTable, useFlexLayout, useFilters, useGlobalFilter, useSortBy } from 'react-table'
 
-import { Modal, Button, Link } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Link } from '@material-ui/core';
 
 import { useAuth0 } from "@auth0/auth0-react";
 
 import { useHistory } from 'react-router-dom';
-
-// Used to fix the placement of the triggered modal
-const getModalStyle = () => {
-
-  const top = 50;
-  const left = 50;
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
-
-// Styling of the triggered modal + the text and select fields.
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    maxWidth: '600px',
-    position: 'absolute',
-    backgroundColor: theme.palette.background.paper,
-    border: '3px solid #0066B3',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
-}));
 
 // This component links the patients name from the table to a confirmation modal and then onto its patient specific part of the website.
 const PatientLink = ({ id, name }) => {

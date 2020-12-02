@@ -9,9 +9,8 @@ import {
   useSortBy,
 } from "react-table";
 
-import { Tooltip, Modal, Button, Link, Grid } from "@material-ui/core";
+import { Tooltip, Link, Grid } from "@material-ui/core";
 import { NotificationImportant } from "@material-ui/icons";
-import { makeStyles } from "@material-ui/core/styles";
 
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -46,37 +45,8 @@ const Notification = ({ value, text }) => {
   );
 };
 
-// Used to fix the placement of the triggered modal
-const getModalStyle = () => {
-  const top = 50;
-  const left = 50;
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-};
-
-// Styling of the triggered modal + the text and select fields.
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    maxWidth: "600px",
-    position: "absolute",
-    backgroundColor: theme.palette.background.paper,
-    border: "3px solid #0066B3",
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
-}));
-
 // This component links the patients name from the table to a confirmation modal and then onto its patient specific part of the website.
 const PatientLink = ({ id, name }) => {
-  //////////////////////////////////////////////////////////////////////////////////
-  const classes = useStyles();
-  // getModalStyle is not a pure function, we roll the style only on the first render
-  const [modalStyle] = useState(getModalStyle);
-  //////////////////////////////////////////////////////////////////////////////////
 
   const href = "/patient/overview/" + id;
   const history = useHistory();
