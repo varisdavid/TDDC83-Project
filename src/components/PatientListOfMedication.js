@@ -10,7 +10,8 @@ const PatientListOfMedication = () => {
   // When something happens, we check to see if we change the sorting option, and we check if the search has been triggered
   useEffect(() => {
      // Basic example of how to make a authorized fetch call to our backend endpoints
-    const medication_list = async () => {
+   const [medicationList, setmedicationList] = useState([]);
+   const medication_list = async () => {
         const ehrid = "c784e009-c51b-437c-9c8d-a4a87dc18a72"
         const domain =  "http://127.0.0.1:5000/medication_list/";
 
@@ -30,12 +31,9 @@ const PatientListOfMedication = () => {
           console.log(error.message);
         }
       };
-      medication_list();
-      console.log(medication_list());
+      setmedicationList(medication_list());
   },[] );
-  // [getAccessTokenSilently]
-
-
+  console.log(medicationList);
 
   const data =  useMemo(
       () => [
