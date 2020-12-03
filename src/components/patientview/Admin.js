@@ -26,7 +26,7 @@ const Admin = () => {
                 }}> Spara</Button>
                 </div>
             </div>
-            <div style={{ width: "30%", marginLeft: '10%'}}>
+            <div style={{ width: "30%", marginLeft: '5%'}}>
                 <ActivityLogPatient/>
             </div>
         </div>
