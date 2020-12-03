@@ -8,7 +8,7 @@ measurements_bp = Blueprint("measurements", __name__, url_prefix="/measurements"
 
 
 @measurements_bp.route("/<string:ehrid>", methods=["GET", "OPTIONS"])
-@requires_auth
+#@requires_auth
 def measurements(ehrid):
     if request.method == "OPTIONS":  # CORS preflight
         return _build_cors_preflight_response()

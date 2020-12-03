@@ -1,15 +1,16 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { WeightChart, BloodPressure, PhysicalActivityChart } from "..";
 
 
 const Measurements = ({ setActiveTabValueM }) => {
 
     // When something happens, we check to see if we change the sorting option, and we check if the search has been triggered
+    const [measurement, setmeasurements] = useState([]);
     useEffect(() => {
         // Basic example of how to make a authorized fetch call to our backend endpoints
         const measurements = async () => {
-            const ehrid = "c784e009-c51b-437c-9c8d-a4a87dc18a72"
-            const domain =  "http://127.0.0.1:5000/measurements";
+            const ehrid = "9c80a7e4-d314-4dba-997b-2f4ae742bea2"
+            const domain =  "http://127.0.0.1:5000/measurements/";
 
             try {
                 // const token = await getAccessTokenSilently();
@@ -20,14 +21,17 @@ const Measurements = ({ setActiveTabValueM }) => {
                 );
 
                 const responseData = await response.json();
+                console.log(" HÄR KOMMER DATAN?")
                 console.log(responseData);
+                console.log("End of data")
+                setmeasurements(responseData);
             } catch (error) {
                 console.log(error.message);
             }
         };
         measurements();
     },[] );
-
+    console.log(measurement);
 
     return (
         <>
@@ -55,7 +59,7 @@ const Measurements = ({ setActiveTabValueM }) => {
                         e.preventDefault();
                         setActiveTabValueM(3);
                     }}>
-                        <PhysicalActivityChart />
+                        <PhysicalActivityChart data = {measurement} />
                     </div>
                 </div>
             </div>
