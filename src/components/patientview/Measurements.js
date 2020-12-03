@@ -1,11 +1,32 @@
-import React from 'react';
-import { RuleEngine, WeightChart, BloodPressure, PhysicalActivityChart } from "..";
+import React, {useEffect} from 'react';
+import { WeightChart, BloodPressure, PhysicalActivityChart } from "..";
 
 
 const Measurements = ({ setActiveTabValueM }) => {
 
-    // used to test ruleEngine
-     console.log(RuleEngine());
+    // When something happens, we check to see if we change the sorting option, and we check if the search has been triggered
+    useEffect(() => {
+        // Basic example of how to make a authorized fetch call to our backend endpoints
+        const measurements = async () => {
+            const ehrid = "c784e009-c51b-437c-9c8d-a4a87dc18a72"
+            const domain =  "http://127.0.0.1:5000/measurements";
+
+            try {
+                // const token = await getAccessTokenSilently();
+                const response = await fetch(domain+ehrid,
+                    {
+                        headers: {},
+                    }
+                );
+
+                const responseData = await response.json();
+                console.log(responseData);
+            } catch (error) {
+                console.log(error.message);
+            }
+        };
+        measurements();
+    },[] );
 
 
     return (
