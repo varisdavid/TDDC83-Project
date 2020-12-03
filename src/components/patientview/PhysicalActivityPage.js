@@ -1,17 +1,16 @@
 import React, {useState } from 'react';
 import { PhysicalActivityChart, Notification,FormForUpdateValues,TableForChartPysicalActivity, SliderMeasurements } from "..";
-const PhysicalActivityPage = ({data}) => {
+const PhysicalActivityPage = () => {
     //Sending the personaldata to the notices. This should be used for the ajax call in the futher as well
     const id="470203-1324"
     //Fake data to the table below which can be updated to live data if needed
     console.log("Utanför funk");
-    console.log(data);
+
 
     //Adds the Notification to the data array so that the pop-up modals can retrive the correct data
     function addNotification(data) {
         let newArr = [];
         console.log("I funk");
-        console.log(data);
 
         for (let i = 0; i < data.length; i++) {
             newArr.push({

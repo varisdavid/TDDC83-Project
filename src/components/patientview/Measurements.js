@@ -30,6 +30,8 @@ const Measurements = ({ setActiveTabValueM }) => {
     },[] );
     console.log("Kommer datan här");
     console.log(measurement);
+    console.log("enbd");
+
 
     return (
         <>
