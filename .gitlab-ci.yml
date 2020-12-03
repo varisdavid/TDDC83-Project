@@ -33,7 +33,7 @@ build:
       - build
   before_script:
     - yarn config set cache-folder .yarn
-    - npm install
+    - yarn install
   script:
     - npm run build
 
@@ -99,12 +99,13 @@ deploy-app:
 
 
 Test:
+  image: node:latest
   stage: test
-  image: trion/ng-cli-e2e
+  before_script:
+    - yarn config set cache-folder .yarn
+    - yarn install --frozen-lockfile
   script:
-    - npm install
-    - npm run ci
-
+    - yarn test
 # Deploy to Staging:
 #   stage: staging
 #   tags:
