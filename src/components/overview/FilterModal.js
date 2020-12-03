@@ -299,6 +299,7 @@ const FilterModal = ({setDropdownOpen, customFilterData, setCustomFilterData, se
                                     style={{ color: '#0066B3'}}
 
                                 >
+                                    {/* }  {data.dep.map(value=>)} */}
                                     <MenuItem value={'all'}><em>Alla</em></MenuItem>
                                     <MenuItem value={'Department 1'}>Department 1</MenuItem>
                                     <MenuItem value={'Department 2'}>Department 2</MenuItem>
