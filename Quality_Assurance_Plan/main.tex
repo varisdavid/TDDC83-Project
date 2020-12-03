@@ -7,10 +7,13 @@
 \usepackage{tabularx}
 \usepackage{booktabs}
 \usepackage{makecell}
+\usepackage{multirow}
 \graphicspath{./Pictures/}
 
 \newcolumntype{n}{>{\hsize=0.7\hsize \raggedright\arraybackslash}X}
 \newcolumntype{w}{>{\hsize=1.6\hsize \raggedright\arraybackslash}X}
+\newcolumntype{a}{>{\hsize=1.2\hsize \raggedright\arraybackslash}X}
+\newcolumntype{b}{>{\hsize=0.8\hsize \raggedright\arraybackslash}X}
 
 \begin{document}
 	% Title Page
@@ -46,7 +49,7 @@
 	
 	\clearpage
 	\section{Software Configuration Management}
-	The purpose of Software Configuration Management (SCM) is to implement a controlled change process and define build and process management. The project uses GitLab as version control tool. The framework on how Git is used within the project is found in \textit{Framework for programming TDDC88}. The main principles specified to assure high quality code is the use of several levels of feature branches and merge requests. Each function are to be developed on a separate branch and requested to merge to a higher level feature branch when finished. The merge request is then to be audited by the responsible person for each level before being accepted and merged to the highest level of development feature branches. This process work to avoid defects being imported into the running code.
+	The purpose of Software Configuration Management (SCM) is to implement a controlled change process and define build and process management. The project uses GitLab as version control tool. The framework on how GitLab is used within the project is found in \textit{Framework for programming TDDC88}. The main principles specified to assure high quality code is the use of several levels of feature branches and merge requests. Each function are to be developed on a separate branch and requested to merge to a higher level feature branch when finished. The merge request is then to be audited by the responsible person for each level before being accepted and merged to the highest level of development feature branches. This process work to avoid defects being imported into the running code.
 	
 	To assure readability of code and traceability to features connected to requirements, processes for generating readme-files and commenting of code are specified (see \textit{Framework for programming TDDC88}).
 	
@@ -65,52 +68,36 @@
 	SQA shall evaluate software tools, both existing and planned, used for software development and support. This is due to ensure that existing tools are adequate for the purpose they are intended and whether the capabilities of the tools are needed. Planned tools are assessed in the same way, but also by determining feasibility in adopting the tool with regard to available knowledge and resources for education within HeartByte. This evaluation is done in consultation with representatives from the management team as well as the team proposing the tool.
 	
 	\subsection{Evaluate Project Planning and Compliance}
-	The Project Plan is a work product under supervision of SQA. The Plan is assessed by ensuring that relevant activities are specified and planned, as well as management processes. SQA shall also evaluate that the project conducts the activities stated in the Project Plan. Prior to release, each major version is to be inspected according to the process described in  section~\ref{method} \nameref{method}. Evaluation of conducted activities are to be done continuously and in detail at the end of each iteration of the project. 
+	The Project Plan is a work product under supervision of SQA. The Plan is assessed by ensuring that relevant activities are specified and planned, as well as management processes. SQA shall also evaluate that the project conducts the activities stated in the Project Plan. Prior to release, each major version is to be inspected according to the process described in  section~\ref{method} \nameref{method}. 
 	
 	%\subsection{Evaluate System Requirements Analysis Process}
 	%Requirements analysis establishes a common understanding of the customer’s requirements between that customer and the software project team.  An agreement with the customer on the requirements for the software project is established and maintained.  This agreement is known as allocating system requirements to software and hardware.  Section 4 lists the system requirements documents.
 	
 	
 	\subsection{Evaluate Software Configuration Compliance}
-	SQA is responsible for following the compliance of the software configuration. This includes to asses the use of Gitlab in comparison to specified guidelines as well as the readability and traceability of the code. Furthermore the continuous integration process is to be evaluated in terms of how frequent work is integrated at each level and the size of the integrated work pieces.
+	SQA is responsible for following the compliance of the software configuration. This includes to asses the use of GitLab in comparison to specified guidelines as well as the readability and traceability of the code. Furthermore the continuous integration process is to be evaluated in terms of how frequent work is integrated at each level and the size of the integrated work pieces.
 	
 	\subsection{Evaluate Document Review and Inspection Process Compliance}
 	SQA is responsible of ensuring that document review and inspection processes are followed for relevant documents. This includes documentation of the processes as well. 
 	
-	%SQA activities are listed below:
-	\begin{comment}
-		
-	
-	a.	Verify that the correct participants are involved in the system requirements analysis process to identify all user needs.
-	b.	Verify that requirements are reviewed to determine if they are feasible to implement, clearly stated, and consistent.
-	c.	Verify that changes to allocated requirements, work products and activities are identified, reviewed, and tracked to closure.
-	d.	Verify that project personnel involved in the system requirements analysis process are trained in the necessary procedures and standards applicable to their area of responsibility to do the job correctly.
-	e.	Verify that the commitments resulting from allocated requirements are negotiated and agreed upon by the affected groups.
-	f.	Verify that commitments are documented, communicated, reviewed, and accepted.
-	g.	Verify that allocated requirements identified as having potential problems are reviewed with the group responsible for analyzing system requirements and documents, and that necessary changes are made.
-	h.	Verify that the prescribed processes for defining, documenting, and allocating requirements are followed and documented.
-	i.	Confirm that a configuration management process is in place to control and manage the baseline.
-	j.	Verify that requirements are documented, managed, controlled, and traced (preferably via a matrix).
-	k.	Verify that the agreed upon requirements are addressed in the SDP.
-	SQA may use the audit checklist in Figure B-3 as a guide for conducting the evaluation.
-	The results of this task shall be documented using the Process Audit Form described in Section 7 and provided to project management.  SQA recommendation for corrective action requires project management’s disposition and will be processed in accordance with the guidance in Section 7
-	\end{comment}
-	
+	%\subsection{Software quality }
 	%\subsection{Evaluate Coverage Rate of Tests}
 	% Quality Factors and metrics
 	
+	\begin{comment}
 	\clearpage
 	
 	\section{Software Quality Assurance Records} \label{doc}
 	The aim of the software quality assurance record (SQR) is to report activities performed as part of the quality assurance work defined in the SQAP. The SQR shall identify the activity performed, persons involved and documents or data assessed. The resulting observations, suggestions, deviations and/or actions shall also be included. 
 	
 	The SQR's produced shall be gathered in a software quality assurance summary. There, all SQA activities performed are listed with references to respective SQR. The summary shall include a conclusion regarding the adherence to SQAP that is continuously updated.
-	
+	\end{comment}
 	
 	\clearpage
 	\section{Tools, Technologies and Methodologies} \label{method}
 	
 	\subsection{Document Review and Inspection}
+	Documents produced in the project are internally reviewed and inspected to  ensure that they contain relevant, correct and unambiguous information presented in an easily accessible way.  
 	
 	\subsubsection{Change Log}
 	All documents that are to be reviewed or inspected shall have a document change log. This facilitates in tracking changes and verifying that those are approved by someone other than the author. Version Number provides a means to refer to a specific version. Published Date is the date when the certain version is locked. Description of Revision is a brief description of what has been changed/added/removed and, if applicable, which chapter it concerns. Author is responsible for the changes made to the certain version. Approved by refers to who has conducted a review or inspection, thus only applicable for primary number increments (e.g. 2.0, 3.0). See table \ref{tab:changeLog}.
@@ -123,7 +110,7 @@
 				\makecell[l]{Published \\ Date} & Description of Revision & Author & Approved by \\
 				\midrule
 				1.0	& 2020-10-23 &	Initial Version	& Emma Johansson & Patrik Palmgren \\
-				1.1 & 2020-11-07 &	Document Review Process added (ch 6) & Emma Johansson & Patrik Palmgren \\
+				1.1 & 2020-11-07 &	Document Review Process added (ch 6) & Emma Johansson &  \\
 				\bottomrule
 			\end{tabularx}
 		}
@@ -158,37 +145,84 @@
 	\end{table}
 	
 	
-	The role of inspection leader and recorder is taken by Document Manager or Quality Coordinator. This person can be the reader as well, otherwise the test leader chooses someone else to fill the role. For each living document, a specialist inspector is chosen, see table X. The test leader can invite more inspectors if needed. These roles all need to be represented at the inspection meeting. The author may also be present.
+	The role of inspection leader and recorder is taken by Document Manager or Quality Coordinator. This person can be the reader as well, otherwise the inspection leader chooses someone else to fill the role. For each living document, a specialist inspector is chosen, see table \ref{tab:livedocsroles}. The inspection leader can invite more inspectors if needed. All attendants to an inspection meeting also performs the role as inspectors. These roles all need to be represented at the inspection meeting. The author may also be present.
 	
-	%make table
-	Inspector for each document:
-	Arch. Lead dev Filip Eriksson
-	SRS  Lead tester Gustav K
-	Educatino Plan Sam Anlér
-	Project Plan Max K och Patrik P
-	QAP Axel
+		
+	\smallskip
+	\begin{table}[h]
+		{\renewcommand{\arraystretch}{1.8}
+		\begin{tabularx}{\textwidth}{lab}
+			\toprule
+			Document & \multicolumn{2}{l}{Inspector} \\
+			\cline{2-3}
+					 & Role	& Name \\
+			\midrule
+			Architecture Notebook & Lead Developer & Filip Eriksson \\
+			\makecell[l]{Software Requirement \\ Specification} & Lead Tester & Gustav Karlsson \\
+			Education Plan & Configuration Manager & Sam Anlér \\
+			Project Plan & Strategic Product Manager & Max Klasson \\
+				& \& Line Manager & Patrik Palmgren \\
+			\makecell[l]{Software Quality \\ Assurance Plan} & Project Manager & Axel Trolme \\
+			Test Plan &	Quality Coordinator	& Emma Johansson \\
+			\bottomrule
+		\end{tabularx}}
+		\label{tab:livedocsroles}
+	\end{table}
 	
+	The inspection process starts with the author of the document contacting the Document Manager (before the version is released by being published to Teams). An inspection leader for the current inspection is chosen, who contacts concerned parties to schedule the inspection. The inspection leader hands out the material, i.e. the document to be inspected and possibly related work products, and gives a brief introduction if needed. The inspectors, including the inspection leader, perform an individual checking of the document. All anomalies and defects, as well as ideas for improval or missing parts, shall be written down and handed to the inspection leader at least the day before the following inspection meeting. The inspectors shall be especially observant of things that are hard to understand, incorrect or unambiguous. The inspector needs to see the document from the perspective of one's role and evaluate if any relevant information is missing or need to be further specified. During the inspection meeting the reader presents the product and defects from all inspectors are  brought up chronologically. The defects shall be gathered in a single defect list. The inspection meeting shall result in an exit decision where the document is (1) accepted with no further verification, (2) accepted with rework verification performed by one member or (3) not accepted and sent to reinspection. The result is then communicated to the author who resolves eventual defects. The inspection leader shall be informed when the rework is made to verify this and close the inspection process. Finally, the change log is signed by the inspection leader and the document published as a new primary version. The recorder is responsible for publishing documentation of the process including involved members, defect list, exit decision and date of closure.
 	
-	The inspection process starts with the author of the document contacting the Document Manager (before the version is released by being published to Teams). A test leader for the current inspection is chosen, who contacts concerned parties to schedule the inspection. The test leader hands out the material, i.e. the document to be inspected and possibly related work products, and gives a brief introduction if needed. The inspectors, including the inspection leader, perform an individual checking of the document. All anomalies and defects, as well as ideas for improval or missing parts, shall be written down and handed to the inspection leader at least the day before the following inspection meeting. During the inspection meeting the reader presents the product and defects from all inspectors are  brought up chronologically. The defects shall be gathered in a single defect list. The inspection meeting shall result in an exit decision where the document is (1) accepted with no further verification, (2) accepted with rework verification performed by one member or (3) not accepted and sent to reinspection. The result is then communicated to the author who resolves eventual defects. The inspection leader shall be informed when the rework is made to verify this and close the inspection process. Finally, the change log is signed by the inspection leader and the document published as a new primary version. The recorder is responsible for publishing documentation of the process including involved members, defect list, exit decision and date of closure.
+	\subsection{Software Evaluation}	
+	In order to provide high quality code in terms of understandability, reliability and testability the following methodologies have been implemented in HeartByte's development process.
 	
-	\subsection{Software Quality Metrics}
+	\subsubsection{Programming Guidelines}
+	The programming guidelines conducted for the project can be found in \textit{Framework for Programming}. This includes the process of continuous integration using GitLab, expectations on the developers and the main processes to be used. Furthermore it specifies which naming conventions that are to be used as well as how to document the code, which is mainly done through commenting the code. 
 	
+	\subsubsection{Code Review}
+	To ensure that the produced code follows the programming guidelines, all code that is pushed to our main development branch on GitLab is merged using merge requests. Thus, all code is reviewed by a responsible developer before accepted to the main branch. The assessment includes verifying that the code passes the CI pipeline, that the code is understandable and follows our conventions. The responsibility of accepting merge requests lies on the Integrator Emil Strömberg, who may temporarily delegate the responsibility to another developer. From iteration four, all developers are given permission to accept other developers merge requests. This change serves to minimize the time from the request being made to the time of acceptance. By dividing the responsibility evenly between the integration is not dependant on only one person, which might delay it.
 	
-	CodeMR is used to assess metrics to evaluate chosen quality factors. These are understandability, reliability and ...
-	
-	TBD.
+	\subsection{Traceability} \label{traceability}
+	In order to provide traceability between the requirements, developed functionality and tests, a work pipeline is established using the functionality of GitLab Issue Boards. Each functional requirement defined in the SRS is added to the board as an issue with appropriate labels to categorize them. The issue is named with the requirement's ID and name, and includes the description and category. The priority level is indicated using labels. The board lists issues separately with the labels "requirements functional", "TestCase", "Ready to develop", "Being developed" and "Test requirement". The issues are initially on the list "requirements functional", upon an issue is moved to "TestCase" when a tester starts to develop a test case for testing the requirement. In this stage, the ID of input and output objects are set according to the naming convention aforementioned. When the test case it developed, the tester moves the issue to the list "Ready to develop". Issues lie here waiting for a developer to get assigned to it and start developing corresponding functionality in the product. Then the issue is moved to "Being developed" until finished and progressed to "Test requirement". At that time a tester will perform the test and depending on the result, the issue will either be labelled "Done" and closed, or report the bug by creating a new issue labelled "Bug".
 	
 	\subsection{Software Testing}
-	%Which testing activities we are to have
-	Reference to Test Plan. %Unit testing, function testing, system testing and user testing. 
+	The product developed by HeartByte is evaluated through software testing to ensure that functional requirements are met as well as bugs are identified. The full specification regarding testing is to be found in \textit{Test Plan 3.0}. The following section will provide a brief overview of the methodology and how the quality of the tests are to be assessed.
 	
+	\begin{comment}
+		Dynamic testing - What TEsting team does
+		Static testing - What I do
+		Detect overcomplecity in code, find security errors (help source code be more secured when being deployed), enforce best coding practices (specific to code language, helps other understand code), can create project specific rules
+		
+		technical dept - translates as the implied cost for additional rework that can occur if at an early stage an easy but not efficient solution is chosen. In the future the easy code may restrict scalability. Might be measured by static testing tool
+		
+		sonarqube open source static analysis tools. 
+		can detect tricky issues: bugs, code smells, security vulnerability,acticate rules needed (quality profiles),
+	\end{comment}
+	  
 	\subsubsection{Methodology}
-	TBD on discussion with Gustav, Filip and Axel.
+	The testing will include integration tests, regression tests, system tests and user tests. The back-end of the product is mainly based on OpenEHR, which obstruct extensive unit testing. The majority of tests are designed as end to end tests, where the functionality is tested from the user's point of view through simulating human interaction with the website. 
+	
+	The integration tests are developed straight from the functional requirements of the product. These are handled in GitLab boards as test cases as described above, section \ref{traceability}. These tests are either automated or manual, depending on how measurable the output of the requirement is.
+	
+	Regression testing is performed by putting some of the automated integration tests in the Continuous Integration pipeline on GitLab. To withdraw most value from regression testing, a larger portion of tests would need to be included in the CI than what will be in the project. The limitation is due to time constraints within the project.
+	
+	System tests are performed by manually testing the system from the user's point of view by testing all elements on the user interface that are not covered by the integration tests. 
+	
+	User tests are performed several times during the development to ensure that the product really does capture the needs of the intended end users. This is done both on the prototype and the deployed system. The methods used for the user tests include Thinking-out-Loud, Lostness and System Usability Scale (SUS).
 	
 	%\subsubsection{User Test}
 	%User shall be summarised using the predetermined template which follows here *Make list of content*
-		
-	 
+	\subsubsection{Reporting Test Results}
+	
+	
+	\subsubsection{Testing Quality}
+	The type of tests performed makes it 
+	
+	System coverage
+	
+	Requirement Coverage
+	
+	Bugs reported
+	
+	
 
 	\clearpage
 	\section{Problem Reporting}
