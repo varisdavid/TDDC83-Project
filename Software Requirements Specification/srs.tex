@@ -17,17 +17,17 @@
 \hypersetup{
     bookmarks=false,    % show bookmarks bar?
     pdftitle={Software Requirement Specification},    % title
-    pdfauthor={Sara Lindholm},                     % author
+    pdfauthor={Analysis Team},                     % author
     pdfsubject={TeX and LaTeX},                        % subject of the document
     pdfkeywords={TeX, LaTeX, graphics, images}, % list of keywords
     colorlinks=true,       % false: boxed links; true: colored links
     linkcolor=blue,       % color of internal links
     citecolor=black,       % color of links to bibliography
     filecolor=black,        % color of file links
-    urlcolor=purple,        % color of external links
+    urlcolor=blue,        % color of external links
     linktoc=page            % only page is linked
 }%
-\def\myversion{2.3}
+\def\myversion{2.4}
 \title{Software Requirements Specification}
 \author{Sara Lindholm \\ Patrick Asman \\ Jacob Rhan}
 
@@ -36,6 +36,28 @@
 \newcolumntype{s}{>{\hsize=3.75\hsize}X}
 \newcolumntype{m}{>{\hsize=7\hsize}X}
 \newcolumntype{b}{>{\hsize=11\hsize}X}
+
+\makeatletter
+\renewenvironment{thebibliography}[1]
+     {\section{\bibname}% <-- this line was changed from \chapter* to \section*
+      \@mkboth{\MakeUppercase\bibname}{\MakeUppercase\bibname}%
+      \list{\@biblabel{\@arabic\c@enumiv}}%
+           {\settowidth\labelwidth{\@biblabel{#1}}%
+            \leftmargin\labelwidth
+            \advance\leftmargin\labelsep
+            \@openbib@code
+            \usecounter{enumiv}%
+            \let\p@enumiv\@empty
+            \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+      \sloppy
+      \clubpenalty4000
+      \@clubpenalty \clubpenalty
+      \widowpenalty4000%
+      \sfcode`\.\@m}
+     {\def\@noitemerr
+       {\@latex@warning{Empty `thebibliography' environment}}%
+      \endlist}
+\makeatother
 
 \begin{document}
 
@@ -82,6 +104,8 @@
  \hline 
  2020-12-03 & 2.3 & Added user stories & Patrick Asman & \\ 
  \hline 
+ 2020-12-03 & 2.4 & Minor spelling fixes, added GUI and API definitions, references fixes & Sara Lindholm & \\ 
+ \hline 
 \end{tabular}
 \end{center}
 
@@ -120,34 +144,29 @@ HeartByte's product is a web-based application developed to aid RÖ's health car
   \hline
   User  & Health care staff who interacts with the web application.  \\
   \hline
-  User group & Either a Operation, Department or Team. \\ 
+  User group & Either a Operation, Department or Team. \\
+  \hline 
+  GUI & Graphical user interface \\
+  \hline 
+  API & Application programming interface \\
   \hline
 \end{tabularx}
 \end{center}
 
-\section{References}
-[1] "IEEE Recommended Practice for Software Requirements Specifications," in IEEE Std 830-1998 , vol., no., pp.1-40, 20 Oct. 1998, doi: 10.1109/IEEESTD.1998.88286.
-\newline
-\newline
-[2] Jonas Malm, HeartByte, Architecture Notebook version 0.5.2.
-\newline
-\newline
-[3] Prototype team, HeartByte, Hi-Fi version 2.1. 
-\newline
-\newline
-[4] SFS. (2008:355). Patientdatalagen. Stockholm: Socialdepartementet. Viewed 1 December 2020, http://www.riksdagen.se/sv/Dokument-Lagar/Lagar/Svenskforfattningssamling/Patientdatalag-2008355_sfs-2008-355/?bet=2008:35
+\bibliographystyle{unsrt}
+\bibliography{ref}
 
 \section{Overview}
-The SRS is constructed according to IEEE Std 830-1998 [1] and contains 3 chapters. The first chapter describes the intended use of the SRS and provides a brief description of HeartByte’s application and the application’s value for the user. Furthermore, the first chapter also contains a list of definitions, acronyms and abbreviations to facilitate in reading the SRS. In addition, references are also provided in the first chapter. In the second chapter an overall description of the application is presented which includes the perspectives and functions of the product as well as user characteristics, constraints and assumptions and dependencies. The third and final chapter presents a detailed description of the application including interface requirements, functional and performance requirements, software system attributes and other requirements. 
+The SRS is constructed according to IEEE Std 830-1998 \cite{ieeesrsrec} and contains 3 chapters. The first chapter describes the intended use of the SRS and provides a brief description of HeartByte’s application and the application’s value for the user. Furthermore, the first chapter also contains a list of definitions, acronyms and abbreviations to facilitate in reading the SRS. In addition, references are also provided in the first chapter. In the second chapter an overall description of the application is presented which includes the perspectives and functions of the product as well as user characteristics, constraints and assumptions and dependencies. The third and final chapter presents a detailed description of the application including interface requirements, functional and performance requirements, software system attributes and other requirements. 
 
 \chapter{Overall Description}
 In this chapter an overview of the entire system is presented. The system's perspective and its basic functionality as well as how it interacts with other systems will be introduced. Furthermore, user characteristics, constraints, assumptions and dependencies will also be described.
 
 \section{Product Perspective}
-HeartByte’s system is a web-based application developed with the intention to aid RÖ’s health care staff in monitoring the health of many patients enrolled in their self-monitoring program. The system is OS independent and utilizes a scalable user interface that works seamlessly across a wide range of screen sizes. Consequently, HeartByte’s system is not limited to stationary desktop computers used in the workplace, it can also be used with mobile devices when visiting patients in their homes. The patients being self-monitored have chronic illness such as diabetes mellitus, chronic obstructive pulmonary disease, or consist of frail older adults susceptible to disease or to other infirmity. In HeartByte’s system the patients under care are clearly organized after healthcare centers within RÖ and their subunits for efficient navigation. Furthermore, the system provides the possibility to create customized views so that only the most important information is presented in a particular view for specific healthcare center or subunit within RÖ. The patients report their health data using compatible patient monitoring devices and then the data is presented in HeartByte’s system for the health care staff to assess. The health data is presented in an unambiguous way and in addition effectively visualized in interactive graphs to further aid the health care staff in their evaluation of patients. HeartByte’s system allows for easy and practical filtering and sorting of patients as well as effective search capabilities which makes it uncomplicated to navigated between patients and patient categories. Prioritization levels can be set to alert health care staff to take appropriate actions when a patient exceed the boundaries for a health parameter. Patient alerts and notification have been thoughtfully implemented in HeartByte’s system to minimize potential alert fatigue faced by the health care staff when monitoring many patients. In order to ensure patient safety and to follow the Swedish Patient Data Act [4], HeartByte’s system logs user activity and patient accesses.  
+HeartByte’s system is a web-based application developed with the intention to aid RÖ’s health care staff in monitoring the health of many patients enrolled in their self-monitoring program. The system is OS independent and utilizes a scalable user interface that works seamlessly across a wide range of screen sizes. Consequently, HeartByte’s system is not limited to stationary desktop computers used in the workplace, it can also be used with mobile devices when visiting patients in their homes. The patients being self-monitored have chronic illness such as diabetes mellitus, chronic obstructive pulmonary disease, or consist of frail older adults susceptible to disease or to other infirmity. In HeartByte’s system the patients under care are clearly organized after healthcare centers within RÖ and their subunits for efficient navigation. Furthermore, the system provides the possibility to create customized views so that only the most important information is presented in a particular view for specific healthcare center or subunit within RÖ. The patients report their health data using compatible patient monitoring devices and then the data is presented in HeartByte’s system for the health care staff to assess. The health data is presented in an unambiguous way and in addition effectively visualized in interactive graphs to further aid the health care staff in their evaluation of patients. HeartByte’s system allows for easy and practical filtering and sorting of patients as well as effective search capabilities which makes it uncomplicated to navigated between patients and patient categories. Prioritization levels can be set to alert health care staff to take appropriate actions when a patient exceed the boundaries for a health parameter. Patient alerts and notification have been thoughtfully implemented in HeartByte’s system to minimize potential alert fatigue faced by the health care staff when monitoring many patients. In order to ensure patient safety and to follow the Swedish Patient Data Act \cite{patientdatalag}, HeartByte’s system logs user activity and patient accesses.  
 
 \subsection{System interfaces}
-The architecture of HeartByte’s system is illustrated in Figure \ref{fig: boxAndLineDiag} and is further described in the Architecture Notebook [2]. The system consists of the following four layers: graphical user interface (GUI), Front-end logic, HeartByte Server and EhrScape Server. The flow of the data is indicated by the direction of the arrows. 
+The architecture of HeartByte’s system is illustrated in Figure \ref{fig: boxAndLineDiag} and is further described in the Architecture Notebook \cite{architecture}. The system consists of the following four layers: graphical user interface (GUI), Front-end logic, HeartByte Server and EhrScape Server. The flow of the data is indicated by the direction of the arrows. 
 
 \subsubsection{GUI Layer}
 The GUI is made up of four modules and handles what will be displayed and what the user will interact with in the web application. From the Interface the user can access the Patient Overview which presents an overview of patients. Through the Patient Selector, specific patients can be selected to be viewed in the Patient View. Furthermore, the Interface module allows a user to log in, and for an admin to customize the rules applied in the Rule Engine through the Rule Customizer as well as to customize views via the View Customizer.
@@ -172,7 +191,7 @@ The EhrScape Server layer is a database stored on an external server and accesse
 HeartByte’s web application provides an overview of patients self-monitoring their health in which the user of the application will be able to clearly see and efficiently manage all patients in their healthcare center or subunit within RÖ. Patients can be sorted and filtered by different criteria, which will aid the user in the navigation between patients. Health prioritization levels set by a specific healthcare center or subunit will effectively present the patients in most need of care for the health care staff, as well as alert the staff when appropriate actions need to be taken. Admins can set at which values the system will trigger a change in the patient’s priority level. Views in the application can be customized based on for instance diagnosis and team. When a specific patient is accessed the user is presented with detailed information about the patient in question. Detailed information includes measured health data, current medication, contact information, medical information, activity history, scheduled appointments and so on. Furthermore, for each patient the measured health data is presented with interactive graphs of the measured health data to aid the health care staff in their assessment and understanding of a patient’s health situation. 
 \newline
 \newline
-Some significant functions included in HeartByte’s system are illustrated in Figure \ref{fig: useCaseDiag}. The use case diagram is not a complete representation of all functions provided by HeartByte’s system but it rather represents a general overview of significant functions. The use case diagram is further described in the Architecture Notebook [2].
+Some significant functions included in HeartByte’s system are illustrated in Figure \ref{fig: useCaseDiag}. The use case diagram is not a complete representation of all functions provided by HeartByte’s system but it rather represents a general overview of significant functions. The use case diagram is further described in the Architecture Notebook \cite{architecture}.
 
 Listed below as user stories are the significant functions of HeartByte’s web application:
 \newline
@@ -223,7 +242,7 @@ The users of HeartByte’s system are either administrators or users, as defined
 The main constraint for this product concerns confidentiality and security. Since this product is designed to be used by health care providers there are some regulations concerning patient data security, such as "patientdatalagen". These regulations mainly affect patient data confidentiality and what health care staff should have access to what patient information.
 
 \section{Assumptions and dependencies}
-An assumption is that the system will be used on computers and tablets with a web browser. Since the system requires the user to be logged in to access any functionality it is also assumed that the user has logged in.
+An assumption is that the system will be used on computers and tablets with a web browser. Since HeartByte's system requires the user to be logged in in the system to access any functionality it is also assumed that the user has logged in.
 
 The system needs to interact with other systems to function. OAuth is to be used for authentication and log in functionality. The system will also need to interact with an OpenEHR-database to access and store EHRs. 
 
@@ -240,7 +259,7 @@ description of the system and its features.
 The main system interface is the user interface. The user interfaces are divided into two subsections: the user view and the admin view. The admin has, as previously mentioned, every functionality the user has. Meanwhile the user lacks som functionality that only an admin has access to. 
 
 \subsection{User interfaces -  User View}
-This section describes the user interfaces as the pages/views defined in the document "Hi-Fi" version 2.1 from the prototype team.
+This section describes the user interfaces as the pages/views defined in the "Hi-Fi 2.1" document \cite{prototype}.
 
 \subsubsection{Login page}
 \begin{figure}[h!]
@@ -380,7 +399,7 @@ The difference between this calendar and the calendar under the patient specific
 
 \subsection{User interfaces -  Admin View}
 \label{section: admin}
-This section describes the admin views as defined in the document "Hi-Fi" version 2.1 from the prototype team. As the admin has the same functionality as the user only the functionality the user does not have access to but the admin does is described in this section. The section is divided into different subsections based on the system's different pages.
+This section describes the admin views as defined in the "Hi-Fi" document \cite{prototype}. As the admin has the same functionality as the user only the functionality the user does not have access to but the admin does is described in this section. The section is divided into different subsections based on the system's different pages.
 
 \subsubsection{"Översikt"}
 \begin{figure}[h!]
@@ -1190,7 +1209,7 @@ A precondition is that the user is logged in, on the view “Översikt” and, o
 FR032 & 
 Active choice of accessing patient information outside of user's operation & 
 User in a certain operation tries to access patient information about a patient not in user's operation. &
-\textbf{Input}: Clicking on a patient in overview \newline
+\textbf{Input}: User clicks on a patient with ID "patient$<X>$", X=unique patient in overview \newline
 \textbf{Action}: The system verifies that the chosen patient is outside of user's operation and checks if user wants to access patient data. \newline
 \textbf{Output}:  Display popup with ID "allPatientsPopup" with message checking if user wants to access data, bekräfta with ID 'PatientPopupBekräfta" or cancel with ID "PatientPopuptillbaka". & 
 High \\ 
@@ -1543,6 +1562,8 @@ Medium \\
 \hline
 \end{tabularx}
 \end{center}
+
+%\subsection{Requirements not implemented}
 
 %\appendix
 %\chapter{Appendix Title}
