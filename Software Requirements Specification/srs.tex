@@ -27,7 +27,7 @@
     urlcolor=purple,        % color of external links
     linktoc=page            % only page is linked
 }%
-\def\myversion{2.2}
+\def\myversion{2.3}
 \title{Software Requirements Specification}
 \author{Sara Lindholm \\ Patrick Asman \\ Jacob Rhan}
 
@@ -79,6 +79,8 @@
  2020-12-01 & 2.1 & New section 2.1.1 created, use case diagram added in section 2.2 & Patrick Asman & \\
  \hline 
  2020-12-02 & 2.2 & Updated descriptions with ID & Sara Lindholm & \\
+ \hline 
+ 2020-12-03 & 2.3 & Added user stories & Patrick Asman & \\ 
  \hline 
 \end{tabular}
 \end{center}
@@ -175,11 +177,37 @@ Some significant functions included in HeartByte’s system are illustrated in F
 Listed below as user stories are the significant functions of HeartByte’s web application:
 \newline
 \newline
-\textbf{U1:} As a health care worker, I want to see an overview over many patients so that I can clearly view all patients under care.
+\textbf{U1:} As a health care worker, I want to see an clear overview of many patients so that I can manage many patients under care.
 \newline
 \newline
-\textbf{U2:} As a health care work, I want to be able to sort patients by ‘Namn’, ‘Personnummer’, ‘Prioritet’, ‘Diagnos’ and ‘Senast Uppdaterad’ so that I can efficiently navigate between patients.
-
+\textbf{U2:} As a health care worker, I want to be able to sort patients by ‘Namn’, ‘Personnummer’, ‘Prioritet’, ‘Diagnos’ and ‘Senast Uppdaterad’ so that I can efficiently navigate through many patients.
+\newline
+\newline
+\textbf{U3:} As a health care worker, I want to be able to filter patients by ‘Ålder’, ‘Prioritering’, ‘Verksamhet’, ‘Team’, ‘Avdelning’ and ‘Diagnos’ so that I can quickly find patients.
+\newline
+\newline
+\textbf{U4:} As a health care worker, I want to prioritize patients so that patients in most need of care receive medical attention first.
+\newline
+\newline
+\textbf{U5:} As a health care giver, I want to see detailed information about a patient so that I can provide proper care.
+\newline
+\newline
+\textbf{U6:} As health care giver, I want to see a patient’s measured health data so that I can correctly assess the health of patients.
+\newline
+\newline
+\textbf{U7:} As a health care giver, I want to see a patient’s diagnoses and medications so that I can adequately treat patients. 
+\newline
+\newline
+\textbf{U8:} As a health care giver, I want to see a patient's contact information so that I can contact patients.
+\newline
+\newline
+\textbf{U9:} As health care worker or admin, I want to be able to log in and log out of the system so that I can securely use the system.
+\newline
+\newline
+\textbf{U10:} As an admin, I want to customize prioritization rules for patients so that health care workers can treat patients according to the level of health urgency. 
+\newline
+\newline
+\textbf{U11:} As an admin, I want to customize views so that health care workers can effectively manage many patients. 
 \begin{figure}[htp]
     \centering
     \includegraphics[width=15cm]{useCase.png}
@@ -187,10 +215,8 @@ Listed below as user stories are the significant functions of HeartByte’s web 
     \label{fig: useCaseDiag}
 \end{figure}
 
-
-
 \section{User Characteristics}
-There are two intended users of the system: users and administrators, as defined in section~\ref{section:def}. The admin shall have access to all the same functionalities as the user, but the user shall not have access to any admin functionality. Some of the customizable elements shall only be customizable by an admin and the admin will also be the one to set the criteria for the different priority levels.
+The users of HeartByte’s system are either administrators or users, as defined in section~\ref{section:def}. Administrators are users with extended system capabilities. Administrators can set health prioritization rules for patients and customize views according to the guidelines set by a health care center or subunit within RÖ. All users of HeartByte’s system are expected to have a certain level of medical competence to use the system as intended, that is to provide safe and proper care for patients enrolled in RÖ’s self-monitoring program.
 
 
 \section{Constraints}
