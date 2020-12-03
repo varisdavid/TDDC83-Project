@@ -3,108 +3,31 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { NoticesSearch, NoticesTable } from '..'
 import { useTable, useFlexLayout, useFilters, useGlobalFilter, useSortBy } from 'react-table'
 
-import { Modal, Button, Link } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Link } from '@material-ui/core';
 
 import { useAuth0 } from "@auth0/auth0-react";
 
 import { useHistory } from 'react-router-dom';
 
-// Used to fix the placement of the triggered modal
-const getModalStyle = () => {
-
-  const top = 50;
-  const left = 50;
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
-
-// Styling of the triggered modal + the text and select fields.
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    maxWidth: '600px',
-    position: 'absolute',
-    backgroundColor: theme.palette.background.paper,
-    border: '3px solid #0066B3',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
-}));
-
 // This component links the patients name from the table to a confirmation modal and then onto its patient specific part of the website.
 const PatientLink = ({ id, name }) => {
-
-  //////////////////////////////////////////////////////////////////////////////////
-  const classes = useStyles();
-  // getModalStyle is not a pure function, we roll the style only on the first render
-  const [modalStyle] = useState(getModalStyle);
-  //////////////////////////////////////////////////////////////////////////////////
 
   const href = "/patient/overview/" + id;
   const history = useHistory();
 
-  // Keeps track of whether or not the popup for navigating to specific patient view has been toggled.
-  const [openPatientViewConfirm, setOpenPatientViewConfirm] = useState(false);
-
-  // Handles opening of modal window
-  const handleOpenConfirmation = () => {
-    setOpenPatientViewConfirm(true);
-  };
-
-  // Handles closing of modal window
-  const handleCloseConfirmation = () => {
-    setOpenPatientViewConfirm(false); // Close modal 
-  };
-
   const navigateToPatientView = () => {
     history.push(href);
-    setOpenPatientViewConfirm(false); // Close modal 
   };
-
-  const ConfirmAccessingPatient = () => {
-
-    return (
-      <Modal
-        open={openPatientViewConfirm}
-        onClose={handleCloseConfirmation}
-        aria-labelledby='modal-popup'
-      >
-        <div key="modal-popup-div" style={modalStyle} className={classes.paper}>
-
-          <h2 className='font-bold mt-2' id='modal-popup'>Vill du se data för {name}?</h2>
-          <div className="flex" style={{ width: "100%" }}>
-            <Button
-              className='flex shadow'
-              style={{ border: '2px solid #0066B3', borderRadius: "0px", width: '110px', marginLeft: "auto", marginRight: "auto", marginTop: "1.5rem" }}
-              onClick={handleCloseConfirmation}>
-              Tillbaka
-                  </Button>
-            <Button
-              className='flex shadow'
-              style={{ border: '2px solid #0066B3', borderRadius: "0px", width: '110px', marginLeft: "auto", marginRight: "auto", marginTop: "1.5rem" }}
-              onClick={navigateToPatientView}>
-              Bekräfta
-                  </Button>
-          </div>
-        </div>
-      </Modal>
-    );
-  }
 
   return (
     <>
       <Link
+        onClick={navigateToPatientView}
         component="button"
         style={{ color: "#000" }}
-        onClick={handleOpenConfirmation}
       >
         {name}
       </Link>
-      <ConfirmAccessingPatient />
     </>
 
   );
@@ -134,10 +57,6 @@ const Notices = () => {
     setCustomFilterData(filterData); // This makes sure our representation of the fields in the filterModal is kept up to date.
 
   }
-
-  // This can later be used to save our retrieved patientlist from our API.
-  // const setPatientList = () => {
-  // }
 
   const data = useMemo(
     // To get them in the proper order, using numbers to represent priority, 1 = high, 2 = medium, 3 = low with notification, 4 = low without notification

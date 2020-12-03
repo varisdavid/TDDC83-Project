@@ -5,7 +5,8 @@ import OverviewHeaderNavigation from './overview/OverviewHeaderNavigation';
 
 import OverviewCalendar from './overview/OverviewCalendar';
 
-import Patients from './overview/Patients';
+import MyPatients from './overview/MyPatients';
+import AllPatients from './overview/AllPatients';
 import PatientsSearch from './overview/PatientsSearch'
 import PatientsTable from './overview/PatientsTable'
 import PatientGroups from './overview/PatientGroups';
@@ -57,6 +58,10 @@ import TableForChartWeightChartPage from "./patientview/TableForChartWeightChart
 import RuleEngine from "./ruleEngine/RuleEngine";
 import SliderMeasurements from "./patientview/SliderMeasurements";
 
+import ActivityLogPatient from "./patientview/ActivityLogPatient";
+import FormPatientAdmin from "./patientview/FormPatientAdmin";
+import BlockPatientAdmin from "./patientview/BlockPatientAdmin";
+
 // import Notices from './Notices';
 // import NoticesTable from './NoticesTable';
 
@@ -65,7 +70,8 @@ export {
     OverviewHeaderBanner,
     OverviewHeaderNavigation,
     OverviewCalendar,
-    Patients,
+    MyPatients,
+    AllPatients,
     PatientsSearch,
     PatientsTable,
     PatientGroups,
@@ -102,6 +108,9 @@ export {
     TableForChartBloodPressure,
     Notification,
     FormForUpdateValues,
+    ActivityLogPatient,
+    FormPatientAdmin,
+    BlockPatientAdmin,
     TableForChartPysicalActivity,
     TableForChartWeightChartPage,
     RuleEngine,

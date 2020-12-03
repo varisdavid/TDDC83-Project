@@ -6,17 +6,21 @@ import { PatientViewHeaderBanner, PatientViewHeaderNavigation, PatientCalendar, 
 import { MeasurementsView} from '../views';
 
 // Function for retrieving current active tab from our url.
+let ssn
 const getActiveTab = (location) => {
-  
-  if (location.pathname === '/patient/measurements') {
+  const arrssn = location.pathname.split("/");
+   ssn = arrssn[3]
+  console.log (ssn);
+
+  if (location.pathname.includes( '/patient/measurements')) {
     return 0;
-  } else if (location.pathname === '/patient/overview') {
+  } else if (location.pathname.includes('/patient/overview' )) {
     return 1;  
-  } else if (location.pathname === '/patient/medications') {
+  } else if (location.pathname.includes('/patient/medications')) {
     return 2;  
-  } else if (location.pathname === '/patient/calendar') {
+  } else if (location.pathname.includes('/patient/calendar')) {
     return 3;  
-  } else if (location.pathname === '/patient/admin') {
+  } else if (location.pathname.includes('/patient/admin')) {
     return 4;  
   }else {
     return 0;  
@@ -49,6 +53,8 @@ const PatientView = () => {
 
   // Hook to retrieve the currently used url path
   const location = useLocation();
+  console.log(location);
+
 
   // Function call to get dynamic starting tab
   getActiveTab(location)
@@ -57,7 +63,7 @@ const PatientView = () => {
   const [activeTabValue, setActiveTabValue] = useState(getActiveTab(location));
 
   // Will be fetched by user information later on. 
-  const patientInformation = 'Namn Efternamn, yymmdd-xxxx, Diagnos';
+  const patientInformation = 'Namn Efternamn, '+ ssn;
 
   // Upon rendering the component, this hook calls a function which 
   // determines which tab is active, depending on this we load a different tab.
@@ -73,26 +79,26 @@ const PatientView = () => {
   <>
     <div className='w-full h-auto'>
       <PatientViewHeaderBanner patientInformation={patientInformation} />  
-      <PatientViewHeaderNavigation activeTabValue={activeTabValue} setActiveTabValue={setActiveTabValue} />
+      <PatientViewHeaderNavigation activeTabValue={activeTabValue} setActiveTabValue={setActiveTabValue}  ssn = {ssn}/>
     </div>
 
-    <TabPanel className='Measurements' value={activeTabValue} index={0}>
+    <TabPanel id='patientViewMeasurementsTabBtn' className='Measurements' value={activeTabValue} index={0}>
       <MeasurementsView/>
     </TabPanel>
 
-    <TabPanel id='tab-scroll' className='Overview' value={activeTabValue} index={1}>
+    <TabPanel id='patientViewOverviewTabBtn' className='tab-scroll' value={activeTabValue} index={1}>
       <PatientOverview/>
     </TabPanel>
 
-    <TabPanel id='tab-scroll' className='Medications' value={activeTabValue} index={2}>
+    <TabPanel id='patientViewMedicationsTabBtn' className='tab-scroll' value={activeTabValue} index={2}>
       <PatientListOfMedication/>
     </TabPanel>
 
-    <TabPanel id='tab-scroll' className='Calendar' value={activeTabValue} index={3}>
+    <TabPanel id="patientViewCalenderTabBtn" className='tab-scroll' value={activeTabValue} index={3}>
       <PatientCalendar/>
     </TabPanel>
 
-    <TabPanel id='tab-scroll' className='Admin' value={activeTabValue} index={4}>
+    <TabPanel  id="patientViewAdminTabBtn" className='tab-scroll' value={activeTabValue} index={4}>
       <Admin/>
     </TabPanel>
   </>
