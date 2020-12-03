@@ -1,0 +1,140 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage[utf8]{inputenc}
+\usepackage{subcaption}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{float}
+\restylefloat{table}
+\usepackage{array}
+\usepackage[table]{xcolor}% http://ctan.org/pkg/xcolor
+\setlength{\parindent}{0pt}
+
+
+\usepackage[a4paper,width=165mm,top=25mm,bottom=25mm]{geometry}
+\graphicspath{ {./Pictures/} }
+\title{\Huge Final User Test}
+\author{Axel Trolme}
+
+\begin{document}
+\maketitle
+\vfill
+\includegraphics[width=\linewidth]{Pictures/logo_heartbyte_transparent_v_1_1 (1)}
+
+\vfill
+\begin{center}
+        \textbf{\large Current Version 1.0 [2020-12-02]}
+\end{center}
+\clearpage
+
+\section{Change Log}
+	
+\begin{table}[H]
+
+\begin{center}
+\begin{tabular}{ | m{2cm} |m{2cm} |m{5cm}|m{4cm}|m{3cm}| } 
+\hline
+{Version Number} & {Published Date} & {Description of Revision}& {Author}& {Approved By} \\ 
+\hline
+1.0 & 2020-12-02 & First version of the final user test plan & Axel Trolme & Emma Johansson soon? :-)  \\
+\hline
+\end{tabular}
+\end{center}
+\caption{\label{tab:changeLog}Document change log}
+\end{table}
+\clearpage
+\tableofcontents
+\clearpage
+
+% Introduction
+    \section{Final user test background}
+    The final user test is a test to be pursued with the intended end users of the system or a group of people with applicable information \& knowledge in the subject. Applicable information \& knowledge means that the person taking the test has to know the purpose of the system, as well as basic knowledge for navigating in a web application. \\ 
+    
+    The main purpose for the final user test is to validate if the developed product / system satisfies the non-functional requirements stated by the customer, in this case Region Östergötland. The test is to focus on the usability aspects of the system, and is therefore designed as a SUS-test. Description for how a SUS-test is created and pursued is to be found under section \ref{sec: Method}. 
+
+
+    
+    \section{Method}
+    \label{sec: Method}
+    The test is divided into three different sections / iterations:
+    
+    \begin{enumerate}
+        \item Inform the respondent thoroughly about the backstory to the project - why the system is created and its intended use. 
+        \item Let the respondent perform the following tasks within the application in order to familiarise with the application and test its usability:
+        \begin{enumerate}
+            \item Find the latest notification from Gunilla Andersson and interact with her health data
+            \item Find where to manually add a new weight measurement for Gunilla
+            \item Find Gunilla's credentials (telephone number, address etcetera)
+            \item Filter the patient list to only show diabetes patients.
+            \item Filter the patient list to only show patient of high priority / urgent need of help.
+            \item Find when Gunilla has her next appointment with a doctor.
+            \item Find all the notifications for high priority patients.
+        \end{enumerate}
+        \item Let the respondent answer the SUS questions stated in section \ref{ref: Questions}.
+    \end{enumerate}
+    SUS is an abbreviation for System Usability Scale, and gives a good idea of how usable the system is experienced by its intended users. The test is built up by a questionnaire containing ten questions regarding the system. Five of these questions are to be positive statements and the other five are to be negative. The questions used in this very test are to be found under section \ref{ref: Questions}. This kind of test is often good to use when questions regarding usability for a web application is to be answered. The perks of using the SUS-test standard is mostly its easy set up and good coverage of the usability aspect. The ten questions listed under section \ref{ref: Questions} are to be answered on a scale from one to five, where one is to be interpreted as "I strongly disagree" and five as "I strongly agree". How the result from the test is calculated is to be found under section \ref{ref: Calculations}. 
+    
+    \subsection{Questions}
+    \label{ref: Questions}
+    
+    According to usability.gov (https://www.usability.gov/how-to-and-tools/methods/system-usability-scale.html), the following ten questions are to be answered when performing the SUS-test by each respondent: 
+    
+    \begin{enumerate}
+        \item I think that I would like to use this system frequently.
+        \item I found the system unnecessarily complex.
+        \item I thought the system was easy to use.
+        \item I think that I would need the support of a technical person to be able to use this system.
+        \item I found the various functions in this system were well integrated.
+        \item I thought there was too much inconsistency in this system.
+        \item I would imagine that most people would learn to use this system very quickly.
+        \item I found the system very cumbersome to use.
+        \item I felt very confident using the system.
+        \item I needed to learn a lot of things before I could get going with this system.
+    \end{enumerate}
+    \subsection{Calculation of the result}
+    In order to get a result from the test, the answers from the respondents are validated. See the equations below for how this is done. The positive statements are numbered with uneven numbers $(1, 3, 5, 7, 9)$ and the negative statements are numbered with even numbers $(2, 4, 6, 8, 10)$. The resulting calculation is denoted $X_{i,Positive}$ for $ i = \{1,3,5,7,9\}$ and $X_{i,Negative}$ for $ i = \{2,4,6,8,10\}$. $Y_i = $ The answered number on question $ i = \{1,..,10\}$.
+
+     \begin{equation}
+        X_{i,Positive} = Y_i - 1 \;, \;for \;i = \{1,3,5,7,9\} \; \;else\;  X_{i,Positive} = 0
+     \end{equation}
+    
+     \begin{equation}
+         X_{i,Negative} = 5 - Y_i \;,\; i = \{2,4,6,8,10\}  \;else\;  X_{i,Negative} = 0
+     \end{equation}
+     
+\begin{center}
+    The resulting number for each respondent is then calculated as: 
+\end{center}     
+     
+     \begin{equation}
+         {Final\;result}_{\;one\;respondent} =  (\sum_{i=1}^{10} X_{i,Negative} + X_{i,Positive} ) \times 2,5 
+     \end{equation}
+   
+    The result will end up between zero and 100. According to usability.gov (https://www.usability.gov/how-to-and-tools/methods/system-usability-scale.html), a result above 68 is seen as above average and above 86 is seen as good. These limits and numbers are statistically based on thousands of tests pursued in the past in various projects. The same source gives an idea about how many respondents that has to take the test in order to deliver a viable end result, with numbers varying from 2 to 50. In this test, ten respondents will participate The summarised result from all the respondents is to be found under section \ref{sec: Conclusion}.
+   
+    \label{ref: Calculations}
+    \section{Conclusion \& result}
+    \label{sec: Conclusion}
+    
+    This section will be filled after the tests are performed, most likely between 2020-12-04 and 2020-12-06.
+    
+    \section{Appendix}
+    A figure of the resulting data from Excel is to be displayed here, most likely between 2020-12-04 and 2020-12-06.
+    \subsection{Asked questions in Swedish}
+    Below is the list of the statements being used in the test translated to Swedish. 
+    \begin{enumerate}
+        \item Jag tror att jag skulle vilja använda detta system ofta.
+        \item Jag tycker systemet är onödigt komplext.
+        \item Jag tycker systemet var lätt att använda.
+        \item Jag tror mig behöva hjälp av en tekniskt kunnig och insatt person för att nyttja systemet. 
+        \item Jag tycker de olika funktionerna i systemet var väl integrerade.
+        \item Jag tycker att det fanns för mycket inkonsekvens i detta system.
+        \item Jag skulle tro att de flesta personer skulle lära sig att använda detta system mycket snabbt.
+        \item Jag tycker att systemet var mycket besvärligt att använda.
+        \item Jag kände mig självsäker när jag använde systemet.
+        \item Jag måste lära mig många olika saker innan jag kan använda systemet.
+    \end{enumerate}
+
+    
+\end{document}
