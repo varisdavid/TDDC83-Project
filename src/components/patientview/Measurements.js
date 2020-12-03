@@ -9,7 +9,7 @@ const Measurements = ({ setActiveTabValueM }) => {
     useEffect(() => {
         // Basic example of how to make a authorized fetch call to our backend endpoints
         const measurements = async () => {
-            const ehrid = "9c80a7e4-d314-4dba-997b-2f4ae742bea2"
+            const ehrid = "1f0cd2e4-8d8a-4ece-8d5e-100d52b322cc"
             const domain =  "http://127.0.0.1:5000/measurements/";
 
             try {
@@ -21,9 +21,6 @@ const Measurements = ({ setActiveTabValueM }) => {
                 );
 
                 const responseData = await response.json();
-                console.log(" HÄR KOMMER DATAN?")
-                console.log(responseData);
-                console.log("End of data")
                 setmeasurements(responseData);
             } catch (error) {
                 console.log(error.message);
@@ -31,6 +28,7 @@ const Measurements = ({ setActiveTabValueM }) => {
         };
         measurements();
     },[] );
+    console.log("Kommer datan här");
     console.log(measurement);
 
     return (

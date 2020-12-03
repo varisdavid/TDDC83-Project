@@ -29,7 +29,7 @@ const PatientListOfMedication = () => {
                 );
 
                 const responseData = await response.json();
-                console.log(responseData);
+               // console.log(responseData);
                 setmedicationList(responseData);
             } catch (error) {
                 console.log(error.message);
@@ -38,12 +38,14 @@ const PatientListOfMedication = () => {
 
         medication_list();
     }, []);
-    console.log(medicationList);
+   // console.log("Utranflr fölre");
+   // console.log(medicationList);
+   // console.log("utanfölr efter");
 
 
     //Filter the data to an array that will show the current medication
     function filterDaily(data) {
-        console.log("FilteRDataDaily");
+       // console.log("FilteRDataDaily");
         let newArr = []
         for (let i = 0; i < data.length; i++) {
             if (data[i]['Daily'] === 'True') {
@@ -57,8 +59,8 @@ const PatientListOfMedication = () => {
 
     //Filter the data to an array with when needed medication
     function filterNeed(data) {
-        console.log("FilteRDataNeed");
-        console.log(data);
+      //  console.log("FilteRDataNeed");
+       // console.log(data);
         let newArr = []
         for (let i = 0; i < data.length; i++) {
             if (data[i]['Daily'] === 'False') {
