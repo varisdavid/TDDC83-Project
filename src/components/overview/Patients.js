@@ -19,7 +19,7 @@ import { useHistory } from "react-router-dom";
 import JourTable from "./JourTable";
 import { settingsContext } from "./ColumnFilter";
 import { FetchOverview } from "../dataRetriver";
-import axios from "axios";
+
 
 // Component rendering bell icon (color based on value: integer) and hover information based on (text: string)
 const Notification = ({ value, text }) => {
@@ -183,8 +183,53 @@ const Patients = () => {
   // This can later be used to save our retrieved patientlist from our API.
   // const setPatientList = () => {
   // }
+
+
+  const [fetchState, setFetchState] = useState([])
+  async function fetchData() {
+    const temp_list = [];
+    const response = await FetchOverview();
+    
+    response.data.forEach((row) => {
+      const temp_data = {};
+      //temp_data.team = []
+     /* const temp_team = row.Team.split('"');
+      for (var i = 1; i < temp_team.length; i += 2) 
+        {
+          temp_data.team.push(temp_team[i])
+        }
+    */
+      temp_data.team = "team1";
+      temp_data.notices = 
+        <Notification
+          value={3}
+          text={
+            "Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"
+          }
+        />;
+      temp_data.priority = 3;
+      temp_data.href = <PatientLink id={row.PNR} name={row.Name} />;
+      temp_data.name = row.Name;
+      temp_data.sweID = row.PNR;
+      temp_data.diagnoses = ["Diabetes"];
+      temp_data.updatedAt = "2020-10-08";
+      temp_data.updatedBy = "Patienten";
+      temp_data.age = parseInt(row.Age);
+      temp_data.gender = row.Gender;
+      temp_data.department = row.Department;
+      temp_list.push(temp_data);
+    });
+      setFetchState(temp_list)
+  }
+ 
+  const data = useMemo( () => 
+   fetchData(), []);
+
+  console.log(fetchState); 
   
-const data = useMemo(
+
+/*
+let data = useMemo(
     // To get them in the proper order, using numbers to represent priority, 1 = high, 2 = medium, 3 = low with notification, 4 = low without notification
     () => [
       {
@@ -206,7 +251,7 @@ const data = useMemo(
         age: 73,
         gender: "female",
         team: "Team 1",
-        department: "Department 1",
+        department: "Department 3",
       },
       {
         notices: (
@@ -595,6 +640,7 @@ const data = useMemo(
     []
   );
 
+*/  
   const columns = useMemo(
     () => [
       {
@@ -621,7 +667,7 @@ const data = useMemo(
       {
         Header: "Diagnos",
         accessor: "diagnoses",
-        Cell: ({ value }) => String(value.join(", ")),
+       // Cell: ({ value }) => String(value.join(", ")),
         filter: "containsMatchingValues",
       },
       {
@@ -761,7 +807,6 @@ const data = useMemo(
   };
   const { settings } = useContext(settingsContext);
   // Creates an instance of table, given columns, data and an initial state.
-  const [fetchedData, setFetchedData] = useState([{}]);
   const {
     getTableProps,
     getTableBodyProps,
@@ -795,37 +840,6 @@ const data = useMemo(
   // When something happens, we check to see if we change the sorting option, and we check if the search has been triggered
   useEffect(() => {
     // Basic example of how to make a authorized fetch call to our backend endpoints
-
-    async function fetchData() {
-      const temp_list = [];
-      const request = await FetchOverview();
-
-      request.data.forEach((row) => {
-        const temp_data = {};
-        temp_data.notices = 
-          <Notification
-            value={3}
-            text={
-              "Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"
-            }
-          />;
-        temp_data.priority = 3;
-        temp_data.href = <PatientLink id={row.PNR} name={row.Name} />;
-        temp_data.name = row.Name;
-        temp_data.sweID = row.PNR;
-        temp_data.diagnoses = ["Diabetes"];
-        temp_data.updatedAt = "2020-10-08";
-        temp_data.updatedBy = "Patienten";
-        temp_data.age = row.Age;
-        temp_data.gender = row.Gender;
-        temp_data.team = row.Team;
-        temp_data.department = row.Department;
-        temp_list.push(temp_data);
-      });
-      setFetchedData(temp_list);
-      console.log(temp_list); 
-    }
-    fetchData();
     toggleSortBy(sortState.columnId);
     setGlobalFilter(searchValue); // We use the stored searchValue to globally filter our table by.
   }, [
