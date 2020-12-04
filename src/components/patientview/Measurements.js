@@ -5,7 +5,7 @@ import { RuleEngine, WeightChart, BloodPressure, PhysicalActivityChart } from ".
 const Measurements = ({ setActiveTabValueM }) => {
 
     // used to test ruleEngine
-     console.log(RuleEngine());
+    // console.log(RuleEngine());
 
 
     return (
