@@ -205,6 +205,7 @@ const PatientsSearch = ({ setSortState,
                             width: '100%'
                         }}
                         placeholder='Sök:'
+                        id='dynSearchStr'
                         inputProps={{ 'aria-label': 'search' }}
                         onChange={handleSearchChange}
                         value={searchValue}

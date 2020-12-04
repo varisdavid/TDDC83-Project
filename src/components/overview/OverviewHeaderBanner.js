@@ -37,6 +37,7 @@ const OverviewHeaderBanner = ({ healthCenter }) => {
                         <Settings style={{ color: "#828282", fontSize: 50 }} />
                     </Link>
                     <Link 
+                        id="LogOutBtn"
                         className="text-gray-800 mr-4" 
                         onClick={() =>
                             logout({

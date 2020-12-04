@@ -333,7 +333,7 @@ const CreateNewFilterModal = ({ setDropdownOpen, customFilterData, setCustomFilt
                 key="modal-regular"
 
             >
-                <div style={modalStyle} className={classes.paper}>
+                <div style={modalStyle} className={classes.paper} id='adminOverviewNewViewPopupWindow'>
                     <h2 className='font-bold p-2 mt-2' id='modal-title'>Filtrera</h2>
 
                     <div className='flex-col items-start'>
