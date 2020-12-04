@@ -19,7 +19,12 @@ import { useHistory } from "react-router-dom";
 import JourTable from "./JourTable";
 import { settingsContext } from "./ColumnFilter";
 import { FetchOverview } from "../dataRetriver";
-
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setAdress,
+  setCurrentEhr,
+} from "../../Redux/serverInfo/serverInfo.actions";
+import axios from "axios";
 
 // Component rendering bell icon (color based on value: integer) and hover information based on (text: string)
 const Notification = ({ value, text }) => {
@@ -74,13 +79,14 @@ const useStyles = makeStyles((theme) => ({
 const PatientLink = ({ id, name }) => {
   //////////////////////////////////////////////////////////////////////////////////
   const classes = useStyles();
+  const dispatch = useDispatch();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = useState(getModalStyle);
   //////////////////////////////////////////////////////////////////////////////////
 
   const href = "/patient/overview/" + id;
   const history = useHistory();
-
+  //dispatch(setCurrentEhr(ehr));
   // Keeps track of whether or not the popup for navigating to specific patient view has been toggled.
   const [openPatientViewConfirm, setOpenPatientViewConfirm] = useState(false);
 
@@ -183,53 +189,61 @@ const Patients = () => {
   // This can later be used to save our retrieved patientlist from our API.
   // const setPatientList = () => {
   // }
+  const adress = useSelector((reduxState) => reduxState.serverInfo.adress);
+  console.log(adress);
 
+  const [fetchState, setFetchState] = useState([]);
 
-  const [fetchState, setFetchState] = useState([])
-  async function fetchData() {
-    const temp_list = [];
-    const response = await FetchOverview();
-    
-    response.data.forEach((row) => {
-      const temp_data = {};
-      //temp_data.team = []
-     /* const temp_team = row.Team.split('"');
-      for (var i = 1; i < temp_team.length; i += 2) 
-        {
-          temp_data.team.push(temp_team[i])
-        }
-    */
-      temp_data.team = "team1";
-      temp_data.notices = 
-        <Notification
-          value={3}
-          text={
-            "Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"
-          }
-        />;
-      temp_data.priority = 3;
-      temp_data.href = <PatientLink id={row.PNR} name={row.Name} />;
-      temp_data.name = row.Name;
-      temp_data.sweID = row.PNR;
-      temp_data.diagnoses = ["Diabetes"];
-      temp_data.updatedAt = "2020-10-08";
-      temp_data.updatedBy = "Patienten";
-      temp_data.age = parseInt(row.Age);
-      temp_data.gender = row.Gender;
-      temp_data.department = row.Department;
-      temp_list.push(temp_data);
-    });
-      setFetchState(temp_list)
-  }
- 
-  const data = useMemo( () => 
-   fetchData(), []);
+  useEffect(() => {
+    const fetchData = async () => {
+      const domain = `${adress}/overview/`;
+      const temp_list = [];
+      console.log("USE_EFFECT");
 
-  console.log(fetchState); 
-  
+      axios
+        .get(domain)
+        .then((res) => {
+          res.data.forEach((row) => {
+            const temp_data = {};
+            //temp_data.team = []
+            /* const temp_team = row.Team.split('"');
+            for (var i = 1; i < temp_team.length; i += 2) 
+              {
+                temp_data.team.push(temp_team[i])
+              }
+          */
+            temp_data.team = "team1";
+            temp_data.notices = (
+              <Notification
+                value={3}
+                text={
+                  "Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"
+                }
+              />
+            );
+            temp_data.priority = 3;
+            temp_data.href = <PatientLink id={row.PNR} name={row.Name} />;
+            temp_data.name = row.Name;
+            temp_data.sweID = row.PNR;
+            temp_data.diagnoses = ["Diabetes"];
+            temp_data.updatedAt = "2020-10-08";
+            temp_data.updatedBy = "Patienten";
+            temp_data.age = parseInt(row.Age);
+            temp_data.gender = row.Gender;
+            temp_data.department = row.Department;
+            temp_list.push(temp_data);
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      setFetchState(temp_list);
+    };
+    fetchData();
+  }, []);
 
-/*
-let data = useMemo(
+  /*
+  let data = useMemo(
     // To get them in the proper order, using numbers to represent priority, 1 = high, 2 = medium, 3 = low with notification, 4 = low without notification
     () => [
       {
@@ -252,395 +266,16 @@ let data = useMemo(
         gender: "female",
         team: "Team 1",
         department: "Department 3",
-      },
-      {
-        notices: (
-          <Notification
-            value={1}
-            text={
-              "Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"
-            }
-          />
-        ),
-        priority: 1,
-        href: <PatientLink id="470203-1324" name="Gunilla Andersson" />,
-        name: "Gunilla Andersson",
-        sweID: "470203-1324",
-        diagnoses: ["Diabetes", "Hypertoni"],
-        updatedAt: "2020-10-08",
-        updatedBy: "Patienten",
-        age: 73,
-        gender: "female",
-        team: "Team 1",
-        department: "Department 1",
-      },
-      {
-        notices: (
-          <Notification
-            value={1}
-            text={
-              "Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"
-            }
-          />
-        ),
-        priority: 1,
-        href: <PatientLink id="470203-1324" name="Gunilla Andersson" />,
-        name: "Gunilla Andersson",
-        sweID: "470203-1324",
-        diagnoses: ["Diabetes", "Hypertoni"],
-        updatedAt: "2020-10-08",
-        updatedBy: "Patienten",
-        age: 73,
-        gender: "female",
-        team: "Team 1",
-        department: "Department 1",
-      },
-      {
-        notices: (
-          <Notification
-            value={1}
-            text={
-              "Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"
-            }
-          />
-        ),
-        priority: 1,
-        href: <PatientLink id="470203-1324" name="Gunilla Andersson" />,
-        name: "Gunilla Andersson",
-        sweID: "470203-1324",
-        diagnoses: ["Diabetes", "Hypertoni"],
-        updatedAt: "2020-10-08",
-        updatedBy: "Patienten",
-        age: 73,
-        gender: "female",
-        team: "Team 1",
-        department: "Department 1",
-      },
-      {
-        notices: (
-          <Notification
-            value={1}
-            text={
-              "Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"
-            }
-          />
-        ),
-        priority: 1,
-        href: <PatientLink id="470203-1324" name="Gunilla Andersson" />,
-        name: "Gunilla Andersson",
-        sweID: "470203-1324",
-        diagnoses: ["Diabetes", "Hypertoni"],
-        updatedAt: "2020-10-08",
-        updatedBy: "Patienten",
-        age: 73,
-        gender: "female",
-        team: "Team 1",
-        department: "Department 1",
-      },
-      {
-        notices: (
-          <Notification
-            value={1}
-            text={
-              "Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"
-            }
-          />
-        ),
-        priority: 1,
-        href: <PatientLink id="470203-1324" name="Gunilla Andersson" />,
-        name: "Gunilla Andersson",
-        sweID: "470203-1324",
-        diagnoses: ["Diabetes", "Hypertoni"],
-        updatedAt: "2020-10-08",
-        updatedBy: "Patienten",
-        age: 73,
-        gender: "female",
-        team: "Team 1",
-        department: "Department 1",
-      },
-      {
-        notices: (
-          <Notification
-            value={1}
-            text={
-              "Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"
-            }
-          />
-        ),
-        priority: 1,
-        href: <PatientLink id="470203-1324" name="Gunilla Andersson" />,
-        name: "Gunilla Andersson",
-        sweID: "470203-1324",
-        diagnoses: ["Diabetes", "Hypertoni"],
-        updatedAt: "2020-10-08",
-        updatedBy: "Patienten",
-        age: 73,
-        gender: "female",
-        team: "Team 1",
-        department: "Department 1",
-      },
-      {
-        notices: (
-          <Notification
-            value={1}
-            text={
-              "Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"
-            }
-          />
-        ),
-        priority: 1,
-        href: <PatientLink id="470203-1324" name="Gunilla Andersson" />,
-        name: "Gunilla Andersson",
-        sweID: "470203-1324",
-        diagnoses: ["Diabetes", "Hypertoni"],
-        updatedAt: "2020-10-08",
-        updatedBy: "Patienten",
-        age: 73,
-        gender: "female",
-        team: "Team 1",
-        department: "Department 1",
-      },
-      {
-        notices: (
-          <Notification
-            value={2}
-            text={
-              "Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"
-            }
-          />
-        ),
-        priority: 2,
-        href: <PatientLink id="470203-1324" name="Gunilla Andersson" />,
-        name: "Gunilla Andersson",
-        sweID: "470203-1324",
-        diagnoses: ["Diabetes", "Hypertoni"],
-        updatedAt: "2020-10-08",
-        updatedBy: "Patienten",
-        age: 73,
-        gender: "female",
-        team: "Team 1",
-        department: "Department 1",
-      },
-      {
-        notices: (
-          <Notification
-            value={2}
-            text={
-              "Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"
-            }
-          />
-        ),
-        priority: 2,
-        href: <PatientLink id="470203-1324" name="Gunilla Andersson" />,
-        name: "Gunilla Andersson",
-        sweID: "470203-1324",
-        diagnoses: ["Diabetes", "Hypertoni"],
-        updatedAt: "2020-10-08",
-        updatedBy: "Patienten",
-        age: 73,
-        gender: "female",
-        team: "Team 1",
-        department: "Department 1",
-      },
-      {
-        notices: (
-          <Notification
-            value={2}
-            text={
-              "Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"
-            }
-          />
-        ),
-        priority: 2,
-        href: <PatientLink id="470203-1324" name="Gunilla Andersson" />,
-        name: "Gunilla Andersson",
-        sweID: "470203-1324",
-        diagnoses: ["Diabetes", "Hypertoni"],
-        updatedAt: "2020-10-08",
-        updatedBy: "Patienten",
-        age: 73,
-        gender: "female",
-        team: "Team 1",
-        department: "Department 2",
-      },
-      {
-        notices: (
-          <Notification
-            value={2}
-            text={
-              "Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"
-            }
-          />
-        ),
-        priority: 2,
-        href: <PatientLink id="470203-1324" name="Gunilla Andersson" />,
-        name: "Gunilla Andersson",
-        sweID: "470203-1324",
-        diagnoses: ["Diabetes", "Hypertoni"],
-        updatedAt: "2020-10-08",
-        updatedBy: "Patienten",
-        age: 73,
-        gender: "female",
-      },
-      {
-        notices: (
-          <Notification
-            value={3}
-            text={
-              "Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"
-            }
-          />
-        ),
-        priority: 3,
-        href: <PatientLink id="470203-1324" name="Gunilla Andersson" />,
-        name: "Gunilla Andersson",
-        sweID: "470203-1324",
-        diagnoses: ["Diabetes", "Hypertoni"],
-        updatedAt: "2020-10-08",
-        updatedBy: "Patienten",
-        age: 73,
-        gender: "female",
-        team: "Team 1",
-        department: "Department 2",
-      },
-      {
-        notices: (
-          <Notification
-            value={3}
-            text={
-              "Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"
-            }
-          />
-        ),
-        priority: 3,
-        href: <PatientLink id="470203-1324" name="Gunilla Andersson" />,
-        name: "Gunilla Andersson",
-        sweID: "470203-1324",
-        diagnoses: ["Diabetes", "Hypertoni"],
-        updatedAt: "2020-10-08",
-        updatedBy: "Patienten",
-        age: 73,
-        gender: "female",
-        team: "Team 1",
-        department: "Department 2",
-      },
-      {
-        notices: <Notification value={0} text={""} />,
-        priority: 4,
-        href: <PatientLink id="470203-1324" name="Gunilla Andersson" />,
-        name: "Gunilla Andersson",
-        sweID: "470203-1324",
-        diagnoses: ["Diabetes", "Hypertoni"],
-        updatedAt: "2020-10-08",
-        updatedBy: "Patienten",
-        age: 73,
-        gender: "female",
-        team: "Team 2",
-        department: "Department 2",
-      },
-      {
-        notices: <Notification value={0} text={""} />,
-        priority: 4,
-        href: <PatientLink id="410203-1324" name="Patrik Andersson" />,
-        name: "Patrik Andersson",
-        sweID: "410203-1324",
-        diagnoses: ["Diabetes"],
-        updatedAt: "2020-10-08",
-        updatedBy: "Patienten",
-        age: 79,
-        gender: "male",
-        team: "Team 2",
-        department: "Department 2",
-      },
-      {
-        notices: (
-          <Notification
-            value={1}
-            text={
-              "Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"
-            }
-          />
-        ),
-        priority: 1,
-        href: <PatientLink id="350203-1324" name="Göran Andersson" />,
-        name: "Göran Andersson",
-        sweID: "350203-1324",
-        diagnoses: ["Diabetes"],
-        updatedAt: "2020-10-08",
-        updatedBy: "Patienten",
-        age: 85,
-        gender: "male",
-        team: "Team 2",
-        department: "Department 2",
-      },
-      {
-        notices: (
-          <Notification
-            value={3}
-            text={
-              "Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"
-            }
-          />
-        ),
-        priority: 3,
-        href: <PatientLink id="998877-1324" name="Casper Andersson" />,
-        name: "Casper Andersson",
-        sweID: "998877-1324",
-        diagnoses: ["Diabetes"],
-        updatedAt: "2020-10-08",
-        updatedBy: "Patienten",
-        age: 21,
-        gender: "male",
-        team: "Team 2",
-        department: "Department 2",
-      },
-      {
-        notices: (
-          <Notification
-            value={3}
-            text={
-              "Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"
-            }
-          />
-        ),
-        priority: 3,
-        href: <PatientLink id="350203-1324" name="Xander Andersson" />,
-        name: "Xander Andersson",
-        sweID: "350203-1324",
-        diagnoses: ["Diabetes"],
-        updatedAt: "2020-10-08",
-        updatedBy: "Patienten",
-        age: 85,
-        gender: "male",
-        team: "Team 2",
-        department: "Department 1",
-      },
-      {
-        notices: (
-          <Notification
-            value={3}
-            text={
-              "Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"
-            }
-          />
-        ),
-        priority: 3,
-        href: <PatientLink id="350203-1324" name="Viktor Andersson" />,
-        name: "Viktor Andersson",
-        sweID: "350203-1324",
-        diagnoses: ["Diabetes"],
-        updatedAt: "2020-10-08",
-        updatedBy: "Patienten",
-        age: 85,
-        gender: "male",
-        team: "Team 2",
-        department: "Department 1",
-      },
+      }
     ],
     []
-  );
+  );*/
 
-*/  
+  const data = useMemo(() => {
+    console.log(fetchState)
+    return fetchState;
+  }, [fetchState]);
+
   const columns = useMemo(
     () => [
       {
@@ -667,7 +302,7 @@ let data = useMemo(
       {
         Header: "Diagnos",
         accessor: "diagnoses",
-       // Cell: ({ value }) => String(value.join(", ")),
+        // Cell: ({ value }) => String(value.join(", ")),
         filter: "containsMatchingValues",
       },
       {
@@ -797,7 +432,7 @@ let data = useMemo(
 
   // State keeping track of wheter the sort menu has been toggled or not
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  
+
   // Used for beginning values passed to the PatientTable
   const initialState = {
     sortBy: [sortState],
@@ -834,9 +469,8 @@ let data = useMemo(
 
   const { getAccessTokenSilently } = useAuth0();
 
-  const [loading, setLoading] = useState(true);
- 
-  
+
+
   // When something happens, we check to see if we change the sorting option, and we check if the search has been triggered
   useEffect(() => {
     // Basic example of how to make a authorized fetch call to our backend endpoints
@@ -848,7 +482,7 @@ let data = useMemo(
     toggleSortBy,
     setGlobalFilter,
     getAccessTokenSilently,
-  ]); 
+  ]);
   return (
     <Grid container alignItems="center" justify="center">
       <Grid container spacing={3} justify="center">
