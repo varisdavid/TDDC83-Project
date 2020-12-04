@@ -6,6 +6,11 @@ import { FormPatientAdmin } from '..';
 //Not working just the shell for each block at patientView
 const BlockPatientAdmin = ({ consts }) => {
 
+    //Handles click for moving to changing refernce values for a measurment type
+    const handleClick = (event) => {
+        //Something
+    };
+
     return (
         <div>
             <div style={{ border: '5px solid #E0E0E0', fontSize: '20px', fontWeight: 'bold' }} height='20px'>
@@ -18,7 +23,7 @@ const BlockPatientAdmin = ({ consts }) => {
                 <div>
                     <h1 style={{ marginTop: "1.5rem", fontsize: '15px', fontWeight: 'bold' }}>Inställda målintervall för mätvärden</h1>
 
-                    <Button id="moveToChangeInterval" style={{
+                    <Button id="moveToChangeInterval" onClick={() => handleClick()} style={{
                         border: '1px solid lightgrey',
                         marginLeft: "auto",
                         marginRight: "auto",

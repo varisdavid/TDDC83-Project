@@ -1,11 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { InputBase} from '@material-ui/core';
 
-const ActivityLogPatientSearchBar = () => {
+//Searchbar for the activity log on the admin page
+const ActivityLogPatientSearchBar = ({searchValue, setSearchValue}) => {
 
-
-    const [searchValue, setSearchValue] = useState("");
-
+    //Handle search - for now it leads to nothing
     const handleSearchChange = (event) => {
         setSearchValue(event.target.value);
     };

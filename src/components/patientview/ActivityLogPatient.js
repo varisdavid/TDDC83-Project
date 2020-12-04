@@ -1,8 +1,11 @@
-import React, {useMemo} from 'react';
+import React, {useMemo, useState} from 'react';
 import { ActivityLogPatientSearchBar, ActivityLogPatientEntries } from '..';
 
 //Not logicaly working, more of a visual structure
 const ActivityLogPatient = () => {
+
+    //Needed for in the future be able to sort data after search
+    const [searchValue, setSearchValue] = useState("");
 
     //Mock data 
     const entries = useMemo(
@@ -22,7 +25,7 @@ const ActivityLogPatient = () => {
 
     return (
         <div id='tab-scroll' style={{
-            border: '2px solid #A9D7FF',
+            border: '4px solid #A9D7FF',
             boxShadow: "5px 7px 20px lightgrey",
             borderRadius: '25px',
             fontSize: '15px',
@@ -48,7 +51,9 @@ const ActivityLogPatient = () => {
                     marginRight: '5%',
                     marginBottom: '20px',
                 }}>
-                <ActivityLogPatientSearchBar/>
+                <ActivityLogPatientSearchBar
+                setSearchValue={setSearchValue}
+                searchValue={searchValue}/>
             </div>
 
             <div style={{marginLeft: '5%',

@@ -4,6 +4,7 @@ const ActivityLogPatientEntries = ({ entries }) => {
 
     return (
         <div>
+            {/*Renders the different log entries*/}
             { entries.map((entries, index) => (
                 <div key={entries.date} style={{
                     background: '#A9D7FF',
