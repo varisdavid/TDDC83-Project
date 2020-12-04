@@ -186,7 +186,7 @@ const CreateNewFilterModal = ({ setDropdownOpen, customFilterData, setCustomFilt
                     onClose={handleCloseSave}
                     aria-labelledby='modal-popup-title'
                 >
-                    <div key="modal-popup-div" style={modalStyle} className={classes.paper2}>
+                    <div key="modal-popup-div" style={modalStyle} className={classes.paper2} id='adminOverviewAllPatientsConfirmView'>
                         <h2 className='font-bold mt-2' id='modal-popup-title'>Spara ny överblick</h2>
 
                         <div className='flex-col items-start'>
@@ -379,7 +379,7 @@ const CreateNewFilterModal = ({ setDropdownOpen, customFilterData, setCustomFilt
                                     <InputLabel>Kön</InputLabel>
                                     <Select
                                         labelId='demo-simple-select-outlined-label'
-                                        id='demo-simple-select-outlined'
+                                        id='gender'
                                         value={customFilterData.gender}
                                         onChange={handleChange}
                                         label='Gender'
@@ -394,24 +394,24 @@ const CreateNewFilterModal = ({ setDropdownOpen, customFilterData, setCustomFilt
                                 <FormControl className={classes.select} variant='outlined'>
                                     <InputLabel>Team</InputLabel>
                                     <Select
-                                        labelId='demo-simple-select-outlined-label'
-                                        id='demo-simple-select-outlined'
+                                        labelId='team'
+                                        id='teammenu'
                                         value={customFilterData.team}
                                         onChange={handleChange}
                                         label='Team'
                                         inputProps={{ name: 'team' }}
                                     >
                                         <MenuItem value={'all'}><em>Alla</em></MenuItem>
-                                        <MenuItem value={'Team 1'}>Team 1</MenuItem>
-                                        <MenuItem value={'Team 2'}>Team 2</MenuItem>
+                                        <MenuItem value={'team1'}>Team 1</MenuItem>
+                                        <MenuItem value={'team2'}>Team 2</MenuItem>
                                     </Select>
                                 </FormControl>
 
                                 <FormControl className={classes.select} variant='outlined'>
                                     <InputLabel>Department</InputLabel>
                                     <Select
-                                        labelId='demo-simple-select-outlined-label'
-                                        id='demo-simple-select-outlined'
+                                        labelId='department'
+                                        id='departmentMenu'
                                         value={customFilterData.department}
                                         onChange={handleChange}
                                         label='Department'
@@ -420,8 +420,8 @@ const CreateNewFilterModal = ({ setDropdownOpen, customFilterData, setCustomFilt
 
                                     >
                                         <MenuItem value={'all'}><em>Alla</em></MenuItem>
-                                        <MenuItem value={'Department 1'}>Department 1</MenuItem>
-                                        <MenuItem value={'Department 2'}>Department 2</MenuItem>
+                                        <MenuItem value={'Department1'}>Department 1</MenuItem>
+                                        <MenuItem value={'Department2'}>Department 2</MenuItem>
                                     </Select>
                                 </FormControl>
 
@@ -429,17 +429,17 @@ const CreateNewFilterModal = ({ setDropdownOpen, customFilterData, setCustomFilt
                                     <FormLabel component='legend' style={{ color: '#000' }}>Prioritet</FormLabel>
                                     <FormGroup className='ml-3'>
                                         <FormControlLabel
-                                            control={<Checkbox style={{ color: '#0066B3', }} checked={customFilterData.priority.low} onChange={handleChange} name='low' />}
+                                            control={<Checkbox id='Low' style={{ color: '#0066B3', }} checked={customFilterData.priority.low} onChange={handleChange} name='low' />}
                                             label='Låg'
                                             style={{ marginBottom: '0px' }}
                                         />
                                         <FormControlLabel
-                                            control={<Checkbox style={{ color: '#0066B3', }} checked={customFilterData.priority.average} onChange={handleChange} name='average' />}
+                                            control={<Checkbox id='Medium' style={{ color: '#0066B3', }} checked={customFilterData.priority.average} onChange={handleChange} name='average' />}
                                             label='Medel'
                                             style={{ marginBottom: '0px' }}
                                         />
                                         <FormControlLabel
-                                            control={<Checkbox style={{ color: '#0066B3', }} checked={customFilterData.priority.high} onChange={handleChange} name='high' />}
+                                            control={<Checkbox id='High' style={{ color: '#0066B3', }} checked={customFilterData.priority.high} onChange={handleChange} name='high' />}
                                             label='Hög'
                                             style={{ marginBottom: '0px' }}
                                         />
@@ -451,7 +451,8 @@ const CreateNewFilterModal = ({ setDropdownOpen, customFilterData, setCustomFilt
                             <div className='flex-col w-1/2 p-2 ml-4 mt-5 mb-5' style={{ backgroundColor: 'rgba(169, 215, 255, 0.3)', borderRadius: '15px' }}>
                                 <FormControl className='flex w-full mt-2' style={{ height: 'auto' }}>
                                     <InputLabel disabled className='flex m-2' style={{ fontWeight: '400', color: '#000' }}>Diagnos:</InputLabel>
-                                    <Input
+                                    <Input 
+                                        id='customizeViewDiagnosis'
                                         disableUnderline
                                         className='flex text-gray-800'
                                         style={{
@@ -475,7 +476,7 @@ const CreateNewFilterModal = ({ setDropdownOpen, customFilterData, setCustomFilt
                                 </FormControl>
                                 <div style={{ marginTop: '10px', width: '85%', marginLeft: 'auto', marginRight: 'auto', height: '70%', backgroundColor: '#FFFFFF' }}>
                                     {diagnoses.map(item => {
-                                        const labelId = `checkbox-list-label-${item}`;
+                                        const labelId = `${item}`;
 
                                         return (
                                             <ListItem key={item} style={{ paddingTop: '0px', paddingBottom: '0px' }} role={undefined} button onClick={handleDiagnoseToggle(item)}>
@@ -498,7 +499,7 @@ const CreateNewFilterModal = ({ setDropdownOpen, customFilterData, setCustomFilt
                                 </div>
                             </div>
                         </div>
-                        <Button className='flex shadow float-right mr-4' style={{ width: '120px' }} onClick={handleOk}>Ok</Button>
+                        <Button className='flex shadow float-right mr-4' id='okView' style={{ width: '120px' }} onClick={handleOk}>Ok</Button>
                     </div>
                 </div>
             </Modal>
