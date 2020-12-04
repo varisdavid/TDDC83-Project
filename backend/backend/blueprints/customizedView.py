@@ -7,7 +7,7 @@ from backend.database.models import CustomizedView, Employee
 from backend.auth import _build_cors_preflight_response, _corsify_actual_response
 
 # Creates Blueprint
-customizedView_bp = Blueprint("customizedView", __name__, url_prefix="/customizedview")
+customizedView_bp = Blueprint("customizedView", __name__, url_prefix="/api/customizedview")
 
 # Route for fetching all available/selectable customized views for a certain user
 @customizedView_bp.route("/myviews", methods=["POST", "OPTIONS"])
