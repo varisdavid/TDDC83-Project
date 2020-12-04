@@ -315,6 +315,7 @@ const CreateNewFilterModal = ({ setDropdownOpen, customFilterData, setCustomFilt
     return (
         <>
             <Button component={'span'} onClick={handleOpen} className="shadow mr-2"
+                id='adminOverviewNewViewBtn'
                 style={{
                     paddingTop: '2px',
                     paddingBottom: '2px',
