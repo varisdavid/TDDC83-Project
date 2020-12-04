@@ -1,15 +1,8 @@
 import React from 'react';
-//import { InputBase } from '@material-ui/core';
+
 //Creates a form for changing when notifications should be sent
 const FormPatientAdmin = ({ inputValues, setTempValue }) => {
 
-    /*Consts handling changes
-        const handleChange = (event) => {
-            console.log(event.target.value);
-            inputValues.lowWarning[0]=parseInt(event.target.value);
-            console.log(inputValues);
-            setTempValue(inputValues);
-        };*/
     //Consts handling changes in form
     const handleChangeLow0 = (event) => {
         inputValues.lowWarning[0]=parseInt(event.target.value);

@@ -56,7 +56,6 @@ const Admin = () => {
         setDataPhysicalActivity(tempDataPhysicalActivity);
         setDataBloodPressure(tempDataBloodPressure);
         setDataWeight(tempDataWeight);
-        console.log(dataWeight);
     };
 
     return (
