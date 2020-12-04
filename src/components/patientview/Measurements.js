@@ -1,37 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import { WeightChart, BloodPressure, PhysicalActivityChart } from "..";
+import { WeightChart, BloodPressureChart, PhysicalActivityChart } from "..";
 
 
 const Measurements = ({ setActiveTabValueM }) => {
-
-    // When something happens, we check to see if we change the sorting option, and we check if the search has been triggered
-    const [measurement, setmeasurements] = useState([]);
-    useEffect(() => {
-        // Basic example of how to make a authorized fetch call to our backend endpoints
-        const measurements = async () => {
-            const ehrid = "1f0cd2e4-8d8a-4ece-8d5e-100d52b322cc"
-            const domain =  "http://127.0.0.1:5000/measurements/";
-
-            try {
-                // const token = await getAccessTokenSilently();
-                const response = await fetch(domain+ehrid,
-                    {
-                        headers: {},
-                    }
-                );
-
-                const responseData = await response.json();
-                setmeasurements(responseData);
-            } catch (error) {
-                console.log(error.message);
-            }
-        };
-        measurements();
-    },[] );
-    console.log("Kommer datan här");
-    console.log(measurement);
-    console.log("enbd");
-
 
     return (
         <>
@@ -51,7 +22,7 @@ const Measurements = ({ setActiveTabValueM }) => {
                         e.preventDefault();
                         setActiveTabValueM(2);
                     }}>
-                        <BloodPressure />
+                        <BloodPressureChart />
                     </div>
 
                     {/*Displays a clickable physicalChart*/}
@@ -59,7 +30,7 @@ const Measurements = ({ setActiveTabValueM }) => {
                         e.preventDefault();
                         setActiveTabValueM(3);
                     }}>
-                        <PhysicalActivityChart data = {measurement} />
+                        <PhysicalActivityChart />
                     </div>
                 </div>
             </div>

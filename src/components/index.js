@@ -41,7 +41,7 @@ import PatientOverviewMeasurementsTable from "./patientview/PatientOverviewMeasu
 import PatientResponsibleCaregiversTable from "./patientview/PatientResponsibleCaregiversTable";
 
 import WeightChart from "./patientview/WeightChart";
-import BloodPressure from "./patientview/BloodPressure";
+import BloodPressureChart from "./patientview/BloodPressureChart";
 import PatientOverviewCalendar from "./patientview/PatientOverviewCalendar";
 import PhysicalActivityChart from "./patientview/PhysicalActivityChart";
 import BloodPressurePage from "./patientview/BloodPressurePage";
@@ -98,7 +98,7 @@ export {
     PatientResponsibleCaregiversTable,
     PatientListOfMedicationTable,
     WeightChart,
-    BloodPressure,
+    BloodPressureChart,
     PatientOverviewCalendar,
     PhysicalActivityChart,
     BloodPressurePage,

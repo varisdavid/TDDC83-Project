@@ -3,7 +3,10 @@ import {
     LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine, ResponsiveContainer,
 } from 'recharts';
 
+
+// const data = measurement;
 //fake data that is being displayed in the chart
+
 const data = [
     {
         name: '', Högt: 100, Lågt: 70, status: 'red',
@@ -33,6 +36,8 @@ const data = [
         name: '', Högt: 147, Lågt: 76, status: 'red',
     },
 ];
+
+
 
 //fake data that displays boundaires
 const goalLimitsUpper = [120, 130];
@@ -65,7 +70,7 @@ const CustomizedDot = (props) => {
 
 
 //Displays the chart
-export default class BloodPressure extends PureComponent {
+export default class BloodPressureChart extends PureComponent {
 
     render() {
         return (
