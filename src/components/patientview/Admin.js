@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from "@material-ui/core";
 import { ActivityLogPatient, BlockPatientAdmin } from '..'
 
+//Admin page
 const Admin = () => {
 
     return (
@@ -10,6 +11,7 @@ const Admin = () => {
                 <div className="header-admin-patient">
                     Inställningar - Prioriteringar och mätvärden
                 </div>
+                {/*Displays the blocks for the different measurements*/}
                 <BlockPatientAdmin consts={{ header: "Vikt" }} />
                 <BlockPatientAdmin consts={{ header: "Blodtryck" }} />
                 <BlockPatientAdmin consts={{ header: "Fysisk aktivitet" }} />
@@ -26,7 +28,8 @@ const Admin = () => {
                 }}> Spara</Button>
                 </div>
             </div>
-            <div style={{ width: "30%", marginLeft: '10%'}}>
+            {/*Displays the activity log for a patient */}
+            <div style={{ width: "30%", marginLeft: '5%'}}>
                 <ActivityLogPatient/>
             </div>
         </div>
