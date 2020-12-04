@@ -4,11 +4,17 @@ import { Button } from "@material-ui/core";
 import { FormPatientAdmin } from '..';
 
 //Not working just the shell for each block at patientView
-const BlockPatientAdmin = ({ consts }) => {
+const BlockPatientAdmin = ({ consts, inputValues,setTempValue}) => {
 
     //Handles click for moving to changing refernce values for a measurment type
     const handleClick = (event) => {
-        //Something
+        if (consts.header==="Vikt" ) {
+            window.location.href='/patient/measurements/weight'
+        } else if (consts.header==="Blodtryck"){
+            window.location.href='/patient/measurements/blood-pressure'
+        } else if (consts.header==="Fysisk aktivitet"){
+            window.location.href='/patient/measurements/physical-activity'
+        }
     };
 
     return (
@@ -18,7 +24,7 @@ const BlockPatientAdmin = ({ consts }) => {
             </div>
             <div className="flex justify-center" style={{ border: '5px solid #E0E0E0' }}>
                 <div style={{ marginRight: '20px' }}>
-                    <FormPatientAdmin />
+                    <FormPatientAdmin inputValues={inputValues} setTempValue={setTempValue}/>
                 </div>
                 <div>
                     <h1 style={{ marginTop: "1.5rem", fontsize: '15px', fontWeight: 'bold' }}>Inställda målintervall för mätvärden</h1>

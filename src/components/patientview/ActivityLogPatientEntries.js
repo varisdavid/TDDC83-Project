@@ -6,7 +6,7 @@ const ActivityLogPatientEntries = ({ entries }) => {
         <div>
             {/*Renders the different log entries*/}
             { entries.map((entries, index) => (
-                <div key={entries.date} style={{
+                <div key={index} style={{
                     background: '#A9D7FF',
                     padding: '20px',
                     marginBottom: '20px',
