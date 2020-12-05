@@ -61,8 +61,6 @@ import SliderMeasurements from "./patientview/SliderMeasurements";
 import ActivityLogPatient from "./patientview/ActivityLogPatient";
 import FormPatientAdmin from "./patientview/FormPatientAdmin";
 import BlockPatientAdmin from "./patientview/BlockPatientAdmin";
-import ActivityLogPatientSearchBar from "./patientview/ActivityLogPatientSearchBar";
-import ActivityLogPatientEntries from "./patientview/ActivityLogPatientEntries";
 
 // import Notices from './Notices';
 // import NoticesTable from './NoticesTable';
@@ -117,6 +115,4 @@ export {
     TableForChartWeightChartPage,
     RuleEngine,
     SliderMeasurements,
-    ActivityLogPatientSearchBar,
-    ActivityLogPatientEntries,
 };

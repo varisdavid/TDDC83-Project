@@ -6,7 +6,7 @@ from backend.database.models import Employee
 from backend.auth import _build_cors_preflight_response, _corsify_actual_response
 
 # Creates Blueprint
-employee_bp = Blueprint("employee", __name__, url_prefix="/api/employee")
+employee_bp = Blueprint("employee", __name__, url_prefix="/employee")
 
 # Route for fetching all employees
 @employee_bp.route("/all", methods=["GET", "OPTIONS"])

@@ -6,7 +6,7 @@ from backend.database.models import Team
 from backend.auth import _build_cors_preflight_response, _corsify_actual_response
 
 # Creates Blueprint
-team_bp = Blueprint("team", __name__, url_prefix="/api/team")
+team_bp = Blueprint("team", __name__, url_prefix="/team")
 
 # Route for fetching all teams
 @team_bp.route("/all", methods=["GET", "OPTIONS"])

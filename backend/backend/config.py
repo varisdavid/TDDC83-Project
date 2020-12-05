@@ -9,4 +9,5 @@ class Config(object):
     ALGORITHMS = ["RS256"]
     API_AUDIENCE = "https://localhost:5000/api"
     DEBUG = True
-  
+    APPLICATION_ROOT = "/api" # Possible solve for prefix /api of all endpoints
+
