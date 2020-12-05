@@ -22,7 +22,6 @@ def create_app(test_config=None):
     from .blueprints.patients import patients_bp
     from .blueprints.team import team_bp
     from .blueprints.customizedView import customizedView_bp
-    from .blueprints.customizedViewDiagnosis import customizedViewDiagnosis_bp
     from .blueprints.priorityRule import priorityRule_bp
 
 
@@ -36,7 +35,6 @@ def create_app(test_config=None):
     app.register_blueprint(patients_bp)
     app.register_blueprint(team_bp)
     app.register_blueprint(customizedView_bp)
-    app.register_blueprint(customizedViewDiagnosis_bp)
     app.register_blueprint(priorityRule_bp)
 
     from .cli_commands import cli
