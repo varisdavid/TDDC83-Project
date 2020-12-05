@@ -6,7 +6,7 @@ from backend.database.models import Department
 from backend.auth import _build_cors_preflight_response, _corsify_actual_response
 
 # Creates Blueprint
-department_bp = Blueprint("department", __name__, url_prefix="/api/department")
+department_bp = Blueprint("department", __name__, url_prefix="/department")
 
 # Route for fetching all departments
 @department_bp.route("/all", methods=["GET", "OPTIONS"])
