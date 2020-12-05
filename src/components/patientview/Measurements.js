@@ -1,5 +1,5 @@
 import React from 'react';
-import { RuleEngine, WeightChart, BloodPressure, PhysicalActivityChart } from "..";
+import { WeightChart, BloodPressure, PhysicalActivityChart } from "..";
 
 
 const Measurements = ({ setActiveTabValueM }) => {
