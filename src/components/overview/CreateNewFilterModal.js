@@ -378,7 +378,7 @@ const CreateNewFilterModal = ({ setDropdownOpen, customFilterData, setCustomFilt
                                 <FormControl className={classes.select} variant='outlined'>
                                     <InputLabel>Kön</InputLabel>
                                     <Select
-                                        labelId='demo-simple-select-outlined-label'
+                                        labelId='genderLabel'
                                         id='gender'
                                         value={customFilterData.gender}
                                         onChange={handleChange}
@@ -394,7 +394,7 @@ const CreateNewFilterModal = ({ setDropdownOpen, customFilterData, setCustomFilt
                                 <FormControl className={classes.select} variant='outlined'>
                                     <InputLabel>Team</InputLabel>
                                     <Select
-                                        labelId='team'
+                                        labelId='teammenuLabel'
                                         id='teammenu'
                                         value={customFilterData.team}
                                         onChange={handleChange}
@@ -410,7 +410,7 @@ const CreateNewFilterModal = ({ setDropdownOpen, customFilterData, setCustomFilt
                                 <FormControl className={classes.select} variant='outlined'>
                                     <InputLabel>Department</InputLabel>
                                     <Select
-                                        labelId='department'
+                                        labelId='departmentMenuLabel'
                                         id='departmentMenu'
                                         value={customFilterData.department}
                                         onChange={handleChange}
