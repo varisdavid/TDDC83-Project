@@ -4,7 +4,7 @@ from backend.ehr_related.fetch_patient_list import get_medications
 from backend.auth import _build_cors_preflight_response, _corsify_actual_response
 
 medication_list_bp = Blueprint(
-    "medication_list", __name__, url_prefix="/medication_list"
+    "medication_list", __name__, url_prefix="/api/medication_list"
 )
 
 

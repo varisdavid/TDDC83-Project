@@ -7,7 +7,7 @@ from backend.auth import _build_cors_preflight_response, _corsify_actual_respons
 
 
 # Creates Blueprint
-hospital_bp = Blueprint("hospital", __name__, url_prefix="/hospital")
+hospital_bp = Blueprint("hospital", __name__, url_prefix="/api/hospital")
 
 # Route for fetching all hospitals
 @hospital_bp.route("/all", methods=["GET", "OPTIONS"])
