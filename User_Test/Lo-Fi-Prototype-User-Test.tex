@@ -1,0 +1,237 @@
+
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{comment}
+\usepackage{hyperref}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{makecell}
+\usepackage{multirow}
+\usepackage[title]{appendix}
+\graphicspath{./Pictures/}
+
+\newcolumntype{n}{>{\hsize=0.7\hsize \raggedright\arraybackslash}X}
+\newcolumntype{w}{>{\hsize=1.6\hsize \raggedright\arraybackslash}X}
+\newcolumntype{C}{>{\centering \hsize=1\hsize}X}
+
+\begin{document}
+	% Title Page
+	\input{titlepage}
+	\clearpage
+	
+	% Change Log
+	\input{ChangeLog}
+	\clearpage
+	
+	% Table of Contents
+	\tableofcontents
+	\clearpage
+	
+	\section{Introduction}
+	User tests on the low fidelity prototype of HeartByte's system is to be performed to evaluate how well the prototype corresponds to the real needs and preferences of the end user. The information gathered to form an understanding and formulating the requirements that this prototype derives from have mainly come from the customer's, Region Östergötland's, contact persons regarding the project. Thus, the contact directly with the end user is usable to get input from those who are intended to use the system. The goal of the user tests on the prototype is to increase the project team's understanding of what the end user perceives as a functional and easily handled system. Furthermore, the tests aims to evaluate if the necessary and relevant information is shown in a way that is easy to survey.
+	
+	\section{Method}
+	The focus of the test lies on usability, therefore the methods thinking out loud and System Usability Scale (SUS) are used. The user is presented with a number of tasks to do and is afterwards asked questions. The thinking out loud method is used by encouraging the user to express their thoughts and feelings during the test. The questions following the test is an abbreviated SUS-test, see \ref{Questions}. 
+	
+	The user test were performed with two nurses from Region Östergötland. The tests were held at a physical meeting where the users interacted with the system on a computer provided by HeartByte. The tests were recorded with both audio and screen capturing to enable afterwards analysis. 
+	
+	The test is divided into three different sections:
+	
+	\begin{enumerate}
+		\item Inform the respondent thoroughly about the backstory to the project - why the system is created and its intended use. 
+		\item Let the respondent perform the following tasks within the application in order to familiarise with the application and test its usability:
+		\begin{enumerate}
+			\item Find the latest notification from Gunilla Andersson and interact with her health data
+			\item Find where to manually add a new weight measurement for Gunilla
+			\item Find Gunilla's credentials (telephone number, address etcetera)
+			\item Filter the patient list to only show diabetes patients.
+			\item Filter the patient list to only show patient of high priority / urgent need of help.
+			\item Find when Gunilla has her next appointment with a doctor.
+			\item Find all the notifications for high priority patients.
+		\end{enumerate}
+		\item Let the respondent answer the questions stated in section \ref{Questions}.
+	\end{enumerate}
+	
+	\subsection{Questions} \label{Questions}
+	SUS gives a good idea of how usable the system is experienced by its intended users. The test is built up by a questionnaire containing ten questions regarding the system. Five of these questions are to be positive statements and the other five are to be negative. This kind of test is often good to use when questions regarding usability for a web application is to be answered. The perks of using the SUS-test standard is mostly its easy set up and good coverage of the usability aspect. The ten questions are to be answered on a scale from one to five, where one is to be interpreted as "I strongly disagree" and five as "I strongly agree". How the result from the test is calculated is to be found in section \ref{Calculations}. 
+	
+	\begin{enumerate}
+		\item I think that I would like to use this system frequently.
+		\item I found the system unnecessarily complex.
+		\item I thought the system was easy to use.
+		\item I think that I would need the support of a technical person to be able to use this system.
+		\item I found the various functions in this system were well integrated.
+		\item I thought there was too much inconsistency in this system.
+		\item I would imagine that most people would learn to use this system very quickly.
+		\item I found the system very cumbersome to use.
+		\item I felt very confident using the system.
+		\item I needed to learn a lot of things before I could get going with this system.
+	\end{enumerate}
+	
+	In this test of the lo-fi prototype the number of questions were reduced. This was done because it was considered hard to answer them when the test were not using a full web application. Four questions were removed, and the following were used: 
+	
+	\begin{enumerate}
+		\item I think that I would like to use this system frequently.
+		\item I found the system unnecessarily complex.
+		\item I thought the system was easy to use.
+		\item I think that I would need the support of a technical person to be able to use this system.
+		\item I would imagine that most people would learn to use this system very quickly.
+		\item I needed to learn a lot of things before I could get going with this system.
+	\end{enumerate}
+
+	The user tests were pursued in Swedish and the exact translation used is to be found in 
+	
+	\subsection{Calculation of the result} \label{Calculation}
+	In order to get a result from the test, the answers from the respondents are validated. See the equations below for how this is done. The positive statements are numbered with uneven numbers $(1, 3, 5, 7, 9)$ and the negative statements are numbered with even numbers $(2, 4, 6, 8, 10)$. The resulting calculation is denoted $X_{i,Positive}$ for $ i = \{1,3,5,7,9\}$ and $X_{i,Negative}$ for $ i = \{2,4,6,8,10\}$. $Y_i = $ The answered number on question $ i = \{1,..,10\}$. 
+	
+	\begin{equation}
+		X_{i,Positive} = Y_i - 1 \;, \;for \;i = \{1,3,5,7,9\} \; \;else\;  X_{i,Positive} = 0
+	\end{equation}
+	
+	\begin{equation}
+		X_{i,Negative} = 5 - Y_i \;,\; i = \{2,4,6,8,10\}  \;else\;  X_{i,Negative} = 0
+	\end{equation}
+	
+	\begin{center}
+		The resulting number for each respondent is then calculated as: 
+	\end{center}     
+	
+	\begin{equation}
+		{Final\;result}_{\;one\;respondent} =  (\sum_{i=1}^{10} X_{i,Negative} + X_{i,Positive} ) \times 2,5 
+	\end{equation}
+
+	
+	The result will end up between zero and 100. A result above 68 is seen as above average and above 86 is seen as good. These limits and numbers are statistically based on thousands of tests pursued in the past in various projects. To deliver a viable result, there are different opinions on how many respondents that is needed. It can be argued that a larger group of 50 respondents are needed or that two is enough since there is no correlation between the liability and number of respondents. In this test, two respondents will participate. 
+	
+	\smallskip
+	This user test uses a modified version of the SUS-test with a reduced number of questions. The relation between odd and even numbers, and positive and negative statements is preserved.  With reduced number of statements $ i = \{1,..,6\}$. The factor with which the sums are  multiplied has been changed to make the results comparable with the original formula. The factor is chosen with an accuracy so that the result will differ with a maximum of $\pm 1 $.
+	
+	\begin{equation}
+		X_{i,Positive} = Y_i - 1 \;, \;for \;i = \{1,3,5\} \; \;else\;  X_{i,Positive} = 0
+	\end{equation}
+	
+	\begin{equation}
+		X_{i,Negative} = 5 - Y_i \;,\; i = \{2,4,6\}  \;else\;  X_{i,Negative} = 0
+	\end{equation}
+
+	\begin{center}
+		In the reduced SUS-test with $ i = \{1,..,6\}$ the resulting number for each respondent is then calculated as: 
+	\end{center}
+	
+	\begin{equation}
+		{Final\;result}_{\;one\;respondent} =  (\sum_{i=1}^{6} X_{i,Negative} + X_{i,Positive} ) \times 4,2 
+	\end{equation}
+
+	
+	\section{Results}
+	This section presents the results from the user test in terms of answers to the modified SUS-test and statements gathered using thinking out loud procedure.
+	
+	\subsection{SUS-test}
+	The result on the SUS-test of both respondents are presented in table \ref{tab:SUS-result}. 
+	
+	\begin{table}[h]
+		\centering
+		\begin{tabularx}{0.6\textwidth}{c|C C|c}
+			\toprule
+			Question & \multicolumn{2}{c|}{Respondent} & Average \\
+			 & A & B &  \\
+			 \midrule
+			1 & 4 & 4 & 4 \\
+			2 & 2 & 1 & 1.5 \\
+			3 & 5 & 5 & 5 \\
+			4 & 2 & 1 & 1.5 \\
+			5 & 5 & 4 & 4.5 \\
+			6 & 2 & 1 & 1.5 \\
+			\midrule
+			\textbf{SUS value} & \textbf{84} & \textbf{92,4} & \\
+			\bottomrule
+		\end{tabularx}
+	\caption{The result from the modified SUS-test}
+	\label{tab:SUS-result}
+	\end{table}
+	
+	\subsection{Thinking Out Loud}
+	This section presents the suggestions for improvement that was expressed by both respondents.
+	
+	\begin{itemize}
+		\item In the overview view under the tab home: By hovering over a notice, the user should be able to see which measured values. 
+		
+		\item In the patient overview under the tab "översikt", the measured value" activity level should be included, while "Alkohol" and "Rökning" should not.
+		
+		\item In the patient overview under the tab “översikt”: It must be clear during what period “physical activity” and “blood pressure” have been collected. 
+		
+		\item In the patient overview under the tab “översikt”, should include information about allergies or other care restrictions. 
+		
+		\item In the overview view under the home tab, the user should be able to sort based on disease type, latest date, name, updated by. It must also be clear which measured value the sorting is based on. 
+		
+		\item When the filter view is open, the user should be able to filter based on priority level. 
+		
+		\item In the patient view under the calendar tab, the calendar activities must be color-coded based on the activity type. 
+		
+		\item In the patient view under the calendar tab, the Calendar must be able to be linked to "timebooks" / “tidböcker”. 
+		
+		\item In the Overview view under the tab notise-log: there should be three symbols: 1. "warning for exceeded limit value" 2. "message" and 3. "Lack of measured value of the patient (due to forgotten or technical problems)" 
+
+		\item Diagnosis needs to be clearly visible. Could be added after SSN of the patient.
+		\item When getting a notice of approving a new measured value, it would be good to get several ways of contacting the patient.
+		
+		\item The measured values that need some measure to be taken should have the name of the responsible person if someone have responded to the notice.
+		
+		\item The list of earlier diagnoses is not that prioritized to see easily, should be moved further down on the screen.
+	\end{itemize}
+	
+	\section{Conclusion}
+	
+	The suggestions for improvement were taken into account and resulted in the following changes of the prototype and corresponding requirements. Some improvements were small comments not included in the list above, but resulted in changes in the product.
+	
+	\begin{itemize}
+		\item Changed the notice symbol in “Home” so that we are consequent throughout the whole prototype.
+		
+		\item Removed smoking and alcohol as suggestions on filters because they were interpreted as not useful.
+		
+		\item Removed smoking and alcohol in the overview information about patients.
+		
+		\item Adjusted the view so that you could see if any filters were active, so that you could understand if you are looking at the whole patient database or just a part of it.
+		
+		\item Changed in the Notice Log: Removed the doctor icons, because they gave the misleading information that the doctors could be the cause for the notice. Also removed the chat icon because the chat functions in the application were no longer prioritized and therefore had been temporarily removed from the prototype.    
+		
+		\item When adjusting unexpected measurement values we added the suggestion in the pop-up that one could view the patients contact information. So that you could be able to contact the patient in a fast way to get more information about the alarm. 
+		
+		\item When a larm has been taken care of by someone among the healthcare personnel, their name shall be visible for other staff that view the same alarm. I.e. when hovering over the notice we have changed from “measurement is processed” to “measurement is processed by John Doe”
+		
+		\item In the overview we adapted the elements so that current status and diagnosis should be more visible than the patient's diagnosis history. This is because they were interpreted as more valuable for the user. We added that the measurements are shown as an average value for the last week. Earlier it was unclear if the values shown were the actual value or a goal value.
+		
+		\item We added the attention symbol in the overview because it is a good way to show relevant information that was missing in our prototype.
+		
+		\item UMS gives information regarding “oversensitivity, condition and treatments that, if they are not known for the health care personnel, will lead to a serious threat regarding the patients life or health. A new national symbol, that gathers all information regarding Warning, Observation and Infection. Every part of the symbol contains specific information.”
+		
+		\item Changed the heading from “Responsible caregiver” to “Responsible health personnel” because caregiver is not a person. Also adjusted so that it is clear who of the different responsibility individuals which is the primary one.
+		
+		\item Added “diagnosis” in the heading for the patient specific page, so that you can always get a rough understanding of which type of patient that you are dealing with, regardless of where on the patient section of the application that you are using. We shall avoid unnecessary clicks to and back from the overview.
+		
+		\item Added the comment that one shall be able to change the size of the calendar and table, to choose which one of them that you want to expand or not.
+		
+		\item Added in the calendar the possibility to choose between a daily view (to get the information about what is happening today), a schedule view (to be able to see all coming events without the empty space between them).
+		
+	\end{itemize}
+	
+	The result of the SUS-test need to be compared to results of future user tests to show how the usability changes with the development of the system. The reduced number of questions makes it hard to compute the actual SUS value, and the equation used only gives an indication of what a full SUS-test would result in. The values achieved in this test categorizes as above average and good. This indicate that a system developed from this lo-fi prototype would result in high usability. 
+	
+	\clearpage
+	\begin{appendices}
+		\section{Questions Translated to Swedish}
+		Below is the list of the statements being used in the test translated to Swedish. 
+		\begin{enumerate}
+			\item Jag tror att jag skulle vilja använda detta system ofta.
+			\item Jag tycker systemet är onödigt komplext.
+			\item Jag tycker systemet var lätt att använda.
+			\item Jag tror mig behöva hjälp av en tekniskt kunnig och insatt person för att nyttja systemet. 
+			\item Jag skulle tro att de flesta personer skulle lära sig att använda detta system mycket snabbt.
+			\item Jag känner att jag behöver lära mig mycket för att kunna använda detta system.
+		\end{enumerate}
+	\end{appendices}
+	
+	
+\end{document}
