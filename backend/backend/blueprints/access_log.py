@@ -3,7 +3,7 @@ from backend.database.models import add_log_to_database, AccessLog
 
 from backend.auth import _build_cors_preflight_response, _corsify_actual_response
 
-access_log_bp = Blueprint("access_log", __name__, url_prefix="/api/access_log")
+access_log_bp = Blueprint("access_log", __name__, url_prefix="/access_log")
 
 # In order to add log to the database, use this api endpoint.
 # Send request to this endpoint using method POST and having content type JSON(application/json)

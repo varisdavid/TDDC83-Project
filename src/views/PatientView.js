@@ -10,7 +10,6 @@ let ssn
 const getActiveTab = (location) => {
   const arrssn = location.pathname.split("/");
    ssn = arrssn[3]
-  console.log (ssn);
 
   if (location.pathname.includes( '/patient/measurements')) {
     return 0;

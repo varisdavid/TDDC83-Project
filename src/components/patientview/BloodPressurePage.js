@@ -1,68 +1,54 @@
-import React, { useState, useMemo } from 'react';
-import { BloodPressure, Notification, TableForChartBloodPressure, FormForUpdateValues , SliderMeasurements} from "..";
+import React, {useState, useEffect} from 'react';
+import { BloodPressureChart, Notification, TableForChartBloodPressure, FormForUpdateValues , SliderMeasurements} from "..";
 
 const BloodPressurePage = () => {
     //Sending the personaldata to the notices. This should be used for the ajax call in the futher as well
     const id = "470203-1324";
     //Fake data to the table rendering below
-    const data = useMemo(
-        () => [
+    const [measurement, setmeasurements] = useState([]);
+    useEffect(() => {
+        // Basic example of how to make a authorized fetch call to our backend endpoints
+        const measurements = async () => {
+            const ehrid = "1f0cd2e4-8d8a-4ece-8d5e-100d52b322cc"
+            const domain =  "http://127.0.0.1:5000/measurements/";
 
-            {
-                Date: '2020-05-18',
-                BloodPressure: '135/80',
-                UpdatedBy: 'Patient',
-            },
-            {
-                Date: '2020-06-13',
-                BloodPressure: '135/80',
-                UpdatedBy: 'Patient',
-            },
-            {
-                Date: '2020-07-25',
-                BloodPressure: '135/80',
-                UpdatedBy: 'Vårdpersonal',
-            },
-            {
-                Date: '2020-09-01',
-                BloodPressure: '135/80',
-                UpdatedBy: 'Vårdpersonal',
-            },
-            {
-                Date: '2020-09-10',
-                BloodPressure: '135/80',
-                UpdatedBy: 'Patient',
-            },
-            {
-                Date: '2020-10-02',
-                BloodPressure: '135/80',
-                UpdatedBy: 'Vårdpersonal',
-            },
-            {
-                Date: '2020-10-10',
-                BloodPressure: '135/80',
-                UpdatedBy: 'Patient',
-            },
-        ],
-        []
-    );
+            try {
+                // const token = await getAccessTokenSilently();
+                const response = await fetch(domain+ehrid,
+                    {
+                        headers: {},
+                    }
+                );
+
+                const responseData = await response.json();
+                setmeasurements(responseData);
+            } catch (error) {
+                console.log(error.message);
+            }
+        };
+        measurements();
+    },[] );
+
 
     //Adds the Notification to the data array so that the pop-up modals can retrive the correct data
     function addNotification(data) {
         let newArr = [];
 
         for (let i = 0; i < data.length; i++) {
+            console.log()
             newArr.push({
-                notices: <Notification value={3} text={'blodtrycket till'} id={id} date={data[i]['Date']}
-                                       measurement={data[i]['BloodPressure']} updatedBy={data[i]['UpdatedBy']}/>,
-                Date: data[i]['Date'],
-                BloodPressure: data[i]['BloodPressure'],
-                UpdatedBy: data[i]['UpdatedBy']})
+                notices: <Notification value={3} text={'blodtrycket till'} id={id} date={data[i]['Time: ']}
+                                       measurement={data[i]['Systolic: '] + '/' + data[i]['Diastolic: ']} updatedBy={'Patient'}/>,
+                Date: data[i]['Time: '],
+                BloodPressure: data[i]['Systolic: '] + '/' + data[i]['Diastolic: '],
+                UpdatedBy: 'Patient'
+
+            })
         }
         return (newArr)
     }
 
-    const addNotice = addNotification(data);
+    const addNotice = addNotification(measurement);
 
     //fake data that displays boundaires
     const goalLimitsUpper = [120, 130];
@@ -104,7 +90,7 @@ const BloodPressurePage = () => {
                 <div style={{ width: '50%' }}>
                     {/* This is the bloodpressure chart being displayed */}
                     <div style={{ height: '85%' }}>
-                        <BloodPressure />
+                        <BloodPressureChart />
                     </div>
                 </div>
 

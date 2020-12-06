@@ -1,12 +1,8 @@
 import React from 'react';
-import { RuleEngine, WeightChart, BloodPressure, PhysicalActivityChart } from "..";
+import { WeightChart, BloodPressureChart, PhysicalActivityChart } from "..";
 
 
 const Measurements = ({ setActiveTabValueM }) => {
-
-    // used to test ruleEngine
-     console.log(RuleEngine());
-
 
     return (
         <>
@@ -26,7 +22,7 @@ const Measurements = ({ setActiveTabValueM }) => {
                         e.preventDefault();
                         setActiveTabValueM(2);
                     }}>
-                        <BloodPressure />
+                        <BloodPressureChart />
                     </div>
 
                     {/*Displays a clickable physicalChart*/}

@@ -1,66 +1,53 @@
-import React, { useMemo, useState } from 'react';
+import React, {useState, useEffect} from 'react';
 import { PhysicalActivityChart, Notification,FormForUpdateValues,TableForChartPysicalActivity, SliderMeasurements } from "..";
 const PhysicalActivityPage = () => {
     //Sending the personaldata to the notices. This should be used for the ajax call in the futher as well
     const id="470203-1324"
     //Fake data to the table below which can be updated to live data if needed
-    const data = useMemo(
-        () => [
+    console.log("Utanför funk");
+    // When something happens, we check to see if we change the sorting option, and we check if the search has been triggered
+    const [measurement, setmeasurements] = useState([]);
+    useEffect(() => {
+        // Basic example of how to make a authorized fetch call to our backend endpoints
+        const measurements = async () => {
+            const ehrid = "1f0cd2e4-8d8a-4ece-8d5e-100d52b322cc"
+            const domain =  "http://127.0.0.1:5000/measurements/";
 
-            {
-                Date: '2020-05-18',
-                PysicalActivity: '3',
-                UpdatedBy: 'Patient',
-            },
-            {
-                Date: '2020-06-13',
-                PysicalActivity: '4',
-                UpdatedBy: 'Patient',
-            },
-            {
-                Date: '2020-07-25',
-                PysicalActivity: '5',
-                UpdatedBy: 'Patient',
-            },
-            {
-                Date: '2020-09-01',
-                PysicalActivity: '6',
-                UpdatedBy: 'Patient',
-            },
-            {
-                Date: '2020-09-10',
-                PysicalActivity: '7',
-                UpdatedBy: 'Patient',
-            },
-            {
-                Date: '2020-10-02',
-                PysicalActivity: '8',
-                UpdatedBy: 'Patient',
-            },
-            {
-                Date: '2020-10-10',
-                PysicalActivity: '9',
-                UpdatedBy: 'Patient',
-            },
-        ],
-        []
-    )
+            try {
+                // const token = await getAccessTokenSilently();
+                const response = await fetch(domain+ehrid,
+                    {
+                        headers: {},
+                    }
+                );
+
+                const responseData = await response.json();
+                setmeasurements(responseData);
+            } catch (error) {
+                console.log(error.message);
+            }
+        };
+        measurements();
+    },[] );
+
+
     //Adds the Notification to the data array so that the pop-up modals can retrive the correct data
     function addNotification(data) {
         let newArr = [];
+        console.log("I funk");
 
         for (let i = 0; i < data.length; i++) {
             newArr.push({
-                notices: <Notification value={3} text={'fysisk aktivitet till'} id={id} date={data[i]['Date']}
-                                       measurement={data[i]['PysicalActivity']} updatedBy={data[i]['UpdatedBy']}/>,
-                Date: data[i]['Date'],
-                PysicalActivity: data[i]['PysicalActivity'],
-                UpdatedBy: data[i]['UpdatedBy']})
+                notices: <Notification value={3} text={'fysisk aktivitet till'} id={id} date={data[i]['Time: ']}
+                                       measurement={data[i]['Exercise: ']} updatedBy={data[i]['UpdatedBy']}/>,
+                Date: data[i]['Time: '],
+                PysicalActivity: data[i]['Exercise: '],
+                UpdatedBy: 'Patient'})
         }
         return (newArr)
     }
 
-    const addNotice = addNotification(data);
+    const addNotice = addNotification(measurement);
     //fake data that displays boundaires
     const goalLimits = [5];
     const accLimits = [3];

@@ -2,7 +2,7 @@ from flask import Flask, Blueprint, request, redirect, url_for, jsonify
 from backend.ehr_related.fetch_patient_list import get_overview
 from backend.auth import AuthError, requires_auth
 
-overview_bp = Blueprint("overview", __name__, url_prefix="/api/overview")
+overview_bp = Blueprint("overview", __name__, url_prefix="/overview")
 
 
 @overview_bp.route("/", methods=["GET"])

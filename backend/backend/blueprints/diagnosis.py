@@ -3,7 +3,7 @@ from backend.ehr_related.fetch_patient_list import get_diagnosis
 
 from backend.auth import _build_cors_preflight_response, _corsify_actual_response
 
-diagnosis_bp = Blueprint("diagnosis", __name__, url_prefix="/api/diagnosis")
+diagnosis_bp = Blueprint("diagnosis", __name__, url_prefix="/diagnosis")
 
 
 @diagnosis_bp.route("/<string:ehrid>", methods=["GET", "OPTIONS"])
