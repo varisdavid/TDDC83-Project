@@ -56,7 +56,7 @@ const PatientGroups = ({ setOwnFilters, customFilterData, setCustomFilterData, d
         {patientGroups.map(group => {
           return (
             <Button
-              // ID goes here. X should be a number 1-8. Individual views need individual numbers. 
+              // ID goes here? X should be a number 1-8. Individual views need individual numbers. 
               id='viewX'
               className='shadow mr-2'
               key={group.accessor}

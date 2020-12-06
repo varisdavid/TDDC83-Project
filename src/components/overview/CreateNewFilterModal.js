@@ -186,7 +186,7 @@ const CreateNewFilterModal = ({ setDropdownOpen, customFilterData, setCustomFilt
                     onClose={handleCloseSave}
                     aria-labelledby='modal-popup-title'
                 >
-                    <div key="modal-popup-div" style={modalStyle} className={classes.paper2} id='adminOverviewAllPatientsConfirmView'>
+                    <div key="modal-popup-div" style={modalStyle} className={classes.paper2} id='overviewConfirmView'>
                         <h2 className='font-bold mt-2' id='modal-popup-title'>Spara ny överblick</h2>
 
                         <div className='flex-col items-start'>
@@ -195,7 +195,7 @@ const CreateNewFilterModal = ({ setDropdownOpen, customFilterData, setCustomFilt
                                 className={classes.textField}
                                 style={{ marginTop: "2rem" }}
                                 type="string"
-                                id='name'
+                                id='saveNewView'
                                 label='Namn'
                                 value={filterOptions.name}
                                 onChange={handleChangeInFilterOptions}
@@ -209,7 +209,7 @@ const CreateNewFilterModal = ({ setDropdownOpen, customFilterData, setCustomFilt
                                 <InputLabel>Tillgänglig för:</InputLabel>
                                 <Select
                                     labelId='demo-simple-select-outlined-label'
-                                    id='demo-simple-select-outlined'
+                                    id='viewAvailableFor'
                                     value={filterOptions.availableTo}
                                     onChange={handleChangeInFilterOptions}
                                     label='Tillgänglig för:' // Needs to be the label your using to calculate the appropriate width in border.
@@ -224,7 +224,7 @@ const CreateNewFilterModal = ({ setDropdownOpen, customFilterData, setCustomFilt
                         </div>
                         <div className="flex" style={{ marginTop: "1.5rem" }}>
                             <Button className='flex shadow mr-2' style={{ border: '2px solid #0066B3', borderRadius: "0px", marginLeft: "auto", width: '75px' }} onClick={handleCloseSave}>Avbryt</Button>
-                            <Button className='flex shadow mr-2' style={{ border: '2px solid #0066B3', borderRadius: "0px", width: '75px' }} onClick={handleSaveFilter}>Signera</Button>
+                            <Button className='flex shadow mr-2' id='confirmCustomizedView' style={{ border: '2px solid #0066B3', borderRadius: "0px", width: '75px' }} onClick={handleSaveFilter}>Signera</Button>
                         </div>
                     </div>
                 </Modal>
@@ -315,7 +315,7 @@ const CreateNewFilterModal = ({ setDropdownOpen, customFilterData, setCustomFilt
     return (
         <>
             <Button component={'span'} onClick={handleOpen} className="shadow mr-2"
-                id='adminOverviewNewViewBtn'
+                id='overviewNewViewBtn'
                 style={{
                     paddingTop: '2px',
                     paddingBottom: '2px',
@@ -334,7 +334,7 @@ const CreateNewFilterModal = ({ setDropdownOpen, customFilterData, setCustomFilt
                 key="modal-regular"
 
             >
-                <div style={modalStyle} className={classes.paper} id='adminOverviewNewViewPopupWindow'>
+                <div style={modalStyle} className={classes.paper} id='overviewNewViewPopupWindow'>
                     <h2 className='font-bold p-2 mt-2' id='modal-title'>Filtrera</h2>
 
                     <div className='flex-col items-start'>

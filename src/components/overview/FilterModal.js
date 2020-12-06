@@ -275,7 +275,7 @@ const FilterModal = ({setDropdownOpen, customFilterData, setCustomFilterData, se
                                 <InputLabel>Team</InputLabel>
                                 <Select
                                     labelId='demo-simple-select-outlined-label'
-                                    id='teammenu'
+                                    id='teamMenu'
                                     value={customFilterData.team}
                                     onChange={handleChange}
                                     label='Team'

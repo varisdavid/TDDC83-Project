@@ -240,7 +240,7 @@ const PatientsSearch = ({ setSortState,
                         setOwnFilters={setOwnFilters}
                         customFilterData={customFilterData}
                         setCustomFilterData={setCustomFilterData} />
-                    <Button
+                    <Button id="overviewSortBtn"
                         onClick={() => setDropdownOpen(!dropdownOpen)}
                     >
                         <SwapVert style={{ fontSize: '25px' }} />
