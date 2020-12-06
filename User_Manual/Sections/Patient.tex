@@ -1,0 +1,55 @@
+In this section the views for a single patient is detailed. It is as earlier described by clicking on a specific patient in either my patients list or all patients list. To go back to the overview the house button which is displayed next to the patients name is clicked. 
+
+\subsubsection{Overview}
+\begin{center}
+    \includegraphics[width=\linewidth]{images/single_patient_overview_image.png}
+    \captionof{figure}{Overview single patient}
+    \label{fig:figures}
+\end{center}
+Information about the specific patient with contact information and emergency contact. Shows current diagnoses, current medication intake, average of current measurement values, previous diagnoses and caregivers and staff who handle the patient. Picture of the specific patient. A smaller calendar of the one found in "/patient/calendar" exists as well.
+
+The tables length is adapted to the number of diagnoses, medications, measurements, responsible staff members. 
+
+Table of “tidigare sjukdomar” is shown with a maximum of 4 rows with the see more text included. When pressing see more, the table expands in length and shows the rest of the information.
+
+\subsubsection{Measurements}
+    \input{Sections/Measurements}
+
+\subsubsection{Medication list}
+\begin{center}
+    \includegraphics[width=\linewidth]{images/single_patient_medications_image.png}
+    \captionof{figure}{Medications}
+    \label{fig:figures}
+\end{center}
+Table of medicines that shows current/relevant medication intake for a specific patient and a table of medicines that a specific patient can take if necessary.
+\\
+
+\subsubsection{Calendar}
+\begin{center}
+    \includegraphics[width=\linewidth]{images/single_patient_calendar_image.png}
+    \captionof{figure}{Calendar}
+    \label{fig:figures}
+\end{center}
+As the calendar for all patients but this on does only display the specific patients calendar events.
+\\
+
+\subsubsection{Admin}
+\begin{center}[h]
+    \includegraphics[width=\linewidth]{images/single_patient_admin_image.png}
+    \captionof{figure}{Admin}
+    \label{fig:figures}
+\end{center}
+Page only visible for admins. 
+Inställningar Prioriteringar Mätvärden:
+Set the settings for notifications for the patient measurements. The notifications are rendered by two things, either a measurement which is outside the reference ranges or that the patient have missed to report measurements. 
+
+For changing when a warning should be rendered for missing a measurement, you change in the form for the measurement type and either days without measurement or number of expected measurements not reported, and then click on the "Spara" button at the bottom of the page. 
+
+For changing the target ranges and reference ranges you press “Ändra intervall” and are directed to the measurement page where you can change the interval while seeing the graph at the same time. 
+
+Aktivitetslogg: 
+Shows all the activity that happens on a patient specific page. All activities is logged for the patient's integrity.
+Not fully implemented: 
+The search function. 
+
+\\

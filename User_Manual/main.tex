@@ -1,0 +1,56 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{authblk}
+\usepackage[utf8]{inputenc}
+\usepackage{subcaption}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{makecell}
+\usepackage{multirow}
+\usepackage[table]{xcolor}% http://ctan.org/pkg/xcolor
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+\usepackage{hyperref}
+\graphicspath{ {./images/} }
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\usepackage[a4paper,width=165mm,top=25mm,bottom=25mm]{geometry}
+\title{\Huge User Manual}
+\author{Eveborn L
+        \and Klasson M}
+
+%For tables from SQAP
+\newcolumntype{n}{>{\hsize=0.7\hsize \raggedright\arraybackslash}X}
+\newcolumntype{w}{>{\hsize=1.6\hsize \raggedright\arraybackslash}X}
+\newcolumntype{a}{>{\hsize=1.2\hsize \raggedright\arraybackslash}X}
+\newcolumntype{b}{>{\hsize=0.8\hsize \raggedright\arraybackslash}X}
+
+\begin{document}
+
+\input{Titlepage}
+
+
+\setlength{\parskip}{1em}
+    
+    \pagebreak
+    % Purpose of document
+    \section{Introduction}
+    \input{Sections/Introduction}
+    \pagebreak
+    
+   % How to monitor patients
+    \section{Page views}
+    \input{Sections/Views}
+    
+    \pagebreak
+    
+\end{document}
