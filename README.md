@@ -1,4 +1,4 @@
-### Authentication
+### Authentication 
 
 The routes are now protected, this means you will have to authenticate to be able to access the site.
 
