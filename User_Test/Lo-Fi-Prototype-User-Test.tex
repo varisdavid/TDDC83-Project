@@ -55,7 +55,7 @@
 	\end{enumerate}
 	
 	\subsection{Questions} \label{Questions}
-	SUS gives a good idea of how usable the system is experienced by its intended users. The test is built up by a questionnaire containing ten questions regarding the system. Five of these questions are to be positive statements and the other five are to be negative. This kind of test is often good to use when questions regarding usability for a web application is to be answered. The perks of using the SUS-test standard is mostly its easy set up and good coverage of the usability aspect. The ten questions are to be answered on a scale from one to five, where one is to be interpreted as "I strongly disagree" and five as "I strongly agree". How the result from the test is calculated is to be found under section \ref{ref: Calculations}. 
+	SUS gives a good idea of how usable the system is experienced by its intended users. The test is built up by a questionnaire containing ten questions regarding the system. Five of these questions are to be positive statements and the other five are to be negative. This kind of test is often good to use when questions regarding usability for a web application is to be answered. The perks of using the SUS-test standard is mostly its easy set up and good coverage of the usability aspect. The ten questions are to be answered on a scale from one to five, where one is to be interpreted as "I strongly disagree" and five as "I strongly agree". How the result from the test is calculated is to be found in section \ref{Calculations}. 
 	
 	\begin{enumerate}
 		\item I think that I would like to use this system frequently.
@@ -83,8 +83,8 @@
 
 	The user tests were pursued in Swedish and the exact translation used is to be found in 
 	
-	\subsection{Calculation of the result}
-	In order to get a result from the test, the answers from the respondents are validated. See the equations below for how this is done. The positive statements are numbered with uneven numbers $(1, 3, 5, 7, 9)$ and the negative statements are numbered with even numbers $(2, 4, 6, 8, 10)$. The resulting calculation is denoted $X_{i,Positive}$ for $ i = \{1,3,5,7,9\}$ and $X_{i,Negative}$ for $ i = \{2,4,6,8,10\}$. $Y_i = $ The answered number on question $ i = \{1,..,10\}$.
+	\subsection{Calculation of the result} \label{Calculation}
+	In order to get a result from the test, the answers from the respondents are validated. See the equations below for how this is done. The positive statements are numbered with uneven numbers $(1, 3, 5, 7, 9)$ and the negative statements are numbered with even numbers $(2, 4, 6, 8, 10)$. The resulting calculation is denoted $X_{i,Positive}$ for $ i = \{1,3,5,7,9\}$ and $X_{i,Negative}$ for $ i = \{2,4,6,8,10\}$. $Y_i = $ The answered number on question $ i = \{1,..,10\}$. 
 	
 	\begin{equation}
 		X_{i,Positive} = Y_i - 1 \;, \;for \;i = \{1,3,5,7,9\} \; \;else\;  X_{i,Positive} = 0
@@ -101,15 +101,38 @@
 	\begin{equation}
 		{Final\;result}_{\;one\;respondent} =  (\sum_{i=1}^{10} X_{i,Negative} + X_{i,Positive} ) \times 2,5 
 	\end{equation}
+
 	
 	The result will end up between zero and 100. A result above 68 is seen as above average and above 86 is seen as good. These limits and numbers are statistically based on thousands of tests pursued in the past in various projects. To deliver a viable result, there are different opinions on how many respondents that is needed. It can be argued that a larger group of 50 respondents are needed or that two is enough since there is no correlation between the liability and number of respondents. In this test, two respondents will participate. 
+	
+	\smallskip
+	This user test uses a modified version of the SUS-test with a reduced number of questions. The relation between odd and even numbers, and positive and negative statements is preserved.  With reduced number of statements $ i = \{1,..,6\}$. The factor with which the sums are  multiplied has been changed to make the results comparable with the original formula. The factor is chosen with an accuracy so that the result will differ with a maximum of $\pm 1 $.
+	
+	\begin{equation}
+		X_{i,Positive} = Y_i - 1 \;, \;for \;i = \{1,3,5\} \; \;else\;  X_{i,Positive} = 0
+	\end{equation}
+	
+	\begin{equation}
+		X_{i,Negative} = 5 - Y_i \;,\; i = \{2,4,6\}  \;else\;  X_{i,Negative} = 0
+	\end{equation}
+
+	\begin{center}
+		In the reduced SUS-test with $ i = \{1,..,6\}$ the resulting number for each respondent is then calculated as: 
+	\end{center}
+	
+	\begin{equation}
+		{Final\;result}_{\;one\;respondent} =  (\sum_{i=1}^{6} X_{i,Negative} + X_{i,Positive} ) \times 4,2 
+	\end{equation}
+
 	
 	\section{Results}
 	This section presents the results from the user test in terms of answers to the modified SUS-test and statements gathered using thinking out loud procedure.
 	
 	\subsection{SUS-test}
 	The result on the SUS-test of both respondents are presented in table \ref{tab:SUS-result}. 
+	
 	\begin{table}[h]
+		\centering
 		\begin{tabularx}{0.6\textwidth}{c|C C|c}
 			\toprule
 			Question & \multicolumn{2}{c|}{Respondent} & Average \\
@@ -119,8 +142,10 @@
 			2 & 2 & 1 & 1.5 \\
 			3 & 5 & 5 & 5 \\
 			4 & 2 & 1 & 1.5 \\
-			5 & 2 & 1 & 1.5 \\
-			6 & 5 & 4 & 4.5 \\
+			5 & 5 & 4 & 4.5 \\
+			6 & 2 & 1 & 1.5 \\
+			\midrule
+			\textbf{SUS value} & \textbf{84} & \textbf{92,4} & \\
 			\bottomrule
 		\end{tabularx}
 	\caption{The result from the modified SUS-test}
@@ -159,31 +184,40 @@
 	
 	\section{Conclusion}
 	
-	The suggestions for improvement were took into account and resulted in the following changes of the prototype and corresponding requirements. Some improvements were small comments not included in the list above, but resulted in changes in the product.
+	The suggestions for improvement were taken into account and resulted in the following changes of the prototype and corresponding requirements. Some improvements were small comments not included in the list above, but resulted in changes in the product.
 	
 	\begin{itemize}
-		\item text text
+		\item Changed the notice symbol in “Home” so that we are consequent throughout the whole prototype.
+		
+		\item Removed smoking and alcohol as suggestions on filters because they were interpreted as not useful.
+		
+		\item Removed smoking and alcohol in the overview information about patients.
+		
+		\item Adjusted the view so that you could see if any filters were active, so that you could understand if you are looking at the whole patient database or just a part of it.
+		
+		\item Changed in the Notice Log: Removed the doctor icons, because they gave the misleading information that the doctors could be the cause for the notice. Also removed the chat icon because the chat functions in the application were no longer prioritized and therefore had been temporarily removed from the prototype.    
+		
+		\item When adjusting unexpected measurement values we added the suggestion in the pop-up that one could view the patients contact information. So that you could be able to contact the patient in a fast way to get more information about the alarm. 
+		
+		\item When a larm has been taken care of by someone among the healthcare personnel, their name shall be visible for other staff that view the same alarm. I.e. when hovering over the notice we have changed from “measurement is processed” to “measurement is processed by John Doe”
+		
+		\item In the overview we adapted the elements so that current status and diagnosis should be more visible than the patient's diagnosis history. This is because they were interpreted as more valuable for the user. We added that the measurements are shown as an average value for the last week. Earlier it was unclear if the values shown were the actual value or a goal value.
+		
+		\item We added the attention symbol in the overview because it is a good way to show relevant information that was missing in our prototype.
+		
+		\item UMS gives information regarding “oversensitivity, condition and treatments that, if they are not known for the health care personnel, will lead to a serious threat regarding the patients life or health. A new national symbol, that gathers all information regarding Warning, Observation and Infection. Every part of the symbol contains specific information.”
+		
+		\item Changed the heading from “Responsible caregiver” to “Responsible health personnel” because caregiver is not a person. Also adjusted so that it is clear who of the different responsibility individuals which is the primary one.
+		
+		\item Added “diagnosis” in the heading for the patient specific page, so that you can always get a rough understanding of which type of patient that you are dealing with, regardless of where on the patient section of the application that you are using. We shall avoid unnecessary clicks to and back from the overview.
+		
+		\item Added the comment that one shall be able to change the size of the calendar and table, to choose which one of them that you want to expand or not.
+		
+		\item Added in the calendar the possibility to choose between a daily view (to get the information about what is happening today), a schedule view (to be able to see all coming events without the empty space between them).
+		
 	\end{itemize}
 	
-	Ändrade notissymbol i “hem” för att vara konsekventa genom hela prototypen
-	tog bort rökning och alkohol som förslag på filtrering ty uppfattades ej som användbart
-	tog bort rökning och alkohol i översiktsinformationen om patienten
-	lade till att man ska kunna se vilken filtrering som är aktuell, då det annars kan vara oklart om jag ser alla patienter eller bara en filtrerad del. 
-	ändring i notisloggen: tog bort ikoner på läkare då det gav ett missvisande intryck att läkare var orsaken till just den typen av notis. Tog även bort chat-ikonen då chatfunktionen blev låg prio, och för tillfället inte längre är med i vår prototyp. 
-	vid hantering av ett oväntade mätvärde lade vi till som förslag i pop-upen att man ska kunna tas till patientens kontaktuppgifter för att kunna ringa patienten och snabbt kunna kolla upp larmet.
-	då ett larm blivit behandlat av någon i vårdpersonalen ska namnet på denne synas om andra personalmedlemmar går in på samma larm. Dvs vid svävande över notisen har vi ändrat från “mätvärde behandlas” till “mätvärde behandlas av Per Persson”
-	i översikten möblerade vi om så att nuvarande och diagnoser skulle komma fram mer då de är mer aktuella än patientens diagnoshistorik. Vi lade till att de mätvärden som visas är ett snitt för de senaste veckan, då det tidigare var osäkert om det var det aktuella värdet eller ett målvärde. Det förstorades även upp för att bli lättare att avläsa. 
-	i översikten lade vi även till Uppmärksamhetssymbolen då den på ett bra sätt ska visa relevant information som saknades i vår prototyp. 
-	
-	UMS ger information gällande “överkänslighet, tillstånd och behandlingar som, om de inte är kända för hälso- och sjukvårdspersonalen, medför allvarligt hot mot patientens liv eller hälsa. En ny nationell symbol, samlar all information gällande Varning, Observanda och Smitta. Varje del av symbolen innehåller specifik information.”
-	Bytte ut fliken “hälsodeklaration” till Symptomskattning” då det var oklart vilken sorts deklaration skulle finnas där och vad den skulle ha för syfte. symptomskattning däremot ska kunna kombineras med mätvärden för att kunna jämföra symptom såsom feber med oregelbundna mätvärden och se om det finns en koppling. 
-	(Nej föresten, punkten gällande utbytet av fliken stämmer inte! Det ändrade vi innan testet när vi visade prototypen för kunden tisdagen innan!)
-	Ändrade rubrik från “ansvarig vårdgivare” till ansvarig vårdpersonal” ty vårdgivare är inte en person. Lade även till att tydligt visa vilken av de ansvariga är primär. 
-	Lade till “diagnos” i rubriken för den patientspecifika sidan för att du oavsett var du är på patientsidan ska kunna få en grov uppskattning av vilken typ av patient du har att göra med. Ska undvika onödiga klick till översikten fram och tillbaka. 
-	Lade till kommentaren att man ska kunna ändra storlek på kalendern och tabellen för att välja vilken man vill förstora upp mer. 
-	Lade i kalender till valet att kunna växla mellan en dagsvy (för att få en överblick av vad som händer idag)och en löpande vy(för att kunna se alla framtida händelser utan tomrummet mellan dem).
-	
-	The result of the SUS-test need to be compared to results of future user tests to show how the usability changes with the development of the system. The reduced number of questions makes it hard to compute the actual SUS value.
+	The result of the SUS-test need to be compared to results of future user tests to show how the usability changes with the development of the system. The reduced number of questions makes it hard to compute the actual SUS value, and the equation used only gives an indication of what a full SUS-test would result in. The values achieved in this test categorizes as above average and good. This indicate that a system developed from this lo-fi prototype would result in high usability. 
 	
 	\clearpage
 	\begin{appendices}
@@ -195,7 +229,7 @@
 			\item Jag tycker systemet var lätt att använda.
 			\item Jag tror mig behöva hjälp av en tekniskt kunnig och insatt person för att nyttja systemet. 
 			\item Jag skulle tro att de flesta personer skulle lära sig att använda detta system mycket snabbt.
-			\item Jag måste lära mig många olika saker innan jag kan använda systemet.
+			\item Jag känner att jag behöver lära mig mycket för att kunna använda detta system.
 		\end{enumerate}
 	\end{appendices}
 	
