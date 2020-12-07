@@ -3,17 +3,25 @@
 
 \usepackage{graphicx}
 \usepackage{comment}
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 \usepackage{tabularx}
 \usepackage{booktabs}
 \usepackage{makecell}
 \usepackage{multirow}
+\usepackage{amsmath}
 \graphicspath{./Pictures/}
 
 \newcolumntype{n}{>{\hsize=0.7\hsize \raggedright\arraybackslash}X}
 \newcolumntype{w}{>{\hsize=1.6\hsize \raggedright\arraybackslash}X}
 \newcolumntype{a}{>{\hsize=1.2\hsize \raggedright\arraybackslash}X}
 \newcolumntype{b}{>{\hsize=0.8\hsize \raggedright\arraybackslash}X}
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+	{-2.5ex\@plus -1ex \@minus -.25ex}%
+	{1.25ex \@plus .25ex}%
+	{\normalfont\normalsize\bfseries}}
+\makeatother
 
 \begin{document}
 	% Title Page
@@ -139,8 +147,8 @@
 			Recorder & Responsible of documenting defects, decisions and recommendations \\
 			Reader & Leads the walk-through of the document at the inspection meeting \\
 			Author & Responsible for performing rework to meet the inspection exit criteria \\
-			Inspector & Identifies and describes defects \\
-			&  \\
+			Inspector & Identifies and describes defects. All attendants of Inspection Meeting are Inspectors \\
+			Specialist Inspector & Someone with specific knowledge relevant for the document to inspect \\
 		\end{tabularx}
 	\end{table}
 	
@@ -181,7 +189,7 @@
 	To ensure that the produced code follows the programming guidelines, all code that is pushed to our main development branch on GitLab is merged using merge requests. Thus, all code is reviewed by a responsible developer before accepted to the main branch. The assessment includes verifying that the code passes the CI pipeline, that the code is understandable and follows our conventions. The responsibility of accepting merge requests lies on the Integrator Emil Strömberg, who may temporarily delegate the responsibility to another developer. From iteration four, all developers are given permission to accept other developers merge requests. This change serves to minimize the time from the request being made to the time of acceptance. By dividing the responsibility evenly between the integration is not dependant on only one person, which might delay it.
 	
 	\subsection{Traceability} \label{traceability}
-	In order to provide traceability between the requirements, developed functionality and tests, a work pipeline is established using the functionality of GitLab Issue Boards. Each functional requirement defined in the SRS is added to the board as an issue with appropriate labels to categorize them. The issue is named with the requirement's ID and name, and includes the description and category. The priority level is indicated using labels. The board lists issues separately with the labels "requirements functional", "TestCase", "Ready to develop", "Being developed" and "Test requirement". The issues are initially on the list "requirements functional", upon an issue is moved to "TestCase" when a tester starts to develop a test case for testing the requirement. In this stage, the ID of input and output objects are set according to the naming convention aforementioned. When the test case it developed, the tester moves the issue to the list "Ready to develop". Issues lie here waiting for a developer to get assigned to it and start developing corresponding functionality in the product. Then the issue is moved to "Being developed" until finished and progressed to "Test requirement". At that time a tester will perform the test and depending on the result, the issue will either be labelled "Done" and closed, or report the bug by creating a new issue labelled "Bug".
+	In order to provide traceability between the requirements, developed functionality and tests, a work pipeline is established using the functionality of GitLab Issue Boards. Each functional requirement defined in the SRS is added to the board as an issue with appropriate labels to categorize them. The issue is named with the requirement's ID and name, and includes the description and category. The priority level is indicated using labels. The board lists issues separately with the labels "requirements functional", "TestCase", "Ready to develop", "Being developed" and "Test requirement". The issues are initially on the list "requirements functional", upon an issue is moved to "TestCase" when a tester starts to develop a test case for testing the requirement. In this stage, the ID of input and output objects are set according to the naming convention aforementioned. When the test case it developed, the tester moves the issue to the list "Ready to develop". Issues lie here waiting for a developer to get assigned to it and start developing corresponding functionality in the product. Then the issue is moved to "Being developed" until finished and progressed to "Test requirement". At that time a tester will perform the test and depending on the result, the issue will either be labelled "Done" and closed, or remain open as the bug is reported by creating a new issue labelled "Bug". If the test fails entirely, the issue is moved back to "Being developed".
 	
 	\subsection{Software Testing}
 	The product developed by HeartByte is evaluated through software testing to ensure that functional requirements are met as well as bugs are identified. The full specification regarding testing is to be found in \textit{Test Plan 3.0}. The following section will provide a brief overview of the methodology and how the quality of the tests are to be assessed.
@@ -208,22 +216,65 @@
 	
 	User tests are performed several times during the development to ensure that the product really does capture the needs of the intended end users. This is done both on the prototype and the deployed system. The methods used for the user tests include Thinking-out-Loud, Lostness and System Usability Scale (SUS).
 	
-	%\subsubsection{User Test}
-	%User shall be summarised using the predetermined template which follows here *Make list of content*
-	\subsubsection{Reporting Test Results}
+	%How to measure non-functional requirements?
 	
+	\subsubsection{Tools}
+	The software testing uses the frameworks Jest and WebdriverIO, which in turn uses Jasmine. To make the integration tests Selenium is used with the two webdrivers Chrome and Firefox. Bugtracking is done through GitLab using issues labeled Bugs and a specific board. The environment and tools used for software testing are described in detail in the \textit{Test Plan}. 
+	
+	\subsubsection{Reporting Test Results}
+	The test results of integration tests that are not in the CI are primarily reported on GitLab using the board described in \ref{traceability}. The same information about requirements, corresponding test cases, type of test and test results (exept of bugs) can be seen in the Requirement Traceability Matrix (RTM). There the tests are also divided into iterations, on which testing metrics will be calculated.
+	
+	Regression tests in the CI are reported on GitLab in the pipeline when commits passes it. 
+	
+	%System tests in Excel??
+	
+	User tests shall be documented with an explicit description of the method of the tests, the results of it and adjustments to the requirements and system that were taken accordingly.
 	
 	\subsubsection{Testing Quality}
-	The type of tests performed makes it 
+	The type of tests performed makes it difficult to use standardized static metrics to evaluate different types of code coverage. The following metrics are to be used.
 	
-	System coverage
+	\paragraph{Interface Coverage} 
+	The metric describes how much of the system from the user's point of view that the tests cover. To compute the metric the number of interactive objects, such as buttons and links, there is in the user interface. It is also needed to count how many of those that are covered by some kind of test (exclusive user test). It is computated by dividing the number of objects covered by tests with the total number of objects and multiplying it with 100 making it a percentage.
 	
-	Requirement Coverage
+	\begin{equation}
+		\text{Interface Coverage} = \frac{\text{Number of Objects Covered}}{\text{Total Number of Objects}} \times 100
+	\end{equation}
+		
+	\paragraph{Requirement Coverage}
+	This metric is another way to describe how complete the tests are. It provides a high level view of what requirements have test coverage. However, this will not show any result of the test which could indicate the quality of the test cases if they find any bugs. It is computed by counting the number of requirements that are covered by test cases, dividing this with the total number of requirements and multiplying it with 100 to make it a percentage.
 	
-	Bugs reported
+	\begin{equation}
+		\text{Requirement Coverage} = \frac{\text{Number of Requirements Covered}}{\text{Total Number of Requirements}} \times 100
+	\end{equation}
 	
+	\paragraph{Passed Test Cases Percentage}
+	The metric shows the relation between the number of passed tests compared to the total number of tests executed. This metric is applied to integration tests. It is computed by counting the number of passed tests, dividing this with the total number of executed test and multiplying it with 100 to make it a percentage.
 	
+	\begin{equation}
+		\text{Passed Test Cases Percentage} = \frac{\text{Number of Passed Tests}}{\text{Total Number of Tests Executed}} \times 100
+	\end{equation}
+	
+	\paragraph{Failed Test Cases Percentage}
+	The metric shows the relation between the number of failed tests compared to the total number of tests executed. This metric is applied to integration tests. It is computed by counting the number of failed tests, dividing this with the total number of executed test and multiplying it with 100 to make it a percentage.
+	
+	\begin{equation}
+		\text{Failed Test Cases Percentage} = \frac{\text{Number of Failed Tests}}{\text{Total Number of Tests Executed}} \times 100
+	\end{equation}
 
+	\paragraph{Fixed Bugs Percentage}
+	The percentage of fixed bugs describes to what proportion the detected bugs or defects are actually fixed. If the defects found by tests are not fixed, testing is somewhat redundant. It is computed by counting the number of fixed bugs, dividing this with the total number of bugs reported and multiplying it with 100 to make it a percentage. 
+	
+	\begin{equation}
+		\text{Fixed Bugs Percentage} = \frac{\text{Number of Fixed Bugs}}{\text{Total Number of Bugs Reported}} \times 100
+	\end{equation}
+
+	\paragraph{Bugs per Test Case Percentage}
+	This metric shows what percentage of test cases identifies bugs. A high value indicates accurate test cases, but also a large portion of defects in the system. A low value on the other hand might indicate too simple test cases. It is computed by counting the number of test cases with reported bugs, dividing this with the total number of test cases and multiplying it with 100 to make it a percentage.
+	
+	\begin{equation}
+		\text{Bugs per Test Case Percentage} = \frac{\text{Number of Test Cases with Reported Bugs}}{\text{Total Number of Test Cases}} \times 100
+	\end{equation}
+	
 	\clearpage
 	\section{Problem Reporting}
 	To encourage HearByte's members to report problems regarding quality or compliance to processes of the process plan, the reporting shall be as easy as possible. Therefore everyone are encouraged to contact the Quality Coordinator preferably through Teams. Depending on the problems nature, the team leader of concerned team will likely be involved. If there is a large issue a representative of the management team will be involved to produce a plan for solving the problem.
