@@ -205,7 +205,6 @@ const PatientsSearch = ({ setSortState,
                             width: '100%'
                         }}
                         placeholder='Sök:'
-                        id='dynSearchStr'
                         inputProps={{ 'aria-label': 'search' }}
                         onChange={handleSearchChange}
                         value={searchValue}
@@ -240,7 +239,7 @@ const PatientsSearch = ({ setSortState,
                         setOwnFilters={setOwnFilters}
                         customFilterData={customFilterData}
                         setCustomFilterData={setCustomFilterData} />
-                    <Button id="overviewSortBtn"
+                    <Button
                         onClick={() => setDropdownOpen(!dropdownOpen)}
                     >
                         <SwapVert style={{ fontSize: '25px' }} />
