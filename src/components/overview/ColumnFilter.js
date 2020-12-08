@@ -85,11 +85,11 @@ export const ColumnFilter = () => {
 
   return (
     <div style={{ width: '5%', float: 'right', height: '10px', marginRight: '7px' }}>
-      <IconButton onClick={handleClickOpen} id='adminOverviewCustomizeSettingsDashboardBtn'>
+      <IconButton onClick={handleClickOpen}>
         <SettingsIcon />
       </IconButton>
       <Dialog aria-labelledby="simple-dialog-title" open={open} onClose={handleClickClose}>
-        <Card className={classes.root} id='adminOverviewCustomizeSettingsPopupWindow'>
+        <Card className={classes.root}>
           <CardHeader
             title="Översiktsinställningar"
             className={classes.MuiCardHeader}
@@ -163,7 +163,7 @@ export const ColumnFilter = () => {
             </Grid>
           </CardContent>
           <CardActions>
-            <Button size="small" onClick={submitChange} id='adminFilterSave'>
+            <Button size="small" onClick={submitChange}>
               Spara
             </Button>
           </CardActions>

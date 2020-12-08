@@ -94,7 +94,6 @@ const PatientViewHeaderNavigation = ({ activeTabValue, ssn }) => {
             {...a11yProps(3)}
           />
           <LinkTab 
-            id="patientViewAdminTabBtn"
             style={{ textDecoration: 'none', backgroundColor: activeTabValue === 4 ? '#0066B3' : 'inherit', color: activeTabValue === 4 ? '#FFF' : 'inherit'}} 
             label='Admin'
             onClick={navigateToAdmin}
