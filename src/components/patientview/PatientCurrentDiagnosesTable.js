@@ -7,9 +7,7 @@ const PatientCurrentDiagnosesTable = () => {
 
   const diagnoses = useMemo(
     () => [
-      { name: 'Diabetes' },
       { name: 'Hypertoni' },
-      { name: 'Nedsatt hörsel'}
     ],
     []
   )

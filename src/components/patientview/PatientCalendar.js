@@ -44,7 +44,7 @@ const Data = [
     {
         time: "14:00-15:00",
         activity: "Läkarbesök",
-        description: "Gastroskopi",
+        description: "",
         place: "Univeristetssjukhuset",
     },
 ];
@@ -75,7 +75,7 @@ const StyledTableRow = withStyles((theme) => ({
 
 //Placing the fake data on specific dates
 const modifiers = {
-    highlight: date => getDate(date) === 2 || getDate(date) === 9 || getDate(date) === 16
+    highlight: date => getDate(date) === 2 || getDate(date) === 10 || getDate(date) === 16
         || getDate(date) === 21 || getDate(date) === 30
 }
 
@@ -94,7 +94,7 @@ const BasicTable = (props) => {
     const [rows] = useState(props.props);
     
     /*Prints activites on the dates below in the if. Is the same dates as in const modifiers*/
-    if (tableDay === '02' || tableDay === '09' || tableDay === '21' || tableDay === '16' || tableDay === '30') {
+    if (tableDay === '02' || tableDay === '10' || tableDay === '21' || tableDay === '16' || tableDay === '30') {
         return (
             <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="simple table">

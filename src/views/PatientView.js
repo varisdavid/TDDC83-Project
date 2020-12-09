@@ -62,7 +62,7 @@ const PatientView = () => {
   const [activeTabValue, setActiveTabValue] = useState(getActiveTab(location));
 
   // Will be fetched by user information later on. 
-  const patientInformation = 'Namn Efternamn, '+ ssn;
+  const patientInformation = 'Gerd Karlsson, '+ ssn;
 
   // Upon rendering the component, this hook calls a function which 
   // determines which tab is active, depending on this we load a different tab.

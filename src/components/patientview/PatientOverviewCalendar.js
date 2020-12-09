@@ -80,7 +80,7 @@ const StyledTableRow = withStyles((theme) => ({
 
 //Dates to be underlined in the calendar
 const modifiers = {
-    highlight: date => getDate(date) === 2 || getDate(date) === 9 || getDate(date) === 16
+    highlight: date => getDate(date) === 2 || getDate(date) === 10 || getDate(date) === 16
         || getDate(date) === 21 || getDate(date) === 30
 }
 
@@ -97,7 +97,7 @@ const BasicTable = (props) => {
     const classes = useStyles();
     const [rows] = useState(props.props);
     //Dates that the activity-data above is being printed on
-    if (tableDay === '02' || tableDay === '09' || tableDay === '21' || tableDay === '16' || tableDay === '30') {
+    if (tableDay === '02' || tableDay === '10' || tableDay === '21' || tableDay === '16' || tableDay === '30') {
         return (
             <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="simple table">

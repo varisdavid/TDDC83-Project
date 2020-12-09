@@ -8,11 +8,9 @@ const PatientEarlierDiseasesTable = () => {
   const earlierDisease = useMemo(
     () => [
       { disease: 'Hjärtinfarkt', year: 2018 },
+      { disease: 'Höftoperation', year: 2011 },
+      { disease: 'Höftoperation', year: 2011 },
       { disease: 'Hjärtinfarkt', year: 2008 },
-      { disease: 'Höftoperation', year: 2011 },
-      { disease: 'Trött på distans', year: 2020 },
-      { disease: 'Koffeinberoende', year: 2018 },
-      { disease: 'Höftoperation', year: 2011 },
     ],
     []
   )
