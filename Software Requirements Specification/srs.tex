@@ -27,7 +27,7 @@
     urlcolor=blue,        % color of external links
     linktoc=page            % only page is linked
 }%
-\def\myversion{2.5}
+\def\myversion{2.6}
 \title{Software Requirements Specification}
 \author{Sara Lindholm \\ Patrick Asman \\ Jacob Rhan}
 
@@ -108,6 +108,8 @@
  \hline 
  2020-12-09 & 2.5 & Updated reference links. Added updated ID's according to RTM. & Sara Lindholm & \\
  \hline 
+ 2020-12-09 & 2.6 & Moved requirements that have not been implemented to new sections 3.6 Unimplemented functional requirements and 3.7 Unimplemented non-functional requirements. & Sara Lindholm & \\
+ \hline
 \end{tabular}
 \end{center}
 
@@ -482,15 +484,6 @@ Create new view &
     \newline \textbf{Output:} Pop-up window with ID "overviewNewViewPopupWindow" is displayed &
 Medium \\ 
 \hline
-FR002 & 
-Customization of overview dashboard &
-FR089 is fulfilled & 
-    \textbf{Input:} Choose between different checkboxes of display columns with ID: (Namn, Personnummer, Priority, Diagnos, Senast Uppdaterad, Uppdaterad av, Team). Click on save-button with ID = "adminFilterSave".
-    \newline \textbf{Action:} The system generates and saves display-settings.
-    \newline \textbf{Output:} Overview dashboard updated according to selected settings.
-    & 
-Medium \\
-\hline
 FR046 & 
 Create new customized view based on age & 
 FR001 is fulfilled &  
@@ -551,15 +544,6 @@ FR001, FR046-Fr051 are fulfilled &
     \textbf{Input:} Title of new view in text field with ID "saveNewView", the selected user group in drop-down menu with ID "viewAvailableFor" and sign button with ID "confirmCustomizedView"
     \newline \textbf{Action:}  System generates new view based on previously selected settings and saves to database.
     \newline \textbf{Output:} New view available for all users in the chosen user group.
-    & 
-Medium \\
-\hline
-FR089 & 
-Overview dashboard settings & 
-&  
-    \textbf{Input}: Click on the settings button with ID ="adminOverviewCustomizeSettingsDashboardBtn"
-    \newline \textbf{Action}: System generates popup window
-    \newline \textbf{Output}: System displays customization popup window with ID = "adminOverviewCustomizeSettingsPopupWindow"
     & 
 Medium \\
 \hline
@@ -761,15 +745,6 @@ Overview dashboard settings &
     &
 Medium \\
 \hline
-FR092 & 
-Create new customized view based on operation &
-FR053 is fulfilled & 
-    \textbf{Input:} Click on dropdownmenu with ID = "operationMenu" and choose between "Alla" (value = 'all'), Operation 1 (value = 'Operation1) or Operation 2 (value = 'Operation2') and presses button "OK" with ID = "okView".
-    \newline \textbf{Action:} System generates new view based on operation settings and saves to database.
-    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
-    & 
-Medium \\
-\hline
 \end{tabularx}
 \end{center}
 
@@ -789,34 +764,6 @@ Configure values for the rule engines priority &
     \newline \textbf{Output}: Settings displayed &
 High \\ 
 \hline 
-FR007 & 
-Accessing activity log & 
- & 
-    \textbf{Input}: Click on ”Admin” tab with ID: "patientViewAdminTabBtn" 
-    \newline \textbf{Action}: Load activity log from database 
-    \newline \textbf{Output}: Display activity log &
-Medium \\ 
-\hline 
-FR008 & 
-Search in activity log & 
- & 
-    \textbf{Input}: Text string (search parameter) in search box with ID = "patientViewAdminActivityField". 
-    \newline 
-    \textbf{Action}: System checks for activities or users that matches text string 
-    \newline 
-    \textbf{Output}: Displays activities and/or users that matches string. &
-Low \\ 
-\hline
-FR009 & 
-Filter in activity log & 
-Filter-button with ID ="patientAdminFilterBtn" has been pressed and system currently displays "Filter" window (ID = "patientAdminFilterWindow"). & 
-    \textbf{Input}: Check boxes containing different options (Nya mätvärden, Besökare, Ändringar gjorda) selected and "save"-button with ID = "activityLogSave" pressed. 
-    \newline 
-    \textbf{Action}:  System filter activities based on filter settings. 
-    \newline 
-    \textbf{Output}: Window closes and displays activities that matches filter in the activity log &
-Low \\ 
-\hline
 \end{tabularx}
 \end{center}
 
@@ -831,28 +778,10 @@ In section 3.2.2. we describe functional requirements for the User. A preconditi
 FR005 & 
 Switch to Home view & 
  & 
-    \newline \textbf{Input:} User clicks on the Home button with  ID = "patientHomeButton"..
+    \newline \textbf{Input:} User clicks on the Home button with  ID = "patientHomeButton".
     \newline \textbf{Action:} System loading Home view.
     \newline \textbf{Output:} System displays Home/Mina Patienter . &
 High \\ 
-\hline
-\end{tabularx}
-\end{center}
-
-\subsubsection{Kalender}
-A precondition is that the user is logged in and on the view “Patient” and, on the tab “Kalender”
-\begin{center}
-\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
-\hline
-\textbf{ID:} & \textbf{Title} & \textbf{Precondition} & \textbf{Description} & \textbf{Priority} \\
-\hline
-FR010 & 
-Add calendar activity &
-& 
-\textbf{Input}: Click on a date in calendar, click "Add Activity"-button with ID = "patientCalendarAddActivityBtn", write a title and description in text fields with IDs, and click save-button with ID = "patientCalendarSaveActivityBtn".
-\newline \textbf{Action}: Adds activity in calendar.
-\newline \textbf{Output}: The chosen date is marked and the activity is added to the chosen date. & 
-Low \\ 
 \hline
 \end{tabularx}
 \end{center}
@@ -880,58 +809,6 @@ Add patient's measurement values &
 \textbf{Output}:  Displays confirmation message (ID = "patientMeasurementConfirmationMessage") and updated patient information. & 
 High \\ 
 \hline 
-FR013 & 
-Accept patient's measurement values &
-User has clicked on the notification symbol and system currently displays the "Uppmärksammat värde" window (ID = "patientMeasurementsUnexpectedValue") &
-\textbf{Input}: Click "Godkänn mätvärde"-button with ID = "PatientMeasurementSignBtn" to accept the changed measurement value. \newline 
-\textbf{Action}:System stores measured value in database. \newline 
-\textbf{Output}: Updated patient profile. & 
-Medium \\ 
-\hline 
-FR014 & 
-Deny patient's measurement values &
-User has clicked on the notification symbol and system currently displays the "Uppmärksammat värde" window(ID = "patientMeasurementsUnexpectedValue"). &
-\textbf{Input}: Deny unexpected measurement value by clicking "Avbryt"-button with ID = "PatientMeasurementCancelBtn". \newline 
-\textbf{Action}: System remove measured value from patient profile. \newline 
-\textbf{Output}: Displays changes and updated patient information. & 
-Medium \\ 
-\hline 
-\end{tabularx}
-\end{center}
-
-\subsubsection{Läkemedelslista}
-A precondition is that the user is logged in and on the view “Patient” and, on the tab “Läkemedelslista”.
-\begin{center}
-\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
-\hline
-\textbf{ID:} & \textbf{Title} & \textbf{Precondition} & \textbf{Description} & \textbf{Priority} \\
-\hline
-FR087 & 
-Fetch medication information from FASS &
-& 
-\textbf{Input}:Click on a medication in "Läkemedelslista" \newline 
-\textbf{Action}:Fetch URL from FASS \newline 
-\textbf{Output}: Directed to fetched URL & 
-Low \\ 
-\hline
-\end{tabularx}
-\end{center}
-
-\subsubsection{Översikt}
-A precondition is that the user is logged in and on the view “Patient” and, on the tab “Översikt”.
-\begin{center}
-\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
-\hline
-\textbf{ID:} & \textbf{Title} & \textbf{Precondition} & \textbf{Description} & \textbf{Priority} \\
-\hline
-FR088 & 
-Fetch diagnosis information from 1177 &
-& 
-\textbf{Input}:Click on a diagnosis in "Översikt" \newline 
-\textbf{Action}:Fetch URL from 1177 \newline 
-\textbf{Output}: Directed to fetched URL & 
-Low \\ 
-\hline
 \end{tabularx}
 \end{center}
 
@@ -1012,23 +889,6 @@ High \\
 \subsection{Översikt}
 In section 3.2.4. we describe functional requirements for the User. A precondition is that the user is logged in to the system and, on the view “Översikt”
 
-\subsubsection{Kalender}
-A precondition is that the user is logged in, on the view “Översikt” and, on the tab “Kalender”
-\begin{center}
-\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
-\hline
-\textbf{ID:} & \textbf{Title} & \textbf{Precondition} & \textbf{Description} & \textbf{Priority} \\
-\hline
-FR022 & 
-Add calendar activity & 
-&
-\textbf{Input}: Click on a date in calendar, click "Add Activity"-button with ID = "", write a title and description in text fields with IDs, and click save-button with ID = "".  \newline 
-\textbf{Action}: Adds activity in calendar. \newline
-\textbf{Output}: The chosen date is marked and the activity is added to the chosen date. & 
-Low \\ 
-\hline
-\end{tabularx}
-\end{center}
 
 \subsubsection{Notislogg}
 A precondition is that the user is logged in, on the view “Översikt” and, on the tab “Notislogg”
@@ -1447,15 +1307,6 @@ A view has previously been created and displayed &
     & 
 Medium \\
 \hline
-FR093 & 
-Create new customized view based on operation & 
-FR070 is fulfilled &  
-    \textbf{Input:} Click on dropdownmenu with ID = "operationMenu" and choose between "Alla" (value = 'all'), Operation 1 (value = 'Operation1) or Operation 2 (value = 'Operation2') and presses button "OK" with ID = "okView".
-    \newline \textbf{Action:} System generates new view based on operation settings and saves to database.
-    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
-    & 
-Medium \\
-\hline
 \end{tabularx}
 \end{center} 
 
@@ -1510,7 +1361,7 @@ Low \\
 \subsection{Security}
 
 \begin{center}
-\begin{tabularx}{\linewidth}{| l | X | l |}
+\begin{tabularx}{\linewidth}{| l | p{10.40cm} | l |}
 \hline
 \textbf{ID:} & \textbf{Statement} & \textbf{Priority} \\
 \hline
@@ -1532,10 +1383,6 @@ NFR013 &
 The system shall enable use of openEHR platforms as storage backend for EHR content (e.g. measurements, content from forms filled out by the patient and care plan) &
 High \\ 
 \hline
-NFR019 & 
-Online health care services (i.e. 1177, FASS) shall be integrated in the system. & 
-Low \\ 
-\hline
 \end{tabularx}
 \end{center}
 
@@ -1551,7 +1398,7 @@ The system shall be OS independent. &
 High \\ 
 \hline
 NFR004 & 
-It shall be possible to deploy the system using Docker orchestrated by Kubernetes.&
+It shall be possible to deploy the system using Docker orchestrated by Kubernetes. &
 High \\ 
 \hline
 NFR006 & 
@@ -1581,20 +1428,8 @@ NFR010 &
 The system shall be developed in open source, Apache 2 license. &
 Medium \\ 
 \hline
-NFR011 & 
-The graphical interface components shall be continuously and openly documented/tested/published through Storybook. &
-Medium \\ 
-\hline
 NFR020 & 
 In the view of a patient user shall be able to see the patient's profile picture &
-Low \\ 
-\hline
-NFR021 & 
-In the view of the patient the current diagnosis/diagnoses shall be presented in the heading  &
-Medium \\ 
-\hline
-NFR022 & 
-In the calendar view of a patient the user shall for an upcoming activity be presented with the date, time, description, place, and comments &
 Low \\ 
 \hline
 NFR023 & 
@@ -1602,7 +1437,7 @@ The system shall have a symbol that indicates which priority level the notificat
 Medium \\ 
 \hline
 NFR024 & 
-It must be specified during what period the shown measurments have been collected. &
+It must be specified during what period the shown measurements have been collected. &
 Low \\ 
 \hline
 NFR025 & 
@@ -1610,19 +1445,19 @@ The system shall present measurement history in a diagram. &
 Medium \\ 
 \hline
 NFR026 & 
-Information about patient care considerations shall be visible in patient overview (e.g. Fear of needles)  &
+Information about patient care considerations shall be visible in patient view (e.g. Fear of needles)  &
 Medium \\ 
 \hline
 NFR027 & 
-Personal information (gender, age, personal number) of the patient shall be included in the view. &
+Personal information (gender, age, personal number) of the patient shall be included in the patient view. &
 Medium \\ 
 \hline
 NFR028 & 
-Contact information and emergency contacts, if available, shall be included in the view. &
+Contact information and emergency contacts, if available, shall be included in the patient view. &
 Medium \\ 
 \hline
 NFR029 & 
-At the top of the view, the patient's current diagnosis/diagnoses shall be visible together with a collapsible list of past diagnosis/diagnoses &
+At the top of the patient view, the patient's current diagnosis/diagnoses shall be visible together with a collapsible list of past diagnosis/diagnoses &
 Medium \\ 
 \hline
 NFR030 & 
@@ -1648,8 +1483,253 @@ Medium \\
 \end{tabularx}
 \end{center}
 
-%\subsection{Requirements not implemented}
-% This section describes the requirements that have not been implemented. 
+\section{Unimplemented functional requirements}
+This section describes the functional requirements that have not been implemented. 
+
+\subsection{Admin}
+
+\subsubsection{Översikt/Alla Patienter}
+\begin{center}
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+\textbf{ID:} & \textbf{Title} & \textbf{Precondition} & \textbf{Description} & \textbf{Priority} \\
+\hline
+FR092 & 
+Create new customized view based on operation &
+FR053 is fulfilled & 
+    \textbf{Input:} Click on dropdownmenu with ID = "operationMenu" and choose between "Alla" (value = 'all'), Operation 1 (value = 'Operation1) or Operation 2 (value = 'Operation2') and presses button "OK" with ID = "okView".
+    \newline \textbf{Action:} System generates new view based on operation settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
+    & 
+Medium \\
+\hline
+\end{tabularx}
+\end{center}
+
+\subsubsection{Notislogg}
+\begin{center}
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+\textbf{ID:} & \textbf{Title} & \textbf{Precondition} & \textbf{Description} & \textbf{Priority} \\
+\hline
+FR002 & 
+Customization of overview dashboard &
+FR089 is fulfilled & 
+    \textbf{Input:} Choose between different checkboxes of display columns with ID: (Namn, Personnummer, Priority, Diagnos, Senast Uppdaterad, Uppdaterad av, Team). Click on save-button with ID = "adminFilterSave".
+    \newline \textbf{Action:} The system generates and saves display-settings.
+    \newline \textbf{Output:} Overview dashboard updated according to selected settings.
+    & 
+Medium \\
+\hline
+FR089 & 
+Overview dashboard settings & 
+&  
+    \textbf{Input}: Click on the settings button with ID ="adminOverviewCustomizeSettingsDashboardBtn"
+    \newline \textbf{Action}: System generates popup window
+    \newline \textbf{Output}: System displays customization popup window with ID = "adminOverviewCustomizeSettingsPopupWindow"
+    & 
+Medium \\
+\hline
+\end{tabularx}
+\end{center}
+
+\subsubsection{Patient/Admin}
+\begin{center}
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+\textbf{ID:} & \textbf{Title} & \textbf{Precondition} & \textbf{Description} & \textbf{Priority} \\
+\hline
+FR007 & 
+Accessing activity log & 
+ & 
+    \textbf{Input}: Click on ”Admin” tab with ID: "patientViewAdminTabBtn" 
+    \newline \textbf{Action}: Load activity log from database 
+    \newline \textbf{Output}: Display activity log &
+Medium \\ 
+\hline 
+FR008 & 
+Search in activity log & 
+ & 
+    \textbf{Input}: Text string (search parameter) in search box with ID = "patientViewAdminActivityField". 
+    \newline 
+    \textbf{Action}: System checks for activities or users that matches text string 
+    \newline 
+    \textbf{Output}: Displays activities and/or users that matches string. &
+Low \\ 
+\hline
+FR009 & 
+Filter in activity log & 
+Filter-button with ID ="patientAdminFilterBtn" has been pressed and system currently displays "Filter" window (ID = "patientAdminFilterWindow"). & 
+    \textbf{Input}: Check boxes containing different options (Nya mätvärden, Besökare, Ändringar gjorda) selected and "save"-button with ID = "activityLogSave" pressed. 
+    \newline 
+    \textbf{Action}:  System filter activities based on filter settings. 
+    \newline 
+    \textbf{Output}: Window closes and displays activities that matches filter in the activity log &
+Low \\ 
+\hline
+\end{tabularx}
+\end{center}
+
+\subsection{Patient}
+
+\subsubsection{Kalender}
+\begin{center}
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+\textbf{ID:} & \textbf{Title} & \textbf{Precondition} & \textbf{Description} & \textbf{Priority} \\
+\hline
+FR010 & 
+Add calendar activity &
+& 
+\textbf{Input}: Click on a date in calendar, click "Add Activity"-button with ID = "patientCalendarAddActivityBtn", write a title and description in text fields with IDs, and click save-button with ID = "patientCalendarSaveActivityBtn".
+\newline \textbf{Action}: Adds activity in calendar.
+\newline \textbf{Output}: The chosen date is marked and the activity is added to the chosen date. & 
+Low \\ 
+\hline
+\end{tabularx}
+\end{center}
+
+\subsubsection{Mätvärden}
+\begin{center}
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+\textbf{ID:} & \textbf{Title} & \textbf{Precondition} & \textbf{Description} & \textbf{Priority} \\
+\hline
+FR013 & 
+Accept patient's measurement values &
+User has clicked on the notification symbol and system currently displays the "Uppmärksammat värde" window (ID = "patientMeasurementsUnexpectedValue") &
+\textbf{Input}: Click "Godkänn mätvärde"-button with ID = "PatientMeasurementSignBtn" to accept the changed measurement value. \newline 
+\textbf{Action}:System stores measured value in database. \newline 
+\textbf{Output}: Updated patient profile. & 
+Medium \\ 
+\hline 
+FR014 & 
+Deny patient's measurement values &
+User has clicked on the notification symbol and system currently displays the "Uppmärksammat värde" window(ID = "patientMeasurementsUnexpectedValue"). &
+\textbf{Input}: Deny unexpected measurement value by clicking "Avbryt"-button with ID = "PatientMeasurementCancelBtn". \newline 
+\textbf{Action}: System remove measured value from patient profile. \newline 
+\textbf{Output}: Displays changes and updated patient information. & 
+Medium \\ 
+\hline 
+\end{tabularx}
+\end{center}
+
+\subsubsection{Läkemedelslista}
+\begin{center}
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+\textbf{ID:} & \textbf{Title} & \textbf{Precondition} & \textbf{Description} & \textbf{Priority} \\
+\hline
+FR087 & 
+Fetch medication information from FASS &
+& 
+\textbf{Input}:Click on a medication in "Läkemedelslista" \newline 
+\textbf{Action}:Fetch URL from FASS \newline 
+\textbf{Output}: Directed to fetched URL & 
+Low \\ 
+\hline
+\end{tabularx}
+\end{center}
+
+\subsubsection{Översikt}
+\begin{center}
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+\textbf{ID:} & \textbf{Title} & \textbf{Precondition} & \textbf{Description} & \textbf{Priority} \\
+\hline
+FR088 & 
+Fetch diagnosis information from 1177 &
+& 
+\textbf{Input}:Click on a diagnosis in "Översikt" \newline 
+\textbf{Action}:Fetch URL from 1177 \newline 
+\textbf{Output}: Directed to fetched URL & 
+Low \\ 
+\hline
+\end{tabularx}
+\end{center}
+
+\subsection{System}
+
+\subsection{Översikt}
+
+\subsubsection{Kalender}
+A precondition is that the user is logged in, on the view “Översikt” and, on the tab “Kalender”
+\begin{center}
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+\textbf{ID:} & \textbf{Title} & \textbf{Precondition} & \textbf{Description} & \textbf{Priority} \\
+\hline
+FR022 & 
+Add calendar activity & 
+&
+\textbf{Input}: Click on a date in calendar, click "Add Activity"-button with ID = "", write a title and description in text fields with IDs, and click save-button with ID = "".  \newline 
+\textbf{Action}: Adds activity in calendar. \newline
+\textbf{Output}: The chosen date is marked and the activity is added to the chosen date. & 
+Low \\ 
+\hline
+\end{tabularx}
+\end{center}
+
+\subsubsection{Alla Patienter}
+\begin{center}
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+\textbf{ID:} & \textbf{Title} & \textbf{Precondition} & \textbf{Description} & \textbf{Priority} \\
+\hline
+FR093 & 
+Create new customized view based on operation & 
+FR070 is fulfilled &  
+    \textbf{Input:} Click on dropdownmenu with ID = "operationMenu" and choose between "Alla" (value = 'all'), Operation 1 (value = 'Operation1) or Operation 2 (value = 'Operation2') and presses button "OK" with ID = "okView".
+    \newline \textbf{Action:} System generates new view based on operation settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
+    & 
+Medium \\
+\hline
+\end{tabularx}
+\end{center}
+
+
+\section{Unimplemented non-functional requirements}
+This section describes the non-functional requirements that have not been implemented. 
+
+%\subsection{Performance requirements}
+
+\subsection{System software attributes}
+
+%\subsubsection{Usability}
+%\subsubsection{Security}
+\subsubsection{Maintainability}
+\begin{center}
+\begin{tabularx}{\linewidth}{| l | X | l |}
+\hline
+\textbf{ID:} & \textbf{Statement} & \textbf{Priority} \\
+\hline
+NFR019 & 
+Online health care services (i.e. 1177, FASS) shall be integrated in the system. & 
+Low \\ 
+\hline
+\end{tabularx}
+\end{center}
+
+%\subsubsection{Portability}
+
+\subsection{Other requirements}
+\begin{center}
+\begin{tabularx}{\linewidth}{| l | X | l |}
+\hline
+\textbf{ID:} & \textbf{Statement} & \textbf{Priority} \\
+\hline
+NFR021 & 
+In the view of the patient the current diagnosis/diagnoses shall be presented in the heading  &
+Medium \\ 
+\hline
+NFR022 & 
+In the calendar view of a patient the user shall for an upcoming activity be presented with the date, time, description, place, and comments &
+Low \\ 
+\hline
+\end{tabularx}
+\end{center}
+
 
 %\appendix
 %\chapter{Appendix Title}
