@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useMemo} from "react";
 
 import {PatientListOfMedicationTable} from "../components";
 // import {useAuth0} from "@auth0/auth0-react";
 
-
+/*
 const PatientListOfMedication = () => {
 
     // const { getAccessTokenSilently } = useAuth0();
@@ -38,9 +38,37 @@ const PatientListOfMedication = () => {
 
         medication_list();
     }, []);
-   // console.log("Utranflr fölre");
-   // console.log(medicationList);
-   // console.log("utanfölr efter");
+*/
+
+const PatientListOfMedication = () => {
+
+    const data =  useMemo(
+        () => [
+            {
+                Läkemedel: 'Alvedon',
+                Dos: 'Två spray i varje näsa',
+                Intagsform: 'Genom näsan',
+                Intag: 'Vid behov',
+                Kommentar: 'Tas under vinterhalvåret',
+            },
+            {
+                Läkemedel: 'Actrapid',
+                Dos: 'Två spray i varje näsa',
+                Intagsform: 'Genom näsan',
+                Intag: 'Vid behov',
+                Kommentar: 'Tas under vinterhalvåret',
+            },
+            {
+                Läkemedel: 'Amplodin',
+                Dos: 'Två spray i varje näsa',
+                Intagsform: 'Genom näsan',
+                Intag: 'Vid behov',
+                Kommentar: 'Tas under vinterhalvåret',
+            },
+        ],
+        []
+    )
+
 
 
     //Filter the data to an array that will show the current medication
@@ -55,7 +83,7 @@ const PatientListOfMedication = () => {
         return (newArr)
     }
 
-    const dataDaily = filterDaily(medicationList)
+    const dataDaily = filterDaily(data)
 
     //Filter the data to an array with when needed medication
     function filterNeed(data) {
@@ -71,7 +99,7 @@ const PatientListOfMedication = () => {
         return (newArr)
     }
 
-    const dataNeed = filterNeed(medicationList)
+    const dataNeed = filterNeed(data)
 
     return (
         <>
@@ -85,4 +113,5 @@ const PatientListOfMedication = () => {
         </>
     );
 };
+
 export default PatientListOfMedication;

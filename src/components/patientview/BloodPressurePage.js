@@ -1,10 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useMemo} from 'react';
 import { BloodPressureChart, Notification, TableForChartBloodPressure, FormForUpdateValues , SliderMeasurements} from "..";
 
-const BloodPressurePage = () => {
     //Sending the personaldata to the notices. This should be used for the ajax call in the futher as well
-    const id = "470203-1324";
+
     //Fake data to the table rendering below
+
+  /*
     const [measurement, setmeasurements] = useState([]);
     useEffect(() => {
         // Basic example of how to make a authorized fetch call to our backend endpoints
@@ -29,26 +30,81 @@ const BloodPressurePage = () => {
         measurements();
     },[] );
 
+*/
 
-    //Adds the Notification to the data array so that the pop-up modals can retrive the correct data
+    const BloodPressurePage = () => {
+//Sending the personaldata to the notices. This should be used for the ajax call in the futher as well
+        const id = "470203-1324";
+        //Fake data to the table rendering below
+        const data = useMemo(
+            () => [
+
+                {
+                    notices: <Notification value={1} text={'Ov'} id={id} date={'2020-12-10'}
+                                           bloodPressure={"158/123"} updatedBy={"Patient"}/>,
+                    Date: '2020-12-10',
+                    BloodPressure: '158/121',
+                    UpdatedBy: 'Patient',
+                },
+                {
+                    Date: '2020-12-3',
+                    BloodPressure: '133/81',
+                    UpdatedBy: 'Patient',
+                },
+                {
+                    notices: "",
+                    Date: '2020-11-26',
+                    BloodPressure: '125/76',
+                    UpdatedBy: 'Vårdpersonal',
+                },
+                {
+                    notices: "",
+                    Date: '2020-11-19',
+                    BloodPressure: '122/75',
+                    UpdatedBy: 'Vårdoersonal',
+                },
+                {
+                    notices: "",
+                    Date: '2020-11-12',
+                    BloodPressure: '127/80',
+                    UpdatedBy: 'Patient',
+                },
+                {
+                    notices: "",
+                    Date: '2020-10-29',
+                    BloodPressure: '129/83',
+                    UpdatedBy: 'Vårdpersonal',
+                },
+                {
+                    notices: "",
+                    Date: '2020-10-15',
+                    BloodPressure: '130/82',
+                    UpdatedBy: 'Patient',
+                },
+            ],
+            []
+        );
+
+
+
+        //Adds the Notification to the data array so that the pop-up modals can retrive the correct data
     function addNotification(data) {
         let newArr = [];
 
         for (let i = 0; i < data.length; i++) {
             console.log()
             newArr.push({
-                notices: <Notification value={3} text={'blodtrycket till'} id={id} date={data[i]['Time: ']}
-                                       measurement={data[i]['Systolic: '] + '/' + data[i]['Diastolic: ']} updatedBy={'Patient'}/>,
-                Date: data[i]['Time: '],
-                BloodPressure: data[i]['Systolic: '] + '/' + data[i]['Diastolic: '],
-                UpdatedBy: 'Patient'
+                notices: data[i]['notices'],
+                Date: data[i]['Date'],
+                BloodPressure: data[i]['BloodPressure'],
+                UpdatedBy: data[i]['UpdatedBy']
 
             })
         }
         return (newArr)
     }
 
-    const addNotice = addNotification(measurement);
+    const addNotice = addNotification(data);
 
     //fake data that displays boundaires
     const goalLimitsUpper = [120, 130];

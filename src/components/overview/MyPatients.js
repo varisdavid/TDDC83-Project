@@ -101,7 +101,7 @@ const Patients = () => {
                     <Notification
                         value={1}
                         text={
-                            "Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"
+                            "Oväntat skattat värde! Blodtryck: 158/123 (Gränsvärde 140/90)"
                         }
                     />
                 ),
@@ -168,7 +168,7 @@ const Patients = () => {
                     <Notification
                         value={1}
                         text={
-                            "Oväntat skattat värde! Blodtryck: 155/110 (Gränsvärde 140/90)"
+                            "Oväntat skattat värde! Vikt: 30 kg (28 kg under förväntat värde)"
                         }
                     />
                 ),
