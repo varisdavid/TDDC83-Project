@@ -27,7 +27,7 @@
     urlcolor=blue,        % color of external links
     linktoc=page            % only page is linked
 }%
-\def\myversion{2.4}
+\def\myversion{2.5}
 \title{Software Requirements Specification}
 \author{Sara Lindholm \\ Patrick Asman \\ Jacob Rhan}
 
@@ -98,13 +98,15 @@
  \hline 
  2020-11-24 & 2.0 & Box and line diagram from the Architecture Notebook v. 0.5.2 included in section 2.1. Constraints, assumptions and dependencies in section 2.4-2.5 and interface requirements added. Updated functional and non-functional requirements according to the Excel-spreadsheet with requirements v.1.8. & Patrick Asman & Emma Johansson \\
  \hline
- 2020-12-01 & 2.1 & New section 2.1.1 created, use case diagram added in section 2.2 & Patrick Asman & \\
+ 2020-12-01 & 2.1 & Section 2.1.1 added, use case diagram added in section 2.2 & Patrick Asman & \\
  \hline 
  2020-12-02 & 2.2 & Updated descriptions with ID & Sara Lindholm & \\
  \hline 
- 2020-12-03 & 2.3 & Added user stories & Patrick Asman & \\ 
+ 2020-12-03 & 2.3 & User stories added & Patrick Asman & \\ 
  \hline 
  2020-12-03 & 2.4 & Minor spelling fixes, added GUI and API definitions, references fixes & Sara Lindholm & \\ 
+ \hline 
+ 2020-12-09 & 2.5 & Updated reference links. Added updated ID's according to RTM. & Sara Lindholm & \\
  \hline 
 \end{tabular}
 \end{center}
@@ -154,6 +156,7 @@ HeartByte's product is a web-based application developed to aid RÖ's health car
 \end{center}
 
 \bibliographystyle{unsrt}
+\renewcommand{\bibname}{References}
 \bibliography{ref}
 
 \section{Overview}
@@ -239,12 +242,13 @@ The users of HeartByte’s system are either administrators or users, as defined
 
 
 \section{Constraints}
-The main constraint for this product concerns confidentiality and security. Since this product is designed to be used by health care providers there are some regulations concerning patient data security, such as "patientdatalagen". These regulations mainly affect patient data confidentiality and what health care staff should have access to what patient information.
+The main constraints for HeartByte’s system concerns  confidentiality and security. Since the application process personal data within health and medical care, the system is required to follow the rules governing the processing of such data which can be found in the Swedish Patient Data Act \cite{patientdatalag}. These rules are mainly about patient data confidentiality and who may access patient information.
 
 \section{Assumptions and dependencies}
-An assumption is that the system will be used on computers and tablets with a web browser. Since HeartByte's system requires the user to be logged in in the system to access any functionality it is also assumed that the user has logged in.
-
-The system needs to interact with other systems to function. OAuth is to be used for authentication and log in functionality. The system will also need to interact with an OpenEHR-database to access and store EHRs. 
+HeartByte’s application is assumed to be used on desktop computers and tablets, independent of OS, with a web browser and with hardware capable enough of running the application. Furthermore, a stable internet connection is assumed to run the application. To use HeartByte’s system it is also assumed that the user has logged into the system. In addition, it is assumed that required integration of standards, licenses, API:s, databases, components, libraries and frameworks with HeartByte’s application work correctly in order to use the application.
+\newline
+\newline
+The health management of patients with HeartByte’s application is dependent on data submitted using compatible health monitoring devices by patients enrolled in RÖ’s self-monitoring program. HearByte’s application is dependent on internet access to query the database. Moreover, HeartByte’s system is dependent on OAuth for authentication and log in functionality. The system is also dependent on the OpenEHR-database to access and store EHRs.
 
 %"This subsection of the SRS should list each of the factors that affect the requirements stated in the SRS. These factors are not design constraints on the software but are, rather, any changes to them that can affect the requirements in the SRS. For example, an assumption may be that a specific operating system will be available on the hardware designated for the software product. If, in fact, the operating system is not available, the SRS would then have to change accordingly."
 
@@ -473,15 +477,15 @@ A precondition is that the admin is logged in and on the view “Oversikt/Notisl
 FR001 & 
 Create new view & 
 & 
-\textbf{Input:} Button with ID = "adminOverviewNotisNewViewBtn" is pressed 
+    \textbf{Input:} Button with ID = "overviewNewViewBtn" is pressed 
     \newline \textbf{Action:} System loading new window with customization settings
-    \newline \textbf{Output:} Pop-up window with ID = "adminOverviewNotisNewViewPopupWindow" is displayed &
+    \newline \textbf{Output:} Pop-up window with ID "overviewNewViewPopupWindow" is displayed &
 Medium \\ 
 \hline
 FR002 & 
 Customization of overview dashboard &
 FR089 is fulfilled & 
-\textbf{Input:} Choose between different checkboxes of display columns with ID:(Namn, Personnummer, Priority, Diagnos, Senast Uppdaterad, Uppdaterad av, Team). Click on save-button with ID = "adminFilterSave".
+    \textbf{Input:} Choose between different checkboxes of display columns with ID: (Namn, Personnummer, Priority, Diagnos, Senast Uppdaterad, Uppdaterad av, Team). Click on save-button with ID = "adminFilterSave".
     \newline \textbf{Action:} The system generates and saves display-settings.
     \newline \textbf{Output:} Overview dashboard updated according to selected settings.
     & 
@@ -490,61 +494,61 @@ Medium \\
 FR046 & 
 Create new customized view based on age & 
 FR001 is fulfilled &  
-    \newline \textbf{Input:} Minimum age and maximum age in text fields with ID = "minage" \& "maxage" and presses button "OK" with ID = "okView". 
+    \textbf{Input:} Minimum age and maximum age in text fields with ID = "min-age" \& "max-age" and presses button "OK" with ID = "okView".
     \newline \textbf{Action:} System generates new view based on age settings and saves to database.
-    \newline \textbf{Output:} System displays a pop-up window with ID = "adminOverviewNotisConfirmView"
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
     & 
 Medium \\
 \hline
 FR047 & 
 Create new customized view based on gender & 
 FR001 is fulfilled &  
-    \newline \textbf{Input:} Click on dropdown menu "Kön" with ID = "gender" and choose between "Alla" (ID = "all"), "Man" (ID = "male") or "Kvinna" (ID = "female") and presses button "OK" with ID = "okView".
+    \textbf{Input:} Click on dropdown menu "Kön" with ID = "gender" and choose between "Alla" (value = "all"), "Man" (value = "male") or "Kvinna" (value = "female") and presses button "OK" with ID = "okView".
     \newline \textbf{Action:}  System generates new view based on gender settings and saves to database.
-    \newline \textbf{Output:} System displays a pop-up window with ID = "adminOverviewNotisConfirmView"
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
     & 
 Medium \\
 \hline
 FR048 & 
 Create new customized view based on team & 
 FR001 is fulfilled &  
-    \newline \textbf{Input:} Click on dropdown menu "Team" with ID = "teammenu" and choose between "Alla" (ID = "all"),  or "Team$<x>$" (ID = "team$<x>$"), where x is a unique integer, and presses button "OK" with ID = "okView".
+    \textbf{Input:} Click on dropdown menu "Team" with ID = "teammenu" and choose between "Alla" (value = "all"),  or "Team$<x>$" (value = "team$<x>$"), where x is a unique integer, and presses button "OK" with ID = "okView".
     \newline \textbf{Action:} System generates new view based on team settings and saves to database.
-    \newline \textbf{Output:} System displays a pop-up window with ID = "adminOverviewNotisConfirmView"
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
     & 
 Medium \\
 \hline
 FR049 & 
 Create new customized view based on department & 
 FR001 is fulfilled &  
-    \newline \textbf{Input:} Click on dropdownmenu with ID = "departmentMenu" and choose between "Alla" (ID = 'all'), Department 1 (ID = 'Department1) or Department 2 (ID = 'Department2') and presses button "OK" with ID = "okView".
+    \textbf{Input:} Click on dropdownmenu with ID = "departmentMenu" and choose between "Alla" (value = 'all'), Department 1 (value = 'Department1) or Department 2 (value = 'Department2') and presses button "OK" with ID = "okView".
     \newline \textbf{Action:} System generates new view based on age settings and saves to database.
-    \newline \textbf{Output:} System displays a pop-up window with ID = "adminOverviewNotisConfirmView"
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
     & 
 Medium \\
 \hline
 FR050 & 
 Create new customized view based on priority  & 
 FR001 is fulfilled &  
-    \newline \textbf{Input:} Priority level selected in checkboxes (Low, Medium, High) and presses button "OK" with ID = "okView". 
+    \textbf{Input:} Priority level selected in checkboxes (Low, Medium, High) and presses button "OK" with ID = "okView".
     \newline \textbf{Action:} System generates new view based on priority settings and saves to database.
-    \newline \textbf{Output:} System displays a pop-up window with ID = "adminOverviewNotisConfirmView" 
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
     & 
 Medium \\
 \hline
 FR051 & 
 Create new customized view based on diagnosis  & 
 FR001 is fulfilled &  
-    \newline \textbf{Input:} Diagnosis in text field with ID "customizeViewDiagnosis" OR click on the diagnosis  checkbox with ID = $<diagnosis>$ and press button "OK" with ID = "okView".
+    \textbf{Input:} Diagnosis in text field with ID "customizeViewDiagnosis" OR click on the diagnosis  checkbox with ID = "diagnosisName" and press button "OK" with ID = "okView".
     \newline \textbf{Action:} System generates new view based on diagnosis settings and saves to database.
-    \newline \textbf{Output:} System displays a pop-up window with ID = "adminOverviewNotisConfirmView"
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
     & 
 Medium \\
 \hline
 FR052 & 
 Confirm created view & 
 FR001, FR046-Fr051 are fulfilled &  
-    \newline \textbf{Input:} Title of new view in text field with ID "saveNewView", the selected user group in drop-down menu with ID "viewAvailableFor" and sign button with ID "confirmCustomizedView"
+    \textbf{Input:} Title of new view in text field with ID "saveNewView", the selected user group in drop-down menu with ID "viewAvailableFor" and sign button with ID "confirmCustomizedView"
     \newline \textbf{Action:}  System generates new view based on previously selected settings and saves to database.
     \newline \textbf{Output:} New view available for all users in the chosen user group.
     & 
@@ -553,9 +557,9 @@ Medium \\
 FR089 & 
 Overview dashboard settings & 
 &  
-\textbf{Input}: Click on the settings button with ID ="adminOverviewNotisCustomizeSettingsDashboardBtn"
-\newline \textbf{Action}: System generates popup window
-\newline \textbf{Output}: System displays customization popup window with ID = "adminOverviewNotisCustomizeSettingsPopupWindow"
+    \textbf{Input}: Click on the settings button with ID ="adminOverviewCustomizeSettingsDashboardBtn"
+    \newline \textbf{Action}: System generates popup window
+    \newline \textbf{Output}: System displays customization popup window with ID = "adminOverviewCustomizeSettingsPopupWindow"
     & 
 Medium \\
 \hline
@@ -572,88 +576,89 @@ A precondition is that the admin is logged in and on the view “Översikt/Mina-
 FR003 & 
 Create new view &
 & 
-\textbf{Input:} Button with ID = "adminOverviewMyPatientsNewViewBtn" is pressed
+    \textbf{Input:} Button with ID = "overviewNewViewBtn" is pressed 
     \newline \textbf{Action:} System loading new window with customization settings
-    \newline \textbf{Output:} Pop-up window with ID "adminOverviewMyPatientsNewViewPopupWindow" is displayed &
+    \newline \textbf{Output:} Pop-up window with ID "overviewNewViewPopupWindow" is displayed &
 Medium \\ 
 \hline
 FR004 & 
 Customization of overview dashboard &
 FR090 is fulfilled & 
-\textbf{Input:} Choose between different checkboxes of display columns (Namn, Personnummer, Priority, Diagnos, Senast Uppdaterad, Uppdaterad av, Team). Click on save-button with ID = "adminFilterSave".
-    \newline \textbf{Action:} System displays customization popup window. The system generates and saves display-settings
+    \textbf{Input:} Choose between different checkboxes of display columns with ID: (Namn, Personnummer, Priority, Diagnos, Senast Uppdaterad, Uppdaterad av, Team). Click on save-button with ID = "adminFilterSave".
+    \newline \textbf{Action:} The system generates and saves display-settings.
     \newline \textbf{Output:} Overview dashboard updated according to selected settings. & 
 Medium \\
 \hline
 FR038 & 
 Create new customized view based on age & 
 FR003 is fulfilled &  
-    \textbf{Input:} Minimum age and maximum age in text fields with ID = "minage" \& "maxage" and presses button "OK" with ID = "okView". 
+    \textbf{Input:} Minimum age and maximum age in text fields with ID = "min-age" \& "max-age" and presses button "OK" with ID = "okView".
     \newline \textbf{Action:} System generates new view based on age settings and saves to database.
-    \newline \textbf{Output:} System displays a pop-up window with ID = "adminOverviewMyPatientsConfirmView" 
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
     & 
 Medium \\
 \hline
 FR039 & 
 Create new customized view based on gender & 
 FR003 is fulfilled &  
-    \textbf{Input:} Click on dropdown menu "Kön" with ID = "gender" and choose between "Alla" (ID = "all"), "Man" (ID = "male") or "Kvinna" (ID = "female") and presses button "OK" with ID = "okView".
+    \textbf{Input:} Click on dropdown menu "Kön" with ID = "gender" and choose between "Alla" (value = "all"), "Man" (value = "male") or "Kvinna" (value = "female") and presses button "OK" with ID = "okView".
     \newline \textbf{Action:}  System generates new view based on gender settings and saves to database.
-    \newline \textbf{Output:} System displays a pop-up window with ID = "adminOverviewMyPatientsConfirmView" 
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
     & 
 Medium \\
 \hline
 FR040 & 
 Create new customized view based on team & 
 FR003 is fulfilled &  
-    \textbf{Input:} Click on dropdown menu "Team" with ID = "teammenu" and choose between "Alla" (ID = "all"),  or "Team$<x>$" (ID = "team$<x>$"), where x is a unique integer, and presses button "OK" with ID = "okView".
+    \textbf{Input:} Click on dropdown menu "Team" with ID = "teammenu" and choose between "Alla" (value = "all"),  or "Team$<x>$" (value = "team$<x>$"), where x is a unique integer, and presses button "OK" with ID = "okView".
     \newline \textbf{Action:} System generates new view based on team settings and saves to database.
-    \newline \textbf{Output:} System displays a pop-up window with ID = "adminOverviewMyPatientsConfirmView" 
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
     & 
 Medium \\
 \hline
 FR041 & 
 Create new customized view based on department & 
 FR003 is fulfilled &  
-    \textbf{Input:} Click on dropdownmenu with ID = "departmentMenu" and choose between "Alla" (ID = 'all'), Department 1 (ID = 'Department1) or Department 2 (ID = 'Department2') and presses button "OK" with ID = "okView".
+    \textbf{Input:} Click on dropdownmenu with ID = "departmentMenu" and choose between "Alla" (value = 'all'), Department 1 (value = 'Department1) or Department 2 (value = 'Department2') and presses button "OK" with ID = "okView".
     \newline \textbf{Action:} System generates new view based on age settings and saves to database.
-    \newline \textbf{Output:} System displays a pop-up window where the user must confirm the new view. 
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
     & 
 Medium \\
 \hline
 FR042 & 
 Create new customized view based on priority  & 
 FR003 is fulfilled &  
-    \textbf{Input:} Priority level selected in checkboxes (Low, Medium, High) and presses button "OK" with ID = "okView". 
+    \textbf{Input:} Priority level selected in checkboxes (Low, Medium, High) and presses button "OK" with ID = "okView".
     \newline \textbf{Action:} System generates new view based on priority settings and saves to database.
-    \newline \textbf{Output:} System displays a pop-up window with ID = "adminOverviewMyPatientsConfirmView" 
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView" 
     & 
 Medium \\
 \hline
 FR043 & 
 Create new customized view based on diagnosis  & 
 FR003 is fulfilled &  
-    \textbf{Input:} Diagnosis in text field with ID "customizeViewDiagnosis" OR click on the diagnosis  checkbox with ID = $<diagnosis>$ and press button "OK" with ID = "okView".
+    \textbf{Input:} Diagnosis in text field with ID "customizeViewDiagnosis" OR click on the diagnosis  checkbox with ID = "diagnosisName" and press button "OK" with ID = "okView".
     \newline \textbf{Action:} System generates new view based on diagnosis settings and saves to database.
-    \newline \textbf{Output:} System displays a pop-up window with ID = "adminOverviewMyPatientsConfirmView"
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
     & 
 Medium \\
 \hline
 FR044 & 
 Confirm created view & 
-FR003, FR038-FR043 are fulfilled. In view with ID = "adminOverviewMyPatientsConfirmView". &  
+FR003, FR038-FR043 are fulfilled. &  
     \textbf{Input:} Title of new view in text field with ID "saveNewView", the selected user group in drop-down menu with ID "viewAvailableFor" and sign button with ID "confirmCustomizedView"
     \newline \textbf{Action:}  System generates new view based on previously selected settings and saves to database.
-    \newline \textbf{Output:} New view available.
+    \newline \textbf{Output:} New view available for all users in the chosen user group.
     & 
 Medium \\
 \hline
 Fr090 & 
 Overview dashboard settings & 
 & 
-\textbf{Input}: Click on the settings button with ID ="adminOverviewMyPatientsCustomizeSettingsDashboardBtn"
-\newline \textbf{Action}: System generates popup window
-\newline \textbf{Output}: System displays customization popup window with ID = "adminOverviewMyPatientsCustomizeSettingsPopupWindow" & 
+    \textbf{Input}: Click on the settings button with ID ="adminOverviewCustomizeSettingsDashboardBtn"
+    \newline \textbf{Action}: System generates popup window
+    \newline \textbf{Output}: System displays customization popup window with ID = "adminOverviewCustomizeSettingsPopupWindow"
+& 
 Medium \\
 \hline
 \end{tabularx}
@@ -669,70 +674,70 @@ A precondition is that the admin is logged in and on the view “Översikt/Alla-
 \hline
 FR053 & 
 Create new view &
- & 
-\textbf{Input:} Button with ID = "adminOverviewAllPatientsNewViewBtn is pressed 
+& 
+    \textbf{Input:} Button with ID = "overviewNewViewBtn" is pressed 
     \newline \textbf{Action:} System loading new window with customization settings
-    \newline \textbf{Output:} Pop-up window with ID "adminOverviewAllPatientsNewViewPopupWindow" is displayed &
+    \newline \textbf{Output:} Pop-up window with ID "overviewNewViewPopupWindow" is displayed &
 Medium \\ 
 \hline
 FR054 & 
 Create new customized view based on age & 
 FR053 is fulfilled &  
-    \textbf{Input:} Minimum age and maximum age in text fields with ID = "minage" \& "maxage" and presses button "OK" with ID = "okView".
+    \textbf{Input:} Minimum age and maximum age in text fields with ID = "min-age" \& "max-age" and presses button "OK" with ID = "okView".
     \newline \textbf{Action:} System generates new view based on age settings and saves to database.
-    \newline \textbf{Output:} System displays a pop-up window with ID = "adminOverviewAllPatientsConfirmView" 
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
     & 
 Medium \\
 \hline
 FR055 & 
 Create new customized view based on gender & 
 FR053 is fulfilled &  
-    \textbf{Input:} Click on dropdown menu "Kön" with ID = "gender" and choose between "Alla" (ID = "all"), "Man" (ID = "male") or "Kvinna" (ID = "female") and presses button "OK" with ID = "okView".
+    \textbf{Input:} Click on dropdown menu "Kön" with ID = "gender" and choose between "Alla" (value = "all"), "Man" (value = "male") or "Kvinna" (value = "female") and presses button "OK" with ID = "okView".
     \newline \textbf{Action:}  System generates new view based on gender settings and saves to database.
-    \newline \textbf{Output:}  System displays a pop-up window with ID = "adminOverviewAllPatientsConfirmView"
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
     & 
 Medium \\
 \hline
 FR056 & 
 Create new customized view based on team & 
 FR053 is fulfilled &  
-    \textbf{Input:} Click on dropdown menu "Team" with ID = "teammenu" and choose between "Alla" (ID = "all"),  or "Team$<x>$" (ID = "team$<x>$"), where x is a unique integer, and presses button "OK" with ID = "okView".
+    \textbf{Input:} Click on dropdown menu "Team" with ID = "teammenu" and choose between "Alla" (value = "all"),  or "Team$<x>$" (value = "team$<x>$"), where x is a unique integer, and presses button "OK" with ID = "okView".
     \newline \textbf{Action:} System generates new view based on team settings and saves to database.
-    \newline \textbf{Output:} System displays a pop-up window with ID = "adminOverviewAllPatientsConfirmView"
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
     & 
 Medium \\
 \hline
 FR057 & 
 Create new customized view based on department & 
 FR053 is fulfilled &  
-    \textbf{Input:} Click on dropdownmenu with ID = "departmentMenu" and choose between "Alla" (ID = 'all'), Department 1 (ID = 'Department1) or Department 2 (ID = 'Department2') and presses button "OK" with ID = "okView".
+    \textbf{Input:} Click on dropdownmenu with ID = "departmentMenu" and choose between "Alla" (value = 'all'), Department 1 (value = 'Department1) or Department 2 (value = 'Department2') and presses button "OK" with ID = "okView".
     \newline \textbf{Action:} System generates new view based on age settings and saves to database.
-    \newline \textbf{Output:} System displays a pop-up window with ID = "adminOverviewAllPatientsConfirmView" 
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
     & 
 Medium \\
 \hline
 FR058 & 
 Create new customized view based on priority  & 
 FR053 is fulfilled &  
-    \textbf{Input:} Priority level selected in checkboxes (Low, Medium, High) and presses button "OK" with ID = "okView". 
+    \textbf{Input:} Priority level selected in checkboxes (Low, Medium, High) and presses button "OK" with ID = "okView".
     \newline \textbf{Action:} System generates new view based on priority settings and saves to database.
-    \newline \textbf{Output:} System displays a pop-up window with ID = "adminOverviewAllPatientsConfirmView"
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
     & 
 Medium \\
 \hline
 FR059 & 
 Create new customized view based on diagnosis  & 
 FR053 is fulfilled &  
-    \textbf{Input:} Diagnosis in text field with ID "customizeViewDiagnosis" OR click on the diagnosis  checkbox with ID = $<diagnosis>$ and press button "OK" with ID = "okView".
+    \textbf{Input:} Diagnosis in text field with ID "customizeViewDiagnosis" OR click on the diagnosis  checkbox with ID = "diagnosisName" and press button "OK" with ID = "okView".
     \newline \textbf{Action:} System generates new view based on diagnosis settings and saves to database.
-    \newline \textbf{Output:} System displays a pop-up window with ID = "adminOverviewAllPatientsConfirmView"
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
     & 
 Medium \\
 \hline
 FR060 & 
 Confirm created view & 
 FR053-Fr059, FR092 are fulfilled &  
-    \textbf{Input:} Title of new view in text field with ID "AdminAllpatientsSaveNewView", the selected user group in drop-down menu with ID "viewAvailableFor" and sign button with ID "confirmCustomizedView"
+    \textbf{Input:} Title of new view in text field with ID "saveNewView", the selected user group in drop-down menu with ID "viewAvailableFor" and sign button with ID "confirmCustomizedView"
     \newline \textbf{Action:}  System generates new view based on previously selected settings and saves to database.
     \newline \textbf{Output:} New view available for all users in the chosen user group.
     & 
@@ -741,25 +746,28 @@ Medium \\
 FR061 & 
 Customization of overview dashboard &
 FR091 is fulfilled & 
-\textbf{Input:} Choose between different checkboxes of display columns (Namn, Personnummer, Priority, Diagnos, Senast Uppdaterad, Uppdaterad av, Team). Click on save-button with ID = "adminFilterSave".
-    \newline \textbf{Action:} The system generates and saves display-settings
-    \newline \textbf{Output:} Overview dashboard updated according to selected settings. & 
+    \textbf{Input:} Choose between different checkboxes of display columns with ID: (Namn, Personnummer, Priority, Diagnos, Senast Uppdaterad, Uppdaterad av, Team). Click on save-button with ID = "adminFilterSave".
+    \newline \textbf{Action:} The system generates and saves display-settings.
+    \newline \textbf{Output:} Overview dashboard updated according to selected settings.
+&
 Medium \\
 \hline
-FR91 & 
+FR091 & 
 Overview dashboard settings &
  & 
-\textbf{Input:}  Click on the settings button with ID ="adminOverviewAllPatientsCustomizeSettingsDashboardBtn"
-\newline \textbf{Action:} System generates popup window
-\newline \textbf{Output:} System displays customization popup window with ID = "adminOverviewAllPatientsCustomizeSettingsPopupWindow"& 
+    \textbf{Input}: Click on the settings button with ID ="adminOverviewCustomizeSettingsDashboardBtn"
+    \newline \textbf{Action}: System generates popup window
+    \newline \textbf{Output}: System displays customization popup window with ID = "adminOverviewCustomizeSettingsPopupWindow"
+    &
 Medium \\
 \hline
-FR92 & 
+FR092 & 
 Create new customized view based on operation &
 FR053 is fulfilled & 
-\textbf{Input:} Click on dropdownmenu with ID = "operationMenu" and choose between "Alla" (ID = 'all'), Operation 1 (ID = 'Operation1) or Operation 2 (ID = 'Operation2') and presses button "OK" with ID = "okView".
-\newline \textbf{Action:} System generates new view based on operation settings and saves to database.
-\newline \textbf{Output:} System displays a pop-up window with ID = "adminAllPatientsViewConfirm" & 
+    \textbf{Input:} Click on dropdownmenu with ID = "operationMenu" and choose between "Alla" (value = 'all'), Operation 1 (value = 'Operation1) or Operation 2 (value = 'Operation2') and presses button "OK" with ID = "okView".
+    \newline \textbf{Action:} System generates new view based on operation settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
+    & 
 Medium \\
 \hline
 \end{tabularx}
@@ -784,25 +792,29 @@ High \\
 FR007 & 
 Accessing activity log & 
  & 
-\textbf{Input}: Click on ""Admin"" tab with ID: = "patientViewAdminTabBtn" \newline
-\textbf{Action}: Load activity log from database \newline 
-\textbf{Output}: Display activity log &
+    \textbf{Input}: Click on ”Admin” tab with ID: "patientViewAdminTabBtn" 
+    \newline \textbf{Action}: Load activity log from database 
+    \newline \textbf{Output}: Display activity log &
 Medium \\ 
 \hline 
 FR008 & 
 Search in activity log & 
  & 
-\textbf{Input}: Text string (search parameter) in search box with ID = "patientViewAdminActivityField" \newline 
-\textbf{Action}: System checks for activities or users that matches text string \newline 
-\textbf{Output}: Displays activities and/or users that matches string. &
+    \textbf{Input}: Text string (search parameter) in search box with ID = "patientViewAdminActivityField". 
+    \newline 
+    \textbf{Action}: System checks for activities or users that matches text string 
+    \newline 
+    \textbf{Output}: Displays activities and/or users that matches string. &
 Low \\ 
 \hline
 FR009 & 
 Filter in activity log & 
-Filter-button with ID ="patientAdminFilterBtn" has been pressed and system currently displays "Filter" window (ID = "patientAdminFilterWindow").  & 
-\textbf{Input}: Check boxes containing different options (Nya mätvärden, Besökare, Ändringar gjorda) selected and "save"-button with ID = "activityLogSave" pressed. \newline 
-\textbf{Action}:  System filter activities based on filter settings. \newline 
-\textbf{Output}: Displays activities that matches filter in the activity log. &
+Filter-button with ID ="patientAdminFilterBtn" has been pressed and system currently displays "Filter" window (ID = "patientAdminFilterWindow"). & 
+    \textbf{Input}: Check boxes containing different options (Nya mätvärden, Besökare, Ändringar gjorda) selected and "save"-button with ID = "activityLogSave" pressed. 
+    \newline 
+    \textbf{Action}:  System filter activities based on filter settings. 
+    \newline 
+    \textbf{Output}: Window closes and displays activities that matches filter in the activity log &
 Low \\ 
 \hline
 \end{tabularx}
@@ -863,7 +875,7 @@ Low \\
 FR012 & 
 Add patient's measurement values &
 & 
-\textbf{Input}: Add measurement in text fields with ID = "patientMeasurementsNewValueField", and click "Bekräfta"-button with ID = "patientMeasurementSaveValueBtn". \newline 
+\textbf{Input}: Add measurement in text fields with ID = "patientMeasurementsNewValueField", and click "Bekräfta"-button with ID = "addNewMeasurement". \newline 
 \textbf{Action}: System stores measured value in database and updates the patient profile. \newline 
 \textbf{Output}:  Displays confirmation message (ID = "patientMeasurementConfirmationMessage") and updated patient information. & 
 High \\ 
@@ -989,7 +1001,7 @@ Low \\
 FR045 & 
 Log in &
  & 
-\textbf{Input}: Username in text field with ID "email" and password in text field with ID "password". Click second login-button ("enterLoginKeys").\newline
+\textbf{Input}: Username in text field with ID "email" and password in text field with ID "password". Click login-button (ID= "login-btn").\newline
 \textbf{Action}: System verifies correct log in credentials, logs in user and loads HOME page OR system denies incorrect login credentials and the user is not logged in. \newline 
 \textbf{Output}: System displays start page if log in credentials are correct and verified, else the system displays a warning stating that credentials are incorrect. & 
 High \\ 
@@ -1029,7 +1041,7 @@ A precondition is that the user is logged in, on the view “Översikt” and, o
 FR025 & 
 Sorting patients & 
 &
-\textbf{Input}: Click on one of the column titles with ID: ('colNamn', 'colPersonnummer', 'colPrioritet', 'colDiagnos', 'colSenast Uppdaterad'). Click once for descending alphabetical/Numerical order, click twice for descending alphabetical/numerical order. \newline 
+\textbf{Input}:  Click on button with ID "overviewSortBtn". Click once on sorting parameter for descending alphabetical/numerical order OR click twice for ascending alphabetical/numerical order.  \newline 
 \textbf{Action}: The system rearranges the list of patients according to sorting criteria. \newline 
 \textbf{Output}: The system displays the list of patients in the order of the sorting criteria. & 
 High \\ 
@@ -1037,7 +1049,7 @@ High \\
 FR027 & 
 Switch to patient view & 
 All patients in "Notislogg" are available to the user to access. &
-\textbf{Input}: User clicks on a patient with ID "patient$<X>$", where X=unique patient. \newline
+\textbf{Input}: User clicks on a patient with ID "patient$<X>$", where X=Personal identity number of patient. \newline
 \textbf{Action}: Loading Patient view. \newline
 \textbf{Output}: System displays Patient View. & 
 High \\ 
@@ -1053,7 +1065,7 @@ Medium \\
 FR029 & 
 Dynamic search/filter box & 
 &
-\textbf{Input}:  Text string in search box with ID = "OverviewNotisSearchbox". \newline 
+\textbf{Input}:  Text string in search box with ID = "dynSearchStr". \newline 
 \textbf{Action}: System checks for patients that matches text string and rearranges list of patients.\newline
 \textbf{Output}: Displays patients that matches string dynamically in the list of patients. & 
 Medium \\ 
@@ -1065,6 +1077,78 @@ FR025 fulfilled &
 \textbf{Action}: Load sorting parameter \newline
 \textbf{Output}: Display sorting parameter & 
 Low \\ 
+\hline
+FR094 & 
+Create new view &
+& 
+    \textbf{Input:} Button with ID = "overviewNewViewBtn" is pressed 
+    \newline \textbf{Action:} System loading new window with customization settings
+    \newline \textbf{Output:} Pop-up window with ID "overviewNewViewPopupWindow" is displayed 
+    &
+Medium \\ 
+\hline
+FR095 & 
+Create new customized view based on age & 
+FR094 is fulfilled &  
+    \textbf{Input:} Minimum age and maximum age in text fields with ID = "min-age" \& "max-age" and presses button "OK" with ID = "okView".
+    \newline \textbf{Action:} System generates new view based on age settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
+    & 
+Medium \\
+\hline
+FR096 & 
+Create new customized view based on gender & 
+FR094 is fulfilled &  
+    \textbf{Input:} Click on dropdown menu "Kön" with ID = "gender" and choose between "Alla" (value = "all"), "Man" (value = "male") or "Kvinna" (value = "female") and presses button "OK" with ID = "okView".
+    \newline \textbf{Action:}  System generates new view based on gender settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
+    & 
+Medium \\
+\hline
+FR097 & 
+Create new customized view based on team & 
+FR094 is fulfilled &  
+    \textbf{Input:} Click on dropdown menu "Team" with ID = "teammenu" and choose between "Alla" (value = "all"),  or "Team$<x>$" (value = "team$<x>$"), where x is a unique integer, and presses button "OK" with ID = "okView".
+    \newline \textbf{Action:} System generates new view based on team settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
+    & 
+Medium \\
+\hline
+FR098 & 
+Create new customized view based on department & 
+FR094 is fulfilled &  
+    \textbf{Input:} Click on dropdownmenu with ID = "departmentMenu" and choose between "Alla" (value = 'all'), Department 1 (value = 'Department1) or Department 2 (value = 'Department2') and presses button "OK" with ID = "okView".
+    \newline \textbf{Action:} System generates new view based on age settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
+    & 
+Medium \\
+\hline
+FR099 & 
+Create new customized view based on priority  & 
+FR094 is fulfilled &  
+    \textbf{Input:} Priority level selected in checkboxes (Low, Medium, High) and presses button "OK" with ID = "okView".
+    \newline \textbf{Action:} System generates new view based on priority settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
+    & 
+Medium \\
+\hline
+FR100 & 
+Create new customized view based on diagnosis  & 
+FR094 is fulfilled &  
+    \textbf{Input:} Diagnosis in text field with ID "customizeViewDiagnosis" OR click on the diagnosis  checkbox with ID = "diagnosisName" and press button "OK" with ID = "okView".
+    \newline \textbf{Action:} System generates new view based on diagnosis settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
+    & 
+Medium \\
+\hline
+FR101 & 
+Confirm created view & 
+FR094-FR100 are fulfilled &  
+    \textbf{Input:} Title of new view in text field with ID "saveNewView" and sign button with ID "confirmCustomizedView"
+    \newline \textbf{Action:} System generates new view based on previously selected settings and saves to database.
+    \newline \textbf{Output:} New view available only for the currently logged in user
+    & 
+Medium \\
 \hline
 \end{tabularx}
 \end{center}
@@ -1079,7 +1163,7 @@ A precondition is that the user is logged in, on the view “Översikt” and, o
 \hline
 FR031 & 
 Filtering patients & 
-Filter-button with ID ="myPatientsFilterBtn" has been pressed and system currently displays "Filter" window.  &
+Filter-button with ID ="overviewFilterBtn" has been pressed and system currently displays "Filter" window with ID = "overviewFilterWindow".  &
 \textbf{Input}:  Insert values from categories [Ålder, Prioritering, Verksamhet, Avdelning, Team, Diagnos].  \newline
 \textbf{Action}: The system searches for patients matching filter criteria. \newline
 \textbf{Output}: The system displays all patients who matched the filters. & 
@@ -1088,7 +1172,7 @@ High \\
 FR034 & 
 Sorting patients & 
 &
-\textbf{Input}:  Click on one of the column titles ('colNamn', 'colPersonnummer', 'colPrioritet', 'colDiagnos', 'colSenast Uppdaterad', 'colTeam'). Click once for descending alphabetical/numerical order OR click twice for descending alphabetical/numerical order.  \newline 
+\textbf{Input}:  Click on button with ID "overviewSortBtn". Click once on sorting parameter for descending alphabetical/numerical order OR click twice for ascending alphabetical/numerical order.  \newline 
 \textbf{Action}: The system rearranges the list of patients according to sorting criteria. \newline 
 \textbf{Output}: The system displays all patients according to the sorting criteria. & 
 High \\
@@ -1096,7 +1180,7 @@ High \\
 FR035 & 
 Switch to patient view & 
 &
-\textbf{Input}: User clicks on a patient with ID "patient$<X>$", X=unique patient \newline
+\textbf{Input}: User clicks on a patient with ID "patient$<X>$", X=Personal identity number of patient \newline
 \textbf{Action}: Loading Patient view. \newline
 \textbf{Output}: System displays Patient View. & 
 High \\ 
@@ -1120,71 +1204,71 @@ Medium \\
 FR062 & 
 Create new view &
  & 
-\textbf{Input:} Button with ID = "MyPatientsAddNewViewBtn" is pressed 
+    \textbf{Input:} Button with ID = "overviewNewViewBtn" is pressed 
     \newline \textbf{Action:} System loading new window with customization settings
-    \newline \textbf{Output:} Pop-up window (ID = "myPatientsViewWindow") with customization settings options is displayed &
+    \newline \textbf{Output:} Pop-up window with ID "overviewNewViewPopupWindow" is displayed &
 Medium \\ 
 \hline
 FR063 & 
 Create new customized view based on age & 
 FR062 is fulfilled &  
-    \newline \textbf{Input:} Minimum age and maximum age in text fields with ID = "minage" \& "maxage" and presses button "OK" with ID = "okView". 
+    \textbf{Input:} Minimum age and maximum age in text fields with ID = "min-age" \& "max-age" and presses button "OK" with ID = "okView".
     \newline \textbf{Action:} System generates new view based on age settings and saves to database.
-    \newline \textbf{Output:} System displays a pop-up window with ID = 'OversiktMyPatientsViewConfirm'.  
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
     & 
 Medium \\
 \hline
 FR064 & 
 Create new customized view based on gender & 
 FR062 is fulfilled &  
-    \newline \textbf{Input:} Click on dropdown menu "Kön" with ID = "gender" and choose between "Alla" (ID = "all"), "Man" (ID = "male") or "Kvinna" (ID = "female") and presses button "OK" with ID = "okView".
+    \textbf{Input:} Click on dropdown menu "Kön" with ID = "gender" and choose between "Alla" (value = "all"), "Man" (value = "male") or "Kvinna" (value = "female") and presses button "OK" with ID = "okView".
     \newline \textbf{Action:}  System generates new view based on gender settings and saves to database.
-    \newline \textbf{Output:} System displays a pop-up window with ID = 'OversiktMyPatientsViewConfirm' 
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
     & 
 Medium \\
 \hline
 FR065 & 
 Create new customized view based on team & 
 FR062 is fulfilled &  
-    \newline \textbf{Input:} Click on dropdown menu "Team" with ID = "teammenu" and choose between "Alla" (ID = "all"),  or "Team$<x>$" (ID = "team$<x>$"), where x is a unique integer, and presses button "OK" with ID = "okView". 
+    \textbf{Input:} Click on dropdown menu "Team" with ID = "teammenu" and choose between "Alla" (value = "all"),  or "Team$<x>$" (value = "team$<x>$"), where x is a unique integer, and presses button "OK" with ID = "okView".
     \newline \textbf{Action:} System generates new view based on team settings and saves to database.
-    \newline \textbf{Output:} System displays a pop-up window with ID = 'OversiktMyPatientsViewConfirm' 
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
     & 
 Medium \\
 \hline
 FR066 & 
 Create new customized view based on department & 
 FR062 is fulfilled &  
-    \newline \textbf{Input:} Click on dropdownmenu with ID = "departmentMenu" and choose between "Alla" (ID = 'all'), Department 1 (ID = 'Department1) or Department 2 (ID = 'Department2') and presses button "OK" with ID = "okView".
+    \textbf{Input:} Click on dropdownmenu with ID = "departmentMenu" and choose between "Alla" (value = 'all'), Department 1 (value = 'Department1) or Department 2 (value = 'Department2') and presses button "OK" with ID = "okView".
     \newline \textbf{Action:} System generates new view based on age settings and saves to database.
-    \newline \textbf{Output:} System displays a pop-up window with ID = 'OversiktMyPatientsViewConfirm' 
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
     & 
 Medium \\
 \hline
 FR067 & 
 Create new customized view based on priority  & 
 FR062 is fulfilled &  
-    \newline \textbf{Input:} Priority level selected in checkboxes (Low, Medium, High) and presses button "OK" with ID = "okView". 
+    \textbf{Input:} Priority level selected in checkboxes (Low, Medium, High) and presses button "OK" with ID = "okView".
     \newline \textbf{Action:} System generates new view based on priority settings and saves to database.
-    \newline \textbf{Output:} System displays a pop-up window with ID = 'OversiktMyPatientsViewConfirm'  
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"  
     & 
 Medium \\
 \hline
 FR068 & 
 Create new customized view based on diagnosis  & 
 FR062 is fulfilled &  
-    \newline \textbf{Input:} Diagnosis in text field with ID "customizeViewDiagnosis" OR click on the diagnosis  checkbox with ID = $<diagnosis>$ and press button "OK" with ID = "okView".
+    \textbf{Input:} Diagnosis in text field with ID "customizeViewDiagnosis" OR click on the diagnosis  checkbox with ID = "diagnosisName" and press button "OK" with ID = "okView".
     \newline \textbf{Action:} System generates new view based on diagnosis settings and saves to database.
-    \newline \textbf{Output:} System displays a pop-up window with ID = 'OversiktMyPatientsViewConfirm' 
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
     & 
 Medium \\
 \hline
 FR069 & 
 Confirm created view & 
 FR062-FR068 are fulfilled &  
-    \newline \textbf{Input:} Title of new view in text field with ID "saveNewView" and sign button with ID "confirmCustomizedView"
-    \newline \textbf{Action:}  System generates new view based on previously selected settings and saves to database.
-    \newline \textbf{Output:} New view available for currently logged in user only.
+    \textbf{Input:} Title of new view in text field with ID "saveNewView" and sign button with ID "confirmCustomizedView"
+    \newline \textbf{Action:} System generates new view based on previously selected settings and saves to database.
+    \newline \textbf{Output:} New view available only for the currently logged in user
     & 
 Medium \\
 \hline
@@ -1209,7 +1293,7 @@ A precondition is that the user is logged in, on the view “Översikt” and, o
 FR032 & 
 Active choice of accessing patient information outside of user's operation & 
 User in a certain operation tries to access patient information about a patient not in user's operation. &
-\textbf{Input}: User clicks on a patient with ID "patient$<X>$", X=unique patient in overview \newline
+\textbf{Input}: User clicks on a patient with ID "patient$<X>$", X=Personal identity number of patient \newline
 \textbf{Action}: The system verifies that the chosen patient is outside of user's operation and checks if user wants to access patient data. \newline
 \textbf{Output}:  Display popup with ID "allPatientsPopup" with message checking if user wants to access data, bekräfta with ID 'PatientPopupBekräfta" or cancel with ID "PatientPopuptillbaka". & 
 High \\ 
@@ -1225,71 +1309,72 @@ High \\
 FR070 &
 Create new view &
  & 
-\textbf{Input:} Button with ID = "addNewView" is pressed 
+    \textbf{Input:} Button with ID = "overviewNewViewBtn" is pressed 
     \newline \textbf{Action:} System loading new window with customization settings
-    \newline \textbf{Output:} Pop-up ("allPatiensNewViewWindow") window with customization settings options is displayed &
+    \newline \textbf{Output:} Pop-up window with ID "overviewNewViewPopupWindow" is displayed 
+    &
 Medium \\ 
 \hline
 FR071 & 
 Create new customized view based on age & 
 FR070 is fulfilled &  
-    \newline \textbf{Input:} Minimum age and maximum age in text fields with ID = "minAge" \& "maxAge" and presses button "OK" with ID = "okView". 
+    \textbf{Input:} Minimum age and maximum age in text fields with ID = "min-age" \& "max-age" and presses button "OK" with ID = "okView".
     \newline \textbf{Action:} System generates new view based on age settings and saves to database.
-    \newline \textbf{Output:}  System displays a pop-up window with ID = 'OversiktAllPatientsViewConfirm' where the user must confirm the new view. 
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
     & 
 Medium \\
 \hline
 FR072 & 
 Create new customized view based on gender & 
 FR070 is fulfilled &  
-    \newline \textbf{Input:} Click on dropdown menu "Kön" with ID = "gender" and choose between "Alla" (ID = "all"), "Man" (ID = "male") or "Kvinna" (ID = "female") and presses button "OK" with ID = "okView".
+    \textbf{Input:} Click on dropdown menu "Kön" with ID = "gender" and choose between "Alla" (value = "all"), "Man" (value = "male") or "Kvinna" (value = "female") and presses button "OK" with ID = "okView".
     \newline \textbf{Action:}  System generates new view based on gender settings and saves to database.
-    \newline \textbf{Output:}  System displays a pop-up window with ID = 'OversiktAllPatientsViewConfirm' where the user must confirm the new view. 
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
     & 
 Medium \\
 \hline
 FR073 & 
 Create new customized view based on team & 
 FR070 is fulfilled &  
-    \newline \textbf{Input:} Click on dropdown menu "Team" with ID = "teammenu" and choose between "Alla" (ID = "all"),  or "Team$<x>$" (ID = "team$<x>$"), where x is a unique integer, and presses button "OK" with ID = "okView".
+    \textbf{Input:} Click on dropdown menu "Team" with ID = "teammenu" and choose between "Alla" (value = "all"),  or "Team$<x>$" (value = "team$<x>$"), where x is a unique integer, and presses button "OK" with ID = "okView".
     \newline \textbf{Action:} System generates new view based on team settings and saves to database.
-    \newline \textbf{Output:}  System displays a pop-up window with ID = 'OversiktAllPatientsViewConfirm' where the user must confirm the new view. 
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
     & 
 Medium \\
 \hline
 FR074 & 
 Create new customized view based on department & 
 FR070 is fulfilled &  
-    \newline \textbf{Input:} Click on dropdownmenu with ID = "departmentMenu" and choose between "Alla" (ID = 'all'), Department 1 (ID = 'Department1) or Department 2 (ID = 'Department2') and presses button "OK" with ID = "okView".
+    \textbf{Input:} Click on dropdownmenu with ID = "departmentMenu" and choose between "Alla" (value = 'all'), Department 1 (value = 'Department1) or Department 2 (value = 'Department2') and presses button "OK" with ID = "okView".
     \newline \textbf{Action:} System generates new view based on age settings and saves to database.
-    \newline \textbf{Output:} System displays a pop-up window with ID = 'OversiktAllPatientsViewConfirm' where the user must confirm the new view. 
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
     & 
 Medium \\
 \hline
 FR075 & 
 Create new customized view based on priority  & 
 FR070 is fulfilled &  
-    \newline \textbf{Input:} Priority level selected in checkboxes (Low, Medium, High) and presses button "OK" with ID = "okView". 
+    \textbf{Input:} Priority level selected in checkboxes (Low, Medium, High) and presses button "OK" with ID = "okView".
     \newline \textbf{Action:} System generates new view based on priority settings and saves to database.
-    \newline \textbf{Output:} System displays a pop-up window with ID = 'OversiktAllPatientsViewConfirm' where the user must confirm the new view. 
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
     & 
 Medium \\
 \hline
 FR076 & 
 Create new customized view based on diagnosis  & 
 FR070 is fulfilled &  
-    \newline \textbf{Input:} Diagnosis in text field with ID "customizeViewDiagnosis" OR click on the diagnosis  checkbox with ID = $<diagnosis>$ and press button "OK" with ID = "okView".
+    \textbf{Input:} Diagnosis in text field with ID "customizeViewDiagnosis" OR click on the diagnosis  checkbox with ID = "diagnosisName" and press button "OK" with ID = "okView".
     \newline \textbf{Action:} System generates new view based on diagnosis settings and saves to database.
-    \newline \textbf{Output:} System displays a pop-up window with ID = 'OversiktAllPatientsViewConfirm' where the user must confirm the new view. 
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
     & 
 Medium \\
 \hline
 FR077 & 
 Confirm created view & 
 FR070-FR076, FR093 are fulfilled &  
-    \newline \textbf{Input:} Title of new view in text field with ID "saveNewView" and sign button with ID "confirmCustomizedView"
-    \newline \textbf{Action:}  System generates new view based on previously selected settings and saves to database.
-    \newline \textbf{Output:} New view available for currently logged in user only.
+    \textbf{Input:} Title of new view in text field with ID "saveNewView" and sign button with ID "confirmCustomizedView"
+    \newline \textbf{Action:} System generates new view based on previously selected settings and saves to database.
+    \newline \textbf{Output:} New view available only for the currently logged in user
     & 
 Medium \\
 \hline
@@ -1304,8 +1389,8 @@ Medium \\
 \hline
 FR080 & 
 Filtering patients & 
-Filter-button with ID ="allPatientsFilterBtn" has been pressed and system currently displays "Filter" window ("allPatientsFilterWindow").  &  
-    \newline \textbf{Input:} Insert values from categories [Ålder, Prioritering, Verksamhet, Team, Avdelning, Diagnos]. 
+Filter-button with ID new ID = "overviewFilterBtn" has been pressed and system currently displays "Filter" window "overviewFilterWindow" .  &  
+    \newline \textbf{Input:} nsert values from categories [Ålder, Prioritering, Verksamhet, Team, Avdelning, Diagnos]. 
     \newline \textbf{Action:} The system searches for patients matching filter criteria. 
     \newline \textbf{Output:} The system displays all patients who matched the filters.
     & 
@@ -1314,7 +1399,7 @@ High \\
 FR081 & 
 Sorting patients & 
 &
-    \newline \textbf{Input:} Click on one of the column titles ('colNamn', 'colPersonnummer', 'colPrioritet', 'colDiagnos', 'colSenastUppdaterad', 'colTeam'). Click once for descending alphabetical/numerical order OR click twice for descending alphabetical/numerical order. 
+    \newline \textbf{Input:}  Click on button with ID "overviewSortBtn". Click once on sorting parameter for descending alphabetical/numerical order OR click twice for ascending alphabetical/numerical order. 
     \newline \textbf{Action:}The system rearranges the list of patients according to sorting criteria.  
     \newline \textbf{Output:} The system displays the list of patients in the order of the sorting criteria. 
     & 
@@ -1323,7 +1408,7 @@ High \\
 FR082 & 
 Switch to patient view & 
 The patient must be registered in the user's operation. &  
-    \newline \textbf{Input:}  User clicks on a patient with ID "AllpatientsPatient$<X>$" where X = Pnumber of patient.
+    \newline \textbf{Input:}  User clicks on a patient with ID "AllpatientsPatient$<X>$" where X = Personal identity number of patient.
     \newline \textbf{Action:} Loading Patient view. 
     \newline \textbf{Output:} System displays Patient View.
     & 
@@ -1332,17 +1417,17 @@ High \\
 FR083 & 
 Dynamic search/filter box & 
 &
-\textbf{Input}:  Text string in search box with ID = "allPatientsSearchField". \newline 
-\textbf{Action}: System checks for patients that matches text string and rearranges list of patients.\newline
-\textbf{Output}: Displays patients that matches string dynamically in the list of patients. & 
+    \textbf{Input}:  Text string in search box with ID = "dynSearchSt".
+    \newline \textbf{Action}: System checks for patients that matches text string and rearranges list of patients.
+    \newline \textbf{Output}: Displays patients that matches string dynamically in the list of patients. & 
 Medium \\ 
 \hline
 FR084 & 
 Hover over notification to present detailed information  & 
 User is actively hovering over a notification-symbol in "Alla Patienter"&
-\textbf{Input}: Mouse hover over notification-symbol with ID "notification$<Color>$Symbol", where Color='Green', 'Yellow', 'Red'.  \newline
-\textbf{Action}: System loads data \newline
-\textbf{Output}: Displays detailed information regarding expired measurement time limit OR exceeded measurement value OR unexpected measurement value. & 
+    \textbf{Input}: Mouse hover over notification-symbol with ID "notification$<Color>$Symbol", where Color='Green', 'Yellow', 'Red'.  
+    \newline \textbf{Action}: System loads data 
+    \newline \textbf{Output}: Displays detailed information regarding expired measurement time limit OR exceeded measurement value OR unexpected measurement value. & 
 Medium \\ 
 \hline
 FR085 & 
@@ -1356,7 +1441,7 @@ Low \\
 FR086 & 
 Show sensitive patient information outside user's operation & 
 A view has previously been created and displayed &  
-    \newline \textbf{Input:}  Click on 'Begär patientdata' button (ID = "allPatientsAccessDataBtn$<X>$") for a patient, where X is a unique number for a patient
+    \newline \textbf{Input:}  Click on 'Begär patientdata' button (ID = "allPatientsAccessDataBtn$<X>$") for a patient, where X is the personal identity number of the patient. 
     \newline \textbf{Action:} Load sensitive patient information 
     \newline \textbf{Output:} Display sensitive patient information
     & 
@@ -1365,9 +1450,9 @@ Medium \\
 FR093 & 
 Create new customized view based on operation & 
 FR070 is fulfilled &  
-    \newline \textbf{Input:}  Click on dropdownmenu with ID = "operationMenu" and choose between "Alla" (ID = 'all'), Operation 1 (ID = 'Operation1) or Operation 2 (ID = 'Operation2') and presses button "OK" with ID = "okView".
-    \newline \textbf{Action:} System generates new view based on operation settings and saves to database. 
-    \newline \textbf{Output:} System displays a pop-up window with ID = 'OversiktAllPatientsViewConfirm' where the user must confirm the new view. 
+    \textbf{Input:} Click on dropdownmenu with ID = "operationMenu" and choose between "Alla" (value = 'all'), Operation 1 (value = 'Operation1) or Operation 2 (value = 'Operation2') and presses button "OK" with ID = "okView".
+    \newline \textbf{Action:} System generates new view based on operation settings and saves to database.
+    \newline \textbf{Output:} System displays a pop-up window with ID = "overviewConfirmView"
     & 
 Medium \\
 \hline
@@ -1564,6 +1649,7 @@ Medium \\
 \end{center}
 
 %\subsection{Requirements not implemented}
+% This section describes the requirements that have not been implemented. 
 
 %\appendix
 %\chapter{Appendix Title}
