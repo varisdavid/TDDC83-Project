@@ -1,69 +1,60 @@
-\subsection{Overview}
-\subsubsection{Before Testing}
+
+This section will display what deliverables the testing will produce.
+
+\subsection{Before Testing}
 \begin{itemize}
     \item Test Plan - this document
     \item{Test Cases specification}
     \item{Test Design specification}
 \end{itemize}
-An example of a test case specification for the tests that are possible from our current development in software can be seen in Figure 1-4. Green = Test has been developed. Blue = Able to be tested. 
+Test Cases and Test Design are put into the gitlab boards as seen in figure 1 and 2. An example of a test case specification for the tests that are possible from our current development in software can be seen in X. All test cases are derived from requirements and each requirement can have many test cases. The requirements are moved to different labels depending on its status.  
 
 
-\begin{figure}[ht!]
-\begin{minipage}[t]{0.5\textwidth}
-    \centering
-    \includegraphics[scale=0.75]{Pictures/TestCase1.PNG}
-    \caption{Test Case 1}
-\end{minipage}%
-\begin{minipage}[t]{0.5\textwidth}
-    \centering
-    \includegraphics[scale=0.75]{Pictures/TestCase2.PNG}
-    \caption{Test Case 2}
-\end{minipage}
-\end{figure}
 
-\begin{figure}[ht!]
-\begin{minipage}[t]{0.5\textwidth}
-    \centering
-    \includegraphics[scale=0.75]{Pictures/TestCase3.PNG}
-    \caption{Test Case 3}
-\end{minipage}%
-\begin{minipage}[t]{0.5\textwidth}
-    \centering
-    \includegraphics[scale=0.75]{Pictures/TestCase4.PNG}
-    \caption{Test Case 4}
-\end{minipage}
-\end{figure}
 
-\begin{itemize}
-
-    
-    \item{Education Plan}
-    \end{itemize}
-    Education plan can be found in general output files.
-\subsubsection{During Testing}
+\subsection{During Testing}
 \begin{itemize}
     \item Tests
 \end{itemize}
-For this you can check our RTM that is located in General -> Analysis -> Requirements.xslx . Should map tests to its requirement. For the actual code part of the tests those can be found in the branch testingBranch in the gitlab associated with the project. 
+The tests are added to the gitlab issue board via requirements issues as mentioned before. For the actual code part of the tests those can be found in the branch testingBranch in the gitlab associated with the project. 
 \begin{itemize}
     
     \item{Test Data}
 \end{itemize}
-Is added in the RTM together with Test Results. If a test comes out as failed or not even ran, this will be added to issues in gitlab, where development will be tagged together with the log from the test.
+Is added in the gitlab issue board together with Test Results. If a test comes out as failed or not even ran, this will be added to issues in gitlab, where development will be tagged together with the log from the test.
 \begin{itemize}
 
     \item{Test Traceability}
-
 \end{itemize}
-\subsubsection{After Testing}
+Test Traceability can be seen in the gitlab issue boards, where passed tests will be put to the closed issue area and will then be added as a regression test. Every test will be named according to the requirement they are testing, so if a test fails its easy to fix the coding faults.
+
+\subsection{After Testing}
 \begin{itemize}
     \item Test Result
-  
 \end{itemize}
-Will be added in the RTM together with Test Data.
+Is added to the gitlab issue connected to the test case together with Test Data. Every test result will be marked as either passed or failed, together with a log if it does fail.
+
+\begin{figure}
+
+    \centering
+    \includegraphics[scale=0.5]{Pictures/gitlab.PNG}
+    \caption{Gitlab boards}
+\end{figure}
+\begin{figure}
+
+    \centering
+    \includegraphics[scale=0.5]{Pictures/gitlab2.PNG}
+    \caption{Gitlab boards}
+\end{figure}
+\begin{figure}
+
+    \centering
+    \includegraphics[scale=0.75]{Pictures/TestCase1.PNG}
+    \caption{Test case for requirement}
+\end{figure}
 \subsection{Schedule}
 \vfill
 \includegraphics[width=\linewidth]{Pictures/TestSchedule.PNG}
 
     \vfill
-    \clearpage
+\clearpage

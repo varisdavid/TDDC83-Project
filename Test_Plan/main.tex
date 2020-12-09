@@ -1,7 +1,8 @@
-\documentclass{article}
+\documentclass[12pt]{article}
 \usepackage[utf8]{inputenc}
+\usepackage{pdfpages}
 
-\title{Test Plan}
+\title{\Huge Test Plan}
 \author{Gustav Karlsson }
 \date{November 2020}
 \usepackage{subcaption}
@@ -9,7 +10,7 @@
 \usepackage{natbib}
 \usepackage{graphicx}
 \usepackage[a4paper,width=165mm,top=25mm,bottom=25mm]{geometry}
-\usepackage[table,xcdraw]{xcolor}
+
 \usepackage{adjustbox}
 \usepackage{parskip}
 \usepackage{rotating}
@@ -30,6 +31,9 @@
 \section*{ChangeLog}
 \input{Sections/Changelog}
 
+
+\clearpage
+\tableofcontents
 \clearpage
 \section{Introduction}
 
@@ -41,9 +45,7 @@
 \input{Sections/Test_Deliverables}
 \section{Environment and Tools}
 \input{Sections/Environment}
-\section{Terms}
 
-\section*{Appendix A}
 \input{Sections/AppendixA}
-\section*{Appendix B}
+
 \end{document}
