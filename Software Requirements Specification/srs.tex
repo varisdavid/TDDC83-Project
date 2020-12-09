@@ -27,7 +27,7 @@
     urlcolor=blue,        % color of external links
     linktoc=page            % only page is linked
 }%
-\def\myversion{2.6}
+\def\myversion{2.7}
 \title{Software Requirements Specification}
 \author{Sara Lindholm \\ Patrick Asman \\ Jacob Rhan}
 
@@ -82,7 +82,7 @@
 
 \chapter*{Revision History}
 \begin{center}
-\begin{tabular}{|p{1,8cm}|p{1,4cm}|p{4.6cm}|p{2.5cm}|p{2.5cm}|}
+\begin{tabularx}{\linewidth}{|p{1,8cm}|p{1,4cm}|p{4.6cm}|p{2.5cm}|p{2.5cm}|}
  \hline
  \textbf{Date} & \textbf{Version} & \textbf{Description of revision} & \textbf{Author} & \textbf{Approved by} \\ 
  \hline
@@ -110,7 +110,9 @@
  \hline 
  2020-12-09 & 2.6 & Moved requirements that have not been implemented to new sections 3.6 Unimplemented functional requirements and 3.7 Unimplemented non-functional requirements. & Sara Lindholm & \\
  \hline
-\end{tabular}
+ 2020-12-09 & 2.7 & Moved more requirements that have not been implemented to section 3.6 & Sara Lindholm & \\
+ \hline
+\end{tabularx}
 \end{center}
 
 \tableofcontents
@@ -819,22 +821,6 @@ In section 3.2.3. we describe functional requirements for the system. A precondi
 \hline
 \textbf{ID:} & \textbf{Title} & \textbf{Precondition} & \textbf{Description} & \textbf{Priority} \\
 \hline
-FR015 & 
-Log users accessing patient information &
-& 
-\textbf{Input}: Patient profile page is accessed by user \newline 
-\textbf{Action}: System logs user ID, date and activity as "Besökte", saves to database and updates activity log. \newline 
-\textbf{Output}:  Updated activity log with information regarding user, date and activity. & 
-High \\ 
-\hline 
-FR016 & 
-Log users updating patient information &
-& 
-\textbf{Input}: Patient information (measurements, diagnosis) is updated by user by text string in text fields with IDs. \newline 
-\textbf{Action}: System logs user ID, date and activity as [activity] with new measurements or information, saves to database and updates activity log. \newline 
-\textbf{Output}: Updated activity log with information regarding user, date and activity. &
-High \\ 
-\hline 
 FR017 & 
 Not submitted data notification &
 Time limit for measurement is set for a specific patient.& 
@@ -858,22 +844,6 @@ User is logged in to the system &
 \textbf{Action}: System logs out user and loads start page. \newline 
 \textbf{Output}: System displays start page. & 
 High \\ 
-\hline 
-FR020 & 
-System help &
-A help-button shall be available in all views. & 
-\textbf{Input}: User clicks on button "Help" with ID = "helpBtn". \newline 
-\textbf{Action}: Loading instruction information message regarding a specific view/function. \newline 
-\textbf{Output}: The system displays instructional information message (ID = "helpMessageWindow" regarding a specific view/function. & 
-Low \\ 
-\hline 
-FR021 & 
-Check patient contact alternatives &
-User has clicked on the notification symbol and system currently displays the "Uppmärksammat värde"- window (Id = "unexpectedValueBtn").  &
-\textbf{Input}: Click on the "Gå till patientens kontaktuppgifter"-button with ID ="PatientContactBtn". \newline
-\textbf{Action}: The system loads contact information about the patient. \newline 
-\textbf{Output}: Display patient's contact information. & 
-Low \\ 
 \hline 
 FR045 & 
 Log in &
@@ -1649,6 +1619,45 @@ Low \\
 \end{center}
 
 \subsection{System}
+\begin{center}
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+\textbf{ID:} & \textbf{Title} & \textbf{Precondition} & \textbf{Description} & \textbf{Priority} \\
+\hline
+FR015 & 
+Log users accessing patient information &
+& 
+\textbf{Input}: Patient profile page is accessed by user \newline 
+\textbf{Action}: System logs user ID, date and activity as "Besökte", saves to database and updates activity log. \newline 
+\textbf{Output}:  Updated activity log with information regarding user, date and activity. & 
+High \\ 
+\hline 
+FR016 & 
+Log users updating patient information &
+& 
+\textbf{Input}: Patient information (measurements, diagnosis) is updated by user by text string in text fields with IDs. \newline 
+\textbf{Action}: System logs user ID, date and activity as [activity] with new measurements or information, saves to database and updates activity log. \newline 
+\textbf{Output}: Updated activity log with information regarding user, date and activity. &
+High \\ 
+\hline 
+FR020 & 
+System help &
+A help-button shall be available in all views. & 
+\textbf{Input}: User clicks on button "Help" with ID = "helpBtn". \newline 
+\textbf{Action}: Loading instruction information message regarding a specific view/function. \newline 
+\textbf{Output}: The system displays instructional information message (ID = "helpMessageWindow" regarding a specific view/function. & 
+Low \\ 
+\hline 
+FR021 & 
+Check patient contact alternatives &
+User has clicked on the notification symbol and system currently displays the "Uppmärksammat värde"- window (Id = "unexpectedValueBtn").  &
+\textbf{Input}: Click on the "Gå till patientens kontaktuppgifter"-button with ID ="PatientContactBtn". \newline
+\textbf{Action}: The system loads contact information about the patient. \newline 
+\textbf{Output}: Display patient's contact information. & 
+Low \\ 
+\hline 
+\end{tabularx}
+\end{center}
 
 \subsection{Översikt}
 
