@@ -8,6 +8,9 @@
 %Package enabling dashed lines
 \usepackage{arydshln}
 
+%Package for links
+\usepackage[hidelinks]{hyperref} 
+
 %Displaying code
 \usepackage{listings}
 \lstdefinelanguage{AQL}{%
@@ -25,7 +28,7 @@
 \title{Architecture Notebook}
 
 \author{Jonas Malm}
-\date{Fall 2020\\---\\Version 2.8}
+\date{Fall 2020\\---\\Version 3.2}
 
 \begin{document}
 
@@ -75,7 +78,6 @@ Version & Date & Author & Description & Approved by \\ \hline
 1.9 & 2020-11-22 & Jonas Malm & Future dev: Added tweaking rule engine & \\
 1.10 & 2020-11-24 & Jonas Malm & Following the release of SRS v2.0, re-wrote the ASR section & \\
 1.11 & 2020-11-24 & Jonas Malm & Some re-structuting and smaller changes before inspection & \\ 
-2.0 & 2020-11-25 & Jonas Malm & Made revisions from results of inspections & Emma Johansson\\ 
 \hline
 \end{tabular}
 \end{table}
@@ -93,7 +95,10 @@ Version & Date & Author & Description & Approved by \\ \hline
 2.5 & 2020-11-30 & Jonas Malm & Added all templates, archetypes and AQL queries used with EhrScape to the appendix. Added references to the appendix. & \\
 2.6 & 2020-12-03 & Jonas Malm & Added section about database migration: SQlite to PostgreSQL & \\
 2.7 & 2020-12-03 & Jonas Malm & Extended dependency section & \\
-2.8 & 2020-12-03 & Jonas Malm & Added deployment view & \\
+2.8 & 2020-12-03 & Jonas Malm & Added deployment view & \\ \hline
+3.0 & 2020-12-09 & Jonas Malm & Made revisions from result of inspections & Emma Johansson\\ 
+3.1 & 2020-12-09 & Jonas Malm & Added final corrections to the Future dev: RBAC section to illustrate some functionality that was not implemented & \\
+3.2 & 2020-12-09 & Jonas Malm & Added links to all documents referenced & \\
 \hline
 \end{tabular}
 \end{table}
@@ -138,8 +143,9 @@ Furthermore, the customer wants a system that can be used from different operati
 \subsection{Architectural constraints}
 Due to the nature of the project, there are several constraints which have to be considered. Most importantly, the time frame and the skills of the development team.
 
+
 \subsubsection{Time constraint}
-According the the project plan, the project is to be finished in about three months. The first month, iteration 0 and 1, is spent setting up an organizational structure, communicating with the customer to elicit needs and creating requirements and then one week of education for the development team. Then there are two weeks of developing in iteration 2, two weeks in iteration 3 and one week in iteration 4. 
+According the the \href{https://gitlab.liu.se/tddc88-company-3-2020/deploy/-/tree/Document_branch/Project_Plan}{\underline{Project Plan}}, the project is to be finished in about three months. The first month, iteration 0 and 1, is spent setting up an organizational structure, communicating with the customer to elicit needs and creating requirements and then one week of education for the development team. Then there are two weeks of developing in iteration 2, two weeks in iteration 3 and one week in iteration 4. 
 Thus there are only five weeks where the system is to be developed. If the project is to be completed on time, these five weeks will have to be used effectively. The architecture of the system will have to reflect this and thus focus on creating the modules that add the most value to the customer, while using pre-built components as much as possible.
 
 \subsubsection{Skill constraint}
@@ -164,7 +170,7 @@ Python & 15 & 58\% \\
 \subsection{Assumptions and dependencies}
 \subsubsection{Assumptions}
 \begin{enumerate}[label=(\roman*)]
-\item The system will not be used on mobile devices, thus platform and OS independence applies only to computers and tablets. 
+\item The system will not be used on smart phones, thus platform and OS independence applies only to computers and tablets. 
 \item The customer uses a openEHR system to store EHRs, and the same templates as the ones implemented in the HeartByte system.
 \item The rules used in the rule engine are set by the HCUs admin and not by HeartByte. HeartByte thus cannot take responsibility over if scientifically correct rules are applied, only that the patients are prioritized according to them.
 \end{enumerate}
@@ -176,7 +182,7 @@ Python & 15 & 58\% \\
 \end{enumerate}
 
 \section{Architecturally significant requirements}
-Listed below are the Architecturally significant requirements (ARSs), the requirements most central to the architectural design. 
+Listed below are the Architecturally significant requirements (ARSs), the requirements most central to the architectural design. They are all from the \href{https://gitlab.liu.se/tddc88-company-3-2020/deploy/-/tree/Document_branch/Software\%20Requirements\%20Specification}{\underline{Software Requirements Specification}} document.
 
 \subsection{Main views}
 In the SRS there are a few key requirements specifying the properties of the two views: the overview and the patient view. Below, ASRs concerning these two views will be presented.
@@ -187,7 +193,7 @@ In the SRS there are a few key requirements specifying the properties of the two
 \hline
 \textbf{ID, Title} & FR006, Set limit values for priority levels  \\ 
 \hline
-\textbf{Input}: & Limit values for different measurements in text fields with specific IDs and click "save"-button with ID = "".\\
+\textbf{Input}: & Limit values for different measurements in text fields with specific IDs and click "save"-button with ID = "patientViewAdminBtnValue".\\
 \textbf{Action}: & System saves and sets patient specific prioritization limits \\
 \textbf{Output}: & Settings displayed \\
 \hline
@@ -213,7 +219,7 @@ There are also several requirements specifying the need for customizing a filter
 \hline
 \textbf{ID, Title} & FR003, Create new view \\ 
 \hline
-\textbf{Input:} & Button with ID = "" is pressed \\
+\textbf{Input:} & Button with ID = "adminOverviewMyPatientsNewViewBtn" is pressed \\
 \textbf{Action:} & System loading new window with customization settings \\
 \textbf{Output:} & Pop-up window with customization settings options is displayed \\
 \hline
@@ -658,6 +664,7 @@ To further automate this solution, the roles should be automatically assigned to
     \label{fig:auth-sequence-advanced}
 \end{figure}
 
+Due to the time constraint, some routes are not protected sufficiently and focus was placed on finishing other modules more central to the product. Instead of using permission scopes to protect these routes, the routes were protected using the email of the user sent from the front end as a parameter in a POST-request. This is a security flaw, as someone could modify the the parameter being sent to the server. It would require this person being familiar with the email and permissions of a certain user. This needs to be changed before a deployment and would best be addressed using the Auth0 Python SDK. This allows the back end to both access the permission scope parameter in the token as well as making requests to the Auth0 server to retrieve further information about the user.
 
 \subsubsection{Integration with other databases}
 In discussions with the customer, two other databases were mentioned: both the Swedish Population Register and the customer's personnel database. In the future demographic patient data would be retrieved from the population register, which would ensure that the data in correct. The customer's personnel database would replace the personnel database in the HeartByte back end and the customer's database would be used for the RBAC illustrated in Figure \ref{fig:auth-sequence-advanced}.
