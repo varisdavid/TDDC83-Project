@@ -3,46 +3,79 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from flask import current_app as app
 from backend import db
-
+from backend.ehr_related.fetch_patient_list import getLogInfo
+from auth0.v3.authentication import Users
 
 def dump_datetime(value):
-    if value is None:
-        return None
-    return value.strftime("%m/%d/%Y") + " " + value.strftime("%H:%M:%S.%f")
+	if value is None:
+		return None
+	return value.strftime("%m/%d/%Y") + " " +value.strftime("%H:%M:%S.%f")
+
+def get_log_type(argument):
+    log_type_dict = {
+        1: "Measurements",
+        2: "Medication",
+        3: "Diagnosis",
+		4: "Personal Details"
+    }
+    return log_type_dict.get(argument, "Other")
 
 
 class AccessLog(db.Model):
-    __tablename__ = "access_logs"
+    __tablename__ = 'access_logs'
 
     id = db.Column(db.Integer, primary_key=True)
+    accessed_patients_ehrid = db.Column(db.Integer)
     care_giver_pnumber = db.Column(db.String(10))
-    accessed_patients_pnumber = db.Column(db.String(10))
-    department_name = db.Column(db.String(100))
     accessed_time = db.Column(db.DateTime)
+    log_type = db.Column(db.Integer)
 
-    # This method is used to convert the object to json representation
+	#This method is used to convert the object to json representation
     @property
     def serialize(self):
         return {
-            "id": self.id,
-            "accessed_time": dump_datetime(self.accessed_time),
-            "accessed_patients_pnumber": self.accessed_patients_pnumber,
-            "care_giver_pnumber": self.care_giver_pnumber,
-            "department_name": self.department_name,
-        }
-
+    		'accessed_time': dump_datetime(self.accessed_time),
+    		'accessed_patients_ehrid': self.accessed_patients_ehrid,
+    		'care_giver_pnumber': self.care_giver_pnumber,
+			'log_type': get_log_type(self.log_type)
+    	}
 
 # This function does the work of adding log to database
-def add_log_to_database(accessed_patients_pnumber, care_giver_pnumber, department_name):
-    current_time = datetime.now()
-    log = AccessLog(
-        accessed_patients_pnumber=accessed_patients_pnumber,
-        care_giver_pnumber=care_giver_pnumber,
-        accessed_time=current_time,
-        department_name=department_name,
-    )
-    db.session.add(log)
-    db.session.commit()
+def add_log_to_database(patient_ehrid, caregiver_email, log_type):
+    # domain = 'dev-mlj1m1lm.eu.auth0.com'
+    #
+    # users = Users(domain)
+    # myuser = users.userinfo(caregiver_token)
+    # print(myuser)
+    employee = Employee.query.filter_by(email=caregiver_email).first()
+
+    if employee is not None:
+        current_time = datetime.now()
+
+        log = AccessLog(accessed_patients_ehrid = patient_ehrid, care_giver_pnumber = employee.personalNumber,
+					   accessed_time = current_time, log_type = log_type)
+        db.session.add(log)
+        db.session.commit()
+
+# function to log if measurements of patient is accessed
+def log_accessed_measurement(patient_ehrid, caregiver_email):
+	add_log_to_database(patient_ehrid, caregiver_email, 1)
+
+# function to log if medication of patient is accessed
+def log_accessed_medication(patient_ehrid, caregiver_email):
+	add_log_to_database(patient_ehrid, caregiver_email, 2)
+
+# function to log if diagnosis of patient is accessed
+def log_accessed_diagnosis(patient_ehrid, caregiver_email):
+	add_log_to_database(patient_ehrid, caregiver_email, 3)
+
+# function to log if personal info of patient is accessed
+def log_accessed_personal_info(patient_ehrid, caregiver_email):
+	add_log_to_database(patient_ehrid, caregiver_email, 4)
+
+# function to log if other things of patient is accessed
+def log_other(patient_ehrid, caregiver_email):
+	add_log_to_database(patient_ehrid, caregiver_email, 0)
 
 
 # Employee refers to a doctor or a nurse

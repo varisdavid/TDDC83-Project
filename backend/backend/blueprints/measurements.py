@@ -3,6 +3,7 @@ from backend.ehr_related.fetch_patient_list import get_measurements
 
 from backend.auth import _build_cors_preflight_response, _corsify_actual_response
 from backend.auth import AuthError, requires_auth
+from backend.database.models import log_accessed_measurement
 
 measurements_bp = Blueprint("measurements", __name__, url_prefix="/api/measurements")
 
@@ -15,6 +16,10 @@ def measurements(ehrid):
     elif request.method == "GET":
         try:
             measurements = get_measurements(ehrid)
+            request_dict = dict(request.headers)
+            user_email = request_dict.get("Email", None)
+            if user_email is not None:
+                log_accessed_measurement(ehrid, user_email)
             return _corsify_actual_response(jsonify(measurements))
         except:
 

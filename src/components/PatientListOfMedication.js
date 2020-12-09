@@ -1,12 +1,13 @@
 import React, {useMemo, useEffect} from "react";
 
 import { PatientListOfMedicationTable } from "../components";
-// import {useAuth0} from "@auth0/auth0-react";
+import {useAuth0} from "@auth0/auth0-react";
 
 
 const PatientListOfMedication = () => {
 
-  // const { getAccessTokenSilently } = useAuth0();
+  const { getAccessTokenSilently } = useAuth0();
+  const { user } = useAuth0();
   // When something happens, we check to see if we change the sorting option, and we check if the search has been triggered
   useEffect(() => {
      // Basic example of how to make a authorized fetch call to our backend endpoints
@@ -15,11 +16,13 @@ const PatientListOfMedication = () => {
         const domain =  "http://127.0.0.1:5000/medication_list/";
 
       try {
-        // const token = await getAccessTokenSilently();
+          const token = await getAccessTokenSilently();
           const response = await fetch(domain+ehrid,
             {
+             mode: 'cors',
               headers: {
-              //   Authorization: `Bearer ${token}`,
+                  email: user.email,
+                 Authorization: `Bearer ${token}`,
               },
             }
           );
@@ -32,7 +35,7 @@ const PatientListOfMedication = () => {
       };
       medication_list();
       console.log(medication_list());
-  },[] );
+  },[user, getAccessTokenSilently] );
   // [getAccessTokenSilently]
 
 
@@ -101,7 +104,7 @@ const PatientListOfMedication = () => {
       <div style={{padding: "15px"}}></div>
       <b style= {{padding: "10px"}}>Aktuella läkemedelsbehandlingar</b>
       <PatientListOfMedicationTable data = {dataDaily}/>
-      
+
       <div style={{padding: "15px"}}></div>
       <b style= {{padding: "10px"}}>Vid behov</b>
       <PatientListOfMedicationTable data = {dataNeed}/>

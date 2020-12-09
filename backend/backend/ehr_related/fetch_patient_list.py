@@ -2,12 +2,10 @@ import requests
 import json
 import time
 
-
 wu = "lio.se1"
 wp = "lio.se123"
 
 baseurl = "https://rest.ehrscape.com/rest/v1"
-
 
 def query(aql):
     response = requests.get(baseurl + "/query/?aql=" + aql, verify=True, auth=(wu, wp))
@@ -19,6 +17,19 @@ def getParty(ehrid):
         baseurl + "/demographics/party/query?ehrId=" + ehrid, verify=True, auth=(wu, wp)
     )
     return response.json() if response.ok else response
+
+def getLogInfo(ehrid):
+    party = getParty(ehrid)
+    names = party["parties"][0]
+    more_info = names["additionalInfo"]
+
+    return {
+        "ehrid": more_info["ehrId"],
+        "pnumber": more_info["pnummer"],
+        "team" : more_info["team"],
+        "department" : more_info["department"],
+        "operation" : more_info["operation"]
+    }
 
 
 def get_all_patients_personal_details():
@@ -36,6 +47,7 @@ def get_all_patients_personal_details():
     to_return = []
     list_of_dicts_with_ehrids = response["resultSet"]
     for ehrid_dict in list_of_dicts_with_ehrids:
+        print("ehr id is " + ehrid_dict["id"])
         ehrid = ehrid_dict["id"]
         party = getParty(ehrid)
         names = party["parties"][0]
@@ -65,7 +77,6 @@ def get_measurements(ehrid):
     Parameters: ehrid, String, identifier for a patient
     Returns: List with dicts where each dict is a measurement at a specific time for this patient. All dicts will always contain information
     """
-
     aql = """SELECT x/data[at0002]/events[at0003]/data[at0001]/items[at0004,'Pulse Rate']/value as pulse,
        a/data[at0001]/events[at0002]/data[at0003]/items[at0011]/value as exercise,
        o/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value as bodyweight,
@@ -75,18 +86,18 @@ def get_measurements(ehrid):
        w/data[at0001]/events[at0002]/time/value as time
        FROM EHR e
        CONTAINS COMPOSITION c
-       CONTAINS (OBSERVATION x[openEHR-EHR-OBSERVATION.pulse.v1] and 
-       OBSERVATION a[openEHR-EHR-OBSERVATION.physicalactivityrecord.v0] and 
-       OBSERVATION o[openEHR-EHR-OBSERVATION.body_weight.v2] and 
-       OBSERVATION w[openEHR-EHR-OBSERVATION.blood_glucose.v1] and 
-       OBSERVATION i[openEHR-EHR-OBSERVATION.blood_pressure.v2]) 
+       CONTAINS (OBSERVATION x[openEHR-EHR-OBSERVATION.pulse.v1] and
+       OBSERVATION a[openEHR-EHR-OBSERVATION.physicalactivityrecord.v0] and
+       OBSERVATION o[openEHR-EHR-OBSERVATION.body_weight.v2] and
+       OBSERVATION w[openEHR-EHR-OBSERVATION.blood_glucose.v1] and
+       OBSERVATION i[openEHR-EHR-OBSERVATION.blood_pressure.v2])
        WHERE e/ehr_id/value= '%s'
        OFFSET 0""" %ehrid
-    
+
     response = query(aql)
     to_return= []
     for measurement in response['resultSet']:
-        
+
         time = measurement['time'][:10]
         to_return.append(
                         { "Pulse: " : measurement['pulse']['magnitude'],
@@ -117,10 +128,10 @@ def get_medications(ehrid):
        n/activities[at0001]/description[at0002]/items[at0035]/value as daily
        FROM EHR e
        CONTAINS COMPOSITION c
-       CONTAINS INSTRUCTION n[openEHR-EHR-INSTRUCTION.medication.v1] CONTAINS (CLUSTER l[openEHR-EHR-CLUSTER.medication_amount.v1]) 
+       CONTAINS INSTRUCTION n[openEHR-EHR-INSTRUCTION.medication.v1] CONTAINS (CLUSTER l[openEHR-EHR-CLUSTER.medication_amount.v1])
        WHERE e/ehr_id/value = '%s'
        OFFSET 0""" %ehrid
-    
+
     response = query(aql)
     to_return = []
     for medication in response['resultSet']:
@@ -133,7 +144,7 @@ def get_medications(ehrid):
         })
     return to_return
 
-    
+
 
 
 #medical diagnosis endpoint
@@ -148,7 +159,7 @@ def get_diagnosis(ehrid):
     aql = """SELECT y/data[at0001]/items[at0009]/value as diagnos
         FROM EHR e
         CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.encounter.v1]
-        CONTAINS EVALUATION y[openEHR-EHR-EVALUATION.problem_diagnosis.v1] 
+        CONTAINS EVALUATION y[openEHR-EHR-EVALUATION.problem_diagnosis.v1]
         WHERE c/name/value='Medical diagnosis' and e/ehr_id/value = '%s'
         OFFSET 0""" %ehrid
 
@@ -184,13 +195,13 @@ def get_all_diagnosis():
         e/ehr_id/value as eid
         FROM EHR e
         CONTAINS COMPOSITION c[openEHR-EHR-COMPOSITION.encounter.v1]
-        CONTAINS EVALUATION y[openEHR-EHR-EVALUATION.problem_diagnosis.v1] 
+        CONTAINS EVALUATION y[openEHR-EHR-EVALUATION.problem_diagnosis.v1]
         WHERE c/name/value='Medical diagnosis' AND %s
         OFFSET 0""" %ehrid_string
     response = query(aql)
     to_return = {}
     for diagnosis in response['resultSet']:
-  
+
         to_return[diagnosis["eid"]] = diagnosis['diagnos']['value']
     return to_return
 
@@ -211,7 +222,7 @@ def get_all_measurements():
             ehrid_string+=" OR "
     ehrid_string+=")"
 
-   
+
     aql = """SELECT x/data[at0002]/events[at0003]/data[at0001]/items[at0004,'Pulse Rate']/value as pulse,
        a/data[at0001]/events[at0002]/data[at0003]/items[at0011]/value as exercise,
        o/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value as bodyweight,
@@ -222,21 +233,21 @@ def get_all_measurements():
        e/ehr_id/value as eid
        FROM EHR e
        CONTAINS COMPOSITION c
-       CONTAINS (OBSERVATION x[openEHR-EHR-OBSERVATION.pulse.v1] and 
-       OBSERVATION a[openEHR-EHR-OBSERVATION.physicalactivityrecord.v0] and 
-       OBSERVATION o[openEHR-EHR-OBSERVATION.body_weight.v2] and 
-       OBSERVATION w[openEHR-EHR-OBSERVATION.blood_glucose.v1] and 
-       OBSERVATION i[openEHR-EHR-OBSERVATION.blood_pressure.v2]) 
+       CONTAINS (OBSERVATION x[openEHR-EHR-OBSERVATION.pulse.v1] and
+       OBSERVATION a[openEHR-EHR-OBSERVATION.physicalactivityrecord.v0] and
+       OBSERVATION o[openEHR-EHR-OBSERVATION.body_weight.v2] and
+       OBSERVATION w[openEHR-EHR-OBSERVATION.blood_glucose.v1] and
+       OBSERVATION i[openEHR-EHR-OBSERVATION.blood_pressure.v2])
        WHERE %s
        ORDER BY time DESC
        OFFSET 0""" %ehrid_string
-    
+
     response = query(aql)
     to_return= {}
 
     for measurement in response['resultSet']:
         time = measurement['time'][:10]
-     
+
         to_return[measurement["eid"]]=  { "Pulse: " : measurement['pulse']['magnitude'],
                           "Exercise: ":measurement['exercise']['magnitude'],
                           "Weight: " : measurement['bodyweight']['magnitude'],
@@ -245,8 +256,8 @@ def get_all_measurements():
                           "Bloodsugar: " : measurement['bloodsugar']['magnitude'],
                           "Time: " : time,
                           "ehrid" : measurement['eid']
-                          } 
-                          
+                          }
+
     return to_return
 def get_overview():
     measurements = get_all_measurements()
@@ -255,7 +266,7 @@ def get_overview():
     parties = response['parties']
 
     to_return = []
-    
+
     for party in parties:
         ehrid = party['additionalInfo']['ehrId']
         more_info = party["additionalInfo"]
@@ -263,7 +274,7 @@ def get_overview():
             measurement = measurements[ehrid]
         except Exception:
             measurement = get_measurements(ehrid)[:-1]
-            
+
         diagnosis = diagnosises[ehrid]
         personal_details = {
             "Name": party["firstNames"] + " " + party["lastNames"],
@@ -275,9 +286,9 @@ def get_overview():
             "Age": more_info["age"],
             "Phone": more_info["phone"],
             "Email": more_info["email"],
-            "Team" : more_info["team"], 
-            "Department" : more_info["department"], 
-            "Contactperson" : more_info["contactperson"],  
+            "Team" : more_info["team"],
+            "Department" : more_info["department"],
+            "Contactperson" : more_info["contactperson"],
             "Operation" : more_info["operation"],
             "Diagnosis" : diagnosis,
             "Measurement" : measurement
@@ -287,8 +298,3 @@ def get_overview():
         to_return.append(personal_details)
 
     return to_return
-
-
-
-
- 
