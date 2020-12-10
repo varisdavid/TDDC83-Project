@@ -1,13 +1,12 @@
-In this project we are striving to use Test Driven Development as our methodology for the project. This means that after development is done tests are ran to ensure functionality of the application. If tests are not cleared the application is then changed to fit tests and then refactored.
-
-
+Our testing up until this point has not followed a certain methodology. In our project our development and requirement was based on the prototype and the test cases for integration testing is done from the funcitonal requirements. The few amount of tests are due to requirements and development being developed separately causing a disconnect in the development and the requirements. Working forwards every Functional Requirement that is not yet developed has a test case ready for testing once that feature is developed. The application will go through at least two thorough tests which will be documented in both the \href{https://gitlab.liu.se/tddc88-company-3-2020/deploy/-/tree/Document_branch/RTM}{\underline RTM} aswell as on gitlab issue boards. These tests will be described below.
 
 \subsection{Test Levels}
-We have a focus on Integration Tests, Regression tests and some User tests. We use OpenEHR for our backend and we won't be testing its functionality with Unit-tests, this could be implemented later on, but is not seen as a requirement. To improve traceability, every requirement is put in gitlabs boards, acting as an RTM. There every requirement is labeled as, untested, test developed, in development. This is put in place to make sure that development is done via our test cases made from requirements. Each test case is added as a comment to the requirement to give the developer an idea how the final product should work.
+We have a focus on Integration Tests, black-box testing and User tests. We use OpenEHR for our backend and we won't be testing its functionality with Unit-tests, this could be implemented later on, but is not seen as a requirement. To improve traceability, every requirement is put in gitlabs boards, the requirement will also be added to our \href{https://gitlab.liu.se/tddc88-company-3-2020/deploy/-/tree/Document_branch/RTM}{\underline RTM}. There every requirement is labeled as, untested, test developed, in development. This is put in place to make sure that development is done via our test cases made from requirements. Each test case is added as a comment to the requirement to give the developer an idea how the final product should work.
 
 
 
-Most of our tests are designed as e2e tests. End 2 End testing is designed from how the end user would use the application. Instead of testing code in the application, an e2e test simulate human interaction with the website to trigger the different funtions. This is because 1. most of our code is written in css and html with functionality in the website itself, like pressing buttons. 2. Our testing team is very small, we only have 2 testers and 1 testleader, e2e tests makes sure that the core functionality is there and emulates the path of a potential user. There are negatives to the e2e tests since they don't cover all functionality as good as for example extensive unit testing does. We try to counteract that to do edge cases on specific functionality like the filtering function. 
+Most of our tests are designed as e2e tests. End 2 End testing is designed from how the end user would use the application. Instead of testing code in the application, an e2e test simulate human interaction with the website to trigger the different functions. This is because 1. most of our code is written in css and html with functionality in the website itself, like pressing buttons. 2. Our testing team is very small, we only have 2 testers and 1 testleader, e2e tests makes sure that the core functionality is there and emulates the path of a potential user. There are negatives to the e2e tests since they don't cover all functionality as good as for example extensive unit testing does. We try to counteract that to do edge cases on specific functionality like the filtering function.
+
 \subsubsection{Testing process for integration tests}
 The test defining process goes as follows for integration testing:
 
@@ -17,41 +16,54 @@ Every Requirement can have many tests.
     \item Pick functional requirement that is developed and ready to be tested. This is done in our Gitlab issue boards. Move the issue mapped to the requirement that is going to be tested to the label test case and assign yourself to the task.
     \item Using the Requirement try to map how a user would interact with the website by looking at input, action and output. 
     \item Write down the steps that you take manually and fill this into the test description field in the Gitlab boards issue mapped to the specific requirement.
-    \item Map these steps in a selenium script.
+    \subitem Map these steps in a selenium script.
+    \subitem Prepare to do test manually.
     \item Move the issue in gitlab to the "ready to Develop" board.
     \item Wait for issue to be moved to "testing" on the gitlab board.
-    \subitem If the test goes through, the gitlab issue will be moved to closed.
-    \subitem If the test does not go through, the gitlab issue will be moved back to "developing", a log of the error-message will be added as a comment to the issue. 
+    \subitem If the test goes through, the gitlab issue will be moved to closed and will be used as a regression test, testing future development by running the same test again on new code pushes. 
+    \subitem If the test does not go through, the gitlab issue will be moved back to "developing", a log of the error-message will be added as a comment to the issue.
 \end{enumerate}
 
 
 
 
-\subsubsection{Black box Unit testing}
-Can be skipped, talk with Sana.
+\subsubsection{Black-box testing}
+Black box testing for every function is tested manually via black box testing. Every current function/button/textfield is mapped in our \href{https://gitlab.liu.se/tddc88-company-3-2020/deploy/-/tree/Document_branch/RTM}{\underline RTM}. Testing of these components will both be done with the expected inputs but also trying prohibited inputs in text fields etc. An example of this could be letters in the date input or letters in min or max age input. By doing this black box testing we can ensure branch coverage where every function is tested. Every bug that is noted in the black box testing has an ID of IBXXX to indicate Input Bug. Each bug is also added in the \href{https://gitlab.liu.se/tddc88-company-3-2020/deploy/-/tree/Document_branch/RTM}{\underline RTM}.
 
-Black box testing for every function is tested manually via black box testing. Every current function/button/textfield is mapped in DOCUMENT. Testing of these components will both be done with the expected inputs but also trying prohibited inputs in text fields etc. An example of this could be letters in the date input or letters in min or max age input. By doing this black box Unit testing we can ensure branch coverage where every function is tested. 
+Black box testing process:
+
+\begin{enumerate}
+    \item Find button mapped in \href{https://gitlab.liu.se/tddc88-company-3-2020/deploy/-/tree/Document_branch/RTM}{\underline RTM} document named input
+    \item Start application and find textfield/area/button
+    \item Test the function of said textfield/area/button by inputting a correct input.
+    \subitem If the function is a textfield, test writing in inputs that should not be allowed (letters in date field, negative age in age restrictions etc.)
+    \item Detect functionality
+    \subitem If functionality is deemed correct, write mark passed in the \href{https://gitlab.liu.se/tddc88-company-3-2020/deploy/-/tree/Document_branch/RTM}{\underline RTM}. This test is not added to gitlab since it would clutter the boards and these are static tests. 
+    \subitem If functionality is deemed not correct, add bug to gitlab by tagging it IBXXX, if connected to a functional requirement, add that FR in the description. This is also added to the \href{https://gitlab.liu.se/tddc88-company-3-2020/deploy/-/tree/Document_branch/RTM}{\underline RTM}.
+\end{enumerate}
+
+
 
 
 \subsection{User Tests}
 To get a better understanding on how an end-user would navigate the platform we have performed user tests. A Lo-Fi user test as well as a regular user test.
 
 \subsubsection{Lo-fi test}
-This user test was done on a lo-fi prototype together with nurses at Region Östergötland. The Lo-Fi tests were made through our lo-fi prototype and consisted of scenarios where the user should perform a instruction. The test implemented think aloud where the user spoke their thoughts at every action and impression. The tests were also recorded, both the actions the user made on the computer aswell as the spoken audio. These thoughts were then decoded and made into requirements after the test. At the end of the test a modified version of a SUS-test was performed to see how the users thought about the System Usability. The SUS-test was modified in only having 6 questions rather than 10, since some questions were not covered by our Lo-Fi test.
+This user test was done on a lo-fi prototype together with nurses at Region Östergötland. The Lo-Fi tests were made through our lo-fi prototype and consisted of scenarios where the user should perform a instruction. The test implemented think aloud where the user spoke their thoughts at every action and impression. The tests were also recorded, both the actions the user made on the computer as well as the spoken audio. These thoughts were then decoded and made into requirements after the test. These thinking aloud thoughts can be found in the teams folder for testing. These improved requirements can be found in our SRS. At the end of the test a modified version of a SUS-test was performed to see how the users thought about the System Usability. The SUS-test was modified in only having 6 questions rather than 10, since some questions were not covered by our Lo-Fi test.
 
 Full test report can be found in Appendix A.
 \subsubsection{Final user test}
 This user test was done with our final prototype together with two workers at Region Östergötland as well as members from our Project group. The test is structured the same way as the Lo-Fi test and goes through the same scenarios as the Lo-Fi test. The users will then rat the test test using SUS-tests. The users interaction with the website will also be recorded and Lostness of the website will be derived from this recording. 
 
-Since we had limited testers available from RÖ and according to SUS a reliable test must have atleast 6 test subject, we decided to add some project members to the test group. This might affect the testing result since our members are familiar with how our application works, but we would rather have a larger group of testers and slightly too high results than unreliable ones due to shortage of testers. 
+Since we had limited testers available from RÖ and according to SUS a reliable test must have at least 6 test subject, we decided to add some project members to the test group. This might affect the testing result since our members are familiar with how our application works, but we would rather have a larger group of testers and slightly too high results than unreliable ones due to shortage of testers. 
 
 Full test report can be found in Appendix B.
 \subsection{Continuous Integration}
 Our development flow is designed to fulfill the criteria of Continuous Integration (CI). The branching system is done, so there is a development branch a master branch as well as subbranches to the developer branch where new features are added. Automatic testing is added to the pipeline of the development branch to make sure the application is functional. Here there are two stages, building and testing. Due to time constraints only a few automatic tests have been added, but they prove that no functionality is broken. 
 
-The CI testing is done by launching the server locally on our gitlab runner, and then running through the scripts written in webdriverIO. If the testing is succesful the pipeline will be marked as passed and the code commit is added to the development branch.
+The CI testing is done by launching the server locally on our gitlab runner, and then running through the scripts written in webdriverIO. If the testing is successful the pipeline will be marked as passed and the code commit is added to the development branch.
 
-Before Development branch is pushed to the master branch which is then deployed, testing manually is done to ensure functionality of the application. The tests are the integration tests described in the RTM, but once these tests are made automatic they will be added to the development pipeline. Therefore this step will be excluded in future revisions. 
+Before Development branch is pushed to the master branch which is then deployed, testing manually is done to ensure functionality of the application. The tests are the integration tests described in the \href{https://gitlab.liu.se/tddc88-company-3-2020/deploy/-/tree/Document_branch/RTM}{\underline RTM}, but once these tests are made automatic they will be added to the development pipeline. Therefore this step will be excluded in future revisions.
 
 \subsection{Test Completeness}
 The quality of the tests will be done according to the metrics in QA. The main metric we will be using is Branch coverage since we are almost exclusively using end 2 end testing. Branch coverage can be seen like a top down testing example, where we start in the starting page and look where we can go from each page, and test the functionality in this page. 
