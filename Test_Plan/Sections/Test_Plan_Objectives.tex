@@ -20,7 +20,7 @@ This document describes the testing done on the patient handling software produc
 
 
 \subsubsection{Out of Scope}
-Anything outside of our requirements and functionality will not be tested. OpenEHR will only have output tests since we can't manage the DB ourselves. As of 2020/11/11 a big part of unit testing will be scrapped since almost all of our backend functionality comes from OpenEHR, which can't be tested.
+Anything outside of our requirements and functionality will not be tested. OpenEHR will only have output tests since we can't manage the DB ourselves. As of 2020/11/11 a big part of unit testing will be scrapped since almost all of our backend functionality comes from OpenEHR, which we lack manpower to be able to perform proper testing.
 \subsection{Quality Objective}
 To ensure that our application will meet the requirements, user tests are performed by Region Östergötland and testing is done by us to ensure functionality. This covers both the Functional and non functional requirements. 
 
@@ -37,9 +37,9 @@ The Integration tests will occur once the following input is done:
     \item A test specification is created
     \item The test Environment is complete
 \end{itemize}
-Since testing is done in iterations, we will write tests for the parts of the software that is testable, then as software functionality grows, more tests will be added in later iterations. This is called regression testing.
+Since testing is done in iterations, we will write tests for the parts of the software that is testable, then as software functionality grows, more tests will be added in later iterations.
 
-As Integration tests are tested and passed they are added to the CI for regression testing, meaning that the tests will be ran every time code is pushed to our main branch in Gitlab.
+As Integration tests are tested and passed they are added to the CI for regression testing, meaning that the tests will be ran every time code is pushed to our development branch in Gitlab.
 \subsection{Roles}
 \begin{flushleft}
    \textbf{Test Leader}
