@@ -27,7 +27,7 @@
     urlcolor=blue,        % color of external links
     linktoc=page            % only page is linked
 }%
-\def\myversion{2.7}
+\def\myversion{2.8}
 \title{Software Requirements Specification}
 \author{Sara Lindholm \\ Patrick Asman \\ Jacob Rhan}
 
@@ -112,6 +112,8 @@
  \hline
  2020-12-09 & 2.7 & Moved more requirements that have not been implemented to section 3.6 & Sara Lindholm & \\
  \hline
+ 2020-12-10 & 2.8 & Moved back implemented requirements from section 3.6 and moved unimplemented requirements to section 3.6 according to feedback from development & Sara Lindholm & \\
+ \hline 
 \end{tabularx}
 \end{center}
 
@@ -766,6 +768,14 @@ Configure values for the rule engines priority &
     \newline \textbf{Output}: Settings displayed &
 High \\ 
 \hline 
+FR007 & 
+Accessing activity log & 
+ & 
+    \textbf{Input}: Click on ”Admin” tab with ID: "patientViewAdminTabBtn" 
+    \newline \textbf{Action}: Load activity log from database 
+    \newline \textbf{Output}: Display activity log &
+Medium \\ 
+\hline 
 \end{tabularx}
 \end{center}
 
@@ -803,14 +813,6 @@ Detailed graph and list of measurement &
 \textbf{Output}: Display diagrams and list of measurements & 
 Low \\ 
 \hline 
-FR012 & 
-Add patient's measurement values &
-& 
-\textbf{Input}: Add measurement in text fields with ID = "patientMeasurementsNewValueField", and click "Bekräfta"-button with ID = "addNewMeasurement". \newline 
-\textbf{Action}: System stores measured value in database and updates the patient profile. \newline 
-\textbf{Output}:  Displays confirmation message (ID = "patientMeasurementConfirmationMessage") and updated patient information. & 
-High \\ 
-\hline 
 \end{tabularx}
 \end{center}
 
@@ -821,6 +823,14 @@ In section 3.2.3. we describe functional requirements for the system. A precondi
 \hline
 \textbf{ID:} & \textbf{Title} & \textbf{Precondition} & \textbf{Description} & \textbf{Priority} \\
 \hline
+FR015 & 
+Log users accessing patient information &
+& 
+\textbf{Input}: Patient profile page is accessed by user \newline 
+\textbf{Action}: System logs user ID, date and activity as "Besökte", saves to database and updates activity log. \newline 
+\textbf{Output}:  Updated activity log with information regarding user, date and activity. & 
+High \\ 
+\hline 
 FR017 & 
 Not submitted data notification &
 Time limit for measurement is set for a specific patient.& 
@@ -868,14 +878,6 @@ A precondition is that the user is logged in, on the view “Översikt” and, o
 \hline
 \textbf{ID:} & \textbf{Title} & \textbf{Precondition} & \textbf{Description} & \textbf{Priority} \\
 \hline
-FR025 & 
-Sorting patients & 
-&
-\textbf{Input}:  Click on button with ID "overviewSortBtn". Click once on sorting parameter for descending alphabetical/numerical order OR click twice for ascending alphabetical/numerical order.  \newline 
-\textbf{Action}: The system rearranges the list of patients according to sorting criteria. \newline 
-\textbf{Output}: The system displays the list of patients in the order of the sorting criteria. & 
-High \\ 
-\hline
 FR027 & 
 Switch to patient view & 
 All patients in "Notislogg" are available to the user to access. &
@@ -899,14 +901,6 @@ Dynamic search/filter box &
 \textbf{Action}: System checks for patients that matches text string and rearranges list of patients.\newline
 \textbf{Output}: Displays patients that matches string dynamically in the list of patients. & 
 Medium \\ 
-\hline
-FR030 & 
-Visible sorting parameters & 
-FR025 fulfilled &
-\textbf{Input}: The list of patients have been sorted. \newline 
-\textbf{Action}: Load sorting parameter \newline
-\textbf{Output}: Display sorting parameter & 
-Low \\ 
 \hline
 FR094 & 
 Create new view &
@@ -1509,14 +1503,6 @@ Medium \\
 \hline
 \textbf{ID:} & \textbf{Title} & \textbf{Precondition} & \textbf{Description} & \textbf{Priority} \\
 \hline
-FR007 & 
-Accessing activity log & 
- & 
-    \textbf{Input}: Click on ”Admin” tab with ID: "patientViewAdminTabBtn" 
-    \newline \textbf{Action}: Load activity log from database 
-    \newline \textbf{Output}: Display activity log &
-Medium \\ 
-\hline 
 FR008 & 
 Search in activity log & 
  & 
@@ -1565,6 +1551,14 @@ Low \\
 \hline
 \textbf{ID:} & \textbf{Title} & \textbf{Precondition} & \textbf{Description} & \textbf{Priority} \\
 \hline
+FR012 & 
+Add patient's measurement values &
+& 
+\textbf{Input}: Add measurement in text fields with ID = "patientMeasurementsNewValueField", and click "Bekräfta"-button with ID = "addNewMeasurement". \newline 
+\textbf{Action}: System stores measured value in database and updates the patient profile. \newline 
+\textbf{Output}:  Displays confirmation message (ID = "patientMeasurementConfirmationMessage") and updated patient information. & 
+High \\ 
+\hline 
 FR013 & 
 Accept patient's measurement values &
 User has clicked on the notification symbol and system currently displays the "Uppmärksammat värde" window (ID = "patientMeasurementsUnexpectedValue") &
@@ -1624,14 +1618,6 @@ Low \\
 \hline
 \textbf{ID:} & \textbf{Title} & \textbf{Precondition} & \textbf{Description} & \textbf{Priority} \\
 \hline
-FR015 & 
-Log users accessing patient information &
-& 
-\textbf{Input}: Patient profile page is accessed by user \newline 
-\textbf{Action}: System logs user ID, date and activity as "Besökte", saves to database and updates activity log. \newline 
-\textbf{Output}:  Updated activity log with information regarding user, date and activity. & 
-High \\ 
-\hline 
 FR016 & 
 Log users updating patient information &
 & 
@@ -1674,6 +1660,31 @@ Add calendar activity &
 \textbf{Input}: Click on a date in calendar, click "Add Activity"-button with ID = "", write a title and description in text fields with IDs, and click save-button with ID = "".  \newline 
 \textbf{Action}: Adds activity in calendar. \newline
 \textbf{Output}: The chosen date is marked and the activity is added to the chosen date. & 
+Low \\ 
+\hline
+\end{tabularx}
+\end{center}
+
+\subsubsection{Notislogg}
+\begin{center}
+\begin{tabularx}{\linewidth}{| s | m | m | b | s |}
+\hline
+\textbf{ID:} & \textbf{Title} & \textbf{Precondition} & \textbf{Description} & \textbf{Priority} \\
+\hline
+FR025 & 
+Sorting patients & 
+&
+\textbf{Input}:  Click on button with ID "overviewSortBtn". Click once on sorting parameter for descending alphabetical/numerical order OR click twice for ascending alphabetical/numerical order.  \newline 
+\textbf{Action}: The system rearranges the list of patients according to sorting criteria. \newline 
+\textbf{Output}: The system displays the list of patients in the order of the sorting criteria. & 
+High \\ 
+\hline
+FR030 & 
+Visible sorting parameters & 
+FR025 fulfilled &
+    \textbf{Input}: The list of patients have been sorted. 
+    \newline \textbf{Action}: Load sorting parameter 
+    \newline \textbf{Output}: Display sorting parameter & 
 Low \\ 
 \hline
 \end{tabularx}
