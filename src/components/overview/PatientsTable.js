@@ -4,7 +4,7 @@ import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/c
 import { ArrowDropUp, ArrowDropDown } from '@material-ui/icons';
 import { useVirtual } from 'react-virtual';
 
-// Takes a priority (value: integer) and renders a visual blob 
+// Takes a priority (value: integer) and renders a visual blob
 const Blob = ({value}) => {
 
   var color;
@@ -29,7 +29,7 @@ const Blob = ({value}) => {
       marginRight: 'auto',
       marginLeft: 'auto',
       borderRadius: '15px',
-      width: '90px', 
+      width: '90px',
       height: '27px'}}>
         <span style={{lineHeight: '27px', color: 'rgba(0, 0, 0, 0.87)', }}>{text}</span>
     </div>
@@ -38,19 +38,19 @@ const Blob = ({value}) => {
 
 // Renders a table based on props passed down from useTable
 const PatientsTable = ({
-  getTableProps, 
-  getTableBodyProps, 
-  headerGroups, 
-  rows, 
-  prepareRow, 
+  getTableProps,
+  getTableBodyProps,
+  headerGroups,
+  rows,
+  prepareRow,
   }) => {
-  
+
   // Used for keeping track on the wrapper div (needed for virtualization)
   const parentRef = React.useRef();
 
-  // Using package 'react-virtual' for virtualization of 
+  // Using package 'react-virtual' for virtualization of
   // the table, give it rows.length for how many rows there should be
-  // its ref to outer div and the estimated size. 
+  // its ref to outer div and the estimated size.
   const rowVirtualizer = useVirtual({
     size: rows.length,
     parentRef,
@@ -58,7 +58,7 @@ const PatientsTable = ({
   });
 
   return (
-  <>   
+  <>
       <Table {...getTableProps()} >
         <TableHead>
         {headerGroups.map(headerGroup => (
@@ -74,7 +74,7 @@ const PatientsTable = ({
                     fontWeight: '700',
                     fontSize: '15px',
                     textAlign: 'center',
-                  }}   
+                  }}
                 >
                 {column.render('Header')}
                 <span>
@@ -110,9 +110,9 @@ const PatientsTable = ({
             {rowVirtualizer.virtualItems.map((virtualRow) => {
               const row = rows[virtualRow.index];
               prepareRow(row);
-            
+
                 return (
-                  <TableRow 
+                  <TableRow
                     key={virtualRow.index}
                     ref={virtualRow.measureRef}
                     {...row.getRowProps({
@@ -126,11 +126,11 @@ const PatientsTable = ({
                       }
                     })}
                   >
-                    
+
                       {row.cells.map((cell, cellIndex) => {
                       return (
-                        <TableCell {...cell.getCellProps()} style={{padding: '10px', 
-                                                                    textAlign: 'center', 
+                        <TableCell {...cell.getCellProps()} style={{padding: '10px',
+                                                                    textAlign: 'center',
                                                                     width: (cellIndex === 0) ? '45px' : '100%', //To make first column fixed size
                                                                     background: (cellIndex === 0) && '#FFF', //To make first column invisible
                                                                     borderColor: (cellIndex === 0) && '#FFF', //To make first column invisible
@@ -155,4 +155,3 @@ const PatientsTable = ({
 };
 
 export default PatientsTable;
-

@@ -35,7 +35,7 @@
 }
 
 .cell-table-header{
-    background:#275E8E; 
+    background:#275E8E;
     color: #FFF !Important;
     font-weight: 700 !Important;
     font-size: 15px !Important;
@@ -45,7 +45,7 @@
 .cell-table-body{
   text-align: left;
   border-color: #E5E5E5;
-  padding: 6px !Important; 
+  padding: 6px !Important;
   border-right: 2px solid #275E8E;
 }
 
@@ -76,7 +76,7 @@
 }
 
 .div-table-patient-view{
-  width: 80%; 
+  width: 80%;
   margin-Bottom: 30px;
 }
 
@@ -120,9 +120,20 @@ input[type=number]{
 }
 
 .header-admin-patient{
-  background:#275E8E; 
+  background:#275E8E;
   color: #FFF !Important;
   font-weight: 700 !Important;
   font-size: 20px !Important;
   text-align: center;
+}
+
+.patient-overview-flex {
+   display: flex;
+ }
+
+ @media screen and (max-width: 768px) {
+  .patient-overview-flex {
+    /*display property will be overriden as any class further inside this scope*/
+    display: block;
+  }
 }
